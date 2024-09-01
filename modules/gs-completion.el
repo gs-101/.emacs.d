@@ -58,6 +58,8 @@
   )
 
 (use-package tempel
+  :config
+  (add-hook 'completion-at-point-functions #'tempel-complete)
   :custom
   (tempel-trigger-prefix "<")
   :ensure t
