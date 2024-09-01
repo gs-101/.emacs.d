@@ -323,10 +323,6 @@ Purpose of this package:
 - To present a framework for mode-specific buffer indexes;
 - A buffer index is an alist of names and buffer positions.
 
-[...]
-
-It is documented in the Emacs Lisp manual.
-
 #+end_quote
 
 #+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
