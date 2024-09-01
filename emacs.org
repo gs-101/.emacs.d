@@ -2546,8 +2546,7 @@ With the combined features of cape and tempel, create a super capf for eglot com
 
   (use-package corfu
     :if (package-installed-p '(cape tempel))
-    :after
-    (cape tempel)
+    :after (cape tempel)
     :preface
     (defun minad/eglot-capf ()
       "eglot capf with tempel and cape features."
