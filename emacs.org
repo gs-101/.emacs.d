@@ -1,0 +1,4029 @@
+* Early Init
+
+** [[https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217][Native and byte compilation]]
+
+If Emacs is built with native compilation support, activate it¹, if not, disable it².
+
+#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+
+  ;; 1
+  (if (and (featurep 'native-compile)
+           (fboundp 'native-comp-available-p)
+           (native-comp-available-p))
+      (setq native-comp-jit-compilation t
+            package-native-compile t)
+    ;; 2
+    (setq features (delq 'native-compile features)))
+
+#+end_src
+
+** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#native-compilation-cache][Native Compilation Cache]]
+
+Moves the Native Compilation Cache folder out of the Emacs base folder.
+
+#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+
+  (when (fboundp 'startup-redirect-eln-cache)
+    (startup-redirect-eln-cache
+     (convert-standard-filename
+      (expand-file-name  "var/eln-cache/" user-emacs-directory))))
+
+#+end_src
+
+** Directory Variables
+
+Variables used to reference to specific directories, using ~convert-standard-filename~ for multiple OS support.
+
+#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+
+  (defcustom projects-code-directory (convert-standard-filename (expand-file-name "~/Projects/Code/"))
+    "Path for project related to code, like applications."
+    :type 'directory
+    )
+  (defcustom modules-directory (convert-standard-filename (expand-file-name "modules" user-emacs-directory))
+    "Path for this configuration's modules."
+    :type 'directory
+    )
+
+#+end_src
+
+* Load Modules
+
+#+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+  
+#+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
+
+  (add-to-list 'load-path (expand-file-name modules-directory))
+
+  (require 'gs-package)
+  (require 'gs-settings)
+  (require 'gs-fm)
+  (require 'gs-keys)
+  (require 'gs-org)
+  (require 'gs-org-roam)
+  (require 'gs-cmd)
+  (require 'gs-dev)
+  (require 'gs-completion)
+  (require 'gs-utils)
+  (require 'gs-keys-evil)
+  (require 'gs-ui)
+
+#+end_src
+
+* [[https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217][Package System Set-up]]
+
+** Package
+
+#+begin_quote
+
+Simple package system [...].
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+
+  (require 'package)
+  (add-to-list 'package-archives '(
+                                   "melpa" . "https://melpa.org/packages/"
+                                   ))
+
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+#+end_src
+
+** use-package
+
+#+begin_quote
+
+A configuration macro for simplifying your .emacs.
+
+#+end_quote
+
+If ~use-package~ is not installed, refresh the package list and install it¹.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+
+  ;; 1
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (eval-when-compile (require 'use-package))
+
+  (use-package package
+    :custom
+    (package-install-upgrade-built-in t)
+    )
+
+#+end_src
+
+** [[https://github.com/rranelli/auto-package-update.el][Auto Package Update]]
+
+#+begin_quote
+
+Automatically update Emacs packages.
+ 
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+
+  (use-package auto-package-update
+    :custom
+    (auto-package-update-delete-old-versions t)
+    (auto-package-update-interval 7)
+    (auto-package-update-prompt-before-update t)
+    (auto-package-update-show-preview t)
+    :config
+    (auto-package-update-maybe)
+    :ensure t
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+
+  (provide 'gs-package)
+#+end_src
+
+* Settings 
+
+Configuration of default Emacs packages.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** Default packages
+
+*** Advice
+
+#+begin_quote
+
+An overloading mechanism for Emacs Lisp functions.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package advice
+    :custom
+    (ad-redefinition-action 'accept)
+    )
+
+#+end_src
+
+*** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/early-init.el#L20][Byte Compilation]]
+
+#+begin_quote
+
+The Emacs Lisp byte compiler. This crunches Lisp source into a sort of p-code (~lapcode~) which takes up less space and can be interpreted faster.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package bytecomp
+    :custom
+    (byte-compile-warnings '(not obsolete))
+    )
+
+#+end_src
+
+*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L104][Compilation Runtime]]
+
+#+begin_quote
+
+This file contains all the code needed to drive async compilations and any Lisp code needed at runtime to run native code.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package comp-run
+    :custom
+    (native-comp-async-report-warnings-errors 'silent)
+    )
+
+#+end_src
+
+*** Emacs
+
+Generic package used to configure functions and variables not included in any files.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package emacs
+    :config
+    (setq define-coding-system-alias '(UTF-8 'utf-8))
+    :custom
+    (completion-ignore-case t) ;; 3
+    (cursor-in-non-selected-windows nil)
+    (debugger-stack-frame-as-list t) ;; 4
+    (enable-recursive-minibuffers t)
+    (frame-resize-pixelwise t) ;; 1
+    (history-delete-duplicates t) ;; 4
+    (load-prefer-newer t) ;; 2
+    ;; Disable the cursor in the minibuffer prompt
+    (minibuffer-prompt-properties '(
+                                    cursor-intangible t
+                                    read-only t
+                                    face minibuffer-prompt
+                                    )) ;; 3
+    (read-buffer-completion-ignore-case t) ;; 3
+    (resize-mini-windows 'grow-only)
+    (window-resize-pixelwise nil) ;; 1
+    (words-include-escapes t)
+    :hook
+    (minibuffer-setup . cursor-intangible-mode) ;; 3
+    )
+
+#+end_src
+
+**** Credits
+
+1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]];
+2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#recommended-packagessnippets-to-have-as-early-as-possible][gopar]];
+3. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
+4. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
+
+*** Files
+
+#+begin_quote
+
+Defines most of Emacs's file- and directory-handling functions, including basic file visiting, backup generation, link handling, ITS-id version control, load- and write-hook handling, and the like.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package files
+    :config
+    (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 1
+    :custom
+    (find-file-suppress-same-file-warnings t)
+    (find-file-visit-truename t)
+    (revert-without-query '("")) ;; 1
+    (view-read-only t) ;; 1
+    )
+
+#+end_src
+
+**** Credits
+
+1. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
+
+*** Help
+
+#+begin_quote
+
+Help commands for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package help
+    :custom
+    (help-window-select t)
+    )
+
+#+end_src
+
+*** [[https://github.com/kickingvegas/casual-ibuffer?tab=readme-ov-file#configuration][iBuffer]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package ibuffer
+    :defer t
+    :hook
+    (ibuffer-mode . ibuffer-auto-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L232][iMenu]]
+
+#+begin_quote
+
+Purpose of this package:
+
+- To present a framework for mode-specific buffer indexes;
+- A buffer index is an alist of names and buffer positions.
+
+[...]
+
+It is documented in the Emacs Lisp manual.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package imenu
+    :custom
+    (imenu-space-replacement nil)
+    :defer t
+    )
+
+#+end_src
+
+*** Indent
+
+#+begin_quote
+
+Commands for making and changing indentation in text. These are described in the Emacs manual.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package indent
+    :custom
+    (tab-always-indent 'complete)
+    :defer t
+    )
+
+#+end_src
+
+*** Lisp
+
+#+begin_quote
+
+Lisp editing for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package lisp
+    :custom
+    (narrow-to-defun-include-comments t)
+    :defer t
+    :ensure nil
+    )
+
+#+end_src
+
+*** Minibuffer
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package minibuffer
+    :custom
+    (completions-detailed t) ;; 1
+    (completions-format 'one-column) ;; 1
+    (completions-group t) ;; 1
+    (read-file-name-completion-ignore-case t) ;; 2
+    (resize-mini-windows t)
+    :defer t
+    :init
+    (minibuffer-depth-indicate-mode)
+    (minibuffer-electric-default-mode)
+    )
+
+#+end_src
+
+**** Credits
+
+1. [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L107][ashton314]];
+2. [[https://github.com/minad/vertico?tab=readme-ov-file#completion-styles-and-tab-completion][minad]].
+ 
+*** Mouse
+
+#+begin_quote
+
+This package provides various useful commands (including help system access) through the mouse.  All this code assumes that mouse interpretation has been abstracted into Emacs input events.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package mouse
+    :custom
+    (mouse-yank-at-point t)
+    )
+
+#+end_src
+
+*** Mule
+
+Multilingual Enviroment.
+
+**** Cmds
+
+#+begin_quote
+
+Commands for Multilingual Enviroment.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package mule-cmds
+    :config
+    (setq prefer-coding-system 'utf-8) ;; 1
+    :custom
+    (current-language-environment "UTF-8") ;; 2
+    :defer t
+    )
+
+#+end_src
+
+***** Credits
+
+1. [[https://github.com/gopar/.emacs.d/blob/main/README.org#emacs-defaults][gopar]];
+2. [[https://github.com/oantolin/emacs-config/blob/master/init.el][oantolin]].
+
+**** Util
+
+#+begin_quote
+
+Utility functions for Multilingual Enviroment.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package mule-util
+    :custom
+    (truncate-string-ellipsis "…")
+    )
+
+#+end_src
+
+*** New Comment
+
+#+begin_quote
+
+(un)comment regions of buffers.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package newcomment
+    :custom
+    (comment-empty-lines t)
+    )
+
+#+end_src
+
+*** Paren
+
+#+begin_quote
+
+Highlight matching paren.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package paren
+    :custom
+    (show-paren-delay 0)
+    :init
+    (show-paren-mode)
+    )
+
+#+end_src
+
+*** Password
+
+**** Cache
+
+#+begin_quote
+
+Read passwords, possibly using a password cache.
+
+#+end_quote
+
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package password-cache
+    :custom
+    (password-cache-expiry 60)
+    )
+
+#+end_src
+
+*** Pixel Scroll
+
+#+begin_quote
+
+Scroll a line smoothly.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package pixel-scroll
+    :init
+    (pixel-scroll-precision-mode)   
+    )
+
+#+end_src
+
+*** Save History
+
+#+begin_quote
+
+Save minibuffer history.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package savehist
+    :init
+    (savehist-mode)
+    )
+
+#+end_src
+
+*** Simple
+
+#+begin_quote
+
+A grab-bag of basic Emacs commands not specifically related to some major mode or to file-handling.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package simple
+    :custom
+    (completion-auto-select 'second-tab) ;; 1
+    (indent-tabs-mode nil)
+    (kill-do-not-save-duplicates t) ;; 4
+    (kill-read-only-ok t) ;; 4
+    (kill-whole-line t) ;; 4
+    ;; Hides commands in completion that are not usable in the current mode
+    (read-extended-command-predicate #'command-completion-default-include-p) ;; 3
+    (save-interprogram-paste-before-kill t)
+    (set-mark-command-repeat-pop t) ;; 4
+    )
+
+#+end_src
+
+**** Credits
+
+1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]];
+2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#simple][gopar]];
+3. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
+4. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]].
+
+*** Uniquify
+
+#+begin_quote
+
+Unique buffer names dependent on file name.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package uniquify
+    :custom
+    (uniquify-buffer-name-style 'forward)
+    )
+
+#+end_src
+
+*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L71][use-package]]
+
+#+begin_quote
+
+A configuration macro for simplifying your .emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package use-package
+    :custom
+    (use-package-enable-imenu-support t)
+    (use-package-vc-prefer-newest t)
+    )
+
+#+end_src
+
+*** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/early-init.el#L21][Warnings]]
+
+#+begin_quote
+
+Log and display warnings.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package warnings
+    :custom
+    (warning-suppress-log-types '((comp) (bytecomp)))
+    )
+
+#+end_src
+
+*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L100][Window]]
+
+#+begin_quote
+
+Window tree functions.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package window
+    :custom
+    (recenter-positions '(top middle bottom))
+    (switch-to-buffer-obey-display-actions t)
+    )
+
+#+end_src
+
+** [[https://github.com/emacsmirror/gcmh][Garbage Collector Magic Hack]]
+
+#+begin_quote
+
+Enforce a sneaky Garbage Collection strategy to minimize GC interference with user activity.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package gcmh
+    :ensure t
+    :init
+    (gcmh-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/emacscollective/no-littering][No Littering]]
+
+#+begin_quote
+
+The default paths used to store configuration files and persistent data are not consistent across Emacs packages. This isn’t just a problem with third-party packages but even with built-in packages.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package no-littering
+    :ensure t
+    :init
+    (no-littering-theme-backups)
+    )
+
+#+end_src
+
+*** [[https://github.com/emacscollective/no-littering#lock-files][Lock Files]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package no-littering
+    :config
+    (let ((dir (no-littering-expand-var-file-name "lock-files/")))
+      (make-directory dir t)
+      (setq lock-file-name-transforms `((".*" ,dir t))))
+    )
+
+#+end_src
+
+*** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#recent-files][Recent Files]]
+
+#+begin_quote
+
+Keep track of recently opened files.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package recentf
+    :config
+    (add-to-list 'recentf-exclude
+                 (recentf-expand-file-name no-littering-etc-directory)
+                 (recentf-expand-file-name no-littering-var-directory))
+    :init
+    (recentf-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#saved-customizations][Saved Customizations]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package no-littering
+    :custom
+    (custom-file (no-littering-expand-etc-file-name "custom.el"))
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (provide 'gs-settings) 
+#+end_src
+
+* File Management
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** Autorevert
+
+#+begin_quote
+
+Whenever a file that Emacs is editing has been changed by another program the user normally has to execute the command ~revert-buffer~ to load the new content of the file into Emacs.
+This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert Mode. Both modes automatically revert buffers whenever the corresponding files have been changed on disk and the buffer contains no unsaved changes.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+
+  (use-package autorevert
+    :custom
+    (auto-revert-stop-on-user-input nil)
+    (global-auto-revert-non-file-buffers t)
+    (auto-revert-verbose t)
+    :init
+    (global-auto-revert-mode t)
+    )
+
+#+end_src
+
+** Dired
+
+#+begin_quote
+
+[...] major mode for directory browsing and editing.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package dired
+    :commands
+    (
+     dired
+     dired-jump
+     )
+    :custom
+    (dired-auto-revert-buffer t)
+    (dired-dwim-target t)
+    (dired-listing-switches "-agho --group-directories-first")
+    (dired-mouse-drag-files t)
+    )
+
+#+end_src
+
+*** Auxiliary
+
+#+begin_quote
+
+Less commonly used parts of Dired.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package dired-aux
+    :custom
+    (dired-do-revert-buffer t)
+    )
+
+#+end_src
+
+*** [[https://github.com/protesilaos/dired-preview][Dired Preview]]
+ 
+#+begin_quote
+
+Automatically preview file at point in Emacs Dired.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package dired-preview
+    :custom
+    (dired-preview-delay 0.5)
+    (dired-preview-ignored-extensions-regexp (concat
+                                              "\\(gs\\|"
+                                              "zst\\|"
+                                              "tar\\|"
+                                              "xz\\|"
+                                              "rar\\|"
+                                              "zip\\|"
+                                              "iso\\|"
+                                              "epub"
+                                              "\\)"
+                                              ))
+    :ensure t
+    :init
+    (dired-preview-global-mode)
+    )
+
+#+end_src
+
+**** [[https://protesilaos.com/emacs/dired-preview#h:088fc7b3-7d7b-434b-80b1-e2ad20bdb4ea][Credits]]
+
+** Emacs
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package dired
+    :custom
+    (delete-by-moving-to-trash t)
+    )
+
+#+end_src
+
+** Mouse
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package mouse
+    :custom
+    (mouse-drag-and-drop-region-cross-program t)
+    )
+
+#+end_src
+
+** [[https://github.com/vedang/pdf-tools][PDF-Tools]]
+
+#+begin_quote
+
+Emacs support library for PDF files.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package pdf-tools
+    :bind
+    (
+     :map pdf-view-mode-map
+     ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
+     ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page)
+     )
+    :defer t
+    :ensure t
+    :hook
+    (pdf-view-mode . pdf-view-themed-minor-mode)
+    )
+
+#+end_src
+
+**** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L859][Credits]]
+
+** [[https://github.com/xenodium/ready-player][Ready Player Mode]]
+
+#+begin_quote
+
+A lightweight major mode to open media (audio/video) files in an Emacs buffer.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package ready-player
+    :custom
+    (ready-player-previous-icon "󰒮")
+    (ready-player-play-icon "󰐊")
+    (ready-player-stop-icon "󰓛")
+    (ready-player-next-icon "󰒭")
+    (ready-player-shuffle-icon "󰒝")
+    (ready-player-open-externally-icon "󰒖")
+    (ready-player-repeat-icon "󰑖")
+    (ready-player-autoplay-icon "󰼛")
+    :ensure t
+    :init
+    (ready-player-mode)
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (provide 'gs-fm)
+#+end_src
+
+* Key Binding
+
+Key bindings for default packages.
+
+** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html][Key Binding Conventions]]
+
+#+begin_quote
+
+- Don't define C-c letter as a key in Lisp programs. Sequences consisting of C-c and a letter (either upper or lower case; ASCII or non-ASCII) are reserved for users [...];
+- Function keys F5 through F9 without modifier keys are also reserved for users to define.
+- Sequences consisting of C-c followed by a control character or a digit are reserved for major modes;
+- Sequences consisting of C-c followed by {, }, <, >, : or ; are also reserved for major modes;
+- Sequences consisting of C-c followed by any other ASCII punctuation or symbol character are allocated for minor modes [...];
+- Don't bind C-h following any prefix character (including C-c);
+- [...] don't bind a key sequence ending in C-g, since that is commonly used to cancel a key sequence.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** Development
+
+*** Eglot
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package eglot
+    :bind
+    (
+     :map prog-mode-map
+     ("C-c p e" . eglot)
+     )
+    )
+
+#+end_src
+
+*** Flymake
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package flymake
+    :bind
+    (
+     :map prog-mode-map
+     ("C-c p f" . flymake-start) 
+     )
+    )
+
+#+end_src
+
+** Emacs
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package emacs
+    :bind
+    ("C-c i c" . insert-char)
+    ("C-c k e" . kill-emacs)
+    )
+
+#+end_src
+
+** Emoji
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package emoji
+    :bind
+    ("C-c i e" . emoji-insert)
+    )
+
+#+end_src
+
+** Face Remap
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package face-remap
+    :bind
+    ("C-=" . text-scale-increase)
+    ("C--" . text-scale-decrease)
+    )
+
+#+end_src
+
+** Files
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package files
+    :bind
+    ("C-c f r" . recover-this-file)
+    ("C-c b r" . revert-buffer)
+    )
+
+#+end_src
+
+** Grep
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package grep
+    :bind
+    ("C-c g g" . grep)
+    ("C-c g r" . rgrep)
+    )
+
+#+end_src
+
+** Help
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package help
+    :bind
+    ("C-h C-b" . describe-prefix-bindings)
+    )
+
+#+end_src
+
+** iSearch
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package isearch
+    :bind
+    ("C-s" . isearch-forward-word)
+    )
+
+#+end_src
+
+** Lisp
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package lisp
+    :bind
+    ("C-c p c" . check-parens)
+    :defer t
+    :demand t
+    :ensure nil
+    )
+
+#+end_src
+
+** Org Mode
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package org
+    :bind
+    (
+     :map org-mode-map
+     ([remap org-narrow-to-subtree] . org-toggle-narrow-to-subtree)
+     ("M-p" . org-move-subtree-up)
+     ("M-n" . org-move-subtree-down)
+     ("C-c o s e" . org-sort-entries)
+     )
+    )
+
+#+end_src
+
+*** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L52][Agenda]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package org-agenda
+    :bind
+    ("C-c o a" . org-agenda)
+    (
+     :map org-mode-map
+     ("C-c o v q" . (lambda ()
+                      (interactive)
+                      ;; Filter tasks by tag
+                      (org-tags-view t)))
+     )
+    )
+
+#+end_src
+
+*** Capture
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package org-capture
+    :bind
+    (
+     :map org-mode-map
+     ("C-c o c" . org-capture)
+     )
+    )
+
+#+end_src
+
+*** Export
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package ox
+    :bind
+    (
+     :map org-mode-map
+     ("C-c o x" . org-export-dispatch)
+     )
+    )
+
+#+end_src
+
+*** Keys
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package org-keys
+    :custom
+    (org-return-follows-link t)
+    (org-use-speed-commands t)
+    )
+
+#+end_src
+
+*** Links
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package ol
+    :bind
+    (
+     :map org-mode-map
+     ("C-c o l i" . org-insert-link)
+     ("C-c o l s" . org-store-link)
+     )
+    )
+
+#+end_src
+
+*** List
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package org-list
+    :bind
+    (
+     :map org-mode-map
+     ("C-c o s l" . org-sort-list)
+     )
+    )
+
+#+end_src
+
+*** Refile
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package org-refile
+    :bind
+    (
+     :map org-mode-map
+     ("C-c o r" . org-refile)
+     )
+    )
+
+#+end_src
+
+*** Table
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package org-table
+    :bind
+    (
+     :map org-mode-map
+     ("C-c o -" . org-table-insert-hline)
+     )
+    )
+
+#+end_src
+
+** Sort
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package sort
+    :bind
+    ("C-c l d" . delete-duplicate-lines)
+    )
+
+#+end_src
+
+** [[https://github.com/kickingvegas/casual-suite][Casual Suite]]
+
+#+begin_quote
+
+Casual Suite - An umbrella package to support a single install point for all Casual porcelains.
+
+#+end_quote
+
+*** [[https://github.com/kickingvegas/casual-bookmarks][Bookmarks]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package casual-bookmarks
+    :bind
+    (
+     :map bookmark-bmenu-mode-map
+     ("J" . bookmark-jump)
+     ("M-o" . casual-bookmarks-tmenu)
+     ("S" . casual-bookmarks-sortby-tmenu)
+     )
+    :config
+    (easy-menu-add-item global-map '(menu-bar)
+                        casual-bookmarks-main-menu
+                        "Tools")
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/kickingvegas/casual-calc][Calc]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package casual-calc
+    :bind
+    (
+     :map calc-mode-map
+     ("M-o" . casual-calc-tmenu)
+     :map calc-alg-map
+     ("M-o" . casual-calc-tmenu)
+     )
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/kickingvegas/casual-dired][Dired]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package casual-dired
+    :bind
+    (
+     :map dired-mode-map
+     ("M-o" . casual-dired-tmenu)
+     )
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/kickingvegas/casual-ibuffer][iBuffer]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package casual-ibuffer
+    :bind
+    (
+     :map ibuffer-mode-map
+     ("M-o" . casual-ibuffer-tmenu)
+     ("F" . casual-ibuffer-filter-tmenu)
+     ("s" . casual-ibuffer-sortby-tmenu)
+     ("<double-mouse-1>" . ibuffer-visit-buffer)
+     ("M-<double-mouse-1>" . ibuffer-visit-buffer-other-window)
+     ("{" . ibuffer-backwards-next-marked)
+     ("}" . ibuffer-forward-next-marked)
+     ("[" . ibuffer-backward-filter-group)
+     ("]" . ibuffer-forward-filter-group)
+     ("$" . ibuffer-toggle-filter-group)
+     )
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/kickingvegas/casual-info][Info]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package casual-info
+    :bind
+    (
+     :map Info-mode-map
+     ("M-o" . casual-info-tmenu)
+     ("M-[" . Info-history-back)
+     ("M-]" . Info-history-forward)
+     ("p" . casual-info-browse-backward-paragraph)
+     ("n" . casual-info-browse-forward-paragraph)
+     ("B" . bookmark-set)
+     )
+    :ensure t
+    :hook
+    (info-mode . scroll-lock-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/kickingvegas/casual-isearch][iSearch]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package casual-isearch
+    :bind
+    (
+     :map isearch-mode-map
+     ("M-o" . casual-isearch-tmenu)
+     )
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/kickingvegas/casual-re-builder][RE-Builder]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (use-package casual-re-builder
+    :bind
+    (
+     :map reb-mode-map
+     ("M-o" . casual-re-builder-tmenu)
+     :map reb-lisp-mode-map
+     ("M-o" . casual-re-builder-tmenu)
+     )
+    :ensure t
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+
+  (provide 'gs-keys)
+#+end_src
+
+* Org Mode
+
+#+begin_quote
+
+Org is a mode for keeping notes, maintaining ToDo lists, and doing project planning with a fast and effective plain-text system.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org
+    :config
+    (add-to-list 'org-latex-packages-alist '(
+                                             "" "bookmark" t
+                                             "" "cancel" t
+                                             ))
+    :custom
+    (org-adapt-indentation t)
+    (org-auto-align-tags nil)
+    (org-log-done 'time)
+    (org-log-into-drawer t)
+    (org-reverse-note-order t)
+    (org-startup-indented t)
+    (org-tags-column 0)
+    (org-todo-repeat-to-state t)
+    (org-use-sub-superscripts '{})
+    :hook
+    (org-mode . variable-pitch-mode)
+    (org-mode . visual-line-mode)
+    )
+
+#+end_src
+
+** Startup
+
+This just makes the scratch buffer use Org Mode instead.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package startup
+    :custom
+    (initial-major-mode 'org-mode)
+    :defer t
+    )
+
+#+end_src
+
+** Babel
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org
+    :config
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '(
+       (emacs-lisp . t)
+       (js . t)
+       (latex . t)
+       (python . t)
+       (shell . t)
+       ))
+    
+    (push '("conf-unix" . conf-unix) org-src-lang-modes)
+    (add-hook 'after-save-hook 'org-babel-tangle)
+    )
+
+#+end_src
+
+** Agenda
+
+#+begin_quote
+
+Dynamic task and appointment lists for Org.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-agenda
+    :custom
+    (org-agenda-custom-commands
+     '((
+        "d" "Daily Agenda"
+        (
+         (agenda ""
+                 ((org-agenda-overriding-header "High Priority Tasks")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#A"))
+                  (org-agenda-span 'day)
+                  (org-deadline-warning-days 0)))
+         
+         (agenda ""
+                 ((org-agenda-overriding-header "Medium Priority Tasks")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#B"))
+                  (org-agenda-span 'day)
+                  (org-deadline-warning-days 0)))
+         
+         (agenda ""
+                 ((org-agenda-overriding-header "Low Priority Tasks")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#C"))
+                  (org-agenda-span 'day)
+                  (org-deadline-warning-days 0)))
+         )
+        )))
+    (org-agenda-restore-windows-after-quit t)
+    (org-agenda-skip-scheduled-if-done t)
+    (org-agenda-skip-timestamp-if-done t)
+    (org-agenda-start-with-log-mode t)
+    (org-agenda-tags-column 0)
+    (org-agenda-window-setup 'only-window)
+    )
+
+#+end_src
+
+*** Org Habit
+
+#+begin_quote
+
+The habit tracking code for Org.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-habit
+    :custom
+    (org-habit-graph-column 100)
+    )
+
+#+end_src
+
+** Clock
+
+#+begin_quote
+
+The time clocking code for Org mode.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-clock
+    :custom
+    (org-clock-persist t)
+    (org-clock-report-include-clocking-task t)
+    )
+
+#+end_src
+
+** Compat
+
+#+begin_quote
+
+This file contains code needed for compatibility with older versions of GNU Emacs and integration with other packages.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-compat
+    :custom
+    (org-fold-catch-invisible-edits 'show-and-error)
+    )
+
+#+end_src
+
+** Cycle
+
+#+begin_quote
+
+Visibility cycling of Org entries.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-cycle
+    :custom
+    (org-cycle-emulate-tab 'whitestart)
+    )
+
+#+end_src
+
+** Latex
+
+#+begin_quote
+
+LaTeX Backend for Org Export Engine.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package ox-latex
+    :custom
+    (org-latex-toc-command "\\tableofcontents \\pagebreak")
+    (org-startup-with-latex-preview t)
+    (org-preview-latex-default-process 'dvisvgm) ;; 1
+    (org-preview-latex-image-directory (expand-file-name "ltximg" temporary-file-directory))
+    )
+
+#+end_src
+
+1. ~dvipng~ doesn't work for me for some reason.
+   
+*** Packages to install
+
+**** Fedora
+
+#+begin_src bash
+
+sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm
+
+#+end_src bash
+
+** List
+
+#+begin_quote
+
+Plain lists for Org.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-list
+    :custom
+    (org-list-allow-alphabetical t)
+    )
+
+#+end_src
+
+** Modules
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org
+    :config
+    (add-to-list 'org-modules '(
+                                org-habit
+                                org-id
+                                org-protocol
+                                )
+                 )
+    )
+
+#+end_src
+
+** Refile
+
+#+begin_quote
+
+Org refile allows you to refile subtrees to various locations.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-refile
+    :config
+    (advice-add 'org-refile :after 'org-save-all-org-buffers)  
+    :custom
+    (org-outline-path-complete-in-steps nil)
+    (org-refile-allow-creating-parent-nodes 'confirm)
+    (org-refile-targets '(
+                          (nil :maxlevel . 1)
+                          (org-agenda-files :maxlevel . 1)
+                          ))
+    (org-refile-use-outline-path t)
+    )
+
+#+end_src
+
+** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L442][Tags]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org
+    :custom
+    (org-tag-alist '(
+                     ;; Places
+                     (:startgroup)
+                     ("Places")
+                     (:grouptags)
+                     ("@home" . ?h)
+                     (:endgroup)
+
+                     ;; Contexts
+                     (:startgroup)
+                     ("Contexts")
+                     (:grouptags)
+                     ("@computer" . ?c)
+                     ("@mobile" . ?m)
+                     (:endgrouptag)
+
+                     ;; Task Types
+                     (:startgroup)
+                     ("Types")
+                     (:grouptags)
+                     ("@hacking" . ?H)
+                     ("@writing" . ?w)
+                     ("@creative" . ?C)
+                     ("@accounting" . ?a)
+                     ("@email" . ?e)
+                     ("@system" . ?s)
+                     (:endgrouptag)
+
+                     ;; Workflow states
+                     (:startgroup)
+                     ("States")
+                     (:grouptags)
+                     ("@plan" . ?p)
+                     ("@review" . ?r)
+                     (:endgroup)
+                     ))
+    )  
+#+end_src
+
+** TODOs
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org
+    :custom
+    (org-todo-keywords '(
+                         (sequence
+                          "TODO(t)"
+                          "WRITE(W)"
+                          "WAIT(w!)"
+                          "|"
+                          "DONE(d!)"
+                          "BACKLOG(b)"
+                          "CANCELLED(c@)"
+                          )
+                         (sequence
+                          "GOAL(g)"
+                          "PROJ(p)"
+                          "|"
+                          "DONE(d!)"
+                          )
+                         (sequence
+                          "FIX(f@)"
+                          "FEAT(F@)"
+                          "STYLE(s)"
+                          "REFACTOR(r)"
+                          "CHORE(C@)"
+                          "|"
+                          "MERGED(m)"
+                          "CLOSED(x@)"
+                          )
+                         ))
+    )
+
+#+end_src
+
+** [[https://github.com/io12/org-fragtog][Fragtog]]
+
+#+begin_quote
+
+Automatically toggle Org mode LaTeX fragment previews as the cursor enters and exits them.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-fragtog
+    :ensure t
+    :hook
+    (org-mode . org-fragtog-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/awth13/org-appear][Appear]]
+
+#+begin_quote
+
+Toggle visibility of hidden Org mode element parts upon entering and leaving an element.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-appear
+    :custom
+    (org-appear-autoentities t)
+    (org-appear-autolinks t)
+    (org-appear-autosubmarkers t)
+    :ensure t
+    :hook
+    (org-mode . org-appear-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/nobiot/org-transclusion][Transclusion]]
+
+#+begin_quote
+
+Org-transclusion lets you insert a copy of text content via a file link or ID link within an Org file. It lets you have the same content present in different buffers at the same time without copy-and-pasting it. Edit the source of the content, and you can refresh the transcluded copies to the up-to-date state. Org-transclusion keeps your files clear of the transcluded copies, leaving only the links to the original content.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-transclusion
+    :ensure t
+    :hook
+    (org-mode . org-transclusion-mode)
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (provide 'gs-org) 
+#+end_src
+
+* [[https://github.com/org-roam/org-roam][Org Roam]]
+
+#+begin_quote
+
+Rudimentary Roam replica with Org-mode.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+
+  (use-package org-roam
+    :bind
+    ("C-c r f" . org-roam-node-find)
+    ("C-c r i" . org-roam-node-insert)
+    :demand t
+    :ensure t
+    :init
+    (org-roam-db-autosync-mode)
+    )
+
+#+end_src
+
+** Capture templates
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+
+  (use-package org-roam
+    :custom
+    (org-roam-capture-templates '(
+                                  ("b" "book notes" plain
+                                   (file "~/org-roam/templates/book_note.org")
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Book-Notes\n\n")
+                                   :unnarrowed t)
+                                  ("d" "default" plain
+                                   (file "~/org-roam/templates/default.org") 
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
+                                   :unnarrowed t)
+                                  ("n" "notegpt.io" plain
+                                   (file "~/org-roam/templates/notegpt.io.org")
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: notegpt.io Hacker-News\n\n")
+                                   :unnarrowed t)
+                                  ("r" "redação" plain
+                                   (file "~/org-roam/templates/redação.org")
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Redação\n\n")
+                                   :unnarrowed t)
+                                  ("s" "summarize.ing" plain
+                                   (file "~/org-roam/templates/summarize.ing.org")
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: summarize.ing\n\n")
+                                   :unnarrowed t)
+                                  ))
+    )
+
+#+end_src
+
+** Dailies
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+
+  (use-package org-roam-dailies
+    :bind-keymap
+    ("C-c r d" . org-roam-dailies-map)
+    :bind 
+    (
+     :map org-roam-dailies-map
+     ("Y" . org-roam-dailies-capture-yesterday)
+     ("T" . org-roam-dailies-capture-tomorrow)
+     )
+    :custom
+    (dw/daily-note-filename "%<%Y-%m-%d>.org")
+    (dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+    :demand t
+    )
+
+#+end_src
+
+*** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L243][Capture templates]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+
+  (use-package org-roam-dailies
+    :custom
+    (org-roam-dailies-capture-templates '(
+                                          ("d" "default" entry
+                                           "* %?"
+                                           :if-new (file+head ,dw/daily-note-filename
+                                                              ,dw/daily-note-header))
+                                          ("t" "task" entry
+                                           "* TODO %?\n  %U\n  %a\n  %i"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Tasks"))
+                                           :empty-lines 1)
+                                          ("l" "log entry" entry
+                                           "* %<%I:%M %p> - %?"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Log")))
+                                          ("j" "journal" entry
+                                           "* %<%I:%M %p> - Journal  :journal:\n\n%?\n\n"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Log")))
+                                          ("m" "meeting" entry
+                                           "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Log")))
+                                          ))
+    )
+
+#+end_src
+
+** [[https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-workflow.el][Roam Agenda]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+
+  (use-package org-agenda
+    :bind
+    ("C-c r b" . dw/org-roam-capture-inbox)
+    :preface
+    (defun dw/org-roam-filter-by-tag (tag-name)
+      "Filter org roam files by their tags."
+      (lambda (node)
+        (member tag-name (org-roam-node-tags node))))
+    
+    (defun dw/org-roam-list-notes-by-tag (tag-name)
+      "List org roam files by their tags."
+      (mapcar #'org-roam-node-file
+              (seq-filter
+               (dw/org-roam-filter-by-tag tag-name)
+               (org-roam-node-list))))
+    
+    (defun dw/org-roam-refresh-agenda-list () ;; 1
+      "Refresh the current agenda list, and add the files with the currosponding tag to the agenda list."
+      (interactive)
+      (setq org-agenda-files (dw/org-roam-list-notes-by-tag "Agenda")))
+    ;; Build the agenda list the first time for the session
+    (dw/org-roam-refresh-agenda-list)
+    (defun dw/org-roam-project-finalize-hook ()
+      "Adds the captured project file to "org-agenda-file" if the capture was not aborted."
+      ;; Remove the hook since it was added temporarily
+      (remove-hook 'org-capture-after-finalize-hook #'dw/org-roam-project-finalize-hook)
+      
+      ;; Add project file to the agenda list if the capture was confirmed
+      (unless org-note-abort
+        (with-current-buffer (org-capture-get :buffer)
+          (add-to-list 'org-agenda-files (buffer-file-name)))))
+    (defun dw/org-roam-capture-inbox ()
+      "Create a org roam inbox file."
+      (interactive)
+      (org-roam-capture- :node (org-roam-node-create)
+                         :templates '(("i" "inbox" plain "* %?"
+                                       :if-new (file+head "inbox.org" "#+title: Inbox\n#+filetags: Agenda\n\n")))))
+    (defun dw/org-roam-goto-month ()
+      "Lists the files of the selected month with the set tag."
+      (interactive)
+      (org-roam-capture- :goto (when (org-roam-node-from-title-or-alias (format-time-string "%Y-%B")) '(4))
+                         :node (org-roam-node-create)
+                         :templates '(("m" "month" plain "\n* Goals\n\n%?* Summary\n\n"
+                                       :if-new (file+head "%<%Y-%B>.org"
+                                                          "#+title: %<%Y-%B>\n#+filetags: Agenda\n\n")
+                                       :unnarrowed t))))
+    (defun dw/org-roam-goto-year ()
+      "Lists the files of the selected year with the set tag."
+      (interactive)
+      (org-roam-capture- :goto (when (org-roam-node-from-title-or-alias (format-time-string "%Y")) '(4))
+                         :node (org-roam-node-create)
+                         :templates '(("y" "year" plain "\n* Goals\n\n%?* Summary\n\n"
+                                       :if-new (file+head "%<%Y>.org"
+                                                          "#+title: %<%Y>\n#+filetags: Agenda\n\n")
+                                       :unnarrowed t))))
+    :custom
+    (org-agenda-hide-tags-regexp "Agenda")
+    )
+
+#+end_src
+
+*** Credits
+
+1. [[https://github.com/org-roam/org-roam/issues/2357#issuecomment-1614254880][pauljamesharper]].
+
+** [[https://github.com/org-roam/org-roam-ui][User Interface]]
+
+#+begin_quote
+
+A graphical frontend for exploring your org-roam Zettelkasten.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+
+  (use-package org-roam-ui
+    :custom
+    (org-roam-ui-sync-theme t)
+    (org-roam-ui-follow t)
+    (org-roam-ui-update-on-save t)
+    (org-roam-ui-open-on-start nil)
+    (org-roam-ui-browser-function #'browse-url-chromium)
+    :ensure t
+    :hook
+    (org-roam-mode . org-roam-ui-mode)
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+
+  (provide 'gs-org-roam) 
+#+end_src
+
+* Command Line
+
+#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes 
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** [[https://github.com/akermu/emacs-libvterm][vterm]]
+
+#+begin_quote
+
+Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based on [[https://github.com/neovim/libvterm][libvterm]], a C library. As a result of using compiled code (instead of elisp), emacs-libvterm is fully capable, fast, and it can seamlessly handle large outputs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+
+  (use-package vterm
+    :custom
+    (vterm-shell "bash")
+    (vterm-max-scrollback 10000)
+    )
+
+#+end_src
+
+*** [[https://github.com/jixiuf/vterm-toggle][Toggle vterm]]
+
+#+begin_quote
+
+Toggles between the vterm buffer and whatever buffer you are editing. 
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+
+  (use-package vterm-toggle
+    :bind
+    ("C-c t v" . vterm-toggle)
+    :custom
+    (vterm-toggle-reset-window-configration-after-exit t)
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+
+  (provide 'gs-cmd)
+#+end_src
+
+* Development
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** Tree-Sitter
+
+#+begin_quote
+
+tree-sitter utilities.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package treesit
+    :mode
+    (
+     ("\\.sh\\'" . bash-ts-mode)
+     ("\\.css\\'" . css-ts-mode)
+     ("\\.Dockerfile\\'" . dockerfile-ts-mode)
+     ("\\.go\\'" . go-ts-mode)
+     ("\\.html\\'" . html-ts-mode)
+     ("\\.json\\'" .  json-ts-mode)
+     ("\\.lua\\'" . lua-ts-mode)
+     ("\\.py\\'" . python-ts-mode)
+     ("\\.rs\\'" . rust-ts-mode)
+     ("\\.tsx\\'" . tsx-ts-mode)
+     ("\\.jsx\\'" . tsx-ts-mode)
+     ("\\.js\\'"  . typescript-ts-mode)
+     ("\\.mjs\\'" . typescript-ts-mode)
+     ("\\.mts\\'" . typescript-ts-mode)
+     ("\\.cjs\\'" . typescript-ts-mode)
+     ("\\.ts\\'"  . typescript-ts-mode)
+     ("\\.yaml\\'" . yaml-ts-mode)
+     )
+    :preface
+    (defun os/setup-install-grammars ()
+      "Install Tree-sitter grammars if they are absent."
+      (interactive)
+      (dolist
+          (grammar '(
+                     (bash "https://github.com/tree-sitter/tree-sitter-bash.git")
+                     (c "https://github.com/tree-sitter/tree-sitter-c.git")
+                     (cpp "https://github.com/tree-sitter/tree-sitter-cpp.git")
+                     (cmake "https://github.com/uyha/tree-sitter-cmake.git")
+                     (css "https://github.com/tree-sitter/tree-sitter-css.git")
+                     (elisp "https://github.com/Wilfred/tree-sitter-elisp.git")
+                     (go "https://github.com/tree-sitter/tree-sitter-go.git")
+                     (html "https://github.com/tree-sitter/tree-sitter-html.git")
+                     (javascript "https://github.com/tree-sitter/tree-sitter-javascript.git")
+                     (json "https://github.com/tree-sitter/tree-sitter-json.git")
+                     (python "https://github.com/tree-sitter/tree-sitter-python.git")
+                     (make "https://github.com/alemuller/tree-sitter-make.git")
+                     (markdown "https://github.com/ikatyang/tree-sitter-markdown.git")
+                     (rust "https://github.com/tree-sitter/tree-sitter-rust.git")
+                     (toml "https://github.com/tree-sitter/tree-sitter-toml.git")
+                     (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
+                     (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
+                     (yaml "https://github.com/ikatyang/tree-sitter-yaml.git")
+                     ))
+        (add-to-list 'treesit-language-source-alist grammar)
+        ;; Only install `grammar' if we don't already have it
+        ;; installed. However, if you want to *update* a grammar then
+        ;; this obviously prevents that from happening.
+        (unless (treesit-language-available-p (car grammar))
+          (treesit-install-language-grammar (car grammar)))))
+
+    ;; Optional, but recommended. Tree-sitter enabled major modes are
+    ;; distinct from their ordinary counterparts.
+    ;;
+    ;; You can remap major modes with `major-mode-remap-alist'. Note
+    ;; that this does *not* extend to hooks! Make sure you migrate them
+    (dolist
+        (mapping '(
+                   (bash-mode . bash-ts-mode)
+                   (sh-mode . bash-ts-mode)
+                   (sh-base-mode . bash-ts-mode)
+                   (c-mode . c-ts-mode)
+                   (c++-mode . c++-ts-mode)
+                   (c-or-c++-mode . c-or-c++-ts-mode)
+                   (css-mode . css-ts-mode)
+                   (html-mode . html-ts-mode)
+                   (js-mode . typescript-ts-mode)
+                   (js2-mode . typescript-ts-mode)
+                   (json-mode . json-ts-mode)
+                   (lua-mode . lua-ts-mode)
+                   (js-json-mode . json-ts-mode)
+                   (python-mode . python-ts-mode)
+                   (typescript-mode . typescript-ts-mode)
+                   ))
+      (add-to-list 'major-mode-remap-alist mapping))
+    :init
+    (os/setup-install-grammars)
+    )
+
+#+end_src
+
+*** [[https://www.ovistoica.com/blog/2024-7-05-modern-emacs-typescript-web-tsx-config][Credits]]
+
+** Eglot
+
+#+begin_quote
+
+Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package eglot
+    :custom
+    (eglot-autoshutdown t)
+    )
+
+#+end_src
+
+** Flymake
+
+#+begin_quote
+
+A universal on-the-fly syntax checker.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package flymake
+    :hook
+    (prog-mode . flymake-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/radian-software/apheleia][Apheleia]]
+
+#+begin_quote
+
+Run code formatter on buffer contents without moving point, using RCS patches and dynamic programming. 
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package apheleia
+    :config
+    (setf (alist-get 'prettier apheleia-formatters)
+          '("prettier" "--stdin-filepath" filepath))
+    :hook
+    (prog-mode . apheleia-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/emacs-vs/cognitive-complexity][Cognitive Complexity]]
+
+#+begin_quote
+
+Show the cognitive complexity of the code.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package cognitive-complexity
+    :vc (:url "https://github.com/emacs-vs/cognitive-complexity")
+    :ensure t
+    :hook
+    (prog-mode . cognitive-complexity-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/mickeynp/combobulate][Combobulate]]
+
+#+begin_quote
+
+Structured Editing and Navigation in Emacs with Tree-Sitter.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package combobulate
+    :vc (:url "https://github.com/mickeynp/combobulate")
+    :bind
+    (
+     :map prog-mode-map
+     ("C-c C-x c" . combobulate)
+     )
+    :ensure t
+    :hook
+    (
+     (css-ts-mode . combobulate-mode)
+     (html-ts-mode . combobulate-mode)
+     (js-ts-mode . combobulate-mode)
+     (json-ts-mode . combobulate-mode)
+     (python-ts-mode . combobulate-mode)
+     (tsx-ts-mode . combobulate-mode)
+     (typescript-ts-mode . combobulate-mode)
+     (yaml-ts-mode . combobulate-mode)
+     )
+    )
+
+#+end_src
+
+** [[https://github.com/magit/magit][Magit]]
+
+#+begin_quote
+
+It's Magit! A Git Porcelain inside Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package magit
+    :commands
+    (
+     magit
+     magit-clone
+     magit-status
+     )
+    :custom
+    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+    :ensure t
+    :hook
+    (magit-process-find-password-functions . magit-process-password-auth-source)
+    )
+
+#+end_src
+
+** [[https://github.com/magit/forge][Forge]]
+
+#+begin_quote
+
+Work with Git forges from the comfort of Magit.
+
+#+end_quote
+
+To make use of this package, a Gitlab/Github [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package forge
+    :ensure t
+    )
+
+#+end_src
+
+*** Auth Source
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package auth-source
+    :custom
+    (auth-sources (expand-file-name "gs-forge-magit-auth.gpg" modules-directory))
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (provide 'gs-dev)
+#+end_src
+
+* Completion
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** [[https://github.com/oantolin/orderless][Orderless]]
+
+#+begin_quote
+
+Emacs completion style that matches multiple regexps in any order.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package orderless
+    :config
+    (orderless-define-completion-style orderless+initialism
+      (orderless-matching-styles '(
+                                   orderless-annotation
+                                   orderless-initialism
+                                   orderless-literal-prefix
+                                   orderless-regexp
+                                   )))
+    :custom
+    (completion-category-defaults nil)
+    (completion-category-overrides '(
+                                     (file (styles partial-completion))
+                                     ))
+    (completion-styles '(orderless))
+    (orderless-matching-styles '(
+                                 orderless-literal
+                                 orderless-regexp
+                                 ))
+    (orderless-style-dispatchers (list
+                                  #'orderless-affix-dispatch
+                                  #'+orderless-consult-dispatch
+                                  ))
+    :ensure t
+    :preface
+    (defun +orderless--consult-suffix ()
+      "Regexp which matches the end of string with Consult tofu support."
+      (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
+          (format "[%c-%c]*$"
+                  consult--tofu-char
+                  (+ consult--tofu-char consult--tofu-range -1))
+        "$"))
+    ;; Recognizes the following patterns:
+    ;; * .ext (file extension)
+    ;; * regexp$ (regexp matching at end)
+    (defun +orderless-consult-dispatch (word _index _total)
+      (cond
+       ;; Ensure that $ works with Consult commands, which add disambiguation suffixes
+       ((string-suffix-p "$" word)
+        `(orderless-regexp . ,(concat (substring word 0 -1) (+orderless--consult-suffix))))))
+    )
+
+#+end_src
+
+*** [[https://github.com/minad/consult/wiki#minads-orderless-configuration][Credits]]
+
+** [[https://github.com/minad/cape][Cape]]
+
+#+begin_quote
+
+Completion At Point Extensions.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package cape
+    :config
+    (add-hook 'completion-at-point-functions #'cape-keyword)
+    (add-hook 'completion-at-point-functions #'cape-file)
+    (add-hook 'completion-at-point-functions #'cape-dabbrev)
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/isamert/corg.el][Corg]]
+
+#+begin_quote
+
+Auto complete org-mode headers seamlessly.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package corg
+    :vc (:url "https://github.com/isamert/corg.el")
+    :config
+    (add-hook 'org-mode-hook #'corg-setup)
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/minad/tempel][Tempel]]
+
+#+begin_quote
+
+Simple templates for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package tempel
+    :custom
+    (tempel-trigger-prefix "<")
+    :ensure t
+    :hook
+    (prog-mode . tempel-abbrev-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/fejfighter/eglot-tempel][Eglot]]
+
+#+begin_quote
+
+Bridge for tempel templates with eglot.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package eglot-tempel
+    :ensure t
+    :hook
+    (eglot . eglot-tempel-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/Crandel/tempel-collection][Collection]]
+
+#+begin_quote
+
+Collection tempel templates.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package tempel-collection
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/minad/corfu][Corfu]]
+
+#+begin_quote
+
+COmpletion in Region FUnction.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package corfu
+    :bind
+    (
+     :map corfu-map
+     ("M-SPC" . corfu-insert-separator)
+     ("RET" . nil)
+     )
+    :config
+    (global-corfu-mode)
+    (corfu-history-mode)
+    (corfu-popupinfo-mode)
+    :custom
+    (corfu-auto t)
+    (corfu-auto-prefix 2)
+    (corfu-auto-delay 0.0)
+    (corfu-cycle t)
+    (corfu-preselect 'directory)
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/minad/corfu/wiki#configuring-corfu-for-eglot][Configuring Corfu for Eglot]]
+
+**** [[https://github.com/minad/corfu/wiki#filter-list-of-all-possible-completions-with-completion-style-like-orderless][Orderless]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package orderless
+    :custom
+    (completion-category-overrides '((eglot (styles orderless))
+                                     (eglot-capf (styles orderless))))
+    )
+
+#+end_src
+
+**** [[https://github.com/minad/corfu/wiki#continuously-update-the-candidates][Cape]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package cape
+    :config
+    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+    )
+
+#+end_src
+
+**** [[https://github.com/minad/corfu/wiki#making-a-cape-super-capf-for-eglot][Emacs]]
+
+With the combined features of cape and tempel, create a super capf for eglot completion.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package corfu
+    :if (package-installed-p '(cape tempel))
+    :after
+    (cape tempel)
+    :preface
+    (defun minad/eglot-capf ()
+      "eglot capf with tempel and cape features."
+      (setq-local completion-at-point-functions
+                  (list (cape-capf-super
+                         #'cape-file
+                         #'eglot-completion-at-point
+                         #'tempel-expand
+                         ))))
+    (add-hook 'eglot-managed-mode-hook #'minad/eglot-capf)
+    )
+
+#+end_src
+
+** [[https://github.com/minad/vertico][Vertico]]
+
+#+begin_quote
+
+VERTical Interactive COmpletion.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package vertico
+    :custom
+    (vertico-cycle t)
+    :ensure t
+    :init
+    (vertico-mode)
+    :preface
+    (defun crm-indicator (args)
+      "Add a prompt indicator to `completing-read-multiple'."
+      (cons (format "[CRM%s] %s"
+                    (replace-regexp-in-string
+                     "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                     crm-separator)
+                    (aref args))
+            (aref args)))
+    (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+    )
+
+#+end_src
+
+*** [[https://github.com/minad/vertico?tab=readme-ov-file#extensions][Vertico Directory]]
+
+#+begin_quote
+
+Commands for Ido-like directory navigation.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package vertico-directory
+    :after vertico
+    :bind
+    (
+     :map vertico-map
+     ("RET" . vertico-directory-enter)
+     ("DEL" . vertico-directory-delete-char)
+     ("M-DEL" . vertico-directory-delete-word)
+     )
+    :hook
+    (rfn-eshadow-update-overlay . vertico-directory-tidy)
+    )
+
+#+end_src
+
+** [[https://github.com/minad/marginalia][Marginalia]]
+
+#+begin_quote
+
+Marginalia in the minibuffer.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package marginalia
+    :ensure t
+    :init
+    (marginalia-mode)
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (provide 'gs-completion)
+#+end_src
+
+* Utilities
+
+Generally useful packages for productivity and other aspects.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** [[https://github.com/mhayashi1120/Emacs-wgrep][wgrep]]
+
+#+begin_quote
+
+Writable grep buffer to apply changes to files.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package wgrep
+    :ensure t
+    :hook
+    (grep-mode . wgrep-setup)
+    )
+
+#+end_src
+
+** [[https://github.com/jwiegley/alert][Alert]]
+
+#+begin_quote
+
+A Growl-like alerts notifier for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package alert
+    :custom
+    (alert-default-style 'libnotify)
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/SqrtMinusOne/pomm.el][Pomm]]
+
+#+begin_quote
+
+Implementation of Pomodoro and Third Time techniques for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package pomm
+    :commands
+    (
+     pomm
+     pomm-third-time
+     )
+    :config
+    (pomm-mode-line-mode)
+    (add-hook 'pomm-on-status-changed-hook #'pomm--sync-org-clock)
+    (add-hook 'pomm-third-time-on-status-changed-hook #'pomm-third-time--sync-org-clock)
+    :custom
+    (pomm-audio-enabled t)
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/minad/consult][Consult]]
+
+#+begin_quote
+
+Consulting completing-read.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult
+    :bind
+    (
+     ([remap flymake-start] . consult-flymake)
+     ([remap goto-line] . consult-goto-line)
+     ([remap grep] . consult-grep)
+     ([remap imenu] . consult-imenu-multi)
+     ([remap info] . consult-info)
+     ([remap info-search] . consult-info)
+     ([remap isearch-forward-word] . consult-line)
+     ([remap list-buffers] . consult-buffer)
+     ([remap load-theme] . consult-theme)
+     ([remap locate] . consult-locate)
+     ([remap man] . consult-man)
+     ([remap rgrep] . consult-ripgrep)
+     ([remap switch-to-buffer] . consult-buffer)
+     ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)
+     ([remap yank-pop] . consult-yank-pop)
+     )
+    :config
+    (defun choose-completion-in-region ()
+      "Use default `completion--in-region' unless we are not completing."
+      (when minibuffer-completion-table
+        (setq-local completion-in-region-function #'completion--in-region)))
+    (advice-add #'register-preview :override #'consult-register-window)
+    (setf (alist-get 'log-edit-mode consult-mode-histories)
+          'log-edit-comment-ring)
+    :custom
+    (consult-narrow-key "<")
+    (register-preview-function #'consult-register-format)
+    (xref-show-xrefs-function #'consult-xref)
+    (xref-show-definitions-function #'consult-xref)
+    :ensure t
+    :hook
+    (minibuffer-setup . choose-completion-in-region)
+    )
+
+#+end_src
+
+*** [[https://github.com/oantolin/emacs-config/blob/master/init.el][Credits]]
+
+*** [[https://github.com/karthink/consult-dir][Dir]]
+
+#+begin_quote
+
+Insert paths into the minibuffer prompt in Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult-dir
+    :bind
+    ([remap list-directory] . consult-dir)
+    ([remap dired-jump] . consult-dir-jump-file)
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/mclear-tools/consult-notes][Notes]]
+
+#+begin_quote
+
+Use consult to search notes.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult-notes
+    :config
+    (when (locate-library "org-roam")
+      (consult-notes-org-roam-mode))
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/armindarvish/consult-gh][gh]]
+
+#+begin_quote
+
+An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult-gh
+    :vc (:url "https://github.com/armindarvish/consult-gh")
+    :custom
+    (consult-gh-code-action #'consult-gh--code-view-action)
+    (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
+    (consult-gh-default-orgs-list "gs-101")
+    (consult-gh-pr-action #'consult-gh-forge--pr-view-action)
+    :ensure t
+    )
+
+#+end_src
+
+**** [[https://github.com/armindarvish/consult-gh?tab=readme-ov-file#magitforge-integration][Forge]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult-gh-forge
+    :if (package-installed-p 'forge)
+    :after (consult-gh forge)
+    :custom
+    (consult-gh-file-action #'consult-gh--files-view-action)
+    (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
+    (consult-gh-repo-action #'consult-gh--repo-view-action)
+    )
+
+#+end_src
+
+**** [[https://github.com/armindarvish/consult-gh?tab=readme-ov-file#embark-integration][Embark]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult-gh-embark
+    :if (package-installed-p 'embark)
+    :after (consult-gh embark)
+    )
+
+#+end_src
+
+**** [[https://github.com/armindarvish/consult-gh?tab=readme-ov-file#transient-menu][Transient]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult-gh-transient
+    :after consult-gh
+    )
+
+#+end_src
+
+** [[https://github.com/oantolin/embark][Embark]]
+
+#+begin_quote
+
+Emacs Mini-Buffer Actions Rooted in Keymaps.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package embark
+    :bind
+    (
+     ([remap describe-bindings]. embark-bindings)
+     ("C-c e a" . embark-act)
+     ("C-c e d" . embark-dwim)
+     )
+    :config
+    ;; Hide the mode line of the Embark live/completions buffers
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                   nil
+                   (window-parameters (mode-line-format . none))))
+    :custom
+    (prefix-help-command #'embark-prefix-help-command)
+    ;; Disable quitting after killing a buffer in an action
+    (embark-quit-after-action '(
+                                (kill-buffer . nil)
+                                ))
+    )
+
+#+end_src
+
+*** [[https://github.com/minad/consult/wiki#manual-preview-for-non-consult-commands-using-embark][Manual preview for non-Consult commands]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package embark
+    :bind
+    (
+     :map minibuffer-local-map
+     ([remap embark-dwim] . my-embark-preview)
+     )
+    :preface
+    (defun my-embark-preview ()
+      "Previews candidate in vertico buffer, unless it's a consult command."
+      (interactive)
+      (unless (bound-and-true-p consult--preview-function)
+        (save-selected-window
+          (let ((embark-quit-after-action nil))
+            (embark-dwim)))))
+    )
+
+#+end_src
+
+*** [[https://github.com/oantolin/embark?tab=readme-ov-file#consult][Consult]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package embark-consult
+    :hook
+    ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/oantolin/embark/wiki/Additional-Configuration#use-which-key-like-a-key-menu-prompt][Which Key]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package embark
+    :config
+    (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
+    :custom
+    (embark-indicators '(
+                         embark-which-key-indicator
+                         embark-highlight-indicator
+                         embark-isearch-highlight-indicator
+                         ))
+    :preface
+    (defun embark-which-key-indicator ()
+      "An embark indicator that displays keymaps using which-key.
+  The which-key help message will show the type and value of the
+  current target followed by an ellipsis if there are further
+  targets."
+      (lambda (&optional keymap targets prefix)
+        (if (null keymap)
+            (which-key--hide-popup-ignore-command)
+          (which-key--show-keymap
+           (if (eq (plist-get (car targets) :type) 'embark-become)
+               "Become"
+             (format "Act on %s '%s'%s"
+                     (plist-get (car targets) :type)
+                     (embark--truncate-target (plist-get (car targets) :target))
+                     (if (cdr targets) "…" "")))
+           (if prefix
+               (pcase (lookup-key keymap prefix 'accept-default)
+                 ((and (pred keymapp) km) km)
+                 (_ (key-binding prefix 'accept-default)))
+             keymap)
+           nil nil t (lambda (binding)
+                       (not (string-suffix-p "-argument" (car binding))))))))
+
+    (defun embark-hide-which-key-indicator (fn &rest args)
+      "Hide the which-key indicator immediately when using the completing-read prompter."
+      (which-key--hide-popup-ignore-command)
+      (let ((embark-indicators
+             (remq #'embark-which-key-indicator embark-indicators)))
+        (apply fn args)))
+    )
+
+#+end_src
+
+** [[https://github.com/mahmoodsh36/blk][blk]]
+
+#+begin_quote
+
+Emacs package to rapidly create and follow links across text files.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package blk
+    :vc (:url "https://github.com/mahmoodsh36/blk")
+    :bind
+    ("C-c b l f" . blk-find)
+    ("C-c b l i" . blk-insert)
+    ("C-c b l o" . blk-open-at-point)
+    :custom
+    (blk-list-directories-recursively t)
+    (blk-use-cache t)
+    (blk-treat-titles-as-ids t)
+    :demand t
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/mahmoodsh36/blk][Org Mode]]
+
+#+begin_quote
+
+Add blk-type Org links and transclusion.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package blk-org
+    :if (package-installed-p "org-transclusion")
+    :after blk
+    :config
+    (blk-configure-org-transclusion)
+    )
+
+#+end_src
+
+*** Org Roam
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package blk
+    :if (package-installed-p "org-roam")
+    :custom 
+    (blk-directories (list (expand-file-name org-roam-directory)))
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (provide 'gs-utils)
+#+end_src
+
+* [[https://github.com/emacs-evil/evil][Evil Mode]]
+
+#+begin_quote
+
+The extensible vi layer for Emacs. 
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** Simple
+
+Bind the universal argument to another key to avoid conflicts.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package simple
+    :bind 
+    ("C-M-u" . universal-argument)
+    )
+
+#+end_src
+
+** Emacs
+
+This is needed for ~evil-collection~.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package emacs
+    :custom
+    (evil-want-keybinding nil)
+    )
+
+#+end_src
+
+** Evil
+
+#+begin_quote
+
+The extensible vi layer for Emacs. 
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil
+    :ensure t
+    )
+
+#+end_src
+
+** Core
+
+#+begin_quote
+
+Core functionality.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :config
+    ;; Use visual line motions even outside of visual-line-mode buffers
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+    :init
+    (evil-mode)
+    )
+
+#+end_src
+
+** Variables
+
+#+begin_quote
+
+Settings and variables.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-vars
+    :custom
+    (evil-respect-visual-line-mode t)
+    (evil-undo-system 'undo-redo)
+    (evil-v$-excludes-newline t)
+    (evil-vsplit-window-right t)
+    (evil-split-window-below t)
+    (evil-want-C-i-jump nil)
+    (evil-want-C-u-scroll t)
+    )
+
+#+end_src
+
+*** [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-05/config.org#headline-28][Credits]]
+
+** States
+
+The different states found in Evil Mode.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-states
+    :bind 
+    (
+     :map evil-insert-state-map
+     ;; In insert state, use the default quit command to return to normal state
+     ("C-g" . evil-normal-state)
+     :map evil-motion-state-map
+     ;; Disabled to avoid conflict with Org Mode
+     ("RET" . nil)
+     )
+    )
+
+#+end_src
+
+*** [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/emacs/config.el#L164][Credits]]
+
+** [[https://github.com/awth13/org-appear?tab=readme-ov-file#usage][Org Appear]]
+
+Toggles org-appear based on the current evil state.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :if (package-installed-p 'org-appear)
+    :custom
+    (org-appear-trigger 'manual) 
+    :config
+    (add-hook 'org-mode-hook (lambda ()
+                               (add-hook 'evil-insert-state-entry-hook
+                                         #'org-appear-manual-start
+                                         nil
+                                         t)
+                               (add-hook 'evil-insert-state-exit-hook
+                                         #'org-appear-manual-stop
+                                         nil
+                                         t)))
+    )
+
+#+END_src
+
+** Vertico
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :if (package-installed-p 'vertico)
+    :bind
+    (
+     :map vertico-map
+     ("C-j" . vertico-next)
+     ("C-k" . vertico-previous)
+     )
+    )
+
+#+end_src
+
+** [[https://reddit.com/r/emacs/comments/12zyrnk/evilsetleader_vs_generalel_for_spc_based/][Leader Keys]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :config
+    (evil-set-leader nil (kbd "SPC"))
+    )
+
+#+end_src
+
+*** Buffer Management
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>B") 'ibuffer)
+    (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
+    )
+
+#+end_src
+
+*** Character Insertion
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>ie") 'emoji-insert)
+    (evil-define-key 'normal 'global (kbd "<leader>ic") 'insert-char)
+    )
+
+#+end_src
+
+*** File Shortcuts
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>fe") '(lambda () (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory))))
+    )
+
+#+end_src
+
+*** Org Mode
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda) 
+    (evil-define-key 'normal 'global (kbd "<leader>oc") 'org-clock-report)
+    (evil-define-key 'normal 'global (kbd "<leader>od") 'org-deadline) 
+    (evil-define-key 'normal 'global (kbd "<leader>ol") 'org-insert-link)
+    (evil-define-key 'normal 'global (kbd "<leader>os") 'org-schedule)
+    (evil-define-key 'normal 'global (kbd "<leader>op") 'org-set-property)
+    (evil-define-key 'normal 'global (kbd "<leader>ot") 'org-todo)
+    )
+
+#+end_src
+
+*** Window Movement
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>wo") 'other-window)
+    (evil-define-key 'normal 'global (kbd "<leader>wk") 'windmove-up)
+    (evil-define-key 'normal 'global (kbd "<leader>wj") 'windmove-down)
+    (evil-define-key 'normal 'global (kbd "<leader>wh") 'windmove-left)
+    (evil-define-key 'normal 'global (kbd "<leader>wl") 'windmove-right)
+    )
+
+#+end_src
+
+*** Vterm
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :if (package-installed-p 'vterm-toggle)
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm-toggle)
+    )
+
+#+end_src
+
+*** Magit
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :if (package-installed-p 'magit)
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>mc") 'magit-clone)
+    (evil-define-key 'normal 'global (kbd "<leader>ms") 'magit-status)
+    )
+
+#+end_src
+
+*** Org Roam
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :if (package-installed-p 'org-roam)
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
+    (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
+    (evil-define-key 'normal 'global (kbd "<leader>rf") 'org-roam-node-find) 
+    (evil-define-key 'normal 'global (kbd "<leader>ri") 'org-roam-node-insert)
+    )
+
+#+end_src
+
+**** User Interface
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :if (package-installed-p 'org-roam-ui)
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>ru") 'org-roam-ui-open)
+    )
+
+#+end_src
+
+*** Nerd Icons
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-core
+    :if (package-installed-p 'nerd-icons)
+    :config
+    (evil-define-key 'normal 'global (kbd "<leader>in") 'nerd-icons-insert)
+    )
+
+#+end_src
+
+** [[https://github.com/emacs-evil/evil-collection][Collection]]
+
+#+begin_quote
+
+A set of keybindings for evil-mode.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-collection
+    :after evil
+    :ensure t
+    :init
+    (evil-collection-init)
+    )
+
+#+end_src
+
+** [[https://github.com/Somelauw/evil-org-mode][Org Mode]]
+
+#+begin_quote
+
+Supplemental evil-mode keybindings to emacs org-mode 
+
+#+end_quote
+
+Why is this one not included in the collection?
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-org
+    :hook
+    (
+     (org-agenda-mode . evil-org-mode)
+     (org-mode . evil-org-mode)
+     )
+    :config
+    (evil-org-set-key-theme '(navigation todo insert textobjects additional))
+    :ensure t
+    )
+
+#+end_src
+
+*** Agenda
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-org-agenda
+    :after evil-org
+    :config
+    (evil-org-agenda-set-keys)
+    )
+
+#+end_src
+
+*** [[https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-keys-evil.el][Credits]]
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (provide 'gs-keys-evil)
+#+end_src
+
+* User Interface
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+** IMPORTANT
+
+[[https://www.masteringemacs.org/article/bad-emacs-advice][Enable the menu bar if you're a new user]].
+It may not look good, but it is a really useful tool.
+You can disable it after getting used to Emacs.
+
+** Emacs
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package emacs
+    :custom
+    (menu-bar-mode nil)
+    (ring-bell-function #'ignore)
+    (scroll-preserve-screen-position t)
+    (tool-bar-mode nil)
+    (tooltip-mode nil)
+    (use-dialog-box nil)
+    (use-file-dialog nil)
+    (visible-bell nil)
+    (x-stretch-cursor t)
+    (x-underline-at-descent-line nil)   
+    )
+
+#+END_src
+
+** [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#font-configuration][Faces]]
+
+#+begin_quote
+
+Lisp faces.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package faces
+    :preface
+    (defun dw/set-font-faces ()
+      ;; Set the default face
+      (set-face-attribute 'default nil :font "Cascadia Code NF")
+      ;; Set the fixed pitch face
+      (set-face-attribute 'fixed-pitch nil :font "Cascadia Mono NF")
+      ;; Set the variable pitch face
+      (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
+    (if (daemonp)
+        (add-hook 'after-make-frame-functions
+                  (lambda (frame)
+                    (with-selected-frame frame
+                      (dw/set-font-faces))))
+      (dw/set-font-faces))
+    )
+
+#+end_src  
+
+** Display Line Numbers
+
+#+begin_quote
+
+Interface for display-line-numbers.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package display-line-numbers
+    :hook
+    (prog-mode . display-line-numbers-mode)
+    )
+
+#+end_src
+
+** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L73][Mouse]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package mouse
+    :config
+    ;; Make right click open the context menu
+    (when (display-graphic-p)
+      (context-menu-mode))
+    (if (daemonp)
+        (add-hook 'after-make-frame-functions
+                  (lambda (frame)
+                    (context-menu-mode))))
+    )
+#+end_src
+
+** Org Mode
+
+*** [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#better-font-faces][Faces]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package org-faces
+    :config
+    (dolist
+        (face '(
+                (org-level-1 . 1.30)
+                (org-level-2 . 1.29)
+                (org-level-3 . 1.28)
+                (org-level-4 . 1.27)
+                (org-level-5 . 1.26)
+                (org-level-6 . 1.25)
+                (org-level-7 . 1.24)
+                (org-level-8 . 1.23)
+                )
+              )
+      (set-face-attribute (car face) nil :font "Cascadia Code NF" :weight 'medium :height (cdr face)))
+    (set-face-attribute 'org-document-title nil :font "Cascadia Code NF" :weight 'medium :height 1.40)
+    )
+
+#+end_src
+
+*** Fontify
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package org
+    :custom
+    (org-ellipsis "…")
+    (org-fontify-done-headline t)
+    (org-fontify-quote-and-verse-blocks t)
+    (org-fontify-whole-heading-line t)
+    (org-hide-emphasis-markers t)
+    (org-hide-leading-stars)
+    )
+
+#+end_src
+
+*** Prettify
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package org
+    :custom
+    (org-pretty-entities t)
+    (org-pretty-entities-include-sub-superscripts t)
+    )
+
+#+end_src
+
+*** [[https://github.com/minad/org-modern][Org Modern]]
+
+#+begin_quote
+
+Modern Org Style.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package org-modern
+    :custom
+    (org-modern-star 'replace)
+    (org-modern-replace-stars "󰪥󰪤󰪣󰪢󰪡󰪠󰪟")
+    (org-modern-table-vertical 1)
+    :ensure t
+    :init
+    (global-org-modern-mode)
+    )
+
+#+end_src
+
+**** Prettify Agenda
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package org-agenda
+    :custom
+    (org-agenda-block-separator ?─)
+    (org-agenda-current-time-string
+     "←──────────────")
+    (org-agenda-time-grid
+     '((daily today require-timed)
+       (800 1000 1200 1400 1600 1800 2000)
+       " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+    )
+
+#+end_src
+
+** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L70][Paragraphs]]
+
+#+begin_quote
+
+Paragraph and sentence parsing.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package paragraphs
+    :custom
+    (sentence-end-double-space nil)
+    :defer t
+    ) 
+
+#+end_src
+
+** Scroll Bar
+
+#+begin_quote
+
+Window system-independent scroll bar support.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package scroll-bar
+    :custom
+    (scroll-bar-mode nil)
+    )
+
+#+end_src
+
+** Startup
+
+#+begin_quote
+
+This file parses the command line and gets Emacs running. Options on the command line are handled in precedence order.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package startup
+    :custom
+    (initial-scratch-message nil)
+    (inhibit-startup-echo-area-message t)
+    (inhibit-startup-message t)
+    (inhibit-startup-screen t)
+    :defer t
+    )
+
+#+end_src
+
+** [[https://emacsredux.com/blog/2020/11/21/disable-global-hl-line-mode-for-specific-modes/][Highlight Line]]
+
+#+begin_quote
+
+Highlight the current line.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package hl-line
+    :config
+    (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil))) ;; Disable highlight line in PDF mode
+    :init
+    (global-hl-line-mode)
+    )
+
+#+end_src
+
+*** Disable in PDF
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package hl-line
+    :if (package-installed-p 'pdf-tools)
+    :config
+    (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+    )
+
+#+end_src
+
+*** Disable in vterm
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package hl-line
+    :if (package-installed-p 'vterm)
+    :config
+    (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+    )
+
+#+end_src
+
+** [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-06-final/config.org#headline-37][Which Key]]
+
+#+begin_quote
+
+Display available keybindings in popup.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package which-key
+    :custom
+    (which-key-add-column-padding 1)
+    (which-key-idle-delay 0.5)
+    (which-key-min-display-lines 6)
+    (which-key-separator " | ")
+    (which-key-side-window-slot -10)
+    (which-key-sort-order #'which-key-key-order-alpha)
+    (which-key-sort-uppercase-first nil)
+    :init
+    (which-key-mode)
+    )
+
+#+end_src
+   
+** [[https://github.com/catppuccin/emacs][Catppuccin]]
+
+#+begin_quote
+
+Soothing pastel theme for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package catppuccin-theme
+    :config
+    (load-theme 'catppuccin t)
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/seagle0128/doom-modeline][DOOM Modeline]]
+
+#+begin_quote
+
+A fancy and fast mode-line inspired by minimalism design.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package doom-modeline
+    :custom   
+    (doom-modeline-ellipsis "…")
+    (doom-modeline-enable-word-count t)
+    :ensure t
+    :init
+    (doom-modeline-mode)
+    )
+
+#+end_src
+
+*** Fix in daemon mode
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package doom-modeline
+    :if (daemonp)
+    :config
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (setq doom-modeline-icon t)))
+    )
+
+#+end_src
+
+** [[https://github.com/roman/golden-ratio.el][Golden Ratio]]
+
+#+begin_quote
+
+Automatic resizing of Emacs windows to the golden ratio.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package golden-ratio
+    :ensure t
+    :init
+    (golden-ratio-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/Wilfred/helpful][Helpful]]
+
+#+begin_quote
+
+A better Emacs help buffer.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package helpful
+    :bind
+    ([remap describe-command] . helpful-command)
+    ([remap describe-function] . helpful-callable)
+    ([remap describe-key] . helpful-key)
+    ([remap describe-symbol] . helpful-symbol)
+    ([remap describe-variable] . helpful-variable)
+    :commands
+    (
+     helpful-callable
+     helpful-command
+     helpful-key
+     helpful-variable
+     )
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/mickeynp/ligature.el][Ligatures]]
+
+#+begin_quote
+
+Display typographical ligatures in Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package ligature
+    :config
+    (ligature-set-ligatures 't '("www"))
+    ;; Enable traditional ligature support in eww-mode, if the `variable-pitch' face supports it
+    (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+    ;; Enable all Cascadia and Fira Code ligatures in programming modes
+    (ligature-set-ligatures 'prog-mode
+                            '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
+                              ;; =:= =!=
+                              ("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
+                              ;; ;; ;;;
+                              (";" (rx (+ ";")))
+                              ;; && &&&
+                              ("&" (rx (+ "&")))
+                              ;; !! !!! !. !: !!. != !== !~
+                              ("!" (rx (+ (or "=" "!" "\." ":" "~"))))
+                              ;; ?? ??? ?:  ?=  ?.
+                              ("?" (rx (or ":" "=" "\." (+ "?"))))
+                              ;; %% %%%
+                              ("%" (rx (+ "%")))
+                              ;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
+                              ;; |->>-||-<<-| |- |== ||=||
+                              ;; |==>>==<<==<=>==//==/=!==:===>
+                              ("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
+                                              "-" "=" ))))
+                              ;; \\ \\\ \/
+                              ("\\" (rx (or "/" (+ "\\"))))
+                              ;; ++ +++ ++++ +>
+                              ("+" (rx (or ">" (+ "+"))))
+                              ;; :: ::: :::: :> :< := :// ::=
+                              (":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
+                              ;; // /// //// /\ /* /> /===:===!=//===>>==>==/
+                              ("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
+                                              "="))))
+                              ;; .. ... .... .= .- .? ..= ..<
+                              ("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
+                              ;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
+                              ("-" (rx (+ (or ">" "<" "|" "~" "-"))))
+                              ;; *> */ *)  ** *** ****
+                              ("*" (rx (or ">" "/" ")" (+ "*"))))
+                              ;; www wwww
+                              ("w" (rx (+ "w")))
+                              ;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
+                              ;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
+                              ;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
+                              ;; << <<< <<<<
+                              ("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
+                                              "-"  "/" "|" "="))))
+                              ;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
+                              ;; >> >>> >>>>
+                              (">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
+                              ;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
+                              ("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
+                                           (+ "#"))))
+                              ;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
+                              ("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
+                              ;; __ ___ ____ _|_ __|____|_
+                              ("_" (rx (+ (or "_" "|"))))
+                              ;; The few not covered by the regexps.
+                              "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
+    :ensure t
+    :hook
+    (prog-mode . ligature-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Fonts]]
+
+#+begin_quote
+
+A Library for Nerd Font icons.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package nerd-icons
+    :ensure t
+    )
+
+#+end_src
+     
+*** [[https://github.com/rainstormstudio/nerd-icons-completion][Completion]]
+
+#+begin_quote
+
+Use nerd-icons for completion.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package nerd-icons-completion
+    :if (package-installed-p 'marginalia)
+    :config
+    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
+    :ensure t
+    :init
+    (nerd-icons-completion-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/LuigiPiucco/nerd-icons-corfu][Corfu]]
+
+#+begin_quote
+
+Icons for Corfu via nerd-icons.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package nerd-icons-corfu
+    :if (package-installed-p 'marginalia)
+    :after margnialia
+    :config
+    (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+    :custom
+    (nerd-icons-corfu-mapping
+     '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+       (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+       ;; ...
+       (t :style "cod" :icon "code" :face font-lock-warning-face)))
+    :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/seagle0128/nerd-icons-ibuffer][iBuffer]]
+
+#+begin_quote
+
+Display nerd icons in ibuffer.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package nerd-icons-ibuffer
+    :ensure t
+    :hook
+    (ibuffer-mode . nerd-icons-ibuffer-mode)
+    )
+
+#+end_src
+
+** [[https://github.com/alphapapa/prism.el][Prism]]
+
+Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package prism
+    :ensure t
+    :hook
+    (c-ts-mode . prism-mode)
+    (c++-ts-mode . prism-mode)
+    (csharp-ts-mode . prism-mode)
+    (emacs-lisp-mode . prism-mode)
+    (lisp-mode . prism-mode)
+    (lisp-data-mode . prism-mode)
+    (elisp-refs-mode . prism-mode)
+    (common-lisp-mode . prism-mode)
+    (elisp-byte-code-mode . prism-mode)
+    (lisp-interaction-mode . prism-mode)
+    (emacs-lisp-compilation-mode . prism-mode)
+    (python-ts-mode . prism-whitespace-mode)
+    (bash-ts-mode . prism-whitespace-mode)
+    )
+
+#+end_src
+
+*** Catppuccin Colors
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package prism
+    :if (package-installed-p 'catppuccin)
+    :config
+    (prism-set-colors
+      :lightens '(0 5 10)
+      :desaturations '(-2.5 0 2.5)
+      :colors (-map #'catppuccin-get-color '(
+                                             red
+                                             peach
+                                             yellow
+                                             green
+                                             sapphire
+                                             lavender
+                                             mauve)))
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (provide 'gs-ui)
+#+end_src
