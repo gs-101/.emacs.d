@@ -3957,6 +3957,24 @@ Icons for Corfu via nerd-icons.
 
 #+end_src
 
+*** [[https://github.com/rainstormstudio/nerd-icons-dired][Dired]]
+
+#+begin_quote
+
+Use nerd-icons for Dired.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package nerd-icons-dired
+    :ensure t
+    :hook
+    (dired-mode . nerd-icons-dired-mode)
+    )
+
+#+end_src
+
 *** [[https://github.com/seagle0128/nerd-icons-ibuffer][iBuffer]]
 
 #+begin_quote
