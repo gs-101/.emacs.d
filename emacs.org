@@ -2436,6 +2436,8 @@ Simple templates for Emacs.
 #+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
 
   (use-package tempel
+    :config
+    (add-hook 'completion-at-point-functions #'tempel-complete)
     :custom
     (tempel-trigger-prefix "<")
     :ensure t
