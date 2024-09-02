@@ -41,7 +41,7 @@
                    (make "https://github.com/alemuller/tree-sitter-make.git")
                    (markdown "https://github.com/ikatyang/tree-sitter-markdown.git")
                    (rust "https://github.com/tree-sitter/tree-sitter-rust.git")
-                   (toml "https://github.com/tree-sitter/tree-sitter-toml.git")
+                   (toml "https://github.com/tree-sitter-grammars/tree-sitter-toml.git")
                    (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
                    (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
                    (yaml "https://github.com/ikatyang/tree-sitter-yaml.git")
