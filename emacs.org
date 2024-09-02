@@ -3045,6 +3045,8 @@ Add blk-type Org links and transclusion.
     :after blk
     :config
     (blk-configure-org-transclusion)
+    :hook
+    (org-mode . blk-enable-completion)
     )
 
 #+end_src

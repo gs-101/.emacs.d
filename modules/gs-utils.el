@@ -208,6 +208,8 @@ targets."
   :after blk
   :config
   (blk-configure-org-transclusion)
+  :hook
+  (org-mode . blk-enable-completion)
   )
 
 (use-package blk
