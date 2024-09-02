@@ -1999,6 +1999,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
     :custom
     (vterm-shell "bash")
     (vterm-max-scrollback 10000)
+    :ensure t
     )
 
 #+end_src
@@ -2018,6 +2019,7 @@ Toggles between the vterm buffer and whatever buffer you are editing.
     ("C-c t v" . vterm-toggle)
     :custom
     (vterm-toggle-reset-window-configration-after-exit t)
+    :ensure t
     )
 
 #+end_src
