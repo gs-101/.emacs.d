@@ -94,7 +94,7 @@
   :custom
   (consult-gh-file-action #'consult-gh--files-view-action)
   (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
-  (consult-gh-repo-action #'consult-gh--repo-view-action)
+  (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
   )
 
 (use-package consult-gh-embark
