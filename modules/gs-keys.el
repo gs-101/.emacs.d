@@ -146,6 +146,15 @@
   ("C-c l d" . delete-duplicate-lines)
   )
 
+(use-package casual-agenda
+  :bind
+  (
+   :map org-agenda-mode-map
+        ("M-o" . casual-agenda-tmenu)
+        )
+  :ensure t
+  )
+
 (use-package casual-bookmarks
   :bind
   (
