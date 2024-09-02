@@ -34,6 +34,7 @@
                                   )) ;; 3
   (read-buffer-completion-ignore-case t) ;; 3
   (resize-mini-windows 'grow-only)
+  (text-mode-ispell-word-completion nil)
   (window-resize-pixelwise nil) ;; 1
   (words-include-escapes t)
   :hook
