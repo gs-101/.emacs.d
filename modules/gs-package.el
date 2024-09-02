@@ -20,15 +20,4 @@
   (package-install-upgrade-built-in t)
   )
 
-(use-package auto-package-update
-  :custom
-  (auto-package-update-delete-old-versions t)
-  (auto-package-update-interval 7)
-  (auto-package-update-prompt-before-update t)
-  (auto-package-update-show-preview t)
-  :config
-  (auto-package-update-maybe)
-  :ensure t
-  )
-
 (provide 'gs-package)

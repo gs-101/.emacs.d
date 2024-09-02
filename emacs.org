@@ -128,29 +128,6 @@ If ~use-package~ is not installed, refresh the package list and install it¹.
 
 #+end_src
 
-** [[https://github.com/rranelli/auto-package-update.el][Auto Package Update]]
-
-#+begin_quote
-
-Automatically update Emacs packages.
- 
-#+end_quote
-
-#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
-
-  (use-package auto-package-update
-    :custom
-    (auto-package-update-delete-old-versions t)
-    (auto-package-update-interval 7)
-    (auto-package-update-prompt-before-update t)
-    (auto-package-update-show-preview t)
-    :config
-    (auto-package-update-maybe)
-    :ensure t
-    )
-
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
@@ -2659,6 +2636,36 @@ Writable grep buffer to apply changes to files.
     :ensure t
     :hook
     (grep-mode . wgrep-setup)
+    )
+
+#+end_src
+
+** [[https://github.com/tarsius/hl-todo][hl-todo]]
+
+#+begin_quote
+
+Highlight TODO keywords.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package hl-todo
+    :custom
+    (hl-todo-keyword-faces '(
+                             ("FIX" . s)
+                             ("FEAT" . s)
+                             ("STYLE" . s)
+                             ("REFACTOR" . s)
+                             ("CHORE" . s)
+                             ("MERGED" . s)
+                             ("CLOSED" . s)
+                             ))
+    :ensure t
+    :hook
+    (markdown-mode . hl-todo-mode)
+    (org-mode . hl-todo-mode)
+    (prog-mode . hl-todo-mode)
     )
 
 #+end_src
