@@ -4,7 +4,7 @@
   :bind
   (
    :map prog-mode-map
-   ("C-c p e" . eglot)
+   ("C-c C-x e" . eglot)
    )
   )
 
@@ -12,7 +12,7 @@
   :bind
   (
    :map prog-mode-map
-   ("C-c p f" . flymake-start) 
+   ("C-c C-x f" . flymake-start) 
    )
   )
 
