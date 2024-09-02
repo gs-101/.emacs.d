@@ -2641,36 +2641,6 @@ Writable grep buffer to apply changes to files.
 
 #+end_src
 
-** [[https://github.com/tarsius/hl-todo][hl-todo]]
-
-#+begin_quote
-
-Highlight TODO keywords.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package hl-todo
-    :custom
-    (hl-todo-keyword-faces '(
-                             ("FIX" . s)
-                             ("FEAT" . s)
-                             ("STYLE" . s)
-                             ("REFACTOR" . s)
-                             ("CHORE" . s)
-                             ("MERGED" . s)
-                             ("CLOSED" . s)
-                             ))
-    :ensure t
-    :hook
-    (markdown-mode . hl-todo-mode)
-    (org-mode . hl-todo-mode)
-    (prog-mode . hl-todo-mode)
-    )
-
-#+end_src
-
 ** [[https://github.com/jwiegley/alert][Alert]]
 
 #+begin_quote
@@ -3816,6 +3786,36 @@ A better Emacs help buffer.
      helpful-variable
      )
     :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/tarsius/hl-todo][hl-todo]]
+
+#+begin_quote
+
+Highlight TODO keywords.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package hl-todo
+    :custom
+    (hl-todo-keyword-faces '(
+                             ("FIX" . "red")
+                             ("FEAT" . "yellow")
+                             ("STYLE" . "orange")
+                             ("REFACTOR" . "white")
+                             ("CHORE" . "grey")
+                             ("MERGED" . "green")
+                             ("CLOSED" . "red")
+                             ))
+    :ensure t
+    :hook
+    (markdown-mode . hl-todo-mode)
+    (org-mode . hl-todo-mode)
+    (prog-mode . hl-todo-mode)
     )
 
 #+end_src

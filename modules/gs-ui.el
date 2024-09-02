@@ -200,6 +200,24 @@
   :ensure t
   )
 
+(use-package hl-todo
+  :custom
+  (hl-todo-keyword-faces '(
+                           ("FIX" . "red")
+                           ("FEAT" . "yellow")
+                           ("STYLE" . "orange")
+                           ("REFACTOR" . "white")
+                           ("CHORE" . "grey")
+                           ("MERGED" . "green")
+                           ("CLOSED" . "red")
+                           ))
+  :ensure t
+  :hook
+  (markdown-mode . hl-todo-mode)
+  (org-mode . hl-todo-mode)
+  (prog-mode . hl-todo-mode)
+  )
+
 (use-package ligature
   :config
   (ligature-set-ligatures 't '("www"))
