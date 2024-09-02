@@ -896,6 +896,23 @@ A lightweight major mode to open media (audio/video) files in an Emacs buffer.
 
 #+end_src
 
+** [[https://github.com/protesilaos/show-font][Show Font]]
+
+#+begin_quote
+
+Show font features in an Emacs buffer.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package show-font
+    :vc (:url "https://github.com/protesilaos/show-font")
+    :ensure t
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
