@@ -218,6 +218,20 @@
   (prog-mode . hl-todo-mode)
   )
 
+(use-package hl-todo
+  :if (package-installed-p 'catppuccin-theme)
+  :custom
+  (hl-todo-keyword-faces '(
+                           ("FIX" . "#f38ba8")
+                           ("FEAT" . "#f9e2af")
+                           ("STYLE" . "#fab387")
+                           ("REFACTOR" . "#89b4fa")
+                           ("CHORE" . "#a6adc8")
+                           ("MERGED" . "#a6e3a1")
+                           ("CLOSED" . "#f38ba8")
+                           ))
+  )
+
 (use-package ligature
   :config
   (ligature-set-ligatures 't '("www"))
