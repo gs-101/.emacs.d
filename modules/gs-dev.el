@@ -141,6 +141,12 @@
   (magit-process-find-password-functions . magit-process-password-auth-source)
   )
 
+(use-package magit-todos
+  :ensure t
+  :hook
+  (magit-mode . magit-todos-mode)
+  )
+
 (use-package forge
   :ensure t
   )
