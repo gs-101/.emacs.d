@@ -323,7 +323,7 @@
   )
 
 (use-package prism
-  :if (package-installed-p 'catppuccin)
+  :if (package-installed-p 'catppuccin-theme)
   :config
   (prism-set-colors
     :lightens '(0 5 10)
