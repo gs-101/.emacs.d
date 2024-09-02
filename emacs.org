@@ -3960,7 +3960,7 @@ Use nerd-icons for Dired.
 
 #+end_quote
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
   (use-package nerd-icons-dired
     :ensure t

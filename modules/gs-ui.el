@@ -293,9 +293,9 @@
   )
 
 (use-package nerd-icons-dired
-    :ensure t
-    :hook
-    (dired-mode . nerd-icons-dired-mode)
+  :ensure t
+  :hook
+  (dired-mode . nerd-icons-dired-mode)
   )
 
 (use-package nerd-icons-ibuffer
