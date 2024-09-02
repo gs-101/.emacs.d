@@ -737,8 +737,8 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
   (use-package autorevert
     :custom
     (auto-revert-stop-on-user-input nil)
-    (global-auto-revert-non-file-buffers t)
     (auto-revert-verbose t)
+    (global-auto-revert-non-file-buffers t)
     :init
     (global-auto-revert-mode t)
     )
@@ -3022,8 +3022,8 @@ Emacs package to rapidly create and follow links across text files.
     ("C-c b l o" . blk-open-at-point)
     :custom
     (blk-list-directories-recursively t)
-    (blk-use-cache t)
     (blk-treat-titles-as-ids t)
+    (blk-use-cache t)
     :demand t
     :ensure t
     )
@@ -3159,9 +3159,9 @@ Settings and variables.
     :custom
     (evil-respect-visual-line-mode t)
     (evil-undo-system 'undo-redo)
+    (evil-split-window-below t)
     (evil-v$-excludes-newline t)
     (evil-vsplit-window-right t)
-    (evil-split-window-below t)
     (evil-want-C-i-jump nil)
     (evil-want-C-u-scroll t)
     )

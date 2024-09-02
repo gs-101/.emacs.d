@@ -197,8 +197,8 @@ targets."
   ("C-c b l o" . blk-open-at-point)
   :custom
   (blk-list-directories-recursively t)
-  (blk-use-cache t)
   (blk-treat-titles-as-ids t)
+  (blk-use-cache t)
   :demand t
   :ensure t
   )

@@ -27,9 +27,9 @@
   :custom
   (evil-respect-visual-line-mode t)
   (evil-undo-system 'undo-redo)
+  (evil-split-window-below t)
   (evil-v$-excludes-newline t)
   (evil-vsplit-window-right t)
-  (evil-split-window-below t)
   (evil-want-C-i-jump nil)
   (evil-want-C-u-scroll t)
   )

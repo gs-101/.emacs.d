@@ -212,8 +212,8 @@
 (use-package autorevert
   :custom
   (auto-revert-stop-on-user-input nil)
-  (global-auto-revert-non-file-buffers t)
   (auto-revert-verbose t)
+  (global-auto-revert-non-file-buffers t)
   :init
   (global-auto-revert-mode t)
   )
