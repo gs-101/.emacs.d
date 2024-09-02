@@ -3822,6 +3822,8 @@ Highlight TODO keywords.
 
 *** Catppuccin Colors
 
+REFACTOR: use a ~catppuccin~ function to automatically set the colors based on name (mauve, flamingo...).
+
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
   (use-package hl-todo
