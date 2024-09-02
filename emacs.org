@@ -4019,7 +4019,7 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
   (use-package prism
-    :if (package-installed-p 'catppuccin)
+    :if (package-installed-p 'catppuccin-theme)
     :config
     (prism-set-colors
       :lightens '(0 5 10)
