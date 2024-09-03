@@ -1836,7 +1836,7 @@ Rudimentary Roam replica with Org-mode.
     (org-roam-capture-templates '(
                                   ("b" "book notes" plain
                                    (file "~/org-roam/templates/book_note.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Book-Notes\n\n")
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Book_Notes\n\n")
                                    :unnarrowed t)
                                   ("d" "default" plain
                                    (file "~/org-roam/templates/default.org") 
@@ -1844,7 +1844,7 @@ Rudimentary Roam replica with Org-mode.
                                    :unnarrowed t)
                                   ("n" "notegpt.io" plain
                                    (file "~/org-roam/templates/notegpt.io.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: notegpt.io Hacker-News\n\n")
+                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: notegpt.io Hacker_News\n\n")
                                    :unnarrowed t)
                                   ("r" "redação" plain
                                    (file "~/org-roam/templates/redação.org")
