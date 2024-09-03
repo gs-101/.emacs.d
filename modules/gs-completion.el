@@ -85,7 +85,6 @@
    ("RET" . nil)
    )
   :config
-  (global-corfu-mode)
   (corfu-history-mode)
   (corfu-popupinfo-mode)
   :custom
@@ -95,6 +94,8 @@
   (corfu-cycle t)
   (corfu-preselect 'directory)
   :ensure t
+  :init
+  (global-corfu-mode)
   )
 
 (use-package orderless

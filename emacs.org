@@ -2531,7 +2531,6 @@ COmpletion in Region FUnction.
      ("RET" . nil)
      )
     :config
-    (global-corfu-mode)
     (corfu-history-mode)
     (corfu-popupinfo-mode)
     :custom
@@ -2541,6 +2540,8 @@ COmpletion in Region FUnction.
     (corfu-cycle t)
     (corfu-preselect 'directory)
     :ensure t
+    :init
+    (global-corfu-mode)
     )
 
 #+end_src
