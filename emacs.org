@@ -1385,6 +1385,8 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 
 #+end_quote
 
+FIX: ~org-latex-packages-alist~.
+
 #+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
   ;;; -*- lexical-binding: t -*-
 #+end_src
@@ -2696,6 +2698,22 @@ Writable grep buffer to apply changes to files.
     :ensure t
     :hook
     (grep-mode . wgrep-setup)
+    )
+
+#+end_src
+
+** [[https://github.com/sergiruiztrepat/chemtable][chemtable]]
+
+#+begin_quote
+
+Periodic table of the elements.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package chemtable
+    :ensure t
     )
 
 #+end_src

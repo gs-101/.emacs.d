@@ -6,6 +6,10 @@
   (grep-mode . wgrep-setup)
   )
 
+(use-package chemtable
+  :ensure t
+  )
+
 (use-package alert
   :custom
   (alert-default-style 'libnotify)
