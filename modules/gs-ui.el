@@ -298,6 +298,9 @@
   )
 
 (use-package nerd-icons
+  :bind
+  ("C-c i n" . nerd-icons-insert)
+  :demand t
   :ensure t
   )
 

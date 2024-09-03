@@ -4014,7 +4014,7 @@ Display typographical ligatures in Emacs.
 
 #+end_src
 
-** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Fonts]]
+** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]
 
 #+begin_quote
 
@@ -4025,6 +4025,9 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
   (use-package nerd-icons
+    :bind
+    ("C-c i n" . nerd-icons-insert)
+    :demand t
     :ensure t
     )
 
