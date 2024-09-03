@@ -204,18 +204,28 @@ targets."
   )
 
 (use-package blk-org
-  :if (package-installed-p "org-transclusion")
-  :after blk
+  :after (blk org)
   :config
   (blk-configure-org-transclusion)
   :hook
   (org-mode . blk-enable-completion)
   )
 
+(use-package blk-org
+  :if (package-installed-p 'org-transclusion)
+  :after (blk org-transclusion)
+  :config
+  (blk-configure-org-transclusion)
+  )
+
 (use-package blk
-  :if (package-installed-p "org-roam")
+  :if (package-installed-p 'org-roam)
+  :after org-roam
   :custom 
-  (blk-directories (list (expand-file-name org-roam-directory)))
+  (blk-directories (list
+                    org-roam-directory
+                    user-emacs-directory
+                    ))
   )
 
 (provide 'gs-utils)
