@@ -1596,7 +1596,7 @@ LaTeX Backend for Org Export Engine.
 
 sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm
 
-#+end_src bash
+#+end_src
 
 ** List
 
@@ -2293,6 +2293,34 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
      (yaml-ts-mode . combobulate-mode)
      )
     )
+
+#+end_src
+
+** [[https://github.com/seagle0128/grip-mode][grip-mode]]
+
+#+begin_quote
+
+Instant Github-flavored Markdown/Org preview using grip.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package grip-mode
+    :custom
+    (grip-preview-use-webkit t)
+    :ensure t
+    )
+
+#+end_src
+
+*** Packages to install
+
+**** Pip
+
+#+begin_src bash
+
+pip install grip
 
 #+end_src
 

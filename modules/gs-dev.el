@@ -133,6 +133,12 @@
    )
   )
 
+(use-package grip-mode
+  :custom
+  (grip-preview-use-webkit t)
+  :ensure t
+  )
+
 (use-package magit
   :commands
   (
