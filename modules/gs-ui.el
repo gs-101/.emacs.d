@@ -23,12 +23,17 @@
     (set-face-attribute 'fixed-pitch nil :font "Cascadia Mono NF")
     ;; Set the variable pitch face
     (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (dw/set-font-faces))))
-    (dw/set-font-faces))
+  :init
+    (dw/set-font-faces)
+  )
+
+(use-package faces
+  :if (daemonp)
+  :config
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (with-selected-frame frame
+                (dw/set-font-faces))))
   )
 
 (use-package display-line-numbers
@@ -37,14 +42,17 @@
   )
 
 (use-package mouse
+  :if (display-graphic-p)
+  :init
+  (context-menu-mode)
+  )
+
+(use-package mouse
+  :if (daemonp)
   :config
-  ;; Make right click open the context menu
-  (when (display-graphic-p)
-    (context-menu-mode))
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (context-menu-mode))))
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (context-menu-mode)))
   )
 
 (use-package org-faces
@@ -370,7 +378,27 @@
                                            green
                                            sapphire
                                            lavender
-                                           mauve)))
+                                           mauve
+                                           )))
+  )
+
+(use-package prism
+  :if (list (daemonp) (package-installed-p 'catppuccin-theme))
+  :config
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (prism-set-colors
+                :lightens '(0 5 10)
+                :desaturations '(-2.5 0 2.5)
+                :colors (-map #'catppuccin-get-color '(
+                                                       red
+                                                       peach
+                                                       yellow
+                                                       green
+                                                       sapphire
+                                                       lavender
+                                                       mauve
+                                                       )))))
   )
 
 (provide 'gs-ui)
