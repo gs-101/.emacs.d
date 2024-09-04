@@ -91,6 +91,12 @@
   (prog-mode . flymake-mode)
   )
 
+(use-package flymake-collection
+  :ensure t
+  :hook
+  (after-init . flymake-collection-hook-setup)
+  )
+
 (use-package apheleia
   :config
   (setf (alist-get 'prettier apheleia-formatters)

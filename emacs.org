@@ -2206,6 +2206,24 @@ A universal on-the-fly syntax checker.
 
 #+end_src
 
+*** Collection
+
+#+begin_quote
+
+Collection of checkers for flymake.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package flymake-collection
+    :ensure t
+    :hook
+    (after-init . flymake-collection-hook-setup)
+    )
+
+#+end_src
+
 ** [[https://github.com/radian-software/apheleia][Apheleia]]
 
 #+begin_quote
