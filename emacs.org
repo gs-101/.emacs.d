@@ -4254,6 +4254,25 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
 #+end_src
 
+** [[https://github.com/yanghaoxie/transient-posframe][Transient Posframe]]
+
+#+begin_quote
+
+Pops the transient menu to a posframe (floating window).
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package transient-posframe
+    :vc (:url "https://github.com/gs-101/transient-posframe")
+    :ensure t
+    :init
+    (transient-posframe-mode)
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes

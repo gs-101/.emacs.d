@@ -401,4 +401,11 @@
                                                        )))))
   )
 
+(use-package transient-posframe
+  :vc (:url "https://github.com/gs-101/transient-posframe")
+  :ensure t
+  :init
+  (transient-posframe-mode)
+  )
+
 (provide 'gs-ui)
