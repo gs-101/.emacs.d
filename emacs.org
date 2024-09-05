@@ -50,7 +50,7 @@ Variables used to reference to specific directories, using ~convert-standard-fil
     )
 
 #+end_src
-THIS IS A TEST COMMIT
+
 * Load Modules
 
 #+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
@@ -2374,7 +2374,10 @@ Work with Git forges from the comfort of Magit.
 
 #+end_quote
 
-To make use of this package, a Gitlab/Github [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated.
+To make use of this package there are two options:
+
+1. A Gitlab/Github [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated;
+2. Github users can just install [[https://github.com/cli/cli][Github CLI]] and login using ~gh auth login~.
 
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
 
