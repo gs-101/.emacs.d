@@ -75,13 +75,6 @@
   :ensure t
   )
 
-(use-package consult-notes
-  :config
-  (when (locate-library "org-roam")
-    (consult-notes-org-roam-mode))
-  :ensure t
-  )
-
 (use-package consult-gh
   :vc (:url "https://github.com/armindarvish/consult-gh")
   :custom
@@ -108,6 +101,13 @@
 
 (use-package consult-gh-transient
   :after consult-gh
+  )
+
+(use-package consult-notes
+  :config
+  (when (locate-library "org-roam")
+    (consult-notes-org-roam-mode))
+  :ensure t
   )
 
 (use-package embark

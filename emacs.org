@@ -2880,25 +2880,6 @@ Insert paths into the minibuffer prompt in Emacs.
 
 #+end_src
 
-*** [[https://github.com/mclear-tools/consult-notes][Notes]]
-
-#+begin_quote
-
-Use consult to search notes.
-
-#+end_quote
-
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
-
-  (use-package consult-notes
-    :config
-    (when (locate-library "org-roam")
-      (consult-notes-org-roam-mode))
-    :ensure t
-    )
-
-#+end_src
-
 *** [[https://github.com/armindarvish/consult-gh][gh]]
 
 #+begin_quote
@@ -2953,6 +2934,25 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 
   (use-package consult-gh-transient
     :after consult-gh
+    )
+
+#+end_src
+
+*** [[https://github.com/mclear-tools/consult-notes][Notes]]
+
+#+begin_quote
+
+Use consult to search notes.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package consult-notes
+    :config
+    (when (locate-library "org-roam")
+      (consult-notes-org-roam-mode))
+    :ensure t
     )
 
 #+end_src
