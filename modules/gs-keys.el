@@ -42,6 +42,7 @@
 (use-package grep
   :bind
   ("C-c g g" . grep)
+  ("C-c g l" . lgrep)
   ("C-c g r" . rgrep)
   )
 
