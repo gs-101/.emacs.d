@@ -19,6 +19,7 @@
   )
 
 (use-package dired-preview
+  :vc (:url "https://github.com/protesilaos/dired-preview")
   :custom
   (dired-preview-delay 0.5)
   (dired-preview-ignored-extensions-regexp (concat
