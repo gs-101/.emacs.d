@@ -2,8 +2,8 @@
 
 (require 'package)
 (add-to-list 'package-archives '(
-                                 "jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/"
-                                 "melpa" . "https://melpa.org/packages/"
+                                 ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+                                 ("melpa" . "https://melpa.org/packages/")
                                  ))
 (setq package-archives-priorities '(
                                     ("jcs-elpa" . 0)
