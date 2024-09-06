@@ -2375,25 +2375,7 @@ It's Magit! A Git Porcelain inside Emacs.
 
 #+end_src
 
-*** [[https://github.com/alphapapa/magit-todos][TODOs]]
-
-#+begin_quote
-
-Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
-
-#+end_quote
-
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
-
-  (use-package magit-todos
-    :ensure t
-    :hook
-    (magit-mode . magit-todos-mode)
-    )
-
-#+end_src
-
-** [[https://github.com/magit/forge][Forge]]
+*** [[https://github.com/magit/forge][Forge]]
 
 #+begin_quote
 
@@ -2414,13 +2396,21 @@ To make use of this package there are two options:
 
 #+end_src
 
-*** Auth Source
+*** [[https://github.com/alphapapa/magit-todos][TODOs]]
+
+#+begin_quote
+
+Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
+
+#+end_quote
 
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
 
-  (use-package auth-source
-    :custom
-    (auth-sources (expand-file-name "gs-forge-magit-auth.gpg" modules-directory))
+  (use-package magit-todos
+    :if (package-installed-p 'hl-todo)
+    :ensure t
+    :hook
+    (magit-mode . magit-todos-mode)
     )
 
 #+end_src

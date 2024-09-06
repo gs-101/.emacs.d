@@ -151,19 +151,15 @@
   (magit-process-find-password-functions . magit-process-password-auth-source)
   )
 
-(use-package magit-todos
-  :ensure t
-  :hook
-  (magit-mode . magit-todos-mode)
-  )
-
 (use-package forge
   :ensure t
   )
 
-(use-package auth-source
-  :custom
-  (auth-sources (expand-file-name "gs-forge-magit-auth.gpg" modules-directory))
+(use-package magit-todos
+  :if (package-installed-p 'hl-todo)
+  :ensure t
+  :hook
+  (magit-mode . magit-todos-mode)
   )
 
 (provide 'gs-dev)
