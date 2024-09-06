@@ -2415,6 +2415,25 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 
 #+end_src
 
+** [[https://github.com/emacs-rustic/rustic][Rustic]]
+
+#+begin_quote
+
+Rust development environment for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package rustic
+    :ensure t
+    :custom
+    (rustic-cargo-use-last-stored-arguments t)
+    (rustic-format-on-save nil)
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes

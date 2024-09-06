@@ -162,4 +162,11 @@
   (magit-mode . magit-todos-mode)
   )
 
+(use-package rustic
+  :ensure t
+  :custom
+  (rustic-cargo-use-last-stored-arguments t)
+  (rustic-format-on-save nil)
+  )
+
 (provide 'gs-dev)
