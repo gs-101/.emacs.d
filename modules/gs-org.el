@@ -102,7 +102,7 @@
   (org-latex-toc-command "\\tableofcontents \\pagebreak")
   (org-startup-with-latex-preview t)
   (org-preview-latex-default-process 'dvisvgm) ;; 1
-  (org-preview-latex-image-directory (expand-file-name "ltximg" temporary-file-directory))
+  (org-preview-latex-image-directory (convert-standard-filename (expand-file-name "ltximg/" temporary-file-directory)))
   )
 
 (use-package org-list
