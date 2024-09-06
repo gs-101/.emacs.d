@@ -54,6 +54,8 @@
 (use-package isearch
   :bind
   ("C-s" . isearch-forward-word)
+  :custom
+  (lazy-highlight-initial-delay 0.0)
   )
 
 (use-package lisp

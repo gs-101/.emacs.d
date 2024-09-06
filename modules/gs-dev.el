@@ -98,6 +98,11 @@
   (after-init . flymake-collection-hook-setup)
   )
 
+(use-package python
+  :custom
+  (python-indent-guess-indent-offset-verbose nil)
+  )
+
 (use-package apheleia
   :config
   (setf (alist-get 'prettier apheleia-formatters)

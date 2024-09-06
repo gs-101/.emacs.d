@@ -19,36 +19,45 @@
   :config
   (setq define-coding-system-alias '(UTF-8 'utf-8))
   :custom
-  (completion-ignore-case t) ;; 3
-  (cursor-in-non-selected-windows nil)
-  (debugger-stack-frame-as-list t) ;; 4
+  (auto-window-vscroll nil) ;; 3
+  (bidi-inhibit-bpa t) ;; 3
+  (completion-ignore-case t) ;; 4
+  (cursor-in-non-selected-windows nil) ;; 3
+  (debugger-stack-frame-as-list t) ;; 5
   (enable-recursive-minibuffers t)
+  (fast-but-imprecise-scrolling t) ;; 3
   (frame-resize-pixelwise t) ;; 1
-  (history-delete-duplicates t) ;; 4
+  (history-delete-duplicates t) ;; 5
+  (hscroll-margin 2) ;; 3
+  (hscroll-step 1) ;; 3
+  (inhibit-compacting-font-caches t) ;; 3
   (load-prefer-newer t) ;; 2
   ;; Disable the cursor in the minibuffer prompt
   (minibuffer-prompt-properties '(
                                   cursor-intangible t
                                   read-only t
                                   face minibuffer-prompt
-                                  )) ;; 3
-  (read-buffer-completion-ignore-case t) ;; 3
+                                  )) ;; 4
+  (read-buffer-completion-ignore-case t) ;; 4
+  (read-process-output-max (* 512 1024)) ;; 3
   (resize-mini-windows 'grow-only)
+  (scroll-conservatively 10) ;; 3
   (text-mode-ispell-word-completion nil)
   (window-resize-pixelwise nil) ;; 1
   (words-include-escapes t)
   :hook
-  (minibuffer-setup . cursor-intangible-mode) ;; 3
+  (minibuffer-setup . cursor-intangible-mode) ;; 4
   )
 
 (use-package files
   :config
-  (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 1
+  (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 2
   :custom
+  (auto-mode-case-fold nil)
   (find-file-suppress-same-file-warnings t)
   (find-file-visit-truename t)
-  (revert-without-query '("")) ;; 1
-  (view-read-only t) ;; 1
+  (revert-without-query '("")) ;; 2
+  (view-read-only t) ;; 2
   )
 
 (use-package help
@@ -101,9 +110,11 @@
 
 (use-package mule-cmds
   :config
+  (set-language-environment "UTF-8") ;; 2
   (setq prefer-coding-system 'utf-8) ;; 1
   :custom
-  (current-language-environment "UTF-8") ;; 2
+  (current-language-environment "UTF-8") ;; 3
+  (default-input-method nil) ;; 2
   :defer t
   )
 
@@ -135,6 +146,8 @@
   )
 
 (use-package savehist
+  :custom
+  (history-length 300)
   :init
   (savehist-mode)
   )
@@ -142,14 +155,15 @@
 (use-package simple
   :custom
   (completion-auto-select 'second-tab) ;; 1
+  (idle-update-delay 1.0)
   (indent-tabs-mode nil)
-  (kill-do-not-save-duplicates t) ;; 4
-  (kill-read-only-ok t) ;; 4
-  (kill-whole-line t) ;; 4
+  (kill-do-not-save-duplicates t) ;; 5
+  (kill-read-only-ok t) ;; 5
+  (kill-whole-line t) ;; 5
   ;; Hides commands in completion that are not usable in the current mode
-  (read-extended-command-predicate #'command-completion-default-include-p) ;; 3
+  (read-extended-command-predicate #'command-completion-default-include-p) ;; 4
   (save-interprogram-paste-before-kill t)
-  (set-mark-command-repeat-pop t) ;; 4
+  (set-mark-command-repeat-pop t) ;; 5
   )
 
 (use-package uniquify
@@ -166,12 +180,6 @@
 (use-package warnings
   :custom
   (warning-suppress-log-types '((comp) (bytecomp)))
-  )
-
-(use-package window
-  :custom
-  (recenter-positions '(top middle bottom))
-  (switch-to-buffer-obey-display-actions t)
   )
 
 (use-package gcmh

@@ -14,6 +14,11 @@
   (x-underline-at-descent-line nil)   
   )
 
+(use-package display-line-numbers
+  :hook
+  (prog-mode . display-line-numbers-mode)
+  )
+
 (use-package faces
   :preface
   (defun dw/set-font-faces ()
@@ -36,9 +41,32 @@
                 (dw/set-font-faces))))
   )
 
-(use-package display-line-numbers
-  :hook
-  (prog-mode . display-line-numbers-mode)
+(use-package frame
+  :custom
+  (window-divider-default-bottom-width 1)
+  (window-divider-default-places t)
+  (window-divider-default-right-width 1)
+  :init
+  (window-divider-mode)
+  )
+
+(use-package hl-line
+  :config
+  (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil))) ;; Disable highlight line in PDF mode
+  :init
+  (global-hl-line-mode)
+  )
+
+(use-package hl-line
+  :if (package-installed-p 'pdf-tools)
+  :config
+  (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+  )
+
+(use-package hl-line
+  :if (package-installed-p 'vterm)
+  :config
+  (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package mouse
@@ -122,6 +150,9 @@
   )
 
 (use-package startup
+  :config
+  (advice-add #'display-startup-echo-area-message :override #'ignore)
+  (advice-add #'display-startup-screen :override #'ignore)
   :custom
   (initial-scratch-message nil)
   (inhibit-startup-echo-area-message t)
@@ -130,23 +161,13 @@
   :defer t
   )
 
-(use-package hl-line
-  :config
-  (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil))) ;; Disable highlight line in PDF mode
-  :init
-  (global-hl-line-mode)
-  )
-
-(use-package hl-line
-  :if (package-installed-p 'pdf-tools)
-  :config
-  (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
-  )
-
-(use-package hl-line
-  :if (package-installed-p 'vterm)
-  :config
-  (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+(use-package window
+  :custom
+  (recenter-positions '(top middle bottom)) ;; 2
+  (scroll-error-top-bottom t) ;; 1
+  (split-height-threshold nil) ;;1
+  (split-width-threshold 170) ;; 1
+  (switch-to-buffer-obey-display-actions t) ;; 2
   )
 
 (use-package which-key
@@ -154,7 +175,7 @@
   (which-key-add-column-padding 1)
   (which-key-idle-delay 0.5)
   (which-key-min-display-lines 6)
-  (which-key-separator " | ")
+  (which-key-separator "  ")
   (which-key-side-window-slot -10)
   (which-key-sort-order #'which-key-key-order-alpha)
   (which-key-sort-uppercase-first nil)

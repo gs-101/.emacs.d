@@ -162,6 +162,8 @@ An overloading mechanism for Emacs Lisp functions.
 
 #+end_src
 
+**** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L104][Credits]]
+
 *** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/early-init.el#L20][Byte Compilation]]
 
 #+begin_quote
@@ -206,26 +208,34 @@ Generic package used to configure functions and variables not included in any fi
     :config
     (setq define-coding-system-alias '(UTF-8 'utf-8))
     :custom
-    (completion-ignore-case t) ;; 3
-    (cursor-in-non-selected-windows nil)
-    (debugger-stack-frame-as-list t) ;; 4
+    (auto-window-vscroll nil) ;; 3
+    (bidi-inhibit-bpa t) ;; 3
+    (completion-ignore-case t) ;; 4
+    (cursor-in-non-selected-windows nil) ;; 3
+    (debugger-stack-frame-as-list t) ;; 5
     (enable-recursive-minibuffers t)
+    (fast-but-imprecise-scrolling t) ;; 3
     (frame-resize-pixelwise t) ;; 1
-    (history-delete-duplicates t) ;; 4
+    (history-delete-duplicates t) ;; 5
+    (hscroll-margin 2) ;; 3
+    (hscroll-step 1) ;; 3
+    (inhibit-compacting-font-caches t) ;; 3
     (load-prefer-newer t) ;; 2
     ;; Disable the cursor in the minibuffer prompt
     (minibuffer-prompt-properties '(
                                     cursor-intangible t
                                     read-only t
                                     face minibuffer-prompt
-                                    )) ;; 3
-    (read-buffer-completion-ignore-case t) ;; 3
+                                    )) ;; 4
+    (read-buffer-completion-ignore-case t) ;; 4
+    (read-process-output-max (* 512 1024)) ;; 3
     (resize-mini-windows 'grow-only)
+    (scroll-conservatively 10) ;; 3
     (text-mode-ispell-word-completion nil)
     (window-resize-pixelwise nil) ;; 1
     (words-include-escapes t)
     :hook
-    (minibuffer-setup . cursor-intangible-mode) ;; 3
+    (minibuffer-setup . cursor-intangible-mode) ;; 4
     )
 
 #+end_src
@@ -234,9 +244,10 @@ Generic package used to configure functions and variables not included in any fi
 
 1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]];
 2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#recommended-packagessnippets-to-have-as-early-as-possible][gopar]];
-3. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
-4. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
-
+3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#][jamescherti]];
+4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
+5. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
+   
 *** Files
 
 #+begin_quote
@@ -249,19 +260,21 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
 
   (use-package files
     :config
-    (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 1
+    (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 2
     :custom
+    (auto-mode-case-fold nil)
     (find-file-suppress-same-file-warnings t)
     (find-file-visit-truename t)
-    (revert-without-query '("")) ;; 1
-    (view-read-only t) ;; 1
+    (revert-without-query '("")) ;; 2
+    (view-read-only t) ;; 2
     )
 
 #+end_src
 
 **** Credits
 
-1. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
+1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L178][jamescherti]];
+2. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
 
 *** Help
 
@@ -407,9 +420,11 @@ Commands for Multilingual Enviroment.
 
   (use-package mule-cmds
     :config
+    (set-language-environment "UTF-8") ;; 2
     (setq prefer-coding-system 'utf-8) ;; 1
     :custom
-    (current-language-environment "UTF-8") ;; 2
+    (current-language-environment "UTF-8") ;; 3
+    (default-input-method nil) ;; 2
     :defer t
     )
 
@@ -418,7 +433,8 @@ Commands for Multilingual Enviroment.
 ***** Credits
 
 1. [[https://github.com/gopar/.emacs.d/blob/main/README.org#emacs-defaults][gopar]];
-2. [[https://github.com/oantolin/emacs-config/blob/master/init.el][oantolin]].
+2. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L65][jamescherti]];
+3. [[https://github.com/oantolin/emacs-config/blob/master/init.el][oantolin]].
 
 **** Util
 
@@ -521,6 +537,8 @@ Save minibuffer history.
 #+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
 
   (use-package savehist
+    :custom
+    (history-length 300)
     :init
     (savehist-mode)
     )
@@ -540,14 +558,15 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
   (use-package simple
     :custom
     (completion-auto-select 'second-tab) ;; 1
+    (idle-update-delay 1.0)
     (indent-tabs-mode nil)
-    (kill-do-not-save-duplicates t) ;; 4
-    (kill-read-only-ok t) ;; 4
-    (kill-whole-line t) ;; 4
+    (kill-do-not-save-duplicates t) ;; 5
+    (kill-read-only-ok t) ;; 5
+    (kill-whole-line t) ;; 5
     ;; Hides commands in completion that are not usable in the current mode
-    (read-extended-command-predicate #'command-completion-default-include-p) ;; 3
+    (read-extended-command-predicate #'command-completion-default-include-p) ;; 4
     (save-interprogram-paste-before-kill t)
-    (set-mark-command-repeat-pop t) ;; 4
+    (set-mark-command-repeat-pop t) ;; 5
     )
 
 #+end_src
@@ -556,8 +575,9 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 
 1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]];
 2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#simple][gopar]];
-3. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
-4. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]].
+3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L112][jamescherti]];
+4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
+5. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]].
 
 *** Uniquify
 
@@ -611,23 +631,7 @@ Log and display warnings.
 
 #+end_src
 
-*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L100][Window]]
-
-#+begin_quote
-
-Window tree functions.
-
-#+end_quote
-
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
-
-  (use-package window
-    :custom
-    (recenter-positions '(top middle bottom))
-    (switch-to-buffer-obey-display-actions t)
-    )
-
-#+end_src
+**** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L104][Credits]]
 
 ** [[https://github.com/emacsmirror/gcmh][Garbage Collector Magic Hack]]
 
@@ -759,16 +763,22 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
     :commands
     (
      dired
-     dired-jump
      )
     :custom
     (dired-auto-revert-buffer t)
+    (dired-clean-confirm-killing-deleted-buffers nil)
     (dired-dwim-target t)
-    (dired-listing-switches "-agho --group-directories-first")
+    (dired-listing-switches "-agho --group-directories-first") ;;1
     (dired-mouse-drag-files t)
+    (dired-recursive-copies 'always)
     )
 
 #+end_src
+
+*** Credits
+
+1. [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#configuration][daviwil]];
+2. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L336][jamescherti]].
 
 *** Auxiliary
 
@@ -1076,6 +1086,8 @@ Key bindings for default packages.
   (use-package isearch
     :bind
     ("C-s" . isearch-forward-word)
+    :custom
+    (lazy-highlight-initial-delay 0.0)
     )
 
 #+end_src
@@ -2248,6 +2260,23 @@ Collection of checkers for flymake.
     :ensure t
     :hook
     (after-init . flymake-collection-hook-setup)
+    )
+
+#+end_src
+
+** Python
+
+#+begin_quote
+
+Python's flying circus support for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package python
+    :custom
+    (python-indent-guess-indent-offset-verbose nil)
     )
 
 #+end_src
@@ -3610,6 +3639,23 @@ You can disable it after getting used to Emacs.
 
 #+END_src
 
+** Display Line Numbers
+
+#+begin_quote
+
+Interface for display-line-numbers.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package display-line-numbers
+    :hook
+    (prog-mode . display-line-numbers-mode)
+    )
+
+#+end_src
+
 ** [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#font-configuration][Faces]]
 
 #+begin_quote
@@ -3650,19 +3696,66 @@ Lisp faces.
 
 #+end_src
 
-** Display Line Numbers
+*** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L106][Frame]]
 
 #+begin_quote
 
-Interface for display-line-numbers.
+Multi-frame management independent of window systems.
 
 #+end_quote
 
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
-  (use-package display-line-numbers
-    :hook
-    (prog-mode . display-line-numbers-mode)
+  (use-package frame
+    :custom
+    (window-divider-default-bottom-width 1)
+    (window-divider-default-places t)
+    (window-divider-default-right-width 1)
+    :init
+    (window-divider-mode)
+    )
+
+#+end_src
+
+** [[https://emacsredux.com/blog/2020/11/21/disable-global-hl-line-mode-for-specific-modes/][Highlight Line]]
+
+#+begin_quote
+
+Highlight the current line.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package hl-line
+    :config
+    (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil))) ;; Disable highlight line in PDF mode
+    :init
+    (global-hl-line-mode)
+    )
+
+#+end_src
+
+*** Disable in PDF
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package hl-line
+    :if (package-installed-p 'pdf-tools)
+    :config
+    (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+    )
+
+#+end_src
+
+*** Disable in vterm
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package hl-line
+    :if (package-installed-p 'vterm)
+    :config
+    (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
     )
 
 #+end_src
@@ -3831,6 +3924,9 @@ This file parses the command line and gets Emacs running. Options on the command
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
   (use-package startup
+    :config
+    (advice-add #'display-startup-echo-area-message :override #'ignore)
+    (advice-add #'display-startup-screen :override #'ignore)
     :custom
     (initial-scratch-message nil)
     (inhibit-startup-echo-area-message t)
@@ -3841,49 +3937,34 @@ This file parses the command line and gets Emacs running. Options on the command
 
 #+end_src
 
-** [[https://emacsredux.com/blog/2020/11/21/disable-global-hl-line-mode-for-specific-modes/][Highlight Line]]
+*** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L182][Credits]]
+
+*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L100][Window]]
 
 #+begin_quote
 
-Highlight the current line.
+Window tree functions.
 
 #+end_quote
 
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
-  (use-package hl-line
-    :config
-    (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil))) ;; Disable highlight line in PDF mode
-    :init
-    (global-hl-line-mode)
+  (use-package window
+    :custom
+    (recenter-positions '(top middle bottom)) ;; 2
+    (scroll-error-top-bottom t) ;; 1
+    (split-height-threshold nil) ;;1
+    (split-width-threshold 170) ;; 1
+    (switch-to-buffer-obey-display-actions t) ;; 2
     )
 
 #+end_src
 
-*** Disable in PDF
+**** Credits
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
-
-  (use-package hl-line
-    :if (package-installed-p 'pdf-tools)
-    :config
-    (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
-    )
-
-#+end_src
-
-*** Disable in vterm
-
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
-
-  (use-package hl-line
-    :if (package-installed-p 'vterm)
-    :config
-    (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
-    )
-
-#+end_src
-
+1. [[https://github.com/jamescherti/minimal-emacs.d/blob/main/init.el][jamescherti]];
+2. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el][oantolin]].
+   
 ** [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-06-final/config.org#headline-37][Which Key]]
 
 #+begin_quote
@@ -3899,7 +3980,7 @@ Display available keybindings in popup.
     (which-key-add-column-padding 1)
     (which-key-idle-delay 0.5)
     (which-key-min-display-lines 6)
-    (which-key-separator " | ")
+    (which-key-separator "  ")
     (which-key-side-window-slot -10)
     (which-key-sort-order #'which-key-key-order-alpha)
     (which-key-sort-uppercase-first nil)

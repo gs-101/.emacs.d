@@ -4,13 +4,14 @@
   :commands
   (
    dired
-   dired-jump
    )
   :custom
   (dired-auto-revert-buffer t)
+  (dired-clean-confirm-killing-deleted-buffers nil)
   (dired-dwim-target t)
-  (dired-listing-switches "-agho --group-directories-first")
+  (dired-listing-switches "-agho --group-directories-first") ;;1
   (dired-mouse-drag-files t)
+  (dired-recursive-copies 'always)
   )
 
 (use-package dired-aux
