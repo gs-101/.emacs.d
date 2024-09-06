@@ -74,6 +74,7 @@
                  (lua-mode . lua-ts-mode)
                  (js-json-mode . json-ts-mode)
                  (python-mode . python-ts-mode)
+                 (rust-mode . rust-ts-mode)
                  (typescript-mode . typescript-ts-mode)
                  ))
     (add-to-list 'major-mode-remap-alist mapping))
