@@ -2416,6 +2416,24 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 
 #+end_src
 
+** [[https://github.com/rust-lang/rust-mode][Rust Mode]]
+
+#+begin_quote
+
+Emacs configuration for Rust.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package rust-mode
+    :custom
+    (rust-mode-treesitter-derive t)
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/emacs-rustic/rustic][Rustic]]
 
 #+begin_quote
@@ -2427,10 +2445,11 @@ Rust development environment for Emacs.
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
 
   (use-package rustic
-    :ensure t
     :custom
     (rustic-cargo-use-last-stored-arguments t)
     (rustic-format-on-save nil)
+    (rustic-lsp-client 'eglot)
+    :ensure t
     )
 
 #+end_src

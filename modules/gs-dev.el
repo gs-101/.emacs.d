@@ -163,11 +163,18 @@
   (magit-mode . magit-todos-mode)
   )
 
-(use-package rustic
+(use-package rust-mode
+  :custom
+  (rust-mode-treesitter-derive t)
   :ensure t
+  )
+
+(use-package rustic
   :custom
   (rustic-cargo-use-last-stored-arguments t)
   (rustic-format-on-save nil)
+  (rustic-lsp-client 'eglot)
+  :ensure t
   )
 
 (provide 'gs-dev)
