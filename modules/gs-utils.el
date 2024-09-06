@@ -77,6 +77,7 @@
 
 (use-package consult-gh
   :vc (:url "https://github.com/armindarvish/consult-gh")
+  :load-path ("elpa/consult-gh/" user-emacs-directory)
   :custom
   (consult-gh-code-action #'consult-gh--code-view-action)
   (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
