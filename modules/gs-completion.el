@@ -99,7 +99,7 @@
   )
 
 (use-package eldoc
-  :init
+  :custom
   (global-eldoc-mode nil)
   )
 

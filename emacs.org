@@ -2703,7 +2703,7 @@ COmpletion in Region FUnction.
 #+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
 
   (use-package eldoc
-    :init
+    :custom
     (global-eldoc-mode nil)
     )
 
