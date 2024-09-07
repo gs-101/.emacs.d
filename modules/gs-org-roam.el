@@ -13,7 +13,7 @@
   (org-roam-capture-templates '(
                                 ("b" "book notes" plain
                                  (file "~/org-roam/templates/book_note.org")
-                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Book_Notes\n\n")
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :book_notes:\n\n")
                                  :unnarrowed t)
                                 ("d" "default" plain
                                  (file "~/org-roam/templates/default.org") 
@@ -21,15 +21,15 @@
                                  :unnarrowed t)
                                 ("n" "notegpt.io" plain
                                  (file "~/org-roam/templates/notegpt.io.org")
-                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: notegpt.io Hacker_News\n\n")
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt.io:hacker_news:\n\n")
                                  :unnarrowed t)
                                 ("r" "redação" plain
                                  (file "~/org-roam/templates/redação.org")
-                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Redação\n\n")
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :redação:\n\n")
                                  :unnarrowed t)
                                 ("s" "summarize.ing" plain
                                  (file "~/org-roam/templates/summarize.ing.org")
-                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: summarize.ing\n\n")
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize.ing:\n\n")
                                  :unnarrowed t)
                                 ))
   )
