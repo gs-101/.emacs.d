@@ -99,7 +99,7 @@
   (defun dw/org-roam-refresh-agenda-list () ;; 1
     "Refresh the current agenda list, and add the files with the currosponding tag to the agenda list."
     (interactive)
-    (setq org-agenda-files (dw/org-roam-list-notes-by-tag "Agenda")))
+    (setq org-agenda-files (dw/org-roam-list-notes-by-tag "agenda")))
   ;; Build the agenda list the first time for the session
   (dw/org-roam-refresh-agenda-list)
   (defun dw/org-roam-project-finalize-hook ()
@@ -116,7 +116,7 @@
     (interactive)
     (org-roam-capture- :node (org-roam-node-create)
                        :templates '(("i" "inbox" plain "* %?"
-                                     :if-new (file+head "inbox.org" "#+title: Inbox\n#+filetags: Agenda\n\n")))))
+                                     :if-new (file+head "inbox.org" "#+title: Inbox\n#+filetags: :agenda:\n\n")))))
   (defun dw/org-roam-goto-month ()
     "Lists the files of the selected month with the set tag."
     (interactive)
@@ -124,7 +124,7 @@
                        :node (org-roam-node-create)
                        :templates '(("m" "month" plain "\n* Goals\n\n%?* Summary\n\n"
                                      :if-new (file+head "%<%Y-%B>.org"
-                                                        "#+title: %<%Y-%B>\n#+filetags: Agenda\n\n")
+                                                        "#+title: %<%Y-%B>\n#+filetags: :agenda:\n\n")
                                      :unnarrowed t))))
   (defun dw/org-roam-goto-year ()
     "Lists the files of the selected year with the set tag."
@@ -133,10 +133,10 @@
                        :node (org-roam-node-create)
                        :templates '(("y" "year" plain "\n* Goals\n\n%?* Summary\n\n"
                                      :if-new (file+head "%<%Y>.org"
-                                                        "#+title: %<%Y>\n#+filetags: Agenda\n\n")
+                                                        "#+title: %<%Y>\n#+filetags: :agenda:\n\n")
                                      :unnarrowed t))))
   :custom
-  (org-agenda-hide-tags-regexp "Agenda")
+  (org-agenda-hide-tags-regexp "agenda")
   )
 
 (use-package org-roam-ui
