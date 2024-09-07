@@ -2684,6 +2684,17 @@ COmpletion in Region FUnction.
 
 #+end_src
 
+*** Eldoc
+
+#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+
+  (use-package eldoc
+    :init
+    (global-eldoc-mode nil)
+    )
+
+#+end_src
+
 *** [[https://github.com/minad/corfu/wiki#configuring-corfu-for-eglot][Configuring Corfu for Eglot]]
 
 **** [[https://github.com/minad/corfu/wiki#filter-list-of-all-possible-completions-with-completion-style-like-orderless][Orderless]]

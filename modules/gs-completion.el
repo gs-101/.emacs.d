@@ -98,6 +98,11 @@
   (global-corfu-mode)
   )
 
+(use-package eldoc
+  :init
+  (global-eldoc-mode nil)
+  )
+
 (use-package orderless
   :custom
   (completion-category-overrides '((eglot (styles orderless))
