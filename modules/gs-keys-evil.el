@@ -34,6 +34,11 @@
   (evil-want-C-u-scroll t)
   )
 
+(use-package evil-search
+  :custom
+  (evil-search-module 'evil-search)
+  )
+
 (use-package evil-states
   :bind 
   (

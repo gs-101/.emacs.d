@@ -3353,6 +3353,23 @@ Settings and variables.
 
 *** [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-05/config.org#headline-28][Credits]]
 
+** Search
+
+#+begin_quote
+
+Search and substitute.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package evil-search
+    :custom
+    (evil-search-module 'evil-search)
+    )
+
+#+end_src
+
 ** States
 
 The different states found in Evil Mode.
