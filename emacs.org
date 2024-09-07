@@ -2482,6 +2482,25 @@ Rust development environment for Emacs.
 
 #+end_src
 
+** [[https://github.com/wakatime/wakatime-mode][Wakatime]]
+
+#+begin_quote
+
+Emacs plugin for automatic time tracking and metrics generated from your programming activity.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package wakatime-mode
+    :ensure t
+    :init
+    (global-wakatime-mode)
+    )
+    
+#+end_src
+
+
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
