@@ -2076,7 +2076,7 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 
 * Command Line
 
-#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes 
+#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
