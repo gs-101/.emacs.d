@@ -49,8 +49,8 @@
   :bind
   (
    :map dired-preview-mode-map
-  ("C-c C-p" . prot/ready-player-dired-preview-play-toggle)
-  )
+   ("C-c C-p" . prot/ready-player-dired-preview-play-toggle)
+   )
   :preface
   (defun prot/ready-player-dired-preview-play-toggle ()
     "Call `ready-player-toggle-play-stop' on the currently previewed media file."

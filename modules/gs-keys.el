@@ -153,8 +153,8 @@
   :bind
   (
    :map org-agenda-mode-map
-        ("M-o" . casual-agenda-tmenu)
-        )
+   ("M-o" . casual-agenda-tmenu)
+   )
   :ensure t
   )
 

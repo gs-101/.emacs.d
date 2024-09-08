@@ -851,24 +851,24 @@ Automatically preview file at point in Emacs Dired.
 
 #+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
 
-    (use-package dired-preview
-      :if (package-installed-p 'ready-player)
-      :bind
-      (
-       :map dired-preview-mode-map
-      ("C-c C-p" . prot/ready-player-dired-preview-play-toggle)
-      )
-      :preface
-      (defun prot/ready-player-dired-preview-play-toggle ()
-        "Call `ready-player-toggle-play-stop' on the currently previewed media file."
-        (interactive)
-        (dired-preview-with-window
-          (if-let ((file buffer-file-name)
-                   (media (concat "\\." (regexp-opt ready-player-supported-media t) "\\'"))
-                   (_ (string-match-p media file)))
-              (call-interactively #'ready-player-toggle-play-stop)
-            (user-error "Cannot do something useful with `ready-player' here"))))
-      )
+  (use-package dired-preview
+    :if (package-installed-p 'ready-player)
+    :bind
+    (
+     :map dired-preview-mode-map
+     ("C-c C-p" . prot/ready-player-dired-preview-play-toggle)
+     )
+    :preface
+    (defun prot/ready-player-dired-preview-play-toggle ()
+      "Call `ready-player-toggle-play-stop' on the currently previewed media file."
+      (interactive)
+      (dired-preview-with-window
+        (if-let ((file buffer-file-name)
+                 (media (concat "\\." (regexp-opt ready-player-supported-media t) "\\'"))
+                 (_ (string-match-p media file)))
+            (call-interactively #'ready-player-toggle-play-stop)
+          (user-error "Cannot do something useful with `ready-player' here"))))
+    )
 
 #+end_src
 
@@ -1288,8 +1288,8 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
     :bind
     (
      :map org-agenda-mode-map
-          ("M-o" . casual-agenda-tmenu)
-          )
+     ("M-o" . casual-agenda-tmenu)
+     )
     :ensure t
     )
 
@@ -1650,7 +1650,7 @@ LaTeX Backend for Org Export Engine.
 
 #+begin_src bash
 
-sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm
+  sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm
 
 #+end_src
 
@@ -2399,7 +2399,7 @@ Instant Github-flavored Markdown/Org preview using grip.
 
 #+begin_src bash
 
-pip install grip
+  pip install grip
 
 #+end_src
 
@@ -2522,7 +2522,7 @@ Emacs plugin for automatic time tracking and metrics generated from your program
     :init
     (global-wakatime-mode)
     )
-    
+
 #+end_src
 
 
@@ -3776,7 +3776,7 @@ Lisp faces.
       ;; Set the variable pitch face
       (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
     :init
-      (dw/set-font-faces)
+    (dw/set-font-faces)
     )
 
 #+end_src  
@@ -4135,16 +4135,16 @@ An extensible emacs dashboard.
     (dashboard-center-content t)
     (dashboard-vertically-center-content t)
     (dashboard-startupify-list '(
-                                dashboard-insert-banner
-                                dashboard-insert-banner-title
-                                dashboard-insert-newline
-                                dashboard-insert-init-info
-                                dashboard-insert-items
-                                dashboard-insert-newline
-                                dashboard-insert-navigator
-                                dashboard-insert-newline
-                                dashboard-insert-footer
-                                ))
+                                 dashboard-insert-banner
+                                 dashboard-insert-banner-title
+                                 dashboard-insert-newline
+                                 dashboard-insert-init-info
+                                 dashboard-insert-items
+                                 dashboard-insert-newline
+                                 dashboard-insert-navigator
+                                 dashboard-insert-newline
+                                 dashboard-insert-footer
+                                 ))
     :defer nil
     :ensure t
     :preface
@@ -4168,7 +4168,7 @@ A startup screen extracted from Spacemacs.
 
   (use-package dashboard-widgets
     :config
-        (dashboard-modify-heading-icons '(
+    (dashboard-modify-heading-icons '(
                                       (agenda . "nf-oct-calendar")
                                       (projects . "nf-oct-project")
                                       (recents . "nf-oct-clock")
@@ -4189,7 +4189,7 @@ A startup screen extracted from Spacemacs.
     :init
     (dashboard-setup-startup-hook)
     )
-    
+
 #+end_src
 
 *** Navigator Buttons
@@ -4198,35 +4198,35 @@ A startup screen extracted from Spacemacs.
 
   (use-package dashboard-widgets
     :custom
-  (dashboard-navigator-buttons
-   `(;; line1
-     (
-      (,(nerd-icons-mdicon "nf-md-github")
-       "Source Repository"
-       "Open the source repository in the browser"
-       (lambda (&rest _) (browse-url "https://github.com/gs-101/.emacs.d"))
-       'default)
-      )
-     ;;line 2
-     (
-      (,(nerd-icons-mdicon "nf-md-note_outline")
-       "Open Scratch Buffer"
-       "Switch to the scratch buffer"
-       (lambda (&rest _) (snackon/create-scratch-buffer))
-       'default)
-      (,(nerd-icons-mdicon "nf-md-calendar_outline")
-       "Open Org Agenda"
-       "Switch to the agenda buffer"
-       (lambda (&rest _) (org-agenda))
-       'default)
-      (,(nerd-icons-mdicon "nf-md-cog")
-       "Open Config"
-       "Switch to the configuration file buffer"
-       (lambda (&rest _) (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory)))
-       'default)
-      )
-     ))
-  )
+    (dashboard-navigator-buttons
+     `(;; line1
+       (
+        (,(nerd-icons-mdicon "nf-md-github")
+         "Source Repository"
+         "Open the source repository in the browser"
+         (lambda (&rest _) (browse-url "https://github.com/gs-101/.emacs.d"))
+         'default)
+        )
+       ;;line 2
+       (
+        (,(nerd-icons-mdicon "nf-md-note_outline")
+         "Open Scratch Buffer"
+         "Switch to the scratch buffer"
+         (lambda (&rest _) (snackon/create-scratch-buffer))
+         'default)
+        (,(nerd-icons-mdicon "nf-md-calendar_outline")
+         "Open Org Agenda"
+         "Switch to the agenda buffer"
+         (lambda (&rest _) (org-agenda))
+         'default)
+        (,(nerd-icons-mdicon "nf-md-cog")
+         "Open Config"
+         "Switch to the configuration file buffer"
+         (lambda (&rest _) (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory)))
+         'default)
+        )
+       ))
+    )
 
 #+end_src
 
@@ -4575,23 +4575,23 @@ FEAT: try to add vterm support to this package.
     :custom
     (popper-display-control t)
     (popper-reference-buffers '(
-       compilation-mode
-       help-mode
-       "\\*Async Shell Command\\*"
-       "\\*Backtrace\\*"
-       "\\*compilation\\*"
-       "\\*Dtache Shell Command\\*"
-       "\\*eldoc\\*"
-       "\\*Ement Notifications\\*"
-       "*Flymake diagnostics.*"
-       "\\*GDB.*out\\*"
-       "\\*Messages\\*"
-       "\\*mu4e-update\\*"
-       "Output\\*$"
-       "^*tex"
-       "\\*Warnings\\*"
-       "\\*xref\\*"
-       ))
+                                compilation-mode
+                                help-mode
+                                "\\*Async Shell Command\\*"
+                                "\\*Backtrace\\*"
+                                "\\*compilation\\*"
+                                "\\*Dtache Shell Command\\*"
+                                "\\*eldoc\\*"
+                                "\\*Ement Notifications\\*"
+                                "*Flymake diagnostics.*"
+                                "\\*GDB.*out\\*"
+                                "\\*Messages\\*"
+                                "\\*mu4e-update\\*"
+                                "Output\\*$"
+                                "^*tex"
+                                "\\*Warnings\\*"
+                                "\\*xref\\*"
+                                ))
     :ensure t
     :init
     (popper-mode)
@@ -4635,18 +4635,18 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
     :preface
     (defun prism-catppuccin-colors ()
       "Grab color definitions from catppuccin and use them to set prism's colors."
-    (prism-set-colors
-      :lightens '(0 5 10)
-      :desaturations '(-2.5 0 2.5)
-      :colors (-map #'catppuccin-get-color '(
-                                             red
-                                             peach
-                                             yellow
-                                             green
-                                             sapphire
-                                             lavender
-                                             mauve
-                                             ))))
+      (prism-set-colors
+        :lightens '(0 5 10)
+        :desaturations '(-2.5 0 2.5)
+        :colors (-map #'catppuccin-get-color '(
+                                               red
+                                               peach
+                                               yellow
+                                               green
+                                               sapphire
+                                               lavender
+                                               mauve
+                                               ))))
     )
 
 #+end_src

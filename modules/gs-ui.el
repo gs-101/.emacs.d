@@ -29,7 +29,7 @@
     ;; Set the variable pitch face
     (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
   :init
-    (dw/set-font-faces)
+  (dw/set-font-faces)
   )
 
 (use-package faces
@@ -200,16 +200,16 @@
   (dashboard-center-content t)
   (dashboard-vertically-center-content t)
   (dashboard-startupify-list '(
-                              dashboard-insert-banner
-                              dashboard-insert-banner-title
-                              dashboard-insert-newline
-                              dashboard-insert-init-info
-                              dashboard-insert-items
-                              dashboard-insert-newline
-                              dashboard-insert-navigator
-                              dashboard-insert-newline
-                              dashboard-insert-footer
-                              ))
+                               dashboard-insert-banner
+                               dashboard-insert-banner-title
+                               dashboard-insert-newline
+                               dashboard-insert-init-info
+                               dashboard-insert-items
+                               dashboard-insert-newline
+                               dashboard-insert-navigator
+                               dashboard-insert-newline
+                               dashboard-insert-footer
+                               ))
   :defer nil
   :ensure t
   :preface
@@ -221,7 +221,7 @@
 
 (use-package dashboard-widgets
   :config
-      (dashboard-modify-heading-icons '(
+  (dashboard-modify-heading-icons '(
                                     (agenda . "nf-oct-calendar")
                                     (projects . "nf-oct-project")
                                     (recents . "nf-oct-clock")
@@ -245,35 +245,35 @@
 
 (use-package dashboard-widgets
   :custom
-(dashboard-navigator-buttons
- `(;; line1
-   (
-    (,(nerd-icons-mdicon "nf-md-github")
-     "Source Repository"
-     "Open the source repository in the browser"
-     (lambda (&rest _) (browse-url "https://github.com/gs-101/.emacs.d"))
-     'default)
-    )
-   ;;line 2
-   (
-    (,(nerd-icons-mdicon "nf-md-note_outline")
-     "Open Scratch Buffer"
-     "Switch to the scratch buffer"
-     (lambda (&rest _) (snackon/create-scratch-buffer))
-     'default)
-    (,(nerd-icons-mdicon "nf-md-calendar_outline")
-     "Open Org Agenda"
-     "Switch to the agenda buffer"
-     (lambda (&rest _) (org-agenda))
-     'default)
-    (,(nerd-icons-mdicon "nf-md-cog")
-     "Open Config"
-     "Switch to the configuration file buffer"
-     (lambda (&rest _) (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory)))
-     'default)
-    )
-   ))
-)
+  (dashboard-navigator-buttons
+   `(;; line1
+     (
+      (,(nerd-icons-mdicon "nf-md-github")
+       "Source Repository"
+       "Open the source repository in the browser"
+       (lambda (&rest _) (browse-url "https://github.com/gs-101/.emacs.d"))
+       'default)
+      )
+     ;;line 2
+     (
+      (,(nerd-icons-mdicon "nf-md-note_outline")
+       "Open Scratch Buffer"
+       "Switch to the scratch buffer"
+       (lambda (&rest _) (snackon/create-scratch-buffer))
+       'default)
+      (,(nerd-icons-mdicon "nf-md-calendar_outline")
+       "Open Org Agenda"
+       "Switch to the agenda buffer"
+       (lambda (&rest _) (org-agenda))
+       'default)
+      (,(nerd-icons-mdicon "nf-md-cog")
+       "Open Config"
+       "Switch to the configuration file buffer"
+       (lambda (&rest _) (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory)))
+       'default)
+      )
+     ))
+  )
 
 (use-package startup
   :custom
@@ -468,23 +468,23 @@
   :custom
   (popper-display-control t)
   (popper-reference-buffers '(
-     compilation-mode
-     help-mode
-     "\\*Async Shell Command\\*"
-     "\\*Backtrace\\*"
-     "\\*compilation\\*"
-     "\\*Dtache Shell Command\\*"
-     "\\*eldoc\\*"
-     "\\*Ement Notifications\\*"
-     "*Flymake diagnostics.*"
-     "\\*GDB.*out\\*"
-     "\\*Messages\\*"
-     "\\*mu4e-update\\*"
-     "Output\\*$"
-     "^*tex"
-     "\\*Warnings\\*"
-     "\\*xref\\*"
-     ))
+                              compilation-mode
+                              help-mode
+                              "\\*Async Shell Command\\*"
+                              "\\*Backtrace\\*"
+                              "\\*compilation\\*"
+                              "\\*Dtache Shell Command\\*"
+                              "\\*eldoc\\*"
+                              "\\*Ement Notifications\\*"
+                              "*Flymake diagnostics.*"
+                              "\\*GDB.*out\\*"
+                              "\\*Messages\\*"
+                              "\\*mu4e-update\\*"
+                              "Output\\*$"
+                              "^*tex"
+                              "\\*Warnings\\*"
+                              "\\*xref\\*"
+                              ))
   :ensure t
   :init
   (popper-mode)
@@ -514,18 +514,18 @@
   :preface
   (defun prism-catppuccin-colors ()
     "Grab color definitions from catppuccin and use them to set prism's colors."
-  (prism-set-colors
-    :lightens '(0 5 10)
-    :desaturations '(-2.5 0 2.5)
-    :colors (-map #'catppuccin-get-color '(
-                                           red
-                                           peach
-                                           yellow
-                                           green
-                                           sapphire
-                                           lavender
-                                           mauve
-                                           ))))
+    (prism-set-colors
+      :lightens '(0 5 10)
+      :desaturations '(-2.5 0 2.5)
+      :colors (-map #'catppuccin-get-color '(
+                                             red
+                                             peach
+                                             yellow
+                                             green
+                                             sapphire
+                                             lavender
+                                             mauve
+                                             ))))
   )
 
 (use-package prism
