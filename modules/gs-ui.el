@@ -514,6 +514,7 @@
   :preface
   (defun prism-catppuccin-colors ()
     "Grab color definitions from catppuccin and use them to set prism's colors."
+    (interactive)
     (prism-set-colors
       :lightens '(0 5 10)
       :desaturations '(-2.5 0 2.5)
