@@ -1,0 +1,39 @@
+#+CAPTION: Screenshot of the dashboard, save the agenda and recent files items
+#+NAME: Dashboard View
+[[./screenshot.png]]
+
+* Greetings
+
+This is my personal [[https://www.gnu.org/software/emacs/][Emacs]] configuration. It is not meant to be used by others, since I compiled Emacs from source, but you are welcome to take inspiration and bits of code from here. It may seem kinda large, when looking at the [[./emacs.org][org document]], but most of it is just useless spacing that looks nice for me.
+Also, I'd like to thank [[https://github.com/sachac][Sacha Chua]] for [[https://sachachua.com/blog/2024/09/2024-09-02-emacs-news/][featuring]] my configuration in her blog!
+
+* Packages
+
+Each external package has a link to their source on the headline. Be sure to check them out if the quoted descriptions don't clarify their functionality enough.
+
+* [[./emacs.png][Logo]]
+
+The current dashboard logo was created by editing the current Emacs icon from the [[https://git.savannah.gnu.org/cgit/emacs.git][source repository]], then exporting the [[https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/images/icons/hicolor/scalable/apps/emacs.svg][SVG version]] using [[https://inkscape.org/][Inkscape]].
+
+* Credits
+
+I've taken some inspiration on working through this configuration from other members of the community. Be sure to check them out if you want a configuration that is actually usable!
+
+** [[https://codeberg.org/ashton314][Ashton Wiersdorf]]
+
+** [[https://codeberg.org/blau_araujo][Blau Araujo]]
+
+** [[https://github.com/minad][Daniel Mendler]]
+
+** [[https://github.com/daviwil][David Wilson]]
+
+** [[https://gitlab.com/dwt1][Derek Taylor]]
+** [[https://github.com/Gavinok][Gavin Freeborn]]
+
+** [[https://github.com/gopar][Gopar]]
+
+** [[https://github.com/jamescherti][James Cherti]]
+
+** [[https://github.com/oantolin][Omar Antolín Camarena]]
+
+** [[https://github.com/protesilaos][Protesilaos Stavrou]]
