@@ -58,6 +58,12 @@
   )
 
 (use-package hl-line
+  :if (package-installed-p 'dashboard)
+  :config
+  (add-hook 'dashboard-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+  )
+
+(use-package hl-line
   :if (package-installed-p 'pdf-tools)
   :config
   (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
@@ -187,6 +193,92 @@
   :config
   (load-theme 'catppuccin t)
   :ensure t
+  )
+
+(use-package dashboard
+  :custom
+  (dashboard-center-content t)
+  (dashboard-vertically-center-content t)
+  (dashboard-startupify-list '(
+                              dashboard-insert-banner
+                              dashboard-insert-banner-title
+                              dashboard-insert-newline
+                              dashboard-insert-init-info
+                              dashboard-insert-items
+                              dashboard-insert-newline
+                              dashboard-insert-navigator
+                              dashboard-insert-newline
+                              dashboard-insert-footer
+                              ))
+  :defer nil
+  :ensure t
+  :preface
+  (defun dashboard-create-scratch-buffer ()
+    "Create a scratch buffer."
+    (interactive)
+    (switch-to-buffer (get-buffer-create "*scratch*")))
+  )
+
+(use-package dashboard-widgets
+  :config
+      (dashboard-modify-heading-icons '(
+                                    (agenda . "nf-oct-calendar")
+                                    (projects . "nf-oct-project")
+                                    (recents . "nf-oct-clock")
+                                    ))
+  :custom
+  (dashboard-banner-logo-title "The Extensible Computing Enviroment")
+  (dashboard-display-icons-p t)
+  (dashboard-icon-type 'nerd-icons)
+  (dashboard-items '(
+                     (agenda . 5)
+                     (projects . 5)
+                     (recents . 5)
+                     ))
+  (dashboard-set-file-icons t)
+  (dashboard-set-heading-icons t)
+  (dashboard-startup-banner (expand-file-name "emacs.png" user-emacs-directory))
+  (dashboard-week-agenda nil)
+  :init
+  (dashboard-setup-startup-hook)
+  )
+
+(use-package dashboard-widgets
+  :custom
+(dashboard-navigator-buttons
+ `(;; line1
+   (
+    (,(nerd-icons-mdicon "nf-md-github")
+     "Source Repository"
+     "Open the source repository in the browser"
+     (lambda (&rest _) (browse-url "https://github.com/gs-101/.emacs.d"))
+     'default)
+    )
+   ;;line 2
+   (
+    (,(nerd-icons-mdicon "nf-md-note_outline")
+     "Open Scratch Buffer"
+     "Switch to the scratch buffer"
+     (lambda (&rest _) (snackon/create-scratch-buffer))
+     'default)
+    (,(nerd-icons-mdicon "nf-md-calendar_outline")
+     "Open Org Agenda"
+     "Switch to the agenda buffer"
+     (lambda (&rest _) (org-agenda))
+     'default)
+    (,(nerd-icons-mdicon "nf-md-cog")
+     "Open Config"
+     "Switch to the configuration file buffer"
+     (lambda (&rest _) (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory)))
+     'default)
+    )
+   ))
+)
+
+(use-package startup
+  :custom
+  (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
+  :defer t
   )
 
 (use-package doom-modeline
