@@ -4563,6 +4563,8 @@ Emacs minor-mode to summon and dismiss buffers easily.
 
 #+end_quote
 
+FEAT: try to add vterm support to this package.
+
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
   (use-package popper
@@ -4650,6 +4652,8 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 #+end_src
 
 **** Daemon Support
+
+REFACTOR: require both catppuccin and daemonp to trigger this use-package declaration. `:if` seems to support only one function.
 
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
