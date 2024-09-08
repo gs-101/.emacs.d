@@ -511,6 +511,9 @@
 (use-package prism
   :if (package-installed-p 'catppuccin-theme)
   :config
+  :preface
+  (defun prism-catppuccin-colors ()
+    "Grab color definitions from catppuccin and use them to set prism's colors."
   (prism-set-colors
     :lightens '(0 5 10)
     :desaturations '(-2.5 0 2.5)
@@ -522,26 +525,15 @@
                                            sapphire
                                            lavender
                                            mauve
-                                           )))
+                                           ))))
   )
 
 (use-package prism
-  :if (list (daemonp) (package-installed-p 'catppuccin-theme))
+  :if (daemonp)
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)
-              (prism-set-colors
-                :lightens '(0 5 10)
-                :desaturations '(-2.5 0 2.5)
-                :colors (-map #'catppuccin-get-color '(
-                                                       red
-                                                       peach
-                                                       yellow
-                                                       green
-                                                       sapphire
-                                                       lavender
-                                                       mauve
-                                                       )))))
+              (prism-catppuccin-colors)))
   )
 
 (use-package transient-posframe
