@@ -4422,6 +4422,48 @@ Display nerd icons in ibuffer.
 
 #+end_src
 
+** [[https://github.com/karthink/popper][Popper]]
+
+#+begin_quote
+
+Emacs minor-mode to summon and dismiss buffers easily.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package popper
+    :bind
+    ("M-]" . popper-cycle)
+    ("M-[" . popper-toggle)
+    ("C-x M-[" . popper-toggle-type)
+    :custom
+    (popper-display-control t)
+    (popper-reference-buffers '(
+       compilation-mode
+       help-mode
+       "\\*Async Shell Command\\*"
+       "\\*Backtrace\\*"
+       "\\*compilation\\*"
+       "\\*Dtache Shell Command\\*"
+       "\\*eldoc\\*"
+       "\\*Ement Notifications\\*"
+       "*Flymake diagnostics.*"
+       "\\*GDB.*out\\*"
+       "\\*Messages\\*"
+       "\\*mu4e-update\\*"
+       "Output\\*$"
+       "^*tex"
+       "\\*Warnings\\*"
+       "\\*xref\\*"
+       ))
+    :ensure t
+    :init
+    (popper-mode)
+    )
+
+#+end_src
+
 ** [[https://github.com/alphapapa/prism.el][Prism]]
 
 Disperse Lisp forms (and other languages) into a spectrum of colors by depth.

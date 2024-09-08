@@ -368,6 +368,36 @@
   (ibuffer-mode . nerd-icons-ibuffer-mode)
   )
 
+(use-package popper
+  :bind
+  ("M-]" . popper-cycle)
+  ("M-[" . popper-toggle)
+  ("C-x M-[" . popper-toggle-type)
+  :custom
+  (popper-display-control t)
+  (popper-reference-buffers '(
+     compilation-mode
+     help-mode
+     "\\*Async Shell Command\\*"
+     "\\*Backtrace\\*"
+     "\\*compilation\\*"
+     "\\*Dtache Shell Command\\*"
+     "\\*eldoc\\*"
+     "\\*Ement Notifications\\*"
+     "*Flymake diagnostics.*"
+     "\\*GDB.*out\\*"
+     "\\*Messages\\*"
+     "\\*mu4e-update\\*"
+     "Output\\*$"
+     "^*tex"
+     "\\*Warnings\\*"
+     "\\*xref\\*"
+     ))
+  :ensure t
+  :init
+  (popper-mode)
+  )
+
 (use-package prism
   :ensure t
   :hook
