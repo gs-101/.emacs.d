@@ -25,13 +25,26 @@
 
 (use-package evil-vars
   :custom
-  (evil-respect-visual-line-mode t)
+  (evil-disable-insert-state-bindings t) ;; 2
+  (evil-respect-visual-line-mode t) ;; 1
   (evil-undo-system 'undo-redo)
-  (evil-split-window-below t)
-  (evil-v$-excludes-newline t)
-  (evil-vsplit-window-right t)
-  (evil-want-C-i-jump nil)
+  (evil-split-window-below t) ;; 1
+  (evil-v$-excludes-newline t) ;; 1
+  (evil-vsplit-window-right t) ;; 1
+  (evil-want-C-i-jump nil) ;; 1
   (evil-want-C-u-scroll t)
+  (evil-want-Y-yank-to-eol t) ;; 2
+  )
+
+(use-package evil-commands
+  :bind
+  (
+   :map evil-normal-state-map
+   ("C-n" . evil-next-line)
+   ("C-p" . evil-previous-line)
+   (")" . evil-next-close-paren)
+   ("(" . evil-previous-open-paren)
+   )
   )
 
 (use-package evil-search
