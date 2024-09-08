@@ -12,5 +12,6 @@
 (require 'gs-dev)
 (require 'gs-completion)
 (require 'gs-utils)
-(require 'gs-keys-evil)
+;;(require 'gs-keys-evil)
+(require 'gs-keys-meow)
 (require 'gs-ui)
