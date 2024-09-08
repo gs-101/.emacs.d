@@ -19,6 +19,11 @@
   (dired-do-revert-buffer t)
   )
 
+(use-package dired-async
+  :init
+  (dired-async-mode)
+  )
+
 (use-package dired-preview
   :vc (:url "https://github.com/protesilaos/dired-preview")
   :custom

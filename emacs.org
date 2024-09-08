@@ -796,6 +796,23 @@ Less commonly used parts of Dired.
 
 #+end_src
 
+*** Async
+
+#+begin_quote
+
+Asynchronous dired actions.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+
+  (use-package dired-async
+    :init
+    (dired-async-mode)
+    )
+
+#+end_src
+
 *** [[https://github.com/protesilaos/dired-preview][Preview]]
  
 #+begin_quote
