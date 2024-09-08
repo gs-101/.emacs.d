@@ -2262,7 +2262,7 @@ A universal on-the-fly syntax checker.
 
 #+end_src
 
-*** Collection
+*** [[https://github.com/mohkale/flymake-collection][Collection]]
 
 #+begin_quote
 
