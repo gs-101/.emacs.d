@@ -259,7 +259,7 @@
       (,(nerd-icons-mdicon "nf-md-note_outline")
        "Open Scratch Buffer"
        "Switch to the scratch buffer"
-       (lambda (&rest _) (snackon/create-scratch-buffer))
+       (lambda (&rest _) (dashboard-create-scratch-buffer))
        'default)
       (,(nerd-icons-mdicon "nf-md-calendar_outline")
        "Open Org Agenda"
