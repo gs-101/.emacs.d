@@ -21,7 +21,7 @@
                                  :unnarrowed t)
                                 ("n" "notegpt.io" plain
                                  (file "~/org-roam/templates/notegpt.io.org")
-                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt.io:hacker_news:\n\n")
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt_io:hacker_news:\n\n")
                                  :unnarrowed t)
                                 ("r" "redação" plain
                                  (file "~/org-roam/templates/redação.org")
@@ -29,7 +29,7 @@
                                  :unnarrowed t)
                                 ("s" "summarize.ing" plain
                                  (file "~/org-roam/templates/summarize.ing.org")
-                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize.ing:\n\n")
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
                                  :unnarrowed t)
                                 ))
   )
