@@ -71,6 +71,11 @@
   (ibuffer-mode . ibuffer-auto-mode)
   )
 
+(use-package image-mode
+  :custom
+  (image-animate-loop t)
+  )
+
 (use-package imenu
   :custom
   (imenu-space-replacement nil)
