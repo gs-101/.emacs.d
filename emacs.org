@@ -2442,6 +2442,38 @@ Instant Github-flavored Markdown/Org preview using grip.
 
 #+end_src
 
+** [[https://github.com/kaiwk/leetcode.el][LeetCode]]
+
+#+begin_quote
+
+An Emacs LeetCode client.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package leetcode
+    :custom
+    (leetcode--paid "$")
+    (leetcode--User-Agent ("User Agent" . "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.1"))
+    :ensure t
+    )
+
+#+end_src
+
+*** Save solutions to Roam
+
+#+begin_src emacs-lisp
+
+  (use-package leetcode
+    :if (package-installed-p 'org-roam)
+    :custom
+    (leetcode-save-solutions t)
+    (leetcode-directory (convert-standard-filename (expand-file-name "leetcode/" org-roam-directory)))
+    )
+
+#+end_src
+
 ** [[https://github.com/magit/magit][Magit]]
 
 #+begin_quote
