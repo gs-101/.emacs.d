@@ -4,7 +4,6 @@
   :config
   (add-to-list 'org-latex-packages-alist '(
                                            "" "bookmark" t
-                                           "" "cancel" t
                                            ))
   :custom
   (org-adapt-indentation t)
