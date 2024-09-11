@@ -510,7 +510,8 @@
 
 (use-package prism
   :if (package-installed-p 'catppuccin-theme)
-  :config
+  :init
+  (prism-catppuccin-colors)
   :preface
   (defun prism-catppuccin-colors ()
     "Grab color definitions from catppuccin and use them to set prism's colors."
@@ -534,7 +535,8 @@
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)
-              (prism-catppuccin-colors)))
+              (with-selected-frame frame
+              (prism-catppuccin-colors))))
   )
 
 (use-package transient-posframe

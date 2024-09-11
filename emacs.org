@@ -4949,7 +4949,8 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
   (use-package prism
     :if (package-installed-p 'catppuccin-theme)
-    :config
+    :init
+    (prism-catppuccin-colors)
     :preface
     (defun prism-catppuccin-colors ()
       "Grab color definitions from catppuccin and use them to set prism's colors."
@@ -4981,7 +4982,8 @@ REFACTOR: require both catppuccin and daemonp to trigger this use-package declar
     :config
     (add-hook 'after-make-frame-functions
               (lambda (frame)
-                (prism-catppuccin-colors)))
+                (with-selected-frame frame
+                (prism-catppuccin-colors))))
     )
 
 #+end_src
