@@ -155,7 +155,6 @@
 (use-package simple
   :custom
   (completion-auto-select 'second-tab) ;; 1
-  (idle-update-delay 1.0)
   (indent-tabs-mode nil)
   (kill-do-not-save-duplicates t) ;; 5
   (kill-read-only-ok t) ;; 5
