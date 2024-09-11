@@ -103,7 +103,6 @@
   )
 
 (use-package show-font
-  :vc (:url "https://github.com/protesilaos/show-font")
   :ensure t
   )
 

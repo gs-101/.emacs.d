@@ -997,7 +997,6 @@ Show font features in an Emacs buffer.
 #+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
 
   (use-package show-font
-    :vc (:url "https://github.com/protesilaos/show-font")
     :ensure t
     )
 
