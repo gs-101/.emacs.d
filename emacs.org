@@ -3921,6 +3921,7 @@ Meow helpers for customization.
      '("[" . meow-beginning-of-thing)
      '("]" . meow-end-of-thing)
      '("'" . repeat)
+     '("=" . meow-indent)
      '("<escape>" . ignore)
      '("1" . meow-expand-1)
      '("2" . meow-expand-2)
@@ -4001,7 +4002,7 @@ Calculate bounds of thing in Meow.
 
 #+begin_quote
 
-Tree-sitter powered 🌳 motions for Meow 🐱.
+Tree-sitter powered motions for Meow.
 
 #+end_quote
 

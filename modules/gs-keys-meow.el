@@ -63,6 +63,7 @@
    '("[" . meow-beginning-of-thing)
    '("]" . meow-end-of-thing)
    '("'" . repeat)
+   '("=" . meow-indent)
    '("<escape>" . ignore)
    '("1" . meow-expand-1)
    '("2" . meow-expand-2)
