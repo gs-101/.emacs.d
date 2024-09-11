@@ -1477,8 +1477,6 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 
 #+end_quote
 
-FIX: ~org-latex-packages-alist~.
-
 #+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
   ;;; -*- lexical-binding: t -*-
 #+end_src
@@ -1906,12 +1904,16 @@ Rudimentary Roam replica with Org-mode.
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
+REFACTOR: Separate ~use-package org-roam~ into its different files.
+
 #+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
 
   (use-package org-roam
     :bind
     ("C-c r f" . org-roam-node-find)
     ("C-c r i" . org-roam-node-insert)
+    :custom
+    (org-roam-completion-everywhere t)
     :demand t
     :ensure t
     :init
@@ -3284,8 +3286,6 @@ Add blk-type Org links and transclusion.
     :after (blk org)
     :config
     (blk-configure-org-transclusion)
-    :hook
-    (org-mode . blk-enable-completion)
     )
 
 #+end_src

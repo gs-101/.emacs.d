@@ -2,6 +2,8 @@
   :bind
   ("C-c r f" . org-roam-node-find)
   ("C-c r i" . org-roam-node-insert)
+  :custom
+  (org-roam-completion-everywhere t)
   :demand t
   :ensure t
   :init
