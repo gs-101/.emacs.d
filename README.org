@@ -1,6 +1,11 @@
+#+title: Emacs Configuration --- [[./emacs.org][Literate File]] | [[./modules/][Modules]]
+#+author: Gabriel Santos
+
+#+html: <a href="https://orgmode.org"><img src="https://img.shields.io/badge/Org-literate%20config-%2377aa99?style=flat-square&logo=org&logoColor=white"></a>
+
+[[./screenshot.png]]
 #+CAPTION: Screenshot of the dashboard, save the agenda and recent files items
 #+NAME: Dashboard View
-[[./screenshot.png]]
 
 * Greetings
 
