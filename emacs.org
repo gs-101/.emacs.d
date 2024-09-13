@@ -3325,9 +3325,6 @@ Add blk-type Org links and transclusion.
 #+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
 
   (use-package blk-org
-    :after (blk org)
-    :config
-    (blk-configure-org-transclusion)
     )
 
 #+end_src

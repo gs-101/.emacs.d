@@ -210,9 +210,6 @@ targets."
   )
 
 (use-package blk-org
-  :after (blk org)
-  :config
-  (blk-configure-org-transclusion)
   )
 
 (use-package blk-org
