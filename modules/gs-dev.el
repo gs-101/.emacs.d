@@ -10,7 +10,6 @@
    ("\\.html\\'" . html-ts-mode)
    ("\\.json\\'" .  json-ts-mode)
    ("\\.lua\\'" . lua-ts-mode)
-   ("\\.php\\'" . php-ts-mode)
    ("\\.py\\'" . python-ts-mode)
    ("\\.rb\\'" . ruby-ts-mode)
    ("\\.rs\\'" . rust-ts-mode)

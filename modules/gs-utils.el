@@ -45,6 +45,8 @@
    ([remap load-theme] . consult-theme)
    ([remap locate] . consult-locate)
    ([remap man] . consult-man)
+   ([remap project-list-buffers] . consult-project-buffer)
+   ([remap project-switch-to-buffer] . consult-project-buffer)
    ([remap rgrep] . consult-ripgrep)
    ([remap switch-to-buffer] . consult-buffer)
    ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)

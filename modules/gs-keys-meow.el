@@ -18,7 +18,7 @@
 
 (use-package meow-cheatsheet
   :custom
-  (meow-cheatsheet-layout t)
+  (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   )
 
 (use-package meow-cheatsheet-layout

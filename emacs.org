@@ -53,6 +53,8 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 
 * Load Modules
 
+FEAT: Write ~gs-daemon/server~, see [[https://github.com/meow-edit/meow/issues/568][this]] issue.
+
 #+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
   ;;; -*- lexical-binding: t -*-
 #+end_src
@@ -3042,6 +3044,8 @@ Consulting completing-read.
      ([remap load-theme] . consult-theme)
      ([remap locate] . consult-locate)
      ([remap man] . consult-man)
+     ([remap project-list-buffers] . consult-project-buffer)
+     ([remap project-switch-to-buffer] . consult-project-buffer)
      ([remap rgrep] . consult-ripgrep)
      ([remap switch-to-buffer] . consult-buffer)
      ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)
@@ -3844,7 +3848,7 @@ Cheatsheet for Meow.
 
   (use-package meow-cheatsheet
     :custom
-    (meow-cheatsheet-layout t)
+    (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     )
 
 #+end_src
@@ -3905,7 +3909,7 @@ Meow helpers for customization.
 
 #+end_src
 
-*** Normal Mode
+** Normal State
 
 #+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
 
