@@ -2358,6 +2358,7 @@ Run code formatter on buffer contents without moving point, using RCS patches an
     :config
     (setf (alist-get 'prettier apheleia-formatters)
           '("prettier" "--stdin-filepath" filepath))
+    :ensure t
     :hook
     (prog-mode . apheleia-mode)
     )
