@@ -2556,6 +2556,12 @@ Instant Github-flavored Markdown/Org preview using grip.
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
 
   (use-package grip-mode
+    :commands
+    (
+     grip-start-preview
+     )
+    :custom
+    (grip-preview-use-webkit nil)
     :ensure t
     )
 
