@@ -2139,7 +2139,35 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
 
 #+end_src
 
-*** [[https://github.com/jixiuf/vterm-toggle][Toggle vterm]]
+*** [[https://mocompute.codeberg.page/item/2024/2024-09-03-emacs-project-vterm.html][Project Shell]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+
+  (use-package vterm
+    :preface
+    (defun mocompute/project-shell ()
+      "Start an inferior shell in the current project's root directory.
+  If a buffer already exists for running a shell in the project's root,
+  switch to it.  Otherwise, create a new shell buffer.
+  With \\[universal-argument] prefix arg, create a new inferior shell buffer even
+  if one already exists."
+      (interactive)
+      (require 'comint)
+      (let* ((default-directory (project-root (project-current t)))
+             (default-project-shell-name (project-prefixed-buffer-name "shell"))
+             (shell-buffer (get-buffer default-project-shell-name)))
+        (if (and shell-buffer (not current-prefix-arg))
+            (if (comint-check-proc shell-buffer)
+                (pop-to-buffer shell-buffer (bound-and-true-p display-comint-buffer-action))
+              (vterm shell-buffer))
+          (vterm (generate-new-buffer-name default-project-shell-name)))))
+    :config
+    (advice-add 'project-shell :override #'mocompute/project-shell)
+    )
+
+#+end_src
+
+*** [[https://github.com/jixiuf/vterm-toggle][Toggle]]
 
 #+begin_quote
 
