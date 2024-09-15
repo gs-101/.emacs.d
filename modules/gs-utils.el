@@ -87,17 +87,17 @@
   :ensure t
   )
 
+(use-package consult-gh-embark
+  :if (package-installed-p 'embark)
+  :defer t
+  )
+
 (use-package consult-gh-forge
   :if (package-installed-p 'forge)
   :custom
   (consult-gh-file-action #'consult-gh--files-view-action)
   (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
   (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
-  :defer t
-  )
-
-(use-package consult-gh-embark
-  :if (package-installed-p 'embark)
   :defer t
   )
 
