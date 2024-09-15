@@ -2477,7 +2477,7 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
 
   (use-package combobulate
-    :vc (:url "https://github.com/mickeynp/combobulate")
+    :vc (:url "https://github.com/mickeynp/combobulate" :branch "development")
     :bind
     (
      :map prog-mode-map

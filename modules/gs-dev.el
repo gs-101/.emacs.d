@@ -167,7 +167,7 @@
   )
 
 (use-package combobulate
-  :vc (:url "https://github.com/mickeynp/combobulate")
+  :vc (:url "https://github.com/mickeynp/combobulate" :branch "development")
   :bind
   (
    :map prog-mode-map
