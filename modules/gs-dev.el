@@ -89,6 +89,46 @@
   (os/setup-install-grammars)
   )
 
+(use-package compile
+  :bind
+  (
+   :map compilation-mode-map
+   ("}" . compilation-next-file)
+   ("{" . compilation-previous-file)
+   ("n" . next-error-no-select)
+   ("p" . previous-error-no-select)
+   ("q" . kill-buffer-and-window)
+   )
+  :commands
+  (
+   compile
+   )
+  :custom
+  (compilation-auto-jump-to-first-error t)
+  (compilation-max-output-line-length nil)
+  (compilation-scroll-output t)
+  (compilation-skip-threshold 2)
+  :functions
+  (
+   kill-buffer-and-window
+   next-error-no-select
+   previous-error-no-select
+   )
+  :hook
+  (compilation-mode . goto-address-mode)
+  (compilation-filter . xenodium/colorize-compilation-buffer)
+  :preface
+  (defun xenodium/colorize-compilation-buffer ()
+    (let ((was-read-only buffer-read-only))
+      (unwind-protect
+          (progn
+            (when was-read-only
+              (read-only-mode -1))
+            (ansi-color-apply-on-region (point-min) (point-max)))
+        (when was-read-only
+          (read-only-mode +1)))))
+  )
+
 (use-package eglot
   :custom
   (eglot-autoshutdown t)
