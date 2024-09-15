@@ -237,6 +237,12 @@
   :ensure t
   )
 
+(use-package leetcode
+  :custom
+  (leetcode-save-solutions t)
+  (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
+  )
+
 (use-package magit
   :commands
   (

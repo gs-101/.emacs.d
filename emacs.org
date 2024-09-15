@@ -2601,15 +2601,14 @@ An Emacs LeetCode client.
 
 #+end_src
 
-*** Save solutions to Roam
+*** Save solutions to Project
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
 
   (use-package leetcode
-    :if (package-installed-p 'org-roam)
     :custom
     (leetcode-save-solutions t)
-    (leetcode-directory (convert-standard-filename (expand-file-name "leetcode/" org-roam-directory)))
+    (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
     )
 
 #+end_src
