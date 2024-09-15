@@ -4045,7 +4045,7 @@ Meow helpers for customization.
 
 #+end_src
 
-** Normal State
+** Normal Mode
 
 #+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
 
