@@ -216,6 +216,8 @@
   )
 
 (use-package recentf
+  :custom
+  (recentf-max-saved-items 1000)
   :config
   (add-to-list 'recentf-exclude
                (recentf-expand-file-name no-littering-etc-directory)

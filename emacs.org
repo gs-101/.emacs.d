@@ -722,6 +722,8 @@ Keep track of recently opened files.
 #+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
 
   (use-package recentf
+    :custom
+    (recentf-max-saved-items 1000)
     :config
     (add-to-list 'recentf-exclude
                  (recentf-expand-file-name no-littering-etc-directory)
