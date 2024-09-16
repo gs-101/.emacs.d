@@ -195,6 +195,17 @@ targets."
       (apply fn args)))
   )
 
+(use-package embark
+  :if (package-installed-p 'wgrep)
+  :hook
+  (embark-after-export . rmurri/embark-after-export-wgrep)
+  :preface
+  (defun rmurri/embark-after-export-wgrep ()
+    "Change to `wgrep-mode' after exporting a grep result to a buffer."
+    (if (string= "grep-mode" (symbol-name major-mode))
+        (wgrep-change-to-wgrep-mode)))
+  )
+
 (use-package blk
   :vc (:url "https://github.com/mahmoodsh36/blk")
   :bind

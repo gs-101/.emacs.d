@@ -3434,6 +3434,23 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 #+end_src
 
+*** [[https://lr.ggtyler.dev/r/emacs/comments/1benj4g/things_you_do_in_emacs_that_will_make_nonemacs/][wgrep export]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package embark
+    :if (package-installed-p 'wgrep)
+    :hook
+    (embark-after-export . rmurri/embark-after-export-wgrep)
+    :preface
+    (defun rmurri/embark-after-export-wgrep ()
+      "Change to `wgrep-mode' after exporting a grep result to a buffer."
+      (if (string= "grep-mode" (symbol-name major-mode))
+          (wgrep-change-to-wgrep-mode)))
+    )
+
+#+end_src
+
 ** [[https://github.com/mahmoodsh36/blk][blk]]
 
 #+begin_quote
