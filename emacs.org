@@ -4642,6 +4642,24 @@ An extensible emacs dashboard.
 
 #+end_src
 
+** [[https://github.com/purcell/diredfl][diredfl]]
+
+#+begin_quote
+
+Extra Emacs font lock rules for a more colourful dired.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package diredfl
+    :ensure t
+    :init
+    (diredfl-global-mode)
+    )
+
+#+end_src
+
 *** Widgets
 
 #+begin_quote

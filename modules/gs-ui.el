@@ -219,6 +219,12 @@
     (switch-to-buffer (get-buffer-create "*scratch*")))
   )
 
+(use-package diredfl
+  :ensure t
+  :init
+  (diredfl-global-mode)
+  )
+
 (use-package dashboard-widgets
   :config
   (dashboard-modify-heading-icons '(
