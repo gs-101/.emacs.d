@@ -142,6 +142,8 @@
   )
 
 (use-package org-roam-ui
+  :bind
+  ("C-c r u" . org-roam-ui-open)
   :custom
   (org-roam-ui-sync-theme t)
   (org-roam-ui-follow t)
@@ -149,8 +151,6 @@
   (org-roam-ui-open-on-start nil)
   (org-roam-ui-browser-function #'browse-url-chromium)
   :ensure t
-  :hook
-  (org-roam-mode . org-roam-ui-mode)
   )
 
 (provide 'gs-org-roam)

@@ -2107,6 +2107,8 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 #+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
 
   (use-package org-roam-ui
+    :bind
+    ("C-c r u" . org-roam-ui-open)
     :custom
     (org-roam-ui-sync-theme t)
     (org-roam-ui-follow t)
@@ -2114,8 +2116,6 @@ A graphical frontend for exploring your org-roam Zettelkasten.
     (org-roam-ui-open-on-start nil)
     (org-roam-ui-browser-function #'browse-url-chromium)
     :ensure t
-    :hook
-    (org-roam-mode . org-roam-ui-mode)
     )
 
 #+end_src
