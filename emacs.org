@@ -745,26 +745,6 @@ Keep track of recently opened files.
 
 #+end_src
 
-** [[https://github.com/twlz0ne/separedit.el][Separedit]]
-
-#+begin_quote
-
-Edit comment or string/docstring or code block inside them in separate buffer with your favorite mode.
-
-#+end_quote
-
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
-
-  (use-package separedit
-    :bind
-    ("C-c C-." . separedit)
-    :custom
-    (separedit-default-mode 'org-mode)
-    :ensure t
-    )
-
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes

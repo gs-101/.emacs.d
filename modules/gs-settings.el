@@ -231,14 +231,6 @@
   (custom-file (no-littering-expand-etc-file-name "custom.el"))
   )
 
-(use-package separedit
-  :bind
-  ("C-c C-." . separedit)
-  :custom
-  (separedit-default-mode 'org-mode)
-  :ensure t
-  )
-
 (provide 'gs-settings)
 
 (use-package autorevert
