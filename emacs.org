@@ -1042,6 +1042,8 @@ Key bindings for default packages.
 
 #+end_quote
 
+** [[./notes/window_management.org][Window Management Bindings]]
+
 #+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
   ;;; -*- lexical-binding: t -*-
 #+end_src

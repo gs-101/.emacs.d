@@ -1,0 +1,60 @@
+#+title: How to Create and Manage Multiple Windows
+#+author: David Wilson
+
+#+html: <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Windows.html"><img src="https://img.shields.io/badge/_-Documentation-822422?style=flat-square&logo=GNU&logoColor=black&labelColor=white">
+
+#+html: <a href="https://github.com/daviwil/emacs-from-scratch/blob/aa344276b42f8abaf1fc7326c7ceda28ea5cf750/show-notes/Emacs-Tips-05.org"><img src="https://img.shields.io/badge/Source-100000?style=for-the-badge&logo=github&logoColor=white">
+
+* Windows and Frames
+
+- A "window" is a region within an Emacs frame that shows a particular buffer
+- A "frame" is an Emacs program window at the level of your OS or desktop environment which can hold multiple windows
+- Multiple windows can show the same buffer, but with different scroll, selection, etc
+
+* Basic Window Operations
+
+| Command                             | Key   | Description                            |
+|-------------------------------------+-------+----------------------------------------|
+| =delete-window=                       | ~C-x 0~ | Close the current window               |
+| =delete-other-windows=                | ~C-x 1~ | Close all other windows                |
+| =split-window-below=                  | ~C-x 2~ | Split the current window horizonally   |
+| =split-window-right=                  | ~C-x 3~ | Split the current window vertically    |
+| =shrink-window-horizontally=          | ~C-x {~ | Make the window smaller horizontally   |
+| =enlarge-window-horizontally=         | ~C-x }~ | Make the window bigger horizontally    |
+| =shrink-window-if-larger-than-buffer= | ~C-x -~ | Shrink the window vertically to buffer |
+| =balance-windows=                     | ~C-x +~ | Balance the sizes of all windows       |
+
+*TIP*: The =universal-argument= (~C-u~) and a numeric prefix can be used to dictate the mount by which the window is resized.
+
+** evil-mode alternatives
+
+| Command                | Key        | Description                             |
+|------------------------+------------+-----------------------------------------|
+| =evil-window-delete=     | ~C-w C-c~    | Close the current window                |
+| =delete-other-windows=   | ~C-w C-o~    | Close all other windows                 |
+| =evil-window-split=      | ~C-w C-s~    | Split the current window horizontally   |
+| =evil-window-vsplit=     | ~C-w C-v~    | Split the current window vertically     |
+| =evil-window-set-width=  | ~C-w (pipe)~ | Use numeric prefix to set window width  |
+| =evil-window-set-height= | ~C-w _~      | Use numeric prefix to set window height |
+| =balance-windows=        | ~C-w =~      | Balance the sizes of all windows        |
+
+*TIP*: A numeric argument before running =evil-window-set-width= and =evil-window-set-height= to specify the desired size of the window.
+
+* "Other window" operations
+
+| Command                  | Keys    | Description                                      |
+|--------------------------+---------+--------------------------------------------------|
+| =other-window=             | ~C-x o~   | Select the next visible window                   |
+| =find-file-other-window=   | ~C-x 4 f~ | Open a file in another window                    |
+| =dired-other-window=       | ~C-x 4 d~ | Open Dired in another window                     |
+| =dired-jump-other-window=  | ~C-x 4 j~ | Open Dired in another window at location of file |
+| =scroll-other-window=      | ~M-pgdn~  | Scroll the other window down without focusing it |
+| =scroll-other-window-down= | ~M-pgup~  | Scroll the other window up without focusing it   |
+
+** evil-mode alternatives
+
+| Command           | Keys    | Description                        |
+|-------------------+---------+------------------------------------|
+| =evil-window-next=  | ~C-w C-w~ | Select the next visible window     |
+| =evil-window-prev=  | ~C-w W~   | Select the previous visible window |
+| =ffap-other-window= | ~C-w C-f~ | Open a file in another window      |
