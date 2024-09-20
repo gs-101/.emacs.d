@@ -14,7 +14,7 @@
   :custom
   (org-roam-capture-templates '(
                                 ("b" "book notes" plain
-                                 (file "~/org-roam/templates/book_note.org")
+                                 (file "~/org-roam/templates/book_notes.org")
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :book_notes:\n\n")
                                  :unnarrowed t)
                                 ("d" "default" plain
