@@ -292,7 +292,8 @@
   )
 
 (use-package doom-modeline
-  :custom   
+  :custom
+  (doom-modeline-buffer-encoding nil)
   (doom-modeline-ellipsis "…")
   (doom-modeline-enable-word-count t)
   :ensure t

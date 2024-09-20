@@ -5000,7 +5000,8 @@ A fancy and fast mode-line inspired by minimalism design.
 #+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
 
   (use-package doom-modeline
-    :custom   
+    :custom
+    (doom-modeline-buffer-encoding nil)
     (doom-modeline-ellipsis "…")
     (doom-modeline-enable-word-count t)
     :ensure t
