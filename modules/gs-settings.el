@@ -158,7 +158,7 @@
 
 (use-package pixel-scroll
   :init
-  (pixel-scroll-precision-mode)   
+  (pixel-scroll-precision-mode)
   )
 
 (use-package savehist

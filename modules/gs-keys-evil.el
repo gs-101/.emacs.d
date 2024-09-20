@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package simple
-  :bind 
+  :bind
   ("C-M-u" . universal-argument)
   )
 
@@ -53,7 +53,7 @@
   )
 
 (use-package evil-states
-  :bind 
+  :bind
   (
    :map evil-insert-state-map
    ;; In insert state, use the default quit command to return to normal state
@@ -67,7 +67,7 @@
 (use-package evil-core
   :if (package-installed-p 'org-appear)
   :custom
-  (org-appear-trigger 'manual) 
+  (org-appear-trigger 'manual)
   :config
   (add-hook 'org-mode-hook (lambda ()
                              (add-hook 'evil-insert-state-entry-hook
@@ -114,9 +114,9 @@
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda) 
+  (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda)
   (evil-define-key 'normal 'global (kbd "<leader>oc") 'org-clock-report)
-  (evil-define-key 'normal 'global (kbd "<leader>od") 'org-deadline) 
+  (evil-define-key 'normal 'global (kbd "<leader>od") 'org-deadline)
   (evil-define-key 'normal 'global (kbd "<leader>ol") 'org-insert-link)
   (evil-define-key 'normal 'global (kbd "<leader>os") 'org-schedule)
   (evil-define-key 'normal 'global (kbd "<leader>op") 'org-set-property)
@@ -150,7 +150,7 @@
   :config
   (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
   (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
-  (evil-define-key 'normal 'global (kbd "<leader>rf") 'org-roam-node-find) 
+  (evil-define-key 'normal 'global (kbd "<leader>rf") 'org-roam-node-find)
   (evil-define-key 'normal 'global (kbd "<leader>ri") 'org-roam-node-insert)
   )
 

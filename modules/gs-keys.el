@@ -12,7 +12,7 @@
   :bind
   (
    :map prog-mode-map
-   ("C-c C-x f" . flymake-start) 
+   ("C-c C-x f" . flymake-start)
    )
   )
 

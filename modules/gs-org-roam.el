@@ -18,7 +18,7 @@
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :book_notes:\n\n")
                                  :unnarrowed t)
                                 ("d" "default" plain
-                                 (file "~/org-roam/templates/default.org") 
+                                 (file "~/org-roam/templates/default.org")
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
                                  :unnarrowed t)
                                 ("n" "notegpt.io" plain
@@ -39,7 +39,7 @@
 (use-package org-roam-dailies
   :bind-keymap
   ("C-c r d" . org-roam-dailies-map)
-  :bind 
+  :bind
   (
    :map org-roam-dailies-map
    ("Y" . org-roam-dailies-capture-yesterday)
@@ -90,14 +90,14 @@
     "Filter org roam files by their tags."
     (lambda (node)
       (member tag-name (org-roam-node-tags node))))
-  
+
   (defun dw/org-roam-list-notes-by-tag (tag-name)
     "List org roam files by their tags."
     (mapcar #'org-roam-node-file
             (seq-filter
              (dw/org-roam-filter-by-tag tag-name)
              (org-roam-node-list))))
-  
+
   (defun dw/org-roam-refresh-agenda-list () ;; 1
     "Refresh the current agenda list, and add the files with the currosponding tag to the agenda list."
     (interactive)
@@ -108,7 +108,7 @@
     "Adds the captured project file to "org-agenda-file" if the capture was not aborted."
     ;; Remove the hook since it was added temporarily
     (remove-hook 'org-capture-after-finalize-hook #'dw/org-roam-project-finalize-hook)
-    
+
     ;; Add project file to the agenda list if the capture was confirmed
     (unless org-note-abort
       (with-current-buffer (org-capture-get :buffer)

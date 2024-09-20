@@ -58,7 +58,7 @@ FEAT: Write ~gs-daemon/server~, see [[https://github.com/meow-edit/meow/issues/5
 #+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
   ;;; -*- lexical-binding: t -*-
 #+end_src
-  
+
 #+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
 
   (add-to-list 'load-path (expand-file-name modules-directory))
@@ -137,7 +137,7 @@ If ~use-package~ is not installed, refresh the package list and install it¹.
   (provide 'gs-package)
 #+end_src
 
-* Settings 
+* Settings
 
 Configuration of default Emacs packages.
 
@@ -250,7 +250,7 @@ Generic package used to configure functions and variables not included in any fi
 3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#][jamescherti]];
 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
 5. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
-   
+
 *** Files
 
 #+begin_quote
@@ -333,7 +333,7 @@ Support for visiting image files.
     :custom
     (image-animate-loop t)
     )
-  
+
 #+end_src
 
 *** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L232][iMenu]]
@@ -417,7 +417,7 @@ Lisp editing for Emacs.
 
 1. [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L107][ashton314]];
 2. [[https://github.com/minad/vertico?tab=readme-ov-file#completion-styles-and-tab-completion][minad]].
- 
+
 *** Mouse
 
 #+begin_quote
@@ -552,7 +552,7 @@ Scroll a line smoothly.
 
   (use-package pixel-scroll
     :init
-    (pixel-scroll-precision-mode)   
+    (pixel-scroll-precision-mode)
     )
 
 #+end_src
@@ -768,7 +768,7 @@ Keep track of recently opened files.
 
 #+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
 
-  (provide 'gs-settings) 
+  (provide 'gs-settings)
 #+end_src
 
 * File Management
@@ -886,7 +886,7 @@ Asynchronous dired actions.
 #+end_src
 
 *** [[https://github.com/protesilaos/dired-preview][Preview]]
- 
+
 #+begin_quote
 
 Automatically preview file at point in Emacs Dired.
@@ -1092,7 +1092,7 @@ Key bindings for default packages.
     :bind
     (
      :map prog-mode-map
-     ("C-c C-x f" . flymake-start) 
+     ("C-c C-x f" . flymake-start)
      )
     )
 
@@ -1581,7 +1581,7 @@ This just makes the scratch buffer use Org Mode instead.
        (python . t)
        (shell . t)
        ))
-    
+
     (push '("conf-unix" . conf-unix) org-src-lang-modes)
     (add-hook 'after-save-hook 'org-babel-tangle)
     )
@@ -1609,13 +1609,13 @@ Dynamic task and appointment lists for Org.
                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#A"))
                   (org-agenda-span 'day)
                   (org-deadline-warning-days 0)))
-         
+
          (agenda ""
                  ((org-agenda-overriding-header "Medium Priority Tasks")
                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#B"))
                   (org-agenda-span 'day)
                   (org-deadline-warning-days 0)))
-         
+
          (agenda ""
                  ((org-agenda-overriding-header "Low Priority Tasks")
                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#C"))
@@ -1723,7 +1723,7 @@ LaTeX Backend for Org Export Engine.
 #+end_src
 
 1. ~dvipng~ doesn't work for me for some reason.
-   
+
 *** Packages to install
 
 **** Fedora
@@ -1779,7 +1779,7 @@ Org refile allows you to refile subtrees to various locations.
 
   (use-package org-refile
     :config
-    (advice-add 'org-refile :after 'org-save-all-org-buffers)  
+    (advice-add 'org-refile :after 'org-save-all-org-buffers)
     :custom
     (org-outline-path-complete-in-steps nil)
     (org-refile-allow-creating-parent-nodes 'confirm)
@@ -1834,7 +1834,7 @@ Org refile allows you to refile subtrees to various locations.
                      ("@review" . ?r)
                      (:endgroup)
                      ))
-    )  
+    )
 #+end_src
 
 ** TODOs
@@ -1870,6 +1870,22 @@ Org refile allows you to refile subtrees to various locations.
                           "CLOSED(x@)"
                           )
                          ))
+    )
+
+#+end_src
+
+** [[https://github.com/spegoraro/org-alert][Alert]]
+
+#+begin_quote
+
+System notifications of org agenda items.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+
+  (use-package org-alert
+    :ensure t
     )
 
 #+end_src
@@ -1936,7 +1952,7 @@ Org-transclusion lets you insert a copy of text content via a file link or ID li
 
 #+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
 
-  (provide 'gs-org) 
+  (provide 'gs-org)
 #+end_src
 
 * [[https://github.com/org-roam/org-roam][Org Roam]]
@@ -1981,7 +1997,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
                                    :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :book_notes:\n\n")
                                    :unnarrowed t)
                                   ("d" "default" plain
-                                   (file "~/org-roam/templates/default.org") 
+                                   (file "~/org-roam/templates/default.org")
                                    :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
                                    :unnarrowed t)
                                   ("n" "notegpt.io" plain
@@ -2008,7 +2024,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
   (use-package org-roam-dailies
     :bind-keymap
     ("C-c r d" . org-roam-dailies-map)
-    :bind 
+    :bind
     (
      :map org-roam-dailies-map
      ("Y" . org-roam-dailies-capture-yesterday)
@@ -2071,14 +2087,14 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
       "Filter org roam files by their tags."
       (lambda (node)
         (member tag-name (org-roam-node-tags node))))
-    
+
     (defun dw/org-roam-list-notes-by-tag (tag-name)
       "List org roam files by their tags."
       (mapcar #'org-roam-node-file
               (seq-filter
                (dw/org-roam-filter-by-tag tag-name)
                (org-roam-node-list))))
-    
+
     (defun dw/org-roam-refresh-agenda-list () ;; 1
       "Refresh the current agenda list, and add the files with the currosponding tag to the agenda list."
       (interactive)
@@ -2089,7 +2105,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
       "Adds the captured project file to "org-agenda-file" if the capture was not aborted."
       ;; Remove the hook since it was added temporarily
       (remove-hook 'org-capture-after-finalize-hook #'dw/org-roam-project-finalize-hook)
-      
+
       ;; Add project file to the agenda list if the capture was confirmed
       (unless org-note-abort
         (with-current-buffer (org-capture-get :buffer)
@@ -2156,7 +2172,7 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 
 #+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
 
-  (provide 'gs-org-roam) 
+  (provide 'gs-org-roam)
 #+end_src
 
 * Command Line
@@ -2216,7 +2232,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
 
 #+begin_quote
 
-Toggles between the vterm buffer and whatever buffer you are editing. 
+Toggles between the vterm buffer and whatever buffer you are editing.
 
 #+end_quote
 
@@ -2516,7 +2532,7 @@ Python's flying circus support for Emacs.
 
 #+begin_quote
 
-Run code formatter on buffer contents without moving point, using RCS patches and dynamic programming. 
+Run code formatter on buffer contents without moving point, using RCS patches and dynamic programming.
 
 #+end_quote
 
@@ -3694,7 +3710,7 @@ Add blk-type Org links and transclusion.
   (use-package blk
     :if (package-installed-p 'org-roam)
     :after org-roam
-    :custom 
+    :custom
     (blk-directories (list
                       org-roam-directory
                       user-emacs-directory
@@ -3747,7 +3763,7 @@ Spaced Repetition System for GNU Emacs.
 
 #+begin_quote
 
-The extensible vi layer for Emacs. 
+The extensible vi layer for Emacs.
 
 #+end_quote
 
@@ -3762,7 +3778,7 @@ Bind the universal argument to another key to avoid conflicts.
 #+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
 
   (use-package simple
-    :bind 
+    :bind
     ("C-M-u" . universal-argument)
     )
 
@@ -3785,7 +3801,7 @@ This is needed for ~evil-collection~.
 
 #+begin_quote
 
-The extensible vi layer for Emacs. 
+The extensible vi layer for Emacs.
 
 #+end_quote
 
@@ -3897,7 +3913,7 @@ The different states found in Evil Mode.
 #+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
 
   (use-package evil-states
-    :bind 
+    :bind
     (
      :map evil-insert-state-map
      ;; In insert state, use the default quit command to return to normal state
@@ -3921,7 +3937,7 @@ Toggles org-appear based on the current evil state.
   (use-package evil-core
     :if (package-installed-p 'org-appear)
     :custom
-    (org-appear-trigger 'manual) 
+    (org-appear-trigger 'manual)
     :config
     (add-hook 'org-mode-hook (lambda ()
                                (add-hook 'evil-insert-state-entry-hook
@@ -4004,9 +4020,9 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda) 
+    (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda)
     (evil-define-key 'normal 'global (kbd "<leader>oc") 'org-clock-report)
-    (evil-define-key 'normal 'global (kbd "<leader>od") 'org-deadline) 
+    (evil-define-key 'normal 'global (kbd "<leader>od") 'org-deadline)
     (evil-define-key 'normal 'global (kbd "<leader>ol") 'org-insert-link)
     (evil-define-key 'normal 'global (kbd "<leader>os") 'org-schedule)
     (evil-define-key 'normal 'global (kbd "<leader>op") 'org-set-property)
@@ -4064,7 +4080,7 @@ Toggles org-appear based on the current evil state.
     :config
     (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
     (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
-    (evil-define-key 'normal 'global (kbd "<leader>rf") 'org-roam-node-find) 
+    (evil-define-key 'normal 'global (kbd "<leader>rf") 'org-roam-node-find)
     (evil-define-key 'normal 'global (kbd "<leader>ri") 'org-roam-node-insert)
     )
 
@@ -4117,7 +4133,7 @@ A set of keybindings for evil-mode.
 
 #+begin_quote
 
-Supplemental evil-mode keybindings to emacs org-mode 
+Supplemental evil-mode keybindings to emacs org-mode
 
 #+end_quote
 
@@ -4447,7 +4463,7 @@ You can disable it after getting used to Emacs.
     (use-file-dialog nil)
     (visible-bell nil)
     (x-stretch-cursor t)
-    (x-underline-at-descent-line nil)   
+    (x-underline-at-descent-line nil)
     )
 
 #+END_src
@@ -4492,7 +4508,7 @@ Lisp faces.
     (dw/set-font-faces)
     )
 
-#+end_src  
+#+end_src
 
 *** Daemon Support
 
@@ -4715,7 +4731,7 @@ Paragraph and sentence parsing.
     :custom
     (sentence-end-double-space nil)
     :defer t
-    ) 
+    )
 
 #+end_src
 
@@ -4787,7 +4803,7 @@ Window tree functions.
 
 1. [[https://github.com/jamescherti/minimal-emacs.d/blob/main/init.el][jamescherti]];
 2. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el][oantolin]].
-   
+
 ** [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-06-final/config.org#headline-37][Which Key]]
 
 #+begin_quote
@@ -4812,7 +4828,7 @@ Display available keybindings in popup.
     )
 
 #+end_src
-   
+
 ** [[https://github.com/catppuccin/emacs][Catppuccin]]
 
 #+begin_quote
@@ -5228,7 +5244,7 @@ A Library for Nerd Font icons.
     )
 
 #+end_src
-     
+
 *** [[https://github.com/rainstormstudio/nerd-icons-completion][Completion]]
 
 #+begin_quote

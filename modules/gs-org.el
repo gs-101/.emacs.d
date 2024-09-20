@@ -47,7 +47,7 @@
      (python . t)
      (shell . t)
      ))
-  
+
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
   (add-hook 'after-save-hook 'org-babel-tangle)
   )
@@ -63,13 +63,13 @@
                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#A"))
                 (org-agenda-span 'day)
                 (org-deadline-warning-days 0)))
-       
+
        (agenda ""
                ((org-agenda-overriding-header "Medium Priority Tasks")
                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#B"))
                 (org-agenda-span 'day)
                 (org-deadline-warning-days 0)))
-       
+
        (agenda ""
                ((org-agenda-overriding-header "Low Priority Tasks")
                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#C"))
@@ -131,7 +131,7 @@
 
 (use-package org-refile
   :config
-  (advice-add 'org-refile :after 'org-save-all-org-buffers)  
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
   :custom
   (org-outline-path-complete-in-steps nil)
   (org-refile-allow-creating-parent-nodes 'confirm)
@@ -211,6 +211,10 @@
                         "CLOSED(x@)"
                         )
                        ))
+  )
+
+(use-package org-alert
+  :ensure t
   )
 
 (use-package org-fragtog

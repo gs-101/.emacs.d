@@ -11,7 +11,7 @@
   (use-file-dialog nil)
   (visible-bell nil)
   (x-stretch-cursor t)
-  (x-underline-at-descent-line nil)   
+  (x-underline-at-descent-line nil)
   )
 
 (use-package display-line-numbers

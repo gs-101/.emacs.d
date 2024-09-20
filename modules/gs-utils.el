@@ -218,7 +218,7 @@ targets."
 (use-package blk
   :if (package-installed-p 'org-roam)
   :after org-roam
-  :custom 
+  :custom
   (blk-directories (list
                     org-roam-directory
                     user-emacs-directory
