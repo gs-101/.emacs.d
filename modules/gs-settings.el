@@ -188,6 +188,7 @@
 
 (use-package use-package
   :custom
+  (use-package-compute-statistics t)
   (use-package-enable-imenu-support t)
   (use-package-vc-prefer-newest t)
   )
