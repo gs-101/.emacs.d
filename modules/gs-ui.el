@@ -51,8 +51,6 @@
   )
 
 (use-package hl-line
-  :config
-  (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil))) ;; Disable highlight line in PDF mode
   :init
   (global-hl-line-mode)
   )
