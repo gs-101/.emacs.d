@@ -168,9 +168,6 @@
   )
 
 (use-package apheleia
-  :config
-  (setf (alist-get 'prettier apheleia-formatters)
-        '("prettier" "--stdin-filepath" filepath))
   :ensure t
   :hook
   (prog-mode . apheleia-mode)

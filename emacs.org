@@ -2523,13 +2523,20 @@ Run code formatter on buffer contents without moving point, using RCS patches an
 #+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
 
   (use-package apheleia
-    :config
-    (setf (alist-get 'prettier apheleia-formatters)
-          '("prettier" "--stdin-filepath" filepath))
     :ensure t
     :hook
     (prog-mode . apheleia-mode)
     )
+
+#+end_src
+
+*** Packages to install
+
+**** dnf
+
+#+begin_src bash
+
+  sudo dnf install black
 
 #+end_src
 
