@@ -225,4 +225,19 @@ targets."
                     ))
   )
 
+(use-package gnosis
+  :commands
+  (
+   gnosis-dashboard
+   gnosis-demo
+   )
+  :ensure t
+  )
+
+(use-package gnosis
+  :if (package-installed-p 'no-littering)
+  :custom
+  (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
+  )
+
 (provide 'gs-utils)

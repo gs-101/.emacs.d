@@ -3703,6 +3703,39 @@ Add blk-type Org links and transclusion.
 
 #+end_src
 
+** [[https://thanosapollo.org/projects/gnosis/][Gnosis]]
+
+#+begin_quote
+
+Spaced Repetition System for GNU Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package gnosis
+    :commands
+    (
+     gnosis-dashboard
+     gnosis-demo
+     )
+    :ensure t
+    )
+
+#+end_src
+
+*** no-littering
+
+#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+
+  (use-package gnosis
+    :if (package-installed-p 'no-littering)
+    :custom
+    (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
