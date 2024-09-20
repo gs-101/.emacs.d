@@ -2858,6 +2858,55 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 
 #+end_src
 
+** [[https://github.com/mohkale/projection][Projection]]
+
+#+begin_quote
+
+Projectile like project management library built on Emacs project.el.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package projection
+    :ensure t
+    :bind-keymap
+    (
+     :map prog-mode-map
+    ("C-x P" . projection-map)
+    )
+    :init
+    (global-projection-hook-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/mohkale/projection?tab=readme-ov-file#projection-multi-compile][multi]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package projection-multi
+    :if (package-installed-p 'compile-multi)
+    :ensure t
+    :bind
+    ([remap project-compile] . projection-multi-compile)
+    )
+
+#+end_src
+
+*** [[https://github.com/mohkale/projection?tab=readme-ov-file#projection-multi-embark][Embark]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package projection-multi-embark
+    :if (package-installed-p '(compile-multi embark))
+    :ensure t
+    :init
+    (projection-multi-embark-setup-command-map)
+    )
+
+#+end_src
+
 ** [[https://github.com/rust-lang/rust-mode][Rust Mode]]
 
 #+begin_quote

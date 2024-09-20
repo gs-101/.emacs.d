@@ -314,6 +314,31 @@
   (magit-mode . magit-todos-mode)
   )
 
+(use-package projection
+  :ensure t
+  :bind-keymap
+  (
+   :map prog-mode-map
+  ("C-x P" . projection-map)
+  )
+  :init
+  (global-projection-hook-mode)
+  )
+
+(use-package projection-multi
+  :if (package-installed-p 'compile-multi)
+  :ensure t
+  :bind
+  ([remap project-compile] . projection-multi-compile)
+  )
+
+(use-package projection-multi-embark
+  :if (package-installed-p '(compile-multi embark))
+  :ensure t
+  :init
+  (projection-multi-embark-setup-command-map)
+  )
+
 (use-package rust-mode
   :custom
   (rust-mode-treesitter-derive t)
