@@ -224,18 +224,15 @@
 
 (use-package gptel-openai
   :config
-  (gptel-make-openai "Groq"
-    :host "api.groq.com"
-    :endpoint "/openai/v1/chat/completions"
-    :stream nil
+  (gptel-make-openai "Github Models"
+    :host "models.inference.ai.azure.com"
+    :endpoint "/chat/completions"
+    :stream t
     :key #'gptel-api-key
     :models '(
-              "llama-3.1-70b-versatile"
-              "llama-3.1-8b-instant"
-              "llama3-70b-8192"
-              "llama3-8b-8192"
-              "mixtral-8x7b-32768"
-              "gemma-7b-it"
+              "gpt-4o"
+              "gpt-4o-mini"
+              "meta-llama-3.1-405b-instruct"
               ))
   )
 
