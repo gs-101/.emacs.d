@@ -202,7 +202,12 @@
   (gcmh-mode)
   )
 
+(use-package gnuplot
+  :ensure t
+  )
+
 (use-package no-littering
+  :vc (:url "https://github.com/gs-101/no-littering")
   :ensure t
   :init
   (no-littering-theme-backups)
