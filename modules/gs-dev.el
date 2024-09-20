@@ -250,6 +250,14 @@
    )
   )
 
+(use-package elysium
+  :ensure t
+  )
+
+(use-package smerge-mode
+  :if (package-installed-p 'elysium)
+  :hook
+  (prog-mode . smerge-mode)
   )
 
 (use-package grip-mode

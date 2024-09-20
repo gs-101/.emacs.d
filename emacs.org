@@ -2693,6 +2693,32 @@ Quick LLM lookups in Emacs.
      )
     )
 
+#+end_src
+
+*** [[https://github.com/lanceberge/elysium/][elysium]]
+
+#+begin_quote
+
+Automatically apply AI-generated code changes in Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package elysium
+    :ensure t
+    )
+
+#+end_src
+
+**** smerge-mode
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package smerge-mode
+    :if (package-installed-p 'elysium)
+    :hook
+    (prog-mode . smerge-mode)
     )
 
 #+end_src
