@@ -125,6 +125,7 @@
   (embark-quit-after-action '(
                               (kill-buffer . nil)
                               ))
+  :ensure t
   )
 
 (use-package embark
@@ -144,6 +145,7 @@
   )
 
 (use-package embark-consult
+  :ensure t
   :hook
   ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
   )

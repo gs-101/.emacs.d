@@ -3547,6 +3547,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     (embark-quit-after-action '(
                                 (kill-buffer . nil)
                                 ))
+    :ensure t
     )
 
 #+end_src
@@ -3578,6 +3579,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 #+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
 
   (use-package embark-consult
+    :ensure t
     :hook
     ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
     )
