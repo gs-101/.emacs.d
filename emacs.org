@@ -1,14 +1,17 @@
 * Early Init
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./early-init.el
+:END:
 
 ** [[https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217][Native and byte compilation]]
 
 If Emacs is built with native compilation support, activate it¹, if not, disable it².
 
-#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+#+begin_src emacs-lisp
 
   ;; 1
   (if (and (featurep 'native-compile)
@@ -25,7 +28,7 @@ If Emacs is built with native compilation support, activate it¹, if not, disabl
 
 Moves the Native Compilation Cache folder out of the Emacs base folder.
 
-#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (when (fboundp 'startup-redirect-eln-cache)
     (startup-redirect-eln-cache
@@ -38,7 +41,7 @@ Moves the Native Compilation Cache folder out of the Emacs base folder.
 
 Variables used to reference to specific directories, using ~convert-standard-filename~ for multiple OS support.
 
-#+begin_src emacs-lisp :tangle ./early-init.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (defcustom projects-code-directory (convert-standard-filename (expand-file-name "~/Projects/Code/"))
     "Path for project related to code, like applications."
@@ -52,14 +55,17 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 #+end_src
 
 * Load Modules
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./init.el
+:END:
 
 FEAT: Write ~gs-daemon/server~, see [[https://github.com/meow-edit/meow/issues/568][this]] issue.
 
-#+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-#+begin_src emacs-lisp :tangle ./init.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (add-to-list 'load-path (expand-file-name modules-directory))
 
@@ -80,6 +86,9 @@ FEAT: Write ~gs-daemon/server~, see [[https://github.com/meow-edit/meow/issues/5
 #+end_src
 
 * [[https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217][Package System Set-up]]
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-package.el
+:END:
 
 ** Package
 
@@ -89,11 +98,11 @@ Simple package system [...].
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (require 'package)
   (add-to-list 'package-archives '(
@@ -115,7 +124,7 @@ A configuration macro for simplifying your .emacs.
 
 If ~use-package~ is not installed, refresh the package list and install it¹.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+#+begin_src emacs-lisp
 
   ;; 1
   (unless (package-installed-p 'use-package)
@@ -132,16 +141,19 @@ If ~use-package~ is not installed, refresh the package list and install it¹.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-package.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-package)
 #+end_src
 
 * Settings
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-settings.el
+:END:
 
 Configuration of default Emacs packages.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -155,7 +167,7 @@ An overloading mechanism for Emacs Lisp functions.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package advice
     :custom
@@ -174,7 +186,7 @@ The Emacs Lisp byte compiler. This crunches Lisp source into a sort of p-code (~
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package bytecomp
     :custom
@@ -191,7 +203,7 @@ This file contains all the code needed to drive async compilations and any Lisp 
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package comp-run
     :custom
@@ -204,7 +216,7 @@ This file contains all the code needed to drive async compilations and any Lisp 
 
 Generic package used to configure functions and variables not included in any files.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package emacs
     :config
@@ -259,7 +271,7 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package files
     :config
@@ -298,7 +310,7 @@ Help commands for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package help
     :custom
@@ -309,7 +321,7 @@ Help commands for Emacs.
 
 *** [[https://github.com/kickingvegas/casual-ibuffer?tab=readme-ov-file#configuration][iBuffer]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package ibuffer
     :defer t
@@ -327,7 +339,7 @@ Support for visiting image files.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package image-mode
     :custom
@@ -347,7 +359,7 @@ Purpose of this package:
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package imenu
     :custom
@@ -365,7 +377,7 @@ Commands for making and changing indentation in text. These are described in the
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package indent
     :custom
@@ -383,7 +395,7 @@ Lisp editing for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package lisp
     :custom
@@ -396,7 +408,7 @@ Lisp editing for Emacs.
 
 *** Minibuffer
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package minibuffer
     :custom
@@ -426,7 +438,7 @@ This package provides various useful commands (including help system access) thr
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package mouse
     :custom
@@ -447,7 +459,7 @@ Commands for Multilingual Enviroment.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package mule-cmds
     :config
@@ -475,7 +487,7 @@ Utility functions for Multilingual Enviroment.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package mule-util
     :custom
@@ -492,7 +504,7 @@ Utility functions for Multilingual Enviroment.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package newcomment
     :custom
@@ -509,7 +521,7 @@ Highlight matching paren.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package paren
     :custom
@@ -531,7 +543,7 @@ Read passwords, possibly using a password cache.
 #+end_quote
 
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package password-cache
     :custom
@@ -548,7 +560,7 @@ Scroll a line smoothly.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package pixel-scroll
     :init
@@ -565,7 +577,7 @@ Save minibuffer history.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package savehist
     :custom
@@ -584,7 +596,7 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package simple
     :custom
@@ -617,7 +629,7 @@ Unique buffer names dependent on file name.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package uniquify
     :custom
@@ -634,7 +646,7 @@ A configuration macro for simplifying your .emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package use-package
     :custom
@@ -653,7 +665,7 @@ Log and display warnings.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package warnings
     :custom
@@ -672,7 +684,7 @@ Enforce a sneaky Garbage Collection strategy to minimize GC interference with us
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gcmh
     :ensure t
@@ -690,7 +702,7 @@ A major mode for Emacs for interacting with Gnuplot.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gnuplot
     :ensure t
@@ -706,7 +718,7 @@ The default paths used to store configuration files and persistent data are not 
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package no-littering
     :vc (:url "https://github.com/gs-101/no-littering")
@@ -719,7 +731,7 @@ The default paths used to store configuration files and persistent data are not 
 
 *** [[https://github.com/emacscollective/no-littering#lock-files][Lock Files]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package no-littering
     :config
@@ -738,7 +750,7 @@ Keep track of recently opened files.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package recentf
     :custom
@@ -755,7 +767,7 @@ Keep track of recently opened files.
 
 *** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#saved-customizations][Saved Customizations]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package no-littering
     :custom
@@ -766,14 +778,17 @@ Keep track of recently opened files.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-settings)
 #+end_src
 
 * File Management
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-fm.el
+:END:
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -786,7 +801,7 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-settings.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package autorevert
     :custom
@@ -827,7 +842,7 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dired
     :commands
@@ -859,7 +874,7 @@ Less commonly used parts of Dired.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dired-aux
     :custom
@@ -876,7 +891,7 @@ Asynchronous dired actions.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dired-async
     :init
@@ -893,7 +908,7 @@ Automatically preview file at point in Emacs Dired.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dired-preview
     :vc (:url "https://github.com/protesilaos/dired-preview")
@@ -921,7 +936,7 @@ Automatically preview file at point in Emacs Dired.
 
 **** [[https://protesilaos.com/codelog/2024-07-29-emacs-dired-preview-ready-player-combo/][Ready Player Compatibility]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dired-preview
     :if (package-installed-p 'ready-player)
@@ -946,7 +961,7 @@ Automatically preview file at point in Emacs Dired.
 
 ** Emacs
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dired
     :custom
@@ -957,7 +972,7 @@ Automatically preview file at point in Emacs Dired.
 
 ** Mouse
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package mouse
     :custom
@@ -974,7 +989,7 @@ Emacs support library for PDF files.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package pdf-tools
     :bind
@@ -1001,7 +1016,7 @@ A lightweight major mode to open media (audio/video) files in an Emacs buffer.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package ready-player
     :custom
@@ -1029,7 +1044,7 @@ Show font features in an Emacs buffer.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package show-font
     :ensure t
@@ -1039,12 +1054,15 @@ Show font features in an Emacs buffer.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-fm.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-fm)
 #+end_src
 
 * Key Binding
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-keys.el
+:END:
 
 Key bindings for default packages.
 
@@ -1064,7 +1082,7 @@ Key bindings for default packages.
 
 ** [[./notes/window_management.org][Window Management Bindings]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -1072,7 +1090,7 @@ Key bindings for default packages.
 
 *** Eglot
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package eglot
     :bind
@@ -1086,7 +1104,7 @@ Key bindings for default packages.
 
 *** Flymake
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package flymake
     :bind
@@ -1100,7 +1118,7 @@ Key bindings for default packages.
 
 ** Emacs
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package emacs
     :bind
@@ -1112,7 +1130,7 @@ Key bindings for default packages.
 
 ** Emoji
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package emoji
     :bind
@@ -1123,7 +1141,7 @@ Key bindings for default packages.
 
 ** Face Remap
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package face-remap
     :bind
@@ -1135,7 +1153,7 @@ Key bindings for default packages.
 
 ** Files
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package files
     :bind
@@ -1147,7 +1165,7 @@ Key bindings for default packages.
 
 ** Grep
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package grep
     :bind
@@ -1160,7 +1178,7 @@ Key bindings for default packages.
 
 ** Help
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package help
     :bind
@@ -1171,7 +1189,7 @@ Key bindings for default packages.
 
 ** iSearch
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package isearch
     :bind
@@ -1184,7 +1202,7 @@ Key bindings for default packages.
 
 ** Lisp
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package lisp
     :bind
@@ -1198,7 +1216,7 @@ Key bindings for default packages.
 
 ** Org Mode
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :bind
@@ -1215,7 +1233,7 @@ Key bindings for default packages.
 
 *** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L52][Agenda]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-agenda
     :bind
@@ -1233,7 +1251,7 @@ Key bindings for default packages.
 
 *** Capture
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-capture
     :bind
@@ -1247,7 +1265,7 @@ Key bindings for default packages.
 
 *** Export
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package ox
     :bind
@@ -1261,7 +1279,7 @@ Key bindings for default packages.
 
 *** Keys
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-keys
     :custom
@@ -1273,7 +1291,7 @@ Key bindings for default packages.
 
 *** Links
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package ol
     :bind
@@ -1288,7 +1306,7 @@ Key bindings for default packages.
 
 *** List
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-list
     :bind
@@ -1302,7 +1320,7 @@ Key bindings for default packages.
 
 *** Refile
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-refile
     :bind
@@ -1316,7 +1334,7 @@ Key bindings for default packages.
 
 *** Table
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-table
     :bind
@@ -1330,7 +1348,7 @@ Key bindings for default packages.
 
 ** Sort
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package sort
     :bind
@@ -1355,7 +1373,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-agenda
     :bind
@@ -1370,7 +1388,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 *** [[https://github.com/kickingvegas/casual-bookmarks][Bookmarks]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-bookmarks
     :bind
@@ -1391,7 +1409,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 *** [[https://github.com/kickingvegas/casual-calc][Calc]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-calc
     :bind
@@ -1408,7 +1426,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 *** [[https://github.com/kickingvegas/casual-dired][Dired]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-dired
     :bind
@@ -1423,7 +1441,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 *** [[https://github.com/kickingvegas/casual-ibuffer][iBuffer]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-ibuffer
     :bind
@@ -1447,7 +1465,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 *** [[https://github.com/kickingvegas/casual-info][Info]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-info
     :bind
@@ -1469,7 +1487,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 *** [[https://github.com/kickingvegas/casual-isearch][iSearch]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-isearch
     :bind
@@ -1484,7 +1502,7 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 *** [[https://github.com/kickingvegas/casual-re-builder][RE-Builder]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package casual-re-builder
     :bind
@@ -1501,12 +1519,15 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-keys)
 #+end_src
 
 * Org Mode
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-org.el
+:END:
 
 #+begin_quote
 
@@ -1514,11 +1535,11 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :config
@@ -1556,7 +1577,7 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 
 This just makes the scratch buffer use Org Mode instead.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package startup
     :custom
@@ -1568,7 +1589,7 @@ This just makes the scratch buffer use Org Mode instead.
 
 ** Babel
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :config
@@ -1596,7 +1617,7 @@ Dynamic task and appointment lists for Org.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-agenda
     :custom
@@ -1641,7 +1662,7 @@ The habit tracking code for Org.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-habit
     :custom
@@ -1658,7 +1679,7 @@ The time clocking code for Org mode.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-clock
     :custom
@@ -1676,7 +1697,7 @@ This file contains code needed for compatibility with older versions of GNU Emac
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-compat
     :custom
@@ -1693,7 +1714,7 @@ Visibility cycling of Org entries.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-cycle
     :custom
@@ -1710,7 +1731,7 @@ LaTeX Backend for Org Export Engine.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package ox-latex
     :custom
@@ -1742,7 +1763,7 @@ Plain lists for Org.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-list
     :custom
@@ -1753,7 +1774,7 @@ Plain lists for Org.
 
 ** Modules
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :config
@@ -1775,7 +1796,7 @@ Org refile allows you to refile subtrees to various locations.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-refile
     :config
@@ -1794,7 +1815,7 @@ Org refile allows you to refile subtrees to various locations.
 
 ** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L442][Tags]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :custom
@@ -1839,7 +1860,7 @@ Org refile allows you to refile subtrees to various locations.
 
 ** TODOs
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :custom
@@ -1882,7 +1903,7 @@ System notifications of org agenda items.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-alert
     :ensure t
@@ -1898,7 +1919,7 @@ Automatically toggle Org mode LaTeX fragment previews as the cursor enters and e
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-fragtog
     :ensure t
@@ -1916,7 +1937,7 @@ Toggle visibility of hidden Org mode element parts upon entering and leaving an 
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-appear
     :custom
@@ -1938,7 +1959,7 @@ Org-transclusion lets you insert a copy of text content via a file link or ID li
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-transclusion
     :ensure t
@@ -1950,12 +1971,15 @@ Org-transclusion lets you insert a copy of text content via a file link or ID li
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-org)
 #+end_src
 
 * [[https://github.com/org-roam/org-roam][Org Roam]]
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-org-roam.el
+:END:
 
 #+begin_quote
 
@@ -1963,13 +1987,13 @@ Rudimentary Roam replica with Org-mode.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
 REFACTOR: Separate ~use-package org-roam~ into its different files.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-roam
     :bind
@@ -1987,7 +2011,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 ** Capture templates
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-roam
     :custom
@@ -2019,7 +2043,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 ** Dailies
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-roam-dailies
     :bind-keymap
@@ -2040,7 +2064,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 *** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L243][Capture templates]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-roam-dailies
     :custom
@@ -2077,7 +2101,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 ** [[https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-workflow.el][Roam Agenda]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-agenda
     :bind
@@ -2152,7 +2176,7 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-roam-ui
     :bind
@@ -2170,14 +2194,17 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-org-roam.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-org-roam)
 #+end_src
 
 * Command Line
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-cmd.el
+:END:
 
-#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -2189,7 +2216,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package vterm
     :custom
@@ -2202,7 +2229,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
 
 *** [[https://mocompute.codeberg.page/item/2024/2024-09-03-emacs-project-vterm.html][Project Shell]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package vterm
     :preface
@@ -2236,7 +2263,7 @@ Toggles between the vterm buffer and whatever buffer you are editing.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package vterm-toggle
     :bind
@@ -2250,14 +2277,17 @@ Toggles between the vterm buffer and whatever buffer you are editing.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-cmd.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-cmd)
 #+end_src
 
 * Development
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-dev.el
+:END:
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -2269,7 +2299,7 @@ tree-sitter utilities.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package treesit
     :mode
@@ -2372,7 +2402,7 @@ Run compiler as inferior of Emacs, parse error messages.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package compile
     :bind
@@ -2426,7 +2456,7 @@ Multi target interface to compile.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package compile-multi
     :ensure t
@@ -2436,7 +2466,7 @@ Multi target interface to compile.
 
 **** [[https://github.com/mohkale/compile-multi?tab=readme-ov-file#consult-multi-compile][Consult]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult-compile-multi
     :if (package-installed-p 'consult)
@@ -2449,7 +2479,7 @@ Multi target interface to compile.
 
 **** [[https://github.com/mohkale/compile-multi?tab=readme-ov-file#compile-multi-embark][Embark]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package compile-multi-embark
     :ensure t
@@ -2467,7 +2497,7 @@ Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package eglot
     :custom
@@ -2484,7 +2514,7 @@ A universal on-the-fly syntax checker.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package flymake
     :hook
@@ -2501,7 +2531,7 @@ Collection of checkers for flymake.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package flymake-collection
     :ensure t
@@ -2519,7 +2549,7 @@ Python's flying circus support for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package python
     :custom
@@ -2536,7 +2566,7 @@ Run code formatter on buffer contents without moving point, using RCS patches an
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package apheleia
     :ensure t
@@ -2564,7 +2594,7 @@ Show the cognitive complexity of the code.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package cognitive-complexity
     :vc (:url "https://github.com/emacs-vs/cognitive-complexity")
@@ -2583,7 +2613,7 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package combobulate
     :vc (:url "https://github.com/mickeynp/combobulate" :branch "development")
@@ -2616,7 +2646,7 @@ Emacs major modes for Git configuration files.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package git-modes
     :ensure t
@@ -2637,7 +2667,7 @@ A simple LLM client for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gptel
     :commands
@@ -2661,7 +2691,7 @@ Try, test, and deploy from a wide range of model types, sizes, and specializatio
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gptel-openai
     :config
@@ -2687,7 +2717,7 @@ Quick LLM lookups in Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gptel-quick
     :vc (:url "https://github.com/karthink/gptel-quick")
@@ -2698,7 +2728,7 @@ Quick LLM lookups in Emacs.
 
 **** [[https://github.com/karthink/gptel-quick?tab=readme-ov-file#setup][Embark]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gptel-quick
     :if (package-installed-p 'embark)
@@ -2719,7 +2749,7 @@ Automatically apply AI-generated code changes in Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package elysium
     :ensure t
@@ -2729,7 +2759,7 @@ Automatically apply AI-generated code changes in Emacs.
 
 **** smerge-mode
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package smerge-mode
     :if (package-installed-p 'elysium)
@@ -2747,7 +2777,7 @@ Instant Github-flavored Markdown/Org preview using grip.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package grip-mode
     :commands
@@ -2779,7 +2809,7 @@ An Emacs LeetCode client.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package leetcode
     :commands
@@ -2797,7 +2827,7 @@ An Emacs LeetCode client.
 
 *** Save solutions to Project
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package leetcode
     :custom
@@ -2815,7 +2845,7 @@ It's Magit! A Git Porcelain inside Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package magit
     :commands
@@ -2847,7 +2877,7 @@ To make use of this package there are two options:
 1. A Gitlab/Github [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated;
 2. Github users can just install [[https://github.com/cli/cli][Github CLI]] and login using ~gh auth login~.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package forge
     :ensure t
@@ -2863,7 +2893,7 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package magit-todos
     :if (package-installed-p 'hl-todo)
@@ -2882,7 +2912,7 @@ Projectile like project management library built on Emacs project.el.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package projection
     :ensure t
@@ -2899,7 +2929,7 @@ Projectile like project management library built on Emacs project.el.
 
 *** [[https://github.com/mohkale/projection?tab=readme-ov-file#projection-multi-compile][multi]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package projection-multi
     :if (package-installed-p 'compile-multi)
@@ -2912,7 +2942,7 @@ Projectile like project management library built on Emacs project.el.
 
 *** [[https://github.com/mohkale/projection?tab=readme-ov-file#projection-multi-embark][Embark]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package projection-multi-embark
     :if (package-installed-p '(compile-multi embark))
@@ -2931,7 +2961,7 @@ Emacs configuration for Rust.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package rust-mode
     :custom
@@ -2949,7 +2979,7 @@ Rust development environment for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package rustic
     :custom
@@ -2969,7 +2999,7 @@ Emacs plugin for automatic time tracking and metrics generated from your program
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package wakatime-mode
     :ensure t
@@ -2982,14 +3012,17 @@ Emacs plugin for automatic time tracking and metrics generated from your program
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-dev)
 #+end_src
 
 * Completion
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-completion.el
+:END:
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -3001,7 +3034,7 @@ Emacs completion style that matches multiple regexps in any order.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package orderless
     :config
@@ -3057,7 +3090,7 @@ Completion At Point Extensions.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package cape
     :config
@@ -3076,7 +3109,7 @@ Auto complete org-mode headers seamlessly.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package corg
     :vc (:url "https://github.com/isamert/corg.el")
@@ -3095,7 +3128,7 @@ Simple templates for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package tempel
     :config
@@ -3117,7 +3150,7 @@ Bridge for tempel templates with eglot.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package eglot-tempel
     :ensure t
@@ -3135,7 +3168,7 @@ Collection tempel templates.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package tempel-collection
     :ensure t
@@ -3151,7 +3184,7 @@ COmpletion in Region FUnction.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package corfu
     :bind
@@ -3179,7 +3212,7 @@ COmpletion in Region FUnction.
 
 *** Eldoc
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package eldoc
     :custom
@@ -3192,7 +3225,7 @@ COmpletion in Region FUnction.
 
 **** [[https://github.com/minad/corfu/wiki#filter-list-of-all-possible-completions-with-completion-style-like-orderless][Orderless]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package orderless
     :custom
@@ -3204,7 +3237,7 @@ COmpletion in Region FUnction.
 
 **** [[https://github.com/minad/corfu/wiki#continuously-update-the-candidates][Cape]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package cape
     :config
@@ -3217,7 +3250,7 @@ COmpletion in Region FUnction.
 
 With the combined features of cape and tempel, create a super capf for eglot completion.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package corfu
     :if (package-installed-p '(cape tempel))
@@ -3244,7 +3277,7 @@ VERTical Interactive COmpletion.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package vertico
     :custom
@@ -3274,7 +3307,7 @@ Commands for Ido-like directory navigation.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package vertico-directory
     :after vertico
@@ -3299,7 +3332,7 @@ Marginalia in the minibuffer.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package marginalia
     :ensure t
@@ -3311,16 +3344,19 @@ Marginalia in the minibuffer.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-completion.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-completion)
 #+end_src
 
 * Utilities
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-utils.el
+:END:
 
 Generally useful packages for productivity and other aspects.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -3332,7 +3368,7 @@ Periodic table of the elements.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package chemtable
     :ensure t
@@ -3348,7 +3384,7 @@ A Growl-like alerts notifier for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package alert
     :custom
@@ -3366,7 +3402,7 @@ Implementation of Pomodoro and Third Time techniques for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package pomm
     :commands
@@ -3393,7 +3429,7 @@ Consulting completing-read.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult
     :bind
@@ -3446,7 +3482,7 @@ Insert paths into the minibuffer prompt in Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult-dir
     :bind
@@ -3465,7 +3501,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult-gh
     :vc (:url "https://github.com/armindarvish/consult-gh")
@@ -3481,7 +3517,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 
 **** [[https://github.com/armindarvish/consult-gh?tab=readme-ov-file#embark-integration][Embark]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult-gh-embark
     :if (package-installed-p 'embark)
@@ -3492,7 +3528,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 
 **** [[https://github.com/armindarvish/consult-gh?tab=readme-ov-file#magitforge-integration][Forge]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult-gh-forge
     :if (package-installed-p 'forge)
@@ -3507,7 +3543,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 
 **** [[https://github.com/armindarvish/consult-gh?tab=readme-ov-file#transient-menu][Transient]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult-gh-transient
     :after consult-gh
@@ -3523,7 +3559,7 @@ Use consult to search notes.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package consult-notes
     :config
@@ -3542,7 +3578,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package embark
     :bind
@@ -3570,7 +3606,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 *** [[https://github.com/minad/consult/wiki#manual-preview-for-non-consult-commands-using-embark][Manual preview for non-Consult commands]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package embark
     :bind
@@ -3592,7 +3628,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 *** [[https://github.com/oantolin/embark?tab=readme-ov-file#consult][Consult]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package embark-consult
     :ensure t
@@ -3604,7 +3640,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 *** [[https://github.com/oantolin/embark/wiki/Additional-Configuration#use-which-key-like-a-key-menu-prompt][Which Key]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package embark
     :config
@@ -3657,7 +3693,7 @@ Emacs package to rapidly create and follow links across text files.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package blk
     :vc (:url "https://github.com/mahmoodsh36/blk")
@@ -3683,7 +3719,7 @@ Add blk-type Org links and transclusion.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package blk-org
     )
@@ -3692,7 +3728,7 @@ Add blk-type Org links and transclusion.
 
 **** Transclusion
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package blk-org
     :if (package-installed-p 'org-transclusion)
@@ -3705,7 +3741,7 @@ Add blk-type Org links and transclusion.
 
 *** Org Roam
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package blk
     :if (package-installed-p 'org-roam)
@@ -3727,7 +3763,7 @@ Spaced Repetition System for GNU Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gnosis
     :commands
@@ -3742,7 +3778,7 @@ Spaced Repetition System for GNU Emacs.
 
 *** no-littering
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package gnosis
     :if (package-installed-p 'no-littering)
@@ -3754,12 +3790,15 @@ Spaced Repetition System for GNU Emacs.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-utils.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-utils)
 #+end_src
 
 * [[https://github.com/emacs-evil/evil][Evil Mode]]
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-keys-evil.el
+:END:
 
 #+begin_quote
 
@@ -3767,7 +3806,7 @@ The extensible vi layer for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -3775,7 +3814,7 @@ The extensible vi layer for Emacs.
 
 Bind the universal argument to another key to avoid conflicts.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package simple
     :bind
@@ -3788,7 +3827,7 @@ Bind the universal argument to another key to avoid conflicts.
 
 This is needed for ~evil-collection~.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package emacs
     :custom
@@ -3805,7 +3844,7 @@ The extensible vi layer for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil
     :ensure t
@@ -3821,7 +3860,7 @@ Core functionality.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :config
@@ -3842,7 +3881,7 @@ Settings and variables.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-vars
     :custom
@@ -3872,7 +3911,7 @@ Evil commands and operators.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-commands
     :bind
@@ -3897,7 +3936,7 @@ Search and substitute.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-search
     :custom
@@ -3910,7 +3949,7 @@ Search and substitute.
 
 The different states found in Evil Mode.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-states
     :bind
@@ -3932,7 +3971,7 @@ The different states found in Evil Mode.
 
 Toggles org-appear based on the current evil state.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :if (package-installed-p 'org-appear)
@@ -3954,7 +3993,7 @@ Toggles org-appear based on the current evil state.
 
 ** Vertico
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :if (package-installed-p 'vertico)
@@ -3970,7 +4009,7 @@ Toggles org-appear based on the current evil state.
 
 ** [[https://reddit.com/r/emacs/comments/12zyrnk/evilsetleader_vs_generalel_for_spc_based/][Leader Keys]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :config
@@ -3981,7 +4020,7 @@ Toggles org-appear based on the current evil state.
 
 *** Buffer Management
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :config
@@ -3993,7 +4032,7 @@ Toggles org-appear based on the current evil state.
 
 *** Character Insertion
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :config
@@ -4005,7 +4044,7 @@ Toggles org-appear based on the current evil state.
 
 *** File Shortcuts
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :config
@@ -4016,7 +4055,7 @@ Toggles org-appear based on the current evil state.
 
 *** Org Mode
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :config
@@ -4033,7 +4072,7 @@ Toggles org-appear based on the current evil state.
 
 *** Window Movement
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :config
@@ -4048,7 +4087,7 @@ Toggles org-appear based on the current evil state.
 
 *** Vterm
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :if (package-installed-p 'vterm-toggle)
@@ -4060,7 +4099,7 @@ Toggles org-appear based on the current evil state.
 
 *** Magit
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :if (package-installed-p 'magit)
@@ -4073,7 +4112,7 @@ Toggles org-appear based on the current evil state.
 
 *** Org Roam
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :if (package-installed-p 'org-roam)
@@ -4088,7 +4127,7 @@ Toggles org-appear based on the current evil state.
 
 **** User Interface
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :if (package-installed-p 'org-roam-ui)
@@ -4100,7 +4139,7 @@ Toggles org-appear based on the current evil state.
 
 *** Nerd Icons
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-core
     :if (package-installed-p 'nerd-icons)
@@ -4118,7 +4157,7 @@ A set of keybindings for evil-mode.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-collection
     :after evil
@@ -4139,7 +4178,7 @@ Supplemental evil-mode keybindings to emacs org-mode
 
 Why is this one not included in the collection?
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-org
     :hook
@@ -4156,7 +4195,7 @@ Why is this one not included in the collection?
 
 *** Agenda
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package evil-org-agenda
     :after evil-org
@@ -4170,7 +4209,7 @@ Why is this one not included in the collection?
 
 ** Which Key
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package which-key
     :custom
@@ -4182,12 +4221,15 @@ Why is this one not included in the collection?
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-keys-evil)
 #+end_src
 
 * [[https://github.com/meow-edit/meow][Meow Mode]]
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-keys-meow.el
+:END:
 
 #+begin_quote
 
@@ -4195,13 +4237,13 @@ Yet another modal editing on Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
 ** Meow
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow
     :ensure t
@@ -4217,7 +4259,7 @@ Modes definition in Meow.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-core
     :init
@@ -4234,7 +4276,7 @@ Internal variables and customizable variables.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-var
     :config
@@ -4253,7 +4295,7 @@ Cheatsheet for Meow.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-cheatsheet
     :custom
@@ -4270,7 +4312,7 @@ Cheatsheet layouts for Meow.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-cheatsheet-layout
     :custom
@@ -4287,7 +4329,7 @@ Meow helpers for customization.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-helpers
     :config
@@ -4320,7 +4362,7 @@ Meow helpers for customization.
 
 ** Normal Mode
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-helpers
     :config
@@ -4400,7 +4442,7 @@ Calculate bounds of thing in Meow.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-thing
     :config
@@ -4417,7 +4459,7 @@ Tree-sitter powered motions for Meow.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package meow-tree-sitter
     :ensure t
@@ -4431,14 +4473,17 @@ Tree-sitter powered motions for Meow.
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-keys-meow.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-keys-meow)
 #+end_src
 
 * User Interface
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-ui.el
+:END:
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
@@ -4450,7 +4495,7 @@ You can disable it after getting used to Emacs.
 
 ** Emacs
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package emacs
     :custom
@@ -4476,7 +4521,7 @@ Interface for display-line-numbers.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package display-line-numbers
     :hook
@@ -4493,7 +4538,7 @@ Lisp faces.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package faces
     :preface
@@ -4512,7 +4557,7 @@ Lisp faces.
 
 *** Daemon Support
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package faces
     :if (daemonp)
@@ -4533,7 +4578,7 @@ Multi-frame management independent of window systems.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package frame
     :custom
@@ -4554,7 +4599,7 @@ Highlight the current line.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package hl-line
     :init
@@ -4565,7 +4610,7 @@ Highlight the current line.
 
 *** Disable in Dashboard
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package hl-line
     :if (package-installed-p 'dashboard)
@@ -4577,7 +4622,7 @@ Highlight the current line.
 
 *** Disable in PDF
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package hl-line
     :if (package-installed-p 'pdf-tools)
@@ -4589,7 +4634,7 @@ Highlight the current line.
 
 *** Disable in vterm
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package hl-line
     :if (package-installed-p 'vterm)
@@ -4601,7 +4646,7 @@ Highlight the current line.
 
 ** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L73][Mouse]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package mouse
     :if (display-graphic-p)
@@ -4612,7 +4657,7 @@ Highlight the current line.
 
 *** Daemon Support
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package mouse
     :if (daemonp)
@@ -4628,7 +4673,7 @@ Highlight the current line.
 
 *** [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#better-font-faces][Faces]]
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-faces
     :config
@@ -4652,7 +4697,7 @@ Highlight the current line.
 
 *** Fontify
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :custom
@@ -4668,7 +4713,7 @@ Highlight the current line.
 
 *** Prettify
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org
     :custom
@@ -4686,7 +4731,7 @@ Modern Org Style.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-modern
     :custom
@@ -4702,7 +4747,7 @@ Modern Org Style.
 
 **** Prettify Agenda
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package org-agenda
     :custom
@@ -4725,7 +4770,7 @@ Paragraph and sentence parsing.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package paragraphs
     :custom
@@ -4743,7 +4788,7 @@ Window system-independent scroll bar support.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package scroll-bar
     :custom
@@ -4760,7 +4805,7 @@ This file parses the command line and gets Emacs running. Options on the command
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package startup
     :config
@@ -4786,7 +4831,7 @@ Window tree functions.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package window
     :custom
@@ -4812,7 +4857,7 @@ Display available keybindings in popup.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package which-key
     :custom
@@ -4837,7 +4882,7 @@ Soothing pastel theme for Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package catppuccin-theme
     :config
@@ -4855,7 +4900,7 @@ An extensible emacs dashboard.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dashboard
     :custom
@@ -4891,7 +4936,7 @@ Display the top stories from Hacker News on the Dashboard.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dashboard-hackernews
     :init
@@ -4909,7 +4954,7 @@ Extra Emacs font lock rules for a more colourful dired.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package diredfl
     :ensure t
@@ -4927,7 +4972,7 @@ A startup screen extracted from Spacemacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dashboard-widgets
     :config
@@ -4957,7 +5002,7 @@ A startup screen extracted from Spacemacs.
 
 *** Navigator Buttons
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package dashboard-widgets
     :custom
@@ -4995,7 +5040,7 @@ A startup screen extracted from Spacemacs.
 
 *** Daemon Support
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package startup
     :custom
@@ -5013,7 +5058,7 @@ A fancy and fast mode-line inspired by minimalism design.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package doom-modeline
     :custom
@@ -5030,7 +5075,7 @@ A fancy and fast mode-line inspired by minimalism design.
 
 *** Daemon Support
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package doom-modeline
     :if (daemonp)
@@ -5050,7 +5095,7 @@ Automatic resizing of Emacs windows to the golden ratio.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package golden-ratio
     :ensure t
@@ -5068,7 +5113,7 @@ A better Emacs help buffer.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package helpful
     :bind
@@ -5097,7 +5142,7 @@ Highlight TODO keywords.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package hl-todo
     :custom
@@ -5127,7 +5172,7 @@ Highlight TODO keywords.
 
 REFACTOR: use a ~catppuccin~ function to automatically set the colors based on name (mauve, flamingo...).
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package hl-todo
     :if (package-installed-p 'catppuccin-theme)
@@ -5157,7 +5202,7 @@ Display typographical ligatures in Emacs.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package ligature
     :config
@@ -5234,7 +5279,7 @@ A Library for Nerd Font icons.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package nerd-icons
     :bind
@@ -5253,7 +5298,7 @@ Use nerd-icons for completion.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package nerd-icons-completion
     :if (package-installed-p 'marginalia)
@@ -5274,7 +5319,7 @@ Icons for Corfu via nerd-icons.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package nerd-icons-corfu
     :if (package-installed-p 'marginalia)
@@ -5300,7 +5345,7 @@ Use nerd-icons for Dired.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package nerd-icons-dired
     :ensure t
@@ -5318,7 +5363,7 @@ Display nerd icons in ibuffer.
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package nerd-icons-ibuffer
     :ensure t
@@ -5338,7 +5383,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
 
 FEAT: try to add vterm support to this package.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package popper
     :bind
@@ -5376,7 +5421,7 @@ FEAT: try to add vterm support to this package.
 
 Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package prism
     :ensure t
@@ -5401,7 +5446,7 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
 *** Catppuccin Colors
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package prism
     :if (package-installed-p 'catppuccin-theme)
@@ -5431,7 +5476,7 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
 REFACTOR: require both catppuccin and daemonp to trigger this use-package declaration. `:if` seems to support only one function.
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package prism
     :if (daemonp)
@@ -5452,7 +5497,7 @@ Pops the transient menu to a posframe (floating window).
 
 #+end_quote
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (use-package transient-posframe
     :vc (:url "https://github.com/gs-101/transient-posframe")
@@ -5465,7 +5510,7 @@ Pops the transient menu to a posframe (floating window).
 
 ** End
 
-#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+#+begin_src emacs-lisp
 
   (provide 'gs-ui)
 #+end_src

@@ -1,5 +1,32 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package autorevert
+  :custom
+  (auto-revert-stop-on-user-input nil)
+  (auto-revert-verbose nil)
+  (global-auto-revert-non-file-buffers t)
+  :init
+  (global-auto-revert-mode t)
+  :preface
+  (add-to-list 'window-state-change-functions
+               (defun xenodium/window-state-state-change (state)
+                 "Enable `global-auto-revert-mode' per active window."
+                 (let* ((old-selected-window (old-selected-window))
+                        (old-buffer (when old-selected-window
+                                      (window-buffer old-selected-window)))
+                        (selected-window (selected-window))
+                        (new-buffer (when selected-window
+                                      (window-buffer selected-window))))
+                   (when old-buffer
+                     (with-current-buffer old-buffer
+                       (when buffer-file-name
+                         (auto-revert-mode -1))))
+                   (when new-buffer
+                     (with-current-buffer new-buffer
+                       (when buffer-file-name
+                         (auto-revert-mode +1)))))))
+  )
+
 (use-package dired
   :commands
   (

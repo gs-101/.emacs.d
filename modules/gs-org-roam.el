@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (use-package org-roam
   :bind
   ("C-c r f" . org-roam-node-find)

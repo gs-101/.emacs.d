@@ -240,5 +240,3 @@
   )
 
 (provide 'gs-org)
-
-;;; -*- lexical-binding: t -*-
