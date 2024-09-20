@@ -217,6 +217,12 @@
     (switch-to-buffer (get-buffer-create "*scratch*")))
   )
 
+(use-package dashboard-hackernews
+  :init
+  (add-to-list 'dashboard-items '(hackernews . 10))
+  :ensure t
+  )
+
 (use-package diredfl
   :ensure t
   :init

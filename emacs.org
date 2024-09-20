@@ -4867,6 +4867,24 @@ An extensible emacs dashboard.
 
 #+end_src
 
+*** [[https://github.com/hyakt/emacs-dashboard-hackernews][Hacker News]]
+
+#+begin_quote
+
+Display the top stories from Hacker News on the Dashboard.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-ui.el :mkdirp yes
+
+  (use-package dashboard-hackernews
+    :init
+    (add-to-list 'dashboard-items '(hackernews . 10))
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/purcell/diredfl][diredfl]]
 
 #+begin_quote
