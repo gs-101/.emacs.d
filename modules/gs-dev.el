@@ -201,7 +201,17 @@
    )
   )
 
+(use-package git-modes
+  :ensure t
+  :mode
+  ("\\.gitattributes\\'" . gitattributes-mode)
+  ("\\.gitconfig\\'" . gitconfig-mode)
+  ("\\.gitmodules\\'" . gitconfig-mode)
+  ("\\.gitignore\\'" . gitignore-mode)
+  )
+
 (use-package gptel
+  :vc (:url "https://github.com/gs-101/gptel")
   :commands
   (
    gptel

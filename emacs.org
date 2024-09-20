@@ -2592,6 +2592,27 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
 
 #+end_src
 
+** [[https://github.com/magit/git-modes][git-modes]]
+
+#+begin_quote
+
+Emacs major modes for Git configuration files.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package git-modes
+    :ensure t
+    :mode
+    ("\\.gitattributes\\'" . gitattributes-mode)
+    ("\\.gitconfig\\'" . gitconfig-mode)
+    ("\\.gitmodules\\'" . gitconfig-mode)
+    ("\\.gitignore\\'" . gitignore-mode)
+    )
+
+#+end_src
+
 ** [[https://github.com/karthink/gptel][gptel]]
 
 #+begin_quote
