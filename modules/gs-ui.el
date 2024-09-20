@@ -296,6 +296,7 @@
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-ellipsis "…")
   (doom-modeline-enable-word-count t)
+  (doom-modeline-modal-modern-icon nil)
   :ensure t
   :init
   (doom-modeline-mode)
