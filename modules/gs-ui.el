@@ -336,10 +336,14 @@
 (use-package hl-todo
   :custom
   (hl-todo-keyword-faces '(
+                           ("NOTE" . "yellow")
                            ("FIX" . "red")
+                           ("FIXME" . "red")
                            ("FEAT" . "yellow")
+                           ("HACK" . "green")
                            ("STYLE" . "orange")
                            ("REFACTOR" . "white")
+                           ("REVIEW" . "white")
                            ("CHORE" . "grey")
                            ("MERGED" . "green")
                            ("CLOSED" . "red")
@@ -355,10 +359,14 @@
   :if (package-installed-p 'catppuccin-theme)
   :custom
   (hl-todo-keyword-faces '(
+                           ("NOTE" . "#f5e0dc")
                            ("FIX" . "#f38ba8")
+                           ("FIXME" . "#f38ba8")
                            ("FEAT" . "#f9e2af")
+                           ("HACK" . "#a6e3a1")
                            ("STYLE" . "#fab387")
                            ("REFACTOR" . "#89b4fa")
+                           ("REVIEW" . "#74c7ec")
                            ("CHORE" . "#a6adc8")
                            ("MERGED" . "#a6e3a1")
                            ("CLOSED" . "#f38ba8")
