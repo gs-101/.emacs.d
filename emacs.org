@@ -2402,6 +2402,47 @@ Run compiler as inferior of Emacs, parse error messages.
 
 *** [[https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-compile.el][Credits]]
 
+*** [[https://github.com/mohkale/compile-multi][multi]]
+
+#+begin_quote
+
+Multi target interface to compile.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package compile-multi
+    :ensure t
+    )
+
+#+end_src
+
+**** [[https://github.com/mohkale/compile-multi?tab=readme-ov-file#consult-multi-compile][Consult]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package consult-compile-multi
+    :if (package-installed-p 'consult)
+    :ensure t
+    :init
+    (consult-compile-multi-mode)
+    )
+
+#+end_src
+
+**** [[https://github.com/mohkale/compile-multi?tab=readme-ov-file#compile-multi-embark][Embark]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package compile-multi-embark
+    :ensure t
+    :init
+    (compile-multi-embark-mode)
+    )
+
+#+end_src
+
 ** Eglot
 
 #+begin_quote

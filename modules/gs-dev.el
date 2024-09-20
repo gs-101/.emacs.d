@@ -129,6 +129,23 @@
           (read-only-mode +1)))))
   )
 
+(use-package compile-multi
+  :ensure t
+  )
+
+(use-package consult-compile-multi
+  :if (package-installed-p 'consult)
+  :ensure t
+  :init
+  (consult-compile-multi-mode)
+  )
+
+(use-package compile-multi-embark
+  :ensure t
+  :init
+  (compile-multi-embark-mode)
+  )
+
 (use-package eglot
   :custom
   (eglot-autoshutdown t)
