@@ -8,6 +8,16 @@
   :custom
   (org-adapt-indentation t)
   (org-auto-align-tags nil)
+  (org-format-latex-options '(
+                              :foreground default
+                              :background nil
+                              :scale 1.0
+                              :html-foreground "Black"
+                              :html-background "Transparent"
+                              :html-scale 1.0
+                              :matchers
+                              ("begin" "$1" "$" "$$" "\\(" "\\[")
+                              ))
   (org-log-done 'time)
   (org-log-into-drawer t)
   (org-reverse-note-order t)
