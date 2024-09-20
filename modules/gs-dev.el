@@ -296,6 +296,7 @@
    magit-status
    )
   :custom
+  (magit-diff-refine-hunk t)
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :ensure t
   :hook
