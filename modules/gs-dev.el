@@ -211,7 +211,6 @@
   )
 
 (use-package gptel
-  :vc (:url "https://github.com/gs-101/gptel")
   :commands
   (
    gptel
@@ -219,6 +218,7 @@
    )
   :custom
   (gptel-default-mode 'org-mode)
+  (gptel-org-branching-context t)
   :ensure t
   )
 

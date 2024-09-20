@@ -2631,6 +2631,7 @@ A simple LLM client for Emacs.
      )
     :custom
     (gptel-default-mode 'org-mode)
+    (gptel-org-branching-context t)
     :ensure t
     )
 
