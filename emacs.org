@@ -4152,6 +4152,18 @@ Why is this one not included in the collection?
 
 *** [[https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-keys-evil.el][Credits]]
 
+** Which Key
+
+#+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
+
+  (use-package which-key
+    :custom
+    (which-key-allow-evil-operators t)
+    )
+
+#+end_src
+
+
 ** End
 
 #+begin_src emacs-lisp :tangle ./modules/gs-keys-evil.el :mkdirp yes
