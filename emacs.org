@@ -210,6 +210,7 @@ Generic package used to configure functions and variables not included in any fi
     :config
     (setq define-coding-system-alias '(UTF-8 'utf-8))
     :custom
+    (auto-save-include-big-deletions)
     (auto-window-vscroll nil) ;; 3
     (bidi-inhibit-bpa t) ;; 3
     (completion-ignore-case t) ;; 4
