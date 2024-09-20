@@ -234,6 +234,22 @@
               "gpt-4o-mini"
               "meta-llama-3.1-405b-instruct"
               ))
+)
+
+(use-package gptel-quick
+  :vc (:url "https://github.com/karthink/gptel-quick")
+  :ensure t
+  )
+
+(use-package gptel-quick
+  :if (package-installed-p 'embark)
+  :bind
+  (
+   :map embark-general-map
+   ("g" . gptel-quick)
+   )
+  )
+
   )
 
 (use-package grip-mode

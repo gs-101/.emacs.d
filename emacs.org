@@ -2663,6 +2663,36 @@ Try, test, and deploy from a wide range of model types, sizes, and specializatio
 
 #+end_src
 
+*** [[https://github.com/karthink/gptel-quick][quick]]
+
+#+begin_quote
+
+Quick LLM lookups in Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package gptel-quick
+    :vc (:url "https://github.com/karthink/gptel-quick")
+    :ensure t
+    )
+
+#+end_src
+
+**** [[https://github.com/karthink/gptel-quick?tab=readme-ov-file#setup][Embark]]
+
+#+begin_src emacs-lisp :tangle ./modules/gs-dev.el :mkdirp yes
+
+  (use-package gptel-quick
+    :if (package-installed-p 'embark)
+    :bind
+    (
+     :map embark-general-map
+     ("g" . gptel-quick)
+     )
+    )
+
     )
 
 #+end_src
