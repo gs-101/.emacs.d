@@ -6,7 +6,7 @@
 
 (use-package alert
   :custom
-  (alert-default-style 'libnotify)
+  (alert-default-style 'notifications)
   :ensure t
   )
 
