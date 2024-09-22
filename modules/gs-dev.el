@@ -136,13 +136,14 @@
   )
 
 (use-package consult-compile-multi
-  :if (package-installed-p 'consult)
+  :when (featurep 'consult)
   :ensure t
   :init
   (consult-compile-multi-mode)
   )
 
 (use-package compile-multi-embark
+  :when (featurep 'embark)
   :ensure t
   :init
   (compile-multi-embark-mode)
@@ -244,7 +245,7 @@
   )
 
 (use-package gptel-quick
-  :if (package-installed-p 'embark)
+  :when (featurep 'embark)
   :bind
   (
    :map embark-general-map
@@ -257,7 +258,7 @@
   )
 
 (use-package smerge-mode
-  :if (package-installed-p 'elysium)
+  :when (featurep 'elysium)
   :hook
   (prog-mode . smerge-mode)
   )
@@ -310,7 +311,7 @@
   )
 
 (use-package magit-todos
-  :if (package-installed-p 'hl-todo)
+  :when (featurep 'hl-todo)
   :ensure t
   :hook
   (magit-mode . magit-todos-mode)
@@ -335,14 +336,14 @@
   )
 
 (use-package projection-multi
-  :if (package-installed-p 'compile-multi)
+  :when (featurep 'compile-multi)
   :ensure t
   :bind
   ([remap project-compile] . projection-multi-compile)
   )
 
 (use-package projection-multi-embark
-  :if (package-installed-p '(compile-multi embark))
+  :when (featurep '(compile-multi embark))
   :ensure t
   :init
   (projection-multi-embark-setup-command-map)

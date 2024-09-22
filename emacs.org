@@ -937,7 +937,7 @@ Automatically preview file at point in Emacs Dired.
 #+begin_src emacs-lisp
 
   (use-package dired-preview
-    :if (package-installed-p 'ready-player)
+    :when (featurep 'org-roam)
     :bind
     (
      :map dired-preview-mode-map
@@ -2469,7 +2469,7 @@ Multi target interface to compile.
 #+begin_src emacs-lisp
 
   (use-package consult-compile-multi
-    :if (package-installed-p 'consult)
+    :when (featurep 'consult)
     :ensure t
     :init
     (consult-compile-multi-mode)
@@ -2482,6 +2482,7 @@ Multi target interface to compile.
 #+begin_src emacs-lisp
 
   (use-package compile-multi-embark
+    :when (featurep 'embark)
     :ensure t
     :init
     (compile-multi-embark-mode)
@@ -2731,7 +2732,7 @@ Quick LLM lookups in Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel-quick
-    :if (package-installed-p 'embark)
+    :when (featurep 'embark)
     :bind
     (
      :map embark-general-map
@@ -2762,7 +2763,7 @@ Automatically apply AI-generated code changes in Emacs.
 #+begin_src emacs-lisp
 
   (use-package smerge-mode
-    :if (package-installed-p 'elysium)
+    :when (featurep 'elysium)
     :hook
     (prog-mode . smerge-mode)
     )
@@ -2896,7 +2897,7 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 #+begin_src emacs-lisp
 
   (use-package magit-todos
-    :if (package-installed-p 'hl-todo)
+    :when (featurep 'hl-todo)
     :ensure t
     :hook
     (magit-mode . magit-todos-mode)
@@ -2957,7 +2958,7 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
   (use-package projection-multi
-    :if (package-installed-p 'compile-multi)
+    :when (featurep 'compile-multi)
     :ensure t
     :bind
     ([remap project-compile] . projection-multi-compile)
@@ -2970,7 +2971,7 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
   (use-package projection-multi-embark
-    :if (package-installed-p '(compile-multi embark))
+    :when (featurep '(compile-multi embark))
     :ensure t
     :init
     (projection-multi-embark-setup-command-map)
@@ -3278,7 +3279,7 @@ With the combined features of cape and tempel, create a super capf for eglot com
 #+begin_src emacs-lisp
 
   (use-package corfu
-    :if (package-installed-p '(cape tempel))
+    :when (featurep '(cape tempel))
     :after (cape tempel)
     :preface
     (defun minad/eglot-capf ()
@@ -3545,7 +3546,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-embark
-    :if (package-installed-p 'embark)
+    :when (featurep 'embark)
     :defer t
     )
 
@@ -3556,7 +3557,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-forge
-    :if (package-installed-p 'forge)
+    :when (featurep 'forge)
     :custom
     (consult-gh-file-action #'consult-gh--files-view-action)
     (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
@@ -3597,7 +3598,7 @@ Use consult to search notes.
 #+begin_src emacs-lisp
 
   (use-package consult-notes
-    :if (package-installed-p 'org-roam)
+    :when (featurep 'org-roam)
     :init
     (consult-notes-org-roam-mode)
     )
@@ -3765,7 +3766,7 @@ Add blk-type Org links and transclusion.
 #+begin_src emacs-lisp
 
   (use-package blk-org
-    :if (package-installed-p 'org-transclusion)
+    :when (featurep 'org-transclusion)
     :after (blk org-transclusion)
     :config
     (blk-configure-org-transclusion)
@@ -3778,7 +3779,7 @@ Add blk-type Org links and transclusion.
 #+begin_src emacs-lisp
 
   (use-package blk
-    :if (package-installed-p 'org-roam)
+    :when (featurep 'org-roam)
     :after org-roam
     :custom
     (blk-directories (list
@@ -3815,7 +3816,7 @@ Spaced Repetition System for GNU Emacs.
 #+begin_src emacs-lisp
 
   (use-package gnosis
-    :if (package-installed-p 'no-littering)
+    :when (featurep 'no-littering)
     :custom
     (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
     )
@@ -4008,7 +4009,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :if (package-installed-p 'org-appear)
+    :when (featurep 'org-appear)
     :custom
     (org-appear-trigger 'manual)
     :config
@@ -4030,7 +4031,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :if (package-installed-p 'vertico)
+    :when (featurep 'vertico)
     :bind
     (
      :map vertico-map
@@ -4124,7 +4125,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :if (package-installed-p 'vterm-toggle)
+    :when (featurep 'vterm-toggle)
     :config
     (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm-toggle)
     )
@@ -4136,7 +4137,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :if (package-installed-p 'magit)
+    :when (featurep 'magit)
     :config
     (evil-define-key 'normal 'global (kbd "<leader>mc") 'magit-clone)
     (evil-define-key 'normal 'global (kbd "<leader>ms") 'magit-status)
@@ -4149,7 +4150,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :if (package-installed-p 'org-roam)
+    :when (featurep 'org-roam)
     :config
     (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
     (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
@@ -4164,7 +4165,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :if (package-installed-p 'org-roam-ui)
+    :when (featurep 'org-roam-ui)
     :config
     (evil-define-key 'normal 'global (kbd "<leader>ru") 'org-roam-ui-open)
     )
@@ -4176,7 +4177,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :if (package-installed-p 'nerd-icons)
+    :when (featurep 'nerd-icons)
     :config
     (evil-define-key 'normal 'global (kbd "<leader>in") 'nerd-icons-insert)
     )
@@ -4647,7 +4648,7 @@ Highlight the current line.
 #+begin_src emacs-lisp
 
   (use-package hl-line
-    :if (package-installed-p 'dashboard)
+    :when (featurep 'dashboard)
     :config
     (add-hook 'dashboard-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
     )
@@ -4659,7 +4660,7 @@ Highlight the current line.
 #+begin_src emacs-lisp
 
   (use-package hl-line
-    :if (package-installed-p 'pdf-tools)
+    :when (featurep 'pdf-tools)
     :config
     (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
     )
@@ -4671,7 +4672,7 @@ Highlight the current line.
 #+begin_src emacs-lisp
 
   (use-package hl-line
-    :if (package-installed-p 'vterm)
+    :when (featurep 'vterm)
     :config
     (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
     )
@@ -5209,7 +5210,7 @@ REFACTOR: use a ~catppuccin~ function to automatically set the colors based on n
 #+begin_src emacs-lisp
 
   (use-package hl-todo
-    :if (package-installed-p 'catppuccin-theme)
+    :when (featurep 'catppuccin-theme)
     :custom
     (hl-todo-keyword-faces '(
                              ("NOTE" . "#f5e0dc")
@@ -5335,7 +5336,7 @@ Use nerd-icons for completion.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-completion
-    :if (package-installed-p 'marginalia)
+    :when (featurep 'marginalia)
     :config
     (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
     :ensure t
@@ -5356,7 +5357,7 @@ Icons for Corfu via nerd-icons.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-corfu
-    :if (package-installed-p 'marginalia)
+    :when (featurep 'marginalia)
     :after margnialia
     :config
     (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
@@ -5483,7 +5484,7 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 #+begin_src emacs-lisp
 
   (use-package prism
-    :if (package-installed-p 'catppuccin-theme)
+    :when (featurep 'catppuccin-theme)
     :config
     (prism-catppuccin-colors)
     :preface

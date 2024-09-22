@@ -73,7 +73,7 @@
   )
 
 (use-package dired-preview
-  :if (package-installed-p 'ready-player)
+  :when (featurep 'org-roam)
   :bind
   (
    :map dired-preview-mode-map

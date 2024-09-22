@@ -115,7 +115,7 @@
   )
 
 (use-package corfu
-  :if (package-installed-p '(cape tempel))
+  :when (featurep '(cape tempel))
   :after (cape tempel)
   :preface
   (defun minad/eglot-capf ()

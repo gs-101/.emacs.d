@@ -82,12 +82,12 @@
   )
 
 (use-package consult-gh-embark
-  :if (package-installed-p 'embark)
+  :when (featurep 'embark)
   :defer t
   )
 
 (use-package consult-gh-forge
-  :if (package-installed-p 'forge)
+  :when (featurep 'forge)
   :custom
   (consult-gh-file-action #'consult-gh--files-view-action)
   (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
@@ -104,7 +104,7 @@
   )
 
 (use-package consult-notes
-  :if (package-installed-p 'org-roam)
+  :when (featurep 'org-roam)
   :init
   (consult-notes-org-roam-mode)
   )
@@ -212,14 +212,14 @@ targets."
   )
 
 (use-package blk-org
-  :if (package-installed-p 'org-transclusion)
+  :when (featurep 'org-transclusion)
   :after (blk org-transclusion)
   :config
   (blk-configure-org-transclusion)
   )
 
 (use-package blk
-  :if (package-installed-p 'org-roam)
+  :when (featurep 'org-roam)
   :after org-roam
   :custom
   (blk-directories (list
@@ -238,7 +238,7 @@ targets."
   )
 
 (use-package gnosis
-  :if (package-installed-p 'no-littering)
+  :when (featurep 'no-littering)
   :custom
   (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
   )

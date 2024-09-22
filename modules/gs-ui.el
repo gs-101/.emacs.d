@@ -56,19 +56,19 @@
   )
 
 (use-package hl-line
-  :if (package-installed-p 'dashboard)
+  :when (featurep 'dashboard)
   :config
   (add-hook 'dashboard-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package hl-line
-  :if (package-installed-p 'pdf-tools)
+  :when (featurep 'pdf-tools)
   :config
   (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package hl-line
-  :if (package-installed-p 'vterm)
+  :when (featurep 'vterm)
   :config
   (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
   )
@@ -356,7 +356,7 @@
   )
 
 (use-package hl-todo
-  :if (package-installed-p 'catppuccin-theme)
+  :when (featurep 'catppuccin-theme)
   :custom
   (hl-todo-keyword-faces '(
                            ("NOTE" . "#f5e0dc")
@@ -446,7 +446,7 @@
   )
 
 (use-package nerd-icons-completion
-  :if (package-installed-p 'marginalia)
+  :when (featurep 'marginalia)
   :config
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
   :ensure t
@@ -455,7 +455,7 @@
   )
 
 (use-package nerd-icons-corfu
-  :if (package-installed-p 'marginalia)
+  :when (featurep 'marginalia)
   :after margnialia
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
@@ -530,7 +530,7 @@
   )
 
 (use-package prism
-  :if (package-installed-p 'catppuccin-theme)
+  :when (featurep 'catppuccin-theme)
   :config
   (prism-catppuccin-colors)
   :preface
