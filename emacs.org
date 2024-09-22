@@ -59,8 +59,6 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./init.el
 :END:
 
-FEAT: Write ~gs-daemon/server~, see [[https://github.com/meow-edit/meow/issues/568][this]] issue.
-
 #+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
 #+end_src
