@@ -3279,7 +3279,7 @@ With the combined features of cape and tempel, create a super capf for eglot com
 #+begin_src emacs-lisp
 
   (use-package corfu
-    :when (featurep '(cape tempel))
+    :when (featurep 'cape 'tempel)
     :after (cape tempel)
     :preface
     (defun minad/eglot-capf ()
