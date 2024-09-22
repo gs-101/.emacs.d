@@ -223,12 +223,6 @@
   :ensure t
   )
 
-(use-package diredfl
-  :ensure t
-  :init
-  (diredfl-global-mode)
-  )
-
 (use-package dashboard-widgets
   :config
   (dashboard-modify-heading-icons '(
@@ -309,6 +303,12 @@
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (setq doom-modeline-icon t)))
+  )
+
+(use-package diredfl
+  :ensure t
+  :init
+  (diredfl-global-mode)
   )
 
 (use-package golden-ratio
