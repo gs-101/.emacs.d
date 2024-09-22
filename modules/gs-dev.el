@@ -316,6 +316,16 @@
   (magit-mode . magit-todos-mode)
   )
 
+(use-package package-lint
+  :ensure t
+  )
+
+(use-package package-lint-flymake
+  :config
+  (package-lint-flymake-setup)
+  :ensure t
+  )
+
 (use-package projection
   :ensure t
   :bind-keymap

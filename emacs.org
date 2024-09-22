@@ -2904,6 +2904,34 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 
 #+end_src
 
+** [[https://github.com/purcell/package-lint][package-lint]]
+
+#+begin_quote
+
+A linting library for elisp package metadata.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package package-lint
+    :ensure t
+    )
+
+#+end_src
+
+*** Flymake
+
+#+begin_src emacs-lisp
+
+  (use-package package-lint-flymake
+    :config
+    (package-lint-flymake-setup)
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/mohkale/projection][Projection]]
 
 #+begin_quote
