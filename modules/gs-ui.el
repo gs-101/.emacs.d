@@ -448,11 +448,15 @@
 
 (use-package nerd-icons-completion
   :when (featurep 'marginalia)
-  :config
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
   :ensure t
   :init
   (nerd-icons-completion-mode)
+  )
+
+(use-package nerd-icons-completion
+  :when (featurep 'nerd-icons 'marginalia)
+  :hook
+  (marginalia-mode . nerd-icons-completion-marginalia-setup)
   )
 
 (use-package nerd-icons-corfu

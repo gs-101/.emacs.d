@@ -5338,11 +5338,21 @@ Use nerd-icons for completion.
 
   (use-package nerd-icons-completion
     :when (featurep 'marginalia)
-    :config
-    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
     :ensure t
     :init
     (nerd-icons-completion-mode)
+    )
+
+#+end_src
+
+**** [[https://github.com/rainstormstudio/nerd-icons-completion?tab=readme-ov-file#setup][Marginalia]]
+
+#+begin_src emacs-lisp
+
+  (use-package nerd-icons-completion
+    :when (featurep 'nerd-icons 'marginalia)
+    :hook
+    (marginalia-mode . nerd-icons-completion-marginalia-setup)
     )
 
 #+end_src
