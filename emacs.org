@@ -5114,6 +5114,7 @@ A fancy and fast mode-line inspired by minimalism design.
 
   (use-package doom-modeline
     :if (daemonp)
+    :when (featurep 'nerd-icons)
     :config
     (add-hook 'after-make-frame-functions
               (lambda (frame)
@@ -5509,12 +5510,12 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
 **** Daemon Support
 
-REFACTOR: require both catppuccin and daemonp to trigger this use-package declaration. `:if` seems to support only one function.
 
 #+begin_src emacs-lisp
 
   (use-package prism
     :if (daemonp)
+    :when (featurep 'catppuccin-theme)
     :config
     (add-hook 'after-make-frame-functions
               (lambda (frame)

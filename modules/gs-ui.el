@@ -304,6 +304,7 @@
 
 (use-package doom-modeline
   :if (daemonp)
+  :when (featurep 'nerd-icons)
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)
@@ -553,6 +554,7 @@
 
 (use-package prism
   :if (daemonp)
+  :when (featurep 'catppuccin-theme)
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)
