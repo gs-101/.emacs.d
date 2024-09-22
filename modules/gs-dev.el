@@ -130,6 +130,8 @@
   )
 
 (use-package compile-multi
+  :bind
+  ([remap compile] . compile-multi)
   :ensure t
   )
 
