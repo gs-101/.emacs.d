@@ -343,7 +343,7 @@
   )
 
 (use-package projection-multi-embark
-  :when (featurep '(compile-multi embark))
+  :when (featurep 'compile-multi 'embark)
   :ensure t
   :init
   (projection-multi-embark-setup-command-map)

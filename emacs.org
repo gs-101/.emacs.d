@@ -2971,7 +2971,7 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
   (use-package projection-multi-embark
-    :when (featurep '(compile-multi embark))
+    :when (featurep 'compile-multi 'embark)
     :ensure t
     :init
     (projection-multi-embark-setup-command-map)
