@@ -100,10 +100,13 @@
   )
 
 (use-package consult-notes
-  :config
-  (when (locate-library "org-roam")
-    (consult-notes-org-roam-mode))
   :ensure t
+  )
+
+(use-package consult-notes
+  :if (package-installed-p 'org-roam)
+  :init
+  (consult-notes-org-roam-mode)
   )
 
 (use-package embark

@@ -3587,10 +3587,19 @@ Use consult to search notes.
 #+begin_src emacs-lisp
 
   (use-package consult-notes
-    :config
-    (when (locate-library "org-roam")
-      (consult-notes-org-roam-mode))
     :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/mclear-tools/consult-notes?tab=readme-ov-file#org-roam][Org Roam]]
+
+#+begin_src emacs-lisp
+
+  (use-package consult-notes
+    :if (package-installed-p 'org-roam)
+    :init
+    (consult-notes-org-roam-mode)
     )
 
 #+end_src
