@@ -329,10 +329,7 @@
 (use-package projection
   :ensure t
   :bind-keymap
-  (
-   :map prog-mode-map
   ("C-x P" . projection-map)
-  )
   :init
   (global-projection-hook-mode)
   )
