@@ -218,37 +218,38 @@
     (switch-to-buffer (get-buffer-create "*scratch*")))
   )
 
-(use-package dashboard-hackernews
-  :init
-  (add-to-list 'dashboard-items '(hackernews . 10))
-  :ensure t
-  )
-
 (use-package dashboard-widgets
-  :config
-  (dashboard-modify-heading-icons '(
-                                    (agenda . "nf-oct-calendar")
-                                    (projects . "nf-oct-project")
-                                    (recents . "nf-oct-clock")
-                                    ))
+  :requires dashboard
   :custom
   (dashboard-banner-logo-title "The Extensible Computing Enviroment")
-  (dashboard-display-icons-p t)
-  (dashboard-icon-type 'nerd-icons)
   (dashboard-items '(
                      (agenda . 5)
                      (projects . 5)
                      (recents . 5)
                      ))
-  (dashboard-set-file-icons t)
-  (dashboard-set-heading-icons t)
   (dashboard-startup-banner (expand-file-name "emacs.png" user-emacs-directory))
   (dashboard-week-agenda nil)
-  :init
-  (dashboard-setup-startup-hook)
   )
 
 (use-package dashboard-widgets
+  :requires dashboard
+  :after nerd-icons
+  :custom
+  (dashboard-display-icons-p t)
+  (dashboard-icon-type 'nerd-icons)
+  (dashboard-set-file-icons t)
+  (dashboard-set-heading-icons t)
+  :init
+  (dashboard-modify-heading-icons '(
+                                    (agenda . "nf-oct-calendar")
+                                    (projects . "nf-oct-project")
+                                    (recents . "nf-oct-clock")
+                                    ))
+  )
+
+(use-package dashboard-widgets
+  :requires dashboard
+  :after nerd-icons
   :custom
   (dashboard-navigator-buttons
    `(;; line1
