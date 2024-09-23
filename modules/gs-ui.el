@@ -455,6 +455,11 @@
   (marginalia-mode . nerd-icons-completion-marginalia-setup)
   )
 
+(use-package compile-multi-nerd-icons
+  :requires (nerd-icons compile-multi)
+  :ensure t
+  )
+
 (use-package nerd-icons-corfu
   :requires (nerd-icons corfu)
   :config

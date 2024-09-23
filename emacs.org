@@ -5397,6 +5397,17 @@ Use nerd-icons for completion.
 
 #+end_src
 
+*** [[https://github.com/mohkale/compile-multi/tree/master?tab=readme-ov-file#compile-multi-nerd-icons][compile-multi]]
+
+#+begin_src emacs-lisp
+
+  (use-package compile-multi-nerd-icons
+    :requires (nerd-icons compile-multi)
+    :ensure t
+    )
+
+#+end_src
+
 *** [[https://github.com/LuigiPiucco/nerd-icons-corfu][Corfu]]
 
 #+begin_quote
