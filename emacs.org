@@ -1078,7 +1078,9 @@ Key bindings for default packages.
 
 #+end_quote
 
-** [[./notes/window_management.org][Window Management Bindings]]
+** [[./notes/keys_dired.org][Dired Bindings]]
+
+** [[./notes/keys_window_management.org][Window Management Bindings]]
 
 #+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-

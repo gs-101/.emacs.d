@@ -1,0 +1,70 @@
+#+title: Dired Key Bindings
+#+author: David Wilson
+
+#+html: <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired-Navigation.html"><img src="https://img.shields.io/badge/_-Documentation-822422?style=flat-square&logo=GNU&logoColor=black&labelColor=white">
+
+#+html: <a href="https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#key-bindings"><img src="https://img.shields.io/badge/Source-100000?style=flat-square&logo=github&logoColor=white">
+
+These are specific to the =dired-mode-map=.
+
+* Navigation
+
+| Command             | Key | Description        |
+| =dired-next-line=     | n   | Move down line     |
+| =dired-previous-line= | p   | Mode up line       |
+| =dired-goto-file=     | j   | Jump to the file   |
+| =dired-find-file=     | RET | Open file          |
+| =dired-up-directory=  | ^   | Go up a directory  |
+| =revert-buffer=       | g   | Refresh the buffer |
+
+** evil-mode alternatives
+
+| Command             | Key | Description        |
+| =dired-next-line=     | j   | Move down line     |
+| =dired-previous-line= | k   | Mode up line       |
+| =dired-goto-file=     | J   | Jump to the file   |
+| =revert-buffer=       | g r | Refresh the buffer |
+
+* Marking
+
+Marking file enables multiple operations, like copying, deleting, renaming...
+
+| Command                | Key | Description             |
+| =dired-mark=             | m   | Mark file               |
+| =dired-unmark=           | u   | Unmark file             |
+| =dired-unmark-all-marks= | U   | Unmark all marked files |
+|                        | *   | Marking functions       |
+| =dired-kill-line=        | k   | Hide line               |
+
+** evil-mode alternatives
+
+| Command         | Key | Description |
+| =dired-kill-line= | K   | Hde line    |
+
+* Copying and Renaming
+
+| Command                | Key     | Description             |
+| =dired-do-copy=          | C       | Copy file               |
+| =dired-do-rename=        | R       | Rename file             |
+| =dired-toggle-read-only= | C-x C-q | Toggle read-only status |
+
+* Deleting
+
+| Command         | Key | Description |
+| =dired-do-delete= | D   | Delete file |
+
+* Archives
+
+| Command              | Key | Description                       |
+| =dired-do-compress=    | Z   | Compress file                     |
+| =dired-do-compress-to= | c   | Compress file and prompt for name |
+
+* Other
+
+| Command          | Key | Description                   |
+| =dired-do-touch=   | T   | Change timestamp of  file (?) |
+| =dired-do-chmod=   | M   | Change mode of file           |
+| =dired-do-chown=   | O   | Change owner of file          |
+| =dired-do-chgrp=   | G   | Change group of file          |
+| =dired-do-symlink= | S   | Create symlink for file       |
+| =dired-do-load=    | L   | Load Emacs Lisp file          |
