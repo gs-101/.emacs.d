@@ -8,6 +8,7 @@
   )
 
 (use-package vterm
+  :requires vterm
   :preface
   (defun mocompute/project-shell ()
     "Start an inferior shell in the current project's root directory.
@@ -30,6 +31,7 @@ if one already exists."
   )
 
 (use-package vterm-toggle
+  :requires vterm
   :bind
   ("C-c t v" . vterm-toggle)
   :custom

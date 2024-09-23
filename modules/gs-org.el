@@ -107,6 +107,10 @@
   )
 
 (use-package ox-latex
+  :commands
+  (
+   org-export-dispatch
+   )
   :custom
   (org-latex-toc-command "\\tableofcontents \\pagebreak")
   (org-startup-with-latex-preview t)

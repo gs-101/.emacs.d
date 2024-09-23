@@ -136,20 +136,26 @@
   )
 
 (use-package consult-compile-multi
-  :when (featurep 'consult)
+  :requires (compile-multi consult)
+  :after compile-multi
   :ensure t
   :init
   (consult-compile-multi-mode)
   )
 
 (use-package compile-multi-embark
-  :when (featurep 'embark)
+  :requires (compile-multi embark)
+  :after compile-multi
   :ensure t
   :init
   (compile-multi-embark-mode)
   )
 
 (use-package eglot
+  :commands
+  (
+   eglot
+   )
   :custom
   (eglot-autoshutdown t)
   )
@@ -162,7 +168,8 @@
 (use-package flymake-collection
   :ensure t
   :hook
-  (after-init . flymake-collection-hook-setup)
+  (flymake-mode . flymake-collection-hook-setup)
+  )
 
 (use-package lisp
   :mode
@@ -173,6 +180,8 @@
   )
 
 (use-package python
+  :mode
+  ("\\.py\\'" . python-mode)
   :custom
   (python-indent-guess-indent-offset-verbose nil)
   )
@@ -233,6 +242,8 @@
   )
 
 (use-package gptel-openai
+  :requires gptel
+  :after gptel
   :config
   (gptel-make-openai "Github Models"
     :host "models.inference.ai.azure.com"
@@ -247,12 +258,15 @@
 )
 
 (use-package gptel-quick
+  :requires gptel
+  :after gptel
   :vc (:url "https://github.com/karthink/gptel-quick")
   :ensure t
   )
 
 (use-package gptel-quick
-  :when (featurep 'embark)
+  :requires (gptel-quick embark)
+  :after gptel
   :bind
   (
    :map embark-general-map
@@ -261,11 +275,14 @@
   )
 
 (use-package elysium
+  :requires gptel
+  :after gptel
   :ensure t
   )
 
 (use-package smerge-mode
-  :when (featurep 'elysium)
+  :requires elysium
+  :after elysium
   :hook
   (prog-mode . smerge-mode)
   )
@@ -293,6 +310,8 @@
   )
 
 (use-package leetcode
+  :requires leetcode
+  :after leetcode
   :custom
   (leetcode-save-solutions t)
   (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
@@ -314,14 +333,15 @@
   )
 
 (use-package forge
+  :requires magit
+  :after magit
   :ensure t
   )
 
 (use-package magit-todos
-  :when (featurep 'hl-todo)
+  :requires hl-todo
+  :after magit
   :ensure t
-  :hook
-  (magit-mode . magit-todos-mode)
   )
 
 (use-package package-lint
@@ -343,14 +363,15 @@
   )
 
 (use-package projection-multi
-  :when (featurep 'compile-multi)
+  :requires (projection compile-multi)
   :ensure t
   :bind
   ([remap project-compile] . projection-multi-compile)
   )
 
 (use-package projection-multi-embark
-  :when (featurep 'compile-multi 'embark)
+  :requires (projection compile-multi embark)
+  :after embark
   :ensure t
   :init
   (projection-multi-embark-setup-command-map)
@@ -372,8 +393,8 @@
 
 (use-package wakatime-mode
   :ensure t
-  :init
-  (global-wakatime-mode)
+  :hook
+  (prog-mode . global-wakatime-mode)
   )
 
 (provide 'gs-dev)

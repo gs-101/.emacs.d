@@ -83,11 +83,16 @@
   )
 
 (use-package image-mode
+  :after dired
   :custom
   (image-animate-loop t)
   )
 
 (use-package imenu
+  :commands
+  (
+   imenu
+   )
   :custom
   (imenu-space-replacement nil)
   :defer t
@@ -208,6 +213,7 @@
   )
 
 (use-package no-littering
+  :requires no-littering
   :config
   (let ((dir (no-littering-expand-var-file-name "lock-files/")))
     (make-directory dir t)
@@ -215,6 +221,7 @@
   )
 
 (use-package recentf
+  :requires no-littering
   :custom
   (recentf-max-saved-items 1000)
   :config
@@ -226,6 +233,7 @@
   )
 
 (use-package no-littering
+  :requires no-littering
   :custom
   (custom-file (no-littering-expand-etc-file-name "custom.el"))
   )

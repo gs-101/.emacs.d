@@ -43,36 +43,37 @@
   )
 
 (use-package cape
-  :config
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-file)
   :ensure t
+  :hook
+  (completion-at-point-functions . cape-dabbrev)
+  (completion-at-point-functions . cape-file)
   )
 
 (use-package corg
   :vc (:url "https://github.com/isamert/corg.el")
-  :config
-  (add-hook 'org-mode-hook #'corg-setup)
   :ensure t
+  :hook
+  (org-mode . corg-setup)
   )
 
 (use-package tempel
-  :config
-  (add-hook 'completion-at-point-functions #'tempel-complete)
   :custom
   (tempel-trigger-prefix "<")
   :ensure t
   :hook
+  (completion-at-point-functions . tempel-complete)
   (prog-mode . tempel-abbrev-mode)
   )
 
 (use-package eglot-tempel
+  :requires tempel
   :ensure t
   :hook
   (eglot . eglot-tempel-mode)
   )
 
 (use-package tempel-collection
+  :requires tempel
   :ensure t
   )
 
@@ -104,19 +105,20 @@
   )
 
 (use-package orderless
+  :requires (corfu orderless)
   :custom
   (completion-category-overrides '((eglot (styles orderless))
                                    (eglot-capf (styles orderless))))
   )
 
 (use-package cape
+  :requires (corfu cape)
   :config
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   )
 
-(use-package corfu
-  :when (featurep 'cape 'tempel)
-  :after (cape tempel)
+(use-package emacs
+  :requires (corfu cape tempel)
   :preface
   (defun minad/eglot-capf ()
     "eglot capf with tempel and cape features."
@@ -126,7 +128,8 @@
                        #'eglot-completion-at-point
                        #'tempel-expand
                        ))))
-  (add-hook 'eglot-managed-mode-hook #'minad/eglot-capf)
+  :hook
+  (eglot-managed-mode-hook . minad/eglot-capf)
   )
 
 (use-package vertico
@@ -148,7 +151,7 @@
   )
 
 (use-package vertico-directory
-  :after vertico
+  :requires vertico
   :bind
   (
    :map vertico-map

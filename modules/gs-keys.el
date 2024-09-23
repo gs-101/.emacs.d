@@ -61,9 +61,6 @@
 (use-package lisp
   :bind
   ("C-c p c" . check-parens)
-  :defer t
-  :demand t
-  :ensure nil
   )
 
 (use-package org

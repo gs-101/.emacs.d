@@ -43,13 +43,14 @@
   )
 
 (use-package dired-aux
+  :after dired
   :custom
   (dired-do-revert-buffer t)
   )
 
 (use-package dired-async
-  :init
-  (dired-async-mode)
+  :hook
+  (dired-mode . dired-async-mode)
   )
 
 (use-package dired-preview
@@ -68,12 +69,12 @@
                                             "\\)"
                                             ))
   :ensure t
-  :init
-  (dired-preview-global-mode)
+  :hook
+  (dired-mode . dired-preview-global-mode)
   )
 
 (use-package dired-preview
-  :when (featurep 'org-roam)
+  :requires (dired-preview ready-player)
   :bind
   (
    :map dired-preview-mode-map
@@ -102,13 +103,14 @@
   )
 
 (use-package pdf-tools
+  :mode
+  ("\\.pdf\\'" . pdf-view-mode)
   :bind
   (
    :map pdf-view-mode-map
    ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
    ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page)
    )
-  :defer t
   :ensure t
   :hook
   (pdf-view-mode . pdf-view-themed-minor-mode)
@@ -126,8 +128,8 @@
   (ready-player-repeat-icon "󰑖")
   (ready-player-autoplay-icon "󰼛")
   :ensure t
-  :init
-  (ready-player-mode)
+  :hook
+  (dired-mode . ready-player-mode)
   )
 
 (use-package show-font

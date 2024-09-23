@@ -56,19 +56,19 @@
   )
 
 (use-package hl-line
-  :when (featurep 'dashboard)
+  :after dashboard
   :config
   (add-hook 'dashboard-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package hl-line
-  :when (featurep 'pdf-tools)
+  :after pdf-tools
   :config
   (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package hl-line
-  :when (featurep 'vterm)
+  :after vterm
   :config
   (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
   )
@@ -208,8 +208,9 @@
                                dashboard-insert-newline
                                dashboard-insert-footer
                                ))
-  :defer nil
   :ensure t
+  :init
+  (dashboard-setup-startup-hook)
   :preface
   (defun dashboard-create-scratch-buffer ()
     "Create a scratch buffer."
@@ -280,6 +281,7 @@
   )
 
 (use-package startup
+  :requires dashboard
   :custom
   (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
   :defer t
@@ -297,8 +299,8 @@
   )
 
 (use-package doom-modeline
+  :requires doom-modeline
   :if (daemonp)
-  :when (featurep 'nerd-icons)
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)
@@ -307,8 +309,8 @@
 
 (use-package diredfl
   :ensure t
-  :init
-  (diredfl-global-mode)
+  :hook
+  (dired-mode . diredfl-global-mode)
   )
 
 (use-package golden-ratio
@@ -324,13 +326,6 @@
   ([remap describe-key] . helpful-key)
   ([remap describe-symbol] . helpful-symbol)
   ([remap describe-variable] . helpful-variable)
-  :commands
-  (
-   helpful-callable
-   helpful-command
-   helpful-key
-   helpful-variable
-   )
   :ensure t
   )
 
@@ -357,7 +352,7 @@
   )
 
 (use-package hl-todo
-  :when (featurep 'catppuccin-theme)
+  :requires (hl-todo catppuccin-theme)
   :custom
   (hl-todo-keyword-faces '(
                            ("NOTE" . "#f5e0dc")
@@ -447,21 +442,20 @@
   )
 
 (use-package nerd-icons-completion
-  :when (featurep 'marginalia)
+  :requires nerd-icons
   :ensure t
   :init
   (nerd-icons-completion-mode)
   )
 
 (use-package nerd-icons-completion
-  :when (featurep 'nerd-icons 'marginalia)
+  :requires (nerd-icons marginalia)
   :hook
   (marginalia-mode . nerd-icons-completion-marginalia-setup)
   )
 
 (use-package nerd-icons-corfu
-  :when (featurep 'marginalia)
-  :after margnialia
+  :requires (nerd-icons corfu)
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
   :custom
@@ -474,12 +468,14 @@
   )
 
 (use-package nerd-icons-dired
+  :requires nerd-icons
   :ensure t
   :hook
   (dired-mode . nerd-icons-dired-mode)
   )
 
 (use-package nerd-icons-ibuffer
+  :requires nerd-icons
   :ensure t
   :hook
   (ibuffer-mode . nerd-icons-ibuffer-mode)
@@ -511,6 +507,7 @@
                               "\\*xref\\*"
                               ))
   :ensure t
+  :demand t
   :init
   (popper-mode)
   )
@@ -535,10 +532,9 @@
   )
 
 (use-package prism
-  :when (featurep 'catppuccin-theme)
+  :requires catppuccin-theme
+  :after prism
   :config
-  (prism-catppuccin-colors)
-  :preface
   (defun prism-catppuccin-colors ()
     "Grab color definitions from catppuccin and use them to set prism's colors."
     (interactive)
@@ -554,11 +550,13 @@
                                              lavender
                                              mauve
                                              ))))
+  (prism-catppuccin-colors)
   )
 
 (use-package prism
   :if (daemonp)
-  :when (featurep 'catppuccin-theme)
+  :requires catppuccin-theme
+  :after prism
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)

@@ -346,6 +346,7 @@ Support for visiting image files.
 #+begin_src emacs-lisp
 
   (use-package image-mode
+    :after dired
     :custom
     (image-animate-loop t)
     )
@@ -366,6 +367,10 @@ Purpose of this package:
 #+begin_src emacs-lisp
 
   (use-package imenu
+    :commands
+    (
+     imenu
+     )
     :custom
     (imenu-space-replacement nil)
     :defer t
@@ -717,6 +722,7 @@ The default paths used to store configuration files and persistent data are not 
 #+begin_src emacs-lisp
 
   (use-package no-littering
+    :requires no-littering
     :config
     (let ((dir (no-littering-expand-var-file-name "lock-files/")))
       (make-directory dir t)
@@ -736,6 +742,7 @@ Keep track of recently opened files.
 #+begin_src emacs-lisp
 
   (use-package recentf
+    :requires no-littering
     :custom
     (recentf-max-saved-items 1000)
     :config
@@ -753,6 +760,7 @@ Keep track of recently opened files.
 #+begin_src emacs-lisp
 
   (use-package no-littering
+    :requires no-littering
     :custom
     (custom-file (no-littering-expand-etc-file-name "custom.el"))
     )
@@ -860,6 +868,7 @@ Less commonly used parts of Dired.
 #+begin_src emacs-lisp
 
   (use-package dired-aux
+    :after dired
     :custom
     (dired-do-revert-buffer t)
     )
@@ -877,8 +886,8 @@ Asynchronous dired actions.
 #+begin_src emacs-lisp
 
   (use-package dired-async
-    :init
-    (dired-async-mode)
+    :hook
+    (dired-mode . dired-async-mode)
     )
 
 #+end_src
@@ -909,8 +918,8 @@ Automatically preview file at point in Emacs Dired.
                                               "\\)"
                                               ))
     :ensure t
-    :init
-    (dired-preview-global-mode)
+    :hook
+    (dired-mode . dired-preview-global-mode)
     )
 
 #+end_src
@@ -922,7 +931,7 @@ Automatically preview file at point in Emacs Dired.
 #+begin_src emacs-lisp
 
   (use-package dired-preview
-    :when (featurep 'org-roam)
+    :requires (dired-preview ready-player)
     :bind
     (
      :map dired-preview-mode-map
@@ -975,13 +984,14 @@ Emacs support library for PDF files.
 #+begin_src emacs-lisp
 
   (use-package pdf-tools
+    :mode
+    ("\\.pdf\\'" . pdf-view-mode)
     :bind
     (
      :map pdf-view-mode-map
      ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
      ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page)
      )
-    :defer t
     :ensure t
     :hook
     (pdf-view-mode . pdf-view-themed-minor-mode)
@@ -1013,8 +1023,8 @@ A lightweight major mode to open media (audio/video) files in an Emacs buffer.
     (ready-player-repeat-icon "󰑖")
     (ready-player-autoplay-icon "󰼛")
     :ensure t
-    :init
-    (ready-player-mode)
+    :hook
+    (dired-mode . ready-player-mode)
     )
 
 #+end_src
@@ -1714,6 +1724,10 @@ LaTeX Backend for Org Export Engine.
 #+begin_src emacs-lisp
 
   (use-package ox-latex
+    :commands
+    (
+     org-export-dispatch
+     )
     :custom
     (org-latex-toc-command "\\tableofcontents \\pagebreak")
     (org-startup-with-latex-preview t)
@@ -2212,6 +2226,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
 #+begin_src emacs-lisp
 
   (use-package vterm
+    :requires vterm
     :preface
     (defun mocompute/project-shell ()
       "Start an inferior shell in the current project's root directory.
@@ -2246,6 +2261,7 @@ Toggles between the vterm buffer and whatever buffer you are editing.
 #+begin_src emacs-lisp
 
   (use-package vterm-toggle
+    :requires vterm
     :bind
     ("C-c t v" . vterm-toggle)
     :custom
@@ -2445,13 +2461,14 @@ Multi target interface to compile.
     )
 
 #+end_src
-
+    
 **** [[https://github.com/mohkale/compile-multi?tab=readme-ov-file#consult-multi-compile][Consult]]
 
 #+begin_src emacs-lisp
 
   (use-package consult-compile-multi
-    :when (featurep 'consult)
+    :requires (compile-multi consult)
+    :after compile-multi
     :ensure t
     :init
     (consult-compile-multi-mode)
@@ -2464,7 +2481,8 @@ Multi target interface to compile.
 #+begin_src emacs-lisp
 
   (use-package compile-multi-embark
-    :when (featurep 'embark)
+    :requires (compile-multi embark)
+    :after compile-multi
     :ensure t
     :init
     (compile-multi-embark-mode)
@@ -2483,6 +2501,10 @@ Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
 #+begin_src emacs-lisp
 
   (use-package eglot
+    :commands
+    (
+     eglot
+     )
     :custom
     (eglot-autoshutdown t)
     )
@@ -2519,7 +2541,13 @@ Collection of checkers for flymake.
   (use-package flymake-collection
     :ensure t
     :hook
-    (after-init . flymake-collection-hook-setup)
+    (flymake-mode . flymake-collection-hook-setup)
+    )
+
+#+end_src
+
+** Languages
+
 *** Lisp
 
 #+begin_quote
@@ -2531,13 +2559,16 @@ Lisp editing for Emacs.
 #+begin_src emacs-lisp
 
   (use-package lisp
+    :mode
+    ("\\.lisp\\'" . lisp-mode)
+    ("\\.lsp\\'" . lisp-mode)
     :custom
     (narrow-to-defun-include-comments t)
     )
 
 #+end_src
 
-** Python
+*** Python
 
 #+begin_quote
 
@@ -2548,6 +2579,8 @@ Python's flying circus support for Emacs.
 #+begin_src emacs-lisp
 
   (use-package python
+    :mode
+    ("\\.py\\'" . python-mode)
     :custom
     (python-indent-guess-indent-offset-verbose nil)
     )
@@ -2690,6 +2723,8 @@ Try, test, and deploy from a wide range of model types, sizes, and specializatio
 #+begin_src emacs-lisp
 
   (use-package gptel-openai
+    :requires gptel
+    :after gptel
     :config
     (gptel-make-openai "Github Models"
       :host "models.inference.ai.azure.com"
@@ -2716,6 +2751,8 @@ Quick LLM lookups in Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel-quick
+    :requires gptel
+    :after gptel
     :vc (:url "https://github.com/karthink/gptel-quick")
     :ensure t
     )
@@ -2727,7 +2764,8 @@ Quick LLM lookups in Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel-quick
-    :when (featurep 'embark)
+    :requires (gptel-quick embark)
+    :after gptel
     :bind
     (
      :map embark-general-map
@@ -2748,6 +2786,8 @@ Automatically apply AI-generated code changes in Emacs.
 #+begin_src emacs-lisp
 
   (use-package elysium
+    :requires gptel
+    :after gptel
     :ensure t
     )
 
@@ -2758,7 +2798,8 @@ Automatically apply AI-generated code changes in Emacs.
 #+begin_src emacs-lisp
 
   (use-package smerge-mode
-    :when (featurep 'elysium)
+    :requires elysium
+    :after elysium
     :hook
     (prog-mode . smerge-mode)
     )
@@ -2826,6 +2867,8 @@ An Emacs LeetCode client.
 #+begin_src emacs-lisp
 
   (use-package leetcode
+    :requires leetcode
+    :after leetcode
     :custom
     (leetcode-save-solutions t)
     (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
@@ -2868,14 +2911,13 @@ Work with Git forges from the comfort of Magit.
 
 #+end_quote
 
-To make use of this package there are two options:
-
-1. A Gitlab/Github [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated;
-2. Github users can just install [[https://github.com/cli/cli][Github CLI]] and login using ~gh auth login~.
+To make use of this package [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated.
 
 #+begin_src emacs-lisp
 
   (use-package forge
+    :requires magit
+    :after magit
     :ensure t
     )
 
@@ -2892,10 +2934,9 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 #+begin_src emacs-lisp
 
   (use-package magit-todos
-    :when (featurep 'hl-todo)
+    :requires hl-todo
+    :after magit
     :ensure t
-    :hook
-    (magit-mode . magit-todos-mode)
     )
 
 #+end_src
@@ -2953,7 +2994,7 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
   (use-package projection-multi
-    :when (featurep 'compile-multi)
+    :requires (projection compile-multi)
     :ensure t
     :bind
     ([remap project-compile] . projection-multi-compile)
@@ -2966,7 +3007,8 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
   (use-package projection-multi-embark
-    :when (featurep 'compile-multi 'embark)
+    :requires (projection compile-multi embark)
+    :after embark
     :ensure t
     :init
     (projection-multi-embark-setup-command-map)
@@ -3024,12 +3066,11 @@ Emacs plugin for automatic time tracking and metrics generated from your program
 
   (use-package wakatime-mode
     :ensure t
-    :init
-    (global-wakatime-mode)
+    :hook
+    (prog-mode . global-wakatime-mode)
     )
 
 #+end_src
-
 
 ** End
 
@@ -3114,10 +3155,10 @@ Completion At Point Extensions.
 #+begin_src emacs-lisp
 
   (use-package cape
-    :config
-    (add-hook 'completion-at-point-functions #'cape-dabbrev)
-    (add-hook 'completion-at-point-functions #'cape-file)
     :ensure t
+    :hook
+    (completion-at-point-functions . cape-dabbrev)
+    (completion-at-point-functions . cape-file)
     )
 
 #+end_src
@@ -3134,9 +3175,9 @@ Auto complete org-mode headers seamlessly.
 
   (use-package corg
     :vc (:url "https://github.com/isamert/corg.el")
-    :config
-    (add-hook 'org-mode-hook #'corg-setup)
     :ensure t
+    :hook
+    (org-mode . corg-setup)
     )
 
 #+end_src
@@ -3152,12 +3193,11 @@ Simple templates for Emacs.
 #+begin_src emacs-lisp
 
   (use-package tempel
-    :config
-    (add-hook 'completion-at-point-functions #'tempel-complete)
     :custom
     (tempel-trigger-prefix "<")
     :ensure t
     :hook
+    (completion-at-point-functions . tempel-complete)
     (prog-mode . tempel-abbrev-mode)
     )
 
@@ -3174,6 +3214,7 @@ Bridge for tempel templates with eglot.
 #+begin_src emacs-lisp
 
   (use-package eglot-tempel
+    :requires tempel
     :ensure t
     :hook
     (eglot . eglot-tempel-mode)
@@ -3192,6 +3233,7 @@ Collection tempel templates.
 #+begin_src emacs-lisp
 
   (use-package tempel-collection
+    :requires tempel
     :ensure t
     )
 
@@ -3249,6 +3291,7 @@ COmpletion in Region FUnction.
 #+begin_src emacs-lisp
 
   (use-package orderless
+    :requires (corfu orderless)
     :custom
     (completion-category-overrides '((eglot (styles orderless))
                                      (eglot-capf (styles orderless))))
@@ -3261,6 +3304,7 @@ COmpletion in Region FUnction.
 #+begin_src emacs-lisp
 
   (use-package cape
+    :requires (corfu cape)
     :config
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     )
@@ -3273,9 +3317,8 @@ With the combined features of cape and tempel, create a super capf for eglot com
 
 #+begin_src emacs-lisp
 
-  (use-package corfu
-    :when (featurep 'cape 'tempel)
-    :after (cape tempel)
+  (use-package emacs
+    :requires (corfu cape tempel)
     :preface
     (defun minad/eglot-capf ()
       "eglot capf with tempel and cape features."
@@ -3285,7 +3328,8 @@ With the combined features of cape and tempel, create a super capf for eglot com
                          #'eglot-completion-at-point
                          #'tempel-expand
                          ))))
-    (add-hook 'eglot-managed-mode-hook #'minad/eglot-capf)
+    :hook
+    (eglot-managed-mode-hook . minad/eglot-capf)
     )
 
 #+end_src
@@ -3331,7 +3375,7 @@ Commands for Ido-like directory navigation.
 #+begin_src emacs-lisp
 
   (use-package vertico-directory
-    :after vertico
+    :requires vertico
     :bind
     (
      :map vertico-map
@@ -3433,11 +3477,12 @@ Implementation of Pomodoro and Third Time techniques for Emacs.
      )
     :config
     (pomm-mode-line-mode)
-    (add-hook 'pomm-on-status-changed-hook #'pomm--sync-org-clock)
-    (add-hook 'pomm-third-time-on-status-changed-hook #'pomm-third-time--sync-org-clock)
     :custom
     (pomm-audio-enabled t)
     :ensure t
+    :hook
+    (pomm-on-status-changed . pomm--sync-org-clock)
+    (pomm-third-time-on-status-changed . pomm-third-time--sync-org-clock)
     )
 
 #+end_src
@@ -3506,6 +3551,7 @@ Insert paths into the minibuffer prompt in Emacs.
 #+begin_src emacs-lisp
 
   (use-package consult-dir
+    :requires consult
     :bind
     ([remap list-directory] . consult-dir)
     ([remap dired-jump] . consult-dir-jump-file)
@@ -3525,6 +3571,12 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh
+    :requires consult
+    :commands
+    (
+     consult-gh
+     consult-gh-repo-clone
+     )
     :vc (:url "https://github.com/armindarvish/consult-gh")
     :custom
     (consult-gh-code-action #'consult-gh--code-view-action)
@@ -3541,8 +3593,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-embark
-    :when (featurep 'embark)
-    :defer t
+    :requires (consult-gh embark)
     )
 
 #+end_src
@@ -3552,12 +3603,11 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-forge
-    :when (featurep 'forge)
+    :requires (consult-gh forge)
     :custom
     (consult-gh-file-action #'consult-gh--files-view-action)
     (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
     (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
-    :defer t
     )
 
 #+end_src
@@ -3567,7 +3617,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-transient
-    :after consult-gh
+    :requires consult-gh
     )
 
 #+end_src
@@ -3593,7 +3643,7 @@ Use consult to search notes.
 #+begin_src emacs-lisp
 
   (use-package consult-notes
-    :when (featurep 'org-roam)
+    :requires org-roam
     :init
     (consult-notes-org-roam-mode)
     )
@@ -3639,6 +3689,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 #+begin_src emacs-lisp
 
   (use-package embark
+    :requires embark
     :bind
     (
      :map minibuffer-local-map
@@ -3661,6 +3712,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 #+begin_src emacs-lisp
 
   (use-package embark-consult
+    :requires (embark consult)
     :ensure t
     :hook
     ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
@@ -3673,6 +3725,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 #+begin_src emacs-lisp
 
   (use-package embark
+    :requires embark
     :config
     (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
     :custom
@@ -3752,6 +3805,7 @@ Add blk-type Org links and transclusion.
 #+begin_src emacs-lisp
 
   (use-package blk-org
+    :requires blk
     )
 
 #+end_src
@@ -3761,8 +3815,7 @@ Add blk-type Org links and transclusion.
 #+begin_src emacs-lisp
 
   (use-package blk-org
-    :when (featurep 'org-transclusion)
-    :after (blk org-transclusion)
+    :requires (blk org-transclusion)
     :config
     (blk-configure-org-transclusion)
     )
@@ -3774,8 +3827,7 @@ Add blk-type Org links and transclusion.
 #+begin_src emacs-lisp
 
   (use-package blk
-    :when (featurep 'org-roam)
-    :after org-roam
+    :requires (blk org-roam)
     :custom
     (blk-directories (list
                       org-roam-directory
@@ -3811,7 +3863,7 @@ Spaced Repetition System for GNU Emacs.
 #+begin_src emacs-lisp
 
   (use-package gnosis
-    :when (featurep 'no-littering)
+    :requires (gnosis no-littering)
     :custom
     (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
     )
@@ -4004,7 +4056,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :when (featurep 'org-appear)
+    :requires org-appear
     :custom
     (org-appear-trigger 'manual)
     :config
@@ -4026,7 +4078,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :when (featurep 'vertico)
+    :requires vertico
     :bind
     (
      :map vertico-map
@@ -4120,7 +4172,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :when (featurep 'vterm-toggle)
+    :requires vterm-toggle
     :config
     (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm-toggle)
     )
@@ -4132,7 +4184,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :when (featurep 'magit)
+    :requires magit
     :config
     (evil-define-key 'normal 'global (kbd "<leader>mc") 'magit-clone)
     (evil-define-key 'normal 'global (kbd "<leader>ms") 'magit-status)
@@ -4145,7 +4197,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :when (featurep 'org-roam)
+    :requires org-roam
     :config
     (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
     (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
@@ -4160,7 +4212,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :when (featurep 'org-roam-ui)
+    :requires org-roam-ui
     :config
     (evil-define-key 'normal 'global (kbd "<leader>ru") 'org-roam-ui-open)
     )
@@ -4172,7 +4224,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :when (featurep 'nerd-icons)
+    :requires nerd-icons
     :config
     (evil-define-key 'normal 'global (kbd "<leader>in") 'nerd-icons-insert)
     )
@@ -4190,7 +4242,6 @@ A set of keybindings for evil-mode.
 #+begin_src emacs-lisp
 
   (use-package evil-collection
-    :after evil
     :ensure t
     :init
     (evil-collection-init)
@@ -4228,7 +4279,6 @@ Why is this one not included in the collection?
 #+begin_src emacs-lisp
 
   (use-package evil-org-agenda
-    :after evil-org
     :config
     (evil-org-agenda-set-keys)
     )
@@ -4643,7 +4693,7 @@ Highlight the current line.
 #+begin_src emacs-lisp
 
   (use-package hl-line
-    :when (featurep 'dashboard)
+    :after dashboard
     :config
     (add-hook 'dashboard-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
     )
@@ -4655,7 +4705,7 @@ Highlight the current line.
 #+begin_src emacs-lisp
 
   (use-package hl-line
-    :when (featurep 'pdf-tools)
+    :after pdf-tools
     :config
     (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
     )
@@ -4667,7 +4717,7 @@ Highlight the current line.
 #+begin_src emacs-lisp
 
   (use-package hl-line
-    :when (featurep 'vterm)
+    :after vterm
     :config
     (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
     )
@@ -5017,6 +5067,8 @@ A startup screen extracted from Spacemacs.
 #+begin_src emacs-lisp
 
   (use-package dashboard-widgets
+    :requires dashboard
+    :after nerd-icons
     :custom
     (dashboard-navigator-buttons
      `(;; line1
@@ -5055,6 +5107,7 @@ A startup screen extracted from Spacemacs.
 #+begin_src emacs-lisp
 
   (use-package startup
+    :requires dashboard
     :custom
     (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
     :defer t
@@ -5090,8 +5143,8 @@ A fancy and fast mode-line inspired by minimalism design.
 #+begin_src emacs-lisp
 
   (use-package doom-modeline
+    :requires doom-modeline
     :if (daemonp)
-    :when (featurep 'nerd-icons)
     :config
     (add-hook 'after-make-frame-functions
               (lambda (frame)
@@ -5112,8 +5165,8 @@ Extra Emacs font lock rules for a more colourful dired.
 
   (use-package diredfl
     :ensure t
-    :init
-    (diredfl-global-mode)
+    :hook
+    (dired-mode . diredfl-global-mode)
     )
 
 #+end_src
@@ -5200,7 +5253,7 @@ REFACTOR: use a ~catppuccin~ function to automatically set the colors based on n
 #+begin_src emacs-lisp
 
   (use-package hl-todo
-    :when (featurep 'catppuccin-theme)
+    :requires (hl-todo catppuccin-theme)
     :custom
     (hl-todo-keyword-faces '(
                              ("NOTE" . "#f5e0dc")
@@ -5326,7 +5379,7 @@ Use nerd-icons for completion.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-completion
-    :when (featurep 'marginalia)
+    :requires nerd-icons
     :ensure t
     :init
     (nerd-icons-completion-mode)
@@ -5339,7 +5392,7 @@ Use nerd-icons for completion.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-completion
-    :when (featurep 'nerd-icons 'marginalia)
+    :requires (nerd-icons marginalia)
     :hook
     (marginalia-mode . nerd-icons-completion-marginalia-setup)
     )
@@ -5357,8 +5410,7 @@ Icons for Corfu via nerd-icons.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-corfu
-    :when (featurep 'marginalia)
-    :after margnialia
+    :requires (nerd-icons corfu)
     :config
     (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
     :custom
@@ -5383,6 +5435,7 @@ Use nerd-icons for Dired.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-dired
+    :requires nerd-icons
     :ensure t
     :hook
     (dired-mode . nerd-icons-dired-mode)
@@ -5401,6 +5454,7 @@ Display nerd icons in ibuffer.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-ibuffer
+    :requires nerd-icons
     :ensure t
     :hook
     (ibuffer-mode . nerd-icons-ibuffer-mode)
@@ -5485,10 +5539,9 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 #+begin_src emacs-lisp
 
   (use-package prism
-    :when (featurep 'catppuccin-theme)
+    :requires catppuccin-theme
+    :after prism
     :config
-    (prism-catppuccin-colors)
-    :preface
     (defun prism-catppuccin-colors ()
       "Grab color definitions from catppuccin and use them to set prism's colors."
       (interactive)
@@ -5504,18 +5557,19 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
                                                lavender
                                                mauve
                                                ))))
+    (prism-catppuccin-colors)
     )
 
 #+end_src
 
 **** Daemon Support
 
-
 #+begin_src emacs-lisp
 
   (use-package prism
     :if (daemonp)
-    :when (featurep 'catppuccin-theme)
+    :requires catppuccin-theme
+    :after prism
     :config
     (add-hook 'after-make-frame-functions
               (lambda (frame)

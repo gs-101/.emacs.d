@@ -18,11 +18,12 @@
    )
   :config
   (pomm-mode-line-mode)
-  (add-hook 'pomm-on-status-changed-hook #'pomm--sync-org-clock)
-  (add-hook 'pomm-third-time-on-status-changed-hook #'pomm-third-time--sync-org-clock)
   :custom
   (pomm-audio-enabled t)
   :ensure t
+  :hook
+  (pomm-on-status-changed . pomm--sync-org-clock)
+  (pomm-third-time-on-status-changed . pomm-third-time--sync-org-clock)
   )
 
 (use-package consult
@@ -65,6 +66,7 @@
   )
 
 (use-package consult-dir
+  :requires consult
   :bind
   ([remap list-directory] . consult-dir)
   ([remap dired-jump] . consult-dir-jump-file)
@@ -72,6 +74,12 @@
   )
 
 (use-package consult-gh
+  :requires consult
+  :commands
+  (
+   consult-gh
+   consult-gh-repo-clone
+   )
   :vc (:url "https://github.com/armindarvish/consult-gh")
   :custom
   (consult-gh-code-action #'consult-gh--code-view-action)
@@ -82,21 +90,19 @@
   )
 
 (use-package consult-gh-embark
-  :when (featurep 'embark)
-  :defer t
+  :requires (consult-gh embark)
   )
 
 (use-package consult-gh-forge
-  :when (featurep 'forge)
+  :requires (consult-gh forge)
   :custom
   (consult-gh-file-action #'consult-gh--files-view-action)
   (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
   (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
-  :defer t
   )
 
 (use-package consult-gh-transient
-  :after consult-gh
+  :requires consult-gh
   )
 
 (use-package consult-notes
@@ -104,7 +110,7 @@
   )
 
 (use-package consult-notes
-  :when (featurep 'org-roam)
+  :requires org-roam
   :init
   (consult-notes-org-roam-mode)
   )
@@ -132,6 +138,7 @@
   )
 
 (use-package embark
+  :requires embark
   :bind
   (
    :map minibuffer-local-map
@@ -148,12 +155,14 @@
   )
 
 (use-package embark-consult
+  :requires (embark consult)
   :ensure t
   :hook
   ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
   )
 
 (use-package embark
+  :requires embark
   :config
   (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
   :custom
@@ -209,18 +218,17 @@ targets."
   )
 
 (use-package blk-org
+  :requires blk
   )
 
 (use-package blk-org
-  :when (featurep 'org-transclusion)
-  :after (blk org-transclusion)
+  :requires (blk org-transclusion)
   :config
   (blk-configure-org-transclusion)
   )
 
 (use-package blk
-  :when (featurep 'org-roam)
-  :after org-roam
+  :requires (blk org-roam)
   :custom
   (blk-directories (list
                     org-roam-directory
@@ -238,7 +246,7 @@ targets."
   )
 
 (use-package gnosis
-  :when (featurep 'no-littering)
+  :requires (gnosis no-littering)
   :custom
   (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
   )
