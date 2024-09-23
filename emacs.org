@@ -317,11 +317,17 @@ Help commands for Emacs.
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-ibuffer?tab=readme-ov-file#configuration][iBuffer]]
+*** [[https://github.com/kickingvegas/casual-ibuffer?tab=readme-ov-file#configuration][iBuffer Extensions]]
+
+#+begin_quote
+
+Extensions for iBuffer.
+
+#+end_quote
 
 #+begin_src emacs-lisp
 
-  (use-package ibuffer
+  (use-package ibuf-ext
     :defer t
     :hook
     (ibuffer-mode . ibuffer-auto-mode)

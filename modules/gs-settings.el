@@ -76,7 +76,7 @@
   (help-window-select t)
   )
 
-(use-package ibuffer
+(use-package ibuf-ext
   :defer t
   :hook
   (ibuffer-mode . ibuffer-auto-mode)
