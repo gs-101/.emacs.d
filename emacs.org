@@ -1587,6 +1587,7 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
      'org-babel-load-languages
      '(
        (emacs-lisp . t)
+       (gnuplot . t)
        (js . t)
        (latex . t)
        (python . t)
