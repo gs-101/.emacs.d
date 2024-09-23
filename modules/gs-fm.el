@@ -92,7 +92,7 @@
         (user-error "Cannot do something useful with `ready-player' here"))))
   )
 
-(use-package dired
+(use-package emacs
   :custom
   (delete-by-moving-to-trash t)
   )

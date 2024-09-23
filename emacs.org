@@ -955,7 +955,7 @@ Automatically preview file at point in Emacs Dired.
 
 #+begin_src emacs-lisp
 
-  (use-package dired
+  (use-package emacs
     :custom
     (delete-by-moving-to-trash t)
     )
