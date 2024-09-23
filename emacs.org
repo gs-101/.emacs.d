@@ -2588,6 +2588,47 @@ Python's flying circus support for Emacs.
 
 #+end_src
 
+*** [[https://github.com/rust-lang/rust-mode][Rust Mode]]
+
+#+begin_quote
+
+Emacs configuration for Rust.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package rust-mode
+    :mode
+    ("\\.rs\\'" . rust-mode)
+    :custom
+    (rust-mode-treesitter-derive t)
+    :ensure t
+    )
+
+#+end_src
+
+**** [[https://github.com/emacs-rustic/rustic][Rustic]]
+
+#+begin_quote
+
+Rust development environment for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package rustic
+    :after rust-mode
+    :custom
+    (rustic-cargo-use-last-stored-arguments t)
+    (rustic-format-on-save t)
+    (rustic-lsp-client 'eglot)
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/radian-software/apheleia][Apheleia]]
 
 #+begin_quote
@@ -3013,44 +3054,6 @@ Projectile like project management library built on Emacs project.el.
     :ensure t
     :init
     (projection-multi-embark-setup-command-map)
-    )
-
-#+end_src
-
-** [[https://github.com/rust-lang/rust-mode][Rust Mode]]
-
-#+begin_quote
-
-Emacs configuration for Rust.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package rust-mode
-    :custom
-    (rust-mode-treesitter-derive t)
-    :ensure t
-    )
-
-#+end_src
-
-** [[https://github.com/emacs-rustic/rustic][Rustic]]
-
-#+begin_quote
-
-Rust development environment for Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package rustic
-    :custom
-    (rustic-cargo-use-last-stored-arguments t)
-    (rustic-format-on-save nil)
-    (rustic-lsp-client 'eglot)
-    :ensure t
     )
 
 #+end_src

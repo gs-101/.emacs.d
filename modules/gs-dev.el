@@ -186,6 +186,23 @@
   (python-indent-guess-indent-offset-verbose nil)
   )
 
+(use-package rust-mode
+  :mode
+  ("\\.rs\\'" . rust-mode)
+  :custom
+  (rust-mode-treesitter-derive t)
+  :ensure t
+  )
+
+(use-package rustic
+  :after rust-mode
+  :custom
+  (rustic-cargo-use-last-stored-arguments t)
+  (rustic-format-on-save t)
+  (rustic-lsp-client 'eglot)
+  :ensure t
+  )
+
 (use-package apheleia
   :ensure t
   :hook
@@ -375,20 +392,6 @@
   :ensure t
   :init
   (projection-multi-embark-setup-command-map)
-  )
-
-(use-package rust-mode
-  :custom
-  (rust-mode-treesitter-derive t)
-  :ensure t
-  )
-
-(use-package rustic
-  :custom
-  (rustic-cargo-use-last-stored-arguments t)
-  (rustic-format-on-save nil)
-  (rustic-lsp-client 'eglot)
-  :ensure t
   )
 
 (use-package wakatime-mode
