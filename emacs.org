@@ -385,25 +385,6 @@ Commands for making and changing indentation in text. These are described in the
 
 #+end_src
 
-*** Lisp
-
-#+begin_quote
-
-Lisp editing for Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package lisp
-    :custom
-    (narrow-to-defun-include-comments t)
-    :defer t
-    :ensure nil
-    )
-
-#+end_src
-
 *** Minibuffer
 
 #+begin_src emacs-lisp
@@ -2540,6 +2521,19 @@ Collection of checkers for flymake.
     :ensure t
     :hook
     (after-init . flymake-collection-hook-setup)
+*** Lisp
+
+#+begin_quote
+
+Lisp editing for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package lisp
+    :custom
+    (narrow-to-defun-include-comments t)
     )
 
 #+end_src

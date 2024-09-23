@@ -99,13 +99,6 @@
   :defer t
   )
 
-(use-package lisp
-  :custom
-  (narrow-to-defun-include-comments t)
-  :defer t
-  :ensure nil
-  )
-
 (use-package minibuffer
   :custom
   (completions-detailed t) ;; 1

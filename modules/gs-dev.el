@@ -163,6 +163,13 @@
   :ensure t
   :hook
   (after-init . flymake-collection-hook-setup)
+
+(use-package lisp
+  :mode
+  ("\\.lisp\\'" . lisp-mode)
+  ("\\.lsp\\'" . lisp-mode)
+  :custom
+  (narrow-to-defun-include-comments t)
   )
 
 (use-package python
