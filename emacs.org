@@ -402,7 +402,6 @@ Commands for making and changing indentation in text. These are described in the
     (completions-group t) ;; 1
     (read-file-name-completion-ignore-case t) ;; 2
     (resize-mini-windows t)
-    :defer t
     :init
     (minibuffer-depth-indicate-mode)
     (minibuffer-electric-default-mode)
@@ -526,7 +525,6 @@ Highlight matching paren.
 Read passwords, possibly using a password cache.
 
 #+end_quote
-
 
 #+begin_src emacs-lisp
 
@@ -1194,9 +1192,6 @@ Key bindings for default packages.
   (use-package lisp
     :bind
     ("C-c p c" . check-parens)
-    :defer t
-    :demand t
-    :ensure nil
     )
 
 #+end_src
@@ -1561,8 +1556,6 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 #+end_src
 
 ** Startup
-
-This just makes the scratch buffer use Org Mode instead.
 
 #+begin_src emacs-lisp
 
@@ -5161,13 +5154,6 @@ A better Emacs help buffer.
     ([remap describe-key] . helpful-key)
     ([remap describe-symbol] . helpful-symbol)
     ([remap describe-variable] . helpful-variable)
-    :commands
-    (
-     helpful-callable
-     helpful-command
-     helpful-key
-     helpful-variable
-     )
     :ensure t
     )
 
@@ -5460,6 +5446,7 @@ FEAT: try to add vterm support to this package.
                                 "\\*xref\\*"
                                 ))
     :ensure t
+    :demand t
     :init
     (popper-mode)
     )

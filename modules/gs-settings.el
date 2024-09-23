@@ -106,7 +106,6 @@
   (completions-group t) ;; 1
   (read-file-name-completion-ignore-case t) ;; 2
   (resize-mini-windows t)
-  :defer t
   :init
   (minibuffer-depth-indicate-mode)
   (minibuffer-electric-default-mode)
