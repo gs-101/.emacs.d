@@ -80,7 +80,6 @@
    consult-gh
    consult-gh-repo-clone
    )
-  :vc (:url "https://github.com/armindarvish/consult-gh")
   :custom
   (consult-gh-code-action #'consult-gh--code-view-action)
   (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
