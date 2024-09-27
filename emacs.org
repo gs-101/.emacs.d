@@ -1792,7 +1792,7 @@ LaTeX Backend for Org Export Engine.
 
 #+begin_src bash
 
-  sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm
+  sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm texlive-stackengine texlive-pgfplots
 
 #+end_src
 
