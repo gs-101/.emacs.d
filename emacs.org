@@ -1,3 +1,5 @@
+#+title: Emacs Configuration
+
 * Early Init
 :PROPERTIES:
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./early-init.el
