@@ -195,6 +195,12 @@
   :ensure t
   )
 
+(use-package casual-editkit
+  :bind
+  ("M-O" . casual-editkit-main-tmenu)
+  :ensure t
+  )
+
 (use-package casual-ibuffer
   :bind
   (

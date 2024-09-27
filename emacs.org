@@ -1442,6 +1442,18 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 #+end_src
 
+*** [[https://github.com/kickingvegas/casual-editkit][EditKit]]
+
+#+begin_src emacs-lisp
+
+  (use-package casual-editkit
+    :bind
+    ("M-O" . casual-editkit-main-tmenu)
+    :ensure t
+    )
+
+#+end_src
+
 *** [[https://github.com/kickingvegas/casual-ibuffer][iBuffer]]
 
 #+begin_src emacs-lisp
