@@ -66,7 +66,7 @@
   )
 
 (use-package consult-dir
-  :requires consult
+  :after consult
   :bind
   ([remap list-directory] . consult-dir)
   ([remap dired-jump] . consult-dir-jump-file)

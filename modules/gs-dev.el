@@ -137,7 +137,6 @@
 
 (use-package consult-compile-multi
   :requires (compile-multi consult)
-  :after compile-multi
   :ensure t
   :init
   (consult-compile-multi-mode)
@@ -145,7 +144,6 @@
 
 (use-package compile-multi-embark
   :requires (compile-multi embark)
-  :after compile-multi
   :ensure t
   :init
   (compile-multi-embark-mode)
@@ -195,7 +193,7 @@
   )
 
 (use-package rustic
-  :after rust-mode
+  :requires rust-mode
   :custom
   (rustic-cargo-use-last-stored-arguments t)
   (rustic-format-on-save t)
@@ -259,7 +257,6 @@
   )
 
 (use-package gptel-openai
-  :requires gptel
   :after gptel
   :config
   (gptel-make-openai "Github Models"
@@ -276,14 +273,12 @@
 
 (use-package gptel-quick
   :requires gptel
-  :after gptel
   :vc (:url "https://github.com/karthink/gptel-quick")
   :ensure t
   )
 
 (use-package gptel-quick
-  :requires (gptel-quick embark)
-  :after gptel
+  :after (gptel-quick embark)
   :bind
   (
    :map embark-general-map
@@ -293,12 +288,10 @@
 
 (use-package elysium
   :requires gptel
-  :after gptel
   :ensure t
   )
 
 (use-package smerge-mode
-  :requires elysium
   :after elysium
   :hook
   (prog-mode . smerge-mode)
@@ -328,7 +321,6 @@
 
 (use-package leetcode
   :requires leetcode
-  :after leetcode
   :custom
   (leetcode-save-solutions t)
   (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
@@ -350,14 +342,12 @@
   )
 
 (use-package forge
-  :requires magit
   :after magit
   :ensure t
   )
 
 (use-package magit-todos
-  :requires hl-todo
-  :after magit
+  :requires (magit hl-todo)
   :ensure t
   )
 
@@ -388,7 +378,6 @@
 
 (use-package projection-multi-embark
   :requires (projection compile-multi embark)
-  :after embark
   :ensure t
   :init
   (projection-multi-embark-setup-command-map)

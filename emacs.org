@@ -2489,7 +2489,6 @@ Multi target interface to compile.
 
   (use-package consult-compile-multi
     :requires (compile-multi consult)
-    :after compile-multi
     :ensure t
     :init
     (consult-compile-multi-mode)
@@ -2503,7 +2502,6 @@ Multi target interface to compile.
 
   (use-package compile-multi-embark
     :requires (compile-multi embark)
-    :after compile-multi
     :ensure t
     :init
     (compile-multi-embark-mode)
@@ -2639,7 +2637,7 @@ Rust development environment for Emacs.
 #+begin_src emacs-lisp
 
   (use-package rustic
-    :after rust-mode
+    :requires rust-mode
     :custom
     (rustic-cargo-use-last-stored-arguments t)
     (rustic-format-on-save t)
@@ -2785,7 +2783,6 @@ Try, test, and deploy from a wide range of model types, sizes, and specializatio
 #+begin_src emacs-lisp
 
   (use-package gptel-openai
-    :requires gptel
     :after gptel
     :config
     (gptel-make-openai "Github Models"
@@ -2814,7 +2811,6 @@ Quick LLM lookups in Emacs.
 
   (use-package gptel-quick
     :requires gptel
-    :after gptel
     :vc (:url "https://github.com/karthink/gptel-quick")
     :ensure t
     )
@@ -2826,8 +2822,7 @@ Quick LLM lookups in Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel-quick
-    :requires (gptel-quick embark)
-    :after gptel
+    :after (gptel-quick embark)
     :bind
     (
      :map embark-general-map
@@ -2849,7 +2844,6 @@ Automatically apply AI-generated code changes in Emacs.
 
   (use-package elysium
     :requires gptel
-    :after gptel
     :ensure t
     )
 
@@ -2860,7 +2854,6 @@ Automatically apply AI-generated code changes in Emacs.
 #+begin_src emacs-lisp
 
   (use-package smerge-mode
-    :requires elysium
     :after elysium
     :hook
     (prog-mode . smerge-mode)
@@ -2930,7 +2923,6 @@ An Emacs LeetCode client.
 
   (use-package leetcode
     :requires leetcode
-    :after leetcode
     :custom
     (leetcode-save-solutions t)
     (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
@@ -2978,7 +2970,6 @@ To make use of this package [[https://magit.vc/manual/forge/Token-Creation.html]
 #+begin_src emacs-lisp
 
   (use-package forge
-    :requires magit
     :after magit
     :ensure t
     )
@@ -2996,8 +2987,7 @@ Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
 #+begin_src emacs-lisp
 
   (use-package magit-todos
-    :requires hl-todo
-    :after magit
+    :requires (magit hl-todo)
     :ensure t
     )
 
@@ -3070,7 +3060,6 @@ Projectile like project management library built on Emacs project.el.
 
   (use-package projection-multi-embark
     :requires (projection compile-multi embark)
-    :after embark
     :ensure t
     :init
     (projection-multi-embark-setup-command-map)
@@ -3575,7 +3564,7 @@ Insert paths into the minibuffer prompt in Emacs.
 #+begin_src emacs-lisp
 
   (use-package consult-dir
-    :requires consult
+    :after consult
     :bind
     ([remap list-directory] . consult-dir)
     ([remap dired-jump] . consult-dir-jump-file)
