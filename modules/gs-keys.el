@@ -51,6 +51,11 @@
   ("C-h C-b" . describe-prefix-bindings)
   )
 
+(use-package ibuffer
+  :bind
+  ("C-x B" . ibuffer)
+  )
+
 (use-package isearch
   :bind
   ("C-s" . isearch-forward-word)

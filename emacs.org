@@ -1182,6 +1182,17 @@ Key bindings for default packages.
 
 #+end_src
 
+** iBuffer
+
+#+begin_src emacs-lisp
+
+  (use-package ibuffer
+    :bind
+    ("C-x B" . ibuffer)
+    )
+
+#+end_src
+
 ** iSearch
 
 #+begin_src emacs-lisp
