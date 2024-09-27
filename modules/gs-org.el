@@ -246,6 +246,13 @@
   (org-mode . org-appear-mode)
   )
 
+(use-package toc-org
+  :ensure t
+  :hook
+  (org-mode . toc-org-mode)
+  (markdown-mode . toc-org-mode)
+  )
+
 (use-package org-transclusion
   :ensure t
   :hook
