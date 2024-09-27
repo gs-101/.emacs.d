@@ -384,6 +384,8 @@
   )
 
 (use-package wakatime-mode
+  :custom
+  (wakatime-api-key (auth-source-pick-first-password :host "wakatime.com"))
   :ensure t
   :hook
   (prog-mode . global-wakatime-mode)

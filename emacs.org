@@ -3123,6 +3123,8 @@ Emacs plugin for automatic time tracking and metrics generated from your program
 #+begin_src emacs-lisp
 
   (use-package wakatime-mode
+    :custom
+    (wakatime-api-key (auth-source-pick-first-password :host "wakatime.com"))
     :ensure t
     :hook
     (prog-mode . global-wakatime-mode)
