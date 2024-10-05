@@ -74,7 +74,7 @@
   )
 
 (use-package consult-gh
-  :requires consult
+  :after consult
   :commands
   (
    consult-gh
@@ -84,20 +84,22 @@
   (consult-gh-code-action #'consult-gh--code-view-action)
   (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
   (consult-gh-default-orgs-list "gs-101")
-  (consult-gh-pr-action #'consult-gh-forge--pr-view-action)
   :ensure t
   )
 
 (use-package consult-gh-embark
-  :requires (consult-gh embark)
+  :after consult-gh embark
+  :ensure t
   )
 
 (use-package consult-gh-forge
-  :requires (consult-gh forge)
+  :after consult-gh forge
   :custom
   (consult-gh-file-action #'consult-gh--files-view-action)
   (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
+  (consult-gh-pr-action #'consult-gh--forge-pr-view-action)
   (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
+  :ensure t
   )
 
 (use-package consult-gh-transient
@@ -110,7 +112,7 @@
 
 (use-package consult-notes
   :requires org-roam
-  :init
+  :config
   (consult-notes-org-roam-mode)
   )
 

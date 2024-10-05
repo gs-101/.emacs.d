@@ -89,13 +89,8 @@
   )
 
 (use-package imenu
-  :commands
-  (
-   imenu
-   )
   :custom
   (imenu-space-replacement nil)
-  :defer t
   )
 
 (use-package indent
@@ -228,7 +223,7 @@
   (add-to-list 'recentf-exclude
                (recentf-expand-file-name no-littering-etc-directory)
                (recentf-expand-file-name no-littering-var-directory))
-  :init
+  :config
   (recentf-mode)
   )
 

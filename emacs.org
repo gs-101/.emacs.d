@@ -751,7 +751,7 @@ Keep track of recently opened files.
     (add-to-list 'recentf-exclude
                  (recentf-expand-file-name no-littering-etc-directory)
                  (recentf-expand-file-name no-littering-var-directory))
-    :init
+    :config
     (recentf-mode)
     )
 
@@ -2448,10 +2448,11 @@ tree-sitter utilities.
                    (typescript-mode . typescript-ts-mode)
                    ))
       (add-to-list 'major-mode-remap-alist mapping))
-    :init
+    :custom
+    (treesit-font-lock-level 4)
+    :config
     (os/setup-install-grammars)
     )
-
 #+end_src
 
 *** [[https://www.ovistoica.com/blog/2024-7-05-modern-emacs-typescript-web-tsx-config][Credits]]
@@ -2534,9 +2535,9 @@ Multi target interface to compile.
 #+begin_src emacs-lisp
 
   (use-package consult-compile-multi
-    :requires (compile-multi consult)
+    :after compile-multi consult
     :ensure t
-    :init
+    :config
     (consult-compile-multi-mode)
     )
 
@@ -2856,7 +2857,7 @@ Quick LLM lookups in Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel-quick
-    :requires gptel
+    :after gptel
     :vc (:url "https://github.com/karthink/gptel-quick")
     :ensure t
     )
@@ -2868,7 +2869,7 @@ Quick LLM lookups in Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel-quick
-    :after (gptel-quick embark)
+    :after gptel-quick embark
     :bind
     (
      :map embark-general-map
@@ -2889,7 +2890,10 @@ Automatically apply AI-generated code changes in Emacs.
 #+begin_src emacs-lisp
 
   (use-package elysium
-    :requires gptel
+    :commands
+    (
+     elysium-query
+     )
     :ensure t
     )
 
@@ -3060,6 +3064,7 @@ A linting library for elisp package metadata.
 #+begin_src emacs-lisp
 
   (use-package package-lint-flymake
+    :after flymake
     :config
     (package-lint-flymake-setup)
     :ensure t
@@ -3078,9 +3083,15 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
   (use-package projection
+    :demand t
     :ensure t
     :bind-keymap
-    ("C-x P" . projection-map)
+    ("C-c p" . projection-map)
+    :bind
+    (
+     :map projection-map
+     ("C" . projection-commands-build-project)
+     )
     :init
     (global-projection-hook-mode)
     )
@@ -3091,12 +3102,16 @@ Projectile like project management library built on Emacs project.el.
 
 #+begin_src emacs-lisp
 
-  (use-package projection-multi
-    :requires (projection compile-multi)
-    :ensure t
-    :bind
-    ([remap project-compile] . projection-multi-compile)
-    )
+   (use-package projection-multi
+     :requires projection
+     :after compile-multi
+     :ensure t
+     :bind 
+     (
+      :map projection-map
+      ("c" . projection-multi-compile)
+      )
+     )
 
 #+end_src
 
@@ -3632,7 +3647,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh
-    :requires consult
+    :after consult
     :commands
     (
      consult-gh
@@ -3642,7 +3657,6 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
     (consult-gh-code-action #'consult-gh--code-view-action)
     (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
     (consult-gh-default-orgs-list "gs-101")
-    (consult-gh-pr-action #'consult-gh-forge--pr-view-action)
     :ensure t
     )
 
@@ -3653,7 +3667,8 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-embark
-    :requires (consult-gh embark)
+    :after consult-gh embark
+    :ensure t
     )
 
 #+end_src
@@ -3663,11 +3678,13 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-forge
-    :requires (consult-gh forge)
+    :after consult-gh forge
     :custom
     (consult-gh-file-action #'consult-gh--files-view-action)
     (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
+    (consult-gh-pr-action #'consult-gh--forge-pr-view-action)
     (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
+    :ensure t
     )
 
 #+end_src
@@ -3704,7 +3721,7 @@ Use consult to search notes.
 
   (use-package consult-notes
     :requires org-roam
-    :init
+    :config
     (consult-notes-org-roam-mode)
     )
 
@@ -5099,14 +5116,13 @@ A startup screen extracted from Spacemacs.
 #+begin_src emacs-lisp
 
   (use-package dashboard-widgets
-    :requires dashboard
-    :after nerd-icons
+    :after dashboard nerd-icons
     :custom
     (dashboard-display-icons-p t)
     (dashboard-icon-type 'nerd-icons)
     (dashboard-set-file-icons t)
     (dashboard-set-heading-icons t)
-    :init
+    :config
     (dashboard-modify-heading-icons '(
                                       (agenda . "nf-oct-calendar")
                                       (projects . "nf-oct-project")
@@ -5121,8 +5137,7 @@ A startup screen extracted from Spacemacs.
 #+begin_src emacs-lisp
 
   (use-package dashboard-widgets
-    :requires dashboard
-    :after nerd-icons
+    :after dashboard nerd-icons
     :custom
     (dashboard-navigator-buttons
      `(;; line1
@@ -5435,7 +5450,7 @@ Use nerd-icons for completion.
   (use-package nerd-icons-completion
     :requires nerd-icons
     :ensure t
-    :init
+    :config
     (nerd-icons-completion-mode)
     )
 
@@ -5458,7 +5473,8 @@ Use nerd-icons for completion.
 #+begin_src emacs-lisp
 
   (use-package compile-multi-nerd-icons
-    :requires (nerd-icons compile-multi)
+    :requires nerd-icons
+    :after compile-multi
     :ensure t
     )
 

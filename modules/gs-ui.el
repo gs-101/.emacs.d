@@ -232,14 +232,13 @@
   )
 
 (use-package dashboard-widgets
-  :requires dashboard
-  :after nerd-icons
+  :after dashboard nerd-icons
   :custom
   (dashboard-display-icons-p t)
   (dashboard-icon-type 'nerd-icons)
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
-  :init
+  :config
   (dashboard-modify-heading-icons '(
                                     (agenda . "nf-oct-calendar")
                                     (projects . "nf-oct-project")
@@ -248,8 +247,7 @@
   )
 
 (use-package dashboard-widgets
-  :requires dashboard
-  :after nerd-icons
+  :after dashboard nerd-icons
   :custom
   (dashboard-navigator-buttons
    `(;; line1
@@ -445,7 +443,7 @@
 (use-package nerd-icons-completion
   :requires nerd-icons
   :ensure t
-  :init
+  :config
   (nerd-icons-completion-mode)
   )
 
@@ -456,7 +454,8 @@
   )
 
 (use-package compile-multi-nerd-icons
-  :requires (nerd-icons compile-multi)
+  :requires nerd-icons
+  :after compile-multi
   :ensure t
   )
 

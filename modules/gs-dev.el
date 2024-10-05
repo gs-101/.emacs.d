@@ -85,7 +85,9 @@
                  (typescript-mode . typescript-ts-mode)
                  ))
     (add-to-list 'major-mode-remap-alist mapping))
-  :init
+  :custom
+  (treesit-font-lock-level 4)
+  :config
   (os/setup-install-grammars)
   )
 
@@ -137,16 +139,16 @@
   )
 
 (use-package consult-compile-multi
-  :requires (compile-multi consult)
+  :after compile-multi consult
   :ensure t
-  :init
+  :config
   (consult-compile-multi-mode)
   )
 
 (use-package compile-multi-embark
-  :requires (compile-multi embark)
+  :after compile-multi embark
   :ensure t
-  :init
+  :config
   (compile-multi-embark-mode)
   )
 
@@ -273,13 +275,13 @@
 )
 
 (use-package gptel-quick
-  :requires gptel
+  :after gptel
   :vc (:url "https://github.com/karthink/gptel-quick")
   :ensure t
   )
 
 (use-package gptel-quick
-  :after (gptel-quick embark)
+  :after gptel-quick embark
   :bind
   (
    :map embark-general-map
@@ -288,7 +290,10 @@
   )
 
 (use-package elysium
-  :requires gptel
+  :commands
+  (
+   elysium-query
+   )
   :ensure t
   )
 
@@ -357,30 +362,42 @@
   )
 
 (use-package package-lint-flymake
+  :after flymake
   :config
   (package-lint-flymake-setup)
   :ensure t
   )
 
 (use-package projection
+  :demand t
   :ensure t
   :bind-keymap
-  ("C-x P" . projection-map)
+  ("C-c p" . projection-map)
+  :bind
+  (
+   :map projection-map
+   ("C" . projection-commands-build-project)
+   )
   :init
   (global-projection-hook-mode)
   )
 
 (use-package projection-multi
-  :requires (projection compile-multi)
+  :requires projection
+  :after compile-multi
   :ensure t
   :bind
-  ([remap project-compile] . projection-multi-compile)
+  (
+   :map projection-map
+   ("c" . projection-multi-compile)
+   )
   )
 
 (use-package projection-multi-embark
-  :requires (projection compile-multi embark)
+  :requires projection
+  :after compile-multi embark
   :ensure t
-  :init
+  :config
   (projection-multi-embark-setup-command-map)
   )
 
