@@ -316,4 +316,13 @@
   :ensure t
   )
 
+(use-package move-text
+  :bind
+  ("M-<up>" . move-text-up)
+  ("M-<down>" . move-text-down)
+  ("M-<left>" . move-text-left)
+  ("M-<right>". move-text-right)
+  :ensure t
+  )
+
 (provide 'gs-keys)
