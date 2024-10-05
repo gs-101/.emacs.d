@@ -2462,6 +2462,34 @@ tree-sitter utilities.
 
 *** [[https://www.ovistoica.com/blog/2024-7-05-modern-emacs-typescript-web-tsx-config][Credits]]
 
+*** [[https://github.com/emacs-tree-sitter/ts-fold][Fold]]
+
+#+begin_quote
+
+Code folding using treesit.el.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package treesit-fold
+    :vc (:url "https://github.com/emacs-tree-sitter/treesit-fold")
+    :bind
+    (
+     :map prog-mode-map
+     ("C-<tab>" . treesit-fold-toggle)
+     )
+    :custom
+    (treesit-fold-replacement "…")
+    :demand t
+    :ensure t
+    :init
+    (global-treesit-fold-indicators-mode)
+    (treesit-fold-line-comment-mode)
+    )
+
+#+end_src
+
 ** Compile
 
 #+begin_quote

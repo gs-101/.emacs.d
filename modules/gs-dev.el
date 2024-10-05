@@ -91,6 +91,22 @@
   (os/setup-install-grammars)
   )
 
+(use-package treesit-fold
+  :vc (:url "https://github.com/emacs-tree-sitter/treesit-fold")
+  :bind
+  (
+   :map prog-mode-map
+   ("C-<tab>" . treesit-fold-toggle)
+   )
+  :custom
+  (treesit-fold-replacement "…")
+  :demand t
+  :ensure t
+  :init
+  (global-treesit-fold-indicators-mode)
+  (treesit-fold-line-comment-mode)
+  )
+
 (use-package compile
   :bind
   (
