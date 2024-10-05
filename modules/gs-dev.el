@@ -204,6 +204,12 @@
   :ensure t
   )
 
+(use-package yaml-mode
+  :mode
+  ("\\.yaml\\'" . yaml-mode)
+  :ensure t
+  )
+
 (use-package apheleia
   :ensure t
   :hook
