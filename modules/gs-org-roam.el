@@ -6,6 +6,7 @@
   ("C-c r i" . org-roam-node-insert)
   :custom
   (org-roam-completion-everywhere t)
+  (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/Org Roam")))
   :demand t
   :ensure t
   :init
@@ -16,23 +17,27 @@
   :custom
   (org-roam-capture-templates '(
                                 ("b" "book notes" plain
-                                 (file "~/org-roam/templates/book_notes.org")
+                                 (file "~/Documents/Org Roam/Templates/book_notes.org")
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :book_notes:\n\n")
                                  :unnarrowed t)
                                 ("d" "default" plain
-                                 (file "~/org-roam/templates/default.org")
+                                 (file "~/Documents/Org Roam/Templates/default.org")
+                                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
+                                 :unnarrowed t)
+                                ("p" "padrão" plain
+                                 (file "~/Documents/Org Roam/Templates/padrão.org")
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
                                  :unnarrowed t)
                                 ("n" "notegpt.io" plain
-                                 (file "~/org-roam/templates/notegpt.io.org")
+                                 (file "~/Documents/Org Roam/Templates/notegpt.io.org")
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt_io:hacker_news:\n\n")
                                  :unnarrowed t)
                                 ("r" "redação" plain
-                                 (file "~/org-roam/templates/redação.org")
+                                 (file "~/Documents/Org Roam/Templates/redação.org")
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :redação:\n\n")
                                  :unnarrowed t)
                                 ("s" "summarize.ing" plain
-                                 (file "~/org-roam/templates/summarize.ing.org")
+                                 (file "~/Documents/Org Roam/Templates/summarize.ing.org")
                                  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
                                  :unnarrowed t)
                                 ))
