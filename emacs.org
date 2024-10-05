@@ -369,13 +369,8 @@ Purpose of this package:
 #+begin_src emacs-lisp
 
   (use-package imenu
-    :commands
-    (
-     imenu
-     )
     :custom
     (imenu-space-replacement nil)
-    :defer t
     )
 
 #+end_src
@@ -1083,7 +1078,53 @@ Key bindings for default packages.
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
+** Apropos
+
+#+begin_src emacs-lisp
+
+  (use-package apropos
+    :bind
+    ("<f1> a" . apropos)
+    ("<f1> A" . apropos-documentation)
+    )
+
+#+end_src
+
+** Custom
+
+#+begin_src emacs-lisp
+
+  (use-package custom
+    :bind
+    ("<f1> t" . load-theme)
+    )
+
+#+end_src
+
+** Describe Text
+
+#+begin_src emacs-lisp
+
+  (use-package descr-text
+    :bind
+    ("<f1> '". describe-char)
+    )
+
+#+end_src
+
 ** Development
+
+*** Compile
+
+#+begin_src emacs-lisp
+
+  (use-package compile
+    :bind
+    ("C-c c c" . compile)
+    ("C-c c C" . recompile)
+    )
+
+#+end_src
 
 *** Eglot
 
@@ -1093,7 +1134,12 @@ Key bindings for default packages.
     :bind
     (
      :map prog-mode-map
-     ("C-c C-x e" . eglot)
+     ("C-c c e" . eglot)
+     :map eglot-mode-map
+     ("C-c c a" . eglot-code-actions)
+     ("C-c c i" . eglot-find-implementation)
+     ("C-c c t" . eglot-find-typeDefinition)
+     ("C-c c f" . eglot-format)
      )
     )
 
@@ -1107,8 +1153,19 @@ Key bindings for default packages.
     :bind
     (
      :map prog-mode-map
-     ("C-c C-x f" . flymake-start)
+     ("C-c t f" . flymake-start)
      )
+    )
+
+#+end_src
+
+** Electric
+
+#+begin_src emacs-lisp
+
+  (use-package electric
+    :bind
+    ("C-j" . electric-newline-and-maybe-indent)
     )
 
 #+end_src
@@ -1119,8 +1176,10 @@ Key bindings for default packages.
 
   (use-package emacs
     :bind
+    ("C-c q f" . delete-frame)
+    ("C-c c e" . eval-buffer)
+    ("C-c c E" . eval-region)
     ("C-c i c" . insert-char)
-    ("C-c k e" . kill-emacs)
     )
 
 #+end_src
@@ -1154,8 +1213,20 @@ Key bindings for default packages.
 
   (use-package files
     :bind
+    ("C-c q K" . save-buffers-kill-emacs)
     ("C-c f r" . recover-this-file)
     ("C-c b r" . revert-buffer)
+    )
+
+#+end_src
+
+** Find Function
+
+#+begin_src emacs-lisp
+
+  (use-package find-func
+    :bind
+    ("<f1> P" . find-library)
     )
 
 #+end_src
@@ -1179,7 +1250,19 @@ Key bindings for default packages.
 
   (use-package help
     :bind
+    ("<f1> M" . describe-minor-mode)
     ("C-h C-b" . describe-prefix-bindings)
+    )
+
+#+end_src
+
+** Help Functions
+
+#+begin_src emacs-lisp
+
+  (use-package help-fns
+    :bind
+    ("<f1> F" . describe-face)
     )
 
 #+end_src
@@ -1195,6 +1278,17 @@ Key bindings for default packages.
 
 #+end_src
 
+** iMenu
+
+#+begin_src emacs-lisp
+
+  (use-package imenu
+    :bind
+    ("C-'" . imenu)
+    )
+
+#+end_src
+
 ** iSearch
 
 #+begin_src emacs-lisp
@@ -1204,17 +1298,6 @@ Key bindings for default packages.
     ("C-s" . isearch-forward-word)
     :custom
     (lazy-highlight-initial-delay 0.0)
-    )
-
-#+end_src
-
-** Lisp
-
-#+begin_src emacs-lisp
-
-  (use-package lisp
-    :bind
-    ("C-c p c" . check-parens)
     )
 
 #+end_src
@@ -1351,6 +1434,28 @@ Key bindings for default packages.
 
 #+end_src
 
+** Paragraphs
+
+#+begin_src emacs-lisp
+
+  (use-package paragraphs
+    :bind
+    ("M-h" . mark-paragraph)
+    )
+
+#+end_src
+
+** Profiler
+
+#+begin_src emacs-lisp
+
+  (use-package profiler
+    :bind
+    ("<f1> T" . profiler-start)
+    )
+
+#+end_src
+
 ** Sort
 
 #+begin_src emacs-lisp
@@ -1358,6 +1463,17 @@ Key bindings for default packages.
   (use-package sort
     :bind
     ("C-c l d" . delete-duplicate-lines)
+    )
+
+#+end_src
+
+** Simple
+
+#+begin_src emacs-lisp
+
+  (use-package simple
+    :bind
+    ("C-?" . undo-redo)
     )
 
 #+end_src
@@ -2581,9 +2697,9 @@ Multi target interface to compile.
 #+begin_src emacs-lisp
 
   (use-package compile-multi-embark
-    :requires (compile-multi embark)
+    :after compile-multi embark
     :ensure t
-    :init
+    :config
     (compile-multi-embark-mode)
     )
 
@@ -3061,12 +3177,19 @@ It's Magit! A Git Porcelain inside Emacs.
 #+begin_src emacs-lisp
 
   (use-package magit
-    :commands
-    (
-     magit
-     magit-clone
-     magit-status
-     )
+    :bind
+    ("C-c v B" . magit-blame)
+    ("C-c v C" . magit-clone)
+    ("C-c v /" . magit-dispatch)
+    ("C-c v F" . magit-fetch)
+    ("C-c v x" . magit-file-delete)
+    ("C-c v ." . magit-file-dispatch)
+    ("C-c v L" . magit-log)
+    ("C-c v g" . magit-status)
+    ("C-c v G" . magit-status-here)
+    ("C-c v c c" . magit-commit)
+    ("C-c v c f" . magit-commit-fixup)
+    ("C-c v l s" . magit-list-submodules)
     :custom
     (magit-diff-refine-hunk t)
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
@@ -3091,6 +3214,17 @@ To make use of this package [[https://magit.vc/manual/forge/Token-Creation.html]
 
   (use-package forge
     :after magit
+    :bind
+    ("C-c v '". forge-dispatch)
+    ("C-c v c i" . forge-create-issue)
+    ("C-c v c p" . forge-create-pullreq)
+    ("C-c v f c" . forge-browse-commit)
+    ("C-c v f i" . forge-browse-issue)
+    ("C-c v f p" . forge-browse-pullreq)
+    ("C-c v l i" . forge-list-issues)
+    ("C-c v l n" . forge-list-notifications)
+    ("C-c v l p" . forge-list-pullreqs)
+    ("C-c v l r" . forge-list-repositories)
     :ensure t
     )
 
@@ -3176,7 +3310,7 @@ Projectile like project management library built on Emacs project.el.
      :requires projection
      :after compile-multi
      :ensure t
-     :bind 
+     :bind
      (
       :map projection-map
       ("c" . projection-multi-compile)
@@ -3189,12 +3323,13 @@ Projectile like project management library built on Emacs project.el.
 
 #+begin_src emacs-lisp
 
-  (use-package projection-multi-embark
-    :requires (projection compile-multi embark)
-    :ensure t
-    :init
-    (projection-multi-embark-setup-command-map)
-    )
+    (use-package projection-multi-embark
+      :requires projection
+      :after compile-multi embark
+      :ensure t
+      :config
+      (projection-multi-embark-setup-command-map)
+      )
 
 #+end_src
 
@@ -3811,8 +3946,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     :bind
     (
      ([remap describe-bindings]. embark-bindings)
-     ("C-c e a" . embark-act)
-     ("C-c e d" . embark-dwim)
+     ("C-;" . embark-act)
      )
     :config
     ;; Hide the mode line of the Embark live/completions buffers

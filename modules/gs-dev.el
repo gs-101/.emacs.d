@@ -362,12 +362,19 @@
   )
 
 (use-package magit
-  :commands
-  (
-   magit
-   magit-clone
-   magit-status
-   )
+  :bind
+  ("C-c v B" . magit-blame)
+  ("C-c v C" . magit-clone)
+  ("C-c v /" . magit-dispatch)
+  ("C-c v F" . magit-fetch)
+  ("C-c v x" . magit-file-delete)
+  ("C-c v ." . magit-file-dispatch)
+  ("C-c v L" . magit-log)
+  ("C-c v g" . magit-status)
+  ("C-c v G" . magit-status-here)
+  ("C-c v c c" . magit-commit)
+  ("C-c v c f" . magit-commit-fixup)
+  ("C-c v l s" . magit-list-submodules)
   :custom
   (magit-diff-refine-hunk t)
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
@@ -378,6 +385,17 @@
 
 (use-package forge
   :after magit
+  :bind
+  ("C-c v '". forge-dispatch)
+  ("C-c v c i" . forge-create-issue)
+  ("C-c v c p" . forge-create-pullreq)
+  ("C-c v f c" . forge-browse-commit)
+  ("C-c v f i" . forge-browse-issue)
+  ("C-c v f p" . forge-browse-pullreq)
+  ("C-c v l i" . forge-list-issues)
+  ("C-c v l n" . forge-list-notifications)
+  ("C-c v l p" . forge-list-pullreqs)
+  ("C-c v l r" . forge-list-repositories)
   :ensure t
   )
 

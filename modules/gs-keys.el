@@ -1,10 +1,37 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package apropos
+  :bind
+  ("<f1> a" . apropos)
+  ("<f1> A" . apropos-documentation)
+  )
+
+(use-package custom
+  :bind
+  ("<f1> t" . load-theme)
+  )
+
+(use-package descr-text
+  :bind
+  ("<f1> '". describe-char)
+  )
+
+(use-package compile
+  :bind
+  ("C-c c c" . compile)
+  ("C-c c C" . recompile)
+  )
+
 (use-package eglot
   :bind
   (
    :map prog-mode-map
-   ("C-c C-x e" . eglot)
+   ("C-c c e" . eglot)
+   :map eglot-mode-map
+   ("C-c c a" . eglot-code-actions)
+   ("C-c c i" . eglot-find-implementation)
+   ("C-c c t" . eglot-find-typeDefinition)
+   ("C-c c f" . eglot-format)
    )
   )
 
@@ -12,14 +39,21 @@
   :bind
   (
    :map prog-mode-map
-   ("C-c C-x f" . flymake-start)
+   ("C-c t f" . flymake-start)
    )
+  )
+
+(use-package electric
+  :bind
+  ("C-j" . electric-newline-and-maybe-indent)
   )
 
 (use-package emacs
   :bind
+  ("C-c q f" . delete-frame)
+  ("C-c c e" . eval-buffer)
+  ("C-c c E" . eval-region)
   ("C-c i c" . insert-char)
-  ("C-c k e" . kill-emacs)
   )
 
 (use-package emoji
@@ -35,8 +69,14 @@
 
 (use-package files
   :bind
+  ("C-c q K" . save-buffers-kill-emacs)
   ("C-c f r" . recover-this-file)
   ("C-c b r" . revert-buffer)
+  )
+
+(use-package find-func
+  :bind
+  ("<f1> P" . find-library)
   )
 
 (use-package grep
@@ -48,7 +88,13 @@
 
 (use-package help
   :bind
+  ("<f1> M" . describe-minor-mode)
   ("C-h C-b" . describe-prefix-bindings)
+  )
+
+(use-package help-fns
+  :bind
+  ("<f1> F" . describe-face)
   )
 
 (use-package ibuffer
@@ -56,16 +102,16 @@
   ("C-x B" . ibuffer)
   )
 
+(use-package imenu
+  :bind
+  ("C-'" . imenu)
+  )
+
 (use-package isearch
   :bind
   ("C-s" . isearch-forward-word)
   :custom
   (lazy-highlight-initial-delay 0.0)
-  )
-
-(use-package lisp
-  :bind
-  ("C-c p c" . check-parens)
   )
 
 (use-package org
@@ -146,9 +192,24 @@
    )
   )
 
+(use-package paragraphs
+  :bind
+  ("M-h" . mark-paragraph)
+  )
+
+(use-package profiler
+  :bind
+  ("<f1> T" . profiler-start)
+  )
+
 (use-package sort
   :bind
   ("C-c l d" . delete-duplicate-lines)
+  )
+
+(use-package simple
+  :bind
+  ("C-?" . undo-redo)
   )
 
 (use-package casual-agenda

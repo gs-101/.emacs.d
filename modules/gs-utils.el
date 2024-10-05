@@ -120,8 +120,7 @@
   :bind
   (
    ([remap describe-bindings]. embark-bindings)
-   ("C-c e a" . embark-act)
-   ("C-c e d" . embark-dwim)
+   ("C-;" . embark-act)
    )
   :config
   ;; Hide the mode line of the Embark live/completions buffers
