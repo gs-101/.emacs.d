@@ -210,6 +210,13 @@
   :ensure t
   )
 
+(use-package aggressive-indent
+  :ensure t
+  :hook
+  (css-mode . aggressive-indent-mode)
+  (emacs-lisp-mode . aggressive-indent-mode)
+  )
+
 (use-package apheleia
   :ensure t
   :hook
