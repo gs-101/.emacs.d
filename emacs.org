@@ -5258,6 +5258,24 @@ Extra Emacs font lock rules for a more colourful dired.
 
 #+end_src
 
+** [[https://github.com/casouri/eldoc-box][ElDoc Box]]
+
+#+begin_quote
+
+Childframe doc for eglot and anything that uses eldoc.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package eldoc-box
+    :after eldoc
+    :ensure t
+    :hook
+    (eglot-managed-mode . eldoc-box-hover-mode)
+    )
+
+#+end_src
 
 ** [[https://github.com/roman/golden-ratio.el][Golden Ratio]]
 

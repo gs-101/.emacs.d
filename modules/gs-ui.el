@@ -312,6 +312,13 @@
   (dired-mode . diredfl-global-mode)
   )
 
+(use-package eldoc-box
+  :after eldoc
+  :ensure t
+  :hook
+  (eglot-managed-mode . eldoc-box-hover-mode)
+  )
+
 (use-package golden-ratio
   :ensure t
   :init
