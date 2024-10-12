@@ -75,6 +75,7 @@ Variables used to reference to specific directories, using ~convert-standard-fil
   (require 'gs-keys)
   (require 'gs-org)
   (require 'gs-org-roam)
+  (require 'gs-citar)
   (require 'gs-cmd)
   (require 'gs-dev)
   (require 'gs-completion)
@@ -2211,35 +2212,36 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 #+begin_src emacs-lisp
 
-  (use-package org-roam
-    :custom
-    (org-roam-capture-templates '(
-                                  ("b" "book notes" plain
-                                   (file "~/Documents/Org Roam/Templates/book_notes.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :book_notes:\n\n")
-                                   :unnarrowed t)
-                                  ("d" "default" plain
-                                   (file "~/Documents/Org Roam/Templates/default.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
-                                   :unnarrowed t)
-                                  ("p" "padrão" plain
-                                   (file "~/Documents/Org Roam/Templates/padrão.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
-                                   :unnarrowed t)
-                                  ("n" "notegpt.io" plain
-                                   (file "~/Documents/Org Roam/Templates/notegpt.io.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt_io:hacker_news:\n\n")
-                                   :unnarrowed t)
-                                  ("r" "redação" plain
-                                   (file "~/Documents/Org Roam/Templates/redação.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :redação:\n\n")
-                                   :unnarrowed t)
-                                  ("s" "summarize.ing" plain
-                                   (file "~/Documents/Org Roam/Templates/summarize.ing.org")
-                                   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
-                                   :unnarrowed t)
-                                  ))
-    )
+            (use-package org-roam
+              :custom
+              (org-roam-capture-templates '(
+                                            ("d" "default" plain
+                                             (file "~/Documents/Org Roam/Templates/default.org")
+                                             :if-new
+                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
+                                             :unnarrowed t)
+                                            ("p" "padrão" plain
+                                             (file "~/Documents/Org Roam/Templates/padrão.org")
+                                             :if-new
+                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
+                                             :unnarrowed t)
+                                            ("n" "notegpt.io" plain
+                                             (file "~/Documents/Org Roam/Templates/notegpt.io.org")
+                                             :if-new
+                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt_io:hacker_news:\n\n")
+                                             :unnarrowed t)
+                                            ("r" "redação" plain
+                                             (file "~/Documents/Org Roam/Templates/redação.org")
+                                             :if-new
+                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :redação:\n\n")
+                                             :unnarrowed t)
+                                            ("s" "summarize.ing" plain
+                                             (file "~/Documents/Org Roam/Templates/summarize.ing.org")
+                                             :if-new
+                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
+                                             :unnarrowed t)
+                                            ))
+              )
 
 #+end_src
 
@@ -2399,6 +2401,168 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 #+begin_src emacs-lisp
 
   (provide 'gs-org-roam)
+#+end_src
+
+* Citar
+:PROPERTIES:
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-citar.el
+:END:
+
+#+begin_quote
+
+Emacs package to quickly find and act on bibliographic references, and edit org, markdown, and latex academic documents.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
+#+begin_src emacs-lisp
+
+  (use-package citar
+    :custom
+    (citar-bibliography org-cite-global-bibliography)
+    (citar-library-paths '("~/Documents/Books/"))
+    (citar-open-entry-function 'citar-open-entry-in-zotero)
+    :hook
+    (org-mode . citar-capf-setup)
+    :ensure t
+    )
+
+#+end_src
+
+** [[https://github.com/emacs-citar/citar?tab=readme-ov-file#embark][Embark]]
+
+#+begin_src emacs-lisp
+
+  (use-package citar-embark
+    :after citar embark
+    :config
+    (citar-embark-mode)
+    :custom
+    (citar-at-point-function 'embark-act)
+    :ensure t
+    )
+
+#+end_src
+
+**** [[https://github.com/emacs-citar/citar/wiki/Citar-in-bibtex-files-with-Embark][Bibliography Interation]]
+
+#+begin_src emacs-lisp
+
+  (use-package citar-embark
+    :after citar embark
+    :config
+    (defun bibtex-key-target-finder ()
+      "Embark target for bibliography files."
+      (save-excursion
+        (bibtex-beginning-of-entry)
+        (when (looking-at bibtex-entry-maybe-empty-head)
+          (cons 'bibtex-key (bibtex-key-in-head)))))
+    (add-to-list 'embark-target-finders 'bibtex-key-target-finder)
+    (defvar citar-embark-bibtex-map
+      "Embark keymap for BibTeX entries."
+      (let ((map (make-sparse-keymap)))
+        (define-key map "o" #'citar-open)
+        (define-key map "n" #'citar-open-notes)
+        map))
+    (add-to-list 'embark-keymap-alist '(bibtex-key . citar-embark-bibtex-map))
+    )
+
+#+end_src
+
+**** [[https://github.com/emacs-citar/citar/wiki/Embark][More Functions]]
+
+#+begin_src emacs-lisp
+
+  (use-package citar-embark
+    :after citar embark
+    :config
+    (setf (alist-get
+           'key-at-point
+           (alist-get '(org-mode) citar-major-mode-functions nil nil #'equal))
+          #'my/citar-org-key-at-point)
+
+    (defun my/citar-org-key-at-point ()
+      "Return citekey at point, when in org property drawer.
+
+  Citkey must be formatted as `@key'."
+      (or (citar-org-key-at-point)
+          (when (and (equal (org-element-type (org-element-at-point)) 'node-property)
+                     (org-in-regexp (concat "[[:space:]]" org-element-citation-key-re)))
+            (cons (substring (match-string 0) 2)
+                  (cons (match-beginning 0)
+                        (match-end 0))))))
+    (add-to-list 'embark-keymap-alist '(bib-reference . citar-map))
+    )
+
+#+end_src
+
+**** [[https://github.com/emacs-citar/citar/wiki/Example-functions#search-contents-of-pdfs][Search Contents of PDFs]]
+
+#+begin_src emacs-lisp
+
+  (use-package citar-embark
+    :after citar embark
+    :config
+    (defun ex/search-pdf-contents (keys-entries &optional str)
+      "Search the contents of PDFs."
+      (interactive (list (citar-select-refs)))
+      (let ((files (citar-file--files-for-multiple-entries
+                    (citar--ensure-entries keys-entries)
+                    citar-library-paths
+                    '("pdf")))
+            (search-str (or str (read-string "Search string: "))))
+        (pdf-occur-search files search-str t)))
+
+    ;; with this, you can exploit embark's multitarget actions, so that you can run `embark-act-all`
+    (add-to-list 'embark-multitarget-actions #'ex/search-pdf-contents)
+    )
+
+#+end_src
+
+** Org Cite
+
+#+begin_src emacs-lisp
+
+  (use-package oc
+    :bind
+    (
+     :map org-mode-map
+     ("C-c o q" . org-cite-insert)
+     )
+    :custom
+    (org-cite-csl-styles-dir (expand-file-name "~/Documents/Zotero/styles/"))
+    (org-cite-global-bibliography '("~/Documents/Bibliography.bib"))
+    (org-cite-insert-processor 'citar)
+    (org-cite-follow-processor 'citar)
+    (org-cite-activate-processor 'citar)
+    )
+
+#+end_src
+
+** [[https://github.com/emacs-citar/citar-org-roam][Org Roam]]
+
+#+begin_src emacs-lisp
+
+  (use-package citar-org-roam
+    :requires org-roam
+    :after citar
+    :config
+    (citar-org-roam-mode)
+    :custom
+    (citar-org-roam-note-title-template "${title}")
+    :ensure t
+    )
+
+#+end_src
+
+** End
+
+#+begin_src emacs-lisp
+
+  (provide 'gs-citar)
 #+end_src
 
 * Command Line
@@ -5683,13 +5847,62 @@ A Library for Nerd Font icons.
 
 #+end_src
 
+*** [[https://github.com/emacs-citar/citar/wiki/Indicators#nerd-icons][Citar]]
+
+#+begin_src emacs-lisp
+
+  (use-package citar
+    :requires nerd-icons
+    :after citar
+    :config
+      (defvar citar-indicator-cited-icons
+        (citar-indicator-create
+         :symbol (nerd-icons-mdicon
+                  "nf-md-record"
+                  :face 'nerd-icons-lgreen)
+         :function #'citar-is-cited
+         :padding "  "
+         :tag "is:cited"))
+        (defvar citar-indicator-files-icons
+        (citar-indicator-create
+         :symbol (nerd-icons-mdicon
+                  "nf-md-file"
+                  :face 'nerd-icons-blue
+                  :v-adjust -0.1)
+         :function #'citar-has-files
+         :padding "  " ; need this because the default padding is too low for these icons
+         :tag "has:files"))
+      (defvar citar-indicator-links-icons
+        (citar-indicator-create
+         :symbol (nerd-icons-mdicon
+                  "nf-md-link"
+                  :face 'nerd-icons-lblue
+                  :v-adjust 0.01)
+         :function #'citar-has-links
+         :padding "  "
+         :tag "has:links"))
+      (defvar citar-indicator-notes-icons
+        (citar-indicator-create
+         :symbol (nerd-icons-mdicon
+                  "nf-md-text"
+                  :face 'nerd-icons-blue
+                  :v-adjust -0.3)
+         :function #'citar-has-notes
+         :padding "    "
+         :tag "has:notes"))
+      :custom
+      (citar-indicators
+       (list
+        citar-indicator-cited-icons
+        citar-indicator-files-icons
+        citar-indicator-links-icons
+        citar-indicator-notes-icons
+        ))
+      )
+
+#+end_src
+
 *** [[https://github.com/rainstormstudio/nerd-icons-completion][Completion]]
-
-#+begin_quote
-
-Use nerd-icons for completion.
-
-#+end_quote
 
 #+begin_src emacs-lisp
 
