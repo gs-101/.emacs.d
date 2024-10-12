@@ -2724,6 +2724,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
     :custom
     (vterm-shell "bash")
     (vterm-max-scrollback 10000)
+    (vterm-timer-delay 0.001)
     :ensure t
     )
 

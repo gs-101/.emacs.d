@@ -4,6 +4,7 @@
   :custom
   (vterm-shell "bash")
   (vterm-max-scrollback 10000)
+  (vterm-timer-delay 0.001)
   :ensure t
   )
 
