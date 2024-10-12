@@ -2005,14 +2005,35 @@ This file contains code needed for compatibility with older versions of GNU Emac
 
 #+end_quote
 
+Support for standard YouTube links is also included, translating them to embbeded links in export.
+
 #+begin_src emacs-lisp
 
   (use-package org-compat
+    :config
+    (org-add-link-type
+     "youtube"
+     (lambda (handle)
+       (browse-url (concat "https://www.youtube.com/watch?v=" handle)))
+     (lambda (path desc backend)
+       (cl-case backend
+         (html (format
+                "<p style='text-align:center;'>
+  <iframe width='420' height='315' align='middle'
+  src='https://youtube.com/embed/W4LxHn5Y_l4?controls=0'
+  allowFullScreen>
+  </iframe>
+  </p>"
+                path (or desc "")))
+         (latex (format "\href{%s}{%s}" path (or desc "video"))))))
+
     :custom
     (org-fold-catch-invisible-edits 'show-and-error)
     )
 
 #+end_src
+
+- [[https://github.com/xenodium/dotsies/blob/75f29e9d9d8f1aaebe1671b19614bb1e6bc5aac3/emacs/ar/ar-org-export-init.el#L37][Credits]]
 
 ** Cycle
 

@@ -123,6 +123,23 @@
   )
 
 (use-package org-compat
+  :config
+  (org-add-link-type
+   "youtube"
+   (lambda (handle)
+     (browse-url (concat "https://www.youtube.com/watch?v=" handle)))
+   (lambda (path desc backend)
+     (cl-case backend
+       (html (format
+              "<p style='text-align:center;'>
+<iframe width='420' height='315' align='middle'
+src='https://youtube.com/embed/W4LxHn5Y_l4?controls=0'
+allowFullScreen>
+</iframe>
+</p>"
+              path (or desc "")))
+       (latex (format "\href{%s}{%s}" path (or desc "video"))))))
+
   :custom
   (org-fold-catch-invisible-edits 'show-and-error)
   )
