@@ -13,8 +13,11 @@
   (completion-category-defaults nil)
   (completion-category-overrides '(
                                    (file (styles partial-completion))
+                                   (minibuffer (initials orderless))
                                    ))
-  (completion-styles '(orderless))
+  (completion-styles '(
+                       orderless
+                       ))
   (orderless-matching-styles '(
                                orderless-literal
                                orderless-regexp
