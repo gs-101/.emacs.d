@@ -111,6 +111,9 @@
    ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
    ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page)
    )
+  :custom
+  (pdf-annot-activate-created-annotations t)
+  (pdf-view-display-size 'fit-page)
   :ensure t
   :hook
   (pdf-view-mode . pdf-view-themed-minor-mode)
