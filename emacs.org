@@ -6020,12 +6020,6 @@ A Library for Nerd Font icons.
 
 *** [[https://github.com/LuigiPiucco/nerd-icons-corfu][Corfu]]
 
-#+begin_quote
-
-Icons for Corfu via nerd-icons.
-
-#+end_quote
-
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-corfu
@@ -6045,12 +6039,6 @@ Icons for Corfu via nerd-icons.
 
 *** [[https://github.com/rainstormstudio/nerd-icons-dired][Dired]]
 
-#+begin_quote
-
-Use nerd-icons for Dired.
-
-#+end_quote
-
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-dired
@@ -6063,12 +6051,6 @@ Use nerd-icons for Dired.
 #+end_src
 
 *** [[https://github.com/seagle0128/nerd-icons-ibuffer][iBuffer]]
-
-#+begin_quote
-
-Display nerd icons in ibuffer.
-
-#+end_quote
 
 #+begin_src emacs-lisp
 
