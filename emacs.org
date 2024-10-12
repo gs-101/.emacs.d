@@ -2929,6 +2929,31 @@ Code folding using treesit.el.
 
 #+end_src
 
+*** [[https://github.com/danilshvalov/git-commit-ts-mode][git-commit]]
+
+#+begin_src emacs-lisp
+
+  (use-package git-commit-ts-mode
+    :mode
+    ("\\COMMIT_EDITMSG\\'" . git-commit-ts-mode)
+    :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
+    :ensure t
+    )
+
+#+end_src
+
+**** [[https://github.com/danilshvalov/git-commit-ts-mode?tab=readme-ov-file#magit-integration][Magit]]
+
+#+begin_src emacs-lisp
+
+  (use-package magit
+    :after git-commit-ts-mode magit
+    :custom
+    (git-commit-major-mode 'git-commit-ts-mode)
+    )
+
+#+end_src
+
 ** Compile
 
 #+begin_quote

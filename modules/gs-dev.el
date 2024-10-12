@@ -107,6 +107,19 @@
   (treesit-fold-line-comment-mode)
   )
 
+(use-package git-commit-ts-mode
+  :mode
+  ("\\COMMIT_EDITMSG\\'" . git-commit-ts-mode)
+  :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
+  :ensure t
+  )
+
+(use-package magit
+  :after git-commit-ts-mode magit
+  :custom
+  (git-commit-major-mode 'git-commit-ts-mode)
+  )
+
 (use-package compile
   :bind
   (
