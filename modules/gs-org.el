@@ -68,19 +68,19 @@
       "d" "Daily Agenda"
       (
        (agenda ""
-               ((org-agenda-overriding-header "High Priority Tasks")
+               ((org-agenda-overriding-header "* High Priority Tasks")
                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#A"))
                 (org-agenda-span 'day)
                 (org-deadline-warning-days 0)))
 
        (agenda ""
-               ((org-agenda-overriding-header "Medium Priority Tasks")
+               ((org-agenda-overriding-header "* Medium Priority Tasks")
                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#B"))
                 (org-agenda-span 'day)
                 (org-deadline-warning-days 0)))
 
        (agenda ""
-               ((org-agenda-overriding-header "Low Priority Tasks")
+               ((org-agenda-overriding-header "* Low Priority Tasks")
                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "\#C"))
                 (org-agenda-span 'day)
                 (org-deadline-warning-days 0)))
@@ -93,6 +93,22 @@
   (org-agenda-start-with-log-mode t)
   (org-agenda-tags-column 0)
   (org-agenda-window-setup 'only-window)
+  )
+
+(use-package org-agenda
+  :hook
+  (org-agenda-mode . mlk/org-agenda-fold)
+  :preface
+  (defun mlk/org-agenda-fold()
+    "Fold headers of the agenda starting with \"* \"."
+    (interactive)
+    (setq-local outline-regexp "^\\* ")
+    (setq-local outline-heading-end-regexp "\n")
+    (setq-local outline-minor-mode-prefix (kbd "C-'"))
+    (outline-minor-mode)
+    (local-set-key outline-minor-mode-prefix outline-mode-prefix-map)
+    (org-defkey org-agenda-mode-map [(tab)] #'outline-toggle-children)
+    )
   )
 
 (use-package org-habit
