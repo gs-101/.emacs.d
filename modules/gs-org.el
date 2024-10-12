@@ -270,10 +270,4 @@
   (markdown-mode . toc-org-mode)
   )
 
-(use-package org-transclusion
-  :ensure t
-  :hook
-  (org-mode . org-transclusion-mode)
-  )
-
 (provide 'gs-org)

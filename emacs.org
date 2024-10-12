@@ -2282,24 +2282,6 @@ toc-org is an Emacs utility to have an up-to-date table of contents in the org f
 
 #+end_src
 
-** [[https://github.com/nobiot/org-transclusion][Transclusion]]
-
-#+begin_quote
-
-Org-transclusion lets you insert a copy of text content via a file link or ID link within an Org file. It lets you have the same content present in different buffers at the same time without copy-and-pasting it. Edit the source of the content, and you can refresh the transcluded copies to the up-to-date state. Org-transclusion keeps your files clear of the transcluded copies, leaving only the links to the original content.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package org-transclusion
-    :ensure t
-    :hook
-    (org-mode . org-transclusion-mode)
-    )
-
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp
