@@ -1138,9 +1138,73 @@ Key bindings for default packages.
      ("C-c c e" . eglot)
      :map eglot-mode-map
      ("C-c c a" . eglot-code-actions)
+     ("C-c c o" . eglot-code-action-organize-imports)
      ("C-c c i" . eglot-find-implementation)
      ("C-c c t" . eglot-find-typeDefinition)
      ("C-c c f" . eglot-format)
+     ("C-c c r" . eglot-rename)
+     )
+    )
+
+#+end_src
+
+*** Emacs Lisp
+
+#+begin_src emacs-lisp
+
+  (use-package elisp-mode
+    :bind
+    (
+     :map emacs-lisp-mode-map
+          ("C-c C-b" . elisp-byte-compile-buffer)
+          ("C-c l e d" . eval-defun)
+          ("C-c C-e" . elisp-eval-region-or-buffer)
+          ("C-c l e e" . eval-last-sexp)
+          )
+    )
+
+#+end_src
+
+**** Emacs
+
+#+begin_src emacs-lisp
+
+  (use-package emacs
+    :bind
+    (
+     :map emacs-lisp-mode-map
+     ("C-c l e b" . eval-buffer)
+     ("C-c l e r" . eval-region)
+     )
+    )
+
+#+end_src
+
+**** Files
+
+#+begin_src emacs-lisp
+
+  (use-package files
+    :bind
+    (
+     :map  emacs-lisp-mode-map
+           ("C-c l e l" . load-library)
+           )
+    )
+
+#+end_src
+
+**** Find Functions
+
+#+begin_src emacs-lisp
+
+  (use-package find-func
+    :bind
+    (
+     :map emacs-lisp-mode-map
+     ("C-c l g f" . find-function)
+     ("C-c l g l" . find-library)
+     ("C-c l g v" . find-variable)
      )
     )
 
@@ -1329,7 +1393,7 @@ Key bindings for default packages.
     ("C-c o a" . org-agenda)
     (
      :map org-mode-map
-     ("C-c o v q" . (lambda ()
+     ("C-c o m" . (lambda ()
                       (interactive)
                       ;; Filter tasks by tag
                       (org-tags-view t)))
@@ -1338,15 +1402,16 @@ Key bindings for default packages.
 
 #+end_src
 
-*** Capture
+*** Clock
 
 #+begin_src emacs-lisp
 
-  (use-package org-capture
+  (use-package org-clock
     :bind
     (
      :map org-mode-map
-     ("C-c o c" . org-capture)
+     ("C-c o c" . org-clock-in-last)
+     ("C-c o C" . org-clock-cancel)
      )
     )
 
@@ -1474,6 +1539,7 @@ Key bindings for default packages.
 
   (use-package simple
     :bind
+    ("C-c c w"  . delete-trailing-whitespace)
     ("C-?" . undo-redo)
     )
 
@@ -3367,6 +3433,7 @@ It's Magit! A Git Porcelain inside Emacs.
     ("C-c v C" . magit-clone)
     ("C-c v /" . magit-dispatch)
     ("C-c v F" . magit-fetch)
+    ("C-c M-g" . magit-file-dispatch)
     ("C-c v x" . magit-file-delete)
     ("C-c v ." . magit-file-dispatch)
     ("C-c v L" . magit-log)
@@ -3480,6 +3547,7 @@ Projectile like project management library built on Emacs project.el.
     (
      :map projection-map
      ("C" . projection-commands-build-project)
+     ("e" . projection-recentf)
      )
     :init
     (global-projection-hook-mode)
@@ -3659,6 +3727,8 @@ Simple templates for Emacs.
 #+begin_src emacs-lisp
 
   (use-package tempel
+    :bind
+    ("C-c i s" . tempel-insert)
     :custom
     (tempel-trigger-prefix "<")
     :ensure t
@@ -3966,6 +4036,7 @@ Consulting completing-read.
   (use-package consult
     :bind
     (
+     ([remap bookmark-jump] . consult-bookmark)
      ([remap flymake-start] . consult-flymake)
      ([remap goto-line] . consult-goto-line)
      ([remap grep] . consult-grep)
@@ -3981,8 +4052,13 @@ Consulting completing-read.
      ([remap project-switch-to-buffer] . consult-project-buffer)
      ([remap rgrep] . consult-ripgrep)
      ([remap switch-to-buffer] . consult-buffer)
+     ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
+     ([remap switch-to-buffer-other-tab] . consult-buffer-other-tab)
+     ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
      ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)
      ([remap yank-pop] . consult-yank-pop)
+     ("M-g I" . consult-imenu-multi)
+     ("C-c M-x" . consult-mode-command)
      )
     :config
     (defun choose-completion-in-region ()
@@ -4132,6 +4208,9 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     (
      ([remap describe-bindings]. embark-bindings)
      ("C-;" . embark-act)
+     :map minibuffer-local-map
+     ("C-c C-;" . embark-export)
+     ("C-c C-l" . embark-collect)
      )
     :config
     ;; Hide the mode line of the Embark live/completions buffers

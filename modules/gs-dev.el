@@ -367,6 +367,7 @@
   ("C-c v C" . magit-clone)
   ("C-c v /" . magit-dispatch)
   ("C-c v F" . magit-fetch)
+  ("C-c M-g" . magit-file-dispatch)
   ("C-c v x" . magit-file-delete)
   ("C-c v ." . magit-file-dispatch)
   ("C-c v L" . magit-log)
@@ -424,6 +425,7 @@
   (
    :map projection-map
    ("C" . projection-commands-build-project)
+   ("e" . projection-recentf)
    )
   :init
   (global-projection-hook-mode)

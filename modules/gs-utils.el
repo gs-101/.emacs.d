@@ -29,6 +29,7 @@
 (use-package consult
   :bind
   (
+   ([remap bookmark-jump] . consult-bookmark)
    ([remap flymake-start] . consult-flymake)
    ([remap goto-line] . consult-goto-line)
    ([remap grep] . consult-grep)
@@ -44,8 +45,13 @@
    ([remap project-switch-to-buffer] . consult-project-buffer)
    ([remap rgrep] . consult-ripgrep)
    ([remap switch-to-buffer] . consult-buffer)
+   ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
+   ([remap switch-to-buffer-other-tab] . consult-buffer-other-tab)
+   ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
    ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)
    ([remap yank-pop] . consult-yank-pop)
+   ("M-g I" . consult-imenu-multi)
+   ("C-c M-x" . consult-mode-command)
    )
   :config
   (defun choose-completion-in-region ()
@@ -121,6 +127,9 @@
   (
    ([remap describe-bindings]. embark-bindings)
    ("C-;" . embark-act)
+   :map minibuffer-local-map
+   ("C-c C-;" . embark-export)
+   ("C-c C-l" . embark-collect)
    )
   :config
   ;; Hide the mode line of the Embark live/completions buffers

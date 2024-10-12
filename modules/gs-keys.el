@@ -29,9 +29,49 @@
    ("C-c c e" . eglot)
    :map eglot-mode-map
    ("C-c c a" . eglot-code-actions)
+   ("C-c c o" . eglot-code-action-organize-imports)
    ("C-c c i" . eglot-find-implementation)
    ("C-c c t" . eglot-find-typeDefinition)
    ("C-c c f" . eglot-format)
+   ("C-c c r" . eglot-rename)
+   )
+  )
+
+(use-package elisp-mode
+  :bind
+  (
+   :map emacs-lisp-mode-map
+        ("C-c C-b" . elisp-byte-compile-buffer)
+        ("C-c l e d" . eval-defun)
+        ("C-c C-e" . elisp-eval-region-or-buffer)
+        ("C-c l e e" . eval-last-sexp)
+        )
+  )
+
+(use-package emacs
+  :bind
+  (
+   :map emacs-lisp-mode-map
+   ("C-c l e b" . eval-buffer)
+   ("C-c l e r" . eval-region)
+   )
+  )
+
+(use-package files
+  :bind
+  (
+   :map  emacs-lisp-mode-map
+         ("C-c l e l" . load-library)
+         )
+  )
+
+(use-package find-func
+  :bind
+  (
+   :map emacs-lisp-mode-map
+   ("C-c l g f" . find-function)
+   ("C-c l g l" . find-library)
+   ("C-c l g v" . find-variable)
    )
   )
 
@@ -130,18 +170,19 @@
   ("C-c o a" . org-agenda)
   (
    :map org-mode-map
-   ("C-c o v q" . (lambda ()
+   ("C-c o m" . (lambda ()
                     (interactive)
                     ;; Filter tasks by tag
                     (org-tags-view t)))
    )
   )
 
-(use-package org-capture
+(use-package org-clock
   :bind
   (
    :map org-mode-map
-   ("C-c o c" . org-capture)
+   ("C-c o c" . org-clock-in-last)
+   ("C-c o C" . org-clock-cancel)
    )
   )
 
@@ -209,6 +250,7 @@
 
 (use-package simple
   :bind
+  ("C-c c w"  . delete-trailing-whitespace)
   ("C-?" . undo-redo)
   )
 

@@ -57,6 +57,8 @@
   )
 
 (use-package tempel
+  :bind
+  ("C-c i s" . tempel-insert)
   :custom
   (tempel-trigger-prefix "<")
   :ensure t
