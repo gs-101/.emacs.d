@@ -243,6 +243,7 @@
   :hook
   (css-mode . aggressive-indent-mode)
   (emacs-lisp-mode . aggressive-indent-mode)
+  (lisp-mode . agressive-indent-mode)
   )
 
 (use-package apheleia
