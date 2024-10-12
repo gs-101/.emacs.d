@@ -155,6 +155,7 @@ allowFullScreen>
    org-export-dispatch
    )
   :custom
+  (org-latex-tables-centered nil)
   (org-latex-toc-command "\\tableofcontents \\pagebreak")
   (org-startup-with-latex-preview t)
   (org-preview-latex-default-process 'dvisvgm) ;; 1
