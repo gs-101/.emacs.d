@@ -338,17 +338,17 @@
 (use-package hl-todo
   :custom
   (hl-todo-keyword-faces '(
-                           ("NOTE" . yellow)
-                           ("FIX" . red)
-                           ("FIXME" . red)
-                           ("FEAT" . yellow)
-                           ("HACK" . green)
-                           ("STYLE" . orange)
-                           ("REFACTOR" . white)
-                           ("REVIEW" . white)
-                           ("CHORE" . grey)
-                           ("MERGED" . green)
-                           ("CLOSED" . red)
+                           ("NOTE" . "yellow")
+                           ("FIX" . "red")
+                           ("FIXME" . "red")
+                           ("FEAT" . "yellow")
+                           ("HACK" . "green")
+                           ("STYLE" . "orange")
+                           ("REFACTOR" . "white")
+                           ("REVIEW" . "white")
+                           ("CHORE" . "grey")
+                           ("MERGED" . "green")
+                           ("CLOSED" . "red")
                            ))
   :ensure t
   :hook
