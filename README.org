@@ -33,11 +33,14 @@ I've taken some inspiration on working through this configuration from other mem
 ** [[https://github.com/daviwil][David Wilson]]
 
 ** [[https://gitlab.com/dwt1][Derek Taylor]]
+
 ** [[https://github.com/Gavinok][Gavin Freeborn]]
 
 ** [[https://github.com/gopar][Gopar]]
 
 ** [[https://github.com/jamescherti][James Cherti]]
+
+** [[https://github.com/Nathan-Furnal/dotemacs][Nathan Furnal]]
 
 ** [[https://github.com/oantolin][Omar Antolín Camarena]]
 
