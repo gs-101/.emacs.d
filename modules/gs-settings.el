@@ -173,6 +173,13 @@
   (set-mark-command-repeat-pop t) ;; 5
   )
 
+(use-package emacs
+  :custom
+  (undo-limit 67108864) ;; 64 mb
+  (undo-strong-limit 100663296) ;; 96 mb
+  (undo-outer-limit 1006632960) ;; 960 mb
+  )
+
 (use-package uniquify
   :custom
   (uniquify-buffer-name-style 'forward)
