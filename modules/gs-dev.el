@@ -4,6 +4,7 @@
   :mode
   (
    ("\\.sh\\'" . bash-ts-mode)
+   ("\\.c\\'" . c-ts-mode)
    ("\\.css\\'" . css-ts-mode)
    ("\\.Dockerfile\\'" . dockerfile-ts-mode)
    ("\\.go\\'" . go-ts-mode)
@@ -70,7 +71,6 @@
                  (sh-base-mode . bash-ts-mode)
                  (c-mode . c-ts-mode)
                  (c++-mode . c++-ts-mode)
-                 (c-or-c++-mode . c-or-c++-ts-mode)
                  (css-mode . css-ts-mode)
                  (html-mode . html-ts-mode)
                  (java-mode . java-ts-mode)
