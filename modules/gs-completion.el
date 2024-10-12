@@ -69,9 +69,10 @@
 
 (use-package eglot-tempel
   :requires tempel
+  :after eglot
   :ensure t
-  :hook
-  (eglot . eglot-tempel-mode)
+  :config
+  (eglot-tempel-mode)
   )
 
 (use-package tempel-collection

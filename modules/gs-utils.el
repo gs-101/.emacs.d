@@ -147,13 +147,13 @@
   )
 
 (use-package embark
-  :requires embark
+  :after embark
   :bind
   (
    :map minibuffer-local-map
    ([remap embark-dwim] . my-embark-preview)
    )
-  :preface
+  :config
   (defun my-embark-preview ()
     "Previews candidate in vertico buffer, unless it's a consult command."
     (interactive)
@@ -164,23 +164,22 @@
   )
 
 (use-package embark-consult
-  :requires (embark consult)
+  :requires consult
+  :after embark
   :ensure t
   :hook
   ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
   )
 
 (use-package embark
-  :requires embark
-  :config
-  (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
+  :after embark
   :custom
   (embark-indicators '(
                        embark-which-key-indicator
                        embark-highlight-indicator
                        embark-isearch-highlight-indicator
                        ))
-  :preface
+  :config
   (defun embark-which-key-indicator ()
     "An embark indicator that displays keymaps using which-key.
 The which-key help message will show the type and value of the
@@ -210,6 +209,7 @@ targets."
     (let ((embark-indicators
            (remq #'embark-which-key-indicator embark-indicators)))
       (apply fn args)))
+  (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
   )
 
 (use-package blk

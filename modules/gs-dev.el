@@ -212,10 +212,9 @@
   )
 
 (use-package rustic
-  :requires rust-mode
+  :after rust-mode
   :custom
   (rustic-cargo-use-last-stored-arguments t)
-  (rustic-format-on-save t)
   (rustic-lsp-client 'eglot)
   :ensure t
   )

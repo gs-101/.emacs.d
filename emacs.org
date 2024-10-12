@@ -3053,7 +3053,7 @@ Python's flying circus support for Emacs.
 
 #+end_src
 
-*** [[https://github.com/rust-lang/rust-mode][Rust Mode]]
+*** [[https://github.com/rust-lang/rust-mode][Rust]]
 
 #+begin_quote
 
@@ -3084,10 +3084,9 @@ Rust development environment for Emacs.
 #+begin_src emacs-lisp
 
   (use-package rustic
-    :requires rust-mode
+    :after rust-mode
     :custom
     (rustic-cargo-use-last-stored-arguments t)
-    (rustic-format-on-save t)
     (rustic-lsp-client 'eglot)
     :ensure t
     )
@@ -3751,9 +3750,10 @@ Bridge for tempel templates with eglot.
 
   (use-package eglot-tempel
     :requires tempel
+    :after eglot
     :ensure t
-    :hook
-    (eglot . eglot-tempel-mode)
+    :config
+    (eglot-tempel-mode)
     )
 
 #+end_src
@@ -4234,13 +4234,13 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 #+begin_src emacs-lisp
 
   (use-package embark
-    :requires embark
+    :after embark
     :bind
     (
      :map minibuffer-local-map
      ([remap embark-dwim] . my-embark-preview)
      )
-    :preface
+    :config
     (defun my-embark-preview ()
       "Previews candidate in vertico buffer, unless it's a consult command."
       (interactive)
@@ -4257,7 +4257,8 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 #+begin_src emacs-lisp
 
   (use-package embark-consult
-    :requires (embark consult)
+    :requires consult
+    :after embark
     :ensure t
     :hook
     ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
@@ -4270,16 +4271,14 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 #+begin_src emacs-lisp
 
   (use-package embark
-    :requires embark
-    :config
-    (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
+    :after embark
     :custom
     (embark-indicators '(
                          embark-which-key-indicator
                          embark-highlight-indicator
                          embark-isearch-highlight-indicator
                          ))
-    :preface
+    :config
     (defun embark-which-key-indicator ()
       "An embark indicator that displays keymaps using which-key.
   The which-key help message will show the type and value of the
@@ -4309,6 +4308,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
       (let ((embark-indicators
              (remq #'embark-which-key-indicator embark-indicators)))
         (apply fn args)))
+    (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
     )
 
 #+end_src
