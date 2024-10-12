@@ -310,9 +310,10 @@
     :stream t
     :key #'gptel-api-key
     :models '(
-              "gpt-4o"
-              "gpt-4o-mini"
-              "meta-llama-3.1-405b-instruct"
+              gpt-4o
+              gpt-4o-mini
+              meta-llama-3.1-405b-instruct
+              llama-3.2-90B-vision-instruct
               ))
 )
 
