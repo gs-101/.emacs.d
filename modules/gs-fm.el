@@ -116,6 +116,12 @@
   (pdf-view-mode . pdf-view-themed-minor-mode)
   )
 
+(use-package nov
+  :mode
+  ("\\.epub\\'" . nov-mode)
+  :ensure t
+  )
+
 (use-package ready-player
   :custom
   (ready-player-previous-icon "󰒮")

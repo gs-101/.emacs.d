@@ -999,6 +999,24 @@ Emacs support library for PDF files.
 
 **** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L859][Credits]]
 
+** [[https://depp.brause.cc/nov.el/][nov.el]]
+
+#+begin_quote
+
+Major mode for reading EPUBs in Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package nov
+    :mode
+    ("\\.epub\\'" . nov-mode)
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/xenodium/ready-player][Ready Player Mode]]
 
 #+begin_quote
