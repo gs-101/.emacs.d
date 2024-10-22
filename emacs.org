@@ -1308,18 +1308,6 @@ Key bindings for default packages.
 
 #+end_src
 
-** Face Remap
-
-#+begin_src emacs-lisp
-
-  (use-package face-remap
-    :bind
-    ("C-=" . text-scale-increase)
-    ("C--" . text-scale-decrease)
-    )
-
-#+end_src
-
 ** Files
 
 #+begin_src emacs-lisp

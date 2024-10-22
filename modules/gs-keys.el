@@ -106,12 +106,6 @@
   ("C-c i e" . emoji-insert)
   )
 
-(use-package face-remap
-  :bind
-  ("C-=" . text-scale-increase)
-  ("C--" . text-scale-decrease)
-  )
-
 (use-package files
   :bind
   ("C-c q K" . save-buffers-kill-emacs)
