@@ -84,6 +84,7 @@ Citkey must be formatted as `@key'."
    )
   :custom
   (org-cite-csl-styles-dir (expand-file-name "~/Documents/Zotero/styles/"))
+  (org-cite-export-processors '(t biblatex))
   (org-cite-global-bibliography '("~/Documents/Bibliography.bib"))
   (org-cite-insert-processor 'citar)
   (org-cite-follow-processor 'citar)
