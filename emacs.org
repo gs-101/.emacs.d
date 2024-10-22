@@ -1753,23 +1753,6 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
 
 #+end_src
 
-** [[https://github.com/emacsfodder/move-text][Move Text]]
-
-#+begin_quote
-
-Move current line or region up or down.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package move-text
-    :bind
-    ("M-<up>" . move-text-up)
-    ("M-<down>" . move-text-down)
-    ("M-<left>" . move-text-left)
-    ("M-<right>". move-text-right)
-    :ensure t
     )
 
 #+end_src
