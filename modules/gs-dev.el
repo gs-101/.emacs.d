@@ -1,97 +1,22 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package treesit
-  :mode
-  (
-   ("\\.sh\\'" . bash-ts-mode)
-   ("\\.c\\'" . c-ts-mode)
-   ("\\.css\\'" . css-ts-mode)
-   ("\\.Dockerfile\\'" . dockerfile-ts-mode)
-   ("\\.go\\'" . go-ts-mode)
-   ("\\.html\\'" . html-ts-mode)
-   ("\\.json\\'" .  json-ts-mode)
-   ("\\.lua\\'" . lua-ts-mode)
-   ("\\.py\\'" . python-ts-mode)
-   ("\\.rb\\'" . ruby-ts-mode)
-   ("\\.rs\\'" . rust-ts-mode)
-   ("\\.tsx\\'" . tsx-ts-mode)
-   ("\\.jar\\'" . java-ts-mode)
-   ("\\.jsx\\'" . tsx-ts-mode)
-   ("\\.js\\'"  . typescript-ts-mode)
-   ("\\.mjs\\'" . typescript-ts-mode)
-   ("\\.mts\\'" . typescript-ts-mode)
-   ("\\.cjs\\'" . typescript-ts-mode)
-   ("\\.ts\\'"  . typescript-ts-mode)
-   ("\\.yaml\\'" . yaml-ts-mode)
-   )
-  :preface
-  (defun os/setup-install-grammars ()
-    "Install Tree-sitter grammars if they are absent."
-    (interactive)
-    (dolist
-        (grammar '(
-                   (bash . ("https://github.com/tree-sitter/tree-sitter-bash.git"))
-                   (c . ("https://github.com/tree-sitter/tree-sitter-c.git"))
-                   (cpp . ("https://github.com/tree-sitter/tree-sitter-cpp.git"))
-                   (cmake . ("https://github.com/uyha/tree-sitter-cmake.git"))
-                   (css . ("https://github.com/tree-sitter/tree-sitter-css.git"))
-                   (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile.git"))
-                   (elisp . ("https://github.com/Wilfred/tree-sitter-elisp.git"))
-                   (go . ("https://github.com/tree-sitter/tree-sitter-go.git"))
-                   (html . ("https://github.com/tree-sitter/tree-sitter-html.git"))
-                   (java . ("https://github.com/tree-sitter/tree-sitter-java.git"))
-                   (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript.git"))
-                   (json . ("https://github.com/tree-sitter/tree-sitter-json.git"))
-                   (python . ("https://github.com/tree-sitter/tree-sitter-python.git"))
-                   (make . ("https://github.com/alemuller/tree-sitter-make.git"))
-                   (markdown . ("https://github.com/ikatyang/tree-sitter-markdown.git"))
-                   (ruby . ("https://github.com/tree-sitter/tree-sitter-ruby.git"))
-                   (rust . ("https://github.com/tree-sitter/tree-sitter-rust.git"))
-                   (toml . ("https://github.com/tree-sitter-grammars/tree-sitter-toml.git"))
-                   (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-                   (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-                   (yaml . ("https://github.com/ikatyang/tree-sitter-yaml.git"))
-                   ))
-      (add-to-list 'treesit-language-source-alist grammar)
-      ;; Only install `grammar' if we don't already have it
-      ;; installed. However, if you want to *update* a grammar then
-      ;; this obviously prevents that from happening.
-      (unless (treesit-language-available-p (car grammar))
-        (treesit-install-language-grammar (car grammar)))))
-
-  ;; Optional, but recommended. Tree-sitter enabled major modes are
-  ;; distinct from their ordinary counterparts.
-  ;;
-  ;; You can remap major modes with `major-mode-remap-alist'. Note
-  ;; that this does *not* extend to hooks! Make sure you migrate them
-  (dolist
-      (mapping '(
-                 (bash-mode . bash-ts-mode)
-                 (sh-mode . bash-ts-mode)
-                 (sh-base-mode . bash-ts-mode)
-                 (c-mode . c-ts-mode)
-                 (c++-mode . c++-ts-mode)
-                 (css-mode . css-ts-mode)
-                 (html-mode . html-ts-mode)
-                 (java-mode . java-ts-mode)
-                 (js-mode . typescript-ts-mode)
-                 (js2-mode . typescript-ts-mode)
-                 (json-mode . json-ts-mode)
-                 (lua-mode . lua-ts-mode)
-                 (js-json-mode . json-ts-mode)
-                 (python-mode . python-ts-mode)
-                 (ruby-mode . ruby-ts-mode)
-                 (rust-mode . rust-ts-mode)
-                 (typescript-mode . typescript-ts-mode)
-                 ))
-    (add-to-list 'major-mode-remap-alist mapping))
   :custom
   (treesit-font-lock-level 4)
+  )
+
+(use-package treesit-auto
+  :vc (:url "https://github.com/gs-101/treesit-auto" :branch "custom")
   :config
-  (os/setup-install-grammars)
+  (global-treesit-auto-mode)
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  :custom
+  (treesit-auto-install t)
+  :ensure t
   )
 
 (use-package treesit-fold
+  :after treesit
   :vc (:url "https://github.com/emacs-tree-sitter/treesit-fold")
   :bind
   (
@@ -108,8 +33,6 @@
   )
 
 (use-package git-commit-ts-mode
-  :mode
-  ("\\COMMIT_EDITMSG\\'" . git-commit-ts-mode)
   :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
   :ensure t
   )
