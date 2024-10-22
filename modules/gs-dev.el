@@ -161,7 +161,7 @@
   )
 
 (use-package compile-multi
-  :vc (:url "https://github.com/gs-101/compile-multi")
+  :vc (:url "https://github.com/mohkale/compile-multi")
   :bind
   ([remap compile] . compile-multi)
   :ensure t

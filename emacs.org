@@ -729,7 +729,7 @@ The default paths used to store configuration files and persistent data are not 
 #+begin_src emacs-lisp
 
   (use-package no-littering
-    :vc (:url "https://github.com/gs-101/no-littering")
+    :vc (:url "https://github.com/emacscollective/no-littering")
     :ensure t
     :init
     (no-littering-theme-backups)
@@ -3020,7 +3020,7 @@ Multi target interface to compile.
 #+begin_src emacs-lisp
 
   (use-package compile-multi
-    :vc (:url "https://github.com/gs-101/compile-multi")
+    :vc (:url "https://github.com/mohkale/compile-multi")
     :bind
     ([remap compile] . compile-multi)
     :ensure t
