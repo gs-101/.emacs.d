@@ -26,7 +26,7 @@
   :bind
   (
    :map prog-mode-map
-   ("C-c c e" . eglot)
+   ("C-c c t e" . eglot)
    :map eglot-mode-map
    ("C-c c a" . eglot-code-actions)
    ("C-c c o" . eglot-code-action-organize-imports)
