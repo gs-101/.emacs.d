@@ -78,6 +78,11 @@
 (use-package flymake
   :bind
   (
+   :map flymake-mode-map
+   ([remap next-error] . flymake-goto-next-error)
+   ([remap previous-error] . flymake-goto-prev-error)
+   :map project-prefix-map
+   ("t f" . flymake-show-project-diagnostics)
    :map prog-mode-map
    ("C-c t f" . flymake-start)
    )
