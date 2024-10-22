@@ -253,13 +253,18 @@
   ("C-?" . undo-redo)
   )
 
+(use-package casual
+  :ensure t
+  )
+
 (use-package casual-agenda
   :bind
   (
    :map org-agenda-mode-map
+   ("J" . bookmark-jump)
    ("M-o" . casual-agenda-tmenu)
+   ("M-j" . org-agenda-clock-goto)
    )
-  :ensure t
   )
 
 (use-package casual-bookmarks
@@ -268,73 +273,76 @@
    :map bookmark-bmenu-mode-map
    ("J" . bookmark-jump)
    ("M-o" . casual-bookmarks-tmenu)
-   ("S" . casual-bookmarks-sortby-tmenu)
    )
   :config
   (easy-menu-add-item global-map '(menu-bar)
                       casual-bookmarks-main-menu
                       "Tools")
-  :ensure t
   )
 
 (use-package casual-calc
   :bind
   (
-   :map calc-mode-map
-   ("M-o" . casual-calc-tmenu)
    :map calc-alg-map
    ("M-o" . casual-calc-tmenu)
+   :map calc-mode-map
+   ("M-o" . casual-calc-tmenu)
    )
-  :ensure t
   )
 
 (use-package casual-dired
   :bind
   (
    :map dired-mode-map
+   ("/" . casual-dired-search-replace-tmenu)
+   ("s" . casual-dired-sort-by-tmenu)
    ("M-o" . casual-dired-tmenu)
    )
-  :ensure t
+  :config
+  (defun kv/casual-dired-context-menu-addons (menu click)
+    "Customize context Menu with CLICK event."
+    (easy-menu-add-item menu nil casual-dired-sort-menu)
+    menu)
+  :hook
+  (context-menu-functions . kv/casual-dired-context-menu-addons)
   )
 
 (use-package casual-editkit
   :bind
-  ("M-O" . casual-editkit-main-tmenu)
-  :ensure t
+  ("M-o" . casual-editkit-main-tmenu)
   )
 
 (use-package casual-ibuffer
   :bind
   (
    :map ibuffer-mode-map
-   ("M-o" . casual-ibuffer-tmenu)
    ("F" . casual-ibuffer-filter-tmenu)
    ("s" . casual-ibuffer-sortby-tmenu)
-   ("<double-mouse-1>" . ibuffer-visit-buffer)
-   ("M-<double-mouse-1>" . ibuffer-visit-buffer-other-window)
-   ("{" . ibuffer-backwards-next-marked)
-   ("}" . ibuffer-forward-next-marked)
-   ("[" . ibuffer-backward-filter-group)
+   ("M-o" . casual-ibuffer-tmenu)
    ("]" . ibuffer-forward-filter-group)
+   ("[" . ibuffer-backward-filter-group)
+   ("}" . ibuffer-forward-next-marked)
+   ("{" . ibuffer-backwards-next-marked)
    ("$" . ibuffer-toggle-filter-group)
    )
-  :ensure t
   )
 
 (use-package casual-info
   :bind
   (
    :map Info-mode-map
-   ("M-o" . casual-info-tmenu)
-   ("M-[" . Info-history-back)
-   ("M-]" . Info-history-forward)
-   ("p" . casual-info-browse-backward-paragraph)
-   ("n" . casual-info-browse-forward-paragraph)
    ("B" . bookmark-set)
+   ("n" . casual-info-browse-forward-paragraph)
+   ("p" . casual-info-browse-backward-paragraph)
+   ("M-o" . casual-info-tmenu)
+   ("M-]" . Info-history-forward)
+   ("M-[" . Info-history-back)
+   ("l" . Info-next)
+   ("h" . Info-prev)
+   ("j" . Info-next-reference)
+   ("k" . Info-prev-reference)
+   ("/" . Info-search)
    )
-  :ensure t
-  :hook
-  (info-mode . scroll-lock-mode)
   )
 
 (use-package casual-isearch
@@ -343,7 +351,6 @@
    :map isearch-mode-map
    ("M-o" . casual-isearch-tmenu)
    )
-  :ensure t
   )
 
 (use-package casual-re-builder
@@ -354,7 +361,6 @@
    :map reb-lisp-mode-map
    ("M-o" . casual-re-builder-tmenu)
    )
-  :ensure t
   )
 
 (provide 'gs-keys)

@@ -1581,21 +1581,23 @@ Key bindings for default packages.
 
 #+end_src
 
-** [[https://github.com/kickingvegas/casual-suite][Casual Suite]]
+** [[https://github.com/kickingvegas/casual][Casual]]
 
 #+begin_quote
 
-Casual Suite - An umbrella package to support a single install point for all Casual porcelains.
+A collection of opinionated keyboard-driven user interfaces for various built-in Emacs modes.
 
 #+end_quote
 
-*** [[https://github.com/kickingvegas/casual-agenda][Agenda]]
+#+begin_src emacs-lisp
 
-#+begin_quote
+  (use-package casual
+    :ensure t
+    )
 
-Casual Agenda is an opinionated Transient-based user interface for Emacs Org Agenda.
+#+end_src
 
-#+end_quote
+*** Agenda
 
 #+begin_src emacs-lisp
 
@@ -1603,14 +1605,16 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
     :bind
     (
      :map org-agenda-mode-map
+     ("J" . bookmark-jump)
      ("M-o" . casual-agenda-tmenu)
+     ("M-j" . org-agenda-clock-goto)
      )
-    :ensure t
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-bookmarks][Bookmarks]]
+
+*** Bookmarks
 
 #+begin_src emacs-lisp
 
@@ -1620,35 +1624,33 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
      :map bookmark-bmenu-mode-map
      ("J" . bookmark-jump)
      ("M-o" . casual-bookmarks-tmenu)
-     ("S" . casual-bookmarks-sortby-tmenu)
      )
     :config
     (easy-menu-add-item global-map '(menu-bar)
                         casual-bookmarks-main-menu
                         "Tools")
-    :ensure t
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-calc][Calc]]
+*** Calc
 
 #+begin_src emacs-lisp
 
   (use-package casual-calc
     :bind
     (
-     :map calc-mode-map
-     ("M-o" . casual-calc-tmenu)
      :map calc-alg-map
      ("M-o" . casual-calc-tmenu)
+     :map calc-mode-map
+     ("M-o" . casual-calc-tmenu)
      )
-    :ensure t
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-dired][Dired]]
+
+*** Dired
 
 #+begin_src emacs-lisp
 
@@ -1656,26 +1658,33 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
     :bind
     (
      :map dired-mode-map
+     ("/" . casual-dired-search-replace-tmenu)
+     ("s" . casual-dired-sort-by-tmenu)
      ("M-o" . casual-dired-tmenu)
      )
-    :ensure t
+    :config
+    (defun kv/casual-dired-context-menu-addons (menu click)
+      "Customize context Menu with CLICK event."
+      (easy-menu-add-item menu nil casual-dired-sort-menu)
+      menu)
+    :hook
+    (context-menu-functions . kv/casual-dired-context-menu-addons)
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-editkit][EditKit]]
+*** EditKit
 
 #+begin_src emacs-lisp
 
   (use-package casual-editkit
     :bind
-    ("M-O" . casual-editkit-main-tmenu)
-    :ensure t
+    ("M-o" . casual-editkit-main-tmenu)
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-ibuffer][iBuffer]]
+*** iBuffer
 
 #+begin_src emacs-lisp
 
@@ -1683,23 +1692,20 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
     :bind
     (
      :map ibuffer-mode-map
-     ("M-o" . casual-ibuffer-tmenu)
      ("F" . casual-ibuffer-filter-tmenu)
      ("s" . casual-ibuffer-sortby-tmenu)
-     ("<double-mouse-1>" . ibuffer-visit-buffer)
-     ("M-<double-mouse-1>" . ibuffer-visit-buffer-other-window)
-     ("{" . ibuffer-backwards-next-marked)
-     ("}" . ibuffer-forward-next-marked)
-     ("[" . ibuffer-backward-filter-group)
+     ("M-o" . casual-ibuffer-tmenu)
      ("]" . ibuffer-forward-filter-group)
+     ("[" . ibuffer-backward-filter-group)
+     ("}" . ibuffer-forward-next-marked)
+     ("{" . ibuffer-backwards-next-marked)
      ("$" . ibuffer-toggle-filter-group)
      )
-    :ensure t
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-info][Info]]
+*** Info
 
 #+begin_src emacs-lisp
 
@@ -1707,21 +1713,23 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
     :bind
     (
      :map Info-mode-map
-     ("M-o" . casual-info-tmenu)
-     ("M-[" . Info-history-back)
-     ("M-]" . Info-history-forward)
-     ("p" . casual-info-browse-backward-paragraph)
-     ("n" . casual-info-browse-forward-paragraph)
      ("B" . bookmark-set)
+     ("n" . casual-info-browse-forward-paragraph)
+     ("p" . casual-info-browse-backward-paragraph)
+     ("M-o" . casual-info-tmenu)
+     ("M-]" . Info-history-forward)
+     ("M-[" . Info-history-back)
+     ("l" . Info-next)
+     ("h" . Info-prev)
+     ("j" . Info-next-reference)
+     ("k" . Info-prev-reference)
+     ("/" . Info-search)
      )
-    :ensure t
-    :hook
-    (info-mode . scroll-lock-mode)
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-isearch][iSearch]]
+*** iSearch
 
 #+begin_src emacs-lisp
 
@@ -1731,12 +1739,11 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
      :map isearch-mode-map
      ("M-o" . casual-isearch-tmenu)
      )
-    :ensure t
     )
 
 #+end_src
 
-*** [[https://github.com/kickingvegas/casual-re-builder][RE-Builder]]
+*** RE-Builder
 
 #+begin_src emacs-lisp
 
@@ -1748,11 +1755,6 @@ Casual Agenda is an opinionated Transient-based user interface for Emacs Org Age
      :map reb-lisp-mode-map
      ("M-o" . casual-re-builder-tmenu)
      )
-    :ensure t
-    )
-
-#+end_src
-
     )
 
 #+end_src
