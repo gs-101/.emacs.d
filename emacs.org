@@ -713,6 +713,7 @@ A major mode for Emacs for interacting with Gnuplot.
 #+begin_src emacs-lisp
 
   (use-package gnuplot
+    :defer t
     :ensure t
     )
 
@@ -3038,11 +3039,9 @@ Lisp editing for Emacs.
 #+begin_src emacs-lisp
 
   (use-package lisp
-    :mode
-    ("\\.lisp\\'" . lisp-mode)
-    ("\\.lsp\\'" . lisp-mode)
     :custom
     (narrow-to-defun-include-comments t)
+    :defer t
     )
 
 #+end_src
@@ -3058,10 +3057,9 @@ Python's flying circus support for Emacs.
 #+begin_src emacs-lisp
 
   (use-package python
-    :mode
-    ("\\.py\\'" . python-mode)
     :custom
     (python-indent-guess-indent-offset-verbose nil)
+    :defer t
     )
 
 #+end_src
@@ -3077,8 +3075,7 @@ Emacs configuration for Rust.
 #+begin_src emacs-lisp
 
   (use-package rust-mode
-    :mode
-    ("\\.rs\\'" . rust-mode)
+    :defer t
     :custom
     (rust-mode-treesitter-derive t)
     :ensure t
@@ -3117,8 +3114,7 @@ The emacs major mode for editing files in the YAML data serialization format.
 #+begin_src emacs-lisp
 
   (use-package yaml-mode
-    :mode
-    ("\\.yaml\\'" . yaml-mode)
+    :defer t
     :ensure t
     )
 

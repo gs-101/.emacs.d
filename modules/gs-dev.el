@@ -125,23 +125,19 @@
   )
 
 (use-package lisp
-  :mode
-  ("\\.lisp\\'" . lisp-mode)
-  ("\\.lsp\\'" . lisp-mode)
   :custom
   (narrow-to-defun-include-comments t)
+  :defer t
   )
 
 (use-package python
-  :mode
-  ("\\.py\\'" . python-mode)
   :custom
   (python-indent-guess-indent-offset-verbose nil)
+  :defer t
   )
 
 (use-package rust-mode
-  :mode
-  ("\\.rs\\'" . rust-mode)
+  :defer t
   :custom
   (rust-mode-treesitter-derive t)
   :ensure t
@@ -156,8 +152,7 @@
   )
 
 (use-package yaml-mode
-  :mode
-  ("\\.yaml\\'" . yaml-mode)
+  :defer t
   :ensure t
   )
 

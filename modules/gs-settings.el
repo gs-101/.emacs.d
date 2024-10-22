@@ -210,6 +210,7 @@
   )
 
 (use-package gnuplot
+  :defer t
   :ensure t
   )
 
