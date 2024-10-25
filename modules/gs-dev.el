@@ -98,6 +98,7 @@
   :vc (:url "https://github.com/mohkale/compile-multi")
   :bind
   ([remap compile] . compile-multi)
+  :demand t
   :ensure t
   )
 
