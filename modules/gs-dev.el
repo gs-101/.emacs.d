@@ -123,6 +123,13 @@
    )
   :custom
   (eglot-autoshutdown t)
+  (eglot-sync-connect nil)
+  )
+
+(use-package eldoc
+  :custom
+  (eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+  (eldoc-echo-area-use-multiline-p nil)
   )
 
 (use-package flymake
