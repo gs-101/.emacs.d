@@ -32,7 +32,7 @@
    ([remap imenu] . consult-imenu-multi)
    ([remap info] . consult-info)
    ([remap info-search] . consult-info)
-   ([remap isearch-forward-word] . consult-line)
+   ([remap isearch-forward] . consult-line)
    ([remap list-buffers] . consult-buffer)
    ([remap load-theme] . consult-theme)
    ([remap locate] . consult-locate)

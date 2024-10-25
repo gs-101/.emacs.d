@@ -110,6 +110,15 @@
   :defer t
   )
 
+(use-package isearch
+  :custom
+  (isearch-allow-scroll t)
+  (isearch-lazy-count t)
+  (lazy-count-prefix-format "(%s/%s) ")
+  (lazy-count-suffix-format nil)
+  (lazy-highlight-initial-delay 0.0)
+  )
+
 (use-package minibuffer
   :custom
   (completions-detailed t) ;; 1
