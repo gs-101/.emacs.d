@@ -132,6 +132,7 @@
   (ready-player-stop-icon "󰓛")
   (ready-player-next-icon "󰒭")
   (ready-player-search-icon "󰍉")
+  (ready-player-set-global-bindings nil)
   (ready-player-shuffle-icon "󰒝")
   (ready-player-open-externally-icon "󰒖")
   (ready-player-repeat-icon "󰑖")

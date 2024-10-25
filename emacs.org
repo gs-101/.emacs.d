@@ -1060,6 +1060,7 @@ A lightweight major mode to open media (audio/video) files in an Emacs buffer.
     (ready-player-stop-icon "󰓛")
     (ready-player-next-icon "󰒭")
     (ready-player-search-icon "󰍉")
+    (ready-player-set-global-bindings nil)
     (ready-player-shuffle-icon "󰒝")
     (ready-player-open-externally-icon "󰒖")
     (ready-player-repeat-icon "󰑖")
