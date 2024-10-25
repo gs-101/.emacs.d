@@ -121,6 +121,7 @@
 
 (use-package org-clock
   :custom
+  (org-clock-clocked-in-display 'frame-title)
   (org-clock-persist t)
   (org-clock-report-include-clocking-task t)
   )
