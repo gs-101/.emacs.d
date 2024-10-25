@@ -1882,6 +1882,7 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
      'org-babel-load-languages
      '(
        (C . t)
+       (css . t)
        (emacs-lisp . t)
        (gnuplot . t)
        (js . t)
@@ -1964,7 +1965,7 @@ Dynamic task and appointment lists for Org.
 
 #+end_src
 
-- [[https://reddit.com/r/emacs/comments/1fjnqgy/weekly_tips_tricks_c_thread/][Credit]]
+- [[https://reddit.com/r/emacs/comments/1fjnqgy/weekly_tips_tricks_c_thread/][Credits]]
 
 *** Org Habit
 

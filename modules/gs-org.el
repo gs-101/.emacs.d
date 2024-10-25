@@ -51,6 +51,7 @@
    'org-babel-load-languages
    '(
      (C . t)
+     (css . t)
      (emacs-lisp . t)
      (gnuplot . t)
      (js . t)
