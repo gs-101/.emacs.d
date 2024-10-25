@@ -22,25 +22,6 @@
 (use-package citar-embark
   :after citar embark
   :config
-  (defun bibtex-key-target-finder ()
-    "Embark target for bibliography files."
-    (save-excursion
-      (bibtex-beginning-of-entry)
-      (when (looking-at bibtex-entry-maybe-empty-head)
-        (cons 'bibtex-key (bibtex-key-in-head)))))
-  (add-to-list 'embark-target-finders 'bibtex-key-target-finder)
-  (defvar citar-embark-bibtex-map
-    "Embark keymap for BibTeX entries."
-    (let ((map (make-sparse-keymap)))
-      (define-key map "o" #'citar-open)
-      (define-key map "n" #'citar-open-notes)
-      map))
-  (add-to-list 'embark-keymap-alist '(bibtex-key . citar-embark-bibtex-map))
-  )
-
-(use-package citar-embark
-  :after citar embark
-  :config
   (setf (alist-get
          'key-at-point
          (alist-get '(org-mode) citar-major-mode-functions nil nil #'equal))
@@ -96,7 +77,14 @@ Citkey must be formatted as `@key'."
   :after citar
   :config
   (citar-org-roam-mode)
+  (add-to-list 'org-roam-capture-templates
+               '("b" "bibliographic" plain
+                (file "~/Documents/Org Roam/Templates/default.org")
+                :if-new
+                (file+head "%<%Y%m%d%H%M%S>-${citar-citekey}.org" "#+title: ${title}\n\n")
+                :unnarrowed t))
   :custom
+  (citar-org-roam-capture-template-key "b")
   (citar-org-roam-note-title-template "${title}")
   :ensure t
   )
