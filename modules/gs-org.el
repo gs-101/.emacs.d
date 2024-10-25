@@ -280,6 +280,46 @@ allowFullScreen>
   (org-mode . org-appear-mode)
   )
 
+(use-package org-remark
+  :bind
+  (
+   :map org-remark-mode-map
+   ("C-c M o" . org-remark-open)
+   ("C-c M ]" . org-remark-view-next)
+   ("C-c M [" . org-remark-view-prev)
+   ("C-c M d" . org-remark-delete)
+   )
+  :ensure t
+  :config
+  (org-remark-global-tracking-mode)
+  )
+
+(use-package org-remark-eww
+  :bind
+  (
+   :map eww-mode-map
+   ("C-c M" . org-remark-mark)
+   )
+  :hook
+  (eww-mode . org-remark-eww-mode)
+  )
+
+(use-package org-remark-info
+  :bind
+  (
+   :map Info-mode-map
+   ("C-c M". org-remark-mark)
+   )
+  :hook
+  (info-mode . org-remark-info-mode)
+  )
+
+(use-package org-remark
+  :after org-remark nov
+  :hook
+  (nov-mode . org-remark-nov-mode)
+  )
+
 (use-package toc-org
   :ensure t
   :hook
