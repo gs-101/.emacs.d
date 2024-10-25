@@ -3567,23 +3567,6 @@ To make use of this package [[https://magit.vc/manual/forge/Token-Creation.html]
 
 #+end_src
 
-*** [[https://github.com/alphapapa/magit-todos][TODOs]]
-
-#+begin_quote
-
-Show source files' TODOs (and FIXMEs, etc) in Magit status buffer.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package magit-todos
-    :requires (magit hl-todo)
-    :ensure t
-    )
-
-#+end_src
-
 ** [[https://github.com/purcell/package-lint][package-lint]]
 
 #+begin_quote

@@ -360,11 +360,6 @@
   :ensure t
   )
 
-(use-package magit-todos
-  :requires (magit hl-todo)
-  :ensure t
-  )
-
 (use-package package-lint
   :ensure t
   )
