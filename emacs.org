@@ -213,6 +213,23 @@ This file contains all the code needed to drive async compilations and any Lisp 
 
 #+end_src
 
+*** Ediff Window
+
+#+begin_quote
+
+window manipulation utilities.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package ediff-wind
+    :custom
+    (ediff-window-setup-function 'ediff-setup-windows-plain)
+    )
+
+#+end_src
+
 *** Emacs
 
 Generic package used to configure functions and variables not included in any files.

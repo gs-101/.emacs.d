@@ -15,6 +15,11 @@
   (native-comp-async-report-warnings-errors 'silent)
   )
 
+(use-package ediff-wind
+  :custom
+  (ediff-window-setup-function 'ediff-setup-windows-plain)
+  )
+
 (use-package emacs
   :config
   (setq define-coding-system-alias '(UTF-8 'utf-8))
