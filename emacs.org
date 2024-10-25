@@ -610,6 +610,7 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 
   (use-package simple
     :custom
+    (column-number-mode t)
     (completion-auto-select 'second-tab) ;; 1
     (indent-tabs-mode nil)
     (kill-do-not-save-duplicates t) ;; 5

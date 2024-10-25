@@ -173,6 +173,7 @@
 
 (use-package simple
   :custom
+  (column-number-mode t)
   (completion-auto-select 'second-tab) ;; 1
   (indent-tabs-mode nil)
   (kill-do-not-save-duplicates t) ;; 5
