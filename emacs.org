@@ -876,10 +876,6 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
 #+begin_src emacs-lisp
 
   (use-package dired
-    :commands
-    (
-     dired
-     )
     :custom
     (dired-auto-revert-buffer t)
     (dired-clean-confirm-killing-deleted-buffers nil)
@@ -888,6 +884,7 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
     (dired-listing-switches "-agho --group-directories-first") ;;1
     (dired-mouse-drag-files t)
     (dired-recursive-copies 'always)
+    :defer t
     )
 
 #+end_src
@@ -2051,16 +2048,13 @@ LaTeX Backend for Org Export Engine.
 #+begin_src emacs-lisp
 
   (use-package ox-latex
-    :commands
-    (
-     org-export-dispatch
-     )
     :custom
     (org-latex-tables-centered nil)
     (org-latex-toc-command "\\tableofcontents \\pagebreak")
     (org-startup-with-latex-preview t)
     (org-preview-latex-default-process 'dvisvgm) ;; 1
     (org-preview-latex-image-directory (convert-standard-filename (expand-file-name "ltximg/" temporary-file-directory)))
+    :defer t
     )
 
 #+end_src
@@ -2945,15 +2939,12 @@ Run compiler as inferior of Emacs, parse error messages.
      ("p" . previous-error-no-select)
      ("q" . kill-buffer-and-window)
      )
-    :commands
-    (
-     compile
-     )
     :custom
     (compilation-auto-jump-to-first-error t)
     (compilation-max-output-line-length nil)
     (compilation-scroll-output t)
     (compilation-skip-threshold 2)
+    :defer t
     :functions
     (
      kill-buffer-and-window
@@ -3036,13 +3027,10 @@ Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
 #+begin_src emacs-lisp
 
   (use-package eglot
-    :commands
-    (
-     eglot
-     )
     :custom
     (eglot-autoshutdown t)
     (eglot-sync-connect nil)
+    :defer t
     )
 
 #+end_src
@@ -3318,11 +3306,9 @@ Emacs integration for [[https://exercism.org][Exercism]].
 
   (use-package exercism
     :commands
-    (
-     exercism
-     )
     :custom
     (exercism--workspace (projects-code-directory "/study/exercism/"))
+    :defer t
     :ensure t
     )
 
@@ -3360,14 +3346,10 @@ A simple LLM client for Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel
-    :commands
-    (
-     gptel
-     gptel-menu
-     )
     :custom
     (gptel-default-mode 'org-mode)
     (gptel-org-branching-context t)
+    :defer t
     :ensure t
     )
 
@@ -3445,10 +3427,7 @@ Automatically apply AI-generated code changes in Emacs.
 #+begin_src emacs-lisp
 
   (use-package elysium
-    :commands
-    (
-     elysium-query
-     )
+    :defer t
     :ensure t
     )
 
@@ -3477,14 +3456,10 @@ An Emacs LeetCode client.
 #+begin_src emacs-lisp
 
   (use-package leetcode
-    :commands
-    (
-     leetcode
-     leetcode-daily
-     )
     :custom
     (leetcode--paid "$")
     (leetcode--User-Agent ("User Agent" . "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.1"))
+    :defer t
     :ensure t
     )
 
@@ -3495,7 +3470,7 @@ An Emacs LeetCode client.
 #+begin_src emacs-lisp
 
   (use-package leetcode
-    :requires leetcode
+    :after leetcode
     :custom
     (leetcode-save-solutions t)
     (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
@@ -4066,15 +4041,11 @@ Implementation of Pomodoro and Third Time techniques for Emacs.
 #+begin_src emacs-lisp
 
   (use-package pomm
-    :commands
-    (
-     pomm
-     pomm-third-time
-     )
     :config
     (pomm-mode-line-mode)
     :custom
     (pomm-audio-enabled t)
+    :defer t
     :ensure t
     :hook
     (pomm-on-status-changed . pomm--sync-org-clock)
@@ -4174,15 +4145,11 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 
   (use-package consult-gh
     :after consult
-    :commands
-    (
-     consult-gh
-     consult-gh-repo-clone
-     )
     :custom
     (consult-gh-code-action #'consult-gh--code-view-action)
     (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
     (consult-gh-default-orgs-list "gs-101")
+    :defer t
     :ensure t
     )
 

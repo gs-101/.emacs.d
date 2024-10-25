@@ -28,10 +28,6 @@
   )
 
 (use-package dired
-  :commands
-  (
-   dired
-   )
   :custom
   (dired-auto-revert-buffer t)
   (dired-clean-confirm-killing-deleted-buffers nil)
@@ -40,6 +36,7 @@
   (dired-listing-switches "-agho --group-directories-first") ;;1
   (dired-mouse-drag-files t)
   (dired-recursive-copies 'always)
+  :defer t
   )
 
 (use-package dired-aux

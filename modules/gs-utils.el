@@ -11,15 +11,11 @@
   )
 
 (use-package pomm
-  :commands
-  (
-   pomm
-   pomm-third-time
-   )
   :config
   (pomm-mode-line-mode)
   :custom
   (pomm-audio-enabled t)
+  :defer t
   :ensure t
   :hook
   (pomm-on-status-changed . pomm--sync-org-clock)
@@ -81,15 +77,11 @@
 
 (use-package consult-gh
   :after consult
-  :commands
-  (
-   consult-gh
-   consult-gh-repo-clone
-   )
   :custom
   (consult-gh-code-action #'consult-gh--code-view-action)
   (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
   (consult-gh-default-orgs-list "gs-101")
+  :defer t
   :ensure t
   )
 

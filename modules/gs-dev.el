@@ -64,15 +64,12 @@
    ("p" . previous-error-no-select)
    ("q" . kill-buffer-and-window)
    )
-  :commands
-  (
-   compile
-   )
   :custom
   (compilation-auto-jump-to-first-error t)
   (compilation-max-output-line-length nil)
   (compilation-scroll-output t)
   (compilation-skip-threshold 2)
+  :defer t
   :functions
   (
    kill-buffer-and-window
@@ -117,13 +114,10 @@
   )
 
 (use-package eglot
-  :commands
-  (
-   eglot
-   )
   :custom
   (eglot-autoshutdown t)
   (eglot-sync-connect nil)
+  :defer t
   )
 
 (use-package eldoc
@@ -228,11 +222,9 @@
 
 (use-package exercism
   :commands
-  (
-   exercism
-   )
   :custom
   (exercism--workspace (projects-code-directory "/study/exercism/"))
+  :defer t
   :ensure t
   )
 
@@ -246,14 +238,10 @@
   )
 
 (use-package gptel
-  :commands
-  (
-   gptel
-   gptel-menu
-   )
   :custom
   (gptel-default-mode 'org-mode)
   (gptel-org-branching-context t)
+  :defer t
   :ensure t
   )
 
@@ -289,10 +277,7 @@
   )
 
 (use-package elysium
-  :commands
-  (
-   elysium-query
-   )
+  :defer t
   :ensure t
   )
 
@@ -303,19 +288,15 @@
   )
 
 (use-package leetcode
-  :commands
-  (
-   leetcode
-   leetcode-daily
-   )
   :custom
   (leetcode--paid "$")
   (leetcode--User-Agent ("User Agent" . "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.1"))
+  :defer t
   :ensure t
   )
 
 (use-package leetcode
-  :requires leetcode
+  :after leetcode
   :custom
   (leetcode-save-solutions t)
   (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
