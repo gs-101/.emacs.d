@@ -188,7 +188,7 @@
   )
 
 (use-package catppuccin-theme
-  :config
+  :preface
   (load-theme 'catppuccin t)
   :ensure t
   )

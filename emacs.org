@@ -5605,7 +5605,7 @@ Soothing pastel theme for Emacs.
 #+begin_src emacs-lisp
 
   (use-package catppuccin-theme
-    :config
+    :preface
     (load-theme 'catppuccin t)
     :ensure t
     )
