@@ -156,6 +156,11 @@
   :ensure t
   )
 
+(use-package subword
+  :hook
+  (prog-mode . subword-mode)
+  )
+
 (use-package aggressive-indent
   :ensure t
   :hook

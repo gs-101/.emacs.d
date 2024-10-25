@@ -3156,6 +3156,23 @@ The emacs major mode for editing files in the YAML data serialization format.
 
 #+end_src
 
+** SubWord
+
+#+begin_quote
+
+Handling capitalized subwords in a nomenclature.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package subword
+    :hook
+    (prog-mode . subword-mode)
+    )
+
+#+end_src
+
 ** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive Indent]]
 
 #+begin_quote
