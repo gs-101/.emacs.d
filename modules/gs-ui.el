@@ -193,6 +193,20 @@
   :ensure t
   )
 
+(use-package color-identifiers-mode
+  :ensure t
+  :config
+  (defun activate-color-identifiers-on-ts-mode ()
+    "Check if MAJOR MODE is a tree-sitter mode.
+If it is, enable `color-identifiers-mode'."
+    (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
+      (color-identifiers-mode))
+    (when (bound-and-true-p prism-mode)
+      (color-identifiers-mode nil)))
+  :hook
+  (prog-mode . activate-color-identifiers-on-ts-mode)
+  )
+
 (use-package dashboard
   :custom
   (dashboard-center-content t)
@@ -378,7 +392,7 @@
              ("MERGED" . green)
              ("CLOSED" . red)
              )))
-  )
+)
 
 (use-package ligature
   :config
@@ -456,49 +470,49 @@
   :requires nerd-icons
   :after citar
   :config
-  (defvar citar-indicator-cited-icons
-    (citar-indicator-create
-     :symbol (nerd-icons-mdicon
-              "nf-md-record"
-              :face 'nerd-icons-lgreen)
-     :function #'citar-is-cited
-     :padding "  "
-     :tag "is:cited"))
-  (defvar citar-indicator-files-icons
-    (citar-indicator-create
-     :symbol (nerd-icons-mdicon
-              "nf-md-file"
-              :face 'nerd-icons-blue
-              :v-adjust -0.1)
-     :function #'citar-has-files
-     :padding "  " ; need this because the default padding is too low for these icons
-     :tag "has:files"))
-  (defvar citar-indicator-links-icons
-    (citar-indicator-create
-     :symbol (nerd-icons-mdicon
-              "nf-md-link"
-              :face 'nerd-icons-lblue
-              :v-adjust 0.01)
-     :function #'citar-has-links
-     :padding "  "
-     :tag "has:links"))
-  (defvar citar-indicator-notes-icons
-    (citar-indicator-create
-     :symbol (nerd-icons-mdicon
-              "nf-md-text"
-              :face 'nerd-icons-blue
-              :v-adjust -0.3)
-     :function #'citar-has-notes
-     :padding "    "
-     :tag "has:notes"))
-  (setq citar-indicators
-        (list
-         citar-indicator-cited-icons
-         citar-indicator-files-icons
-         citar-indicator-links-icons
-         citar-indicator-notes-icons
-         ))
-  )
+    (defvar citar-indicator-cited-icons
+      (citar-indicator-create
+       :symbol (nerd-icons-mdicon
+                "nf-md-record"
+                :face 'nerd-icons-lgreen)
+       :function #'citar-is-cited
+       :padding "  "
+       :tag "is:cited"))
+      (defvar citar-indicator-files-icons
+      (citar-indicator-create
+       :symbol (nerd-icons-mdicon
+                "nf-md-file"
+                :face 'nerd-icons-blue
+                :v-adjust -0.1)
+       :function #'citar-has-files
+       :padding "  " ; need this because the default padding is too low for these icons
+       :tag "has:files"))
+    (defvar citar-indicator-links-icons
+      (citar-indicator-create
+       :symbol (nerd-icons-mdicon
+                "nf-md-link"
+                :face 'nerd-icons-lblue
+                :v-adjust 0.01)
+       :function #'citar-has-links
+       :padding "  "
+       :tag "has:links"))
+    (defvar citar-indicator-notes-icons
+      (citar-indicator-create
+       :symbol (nerd-icons-mdicon
+                "nf-md-text"
+                :face 'nerd-icons-blue
+                :v-adjust -0.3)
+       :function #'citar-has-notes
+       :padding "    "
+       :tag "has:notes"))
+    (setq citar-indicators
+     (list
+      citar-indicator-cited-icons
+      citar-indicator-files-icons
+      citar-indicator-links-icons
+      citar-indicator-notes-icons
+      ))
+    )
 
 (use-package nerd-icons-completion
   :requires nerd-icons
@@ -619,7 +633,7 @@
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (with-selected-frame frame
-                (prism-catppuccin-colors))))
+              (prism-catppuccin-colors))))
   )
 
 (use-package transient-posframe
