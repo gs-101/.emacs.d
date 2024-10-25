@@ -150,6 +150,7 @@
   :bind
   ("C-s" . isearch-forward-word)
   :custom
+  (isearch-allow-scroll t)
   (lazy-highlight-initial-delay 0.0)
   )
 
