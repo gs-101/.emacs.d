@@ -6121,6 +6121,20 @@ A Library for Nerd Font icons.
 
 #+end_src
 
+*** [[https://github.com/gekoke/magit-file-icons][Magit]]
+
+#+begin_src emacs-lisp
+
+  (use-package magit-file-icons
+    :requires nerd-icons
+    :after magit
+    :ensure t
+    :hook
+    (magit-mode . magit-file-icons-mode)
+    )
+
+#+end_src
+
 ** [[https://github.com/karthink/popper][Popper]]
 
 #+begin_quote

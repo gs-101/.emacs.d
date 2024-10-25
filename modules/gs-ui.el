@@ -541,6 +541,14 @@
   (ibuffer-mode . nerd-icons-ibuffer-mode)
   )
 
+(use-package magit-file-icons
+  :requires nerd-icons
+  :after magit
+  :ensure t
+  :hook
+  (magit-mode . magit-file-icons-mode)
+  )
+
 (use-package popper
   :bind
   ("M-]" . popper-cycle)
