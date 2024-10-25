@@ -316,7 +316,7 @@
   :after eldoc
   :ensure t
   :hook
-  (eglot-managed-mode . eldoc-box-hover-mode)
+  (eldoc-mode . eldoc-box-hover-mode)
   )
 
 (use-package golden-ratio

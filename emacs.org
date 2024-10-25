@@ -5817,7 +5817,7 @@ Childframe doc for eglot and anything that uses eldoc.
     :after eldoc
     :ensure t
     :hook
-    (eglot-managed-mode . eldoc-box-hover-mode)
+    (eldoc-mode . eldoc-box-hover-mode)
     )
 
 #+end_src
