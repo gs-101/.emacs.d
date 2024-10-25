@@ -583,19 +583,10 @@
 (use-package prism
   :ensure t
   :hook
-  (c-ts-mode . prism-mode)
-  (c++-ts-mode . prism-mode)
-  (csharp-ts-mode . prism-mode)
   (emacs-lisp-mode . prism-mode)
-  (emacs-lisp-compilation-mode . prism-mode)
-  (elisp-byte-code-mode . prism-mode)
-  (elisp-refs-mode . prism-mode)
   (lisp-mode . prism-mode)
   (lisp-data-mode . prism-mode)
   (lisp-interaction-mode . prism-mode)
-  (java-ts-mode . prism-mode)
-  (rust-ts-mode . prism-mode)
-  (bash-ts-mode . prism-whitespace-mode)
   (python-ts-mode . prism-whitespace-mode)
   )
 
