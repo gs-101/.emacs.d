@@ -2287,6 +2287,38 @@ toc-org is an Emacs utility to have an up-to-date table of contents in the org f
 
 #+end_src
 
+** [[https://github.com/rtrppl/website2org][website2org]]
+
+#+begin_quote
+
+Turn any website into a minimal Orgmode buffer or .org file.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package website2org
+    :vc (:url "https://github.com/rtrppl/website2org")
+    :custom
+    (website2org-cache-filename "/tmp/website2org")
+    :ensure t
+    )
+
+#+end_src
+
+*** Org Roam
+
+#+begin_src emacs-lisp
+
+  (use-package website2org
+    :after website2org org-roam
+    :custom
+    (website2org-directory (expand-file-name "website2org/" org-roam-directory))
+    (website2org-additional-meta "#+filetags: :website2org:")
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
