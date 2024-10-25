@@ -80,7 +80,7 @@ Citkey must be formatted as `@key'."
   :bind
   (
    :map org-mode-map
-   ("C-c o q" . org-cite-insert)
+   ("C-c m q" . org-cite-insert)
    )
   :custom
   (org-cite-csl-styles-dir (expand-file-name "~/Documents/Zotero/styles/"))

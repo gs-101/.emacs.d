@@ -41,10 +41,10 @@
   :bind
   (
    :map emacs-lisp-mode-map
-        ("C-c C-b" . elisp-byte-compile-buffer)
-        ("C-c l e d" . eval-defun)
-        ("C-c C-e" . elisp-eval-region-or-buffer)
-        ("C-c l e e" . eval-last-sexp)
+        ("C-c m C-b" . elisp-byte-compile-buffer)
+        ("C-c m e d" . eval-defun)
+        ("C-c m C-e" . elisp-eval-region-or-buffer)
+        ("C-c m e e" . eval-last-sexp)
         )
   )
 
@@ -52,8 +52,8 @@
   :bind
   (
    :map emacs-lisp-mode-map
-   ("C-c l e b" . eval-buffer)
-   ("C-c l e r" . eval-region)
+   ("C-c m e b" . eval-buffer)
+   ("C-c m e r" . eval-region)
    )
   )
 
@@ -61,7 +61,7 @@
   :bind
   (
    :map  emacs-lisp-mode-map
-         ("C-c l e l" . load-library)
+         ("C-c m l" . load-library)
          )
   )
 
@@ -69,9 +69,9 @@
   :bind
   (
    :map emacs-lisp-mode-map
-   ("C-c l g f" . find-function)
-   ("C-c l g l" . find-library)
-   ("C-c l g v" . find-variable)
+   ("C-c m g f" . find-function)
+   ("C-c m g l" . find-library)
+   ("C-c m g v" . find-variable)
    )
   )
 
@@ -157,10 +157,12 @@
   :bind
   (
    :map org-mode-map
+   ([remap down-list] . org-next-visible-heading)
+   ([remap backward-up-list] . org-previous-visible-heading)
    ([remap org-narrow-to-subtree] . org-toggle-narrow-to-subtree)
    ("M-p" . org-move-subtree-up)
    ("M-n" . org-move-subtree-down)
-   ("C-c o s e" . org-sort-entries)
+   ("C-c m s e" . org-sort-entries)
    )
   )
 
@@ -169,7 +171,7 @@
   ("C-c o a" . org-agenda)
   (
    :map org-mode-map
-   ("C-c o m" . (lambda ()
+   ("C-c m m" . (lambda ()
                     (interactive)
                     ;; Filter tasks by tag
                     (org-tags-view t)))
@@ -180,8 +182,8 @@
   :bind
   (
    :map org-mode-map
-   ("C-c o c" . org-clock-in-last)
-   ("C-c o C" . org-clock-cancel)
+   ("C-c m c" . org-clock-in-last)
+   ("C-c m C" . org-clock-cancel)
    )
   )
 
@@ -189,7 +191,7 @@
   :bind
   (
    :map org-mode-map
-   ("C-c o x" . org-export-dispatch)
+   ("C-c m x" . org-export-dispatch)
    )
   )
 
@@ -203,8 +205,8 @@
   :bind
   (
    :map org-mode-map
-   ("C-c o l i" . org-insert-link)
-   ("C-c o l s" . org-store-link)
+   ("C-c m l i" . org-insert-link)
+   ("C-c m l s" . org-store-link)
    )
   )
 
@@ -212,7 +214,7 @@
   :bind
   (
    :map org-mode-map
-   ("C-c o s l" . org-sort-list)
+   ("C-c m s l" . org-sort-list)
    )
   )
 
@@ -220,7 +222,7 @@
   :bind
   (
    :map org-mode-map
-   ("C-c o r" . org-refile)
+   ("C-c m r" . org-refile)
    )
   )
 
@@ -228,7 +230,7 @@
   :bind
   (
    :map org-mode-map
-   ("C-c o -" . org-table-insert-hline)
+   ("C-c m -" . org-table-insert-hline)
    )
   )
 
