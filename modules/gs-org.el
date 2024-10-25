@@ -264,6 +264,11 @@ allowFullScreen>
                        ))
   )
 
+(use-package org-src
+  :custom
+  (org-src-window-setup 'current-window)
+  )
+
 (use-package org-alert
   :ensure t
   )

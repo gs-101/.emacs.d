@@ -2234,6 +2234,17 @@ Org refile allows you to refile subtrees to various locations.
 
 #+end_src
 
+** Source
+
+#+begin_src emacs-lisp
+
+  (use-package org-src
+    :custom
+    (org-src-window-setup 'current-window)
+    )
+
+#+end_src
+
 ** [[https://github.com/spegoraro/org-alert][Alert]]
 
 #+begin_quote
