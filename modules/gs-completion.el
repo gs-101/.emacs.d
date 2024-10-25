@@ -39,8 +39,8 @@
   ;; * .ext (file extension)
   ;; * regexp$ (regexp matching at end)
   (defun +orderless-consult-dispatch (word _index _total)
+    "Ensure that $ works with Consult commands, witch add disambiguation suffixes."
     (cond
-     ;; Ensure that $ works with Consult commands, which add disambiguation suffixes
      ((string-suffix-p "$" word)
       `(orderless-regexp . ,(concat (substring word 0 -1) (+orderless--consult-suffix))))))
   )

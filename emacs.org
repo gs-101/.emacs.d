@@ -3719,50 +3719,50 @@ Emacs completion style that matches multiple regexps in any order.
 
 #+begin_src emacs-lisp
 
-      (use-package orderless
-        :config
-        (orderless-define-completion-style orderless+initialism
-          (orderless-matching-styles '(
-                                       orderless-annotation
-                                       orderless-initialism
-                                       orderless-literal-prefix
-                                       orderless-regexp
-                                       )))
-        :custom
-        (completion-category-defaults nil)
-        (completion-category-overrides '(
-                                         (file (styles partial-completion))
-                                         (minibuffer (initials orderless))
-                                         ))
-        (completion-styles '(
-                             orderless
-                             ))
-        (orderless-matching-styles '(
-                                     orderless-literal
-                                     orderless-regexp
+  (use-package orderless
+    :config
+    (orderless-define-completion-style orderless+initialism
+      (orderless-matching-styles '(
+                                   orderless-annotation
+                                   orderless-initialism
+                                   orderless-literal-prefix
+                                   orderless-regexp
+                                   )))
+    :custom
+    (completion-category-defaults nil)
+    (completion-category-overrides '(
+                                     (file (styles partial-completion))
+                                     (minibuffer (initials orderless))
                                      ))
-        (orderless-style-dispatchers (list
-                                      #'orderless-affix-dispatch
-                                      #'+orderless-consult-dispatch
-                                      ))
-        :ensure t
-        :preface
-        (defun +orderless--consult-suffix ()
-          "Regexp which matches the end of string with Consult tofu support."
-          (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
-              (format "[%c-%c]*$"
-                      consult--tofu-char
-                      (+ consult--tofu-char consult--tofu-range -1))
-            "$"))
-        ;; Recognizes the following patterns:
-        ;; * .ext (file extension)
-        ;; * regexp$ (regexp matching at end)
-        (defun +orderless-consult-dispatch (word _index _total)
-          (cond
-           ;; Ensure that $ works with Consult commands, which add disambiguation suffixes
-           ((string-suffix-p "$" word)
-            `(orderless-regexp . ,(concat (substring word 0 -1) (+orderless--consult-suffix))))))
-        )
+    (completion-styles '(
+                         orderless
+                         ))
+    (orderless-matching-styles '(
+                                 orderless-literal
+                                 orderless-regexp
+                                 ))
+    (orderless-style-dispatchers (list
+                                  #'orderless-affix-dispatch
+                                  #'+orderless-consult-dispatch
+                                  ))
+    :ensure t
+    :preface
+    (defun +orderless--consult-suffix ()
+      "Regexp which matches the end of string with Consult tofu support."
+      (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
+          (format "[%c-%c]*$"
+                  consult--tofu-char
+                  (+ consult--tofu-char consult--tofu-range -1))
+        "$"))
+    ;; Recognizes the following patterns:
+    ;; * .ext (file extension)
+    ;; * regexp$ (regexp matching at end)
+    (defun +orderless-consult-dispatch (word _index _total)
+      "Ensure that $ works with Consult commands, witch add disambiguation suffixes."
+      (cond
+       ((string-suffix-p "$" word)
+        `(orderless-regexp . ,(concat (substring word 0 -1) (+orderless--consult-suffix))))))
+    )
 
 #+end_src
 
