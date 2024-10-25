@@ -491,8 +491,7 @@
        :function #'citar-has-notes
        :padding "    "
        :tag "has:notes"))
-    :custom
-    (citar-indicators
+    (setq citar-indicators
      (list
       citar-indicator-cited-icons
       citar-indicator-files-icons
