@@ -190,6 +190,13 @@
 
 (use-package apheleia
   :ensure t
+  :config
+  (setf (alist-get 'clang-format apheleia-formatters)
+        '("clang-format" "--style=microsoft" "--assume-filename"
+          (or (apheleia-formatters-local-buffer-file-name)
+              (apheleia-formatters-mode-extension)
+              ".c"))
+        )
   :hook
   (prog-mode . apheleia-mode)
   )
