@@ -201,32 +201,39 @@
   (prog-mode . apheleia-mode)
   )
 
-(use-package cognitive-complexity
-  :vc (:url "https://github.com/emacs-vs/cognitive-complexity")
-  :ensure t
-  :hook
-  (prog-mode . cognitive-complexity-mode)
-  )
-
 (use-package combobulate
   :vc (:url "https://github.com/mickeynp/combobulate")
   :bind
   (
-   :map prog-mode-map
-   ("C-c C-x c" . combobulate)
+   :map combobulate-key-map
+   ([remap backward-up-list] . combobulate-navigate-up)
+   ([remap down-list] . combobulate-navigate-navigate-down)
+   ([remap forward-sexp] . combobulate-navigate-next)
+   ([remap backward-sexp] . combobulate-navigate-previous)
+   ([remap transpose-sexp] . combobulate-transpose-sexps)
+   ([remap kill-sexp] . combobulate-kill-node-dwim)
    )
+  :config
+  (defun cxa/activate-combobulate-on-ts-mode ()
+    "Check if MAJOR MODE is a tree-sitter mode. If it is, enable `combobulate-mode'."
+    (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
+      (combobulate-mode)))
+  :custom
+  (combobulate-key-prefix "C-c t c")
   :ensure t
   :hook
+  (text-mode . cxa/activate-combobulate-on-ts-mode)
+  (prog-mode . cxa/activate-combobulate-on-ts-mode)
+  )
+
+(use-package exercism
+  :commands
   (
-   (css-ts-mode . combobulate-mode)
-   (html-ts-mode . combobulate-mode)
-   (js-ts-mode . combobulate-mode)
-   (json-ts-mode . combobulate-mode)
-   (python-ts-mode . combobulate-mode)
-   (tsx-ts-mode . combobulate-mode)
-   (typescript-ts-mode . combobulate-mode)
-   (yaml-ts-mode . combobulate-mode)
+   exercism
    )
+  :custom
+  (exercism--workspace (projects-code-directory "/study/exercism/"))
+  :ensure t
   )
 
 (use-package git-modes

@@ -3266,25 +3266,6 @@ Run code formatter on buffer contents without moving point, using RCS patches an
 
 #+end_src
 
-** [[https://github.com/emacs-vs/cognitive-complexity][Cognitive Complexity]]
-
-#+begin_quote
-
-Show the cognitive complexity of the code.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package cognitive-complexity
-    :vc (:url "https://github.com/emacs-vs/cognitive-complexity")
-    :ensure t
-    :hook
-    (prog-mode . cognitive-complexity-mode)
-    )
-
-#+end_src
-
 ** [[https://github.com/mickeynp/combobulate][Combobulate]]
 
 #+begin_quote
@@ -3299,21 +3280,49 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
     :vc (:url "https://github.com/mickeynp/combobulate")
     :bind
     (
-     :map prog-mode-map
-     ("C-c C-x c" . combobulate)
+     :map combobulate-key-map
+     ([remap backward-up-list] . combobulate-navigate-up)
+     ([remap down-list] . combobulate-navigate-navigate-down)
+     ([remap forward-sexp] . combobulate-navigate-next)
+     ([remap backward-sexp] . combobulate-navigate-previous)
+     ([remap transpose-sexp] . combobulate-transpose-sexps)
+     ([remap kill-sexp] . combobulate-kill-node-dwim)
      )
+    :config
+    (defun cxa/activate-combobulate-on-ts-mode ()
+      "Check if MAJOR MODE is a tree-sitter mode. If it is, enable `combobulate-mode'."
+      (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
+        (combobulate-mode)))
+    :custom
+    (combobulate-key-prefix "C-c t c")
     :ensure t
     :hook
+    (text-mode . cxa/activate-combobulate-on-ts-mode)
+    (prog-mode . cxa/activate-combobulate-on-ts-mode)
+    )
+
+#+end_src
+
+- [[https://github.com/mickeynp/combobulate/issues/119#issuecomment-2435132123][Credits]]
+
+** [[https://github.com/anonimitoraf/exercism.el][Exercism]]
+
+#+begin_quote
+
+Emacs integration for [[https://exercism.org][Exercism]].
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package exercism
+    :commands
     (
-     (css-ts-mode . combobulate-mode)
-     (html-ts-mode . combobulate-mode)
-     (js-ts-mode . combobulate-mode)
-     (json-ts-mode . combobulate-mode)
-     (python-ts-mode . combobulate-mode)
-     (tsx-ts-mode . combobulate-mode)
-     (typescript-ts-mode . combobulate-mode)
-     (yaml-ts-mode . combobulate-mode)
+     exercism
      )
+    :custom
+    (exercism--workspace (projects-code-directory "/study/exercism/"))
+    :ensure t
     )
 
 #+end_src
