@@ -3465,38 +3465,6 @@ Automatically apply AI-generated code changes in Emacs.
 
 #+end_src
 
-** [[https://github.com/seagle0128/grip-mode][grip-mode]]
-
-#+begin_quote
-
-Instant Github-flavored Markdown/Org preview using grip.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package grip-mode
-    :commands
-    (
-     grip-start-preview
-     )
-    :custom
-    (grip-preview-use-webkit nil)
-    :ensure t
-    )
-
-#+end_src
-
-*** Packages to install
-
-**** Pip
-
-#+begin_src bash
-
-  pip install grip
-
-#+end_src
-
 ** [[https://github.com/kaiwk/leetcode.el][LeetCode]]
 
 #+begin_quote

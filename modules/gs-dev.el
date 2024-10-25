@@ -302,16 +302,6 @@
   (prog-mode . smerge-mode)
   )
 
-(use-package grip-mode
-  :commands
-  (
-   grip-start-preview
-   )
-  :custom
-  (grip-preview-use-webkit nil)
-  :ensure t
-  )
-
 (use-package leetcode
   :commands
   (
