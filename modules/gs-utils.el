@@ -212,52 +212,22 @@ targets."
   (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
   )
 
-(use-package blk
-  :vc (:url "https://github.com/mahmoodsh36/blk")
-  :bind
-  ("C-c b l f" . blk-find)
-  ("C-c b l i" . blk-insert)
-  ("C-c b l o" . blk-open-at-point)
-  :custom
-  (blk-list-directories-recursively t)
-  (blk-treat-titles-as-ids t)
-  (blk-use-cache t)
-  :demand t
-  :ensure t
-  )
-
-(use-package blk-org
-  :requires blk
-  )
-
-(use-package blk-org
-  :requires (blk org-transclusion)
-  :config
-  (blk-configure-org-transclusion)
-  )
-
-(use-package blk
-  :requires (blk org-roam)
-  :custom
-  (blk-directories (list
-                    org-roam-directory
-                    user-emacs-directory
-                    ))
-  )
-
 (use-package gnosis
-  :commands
-  (
-   gnosis-dashboard
-   gnosis-demo
-   )
+  :defer t
   :ensure t
   )
 
 (use-package gnosis
-  :requires (gnosis no-littering)
+  :requires no-littering
+  :after gnosis
   :custom
   (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
+  )
+
+(use-package uniline
+  :bind
+  ("C-c i l" . uniline-mode)
+  :ensure t
   )
 
 (provide 'gs-utils)
