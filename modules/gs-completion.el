@@ -67,15 +67,13 @@
   :ensure t
   :hook
   (completion-at-point-functions . tempel-complete)
-  (prog-mode . tempel-abbrev-mode)
   )
 
 (use-package eglot-tempel
-  :requires tempel
-  :after eglot
+  :after tempel
   :ensure t
-  :config
-  (eglot-tempel-mode)
+  :hook
+  (eglot-managed-mode . eglot-tempel-mode)
   )
 
 (use-package tempel-collection
@@ -103,11 +101,6 @@
   :ensure t
   :init
   (global-corfu-mode)
-  )
-
-(use-package eldoc
-  :custom
-  (global-eldoc-mode nil)
   )
 
 (use-package orderless

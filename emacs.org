@@ -3805,7 +3805,6 @@ Simple templates for Emacs.
     :ensure t
     :hook
     (completion-at-point-functions . tempel-complete)
-    (prog-mode . tempel-abbrev-mode)
     )
 
 #+end_src
@@ -3821,11 +3820,10 @@ Bridge for tempel templates with eglot.
 #+begin_src emacs-lisp
 
   (use-package eglot-tempel
-    :requires tempel
-    :after eglot
+    :after tempel
     :ensure t
-    :config
-    (eglot-tempel-mode)
+    :hook
+    (eglot-managed-mode . eglot-tempel-mode)
     )
 
 #+end_src
@@ -3877,17 +3875,6 @@ COmpletion in Region FUnction.
     :ensure t
     :init
     (global-corfu-mode)
-    )
-
-#+end_src
-
-*** Eldoc
-
-#+begin_src emacs-lisp
-
-  (use-package eldoc
-    :custom
-    (global-eldoc-mode nil)
     )
 
 #+end_src
