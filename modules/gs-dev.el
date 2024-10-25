@@ -5,6 +5,17 @@
   (treesit-font-lock-level 4)
   )
 
+(use-package org-src
+  :config
+  (add-to-list 'org-src-lang-modes '(
+                                     ("C" . c-ts)
+                                     ("css" . css-ts)
+                                     ("html" . html-ts)
+                                     ("js" . js-ts)
+                                     ("python" . python-ts)
+                                     ))
+  )
+
 (use-package treesit-auto
   :vc (:url "https://github.com/gs-101/treesit-auto" :branch "custom")
   :config
