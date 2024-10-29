@@ -52,9 +52,19 @@
   :bind
   (
    :map emacs-lisp-mode-map
+   ("C-c C-c" . gs-101/eval-dwim)
    ("C-c m e b" . eval-buffer)
    ("C-c m e r" . eval-region)
    )
+  :config
+  (defun gs-101/eval-dwim ()
+    "Evaluate region if it is active; if not, evaluate the buffer.
+If the region is active, this function calls `eval-region'.
+Otherwise, it calls `eval-buffer'."
+    (interactive)
+    (if (use-region-p)
+        (eval-region (region-beginning) (region-end) t)
+      (eval-buffer nil t)))
   )
 
 (use-package files
@@ -96,8 +106,6 @@
 (use-package emacs
   :bind
   ("C-c q f" . delete-frame)
-  ("C-c c e" . eval-buffer)
-  ("C-c c E" . eval-region)
   ("C-c i c" . insert-char)
   )
 
