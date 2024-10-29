@@ -284,6 +284,7 @@ allowFullScreen>
   :bind
   (
    :map org-remark-mode-map
+   ("C-c M m" . org-remark-mark)
    ("C-c M o" . org-remark-open)
    ("C-c M ]" . org-remark-view-next)
    ("C-c M [" . org-remark-view-prev)
@@ -295,27 +296,16 @@ allowFullScreen>
   )
 
 (use-package org-remark-eww
-  :bind
-  (
-   :map eww-mode-map
-   ("C-c M" . org-remark-mark)
-   )
   :hook
   (eww-mode . org-remark-eww-mode)
   )
 
 (use-package org-remark-info
-  :bind
-  (
-   :map Info-mode-map
-   ("C-c M". org-remark-mark)
-   )
   :hook
   (info-mode . org-remark-info-mode)
   )
 
 (use-package org-remark
-  :after org-remark nov
   :hook
   (nov-mode . org-remark-nov-mode)
   )

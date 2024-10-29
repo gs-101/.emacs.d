@@ -2306,6 +2306,7 @@ Highlight & annotate text, EWW, Info, and EPUB.
     :bind
     (
      :map org-remark-mode-map
+     ("C-c M m" . org-remark-mark)
      ("C-c M o" . org-remark-open)
      ("C-c M ]" . org-remark-view-next)
      ("C-c M [" . org-remark-view-prev)
@@ -2323,11 +2324,6 @@ Highlight & annotate text, EWW, Info, and EPUB.
 #+begin_src emacs-lisp
 
   (use-package org-remark-eww
-    :bind
-    (
-     :map eww-mode-map
-     ("C-c M" . org-remark-mark)
-     )
     :hook
     (eww-mode . org-remark-eww-mode)
     )
@@ -2339,11 +2335,6 @@ Highlight & annotate text, EWW, Info, and EPUB.
 #+begin_src emacs-lisp
 
   (use-package org-remark-info
-    :bind
-    (
-     :map Info-mode-map
-     ("C-c M". org-remark-mark)
-     )
     :hook
     (info-mode . org-remark-info-mode)
     )
@@ -2355,7 +2346,6 @@ Highlight & annotate text, EWW, Info, and EPUB.
 #+begin_src emacs-lisp
 
   (use-package org-remark
-    :after org-remark nov
     :hook
     (nov-mode . org-remark-nov-mode)
     )
