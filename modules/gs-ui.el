@@ -179,7 +179,7 @@
   (which-key-add-column-padding 1)
   (which-key-idle-delay 0.5)
   (which-key-min-display-lines 6)
-  (which-key-separator "  ")
+  (which-key-separator " = ")
   (which-key-side-window-slot -10)
   (which-key-sort-order #'which-key-key-order-alpha)
   (which-key-sort-uppercase-first nil)
