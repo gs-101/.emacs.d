@@ -1917,7 +1917,7 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
        ))
 
     (push '("conf-unix" . conf-unix) org-src-lang-modes)
-    (add-hook 'after-save-hook 'org-babel-tangle)
+    )
 
 #+end_src
 
@@ -6441,3 +6441,7 @@ Pops the transient menu to a posframe (floating window).
 
   (provide 'gs-ui)
 #+end_src
+
+# Local Variables:
+# eval: (add-hook 'after-save-hook #'org-babel-tangle t t)
+# End:

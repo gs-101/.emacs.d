@@ -54,7 +54,7 @@
      ))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
-  (add-hook 'after-save-hook 'org-babel-tangle)
+  )
 
 (use-package ob-csharp
   :vc (:url "https://github.com/samwdp/ob-csharp")
