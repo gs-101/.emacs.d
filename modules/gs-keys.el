@@ -116,9 +116,10 @@ Otherwise, it calls `eval-buffer'."
 
 (use-package files
   :bind
-  ("C-c q K" . save-buffers-kill-emacs)
   ("C-c f r" . recover-this-file)
   ("C-c b r" . revert-buffer)
+  ("C-c q r" . restart-emacs)
+  ("C-c q K" . save-buffers-kill-emacs)
   )
 
 (use-package find-func
