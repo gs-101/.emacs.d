@@ -1031,37 +1031,6 @@ Automatically preview file at point in Emacs Dired.
 
 #+end_src
 
-** [[https://github.com/vedang/pdf-tools][PDF-Tools]]
-
-#+begin_quote
-
-Emacs support library for PDF files.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package pdf-tools
-    :mode
-    ("\\.pdf\\'" . pdf-view-mode)
-    :bind
-    (
-     :map pdf-view-mode-map
-     ([remap scroll-up-command] . pdf-view-scroll-up-or-next-page)
-     ([remap scroll-down-command] . pdf-view-scroll-down-or-previous-page)
-     )
-    :custom
-    (pdf-annot-activate-created-annotations t)
-    (pdf-view-display-size 'fit-page)
-    :ensure t
-    :hook
-    (pdf-view-mode . pdf-view-themed-minor-mode)
-    )
-
-#+end_src
-
-**** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L859][Credits]]
-
 ** [[https://depp.brause.cc/nov.el/][nov.el]]
 
 #+begin_quote
