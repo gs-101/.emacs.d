@@ -341,10 +341,10 @@
   )
 
 (use-package package-lint-flymake
-  :after flymake
-  :config
-  (package-lint-flymake-setup)
+  :after package-lint flymake
   :ensure t
+  :hook
+  (emacs-lisp-mode . package-lint-flymake-setup)
   )
 
 (use-package projection

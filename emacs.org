@@ -3637,10 +3637,10 @@ A linting library for elisp package metadata.
 #+begin_src emacs-lisp
 
   (use-package package-lint-flymake
-    :after flymake
-    :config
-    (package-lint-flymake-setup)
+    :after package-lint flymake
     :ensure t
+    :hook
+    (emacs-lisp-mode . package-lint-flymake-setup)
     )
 
 #+end_src
