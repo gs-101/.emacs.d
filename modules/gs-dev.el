@@ -316,6 +316,7 @@
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :ensure t
   :hook
+  (magit-mode . magit-wip-mode)
   (magit-process-find-password-functions . magit-process-password-auth-source)
   )
 
