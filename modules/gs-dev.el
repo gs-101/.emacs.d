@@ -273,14 +273,12 @@
   )
 
 (use-package elysium
-  :defer t
+  :bind
+  (
+   :map prog-mode-map
+   ("C-c c e" . elysium-query)
+   )
   :ensure t
-  )
-
-(use-package smerge-mode
-  :after elysium
-  :hook
-  (prog-mode . smerge-mode)
   )
 
 (use-package leetcode

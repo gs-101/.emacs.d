@@ -3507,20 +3507,12 @@ Automatically apply AI-generated code changes in Emacs.
 #+begin_src emacs-lisp
 
   (use-package elysium
-    :defer t
+    :bind
+    (
+     :map prog-mode-map
+     ("C-c c e" . elysium-query)
+     )
     :ensure t
-    )
-
-#+end_src
-
-**** smerge-mode
-
-#+begin_src emacs-lisp
-
-  (use-package smerge-mode
-    :after elysium
-    :hook
-    (prog-mode . smerge-mode)
     )
 
 #+end_src
