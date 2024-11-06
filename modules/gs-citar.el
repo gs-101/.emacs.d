@@ -39,24 +39,6 @@ Citkey must be formatted as `@key'."
                       (match-end 0))))))
   (add-to-list 'embark-keymap-alist '(bib-reference . citar-map))
   )
-
-(use-package citar-embark
-  :after citar embark
-  :config
-  (defun ex/search-pdf-contents (keys-entries &optional str)
-    "Search the contents of PDFs."
-    (interactive (list (citar-select-refs)))
-    (let ((files (citar-file--files-for-multiple-entries
-                  (citar--ensure-entries keys-entries)
-                  citar-library-paths
-                  '("pdf")))
-          (search-str (or str (read-string "Search string: "))))
-      (pdf-occur-search files search-str t)))
-
-  ;; with this, you can exploit embark's multitarget actions, so that you can run `embark-act-all`
-  (add-to-list 'embark-multitarget-actions #'ex/search-pdf-contents)
-  )
-
 (use-package oc
   :bind
   (

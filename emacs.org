@@ -2718,29 +2718,6 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 
 #+end_src
 
-**** [[https://github.com/emacs-citar/citar/wiki/Example-functions#search-contents-of-pdfs][Search Contents of PDFs]]
-
-#+begin_src emacs-lisp
-
-  (use-package citar-embark
-    :after citar embark
-    :config
-    (defun ex/search-pdf-contents (keys-entries &optional str)
-      "Search the contents of PDFs."
-      (interactive (list (citar-select-refs)))
-      (let ((files (citar-file--files-for-multiple-entries
-                    (citar--ensure-entries keys-entries)
-                    citar-library-paths
-                    '("pdf")))
-            (search-str (or str (read-string "Search string: "))))
-        (pdf-occur-search files search-str t)))
-
-    ;; with this, you can exploit embark's multitarget actions, so that you can run `embark-act-all`
-    (add-to-list 'embark-multitarget-actions #'ex/search-pdf-contents)
-    )
-
-#+end_src
-
 ** Org Cite
 
 #+begin_src emacs-lisp
