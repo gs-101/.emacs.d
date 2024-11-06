@@ -101,7 +101,7 @@
   )
 
 (use-package consult-gh-transient
-  :requires consult-gh
+  :after consult-gh
   )
 
 (use-package consult-notes
@@ -109,7 +109,7 @@
   )
 
 (use-package consult-notes
-  :requires org-roam
+  :after org-roam
   :config
   (consult-notes-org-roam-mode)
   )
@@ -210,8 +210,7 @@ targets."
   )
 
 (use-package gnosis
-  :requires no-littering
-  :after gnosis
+  :after gnosis no-littering
   :custom
   (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
   )

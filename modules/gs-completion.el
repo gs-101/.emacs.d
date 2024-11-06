@@ -104,20 +104,20 @@
   )
 
 (use-package orderless
-  :requires (corfu orderless)
+  :after corfu orderless
   :custom
   (completion-category-overrides '((eglot (styles orderless))
                                    (eglot-capf (styles orderless))))
   )
 
 (use-package cape
-  :requires (corfu cape)
+  :after corfu cape
   :config
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   )
 
 (use-package emacs
-  :requires (corfu cape tempel)
+  :after corfu cape tempel
   :preface
   (defun minad/eglot-capf ()
     "eglot capf with tempel and cape features."
@@ -150,7 +150,7 @@
   )
 
 (use-package vertico-directory
-  :requires vertico
+  :after vertico
   :bind
   (
    :map vertico-map

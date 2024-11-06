@@ -244,7 +244,7 @@
   )
 
 (use-package no-littering
-  :requires no-littering
+  :after no-littering
   :config
   (let ((dir (no-littering-expand-var-file-name "lock-files/")))
     (make-directory dir t)
@@ -252,7 +252,7 @@
   )
 
 (use-package recentf
-  :requires no-littering
+  :after no-littering
   :custom
   (recentf-max-saved-items 1000)
   :config

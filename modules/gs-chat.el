@@ -2,6 +2,8 @@
 
 (use-package mu4e
   :load-path "/usr/share/emacs/site-lisp/mu4e/"
+  :commands
+  (mu4e)
   :custom
   (mu4e-compose-format-flowed t)
   (mu4e-change-filenames-when-moving t)
@@ -20,7 +22,6 @@
                             ("/Trash" . ?t)
                             ("/All Mail" . ?a)
                             ))
-  :defer t
   )
 
 (use-package mu4e-column-faces

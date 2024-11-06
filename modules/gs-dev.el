@@ -92,10 +92,8 @@
   )
 
 (use-package compile-multi
-  :vc (:url "https://github.com/mohkale/compile-multi")
   :bind
   ([remap compile] . compile-multi)
-  :demand t
   :ensure t
   )
 
@@ -263,8 +261,8 @@
 )
 
 (use-package gptel-quick
-  :after gptel
   :vc (:url "https://github.com/karthink/gptel-quick")
+  :after gptel
   :ensure t
   )
 
@@ -354,7 +352,6 @@
   )
 
 (use-package projection
-  :demand t
   :ensure t
   :bind-keymap
   ("C-c p" . projection-map)
@@ -369,8 +366,7 @@
   )
 
 (use-package projection-multi
-  :requires projection
-  :after compile-multi
+  :after projection compile-multi
   :ensure t
   :bind
   (
@@ -380,8 +376,7 @@
   )
 
 (use-package projection-multi-embark
-  :requires projection
-  :after compile-multi embark
+  :after projection compile-multi embark
   :ensure t
   :config
   (projection-multi-embark-setup-command-map)

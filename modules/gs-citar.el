@@ -73,8 +73,7 @@ Citkey must be formatted as `@key'."
   )
 
 (use-package citar-org-roam
-  :requires org-roam
-  :after citar
+  :after citar org-roam
   :config
   (citar-org-roam-mode)
   (add-to-list 'org-roam-capture-templates

@@ -56,10 +56,10 @@
   :custom
   (dw/daily-note-filename "%<%Y-%m-%d>.org")
   (dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-  :demand t
   )
 
 (use-package org-roam-dailies
+  :after org-roam-dailies
   :custom
   (org-roam-dailies-capture-templates '(
                                         ("d" "default" entry

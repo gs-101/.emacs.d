@@ -71,7 +71,7 @@
   )
 
 (use-package dired-preview
-  :requires (dired-preview ready-player)
+  :after dired-preview ready-player
   :bind
   (
    :map dired-preview-mode-map

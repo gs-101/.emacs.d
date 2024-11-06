@@ -65,7 +65,7 @@
   )
 
 (use-package evil-core
-  :requires org-appear
+  :after org-appear
   :custom
   (org-appear-trigger 'manual)
   :config
@@ -81,7 +81,7 @@
   )
 
 (use-package evil-core
-  :requires vertico
+  :after vertico
   :bind
   (
    :map vertico-map
@@ -133,20 +133,20 @@
   )
 
 (use-package evil-core
-  :requires vterm-toggle
+  :after vterm-toggle
   :config
   (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm-toggle)
   )
 
 (use-package evil-core
-  :requires magit
+  :after magit
   :config
   (evil-define-key 'normal 'global (kbd "<leader>mc") 'magit-clone)
   (evil-define-key 'normal 'global (kbd "<leader>ms") 'magit-status)
   )
 
 (use-package evil-core
-  :requires org-roam
+  :after org-roam
   :config
   (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
   (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
@@ -155,13 +155,13 @@
   )
 
 (use-package evil-core
-  :requires org-roam-ui
+  :after org-roam-ui
   :config
   (evil-define-key 'normal 'global (kbd "<leader>ru") 'org-roam-ui-open)
   )
 
 (use-package evil-core
-  :requires nerd-icons
+  :after nerd-icons
   :config
   (evil-define-key 'normal 'global (kbd "<leader>in") 'nerd-icons-insert)
   )

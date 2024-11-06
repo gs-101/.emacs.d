@@ -233,7 +233,7 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package dashboard-widgets
-  :requires dashboard
+  :after dashboard
   :custom
   (dashboard-banner-logo-title "The Extensible Computing Enviroment")
   (dashboard-items '(
@@ -294,7 +294,7 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package startup
-  :requires dashboard
+  :after dashboard
   :custom
   (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
   :defer t
@@ -312,7 +312,7 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package doom-modeline
-  :requires doom-modeline
+  :after doom-modeline
   :if (daemonp)
   :config
   (add-hook 'after-make-frame-functions
@@ -372,8 +372,7 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package hl-todo
-  :requires catppuccin-theme
-  :after hl-todo
+  :after hl-todo catppuccin-theme
   :custom
   (hl-todo-keyword-faces
    (mapcar (lambda (keyword-color)
@@ -467,8 +466,7 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package citar
-  :requires nerd-icons
-  :after citar
+  :after citar nerd-icons
   :config
     (defvar citar-indicator-cited-icons
       (citar-indicator-create
@@ -515,48 +513,46 @@ If it is, enable `color-identifiers-mode'."
     )
 
 (use-package nerd-icons-completion
-  :requires nerd-icons
+  :after nerd-icons
   :ensure t
   :config
   (nerd-icons-completion-mode)
   )
 
 (use-package nerd-icons-completion
-  :requires (nerd-icons marginalia)
+  :after nerd-icons marginalia
   :hook
   (marginalia-mode . nerd-icons-completion-marginalia-setup)
   )
 
 (use-package compile-multi-nerd-icons
-  :requires nerd-icons
-  :after compile-multi
+  :after nerd-icons compile-multi
   :ensure t
   )
 
 (use-package nerd-icons-corfu
-  :requires (nerd-icons corfu)
+  :after nerd-icons corfu
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
   :ensure t
   )
 
 (use-package nerd-icons-dired
-  :requires nerd-icons
+  :after nerd-icons
   :ensure t
   :hook
   (dired-mode . nerd-icons-dired-mode)
   )
 
 (use-package nerd-icons-ibuffer
-  :requires nerd-icons
+  :after nerd-icons
   :ensure t
   :hook
   (ibuffer-mode . nerd-icons-ibuffer-mode)
   )
 
 (use-package magit-file-icons
-  :requires nerd-icons
-  :after magit
+  :after nerd-icons magit
   :ensure t
   :hook
   (magit-mode . magit-file-icons-mode)
@@ -604,8 +600,7 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package prism
-  :requires catppuccin-theme
-  :after prism
+  :after prism catppuccin-theme
   :config
   (defun prism-catppuccin-colors ()
     "Grab color definitions from catppuccin and use them to set prism's colors."
@@ -627,8 +622,7 @@ If it is, enable `color-identifiers-mode'."
 
 (use-package prism
   :if (daemonp)
-  :requires catppuccin-theme
-  :after prism
+  :after prism catppuccin-theme
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)

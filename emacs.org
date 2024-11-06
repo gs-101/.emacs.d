@@ -807,7 +807,7 @@ The default paths used to store configuration files and persistent data are not 
 #+begin_src emacs-lisp
 
   (use-package no-littering
-    :requires no-littering
+    :after no-littering
     :config
     (let ((dir (no-littering-expand-var-file-name "lock-files/")))
       (make-directory dir t)
@@ -827,7 +827,7 @@ Keep track of recently opened files.
 #+begin_src emacs-lisp
 
   (use-package recentf
-    :requires no-littering
+    :after no-littering
     :custom
     (recentf-max-saved-items 1000)
     :config
@@ -845,7 +845,7 @@ Keep track of recently opened files.
 #+begin_src emacs-lisp
 
   (use-package no-littering
-    :requires no-littering
+    :after no-littering
     :custom
     (custom-file (no-littering-expand-etc-file-name "custom.el"))
     )
@@ -1013,7 +1013,7 @@ Automatically preview file at point in Emacs Dired.
 #+begin_src emacs-lisp
 
   (use-package dired-preview
-    :requires (dired-preview ready-player)
+    :after dired-preview ready-player
     :bind
     (
      :map dired-preview-mode-map
@@ -2752,8 +2752,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 #+begin_src emacs-lisp
 
   (use-package citar-org-roam
-    :requires org-roam
-    :after citar
+    :after citar org-roam
     :config
     (citar-org-roam-mode)
     (add-to-list 'org-roam-capture-templates
@@ -2811,7 +2810,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
 #+begin_src emacs-lisp
 
   (use-package vterm
-    :requires vterm
+    :after vterm
     :preface
     (defun mocompute/project-shell ()
       "Start an inferior shell in the current project's root directory.
@@ -2846,7 +2845,7 @@ Toggles between the vterm buffer and whatever buffer you are editing.
 #+begin_src emacs-lisp
 
   (use-package vterm-toggle
-    :requires vterm
+    :after vterm
     :bind
     ("C-c t v" . vterm-toggle)
     :custom
@@ -3462,8 +3461,8 @@ Quick LLM lookups in Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel-quick
-    :after gptel
     :vc (:url "https://github.com/karthink/gptel-quick")
+    :after gptel
     :ensure t
     )
 
@@ -3689,8 +3688,7 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
     (use-package projection-multi-embark
-      :requires projection
-      :after compile-multi embark
+      :after projection compile-multi embark
       :ensure t
       :config
       (projection-multi-embark-setup-command-map)
@@ -3930,7 +3928,7 @@ COmpletion in Region FUnction.
 #+begin_src emacs-lisp
 
   (use-package orderless
-    :requires (corfu orderless)
+    :after corfu orderless
     :custom
     (completion-category-overrides '((eglot (styles orderless))
                                      (eglot-capf (styles orderless))))
@@ -3943,7 +3941,7 @@ COmpletion in Region FUnction.
 #+begin_src emacs-lisp
 
   (use-package cape
-    :requires (corfu cape)
+    :after corfu cape
     :config
     (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
     )
@@ -3957,7 +3955,7 @@ With the combined features of cape and tempel, create a super capf for eglot com
 #+begin_src emacs-lisp
 
   (use-package emacs
-    :requires (corfu cape tempel)
+    :after corfu cape tempel
     :preface
     (defun minad/eglot-capf ()
       "eglot capf with tempel and cape features."
@@ -4014,7 +4012,7 @@ Commands for Ido-like directory navigation.
 #+begin_src emacs-lisp
 
   (use-package vertico-directory
-    :requires vertico
+    :after vertico
     :bind
     (
      :map vertico-map
@@ -4255,7 +4253,7 @@ An Interactive interface for "GitHub CLI" client inside GNU Emacs using Consult.
 #+begin_src emacs-lisp
 
   (use-package consult-gh-transient
-    :requires consult-gh
+    :after consult-gh
     )
 
 #+end_src
@@ -4281,7 +4279,7 @@ Use consult to search notes.
 #+begin_src emacs-lisp
 
   (use-package consult-notes
-    :requires org-roam
+    :after org-roam
     :config
     (consult-notes-org-roam-mode)
     )
@@ -4430,8 +4428,7 @@ Spaced Repetition System for GNU Emacs.
 #+begin_src emacs-lisp
 
   (use-package gnosis
-    :requires no-littering
-    :after gnosis
+    :after gnosis no-littering
     :custom
     (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
     )
@@ -4487,6 +4484,8 @@ maildir indexer/searcher + emacs mail client + guile bindings.
 
   (use-package mu4e
     :load-path "/usr/share/emacs/site-lisp/mu4e/"
+    :commands
+    (mu4e)
     :custom
     (mu4e-compose-format-flowed t)
     (mu4e-change-filenames-when-moving t)
@@ -4505,7 +4504,6 @@ maildir indexer/searcher + emacs mail client + guile bindings.
                               ("/Trash" . ?t)
                               ("/All Mail" . ?a)
                               ))
-    :defer t
     )
 
 #+end_src
@@ -4805,7 +4803,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :requires org-appear
+    :after org-appear
     :custom
     (org-appear-trigger 'manual)
     :config
@@ -4827,7 +4825,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :requires vertico
+    :after vertico
     :bind
     (
      :map vertico-map
@@ -4921,7 +4919,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :requires vterm-toggle
+    :after vterm-toggle
     :config
     (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm-toggle)
     )
@@ -4933,7 +4931,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :requires magit
+    :after magit
     :config
     (evil-define-key 'normal 'global (kbd "<leader>mc") 'magit-clone)
     (evil-define-key 'normal 'global (kbd "<leader>ms") 'magit-status)
@@ -4946,7 +4944,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :requires org-roam
+    :after org-roam
     :config
     (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
     (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
@@ -4961,7 +4959,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :requires org-roam-ui
+    :after org-roam-ui
     :config
     (evil-define-key 'normal 'global (kbd "<leader>ru") 'org-roam-ui-open)
     )
@@ -4973,7 +4971,7 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :requires nerd-icons
+    :after nerd-icons
     :config
     (evil-define-key 'normal 'global (kbd "<leader>in") 'nerd-icons-insert)
     )
@@ -5801,7 +5799,7 @@ A startup screen extracted from Spacemacs.
 #+begin_src emacs-lisp
 
   (use-package dashboard-widgets
-    :requires dashboard
+    :after dashboard
     :custom
     (dashboard-banner-logo-title "The Extensible Computing Enviroment")
     (dashboard-items '(
@@ -5880,7 +5878,7 @@ A startup screen extracted from Spacemacs.
 #+begin_src emacs-lisp
 
   (use-package startup
-    :requires dashboard
+    :after dashboard
     :custom
     (initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
     :defer t
@@ -5916,7 +5914,7 @@ A fancy and fast mode-line inspired by minimalism design.
 #+begin_src emacs-lisp
 
   (use-package doom-modeline
-    :requires doom-modeline
+    :after doom-modeline
     :if (daemonp)
     :config
     (add-hook 'after-make-frame-functions
@@ -6042,8 +6040,7 @@ Highlight TODO keywords.
 #+begin_src emacs-lisp
 
   (use-package hl-todo
-    :requires catppuccin-theme
-    :after hl-todo
+    :after hl-todo catppuccin-theme
     :custom
     (hl-todo-keyword-faces
      (mapcar (lambda (keyword-color)
@@ -6167,8 +6164,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package citar
-    :requires nerd-icons
-    :after citar
+    :after citar nerd-icons
     :config
       (defvar citar-indicator-cited-icons
         (citar-indicator-create
@@ -6221,7 +6217,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-completion
-    :requires nerd-icons
+    :after nerd-icons
     :ensure t
     :config
     (nerd-icons-completion-mode)
@@ -6234,7 +6230,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-completion
-    :requires (nerd-icons marginalia)
+    :after nerd-icons marginalia
     :hook
     (marginalia-mode . nerd-icons-completion-marginalia-setup)
     )
@@ -6246,8 +6242,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package compile-multi-nerd-icons
-    :requires nerd-icons
-    :after compile-multi
+    :after nerd-icons compile-multi
     :ensure t
     )
 
@@ -6258,7 +6253,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-corfu
-    :requires (nerd-icons corfu)
+    :after nerd-icons corfu
     :config
     (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
     :ensure t
@@ -6271,7 +6266,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-dired
-    :requires nerd-icons
+    :after nerd-icons
     :ensure t
     :hook
     (dired-mode . nerd-icons-dired-mode)
@@ -6284,7 +6279,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package nerd-icons-ibuffer
-    :requires nerd-icons
+    :after nerd-icons
     :ensure t
     :hook
     (ibuffer-mode . nerd-icons-ibuffer-mode)
@@ -6297,8 +6292,7 @@ A Library for Nerd Font icons.
 #+begin_src emacs-lisp
 
   (use-package magit-file-icons
-    :requires nerd-icons
-    :after magit
+    :after nerd-icons magit
     :ensure t
     :hook
     (magit-mode . magit-file-icons-mode)
@@ -6374,12 +6368,10 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 #+begin_src emacs-lisp
 
   (use-package prism
-    :requires catppuccin-theme
-    :after prism
+    :after prism catppuccin-theme
     :config
     (defun prism-catppuccin-colors ()
       "Grab color definitions from catppuccin and use them to set prism's colors."
-      (interactive)
       (prism-set-colors
         :lightens '(0 5 10)
         :desaturations '(-2.5 0 2.5)
@@ -6403,8 +6395,7 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
   (use-package prism
     :if (daemonp)
-    :requires catppuccin-theme
-    :after prism
+    :after prism catppuccin-theme
     :config
     (add-hook 'after-make-frame-functions
               (lambda (frame)
