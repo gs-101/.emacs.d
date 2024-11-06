@@ -126,11 +126,16 @@ Otherwise, it calls `eval-buffer'."
   ("<f1> P" . find-library)
   )
 
+(use-package vc-git
+  :bind
+  ("M-s g v" . vc-git-grep)
+  )
+
 (use-package grep
   :bind
-  ("C-c g g" . grep)
-  ("C-c g l" . lgrep)
-  ("C-c g r" . rgrep)
+  ("M-s g g" . grep)
+  ("M-s g l" . lgrep)
+  ("M-s g r" . rgrep)
   )
 
 (use-package help

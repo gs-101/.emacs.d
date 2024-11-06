@@ -1393,15 +1393,26 @@ Key bindings for default packages.
 
 #+end_src
 
+** Git
+
+#+begin_src emacs-lisp
+
+  (use-package vc-git
+    :bind
+    ("M-s g v" . vc-git-grep)
+    )
+
+#+end_src
+
 ** Grep
 
 #+begin_src emacs-lisp
 
   (use-package grep
     :bind
-    ("C-c g g" . grep)
-    ("C-c g l" . lgrep)
-    ("C-c g r" . rgrep)
+    ("M-s g g" . grep)
+    ("M-s g l" . lgrep)
+    ("M-s g r" . rgrep)
     )
 
 #+end_src
