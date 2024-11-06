@@ -14,9 +14,4 @@
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 
-(use-package package
-  :custom
-  (package-install-upgrade-built-in t)
-  )
-
 (provide 'gs-package)

@@ -134,11 +134,6 @@ If ~use-package~ is not installed, refresh the package list and install it¹.
     (package-install 'use-package))
   (eval-when-compile (require 'use-package))
 
-  (use-package package
-    :custom
-    (package-install-upgrade-built-in t)
-    )
-
 #+end_src
 
 ** End
