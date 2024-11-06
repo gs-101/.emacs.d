@@ -3897,18 +3897,19 @@ Bridge for tempel templates with eglot.
 
 #+end_src
 
-*** [[https://github.com/Crandel/tempel-collection][Collection]]
+*** [[https://github.com/gs-101/tempel-snippets][Snippets]]
 
 #+begin_quote
 
-Collection tempel templates.
+Effort to translate all the yasnippet snippets to Tempel, inspired on tempel-collection.
 
 #+end_quote
 
 #+begin_src emacs-lisp
 
-  (use-package tempel-collection
-    :requires tempel
+  (use-package tempel-snippets
+    :vc (:url "https://github.com/gs-101/tempel-snippets")
+    :after tempel
     :ensure t
     )
 

@@ -93,8 +93,9 @@ Also adds `cape-file' as a fallback."
   (eglot-managed-mode . eglot-tempel-mode)
   )
 
-(use-package tempel-collection
-  :requires tempel
+(use-package tempel-snippets
+  :vc (:url "https://github.com/gs-101/tempel-snippets")
+  :after tempel
   :ensure t
   )
 
