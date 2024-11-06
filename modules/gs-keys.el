@@ -253,7 +253,17 @@ Otherwise, it calls `eval-buffer'."
 (use-package simple
   :bind
   ("C-c c w"  . delete-trailing-whitespace)
+  ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
   ("C-?" . undo-redo)
+  :config
+  (defun gs-101/switch-to-minibuffer-dwim ()
+    "Switch to minibuffer in a regular window. In minibuffer, switch to previous window.
+If currently in the minibuffer, this function calls `previous-window-any-frame'.
+Otherwise, it calls `switch-to-minibuffer'."
+    (interactive)
+    (if (minibufferp)
+        (previous-window-any-frame)
+      (switch-to-minibuffer)))
   )
 
 (use-package casual
