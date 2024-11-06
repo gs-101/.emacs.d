@@ -3,7 +3,10 @@
 (use-package org-roam
   :bind
   ("C-c r f" . org-roam-node-find)
-  ("C-c r i" . org-roam-node-insert)
+  (
+   :map org-mode-map
+   ("C-c r i" . org-roam-node-insert)
+   )
   :custom
   (org-roam-completion-everywhere t)
   (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/Org Roam")))
