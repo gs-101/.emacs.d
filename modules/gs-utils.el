@@ -123,9 +123,6 @@
   (
    ([remap describe-bindings]. embark-bindings)
    ("C-;" . embark-act)
-   :map minibuffer-local-map
-   ("C-c C-;" . embark-export)
-   ("C-c C-l" . embark-collect)
    )
   :config
   ;; Hide the mode line of the Embark live/completions buffers
