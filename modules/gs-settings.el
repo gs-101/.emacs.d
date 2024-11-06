@@ -271,4 +271,11 @@
   (custom-file (no-littering-expand-etc-file-name "custom.el"))
   )
 
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (setq exec-path-from-shell-arguments nil)
+  (exec-path-from-shell-initialize)
+  )
+
 (provide 'gs-settings)
