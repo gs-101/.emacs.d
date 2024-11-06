@@ -845,6 +845,9 @@ Keep track of recently opened files.
 
   (use-package no-littering
     :after no-littering
+    :config
+    (when (file-exists-p custom-file)
+      (load-file custom-file))
     :custom
     (custom-file (no-littering-expand-etc-file-name "custom.el"))
     )

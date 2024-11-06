@@ -263,7 +263,10 @@
   )
 
 (use-package no-littering
-  :requires no-littering
+  :after no-littering
+  :config
+  (when (file-exists-p custom-file)
+    (load-file custom-file))
   :custom
   (custom-file (no-littering-expand-etc-file-name "custom.el"))
   )
