@@ -237,7 +237,6 @@
   )
 
 (use-package no-littering
-  :vc (:url "https://github.com/emacscollective/no-littering")
   :ensure t
   :init
   (no-littering-theme-backups)
