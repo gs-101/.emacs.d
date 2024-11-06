@@ -229,6 +229,13 @@
   :ensure t
   )
 
+(use-package markdown-mode
+  :defer t
+  :ensure t
+  :custom
+  (markdown-fontify-code-blocks-natively t)
+  )
+
 (use-package no-littering
   :vc (:url "https://github.com/emacscollective/no-littering")
   :ensure t

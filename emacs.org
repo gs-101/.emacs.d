@@ -763,6 +763,26 @@ A major mode for Emacs for interacting with Gnuplot.
 
 #+end_src
 
+
+*** [[https://github.com/jrblevin/markdown-mode][Markdown]]
+
+#+begin_quote
+
+Emacs Markdown Mode.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package markdown-mode
+    :defer t
+    :ensure t
+    :custom
+    (markdown-fontify-code-blocks-natively t)
+    )
+
+#+end_src
+
 *** [[https://github.com/emacscollective/no-littering][No Littering]]
 
 #+begin_quote
