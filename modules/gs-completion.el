@@ -52,6 +52,27 @@
   (completion-at-point-functions . cape-file)
   )
 
+(use-package cape
+  :config
+  (defun minad/emacs-lisp-ignore-keywords (cand)
+    "Remove keywords from the CAND list, unless the completion text starts with a `:'."
+    (or (not (keywordp cand))
+        (eq (char-after (car completion-in-region--data)) ?:)))
+  (defun minad/emacs-lisp-capf ()
+    "`completion-at-point-functions' for `emacs-lisp-mode', including support for symbols currently unknown to Emacs, using `cape-dabbrev'.
+Also adds `cape-file' as a fallback."
+    (setq-local completion-at-point-functions
+                `(,(cape-capf-super
+                    (cape-capf-predicate
+                     #'elisp-completion-at-point
+                     #'minad/emacs-lisp-ignore-keywords)
+                    #'cape-dabbrev)
+                  cape-file)
+                cape-dabbrev-min-length 5))
+  :hook
+  (emacs-lisp-mode . minad/emacs-lisp-capf)
+  )
+
 (use-package corg
   :vc (:url "https://github.com/isamert/corg.el")
   :ensure t
