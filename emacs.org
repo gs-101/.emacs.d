@@ -3656,7 +3656,6 @@ Projectile like project management library built on Emacs project.el.
 #+begin_src emacs-lisp
 
   (use-package projection
-    :demand t
     :ensure t
     :bind-keymap
     ("C-c p" . projection-map)
@@ -3676,16 +3675,15 @@ Projectile like project management library built on Emacs project.el.
 
 #+begin_src emacs-lisp
 
-   (use-package projection-multi
-     :requires projection
-     :after compile-multi
-     :ensure t
-     :bind
-     (
-      :map projection-map
-      ("c" . projection-multi-compile)
-      )
+  (use-package projection-multi
+    :after projection compile-multi
+    :ensure t
+    :bind
+    (
+     :map projection-map
+     ("c" . projection-multi-compile)
      )
+    )
 
 #+end_src
 
