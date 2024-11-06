@@ -2,8 +2,11 @@
 
 (use-package citar
   :custom
-  (citar-bibliography org-cite-global-bibliography)
-  (citar-library-paths '("~/Documents/Books/"))
+  (citar-bibliography "~/Documents/Bibliography.bib")
+  (citar-citeproc-csl-styles-dir "~/Documents/Zotero/styles/")
+  (citar-citeproc-csl-style "harvard-cite-them-right.csl")
+  (citar-format-reference-function 'citar-citeproc-format-reference)
+  (citar-library-paths '("~/Documents/Zotero/storage/"))
   (citar-open-entry-function 'citar-open-entry-in-zotero)
   :hook
   (org-mode . citar-capf-setup)
@@ -39,6 +42,7 @@ Citkey must be formatted as `@key'."
                       (match-end 0))))))
   (add-to-list 'embark-keymap-alist '(bib-reference . citar-map))
   )
+
 (use-package oc
   :bind
   (
@@ -46,8 +50,8 @@ Citkey must be formatted as `@key'."
    ("C-c m q" . org-cite-insert)
    )
   :custom
-  (org-cite-csl-styles-dir (expand-file-name "~/Documents/Zotero/styles/"))
-  (org-cite-export-processors '(t biblatex))
+  (org-cite-csl-styles-dir "~/Documents/Zotero/styles/")
+  (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl"))))
   (org-cite-global-bibliography '("~/Documents/Bibliography.bib"))
   (org-cite-insert-processor 'citar)
   (org-cite-follow-processor 'citar)
