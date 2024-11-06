@@ -79,7 +79,7 @@
   :after consult
   :custom
   (consult-gh-code-action #'consult-gh--code-view-action)
-  (consult-gh-default-clone-directory (expand-file-name projects-code-directory))
+  (consult-gh-default-clone-directory (expand-file-name gs-101/projects-code-directory))
   (consult-gh-default-orgs-list "gs-101")
   :defer t
   :ensure t

@@ -222,8 +222,9 @@
 
 (use-package exercism
   :commands
+  (exercism)
   :custom
-  (exercism--workspace (projects-code-directory "/study/exercism/"))
+  (exercism--workspace (gs-101/projects-code-directory "/study/exercism/"))
   :defer t
   :ensure t
   )
@@ -299,7 +300,7 @@
   :after leetcode
   :custom
   (leetcode-save-solutions t)
-  (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" projects-code-directory)))
+  (leetcode-directory (convert-standard-filename (expand-file-name "leetcode-solutions/" gs-101/projects-code-directory)))
   )
 
 (use-package magit

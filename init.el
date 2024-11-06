@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-(add-to-list 'load-path (expand-file-name modules-directory))
+(add-to-list 'load-path (expand-file-name gs-101/modules-directory))
 
 (require 'gs-package)
 (require 'gs-settings)
