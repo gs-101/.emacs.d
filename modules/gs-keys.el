@@ -167,6 +167,7 @@ Otherwise, it calls `eval-buffer'."
    ([remap down-list] . org-next-visible-heading)
    ([remap backward-up-list] . org-previous-visible-heading)
    ([remap org-narrow-to-subtree] . org-toggle-narrow-to-subtree)
+   ([remap save-buffer] . org-save-all-org-buffers)
    ("M-p" . org-move-subtree-up)
    ("M-n" . org-move-subtree-down)
    ("C-c m s e" . org-sort-entries)
