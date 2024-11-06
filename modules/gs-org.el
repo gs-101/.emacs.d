@@ -55,6 +55,13 @@
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
   (add-hook 'after-save-hook 'org-babel-tangle)
+
+(use-package ob-csharp
+  :vc (:url "https://github.com/samwdp/ob-csharp")
+  :after org
+  :ensure t
+  :config
+  (add-to-list 'org-babel-load-languages '((csharp . t)))
   )
 
 (use-package org-agenda
