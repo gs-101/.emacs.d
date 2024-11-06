@@ -17,7 +17,7 @@
   )
 
 (use-package treesit-auto
-  :vc (:url "https://github.com/gs-101/treesit-auto" :branch "custom")
+  :vc (:url "https://github.com/gs-101/treesit-auto" :branch custom)
   :config
   (global-treesit-auto-mode)
   (treesit-auto-add-to-auto-mode-alist 'all)
