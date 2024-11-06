@@ -83,11 +83,7 @@ Also adds `cape-file' as a fallback."
 (use-package tempel
   :bind
   ("C-c i s" . tempel-insert)
-  :custom
-  (tempel-trigger-prefix "<")
   :ensure t
-  :hook
-  (completion-at-point-functions . tempel-complete)
   )
 
 (use-package eglot-tempel
