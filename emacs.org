@@ -2260,22 +2260,6 @@ Org refile allows you to refile subtrees to various locations.
 
 #+end_src
 
-** [[https://github.com/spegoraro/org-alert][Alert]]
-
-#+begin_quote
-
-System notifications of org agenda items.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package org-alert
-    :ensure t
-    )
-
-#+end_src
-
 ** [[https://github.com/io12/org-fragtog][Fragtog]]
 
 #+begin_quote

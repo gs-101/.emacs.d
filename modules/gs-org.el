@@ -260,10 +260,6 @@ allowFullScreen>
   (org-src-window-setup 'current-window)
   )
 
-(use-package org-alert
-  :ensure t
-  )
-
 (use-package org-fragtog
   :ensure t
   :hook
