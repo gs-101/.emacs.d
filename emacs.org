@@ -2,7 +2,7 @@
 
 * Early Init
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./early-init.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./early-init.el
 :END:
 
 ** [[https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217][Native and byte compilation]]
@@ -58,7 +58,7 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 
 * Load Modules
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./init.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./init.el
 :END:
 
 #+begin_src emacs-lisp
@@ -150,7 +150,7 @@ If ~use-package~ is not installed, refresh the package list and install it¹.
 
 * Settings
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-settings.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-settings.el
 :END:
 
 Configuration of default Emacs packages.
@@ -837,7 +837,7 @@ Keep track of recently opened files.
 
 * File Management
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-fm.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-fm.el
 :END:
 
 #+begin_src emacs-lisp
@@ -1134,7 +1134,7 @@ Show font features in an Emacs buffer.
 
 * Key Binding
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-keys.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-keys.el
 :END:
 
 Key bindings for default packages.
@@ -1804,7 +1804,7 @@ A collection of opinionated keyboard-driven user interfaces for various built-in
 
 * Org Mode
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-org.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-org.el
 :END:
 
 #+begin_quote
@@ -2412,7 +2412,7 @@ Turn any website into a minimal Orgmode buffer or .org file.
 
 * [[https://github.com/org-roam/org-roam][Org Roam]]
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-org-roam.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-org-roam.el
 :END:
 
 #+begin_quote
@@ -2641,7 +2641,7 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 
 * Citar
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-citar.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-citar.el
 :END:
 
 #+begin_quote
@@ -2786,7 +2786,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 
 * Command Line
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-cmd.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-cmd.el
 :END:
 
 #+begin_src emacs-lisp
@@ -2872,7 +2872,7 @@ Toggles between the vterm buffer and whatever buffer you are editing.
 
 * Development
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-dev.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-dev.el
 :END:
 
 #+begin_src emacs-lisp
@@ -3734,7 +3734,7 @@ Emacs plugin for automatic time tracking and metrics generated from your program
 
 * Completion
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-completion.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-completion.el
 :END:
 
 #+begin_src emacs-lisp
@@ -4062,7 +4062,7 @@ Marginalia in the minibuffer.
 
 * Utilities
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-utils.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-utils.el
 :END:
 
 Generally useful packages for productivity and other aspects.
@@ -4473,7 +4473,7 @@ Easily draw UNICODE lines and boxes.
 
 * Chatting
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes  :noweb yes :tangle ./modules/gs-chat.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-chat.el
 :END:
 
 Configuration for different chat clients.
@@ -4635,7 +4635,7 @@ Jabber/XMPP client for Emacs.
 
 * [[https://github.com/emacs-evil/evil][Evil Mode]]
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-keys-evil.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-keys-evil.el
 :END:
 
 #+begin_quote
@@ -5064,7 +5064,7 @@ Why is this one not included in the collection?
 
 * [[https://github.com/meow-edit/meow][Meow Mode]]
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-keys-meow.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-keys-meow.el
 :END:
 
 #+begin_quote
@@ -5321,7 +5321,7 @@ Tree-sitter powered motions for Meow.
 
 * User Interface
 :PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-ui.el
+:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-ui.el
 :END:
 
 #+begin_src emacs-lisp
