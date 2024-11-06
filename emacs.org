@@ -3228,26 +3228,6 @@ Emacs configuration for Rust.
 
 #+end_src
 
-**** [[https://github.com/emacs-rustic/rustic][Rustic]]
-
-#+begin_quote
-
-Rust development environment for Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package rustic
-    :after rust-mode
-    :custom
-    (rustic-cargo-use-last-stored-arguments t)
-    (rustic-lsp-client 'eglot)
-    :ensure t
-    )
-
-#+end_src
-
 *** [[https://github.com/yoshiki/yaml-mode][YAML]]
 
 #+begin_quote
@@ -3261,6 +3241,23 @@ The emacs major mode for editing files in the YAML data serialization format.
   (use-package yaml-mode
     :defer t
     :ensure t
+    )
+
+#+end_src
+
+** Smerge
+
+#+begin_quote
+
+Minor mode to resolve diff3 conflicts.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package smerge-mode
+    :hook
+    (prog-mode . smerge-mode)
     )
 
 #+end_src

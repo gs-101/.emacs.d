@@ -154,17 +154,14 @@
   :ensure t
   )
 
-(use-package rustic
-  :after rust-mode
-  :custom
-  (rustic-cargo-use-last-stored-arguments t)
-  (rustic-lsp-client 'eglot)
-  :ensure t
-  )
-
 (use-package yaml-mode
   :defer t
   :ensure t
+  )
+
+(use-package smerge-mode
+  :hook
+  (prog-mode . smerge-mode)
   )
 
 (use-package subword
