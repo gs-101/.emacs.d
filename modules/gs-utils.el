@@ -61,8 +61,13 @@
   (advice-add #'register-preview :override #'consult-register-window)
   (setf (alist-get 'log-edit-mode consult-mode-histories)
         'log-edit-comment-ring)
+  (defvar minad/consult-line-map
+    (let ((map (make-sparse-keymap)))
+      (define-key map "\C-s" #'previous-history-element)
+      map)
+    "History keymap which is added to the local `consult-line' map.")
+  (consult-customize consult-line :keymap minad/consult-line-map)
   :custom
-  (consult-narrow-key "<")
   (register-preview-function #'consult-register-format)
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref)
