@@ -121,6 +121,12 @@ Also adds `cape-file' as a fallback."
   (global-corfu-mode)
   )
 
+(use-package minibuffer
+  :after eglot
+  :custom
+  (completion-category-defaults nil)
+  )
+
 (use-package orderless
   :after corfu orderless
   :custom
