@@ -59,7 +59,6 @@
   :config
   (meow-normal-define-key
    '("-" . negative-argument)
-   '(";" . meow-reverse)
    '("," . meow-inner-of-thing)
    '("." . meow-bounds-of-thing)
    '("[" . meow-beginning-of-thing)
@@ -135,6 +134,13 @@
   :ensure t
   :config
   (meow-tree-sitter-register-defaults)
+  )
+
+(use-package meow-helpers
+  :after embark
+  :config
+  (meow-normal-define-key
+   '(";" . embark-act))
   )
 
 (provide 'gs-keys-meow)

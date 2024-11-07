@@ -5238,7 +5238,6 @@ Meow helpers for customization.
     :config
     (meow-normal-define-key
      '("-" . negative-argument)
-     '(";" . meow-reverse)
      '("," . meow-inner-of-thing)
      '("." . meow-bounds-of-thing)
      '("[" . meow-beginning-of-thing)
@@ -5338,6 +5337,19 @@ Tree-sitter powered motions for Meow.
     :ensure t
     :config
     (meow-tree-sitter-register-defaults)
+    )
+
+#+end_src
+
+** Embark
+
+#+begin_src emacs-lisp
+
+  (use-package meow-helpers
+    :after embark
+    :config
+    (meow-normal-define-key
+     '(";" . embark-act))
     )
 
 #+end_src
