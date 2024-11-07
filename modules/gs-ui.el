@@ -641,13 +641,18 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package prism
+  :config
+  (defun gs-101/prism-mode-lisp ()
+    "Check if MAJOR MODE is a Lisp mode.
+If it is, enable `prism-mode'."
+    (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
+      (prism-mode))
+    (when (string-match-p "scheme-mode\\'" (symbol-name major-mode))
+      (prism-mode)))
   :ensure t
   :hook
-  (emacs-lisp-mode . prism-mode)
-  (lisp-mode . prism-mode)
-  (lisp-data-mode . prism-mode)
-  (lisp-interaction-mode . prism-mode)
-  (python-ts-mode . prism-whitespace-mode)
+  (prog-mode . gs-101/prism-mode-lisp)
+  (python-base-mode . prism-whitespace-mode)
   )
 
 (use-package prism
