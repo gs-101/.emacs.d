@@ -4009,7 +4009,7 @@ With the combined features of cape and tempel, create a super capf for eglot com
                          #'tempel-expand
                          ))))
     :hook
-    (eglot-managed-mode-hook . minad/eglot-capf)
+    (eglot-managed-mode . minad/eglot-capf)
     )
 
 #+end_src

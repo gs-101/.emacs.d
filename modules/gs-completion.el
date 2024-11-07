@@ -155,7 +155,7 @@ Also adds `cape-file' as a fallback."
                        #'tempel-expand
                        ))))
   :hook
-  (eglot-managed-mode-hook . minad/eglot-capf)
+  (eglot-managed-mode . minad/eglot-capf)
   )
 
 (use-package vertico
