@@ -112,6 +112,19 @@
   :ensure t
   )
 
+(use-package consult
+  :after consult orderless
+  :config
+  (defun minad/consult--orderless-regexp-compiler (input type &rest _config)
+    "Regular expression pattern compiler based on `orderless'."
+    (setq input (cdr (orderless-compile input)))
+    (cons
+     (mapcar (lambda (r) (consult--convert-regexp r type)) input)
+     (lambda (str) (orderless--highlight input t str))))
+  :custom
+  (consult--regexp-compiler 'minad/consult--orderless-regexp-compiler)
+  )
+
 (use-package consult-notes
   :after org-roam
   :config

@@ -2,33 +2,31 @@
 
 (use-package orderless
   :config
-  (orderless-define-completion-style orderless+initialism
+  (orderless-define-completion-style minad/orderless-initialism
     (orderless-matching-styles '(
                                  orderless-annotation
                                  orderless-initialism
-                                 orderless-literal-prefix
+                                 orderless-literal
                                  orderless-regexp
                                  )))
   :custom
+  (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '(
                                    (file (styles partial-completion))
-                                   (minibuffer (initials orderless))
+                                   (command (styles minad/orderless-initialism))
+                                   (variable (styles minad/orderless-initialism))
+                                   (symbol (styles minad/orderless-initialism))
+                                   (minibuffer (styles minad/orderless-initialism))
                                    ))
-  (completion-styles '(
-                       orderless
-                       ))
-  (orderless-matching-styles '(
-                               orderless-literal
-                               orderless-regexp
-                               ))
+  (orderless-comment-separator #'orderless-escapable-split-on-space)
   (orderless-style-dispatchers (list
+                                #'minad/orderless-consult-dispatch
                                 #'orderless-affix-dispatch
-                                #'+orderless-consult-dispatch
                                 ))
   :ensure t
   :preface
-  (defun +orderless--consult-suffix ()
+  (defun minad/orderless--consult-suffix ()
     "Regexp which matches the end of string with Consult tofu support."
     (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
         (format "[%c-%c]*$"
@@ -38,11 +36,16 @@
   ;; Recognizes the following patterns:
   ;; * .ext (file extension)
   ;; * regexp$ (regexp matching at end)
-  (defun +orderless-consult-dispatch (word _index _total)
+  (defun minad/orderless-consult-dispatch (word _index _total)
     "Ensure that $ works with Consult commands, witch add disambiguation suffixes."
     (cond
      ((string-suffix-p "$" word)
-      `(orderless-regexp . ,(concat (substring word 0 -1) (+orderless--consult-suffix))))))
+      `(orderless-regexp . ,(concat (substring word 0 -1) (minad/orderless--consult-suffix))))
+     ;; File extensions
+     ((and (or minibuffer-completing-file-name
+               (derived-mode-p 'eshell-mode))
+           (string-match-p "\\`\\.." word))
+      `(orderless-regexp . ,(concat "\\." (substring word 1) (minad/orderless--consult-suffix))))))
   )
 
 (use-package cape
