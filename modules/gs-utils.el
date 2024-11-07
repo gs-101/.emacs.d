@@ -54,7 +54,7 @@
    ("C-c M-x" . consult-mode-command)
    )
   :config
-  (defun choose-completion-in-region ()
+  (defun oantolin/choose-completion-in-region ()
     "Use default `completion--in-region' unless we are not completing."
     (when minibuffer-completion-table
       (setq-local completion-in-region-function #'completion--in-region)))
@@ -68,7 +68,7 @@
   (xref-show-definitions-function #'consult-xref)
   :ensure t
   :hook
-  (minibuffer-setup . choose-completion-in-region)
+  (minibuffer-setup . oantolin/choose-completion-in-region)
   )
 
 (use-package consult-dir
