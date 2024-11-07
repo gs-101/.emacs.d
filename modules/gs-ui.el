@@ -196,15 +196,15 @@
 (use-package color-identifiers-mode
   :ensure t
   :config
-  (defun activate-color-identifiers-on-ts-mode ()
+  (defun gs-101/color-identifiers-toggle-on-ts-mode ()
     "Check if MAJOR MODE is a tree-sitter mode.
 If it is, enable `color-identifiers-mode'."
     (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
       (color-identifiers-mode))
     (when (bound-and-true-p prism-mode)
-      (color-identifiers-mode nil)))
+      (setq color-identifiers-mode nil)))
   :hook
-  (prog-mode . activate-color-identifiers-on-ts-mode)
+  (prog-mode . gs-101/color-identifiers-toggle-on-ts-mode)
   )
 
 (use-package dashboard
@@ -646,7 +646,6 @@ If it is, enable `color-identifiers-mode'."
   :config
   (defun prism-catppuccin-colors ()
     "Grab color definitions from catppuccin and use them to set prism's colors."
-    (interactive)
     (prism-set-colors
       :lightens '(0 5 10)
       :desaturations '(-2.5 0 2.5)
