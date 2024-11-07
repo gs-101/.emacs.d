@@ -157,29 +157,23 @@
   :ensure t
   )
 
-(use-package embark
-  :after embark
-  :bind
-  (
-   :map minibuffer-local-map
-   ([remap embark-dwim] . my-embark-preview)
-   )
-  :config
-  (defun my-embark-preview ()
-    "Previews candidate in vertico buffer, unless it's a consult command."
-    (interactive)
-    (unless (bound-and-true-p consult--preview-function)
-      (save-selected-window
-        (let ((embark-quit-after-action nil))
-          (embark-dwim)))))
-  )
-
 (use-package embark-consult
-  :requires consult
-  :after embark
+  :defer t
   :ensure t
   :hook
-  ((embark-collect-mode completion-list-mode) . consult-preview-at-point-mode)
+  (embark-collect-mode . consult-preview-at-point-mode)
+  )
+
+(use-package embark
+  :after embark
+  :config
+  (defun oantolin/embark-collect-resize-window (&rest _)
+    "Resize the `embark-collect' window to match its contents."
+    (when (memq embark-collect--kind '(:live :completions))
+      (fit-window-to-buffer (get-buffer-window)
+                             (floor (frame-height) 2) 1)))
+  :hook
+  (embark-collect-post-revert . oantolin/embark-collect-resize-window)
   )
 
 (use-package embark
