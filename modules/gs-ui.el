@@ -393,6 +393,48 @@ If it is, enable `color-identifiers-mode'."
              )))
 )
 
+(use-package keycast
+  :config
+  (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil)
+  (push '(self-insert-command nil nil) keycast-substitute-alist)
+  (push '(org-self-insert-command nil nil) keycast-substitute-alist)
+  :ensure t
+  :init
+  (define-minor-mode keycast-mode
+    "Show current command and its key binding in the mode line (fix for use with `doom-modeline')."
+    :global t
+    (if keycast-mode
+        (add-hook 'pre-command-hook 'keycast--update t)
+      (remove-hook 'pre-command-hook 'keycast--update)))
+  (add-to-list 'global-mode-string '("" keycast-mode-line))
+  (keycast-mode)
+  )
+
+(use-package keycast
+  :if (daemonp)
+  :config
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (with-selected-frame frame
+                (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil))))
+  )
+
+(use-package keycast
+  :after embark
+  :config
+  (defun oantolin/keycast-store-action-key-cmd (cmd)
+    "Store key and CMD command information for `keycast' use."
+    (force-mode-line-update t)
+    (setq this-command cmd
+          keycast--this-command-keys (this-single-command-keys)
+          keycast--this-command-desc cmd))
+  (advice-add 'embark-keymap-prompter :filter-return #'oantolin/keycast-store-action-key-cmd)
+  (defun oantolin/keycast--update-force (&rest _)
+    "Version of `keycast--update' that accepts (and ignore) parameters."
+    (keycast--update))
+  (advice-add 'embark-act :before #'oantolin/keycast--update-force)
+  )
+
 (use-package ligature
   :config
   (ligature-set-ligatures 't '("www"))
