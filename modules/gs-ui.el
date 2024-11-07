@@ -586,6 +586,15 @@ If it is, enable `color-identifiers-mode'."
   (dired-mode . nerd-icons-dired-mode)
   )
 
+(use-package emacs
+  :custom
+  (flymake-margin-indicators-string '(
+                                      (error "󰃤" compilation-error)
+                                      (warning "" compilation-warning)
+                                      (note "󰎚" compilation-info)
+                                      ))
+  )
+
 (use-package nerd-icons-ibuffer
   :after nerd-icons
   :ensure t

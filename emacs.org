@@ -6395,6 +6395,21 @@ A Library for Nerd Font icons.
 
 #+end_src
 
+*** Flymake
+
+#+begin_src emacs-lisp
+
+  (use-package emacs
+    :custom
+    (flymake-margin-indicators-string '(
+                                        (error "󰃤" compilation-error)
+                                        (warning "" compilation-warning)
+                                        (note "󰎚" compilation-info)
+                                        ))
+    )
+
+#+end_src
+
 *** [[https://github.com/seagle0128/nerd-icons-ibuffer][iBuffer]]
 
 #+begin_src emacs-lisp
