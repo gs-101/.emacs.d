@@ -4,7 +4,6 @@
   :config
   (add-to-list 'org-latex-packages-alist '(
                                            "" "bookmark" t
-                                           "" "biblatex" t
                                            "" "url" t
                                            ))
   :custom

@@ -103,6 +103,7 @@
    '("l" . meow-right)
    '("L" . forward-sexp)
    '("m" . meow-join)
+   '("n" . meow-search)
    '("o" . meow-block)
    '("O" . meow-to-block)
    '("p" . meow-yank)
