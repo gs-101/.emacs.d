@@ -2771,6 +2771,8 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 #+begin_src emacs-lisp
 
   (use-package citar-org-roam
+    :bind
+    ("C-c r c" . citar-create-note)
     :after citar org-roam
     :config
     (citar-org-roam-mode)
