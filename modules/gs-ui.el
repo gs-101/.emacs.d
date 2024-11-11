@@ -619,6 +619,7 @@ If it is, enable `color-identifiers-mode'."
   (popper-reference-buffers '(
                               compilation-mode
                               help-mode
+                              vterm-mode
                               "\\*Async Shell Command\\*"
                               "\\*Backtrace\\*"
                               "\\*compilation\\*"

@@ -2817,6 +2817,8 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
 #+begin_src emacs-lisp
 
   (use-package vterm
+    :bind
+    ("C-c t v" . vterm)
     :custom
     (vterm-shell "bash")
     (vterm-max-scrollback 10000)
@@ -2851,27 +2853,6 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
           (vterm (generate-new-buffer-name default-project-shell-name)))))
     :config
     (advice-add 'project-shell :override #'mocompute/project-shell)
-    )
-
-#+end_src
-
-*** [[https://github.com/jixiuf/vterm-toggle][Toggle]]
-
-#+begin_quote
-
-Toggles between the vterm buffer and whatever buffer you are editing.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package vterm-toggle
-    :after vterm
-    :bind
-    ("C-c t v" . vterm-toggle)
-    :custom
-    (vterm-toggle-reset-window-configration-after-exit t)
-    :ensure t
     )
 
 #+end_src
@@ -5007,9 +4988,9 @@ Toggles org-appear based on the current evil state.
 #+begin_src emacs-lisp
 
   (use-package evil-core
-    :after vterm-toggle
+    :after vterm
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm-toggle)
+    (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm)
     )
 
 #+end_src
@@ -6492,8 +6473,6 @@ Emacs minor-mode to summon and dismiss buffers easily.
 
 #+end_quote
 
-FEAT: try to add vterm support to this package.
-
 #+begin_src emacs-lisp
 
   (use-package popper
@@ -6506,6 +6485,7 @@ FEAT: try to add vterm support to this package.
     (popper-reference-buffers '(
                                 compilation-mode
                                 help-mode
+                                vterm-mode
                                 "\\*Async Shell Command\\*"
                                 "\\*Backtrace\\*"
                                 "\\*compilation\\*"

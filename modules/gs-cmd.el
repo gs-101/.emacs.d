@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package vterm
+  :bind
+  ("C-c t v" . vterm)
   :custom
   (vterm-shell "bash")
   (vterm-max-scrollback 10000)
@@ -29,15 +31,6 @@ if one already exists."
         (vterm (generate-new-buffer-name default-project-shell-name)))))
   :config
   (advice-add 'project-shell :override #'mocompute/project-shell)
-  )
-
-(use-package vterm-toggle
-  :after vterm
-  :bind
-  ("C-c t v" . vterm-toggle)
-  :custom
-  (vterm-toggle-reset-window-configration-after-exit t)
-  :ensure t
   )
 
 (provide 'gs-cmd)
