@@ -204,6 +204,8 @@
    ([remap backward-sexp] . combobulate-navigate-previous)
    ([remap transpose-sexp] . combobulate-transpose-sexps)
    ([remap kill-sexp] . combobulate-kill-node-dwim)
+   ([remap mark-sexp] . combobulate-mark-node-dwim)
+   ([query-replace-regexp] . combobulate-cursor-edit-node-by-text-dwim)
    )
   :config
   (defun cxa/activate-combobulate-on-ts-mode ()
