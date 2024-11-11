@@ -562,7 +562,7 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package nerd-icons-completion
-  :after nerd-icons marginalia
+  :after nerd-icons
   :hook
   (marginalia-mode . nerd-icons-completion-marginalia-setup)
   )
