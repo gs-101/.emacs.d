@@ -65,6 +65,7 @@
    '("]" . meow-end-of-thing)
    '("'" . repeat)
    '("=" . meow-indent)
+   '("|" . align)
    '("<escape>" . ignore)
    '("/" . isearch-forward-word)
    '("?" . meow-comment)

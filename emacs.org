@@ -1171,6 +1171,17 @@ Key bindings for default packages.
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
+** Align
+
+#+begin_src emacs-lisp
+
+  (use-package align
+    :bind
+    ("C-x |" . align)
+    )
+
+#+end_src
+
 ** Apropos
 
 #+begin_src emacs-lisp
@@ -5289,6 +5300,7 @@ Meow helpers for customization.
      '("]" . meow-end-of-thing)
      '("'" . repeat)
      '("=" . meow-indent)
+     '("|" . align)
      '("<escape>" . ignore)
      '("/" . isearch-forward-word)
      '("?" . meow-comment)

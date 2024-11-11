@@ -1,5 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package align
+  :bind
+  ("C-x |" . align)
+  )
+
 (use-package apropos
   :bind
   ("<f1> a" . apropos)
