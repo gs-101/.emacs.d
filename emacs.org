@@ -3195,25 +3195,6 @@ Python's flying circus support for Emacs.
 
 #+end_src
 
-*** [[https://github.com/rust-lang/rust-mode][Rust]]
-
-#+begin_quote
-
-Emacs configuration for Rust.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package rust-mode
-    :defer t
-    :custom
-    (rust-mode-treesitter-derive t)
-    :ensure t
-    )
-
-#+end_src
-
 *** [[https://github.com/yoshiki/yaml-mode][YAML]]
 
 #+begin_quote

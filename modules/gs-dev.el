@@ -149,13 +149,6 @@
   :defer t
   )
 
-(use-package rust-mode
-  :defer t
-  :custom
-  (rust-mode-treesitter-derive t)
-  :ensure t
-  )
-
 (use-package yaml-mode
   :defer t
   :ensure t
