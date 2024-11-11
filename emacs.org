@@ -2961,7 +2961,6 @@ Code folding using treesit.el.
     :ensure t
     :init
     (global-treesit-fold-indicators-mode)
-    (treesit-fold-line-comment-mode)
     )
 
 #+end_src

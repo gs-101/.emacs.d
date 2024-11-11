@@ -42,7 +42,6 @@
   :ensure t
   :init
   (global-treesit-fold-indicators-mode)
-  (treesit-fold-line-comment-mode)
   )
 
 (use-package git-commit-ts-mode
