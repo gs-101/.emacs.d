@@ -3969,19 +3969,6 @@ COmpletion in Region FUnction.
 
 #+end_src
 
-**** [[https://github.com/minad/corfu/wiki#filter-list-of-all-possible-completions-with-completion-style-like-orderless][Orderless]]
-
-#+begin_src emacs-lisp
-
-  (use-package orderless
-    :after corfu orderless
-    :custom
-    (completion-category-overrides '((eglot (styles orderless))
-                                     (eglot-capf (styles orderless))))
-    )
-
-#+end_src
-
 **** [[https://github.com/minad/corfu/wiki#continuously-update-the-candidates][Cape]]
 
 #+begin_src emacs-lisp

@@ -130,13 +130,6 @@ Also adds `cape-file' as a fallback."
   (completion-category-defaults nil)
   )
 
-(use-package orderless
-  :after corfu orderless
-  :custom
-  (completion-category-overrides '((eglot (styles orderless))
-                                   (eglot-capf (styles orderless))))
-  )
-
 (use-package cape
   :after corfu cape
   :config
