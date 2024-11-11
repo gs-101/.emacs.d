@@ -3103,6 +3103,25 @@ Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
 
 #+end_src
 
+*** [[https://github.com/jdtsmith/eglot-booster][Booster]]
+
+#+begin_quote
+
+Boost eglot using lsp-booster.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-booster
+    :vc (:url "https://github.com/jdtsmith/eglot-booster")
+    :ensure t
+    :hook
+    (eglot-managed-mode . eglot-booster-mode)
+    )
+
+#+end_src
+
 ** Eldoc
 
 #+begin_quote

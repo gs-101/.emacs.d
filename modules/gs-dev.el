@@ -120,6 +120,13 @@
   :defer t
   )
 
+(use-package eglot-booster
+  :vc (:url "https://github.com/jdtsmith/eglot-booster")
+  :ensure t
+  :hook
+  (eglot-managed-mode . eglot-booster-mode)
+  )
+
 (use-package eldoc
   :custom
   (eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
