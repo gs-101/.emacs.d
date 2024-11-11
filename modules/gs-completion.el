@@ -4,7 +4,6 @@
   :config
   (orderless-define-completion-style minad/orderless-initialism
     (orderless-matching-styles '(
-                                 orderless-annotation
                                  orderless-initialism
                                  orderless-literal
                                  orderless-regexp
