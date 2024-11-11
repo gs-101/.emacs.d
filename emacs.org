@@ -1084,8 +1084,7 @@ Major mode for reading EPUBs in Emacs.
 #+begin_src emacs-lisp
 
   (use-package nov
-    :mode
-    ("\\.epub\\'" . nov-mode)
+    :defer t
     :ensure t
     )
 

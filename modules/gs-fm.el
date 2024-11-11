@@ -99,8 +99,7 @@
   )
 
 (use-package nov
-  :mode
-  ("\\.epub\\'" . nov-mode)
+  :defer t
   :ensure t
   )
 
