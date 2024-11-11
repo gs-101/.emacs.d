@@ -60,7 +60,7 @@
   :after org
   :ensure t
   :config
-  (add-to-list 'org-babel-load-languages '((csharp . t)))
+  (add-to-list 'org-babel-load-languages '(csharp . t))
   )
 
 (use-package org-agenda
