@@ -115,6 +115,7 @@
 (use-package eglot
   :custom
   (eglot-autoshutdown t)
+  (eglot-connect-timeout nil)
   (eglot-sync-connect nil)
   :defer t
   )

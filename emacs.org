@@ -3096,6 +3096,7 @@ Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
   (use-package eglot
     :custom
     (eglot-autoshutdown t)
+    (eglot-connect-timeout nil)
     (eglot-sync-connect nil)
     :defer t
     )
