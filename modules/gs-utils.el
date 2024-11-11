@@ -29,7 +29,7 @@
    ([remap flymake-start] . consult-flymake)
    ([remap goto-line] . consult-goto-line)
    ([remap grep] . consult-grep)
-   ([remap imenu] . consult-imenu-multi)
+   ([remap imenu] . consult-imenu)
    ([remap info] . consult-info)
    ([remap info-search] . consult-info)
    ([remap isearch-forward] . consult-line)
