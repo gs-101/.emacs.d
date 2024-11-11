@@ -5379,8 +5379,6 @@ Tree-sitter powered motions for Meow.
 
 #+end_src
 
-** [[https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-keys-meow.el][Credits]]
-
 ** End
 
 #+begin_src emacs-lisp
