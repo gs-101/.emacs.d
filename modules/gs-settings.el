@@ -182,6 +182,7 @@
 
 (use-package simple
   :custom
+  (blink-matching-paren nil)
   (column-number-mode t)
   (completion-auto-select 'second-tab) ;; 1
   (indent-tabs-mode nil)
