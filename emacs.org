@@ -1459,17 +1459,6 @@ Key bindings for default packages.
 
 #+end_src
 
-** iMenu
-
-#+begin_src emacs-lisp
-
-  (use-package imenu
-    :bind
-    ("C-'" . imenu)
-    )
-
-#+end_src
-
 ** Org Mode
 
 #+begin_src emacs-lisp

@@ -160,11 +160,6 @@ Otherwise, it calls `eval-buffer'."
   ("C-x B" . ibuffer)
   )
 
-(use-package imenu
-  :bind
-  ("C-'" . imenu)
-  )
-
 (use-package org
   :bind
   (
