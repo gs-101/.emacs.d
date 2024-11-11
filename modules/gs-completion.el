@@ -151,16 +151,6 @@ Also adds `cape-file' as a fallback."
   )
 
 (use-package vertico
-  :config
-  (defun minad/crm-indicator (args)
-    "Add a prompt indicator to `completing-read-multiple'."
-    (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (aref args))
-          (aref args)))
-  (advice-add #'completing-read-multiple :filter-args #'minad/crm-indicator)
   :custom
   (vertico-cycle t)
   :ensure t
