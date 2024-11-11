@@ -8,7 +8,9 @@
 (use-package org-src
   :config
   (add-to-list 'org-src-lang-modes '(
+                                     ("bash" . bash-ts)
                                      ("C" . c-ts)
+                                     ("csharp" . csharp-ts)
                                      ("css" . css-ts)
                                      ("html" . html-ts)
                                      ("js" . js-ts)
