@@ -195,6 +195,11 @@
   (set-mark-command-repeat-pop t) ;; 5
   )
 
+(use-package transient
+  :custom
+  (transient-mode-line-format nil)
+  )
+
 (use-package emacs
   :custom
   (undo-limit 67108864) ;; 64 mb

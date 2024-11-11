@@ -687,9 +687,10 @@ If it is, enable `prism-mode'."
   )
 
 (use-package transient-posframe
-  :vc (:url "https://github.com/gs-101/transient-posframe")
+  :after transient
+  :vc (:url "https://github.com/tarsiiformes/transient-posframe" :branch fix-sizing)
   :ensure t
-  :init
+  :config
   (transient-posframe-mode)
   )
 

@@ -650,6 +650,23 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
 5. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]].
 
+*** Transient
+
+#+begin_quote
+
+Transient is the library used to implement the keyboard-driven menus in Magit.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package transient
+    :custom
+    (transient-mode-line-format nil)
+    )
+
+#+end_src
+
 *** Undo Limit
 
 After losing one hour of work on an accident, this might come in handy.
@@ -6577,9 +6594,10 @@ Pops the transient menu to a posframe (floating window).
 #+begin_src emacs-lisp
 
   (use-package transient-posframe
-    :vc (:url "https://github.com/gs-101/transient-posframe")
+    :after transient
+    :vc (:url "https://github.com/tarsiiformes/transient-posframe" :branch fix-sizing)
     :ensure t
-    :init
+    :config
     (transient-posframe-mode)
     )
 
