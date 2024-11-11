@@ -220,12 +220,8 @@
   )
 
 (use-package git-modes
+  :defer t
   :ensure t
-  :mode
-  ("\\.gitattributes\\'" . gitattributes-mode)
-  ("\\.gitconfig\\'" . gitconfig-mode)
-  ("\\.gitmodules\\'" . gitconfig-mode)
-  ("\\.gitignore\\'" . gitignore-mode)
   )
 
 (use-package gptel

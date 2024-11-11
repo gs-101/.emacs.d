@@ -3372,12 +3372,8 @@ Emacs major modes for Git configuration files.
 #+begin_src emacs-lisp
 
   (use-package git-modes
+    :defer t
     :ensure t
-    :mode
-    ("\\.gitattributes\\'" . gitattributes-mode)
-    ("\\.gitconfig\\'" . gitconfig-mode)
-    ("\\.gitmodules\\'" . gitconfig-mode)
-    ("\\.gitignore\\'" . gitignore-mode)
     )
 
 #+end_src
