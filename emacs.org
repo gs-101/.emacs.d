@@ -775,6 +775,8 @@ Emacs Markdown Mode.
     :ensure t
     :custom
     (markdown-fontify-code-blocks-natively t)
+    :hook
+    (markdown-mode . visual-line-mode)
     )
 
 #+end_src

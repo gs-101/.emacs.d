@@ -235,6 +235,8 @@
   :ensure t
   :custom
   (markdown-fontify-code-blocks-natively t)
+  :hook
+  (markdown-mode . visual-line-mode)
   )
 
 (use-package no-littering
