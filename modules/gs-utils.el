@@ -117,6 +117,12 @@
   :ensure t
   )
 
+(use-package consult-notes
+  :after org-roam
+  :config
+  (consult-notes-org-roam-mode)
+  )
+
 (use-package consult
   :after consult orderless
   :config
@@ -128,12 +134,6 @@
      (lambda (str) (orderless--highlight input t str))))
   :custom
   (consult--regexp-compiler 'minad/consult--orderless-regexp-compiler)
-  )
-
-(use-package consult-notes
-  :after org-roam
-  :config
-  (consult-notes-org-roam-mode)
   )
 
 (use-package embark

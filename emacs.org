@@ -4348,6 +4348,18 @@ Use consult to search notes.
 
 #+end_src
 
+**** [[https://github.com/mclear-tools/consult-notes?tab=readme-ov-file#org-roam][Org Roam]]
+
+#+begin_src emacs-lisp
+
+  (use-package consult-notes
+    :after org-roam
+    :config
+    (consult-notes-org-roam-mode)
+    )
+
+#+end_src
+
 *** [[https://github.com/minad/consult/wiki#use-orderless-as-pattern-compiler-for-consult-grepripgrepfind][Orderless]]
 
 #+begin_src emacs-lisp
@@ -4363,18 +4375,6 @@ Use consult to search notes.
        (lambda (str) (orderless--highlight input t str))))
     :custom
     (consult--regexp-compiler 'minad/consult--orderless-regexp-compiler)
-    )
-
-#+end_src
-
-*** [[https://github.com/mclear-tools/consult-notes?tab=readme-ov-file#org-roam][Org Roam]]
-
-#+begin_src emacs-lisp
-
-  (use-package consult-notes
-    :after org-roam
-    :config
-    (consult-notes-org-roam-mode)
     )
 
 #+end_src
