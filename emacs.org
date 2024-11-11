@@ -2671,7 +2671,7 @@ A graphical frontend for exploring your org-roam Zettelkasten.
   (provide 'gs-org-roam)
 #+end_src
 
-* Citar
+* [[https://github.com/emacs-citar/citar][Citar]]
 :PROPERTIES:
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-citar.el
 :END:
