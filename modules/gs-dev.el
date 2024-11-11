@@ -321,6 +321,12 @@
   (magit-process-find-password-functions . magit-process-password-auth-source)
   )
 
+(use-package magit-delta
+  :ensure t
+  :hook
+  (magit-mode . magit-delta-mode)
+  )
+
 (use-package forge
   :after magit
   :bind
