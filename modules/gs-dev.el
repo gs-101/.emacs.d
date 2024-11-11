@@ -123,6 +123,7 @@
   :custom
   (eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
   (eldoc-echo-area-use-multiline-p nil)
+  (eldoc-idle-delay 0)
   )
 
 (use-package flymake
