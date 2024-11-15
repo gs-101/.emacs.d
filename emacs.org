@@ -5764,7 +5764,7 @@ Emacs minor mode to highlight each source code identifier uniquely based on its 
       (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
         (color-identifiers-mode))
       (when (bound-and-true-p prism-mode)
-        (setq color-identifiers-mode nil)))
+        (setq-local color-identifiers-mode nil)))
     :hook
     (prog-mode . gs-101/color-identifiers-toggle-on-ts-mode)
     )

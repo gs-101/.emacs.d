@@ -202,7 +202,7 @@ If it is, enable `color-identifiers-mode'."
     (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
       (color-identifiers-mode))
     (when (bound-and-true-p prism-mode)
-      (setq color-identifiers-mode nil)))
+      (setq-local color-identifiers-mode nil)))
   :hook
   (prog-mode . gs-101/color-identifiers-toggle-on-ts-mode)
   )
