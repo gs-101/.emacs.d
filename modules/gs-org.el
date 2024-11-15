@@ -271,18 +271,4 @@ allowFullScreen>
   (nov-mode . org-remark-nov-mode)
   )
 
-(use-package website2org
-  :vc (:url "https://github.com/rtrppl/website2org")
-  :custom
-  (website2org-cache-filename "/tmp/website2org")
-  :ensure t
-  )
-
-(use-package website2org
-  :after website2org org-roam
-  :custom
-  (website2org-directory (expand-file-name "website2org/" org-roam-directory))
-  (website2org-additional-meta "#+filetags: :website2org:")
-  )
-
 (provide 'gs-org)
