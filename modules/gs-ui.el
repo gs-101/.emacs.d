@@ -333,12 +333,6 @@ If it is, enable `color-identifiers-mode'."
   (eldoc-mode . eldoc-box-hover-mode)
   )
 
-(use-package golden-ratio
-  :ensure t
-  :init
-  (golden-ratio-mode)
-  )
-
 (use-package helpful
   :bind
   ([remap describe-command] . helpful-command)

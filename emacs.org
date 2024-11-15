@@ -5999,24 +5999,6 @@ Childframe doc for eglot and anything that uses eldoc.
 
 #+end_src
 
-** [[https://github.com/roman/golden-ratio.el][Golden Ratio]]
-
-#+begin_quote
-
-Automatic resizing of Emacs windows to the golden ratio.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package golden-ratio
-    :ensure t
-    :init
-    (golden-ratio-mode)
-    )
-
-#+end_src
-
 ** [[https://github.com/Wilfred/helpful][Helpful]]
 
 #+begin_quote
