@@ -125,6 +125,8 @@
 
 (use-package flymake-collection
   :ensure t
+  :flymake-hook
+  (python-mode flymake-collection-flake8)
   :hook
   (flymake-mode . flymake-collection-hook-setup)
   )
