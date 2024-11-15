@@ -608,24 +608,27 @@ If it is, enable `color-identifiers-mode'."
   :bind
   ("M-]" . popper-cycle)
   ("M-[" . popper-toggle)
-  ("C-x M-[" . popper-toggle-type)
   :custom
   (popper-display-control t)
   (popper-reference-buffers '(
                               compilation-mode
-                              help-mode
                               vterm-mode
+                              inferior-emacs-lisp-mode
+                              inferior-python-mode
+                              shell-mode
                               "\\*Async Shell Command\\*"
                               "\\*Backtrace\\*"
                               "\\*compilation\\*"
                               "\\*Dtache Shell Command\\*"
                               "\\*eldoc\\*"
+                              "\\*Embark Collect:"
                               "\\*Ement Notifications\\*"
                               "*Flymake diagnostics.*"
                               "\\*GDB.*out\\*"
                               "\\*Messages\\*"
                               "\\*mu4e-update\\*"
                               "Output\\*$"
+                              "\\*Org Src"
                               "^*tex"
                               "\\*Warnings\\*"
                               "\\*xref\\*"
