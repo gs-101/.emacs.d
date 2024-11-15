@@ -158,8 +158,8 @@
   )
 
 (use-package smerge-mode
-  :hook
-  (prog-mode . smerge-mode)
+  :init
+  (smerge-mode)
   )
 
 (use-package subword

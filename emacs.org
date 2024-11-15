@@ -3191,8 +3191,8 @@ Minor mode to resolve diff3 conflicts.
 #+begin_src emacs-lisp
 
   (use-package smerge-mode
-    :hook
-    (prog-mode . smerge-mode)
+    :init
+    (smerge-mode)
     )
 
 #+end_src
