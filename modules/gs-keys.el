@@ -70,7 +70,7 @@ Otherwise, it calls `eval-buffer'."
     (interactive)
     (if (use-region-p)
         (eval-region (region-beginning) (region-end) t)
-      (eval-buffer nil t)))
+      (eval-buffer nil nil)))
   )
 
 (use-package files

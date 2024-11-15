@@ -1334,7 +1334,7 @@ Key bindings for default packages.
       (interactive)
       (if (use-region-p)
           (eval-region (region-beginning) (region-end) t)
-        (eval-buffer nil t)))
+        (eval-buffer nil nil)))
     )
 
 #+end_src
