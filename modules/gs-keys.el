@@ -263,6 +263,10 @@ Otherwise, it calls `eval-buffer'."
   ("C-c c w"  . delete-trailing-whitespace)
   ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
   ("C-?" . undo-redo)
+  ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
+  ([remacp capitalize-word] . capitalize-dwim)
+  ([remap upcase-word] . upcase-dwim)
+  ([remap downcase-word] . downcase-dwim)
   :config
   (defun gs-101/switch-to-minibuffer-dwim ()
     "Switch to minibuffer in a regular window. In minibuffer, switch to previous window.
