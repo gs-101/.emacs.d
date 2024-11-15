@@ -142,7 +142,6 @@ allowFullScreen>
 </p>"
               path (or desc "")))
        (latex (format "\href{%s}{%s}" path (or desc "video"))))))
-
   :custom
   (org-fold-catch-invisible-edits 'show-and-error)
   )

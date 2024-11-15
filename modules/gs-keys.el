@@ -278,6 +278,11 @@ Otherwise, it calls `switch-to-minibuffer'."
       (switch-to-minibuffer)))
   )
 
+(use-package shell
+  :bind
+  ("C-c t s" . shell)
+  )
+
 (use-package casual
   :ensure t
   )

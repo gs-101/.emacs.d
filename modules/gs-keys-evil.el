@@ -133,9 +133,8 @@
   )
 
 (use-package evil-core
-  :after vterm
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>tv") 'vterm)
+  (evil-define-key 'normal 'global (kbd "<leader>ts") 'shell)
   )
 
 (use-package evil-core
