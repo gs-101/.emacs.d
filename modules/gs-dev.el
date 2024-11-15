@@ -28,22 +28,6 @@
   :ensure t
   )
 
-(use-package treesit-fold
-  :after treesit
-  :vc (:url "https://github.com/emacs-tree-sitter/treesit-fold")
-  :bind
-  (
-   :map prog-mode-map
-   ("C-<tab>" . treesit-fold-toggle)
-   )
-  :custom
-  (treesit-fold-replacement "…")
-  :demand t
-  :ensure t
-  :init
-  (global-treesit-fold-indicators-mode)
-  )
-
 (use-package git-commit-ts-mode
   :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
   :ensure t
