@@ -89,10 +89,10 @@ Also adds `cape-file' as a fallback."
   )
 
 (use-package eglot-tempel
-  :after tempel
+  :after eglot tempel
   :ensure t
-  :hook
-  (eglot-managed-mode . eglot-tempel-mode)
+  :config
+  (eglot-tempel-mode)
   )
 
 (use-package tempel-snippets

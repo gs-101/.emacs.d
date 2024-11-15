@@ -3527,7 +3527,7 @@ Work with Git forges from the comfort of Magit.
 
 #+end_quote
 
-To make use of this package [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated.
+To make use of this package a [[https://magit.vc/manual/forge/Token-Creation.html][token]] must be generated.
 
 #+begin_src emacs-lisp
 
@@ -3824,10 +3824,10 @@ Bridge for tempel templates with eglot.
 #+begin_src emacs-lisp
 
   (use-package eglot-tempel
-    :after tempel
+    :after eglot tempel
     :ensure t
-    :hook
-    (eglot-managed-mode . eglot-tempel-mode)
+    :config
+    (eglot-tempel-mode)
     )
 
 #+end_src
