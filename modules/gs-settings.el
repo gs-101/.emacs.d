@@ -55,6 +55,11 @@
   (minibuffer-setup . cursor-intangible-mode) ;; 4
   )
 
+(use-package epg-config
+  :custom
+  (epg-pinentry-mode 'loopback)
+  )
+
 (use-package files
   :config
   (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 3

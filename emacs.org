@@ -277,6 +277,28 @@ Generic package used to configure functions and variables not included in any fi
 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
 5. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
 
+*** EPG Configuration
+
+#+begin_quote
+
+Configuration of the EasyPG Library.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package epg-config
+    :custom
+    (epg-pinentry-mode 'loopback)
+    )
+
+#+end_src
+
+#+begin_src conf-unix :results none :mkdirp yes :tangle ~/.gnupg/gpg-agent.conf
+  allow-emacs-pinentry
+  allow-loopback-pinentry
+#+end_src
+
 *** Files
 
 #+begin_quote
