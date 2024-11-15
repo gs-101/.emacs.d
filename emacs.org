@@ -6311,6 +6311,20 @@ Display typographical ligatures in Emacs.
 
 #+end_src
 
+** Markdown
+
+#+begin_src emacs-lisp
+
+  (use-package markdown-mode
+    :after markdown-mode
+    :custom
+    (markdown-enable-highlighting-syntax t)
+    (markdown-hide-markup t)
+    )
+
+#+end_src
+
+
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]
 
 #+begin_quote

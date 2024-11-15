@@ -494,6 +494,13 @@ If it is, enable `color-identifiers-mode'."
   (prog-mode . ligature-mode)
   )
 
+(use-package markdown-mode
+  :after markdown-mode
+  :custom
+  (markdown-enable-highlighting-syntax t)
+  (markdown-hide-markup t)
+  )
+
 (use-package nerd-icons
   :bind
   ("C-c i n" . nerd-icons-insert)
