@@ -582,6 +582,7 @@ If it is, enable `color-identifiers-mode'."
 
 (use-package emacs
   :custom
+  (flymake-indicator-type 'margins)
   (flymake-margin-indicators-string '(
                                       (error "󰃤" compilation-error)
                                       (warning "" compilation-warning)
