@@ -3519,24 +3519,6 @@ It's Magit! A Git Porcelain inside Emacs.
 
 #+end_src
 
-*** [[https://github.com/dandavison/magit-delta]]
-
-#+begin_quote
-
-Use [[https://github.com/dandavison/delta][delta]] when viewing diffs in Magit.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package magit-delta
-    :ensure t
-    :hook
-    (magit-mode . magit-delta-mode)
-    )
-
-#+end_src
-
 *** [[https://github.com/magit/forge][Forge]]
 
 #+begin_quote
