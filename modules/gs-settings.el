@@ -193,6 +193,7 @@
   (indent-tabs-mode nil)
   (kill-do-not-save-duplicates t) ;; 5
   (kill-read-only-ok t) ;; 5
+  (kill-region-dwim 'emacs-word)
   (kill-whole-line t) ;; 5
   ;; Hides commands in completion that are not usable in the current mode
   (read-extended-command-predicate #'command-completion-default-include-p) ;; 4
