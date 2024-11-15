@@ -2120,7 +2120,6 @@ Support for standard YouTube links is also included, translating them to embbede
   </p>"
                 path (or desc "")))
          (latex (format "\href{%s}{%s}" path (or desc "video"))))))
-
     :custom
     (org-fold-catch-invisible-edits 'show-and-error)
     )
@@ -2236,51 +2235,6 @@ Org refile allows you to refile subtrees to various locations.
     (org-refile-use-outline-path t)
     )
 
-#+end_src
-
-** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L442][Tags]]
-
-#+begin_src emacs-lisp
-
-  (use-package org
-    :custom
-    (org-tag-alist '(
-                     ;; Places
-                     (:startgroup)
-                     ("Places")
-                     (:grouptags)
-                     ("@home" . ?h)
-                     (:endgroup)
-
-                     ;; Contexts
-                     (:startgroup)
-                     ("Contexts")
-                     (:grouptags)
-                     ("@computer" . ?c)
-                     ("@mobile" . ?m)
-                     (:endgrouptag)
-
-                     ;; Task Types
-                     (:startgroup)
-                     ("Types")
-                     (:grouptags)
-                     ("@hacking" . ?H)
-                     ("@writing" . ?w)
-                     ("@creative" . ?C)
-                     ("@accounting" . ?a)
-                     ("@email" . ?e)
-                     ("@system" . ?s)
-                     (:endgrouptag)
-
-                     ;; Workflow states
-                     (:startgroup)
-                     ("States")
-                     (:grouptags)
-                     ("@plan" . ?p)
-                     ("@review" . ?r)
-                     (:endgroup)
-                     ))
-    )
 #+end_src
 
 ** TODOs

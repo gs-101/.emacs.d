@@ -192,46 +192,6 @@ allowFullScreen>
 
 (use-package org
   :custom
-  (org-tag-alist '(
-                   ;; Places
-                   (:startgroup)
-                   ("Places")
-                   (:grouptags)
-                   ("@home" . ?h)
-                   (:endgroup)
-
-                   ;; Contexts
-                   (:startgroup)
-                   ("Contexts")
-                   (:grouptags)
-                   ("@computer" . ?c)
-                   ("@mobile" . ?m)
-                   (:endgrouptag)
-
-                   ;; Task Types
-                   (:startgroup)
-                   ("Types")
-                   (:grouptags)
-                   ("@hacking" . ?H)
-                   ("@writing" . ?w)
-                   ("@creative" . ?C)
-                   ("@accounting" . ?a)
-                   ("@email" . ?e)
-                   ("@system" . ?s)
-                   (:endgrouptag)
-
-                   ;; Workflow states
-                   (:startgroup)
-                   ("States")
-                   (:grouptags)
-                   ("@plan" . ?p)
-                   ("@review" . ?r)
-                   (:endgroup)
-                   ))
-  )
-
-(use-package org
-  :custom
   (org-todo-keywords '(
                        (sequence
                         "TODO(t)"
