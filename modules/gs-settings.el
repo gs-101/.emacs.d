@@ -235,11 +235,6 @@
   (gcmh-mode)
   )
 
-(use-package gnuplot
-  :defer t
-  :ensure t
-  )
-
 (use-package markdown-mode
   :defer t
   :ensure t

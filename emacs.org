@@ -781,24 +781,6 @@ Enforce a sneaky Garbage Collection strategy to minimize GC interference with us
 
 #+end_src
 
-*** [[https://github.com/emacs-gnuplot/gnuplot][gnuplot]]
-
-#+begin_quote
-
-A major mode for Emacs for interacting with Gnuplot.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package gnuplot
-    :defer t
-    :ensure t
-    )
-
-#+end_src
-
-
 *** [[https://github.com/jrblevin/markdown-mode][Markdown]]
 
 #+begin_quote
