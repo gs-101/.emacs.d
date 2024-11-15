@@ -1324,6 +1324,7 @@ Key bindings for default packages.
      ("C-c C-c" . gs-101/eval-dwim)
      ("C-c m e b" . eval-buffer)
      ("C-c m e r" . eval-region)
+     ("C-c C-p" . ielm)
      )
     :config
     (defun gs-101/eval-dwim ()
@@ -3235,6 +3236,11 @@ Lisp editing for Emacs.
 #+begin_src emacs-lisp
 
   (use-package lisp
+    :bind
+    (
+     :map lisp-mode-map
+     ("C-c C-p" . run-lisp)
+     )
     :custom
     (narrow-to-defun-include-comments t)
     :defer t
@@ -3260,19 +3266,25 @@ Python's flying circus support for Emacs.
 
 #+end_src
 
-*** [[https://github.com/yoshiki/yaml-mode][YAML]]
+*** Scheme
+
+**** CMUScheme
 
 #+begin_quote
 
-The emacs major mode for editing files in the YAML data serialization format.
+Scheme process in a buffer. Adapted from tea.el
 
 #+end_quote
 
 #+begin_src emacs-lisp
 
-  (use-package yaml-mode
+  (use-package cmuscheme
+    :bind
+    (
+     :map scheme-mode-map
+     ("C-c C-p" . run-scheme)
+     )
     :defer t
-    :ensure t
     )
 
 #+end_src

@@ -146,6 +146,11 @@
   )
 
 (use-package lisp
+  :bind
+  (
+   :map lisp-mode-map
+   ("C-c C-p" . run-lisp)
+   )
   :custom
   (narrow-to-defun-include-comments t)
   :defer t
@@ -157,9 +162,13 @@
   :defer t
   )
 
-(use-package yaml-mode
+(use-package cmuscheme
+  :bind
+  (
+   :map scheme-mode-map
+   ("C-c C-p" . run-scheme)
+   )
   :defer t
-  :ensure t
   )
 
 (use-package smerge-mode

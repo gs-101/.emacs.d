@@ -60,6 +60,7 @@
    ("C-c C-c" . gs-101/eval-dwim)
    ("C-c m e b" . eval-buffer)
    ("C-c m e r" . eval-region)
+   ("C-c C-p" . ielm)
    )
   :config
   (defun gs-101/eval-dwim ()
