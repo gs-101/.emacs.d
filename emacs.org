@@ -2396,25 +2396,6 @@ Highlight & annotate text, EWW, Info, and EPUB.
 
 #+end_src
 
-** [[https://github.com/snosov1/toc-org][TOC]]
-
-#+begin_quote
-
-toc-org is an Emacs utility to have an up-to-date table of contents in the org files without exporting (useful primarily for readme files on GitHub).
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package toc-org
-    :ensure t
-    :hook
-    (org-mode . toc-org-mode)
-    (markdown-mode . toc-org-mode)
-    )
-
-#+end_src
-
 ** [[https://github.com/rtrppl/website2org][website2org]]
 
 #+begin_quote

@@ -271,13 +271,6 @@ allowFullScreen>
   (nov-mode . org-remark-nov-mode)
   )
 
-(use-package toc-org
-  :ensure t
-  :hook
-  (org-mode . toc-org-mode)
-  (markdown-mode . toc-org-mode)
-  )
-
 (use-package website2org
   :vc (:url "https://github.com/rtrppl/website2org")
   :custom
