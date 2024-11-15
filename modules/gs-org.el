@@ -1,14 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package org
-  :config
-  (add-to-list 'org-latex-packages-alist '(
-                                           "" "bookmark" t
-                                           "" "url" t
-                                           ))
   :custom
   (org-adapt-indentation t)
   (org-auto-align-tags nil)
+  (org-directory (convert-standard-filename (expand-file-name "~/Documents/Org")))
   (org-format-latex-options '(
                               :foreground default
                               :background nil
@@ -158,6 +154,18 @@ allowFullScreen>
   (org-startup-with-latex-preview t)
   (org-preview-latex-default-process 'dvisvgm) ;; 1
   (org-preview-latex-image-directory (convert-standard-filename (expand-file-name "ltximg/" temporary-file-directory)))
+  :config
+  (add-to-list 'org-latex-classes
+               '("org-plain-latex"
+                 "\\documentclass{article}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   :defer t
   )
 
@@ -172,8 +180,7 @@ allowFullScreen>
                               org-habit
                               org-id
                               org-protocol
-                              )
-               )
+                              ))
   )
 
 (use-package org-refile
