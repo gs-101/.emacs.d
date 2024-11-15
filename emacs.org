@@ -888,6 +888,29 @@ Make Emacs use the $PATH set up by the user's shell.
 
 #+end_src
 
+*** [[https://karthinks.com/software/fifteen-ways-to-use-embark/#open-a-file-as-root-without-losing-your-session][Suco Command]]
+
+Like [[https://github.com/nflath/sudo-edit][sudo-edit]], but just a single, non-packaged command.
+
+#+begin_src emacs-lisp
+
+  (use-package emacs
+    :init
+    (defun karthinks/sudo-find-file (file)
+      "Open FILE as root."
+      (interactive "FOpen file as root: ")
+      (when (file-writable-p file)
+        (user-error "File is user-writable, aborting sudo"))
+      (find-file (if (file-remote-p file)
+                     (concat "/" (file-remote-p file 'method) ":"
+                             (file-remote-p file 'user) "@" (file-remote-p file 'host)
+                             "|sudo@root@"
+                             (file-remote-p file 'host) ":" (file-remote-p file 'localname))
+                   (concat "/sudo:root@localhost:" file))))
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
@@ -4436,6 +4459,22 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
                                (floor (frame-height) 2) 1)))
     :hook
     (embark-collect-post-revert . oantolin/embark-collect-resize-window)
+    )
+
+#+end_src
+
+*** Sudo Action
+
+#+begin_src emacs-lisp
+
+  (use-package embark
+    :after embark
+    :if (functionp 'karthinks/sudo-find-file)
+    :bind
+    (
+     :map embark-file-map
+     ("S" . karthinks/sudo-find-file)
+     )
     )
 
 #+end_src

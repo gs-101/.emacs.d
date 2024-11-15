@@ -178,6 +178,16 @@
 
 (use-package embark
   :after embark
+  :if (functionp 'karthinks/sudo-find-file)
+  :bind
+  (
+   :map embark-file-map
+   ("S" . karthinks/sudo-find-file)
+   )
+  )
+
+(use-package embark
+  :after embark
   :custom
   (embark-indicators '(
                        embark-which-key-indicator
