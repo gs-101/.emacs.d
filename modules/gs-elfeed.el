@@ -4,11 +4,11 @@
   :bind
   (
    :map elfeed-search-mode-map
-   ("R" . kaushal-modi/elfeed-mark-all-as-read)
+   ("R" . kaushal-modi/elfeed-search-mark-all-as-read)
    )
   :config
   ;; https://emacs.stackexchange.com/a/2441
-  (defun kaushal-modi/elfeed-search-tag-all-read ()
+  (defun kaushal-modi/elfeed-search-mark-all-as-read ()
     "Call `mark-whole-buffer' and `elfeed-search-untag-all-undead' in unison,
 marking all current messages as read."
     (interactive)
