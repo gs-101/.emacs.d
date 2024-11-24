@@ -246,6 +246,11 @@ Otherwise, it calls `eval-buffer'."
   ("<f1> T" . profiler-start)
   )
 
+(use-package repeat
+  :init
+  (repeat-mode)
+  )
+
 (use-package sort
   :bind
   ("C-c l d" . delete-duplicate-lines)

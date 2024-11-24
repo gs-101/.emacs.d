@@ -1704,6 +1704,23 @@ Key bindings for default packages.
 
 #+end_src
 
+** Repeat Mode
+
+#+begin_quote
+
+Convenient way to repeat the previous command.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package repeat
+    :init
+    (repeat-mode)
+    )
+
+#+end_src
+
 ** Sort
 
 #+begin_src emacs-lisp
