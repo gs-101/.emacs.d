@@ -4045,22 +4045,6 @@ Generally useful packages for productivity and other aspects.
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-** [[https://github.com/sergiruiztrepat/chemtable][chemtable]]
-
-#+begin_quote
-
-Periodic table of the elements.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package chemtable
-    :ensure t
-    )
-
-#+end_src
-
 ** [[https://github.com/jwiegley/alert][Alert]]
 
 #+begin_quote

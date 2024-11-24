@@ -1,9 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(use-package chemtable
-  :ensure t
-  )
-
 (use-package alert
   :custom
   (alert-default-style 'notifications)
