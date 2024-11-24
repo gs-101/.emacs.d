@@ -73,7 +73,6 @@
   (auto-mode-case-fold nil)
   (backup-by-copying t) ;; 2
   (backup-by-copying-when-linked t) ;; 2
-  (confirm-kill-processes nil) ;; 4
   (delete-old-versions t)
   (find-file-suppress-same-file-warnings t)
   (find-file-visit-truename t)
