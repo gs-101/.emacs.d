@@ -200,7 +200,6 @@ Otherwise, it calls `eval-buffer'."
 
 (use-package org-keys
   :custom
-  (org-return-follows-link t)
   (org-use-speed-commands t)
   )
 
