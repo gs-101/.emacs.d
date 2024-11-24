@@ -8,6 +8,9 @@
                                  orderless-literal
                                  orderless-regexp
                                  )))
+  (orderless-define-completion-style minad/orderless-simple
+    (orderless-style-dispatchers nil)
+    (orderless-matching-styles '(orderless-literal)))
   :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
@@ -121,6 +124,12 @@ Also adds `cape-file' as a fallback."
   :ensure t
   :init
   (global-corfu-mode)
+  )
+
+(use-package corfu
+  :after orderless
+  :hook
+  (corfu-mode . (lambda () (setq-local completion-styles '(minad/orderless-simple))))
   )
 
 (use-package minibuffer

@@ -3798,6 +3798,9 @@ Emacs completion style that matches multiple regexps in any order.
                                    orderless-literal
                                    orderless-regexp
                                    )))
+    (orderless-define-completion-style minad/orderless-simple
+      (orderless-style-dispatchers nil)
+      (orderless-matching-styles '(orderless-literal)))
     :custom
     (completion-styles '(orderless basic))
     (completion-category-defaults nil)
@@ -3991,6 +3994,18 @@ COmpletion in Region FUnction.
     :ensure t
     :init
     (global-corfu-mode)
+    )
+
+#+end_src
+
+*** [[https://github.com/minad/corfu?tab=readme-ov-file#buffer-localcorfu-only-completion-styles][Simpler Completion Style]]
+
+#+begin_src emacs-lisp
+
+  (use-package corfu
+    :after orderless
+    :hook
+    (corfu-mode . (lambda () (setq-local completion-styles '(minad/orderless-simple))))
     )
 
 #+end_src
