@@ -5662,42 +5662,9 @@ Highlight the current line.
   (use-package hl-line
     :init
     (global-hl-line-mode)
-    )
-
-#+end_src
-
-*** Disable in Dashboard
-
-#+begin_src emacs-lisp
-
-  (use-package hl-line
-    :after dashboard
-    :config
-    (add-hook 'dashboard-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
-    )
-
-#+end_src
-
-*** Disable in PDF
-
-#+begin_src emacs-lisp
-
-  (use-package hl-line
-    :after pdf-tools
-    :config
-    (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
-    )
-
-#+end_src
-
-*** Disable in vterm
-
-#+begin_src emacs-lisp
-
-  (use-package hl-line
-    :after vterm
-    :config
-    (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+    :hook
+    (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
+    (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
     )
 
 #+end_src

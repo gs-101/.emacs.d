@@ -53,24 +53,9 @@
 (use-package hl-line
   :init
   (global-hl-line-mode)
-  )
-
-(use-package hl-line
-  :after dashboard
-  :config
-  (add-hook 'dashboard-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
-  )
-
-(use-package hl-line
-  :after pdf-tools
-  :config
-  (add-hook 'pdf-view-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
-  )
-
-(use-package hl-line
-  :after vterm
-  :config
-  (add-hook 'vterm-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+  :hook
+  (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
+  (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package mouse
