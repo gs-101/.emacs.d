@@ -49,7 +49,6 @@
         ("C-c m C-b" . elisp-byte-compile-buffer)
         ("C-c m e d" . eval-defun)
         ("C-c m C-e" . elisp-eval-region-or-buffer)
-        ("C-c m e e" . eval-last-sexp)
         )
   )
 
