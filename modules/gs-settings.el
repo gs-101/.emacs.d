@@ -208,6 +208,12 @@
   (savehist-mode)
   )
 
+(use-package sendmail
+  :custom
+  (sendmail-program "msmtp")
+  :defer t
+  )
+
 (use-package simple
   :custom
   (blink-matching-paren nil)

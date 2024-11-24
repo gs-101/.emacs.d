@@ -688,6 +688,24 @@ Save minibuffer history.
 
 #+end_src
 
+*** Send Mail
+
+#+begin_quote
+
+This mode provides mail-sending facilities from within Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package sendmail
+    :custom
+    (sendmail-program "msmtp")
+    :defer t
+    )
+
+#+end_src
+
 *** Simple
 
 #+begin_quote
