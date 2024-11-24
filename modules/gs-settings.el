@@ -120,6 +120,7 @@
 
 (use-package imenu
   :custom
+  (imenu-flatten 'annotation)
   (imenu-space-replacement nil)
   )
 
