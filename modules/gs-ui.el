@@ -333,9 +333,11 @@ If it is, enable `color-identifiers-mode'."
 (use-package hl-todo
   :custom
   (hl-todo-keyword-faces '(
-                           ("NOTE" . "yellow")
-                           ("FIX" . "red")
                            ("FIXME" . "red")
+                           ("NOTE" . "yellow")
+                           ("QUESTION" . "yellow")
+                           ("ANSWER" . "green")
+                           ("FIX" . "red")
                            ("FEAT" . "yellow")
                            ("HACK" . "green")
                            ("STYLE" . "orange")
@@ -360,9 +362,11 @@ If it is, enable `color-identifiers-mode'."
              (cons (car keyword-color)
                    (catppuccin-get-color (cdr keyword-color))))
            '(
-             ("NOTE" . yellow)
-             ("FIX" . red)
              ("FIXME" . red)
+             ("NOTE" . yellow)
+             ("QUESTION" . yellow)
+             ("ANSWER" . green)
+             ("FIX" . red)
              ("FEAT" . yellow)
              ("HACK" . green)
              ("STYLE" . lavender)
