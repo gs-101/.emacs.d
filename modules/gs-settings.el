@@ -261,6 +261,15 @@
   (warning-suppress-log-types '((comp) (bytecomp)))
   )
 
+(use-package disproject
+  :bind
+  (
+   :map ctl-x-map
+   ("p" . disproject-dispatch)
+   )
+  :ensure t
+  )
+
 (use-package gcmh
   :ensure t
   :init

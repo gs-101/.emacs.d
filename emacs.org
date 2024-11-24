@@ -835,6 +835,27 @@ Log and display warnings.
 
 Packages which I think should be part of Emacs core.
 
+*** [[https://github.com/aurtzy/disproject/tree/ad0d9a6f591b4ae13bd1dff006d3a4c776cee395][Disproject]]
+
+#+begin_quote
+
+Transient interface for managing and interacting with projects.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package disproject
+    :bind
+    (
+     :map ctl-x-map
+     ("p" . disproject-dispatch)
+     )
+    :ensure t
+    )
+
+#+end_src
+
 *** [[https://github.com/emacsmirror/gcmh][Garbage Collector Magic Hack]]
 
 #+begin_quote
