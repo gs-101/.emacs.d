@@ -1339,12 +1339,12 @@ Key bindings for default packages.
      :map prog-mode-map
      ("C-c t e" . eglot)
      :map eglot-mode-map
-     ("C-c c a" . eglot-code-actions)
-     ("C-c c o" . eglot-code-action-organize-imports)
-     ("C-c c i" . eglot-find-implementation)
-     ("C-c c t" . eglot-find-typeDefinition)
-     ("C-c c f" . eglot-format)
-     ("C-c c r" . eglot-rename)
+     ("C-c e a" . eglot-code-actions)
+     ("C-c e o" . eglot-code-action-organize-imports)
+     ("C-c e i" . eglot-find-implementation)
+     ("C-c e t" . eglot-find-typeDefinition)
+     ("C-c e f" . eglot-format)
+     ("C-c e r" . eglot-rename)
      )
     )
 
