@@ -41,11 +41,12 @@
      (C . t)
      (css . t)
      (emacs-lisp . t)
-     (gnuplot . t)
+     (java . t)
      (js . t)
      (latex . t)
      (python . t)
      (shell . t)
+     (sql . t)
      ))
 
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
