@@ -12,6 +12,7 @@
 
 (use-package comp-run
   :custom
+  (native-comp-async-query-on-exit t)
   (native-comp-async-report-warnings-errors 'silent)
   )
 

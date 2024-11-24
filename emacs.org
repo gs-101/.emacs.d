@@ -205,6 +205,7 @@ This file contains all the code needed to drive async compilations and any Lisp 
 
   (use-package comp-run
     :custom
+    (native-comp-async-query-on-exit t)
     (native-comp-async-report-warnings-errors 'silent)
     )
 
