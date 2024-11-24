@@ -208,7 +208,7 @@
     (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
       (combobulate-mode)))
   :custom
-  (combobulate-key-prefix "C-c t c")
+  (combobulate-key-prefix "C-z t c")
   :ensure t
   :hook
   (text-mode . cxa/activate-combobulate-on-ts-mode)
@@ -230,10 +230,18 @@
   )
 
 (use-package gptel
+  :bind
+  ("C-z g b" . gptel)
+  ("C-z g DEL" . gptel-abort)
+  ("C-z g a" . gptel-add)
+  ("C-z g C-x C-f" . gptel-add-file)
+  ("C-z g m" . gptel-menu)
+  ("C-z g r" . gptel-rewrite-menu)
+  ("C-z g RET" . gptel-send)
+  ("C-z g p" . gptel-system-prompt)
   :custom
   (gptel-default-mode 'org-mode)
   (gptel-org-branching-context t)
-  :defer t
   :ensure t
   )
 
@@ -346,7 +354,7 @@
 (use-package projection
   :ensure t
   :bind-keymap
-  ("C-c p" . projection-map)
+  ("C-z p" . projection-map)
   :bind
   (
    :map projection-map

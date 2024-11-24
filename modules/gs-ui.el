@@ -503,7 +503,7 @@ If it is, enable `color-identifiers-mode'."
 
 (use-package nerd-icons
   :bind
-  ("C-c i n" . nerd-icons-insert)
+  ("C-z i n" . nerd-icons-insert)
   :demand t
   :ensure t
   )

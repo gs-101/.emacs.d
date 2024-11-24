@@ -350,6 +350,26 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
 2. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]];
 3. [[https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el][xenodium]].
 
+*** Frame
+
+#+begin_quote
+
+Multi-frame management independent of window systems.
+
+#+end_quote
+
+This is just to remove the =suspend-frame= command, which I don't find useful. This liberates =C-z= to have it used as a prefix.
+
+#+begin_src emacs-lisp
+
+  (use-package frame
+    :bind
+    ("C-z" . nil)
+    )
+
+#+end_src
+
+
 *** Help
 
 #+begin_quote
@@ -2373,11 +2393,11 @@ Highlight & annotate text, EWW, Info, and EPUB.
     :bind
     (
      :map org-remark-mode-map
-     ("C-c M m" . org-remark-mark)
-     ("C-c M o" . org-remark-open)
-     ("C-c M ]" . org-remark-view-next)
-     ("C-c M [" . org-remark-view-prev)
-     ("C-c M d" . org-remark-delete)
+     ("C-z M m" . org-remark-mark)
+     ("C-z M o" . org-remark-open)
+     ("C-z M ]" . org-remark-view-next)
+     ("C-z M [" . org-remark-view-prev)
+     ("C-z M d" . org-remark-delete)
      )
     :ensure t
     :config
@@ -2447,10 +2467,10 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
   (use-package org-roam
     :bind
-    ("C-c r f" . org-roam-node-find)
+    ("C-z r f" . org-roam-node-find)
     (
      :map org-mode-map
-     ("C-c r i" . org-roam-node-insert)
+     ("C-z r i" . org-roam-node-insert)
      )
     :custom
     (org-roam-completion-everywhere t)
@@ -2506,7 +2526,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
   (use-package org-roam-dailies
     :bind-keymap
-    ("C-c r d" . org-roam-dailies-map)
+    ("C-z r d" . org-roam-dailies-map)
     :bind
     (
      :map org-roam-dailies-map
@@ -2564,7 +2584,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
   (use-package org-agenda
     :bind
-    ("C-c r b" . dw/org-roam-capture-inbox)
+    ("C-z r b" . dw/org-roam-capture-inbox)
     :preface
     (defun dw/org-roam-filter-by-tag (tag-name)
       "Filter org roam files by their tags."
@@ -2639,7 +2659,7 @@ A graphical frontend for exploring your org-roam Zettelkasten.
 
   (use-package org-roam-ui
     :bind
-    ("C-c r u" . org-roam-ui-open)
+    ("C-z r u" . org-roam-ui-open)
     :custom
     (org-roam-ui-sync-theme t)
     (org-roam-ui-follow t)
@@ -2759,7 +2779,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 
   (use-package citar-org-roam
     :bind
-    ("C-c r c" . citar-create-note)
+    ("C-z r c" . citar-create-note)
     :after citar org-roam
     :config
     (citar-org-roam-mode)
@@ -3322,7 +3342,7 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
       (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
         (combobulate-mode)))
     :custom
-    (combobulate-key-prefix "C-c t c")
+    (combobulate-key-prefix "C-z t c")
     :ensure t
     :hook
     (text-mode . cxa/activate-combobulate-on-ts-mode)
@@ -3382,10 +3402,18 @@ A simple LLM client for Emacs.
 #+begin_src emacs-lisp
 
   (use-package gptel
+    :bind
+    ("C-z g b" . gptel)
+    ("C-z g DEL" . gptel-abort)
+    ("C-z g a" . gptel-add)
+    ("C-z g C-x C-f" . gptel-add-file)
+    ("C-z g m" . gptel-menu)
+    ("C-z g r" . gptel-rewrite-menu)
+    ("C-z g RET" . gptel-send)
+    ("C-z g p" . gptel-system-prompt)
     :custom
     (gptel-default-mode 'org-mode)
     (gptel-org-branching-context t)
-    :defer t
     :ensure t
     )
 
@@ -3614,7 +3642,7 @@ Projectile like project management library built on Emacs project.el.
   (use-package projection
     :ensure t
     :bind-keymap
-    ("C-c p" . projection-map)
+    ("C-z p" . projection-map)
     :bind
     (
      :map projection-map
@@ -3830,7 +3858,7 @@ Simple templates for Emacs.
 
   (use-package tempel
     :bind
-    ("C-c i s" . tempel-insert)
+    ("C-z i s" . tempel-insert)
     :ensure t
     )
 
@@ -4141,7 +4169,7 @@ Consulting completing-read.
      ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)
      ([remap yank-pop] . consult-yank-pop)
      ("M-g I" . consult-imenu-multi)
-     ("C-c M-x" . consult-mode-command)
+     ("C-z M-x" . consult-mode-command)
      )
     :config
     (defun oantolin/choose-completion-in-region ()
@@ -4464,7 +4492,7 @@ Easily draw UNICODE lines and boxes.
 
   (use-package uniline
     :bind
-    ("C-c i l" . uniline-mode)
+    ("C-z i l" . uniline-mode)
     :ensure t
     )
 
@@ -4627,7 +4655,7 @@ Jabber/XMPP client for Emacs.
 
   (use-package jabber
     :bind-keymap
-    ("C-c j" . jabber-global-keymap)
+    ("C-z j" . jabber-global-keymap)
     :defer t
     :ensure t
     )
@@ -5275,6 +5303,7 @@ Meow helpers for customization.
      '("j" . "h-j")
      '("k" . "h-k")
      '("/" . "h-/")
+     '("z" . "C-z")
      ;; Use SPC (0-9) for digit arguments.
      '("/" . meow-keypad-describe-key)
      '("?" . meow-cheatsheet)
@@ -6336,7 +6365,7 @@ A Library for Nerd Font icons.
 
   (use-package nerd-icons
     :bind
-    ("C-c i n" . nerd-icons-insert)
+    ("C-z i n" . nerd-icons-insert)
     :demand t
     :ensure t
     )

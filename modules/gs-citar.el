@@ -60,7 +60,7 @@ Citkey must be formatted as `@key'."
 
 (use-package citar-org-roam
   :bind
-  ("C-c r c" . citar-create-note)
+  ("C-z r c" . citar-create-note)
   :after citar org-roam
   :config
   (citar-org-roam-mode)

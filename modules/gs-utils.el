@@ -47,7 +47,7 @@
    ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)
    ([remap yank-pop] . consult-yank-pop)
    ("M-g I" . consult-imenu-multi)
-   ("C-c M-x" . consult-mode-command)
+   ("C-z M-x" . consult-mode-command)
    )
   :config
   (defun oantolin/choose-completion-in-region ()
@@ -236,7 +236,7 @@ targets."
 
 (use-package uniline
   :bind
-  ("C-c i l" . uniline-mode)
+  ("C-z i l" . uniline-mode)
   :ensure t
   )
 

@@ -91,6 +91,11 @@
         (make-directory parent-directory t))))
   )
 
+(use-package frame
+  :bind
+  ("C-z" . nil)
+  )
+
 (use-package help
   :custom
   (help-window-select t)

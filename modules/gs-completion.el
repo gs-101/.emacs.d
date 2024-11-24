@@ -84,7 +84,7 @@ Also adds `cape-file' as a fallback."
 
 (use-package tempel
   :bind
-  ("C-c i s" . tempel-insert)
+  ("C-z i s" . tempel-insert)
   :ensure t
   )
 

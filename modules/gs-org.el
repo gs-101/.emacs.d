@@ -252,11 +252,11 @@ allowFullScreen>
   :bind
   (
    :map org-remark-mode-map
-   ("C-c M m" . org-remark-mark)
-   ("C-c M o" . org-remark-open)
-   ("C-c M ]" . org-remark-view-next)
-   ("C-c M [" . org-remark-view-prev)
-   ("C-c M d" . org-remark-delete)
+   ("C-z M m" . org-remark-mark)
+   ("C-z M o" . org-remark-open)
+   ("C-z M ]" . org-remark-view-next)
+   ("C-z M [" . org-remark-view-prev)
+   ("C-z M d" . org-remark-delete)
    )
   :ensure t
   :config

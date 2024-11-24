@@ -2,10 +2,10 @@
 
 (use-package org-roam
   :bind
-  ("C-c r f" . org-roam-node-find)
+  ("C-z r f" . org-roam-node-find)
   (
    :map org-mode-map
-   ("C-c r i" . org-roam-node-insert)
+   ("C-z r i" . org-roam-node-insert)
    )
   :custom
   (org-roam-completion-everywhere t)
@@ -49,7 +49,7 @@
 
 (use-package org-roam-dailies
   :bind-keymap
-  ("C-c r d" . org-roam-dailies-map)
+  ("C-z r d" . org-roam-dailies-map)
   :bind
   (
    :map org-roam-dailies-map
@@ -95,7 +95,7 @@
 
 (use-package org-agenda
   :bind
-  ("C-c r b" . dw/org-roam-capture-inbox)
+  ("C-z r b" . dw/org-roam-capture-inbox)
   :preface
   (defun dw/org-roam-filter-by-tag (tag-name)
     "Filter org roam files by their tags."
@@ -154,7 +154,7 @@
 
 (use-package org-roam-ui
   :bind
-  ("C-c r u" . org-roam-ui-open)
+  ("C-z r u" . org-roam-ui-open)
   :custom
   (org-roam-ui-sync-theme t)
   (org-roam-ui-follow t)

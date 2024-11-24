@@ -33,6 +33,7 @@
    '("j" . "h-j")
    '("k" . "h-k")
    '("/" . "h-/")
+   '("z" . "C-z")
    ;; Use SPC (0-9) for digit arguments.
    '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet)

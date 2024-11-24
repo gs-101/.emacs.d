@@ -80,7 +80,7 @@
 
 (use-package jabber
   :bind-keymap
-  ("C-c j" . jabber-global-keymap)
+  ("C-z j" . jabber-global-keymap)
   :defer t
   :ensure t
   )
