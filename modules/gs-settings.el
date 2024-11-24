@@ -96,6 +96,11 @@
   ("C-z" . nil)
   )
 
+(use-package grep
+  :custom
+  (grep-use-headings t)
+  )
+
 (use-package help
   :custom
   (help-window-select t)

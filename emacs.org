@@ -369,6 +369,20 @@ This is just to remove the =suspend-frame= command, which I don't find useful. T
 
 #+end_src
 
+*** grep
+
+#+begin_quote
+run `grep' and display the results.
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package grep
+    :custom
+    (grep-use-headings t)
+    )
+
+#+end_src
 
 *** Help
 
