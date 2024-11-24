@@ -2,7 +2,7 @@
 
 (use-package align
   :bind
-  ("C-x |" . align)
+  ("C-x |" . align-regexp)
   )
 
 (use-package apropos

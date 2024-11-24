@@ -1258,7 +1258,7 @@ Key bindings for default packages.
 
   (use-package align
     :bind
-    ("C-x |" . align)
+    ("C-x |" . align-regexp)
     )
 
 #+end_src
@@ -5342,7 +5342,7 @@ Meow helpers for customization.
      '("]" . meow-end-of-thing)
      '("'" . repeat)
      '("=" . meow-indent)
-     '("|" . align)
+     '("|" . align-regexp)
      '("<escape>" . ignore)
      '("/" . isearch-forward-word)
      '("?" . meow-comment)
