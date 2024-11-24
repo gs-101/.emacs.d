@@ -35,6 +35,7 @@
 
 (use-package git-commit-ts-mode
   :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
+  :defer t
   :ensure t
   )
 
@@ -130,8 +131,9 @@
 
 (use-package flymake-collection
   :ensure t
-  :flymake-hook
-  (python-mode flymake-collection-flake8)
+  :config
+  (push '((c-mode c-ts-mode) flymake-collection-gcc) flymake-collection-hook-config)
+  (push '((python-mode python-ts-mode) flymake-collection-flake8) flymake-collection-hook-config)
   :hook
   (flymake-mode . flymake-collection-hook-setup)
   )
