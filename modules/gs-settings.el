@@ -142,7 +142,7 @@
 (use-package minibuffer
   :custom
   (completions-detailed t) ;; 1
-  (completions-format 'one-column) ;; 1
+  (completions-format 'vertical)
   (completions-group t) ;; 1
   (read-file-name-completion-ignore-case t) ;; 2
   (resize-mini-windows t)
