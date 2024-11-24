@@ -3584,23 +3584,12 @@ An Emacs LeetCode client.
 
   (use-package leetcode
     :custom
+    (leetcode-directory (convert-standard-filename (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
     (leetcode--paid "$")
+    (leetcode-save-solutions t)
     (leetcode--User-Agent ("User Agent" . "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.1"))
     :defer t
     :ensure t
-    )
-
-#+end_src
-
-*** Save solutions to Project
-
-#+begin_src emacs-lisp
-
-  (use-package leetcode
-    :after leetcode
-    :custom
-    (leetcode-save-solutions t)
-    (leetcode-directory (convert-standard-filename (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
     )
 
 #+end_src
