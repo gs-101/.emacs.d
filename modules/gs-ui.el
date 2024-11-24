@@ -46,6 +46,8 @@
   (window-divider-default-bottom-width 1)
   (window-divider-default-places t)
   (window-divider-default-right-width 1)
+  :hook
+  (doc-view-mode . (lambda () (setq-local blink-cursor-mode nil)))
   :init
   (window-divider-mode)
   )
