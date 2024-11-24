@@ -3245,6 +3245,32 @@ Scheme process in a buffer. Adapted from tea.el
 
 #+end_src
 
+*** Shell Script
+
+#+begin_quote
+
+Major mode for editing shell scripts.
+Bourne, C and rc shells as well as various derivatives are supported and easily derived from.
+Structured statements can be inserted with one command or abbrev.
+Completion is available for filenames, variables known from the script, the shell and the environment as well as commands
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package sh-script
+    :bind
+    (
+     :map bash-ts-mode-map
+     ("C-c C-p" . shell)
+     :map sh-mode-map
+     ("C-c C-p" . shell)
+     )
+    :defer t
+    )
+
+#+end_src
+
 ** Smerge
 
 #+begin_quote

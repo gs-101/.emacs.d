@@ -157,6 +157,17 @@
   :defer t
   )
 
+(use-package sh-script
+  :bind
+  (
+   :map bash-ts-mode-map
+   ("C-c C-p" . shell)
+   :map sh-mode-map
+   ("C-c C-p" . shell)
+   )
+  :defer t
+  )
+
 (use-package smerge-mode
   :init
   (smerge-mode)
