@@ -39,6 +39,7 @@
   (hscroll-step 1) ;; 3
   (inhibit-compacting-font-caches t) ;; 3
   (load-prefer-newer t) ;; 2
+  (locale-coding-system 'utf-8)
   ;; Disable the cursor in the minibuffer prompt
   (minibuffer-prompt-properties '(
                                   cursor-intangible t
@@ -142,13 +143,21 @@
   (mouse-yank-at-point t)
   )
 
+(use-package mule
+  :config
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  :defer t
+  )
+
 (use-package mule-cmds
   :config
-  (set-language-environment "UTF-8") ;; 2
-  (setq prefer-coding-system 'utf-8) ;; 1
+  (set-language-environment 'utf-8)
+  (prefer-coding-system 'utf-8)
   :custom
-  (current-language-environment "UTF-8") ;; 3
-  (default-input-method nil) ;; 2
+  (current-language-environment "UTF-8") ;; 2
+  (default-input-method nil) ;; 1
   :defer t
   )
 
