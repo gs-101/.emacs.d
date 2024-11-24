@@ -5556,6 +5556,28 @@ Tree-sitter powered motions for Meow.
 
 #+end_src
 
+** [[https://github.com/awth13/org-appear/issues/42#issuecomment-1063517134][Org Appear]]
+
+#+begin_src emacs-lisp
+
+  (use-package meow-core
+    :after org-appear
+    :custom
+    (org-appear-trigger 'manual)
+    :config
+    (add-hook 'org-mode-hook (lambda ()
+                               (add-hook 'meow-insert-enter-hook
+                                         #'org-appear-manual-start
+                                         nil
+                                         t)
+                               (add-hook 'meow-insert-exit-hook
+                                         #'org-appear-manual-stop
+                                         nil
+                                         t)))
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp

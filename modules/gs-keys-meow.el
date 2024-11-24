@@ -146,4 +146,20 @@
    '(";" . embark-act))
   )
 
+(use-package meow-core
+  :after org-appear
+  :custom
+  (org-appear-trigger 'manual)
+  :config
+  (add-hook 'org-mode-hook (lambda ()
+                             (add-hook 'meow-insert-enter-hook
+                                       #'org-appear-manual-start
+                                       nil
+                                       t)
+                             (add-hook 'meow-insert-exit-hook
+                                       #'org-appear-manual-stop
+                                       nil
+                                       t)))
+  )
+
 (provide 'gs-keys-meow)
