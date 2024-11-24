@@ -70,7 +70,7 @@
 
 #+begin_signature
 --
-*Gabriel*
+*Gabriel Santos*
 #+end_signature"
    )
   :ensure t

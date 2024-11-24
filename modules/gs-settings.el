@@ -53,6 +53,7 @@
   (scroll-margin 2)
   (scroll-step 1)
   (text-mode-ispell-word-completion nil)
+  (user-full-name "Gabriel Santos")
   (window-resize-pixelwise nil) ;; 1
   (words-include-escapes t)
   :hook

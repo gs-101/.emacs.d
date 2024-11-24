@@ -266,6 +266,7 @@ Generic package used to configure functions and variables not included in any Em
     (scroll-margin 2)
     (scroll-step 1)
     (text-mode-ispell-word-completion nil)
+    (user-full-name "Gabriel Santos")
     (window-resize-pixelwise nil) ;; 1
     (words-include-escapes t)
     :hook
@@ -4605,7 +4606,7 @@ OrgMsg is a GNU/Emacs global minor mode mixing up Org mode and Message mode to c
 
   #+begin_signature
   --
-  *Gabriel*
+  *Gabriel Santos*
   #+end_signature"
      )
     :ensure t
