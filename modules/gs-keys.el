@@ -262,7 +262,7 @@ Otherwise, it calls `eval-buffer'."
   ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
   ("C-?" . undo-redo)
   ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
-  ([remacp capitalize-word] . capitalize-dwim)
+  ([remap capitalize-word] . capitalize-dwim)
   ([remap upcase-word] . upcase-dwim)
   ([remap downcase-word] . downcase-dwim)
   :config
