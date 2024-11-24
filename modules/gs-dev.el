@@ -155,6 +155,19 @@
   :defer t
   )
 
+(use-package cargo-transient
+  :vc (:url "https://github.com/gs-101/cargo-transient" :branch custom)
+  :after rust-ts-mode
+  :bind
+  (
+   :map rust-ts-mode-map
+   ("C-c C-p" . cargo-transient)
+   )
+  :ensure t
+  :custom
+  (cargo-transient-buffer-name-function 'project-prefixed-buffer-name)
+  )
+
 (use-package cmuscheme
   :bind
   (

@@ -3230,6 +3230,33 @@ Python's flying circus support for Emacs.
 
 #+end_src
 
+*** Rust
+
+**** [[https://github.com/peterstuart/cargo-transient][Cargo Transient]]
+
+#+begin_quote
+
+A transient UI for Cargo, Rust's package manager.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package cargo-transient
+    :vc (:url "https://github.com/gs-101/cargo-transient" :branch custom)
+    :after rust-ts-mode
+    :bind
+    (
+     :map rust-ts-mode-map
+     ("C-c C-p" . cargo-transient)
+     )
+    :ensure t
+    :custom
+    (cargo-transient-buffer-name-function 'project-prefixed-buffer-name)
+    )
+
+#+end_src
+
 *** Scheme
 
 **** CMUScheme
