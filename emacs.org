@@ -3536,21 +3536,36 @@ Quick LLM lookups in Emacs.
 
 #+end_src
 
-*** [[https://github.com/lanceberge/elysium/][elysium]]
+
+*** [[https://github.com/daedsidog/evedel][evedel]]
 
 #+begin_quote
 
-Automatically apply AI-generated code changes in Emacs.
+Evedel is an Emacs package that adds a workflow for interacting with LLMs during programming.
 
 #+end_quote
 
 #+begin_src emacs-lisp
 
-  (use-package elysium
+  (use-package evedel
     :bind
     (
      :map prog-mode-map
-     ("C-c c e" . elysium-query)
+     ("C-z e d"   . evedel-create-directive)
+     ("C-z e m"   . evedel-modify-directive)
+     ("C-z e D"   . evedel-modify-directive-tag-query)
+     ("C-z e P"   . evedel-preview-directive-prompt)
+     ("C-z e RET" . evedel-process-directives)
+     ("C-z e TAB" . evedel-convert-instructions)
+     ("C-z e r"   . evedel-create-reference)
+     ("C-z e DEL" . evedel-delete-instructions)
+     ("C-z e C-'" . evedel-modify-reference-commentary)
+     ("C-z e n"   . evedel-next-instruction)
+     ("C-z e p"   . evedel-previous-instruction)
+     ("C-z e s"   . evedel-save-instructions)
+     ("C-z e l"   . evedel-load-instructions)
+     ("C-z e t"   . evedel-add-tags)
+     ("C-z e T"   . evedel-remove-tags)
      )
     :ensure t
     )
