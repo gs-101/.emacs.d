@@ -49,7 +49,9 @@
   (read-buffer-completion-ignore-case t) ;; 4
   (read-process-output-max (* 512 1024)) ;; 3
   (resize-mini-windows 'grow-only)
-  (scroll-conservatively 10) ;; 3
+  (scroll-conservatively 100000)
+  (scroll-margin 2)
+  (scroll-step 1)
   (text-mode-ispell-word-completion nil)
   (window-resize-pixelwise nil) ;; 1
   (words-include-escapes t)
