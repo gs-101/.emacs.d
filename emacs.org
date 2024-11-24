@@ -347,8 +347,8 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
 
 1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L178][jamescherti]];
 2. [[https://github.com/Nathan-Furnal/dotemacs/blob/45defa98dfa7a7c401ca692e9479e588896b9261/init.el#L226][nathan-furnal]];
-2. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]];
-3. [[https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el][xenodium]].
+3. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]];
+4. [[https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el][xenodium]].
 
 *** Frame
 
