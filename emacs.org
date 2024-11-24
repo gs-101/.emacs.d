@@ -229,7 +229,7 @@ window manipulation utilities.
 
 *** Emacs
 
-Generic package used to configure functions and variables not included in any files.
+Generic package used to configure functions and variables not included in any Emacs Lisp files. This is mainly used for files defied in C code.
 
 #+begin_src emacs-lisp
 
