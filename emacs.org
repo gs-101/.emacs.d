@@ -1441,17 +1441,6 @@ Key bindings for default packages.
 
 #+end_src
 
-** Electric
-
-#+begin_src emacs-lisp
-
-  (use-package electric
-    :bind
-    ("C-j" . electric-newline-and-maybe-indent)
-    )
-
-#+end_src
-
 ** Emacs
 
 #+begin_src emacs-lisp

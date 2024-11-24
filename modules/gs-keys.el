@@ -103,11 +103,6 @@ Otherwise, it calls `eval-buffer'."
    )
   )
 
-(use-package electric
-  :bind
-  ("C-j" . electric-newline-and-maybe-indent)
-  )
-
 (use-package emacs
   :bind
   ("C-c q f" . delete-frame)
