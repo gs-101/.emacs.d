@@ -50,44 +50,6 @@
   (dired-mode . dired-async-mode)
   )
 
-(use-package dired-preview
-  :custom
-  (dired-preview-delay 0.5)
-  (dired-preview-ignored-extensions-regexp (concat
-                                            "\\(gs\\|"
-                                            "zst\\|"
-                                            "tar\\|"
-                                            "xz\\|"
-                                            "rar\\|"
-                                            "zip\\|"
-                                            "iso\\|"
-                                            "epub"
-                                            "\\)"
-                                            ))
-  :ensure t
-  :hook
-  (dired-mode . dired-preview-global-mode)
-  )
-
-(use-package dired-preview
-  :after dired-preview ready-player
-  :bind
-  (
-   :map dired-preview-mode-map
-   ("C-c C-p" . prot/ready-player-dired-preview-play-toggle)
-   )
-  :preface
-  (defun prot/ready-player-dired-preview-play-toggle ()
-    "Call `ready-player-toggle-play-stop' on the currently previewed media file."
-    (interactive)
-    (dired-preview-with-window
-      (if-let ((file buffer-file-name)
-               (media (concat "\\." (regexp-opt ready-player-supported-media t) "\\'"))
-               (_ (string-match-p media file)))
-          (call-interactively #'ready-player-toggle-play-stop)
-        (user-error "Cannot do something useful with `ready-player' here"))))
-  )
-
 (use-package emacs
   :custom
   (delete-by-moving-to-trash t)
