@@ -1005,7 +1005,7 @@ Make Emacs use the $PATH set up by the user's shell.
 
 #+end_src
 
-*** [[https://karthinks.com/software/fifteen-ways-to-use-embark/#open-a-file-as-root-without-losing-your-session][Suco Command]]
+*** [[https://karthinks.com/software/fifteen-ways-to-use-embark/#open-a-file-as-root-without-losing-your-session][Sudo Command]]
 
 Like [[https://github.com/nflath/sudo-edit][sudo-edit]], but just a single, non-packaged command.
 
