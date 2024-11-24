@@ -6660,7 +6660,6 @@ Emacs minor-mode to summon and dismiss buffers easily.
                                 "\\*Messages\\*"
                                 "\\*mu4e-update\\*"
                                 "Output\\*$"
-                                "\\*Org Src"
                                 "^*tex"
                                 "\\*Warnings\\*"
                                 "\\*xref\\*"
