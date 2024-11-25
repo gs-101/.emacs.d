@@ -2062,6 +2062,8 @@ Dynamic task and appointment lists for Org.
 #+begin_src emacs-lisp
 
   (use-package org-agenda
+    :config
+    (add-to-list 'org-agenda-prefix-format '(agenda . "%-12t% s "))
     :custom
     (org-agenda-custom-commands
      '((
@@ -6044,6 +6046,7 @@ A startup screen extracted from Spacemacs.
   (use-package dashboard-widgets
     :after dashboard
     :custom
+    (dashboard-agenda-prefix-format "%-12t% s ")
     (dashboard-banner-logo-title "The Extensible Computing Enviroment")
     (dashboard-items '(
                        (agenda . 5)
