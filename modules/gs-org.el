@@ -61,6 +61,8 @@
   )
 
 (use-package org-agenda
+  :config
+  (add-to-list 'org-agenda-prefix-format '(agenda . "%-12t% s "))
   :custom
   (org-agenda-custom-commands
    '((
