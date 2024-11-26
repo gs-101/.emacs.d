@@ -186,6 +186,12 @@ allowFullScreen>
                               ))
   )
 
+(use-package paragraphs
+  :custom
+  (sentence-end-double-space nil)
+  :defer t
+  )
+
 (use-package org-refile
   :config
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
