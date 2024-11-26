@@ -4462,6 +4462,26 @@ Use consult to search notes.
 
 #+end_src
 
+*** [[https://github.com/brett-lempereur/consult-xref-stack][xref]]
+
+#+begin_quote
+
+Navigate the Xref stack with Consult.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package consult-xref-stack
+    :vc (:url "https://github.com/brett-lempereur/consult-xref-stack")
+    :bind
+    ([remap xref-go-back] . consult-xref-stack-backward)
+    ([remap xref-go-forward] . consult-xref-stack-forward)
+    :ensure t
+    )
+
+#+end_src
+
 *** [[https://github.com/minad/consult/wiki#use-orderless-as-pattern-compiler-for-consult-grepripgrepfind][Orderless]]
 
 #+begin_src emacs-lisp
