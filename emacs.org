@@ -1859,6 +1859,20 @@ A collection of opinionated keyboard-driven user interfaces for various built-in
 #+end_src
 
 
+*** Calendar
+
+#+begin_src emacs-lisp
+
+  (use-package casual-calendar
+    :bind
+    (
+     :map calendar-mode-map
+     ("M-o" . casual-calendar)
+     )
+    )
+
+#+end_src
+
 *** Dired
 
 #+begin_src emacs-lisp
