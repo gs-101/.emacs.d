@@ -263,8 +263,8 @@ allowFullScreen>
    :map org-remark-mode-map
    ("C-z M m" . org-remark-mark)
    ("C-z M o" . org-remark-open)
-   ("C-z M ]" . org-remark-view-next)
-   ("C-z M [" . org-remark-view-prev)
+   ("C-z M n" . org-remark-view-next)
+   ("C-z M p" . org-remark-view-prev)
    ("C-z M d" . org-remark-delete)
    )
   :ensure t
