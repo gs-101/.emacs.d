@@ -1202,6 +1202,8 @@ Major mode for reading EPUBs in Emacs.
 #+begin_src emacs-lisp
 
   (use-package nov
+    :custom
+    (nov-header-line-format nil)
     :defer t
     :ensure t
     )
