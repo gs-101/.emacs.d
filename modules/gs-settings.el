@@ -320,6 +320,13 @@
   (custom-file (no-littering-expand-etc-file-name "custom.el"))
   )
 
+(use-package olivetti
+  :custom
+  (olivetti-body-width 132)
+  :defer t
+  :ensure t
+  )
+
 (use-package otpp
   :after project
   :config
