@@ -966,6 +966,25 @@ Keep track of recently opened files.
 
 #+end_src
 
+*** [[https://github.com/rnkn/olivetti][Olivetti]]
+
+#+begin_quote
+
+Minor mode to automatically balance window margins.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package olivetti
+    :custom
+    (olivetti-body-width 132)
+    :defer t
+    :ensure t
+    )
+
+#+end_src
+
 *** [[https://github.com/abougouffa/one-tab-per-project][One Tab Per Project]]
 
 #+begin_quote
