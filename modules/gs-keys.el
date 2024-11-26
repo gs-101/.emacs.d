@@ -318,6 +318,14 @@ Otherwise, it calls `switch-to-minibuffer'."
    )
   )
 
+(use-package casual-calendar
+  :bind
+  (
+   :map calendar-mode-map
+   ("M-o" . casual-calendar)
+   )
+  )
+
 (use-package casual-dired
   :bind
   (
