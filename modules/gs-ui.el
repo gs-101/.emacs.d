@@ -129,12 +129,6 @@
      " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
   )
 
-(use-package paragraphs
-  :custom
-  (sentence-end-double-space nil)
-  :defer t
-  )
-
 (use-package scroll-bar
   :custom
   (scroll-bar-mode nil)

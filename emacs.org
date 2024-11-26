@@ -2326,6 +2326,24 @@ Plain lists for Org.
 
 #+end_src
 
+** Paragraphs
+
+#+begin_quote
+
+Paragraph and sentence parsing.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package paragraphs
+    :custom
+    (sentence-end-double-space nil)
+    :defer t
+    )
+
+#+end_src
+
 ** Refile
 
 #+begin_quote
@@ -5871,24 +5889,6 @@ Modern Org Style.
      '((daily today require-timed)
        (800 1000 1200 1400 1600 1800 2000)
        " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
-    )
-
-#+end_src
-
-** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L70][Paragraphs]]
-
-#+begin_quote
-
-Paragraph and sentence parsing.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package paragraphs
-    :custom
-    (sentence-end-double-space nil)
-    :defer t
     )
 
 #+end_src
