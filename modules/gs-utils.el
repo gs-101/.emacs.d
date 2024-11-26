@@ -119,6 +119,14 @@
   (consult-notes-org-roam-mode)
   )
 
+(use-package consult-xref-stack
+  :vc (:url "https://github.com/brett-lempereur/consult-xref-stack")
+  :bind
+  ([remap xref-go-back] . consult-xref-stack-backward)
+  ([remap xref-go-forward] . consult-xref-stack-forward)
+  :ensure t
+  )
+
 (use-package consult
   :after consult orderless
   :config
