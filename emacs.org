@@ -3138,6 +3138,24 @@ Multi target interface to compile.
 
 #+end_src
 
+** Diff
+
+#+begin_quote
+
+Provides support for font-lock, outline, navigation commands, editing and various conversions as well as jumping to the corresponding source file.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package diff-mode
+    :custom
+    (diff-add-log-use-relative-names t)
+    :defer t
+    )
+
+#+end_src
+
 ** Eglot
 
 #+begin_quote
