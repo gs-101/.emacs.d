@@ -305,7 +305,7 @@ If it is, enable `color-identifiers-mode'."
 (use-package diredfl
   :ensure t
   :hook
-  (dired-mode . diredfl-global-mode)
+  (dired-mode . diredfl-mode)
   )
 
 (use-package eldoc-box

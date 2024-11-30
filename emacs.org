@@ -6306,7 +6306,7 @@ Extra Emacs font lock rules for a more colourful dired.
   (use-package diredfl
     :ensure t
     :hook
-    (dired-mode . diredfl-global-mode)
+    (dired-mode . diredfl-mode)
     )
 
 #+end_src
