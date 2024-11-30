@@ -6734,6 +6734,25 @@ A Library for Nerd Font icons.
 
 #+end_src
 
+*** Go
+
+Use a Gopher for walrus operators (~:=~).
+
+#+begin_src emacs-lisp
+
+  (use-package go-ts-mode
+    :after nerd-icons go-ts-mode
+    :config
+    (defvar gs-101/go-prettify-symbols-alist
+      '((":=" . ?))
+      "Value for `prettify-symbols-alist' in `go-ts-mode'.")
+    :hook
+    (go-ts-mode . (lambda () (setq-local prettify-symbols-alist gs-101/go-prettify-symbols-alist)))
+    (go-ts-mode . prettify-symbols-mode)
+    )
+
+#+end_src
+
 *** [[https://github.com/seagle0128/nerd-icons-ibuffer][iBuffer]]
 
 #+begin_src emacs-lisp
