@@ -283,6 +283,14 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package doom-modeline
+  :config
+  (advice-add #'doom-modeline-lsp-icon :override
+              (defun gs-101/doom-modeline-lsp-icon (text face)
+                "Display LSP icon (or TEXT in terminal) with FACE.
+This advice replaces the rocket icon with a electric plug icon."
+                (if doom-modeline-lsp-icon
+                    (doom-modeline-icon 'mdicon "nf-md-connection" "🔌" text :face face)
+                  (propertize text 'face face))))
   :custom
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-ellipsis "…")
