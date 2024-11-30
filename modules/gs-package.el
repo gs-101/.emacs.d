@@ -1,12 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
 (require 'package)
+(package-initialize)
 (add-to-list 'package-archives '(
                                  "melpa" . "https://melpa.org/packages/"
                                  ))
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
 
 ;; 1
 (unless (package-installed-p 'use-package)

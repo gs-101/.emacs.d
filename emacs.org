@@ -108,12 +108,10 @@ Simple package system [...].
 #+begin_src emacs-lisp
 
   (require 'package)
+  (package-initialize)
   (add-to-list 'package-archives '(
                                    "melpa" . "https://melpa.org/packages/"
                                    ))
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
 
 #+end_src
 
