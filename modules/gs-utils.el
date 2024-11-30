@@ -244,6 +244,13 @@ targets."
   (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
   )
 
+(use-package p-search
+  :vc (:url "https://github.com/zkry/p-search")
+  :bind
+  ("M-s p" . p-search)
+  :ensure t
+  )
+
 (use-package uniline
   :bind
   ("C-z i l" . uniline-mode)

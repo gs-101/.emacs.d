@@ -4713,6 +4713,25 @@ Spaced Repetition System for GNU Emacs.
 
 #+end_src
 
+** [[https://github.com/zkry/p-search][p-search]]
+
+#+begin_quote
+
+p-search is an Emacs tool to find things. It combines concepts from information retrievial and [[https://www2.stat.duke.edu/~banks/130-labs.dir/lab10.dir/Lab10_bayesian_search.pdf][Bayesian search theory]] to assist a user in finding documents.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package p-search
+    :vc (:url "https://github.com/zkry/p-search")
+    :bind
+    ("M-s p" . p-search)
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/tbanel/uniline][Uniline]]
 
 #+begin_quote
