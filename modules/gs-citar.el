@@ -15,11 +15,11 @@
 
 (use-package citar-embark
   :after citar embark
-  :config
-  (citar-embark-mode)
   :custom
   (citar-at-point-function 'embark-act)
   :ensure t
+  :hook
+  (text-mode . citar-embark-mode)
   )
 
 (use-package citar-embark
