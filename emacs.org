@@ -3774,6 +3774,28 @@ To make use of this package a [[https://magit.vc/manual/forge/Token-Creation.htm
 
 #+end_src
 
+*** [[https://github.com/magit/orgit][Orgit]]
+
+#+begin_quote
+
+Support for Org links to Magit buffers.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package orgit
+    :after magit
+    :bind
+    (
+     :map magit-mode-map
+     ("C-c m l s" . org-store-link)
+     )
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/purcell/package-lint][package-lint]]
 
 #+begin_quote
