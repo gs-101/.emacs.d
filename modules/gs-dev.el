@@ -391,6 +391,16 @@
   :ensure t
   )
 
+(use-package orgit
+  :after magit
+  :bind
+  (
+   :map magit-mode-map
+   ("C-c m l s" . org-store-link)
+   )
+  :ensure t
+  )
+
 (use-package package-lint
   :ensure t
   )
