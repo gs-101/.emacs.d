@@ -58,25 +58,9 @@
   (compilation-scroll-output t)
   (compilation-skip-threshold 2)
   :defer t
-  :functions
-  (
-   kill-buffer-and-window
-   next-error-no-select
-   previous-error-no-select
-   )
   :hook
   (compilation-mode . goto-address-mode)
-  (compilation-filter . xenodium/colorize-compilation-buffer)
-  :preface
-  (defun xenodium/colorize-compilation-buffer ()
-    (let ((was-read-only buffer-read-only))
-      (unwind-protect
-          (progn
-            (when was-read-only
-              (read-only-mode -1))
-            (ansi-color-apply-on-region (point-min) (point-max)))
-        (when was-read-only
-          (read-only-mode +1)))))
+  (compilation-filter . ansi-color-compilation-filter)
   )
 
 (use-package compile-multi
