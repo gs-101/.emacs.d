@@ -2286,11 +2286,7 @@ LaTeX Backend for Org Export Engine.
 
 **** Fedora
 
-#+begin_src bash
-
-  sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm texlive-stackengine texlive-pgfplots texlive-mlmodern texlive-titling texlive-hyphenat
-
-#+end_src
+src_bash{sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm texlive-stackengine texlive-pgfplots texlive-mlmodern texlive-titling texlive-hyphenat}
 
 ** List
 
@@ -3439,13 +3435,9 @@ Run code formatter on buffer contents without moving point, using RCS patches an
 
 *** Packages to install
 
-**** dnf
+**** Fedora
 
-#+begin_src bash
-
-  sudo dnf install black
-
-#+end_src
+src_bash{sudo dnf install black}
 
 ** [[https://github.com/mickeynp/combobulate][Combobulate]]
 
