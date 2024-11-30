@@ -35,7 +35,6 @@
 
 (use-package git-commit-ts-mode
   :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
-  :defer t
   :ensure t
   )
 
