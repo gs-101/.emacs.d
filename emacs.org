@@ -3225,10 +3225,10 @@ A universal on-the-fly syntax checker.
 
 #+begin_src emacs-lisp
 
-  (use-package flymake
-    :hook
-    (prog-mode . flymake-mode)
-    )
+  ;; (use-package flymake
+  ;;   :hook
+  ;;   (prog-mode . flymake-mode)
+  ;;   )
 
 #+end_src
 
@@ -4074,7 +4074,7 @@ COmpletion in Region FUnction.
     (corfu-history-mode)
     (corfu-popupinfo-mode)
     :custom
-    (corfu-auto t)
+    (corfu-auto nil)
     (corfu-auto-delay 0.0)
     (corfu-auto-prefix 2)
     (corfu-cycle t)

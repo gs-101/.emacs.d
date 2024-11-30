@@ -115,7 +115,7 @@ Also adds `cape-file' as a fallback."
   (corfu-history-mode)
   (corfu-popupinfo-mode)
   :custom
-  (corfu-auto t)
+  (corfu-auto nil)
   (corfu-auto-delay 0.0)
   (corfu-auto-prefix 2)
   (corfu-cycle t)

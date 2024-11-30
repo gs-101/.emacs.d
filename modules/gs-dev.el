@@ -129,10 +129,10 @@
   (eldoc-idle-delay 0)
   )
 
-(use-package flymake
-  :hook
-  (prog-mode . flymake-mode)
-  )
+;; (use-package flymake
+;;   :hook
+;;   (prog-mode . flymake-mode)
+;;   )
 
 (use-package flymake-collection
   :ensure t
