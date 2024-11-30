@@ -101,6 +101,12 @@
   (compile-multi-embark-mode)
   )
 
+(use-package diff-mode
+  :custom
+  (diff-add-log-use-relative-names t)
+  :defer t
+  )
+
 (use-package eglot
   :custom
   (eglot-autoshutdown t)
