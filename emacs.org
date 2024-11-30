@@ -3030,7 +3030,6 @@ Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
 
   (use-package git-commit-ts-mode
     :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
-    :defer t
     :ensure t
     )
 
