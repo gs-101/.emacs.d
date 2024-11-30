@@ -5,6 +5,8 @@
   (
    :map elfeed-search-mode-map
    ("R" . kaushal-modi/elfeed-search-mark-all-as-read)
+   :map elfeed-show-mode-map
+   ("C-c C-o" . shr-browse-url)
    )
   :config
   ;; https://emacs.stackexchange.com/a/2441
