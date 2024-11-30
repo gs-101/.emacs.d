@@ -251,6 +251,13 @@
   (prog-mode . cxa/activate-combobulate-on-ts-mode)
   )
 
+(use-package dape
+  :defer t
+  :ensure t
+  :hook
+  (dape-display-source . pulse-momentary-highlight-one-line)
+  )
+
 (use-package exercism
   :commands
   (exercism)

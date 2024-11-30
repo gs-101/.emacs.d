@@ -3498,6 +3498,31 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
 
 - [[https://github.com/mickeynp/combobulate/issues/119#issuecomment-2435132123][Credits]]
 
+** [[https://github.com/svaante/dape][Dape]]
+
+#+begin_quote
+
+Debug Adapter Protocol for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package dape
+    :defer t
+    :ensure t
+    :hook
+    (dape-display-source . pulse-momentary-highlight-one-line)
+    )
+
+#+end_src
+
+*** Packages to Install
+
+**** Fedora
+
+src_bash{sudo dnf install delve}
+
 ** [[https://github.com/anonimitoraf/exercism.el][Exercism]]
 
 #+begin_quote
