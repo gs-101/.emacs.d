@@ -4368,6 +4368,8 @@ Consulting completing-read.
      ([remap load-theme] . consult-theme)
      ([remap locate] . consult-locate)
      ([remap man] . consult-man)
+     ([remap pop-global-mark] . consult-global-mark)
+     ([remap pop-to-mark-command] . consult-mark)
      ([remap project-find-regexp] . consult-grep)
      ([remap project-list-buffers] . consult-project-buffer)
      ([remap project-switch-to-buffer] . consult-project-buffer)
