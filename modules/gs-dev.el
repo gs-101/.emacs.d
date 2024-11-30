@@ -48,8 +48,6 @@
   :bind
   (
    :map compilation-mode-map
-   ("}" . compilation-next-file)
-   ("{" . compilation-previous-file)
    ("n" . next-error-no-select)
    ("p" . previous-error-no-select)
    ("q" . kill-buffer-and-window)
