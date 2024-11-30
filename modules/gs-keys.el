@@ -119,7 +119,7 @@ Otherwise, it calls `eval-buffer'."
   ("C-c f r" . recover-this-file)
   ("C-c b r" . revert-buffer)
   ("C-c q r" . restart-emacs)
-  ("C-c q K" . save-buffers-kill-emacs)
+  ("C-c q e" . save-buffers-kill-emacs)
   )
 
 (use-package find-func

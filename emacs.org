@@ -1494,7 +1494,7 @@ Key bindings for default packages.
     ("C-c f r" . recover-this-file)
     ("C-c b r" . revert-buffer)
     ("C-c q r" . restart-emacs)
-    ("C-c q K" . save-buffers-kill-emacs)
+    ("C-c q e" . save-buffers-kill-emacs)
     )
 
 #+end_src
