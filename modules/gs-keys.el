@@ -282,6 +282,8 @@ Otherwise, it calls `switch-to-minibuffer'."
   )
 
 (use-package casual
+  :custom
+  (casual-lib-use-unicode t)
   :ensure t
   )
 
