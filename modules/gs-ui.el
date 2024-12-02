@@ -618,40 +618,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (magit-mode . magit-file-icons-mode)
   )
 
-(use-package popper
-  :bind
-  ("M-]" . popper-cycle)
-  ("M-[" . popper-toggle)
-  :custom
-  (popper-display-control t)
-  (popper-reference-buffers '(
-                              compilation-mode
-                              vterm-mode
-                              inferior-emacs-lisp-mode
-                              inferior-python-mode
-                              shell-mode
-                              "\\*Async Shell Command\\*"
-                              "\\*Backtrace\\*"
-                              "\\*compilation\\*"
-                              "\\*Dtache Shell Command\\*"
-                              "\\*eldoc\\*"
-                              "\\*Embark Collect:"
-                              "\\*Ement Notifications\\*"
-                              "*Flymake diagnostics.*"
-                              "\\*GDB.*out\\*"
-                              "\\*Messages\\*"
-                              "\\*mu4e-update\\*"
-                              "Output\\*$"
-                              "^*tex"
-                              "\\*Warnings\\*"
-                              "\\*xref\\*"
-                              ))
-  :ensure t
-  :demand t
-  :init
-  (popper-mode)
-  )
-
 (use-package prism
   :config
   (defun gs-101/prism-mode-lisp ()

@@ -4717,6 +4717,54 @@ p-search is an Emacs tool to find things. It combines concepts from information 
 
 #+end_src
 
+** [[https://github.com/karthink/popper][Popper]]
+
+#+begin_quote
+
+Emacs minor-mode to summon and dismiss buffers easily.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package popper
+    :bind
+    ("M-]" . popper-cycle)
+    ("M-[" . popper-toggle)
+    :custom
+    (popper-display-control t)
+    (popper-group-function 'popper-group-by-project)
+    (popper-reference-buffers '(
+                                compilation-mode
+                                vterm-mode
+                                inferior-emacs-lisp-mode
+                                inferior-lisp-mode
+                                inferior-python-mode
+                                shell-mode
+                                "\\*Async Shell Command\\*"
+                                "\\*Backtrace\\*"
+                                "\\*compilation\\*"
+                                "\\*Dtache Shell Command\\*"
+                                "\\*eldoc\\*"
+                                "\\*Ement Notifications\\*"
+                                "*Flymake diagnostics.*"
+                                "\\*GDB.*out\\*"
+                                "\\*Messages\\*"
+                                "\\*mu4e-update\\*"
+                                "Output\\*$"
+                                "^*tex"
+                                "\\*Warnings\\*"
+                                "\\*xref\\*"
+                                ))
+    :ensure t
+    :demand t
+    :init
+    (popper-mode)
+    (popper-echo-mode)
+    )
+
+#+end_src
+
 ** [[https://github.com/tbanel/uniline][Uniline]]
 
 #+begin_quote
@@ -6762,52 +6810,6 @@ Use a Gopher for walrus operators (~:=~).
     :ensure t
     :hook
     (magit-mode . magit-file-icons-mode)
-    )
-
-#+end_src
-
-** [[https://github.com/karthink/popper][Popper]]
-
-#+begin_quote
-
-Emacs minor-mode to summon and dismiss buffers easily.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package popper
-    :bind
-    ("M-]" . popper-cycle)
-    ("M-[" . popper-toggle)
-    :custom
-    (popper-display-control t)
-    (popper-reference-buffers '(
-                                compilation-mode
-                                vterm-mode
-                                inferior-emacs-lisp-mode
-                                inferior-python-mode
-                                shell-mode
-                                "\\*Async Shell Command\\*"
-                                "\\*Backtrace\\*"
-                                "\\*compilation\\*"
-                                "\\*Dtache Shell Command\\*"
-                                "\\*eldoc\\*"
-                                "\\*Embark Collect:"
-                                "\\*Ement Notifications\\*"
-                                "*Flymake diagnostics.*"
-                                "\\*GDB.*out\\*"
-                                "\\*Messages\\*"
-                                "\\*mu4e-update\\*"
-                                "Output\\*$"
-                                "^*tex"
-                                "\\*Warnings\\*"
-                                "\\*xref\\*"
-                                ))
-    :ensure t
-    :demand t
-    :init
-    (popper-mode)
     )
 
 #+end_src
