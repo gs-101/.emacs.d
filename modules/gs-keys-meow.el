@@ -110,7 +110,7 @@
    '("s" . meow-search)
    '("S" . isearch-forward)
    '("t" . meow-transpose-sexp)
-   '("u" . meow-undo)
+   '("u" . undo)
    '("U" . undo-redo)
    '("v" . meow-visit)
    '("w" . meow-save)
