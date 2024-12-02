@@ -107,8 +107,7 @@
    '("q" . meow-quit)
    '("r" . meow-replace)
    '("R" . meow-query-replace-regexp)
-   '("s" . meow-search)
-   '("S" . isearch-forward)
+   '("s" . isearch-forward)
    '("t" . meow-transpose-sexp)
    '("u" . undo)
    '("U" . undo-redo)
@@ -124,6 +123,44 @@
 (use-package meow-thing
   :config
   (meow-thing-register 'arrow '(pair ("<") (">")) '(pair ("<") (">")))
+  )
+
+(use-package meow-command
+  :after meow avy
+  :bind
+  (
+   :map meow-normal-state-keymap
+   ([remap meow-pop-to-mark] . favetelinguis/meow-jumper)
+   :map meow-word-state-keymap
+   ([remap meow-pop-to-mark] . favetelinguis/meow-jumper)
+   )
+  :config
+  (defun gs-101/meow-avy-action-kill-whole-line (pt)
+    "Jump to target at marker PT, killing its whole line after the jump.
+This follows the parameters set by `meow-kill-whole-line'."
+    (save-excursion
+      (goto-char pt)
+      (meow-kill-whole-line)))
+
+  (defun gs-101/meow-avy-action-block (pt)
+    "Mark block at PT."
+    (goto-char pt)
+    (meow-block pt))
+
+  (setf
+   (alist-get ?K avy-dispatch-alist) 'gs-101/meow-avy-action-kill-whole-line
+   (alist-get ?m avy-dispatch-alist) 'gs-101/meow-avy-action-block
+   )
+
+  (defun favetelinguis/meow-jumper (&optional arg)
+    "Switch between Meow search and Avy,
+depending on if the region is active.
+If the region is active, this function calls `meow-search'.
+Otherwise, it calls `avy-goto-char-timer."
+    (interactive)
+    (if (region-active-p)
+        (meow-search arg)
+      (avy-goto-char-timer)))
   )
 
 (use-package meow-tree-sitter
