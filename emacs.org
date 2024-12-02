@@ -1798,6 +1798,8 @@ A collection of opinionated keyboard-driven user interfaces for various built-in
 #+begin_src emacs-lisp
 
   (use-package casual
+    :custom
+    (casual-lib-use-unicode t)
     :ensure t
     )
 
