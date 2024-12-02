@@ -117,6 +117,7 @@
    '("y" . meow-yank)
    '("Y" . meow-yank-pop)
    '("z" . meow-till)
+   '("Z" . meow-till-expand)
    )
   )
 
