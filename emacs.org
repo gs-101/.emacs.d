@@ -6671,8 +6671,6 @@ Show current command and its key in the mode line.
   (use-package keycast
     :config
     (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil)
-    (push '(self-insert-command nil nil) keycast-substitute-alist)
-    (push '(org-self-insert-command nil nil) keycast-substitute-alist)
     :ensure t
     :init
     (define-minor-mode keycast-mode
@@ -6683,6 +6681,24 @@ Show current command and its key in the mode line.
         (remove-hook 'pre-command-hook 'keycast--update)))
     (add-to-list 'global-mode-string '("" keycast-mode-line))
     (keycast-mode)
+    )
+
+#+end_src
+
+*** Command Customization
+
+#+begin_src emacs-lisp
+
+  (use-package keycast
+    :after keycast
+    :config
+    (mapc (lambda (command)
+            (add-to-list 'keycast-substitute-alist command)) '(
+            (self-insert-command "" "Typing...")
+            (org-self-insert-command "" "Typing...")
+            (vertico-next nil nil)
+            (vertico-previous nil nil)
+            ))
     )
 
 #+end_src

@@ -388,8 +388,6 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package keycast
   :config
   (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil)
-  (push '(self-insert-command nil nil) keycast-substitute-alist)
-  (push '(org-self-insert-command nil nil) keycast-substitute-alist)
   :ensure t
   :init
   (define-minor-mode keycast-mode
@@ -400,6 +398,18 @@ This advice replaces the rocket icon with a electric plug icon."
       (remove-hook 'pre-command-hook 'keycast--update)))
   (add-to-list 'global-mode-string '("" keycast-mode-line))
   (keycast-mode)
+  )
+
+(use-package keycast
+  :after keycast
+  :config
+  (mapc (lambda (command)
+          (add-to-list 'keycast-substitute-alist command)) '(
+          (self-insert-command "" "Typing...")
+          (org-self-insert-command "" "Typing...")
+          (vertico-next nil nil)
+          (vertico-previous nil nil)
+          ))
   )
 
 (use-package keycast
