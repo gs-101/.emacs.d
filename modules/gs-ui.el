@@ -332,6 +332,8 @@ This advice replaces the rocket icon with a electric plug icon."
   ([remap describe-key] . helpful-key)
   ([remap describe-symbol] . helpful-symbol)
   ([remap describe-variable] . helpful-variable)
+  :config
+  (set-face-attribute 'helpful-heading nil :height 1.5)
   :ensure t
   )
 
