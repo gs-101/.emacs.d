@@ -133,6 +133,7 @@
    ("C-c C-p" . run-lisp)
    )
   :custom
+  (inferior-lisp-program "sbcl")
   (narrow-to-defun-include-comments t)
   :defer t
   )
