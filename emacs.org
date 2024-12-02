@@ -7118,6 +7118,8 @@ Pops the transient menu to a posframe (floating window).
   (provide 'gs-ui)
 #+end_src
 
+* Local Variables
+
 # Local Variables:
 # eval: (add-hook 'after-save-hook #'org-babel-tangle t t)
 # End:
