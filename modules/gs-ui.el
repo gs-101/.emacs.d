@@ -189,6 +189,8 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package dashboard
+  :bind
+  ("C-z <home>" . dashboard-open)
   :custom
   (dashboard-center-content t)
   (dashboard-vertically-center-content t)
