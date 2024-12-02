@@ -63,7 +63,6 @@
 (use-package nov
   :custom
   (nov-header-line-format nil)
-  :defer t
   :ensure t
   )
 
