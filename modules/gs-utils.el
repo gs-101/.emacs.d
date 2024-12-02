@@ -251,6 +251,42 @@ targets."
   :ensure t
   )
 
+(use-package popper
+  :bind
+  ("M-]" . popper-cycle)
+  ("M-[" . popper-toggle)
+  :custom
+  (popper-display-control t)
+  (popper-group-function 'popper-group-by-project)
+  (popper-reference-buffers '(
+                              compilation-mode
+                              vterm-mode
+                              inferior-emacs-lisp-mode
+                              inferior-lisp-mode
+                              inferior-python-mode
+                              shell-mode
+                              "\\*Async Shell Command\\*"
+                              "\\*Backtrace\\*"
+                              "\\*compilation\\*"
+                              "\\*Dtache Shell Command\\*"
+                              "\\*eldoc\\*"
+                              "\\*Ement Notifications\\*"
+                              "*Flymake diagnostics.*"
+                              "\\*GDB.*out\\*"
+                              "\\*Messages\\*"
+                              "\\*mu4e-update\\*"
+                              "Output\\*$"
+                              "^*tex"
+                              "\\*Warnings\\*"
+                              "\\*xref\\*"
+                              ))
+  :ensure t
+  :demand t
+  :init
+  (popper-mode)
+  (popper-echo-mode)
+  )
+
 (use-package uniline
   :bind
   ("C-z i l" . uniline-mode)
