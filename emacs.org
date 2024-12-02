@@ -109,9 +109,11 @@ Simple package system [...].
 
   (require 'package)
   (package-initialize)
-  (add-to-list 'package-archives '(
-                                   "melpa" . "https://melpa.org/packages/"
-                                   ))
+  (mapc (lambda (archive)
+          (add-to-list 'package-archives archive)) '(
+          ("melpa" . "https://melpa.org/packages/")
+          ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+          ))
 
 #+end_src
 
@@ -2981,20 +2983,21 @@ Source code examples in Org.
 
   (use-package org-src
     :config
-    (add-to-list 'org-src-lang-modes '(
-                                       ("bash" . bash-ts)
-                                       ("C" . c-ts)
-                                       ("csharp" . csharp-ts)
-                                       ("css" . css-ts)
-                                       ("go" . go-ts)
-                                       ("html" . html-ts)
-                                       ("java" . java-ts)
-                                       ("js" . js-ts)
-                                       ("python" . python-ts)
-                                       ("rust" . rust-ts)
-                                       ("toml" . toml-ts)
-                                       ("yaml" . yaml-ts)
-                                       ))
+    (mapc (lambda (lang)
+            (add-to-list 'org-src-lang-modes lang)) '(
+            ("bash" . bash-ts)
+            ("C" . c-ts)
+            ("csharp" . csharp-ts)
+            ("css" . css-ts)
+            ("go" . go-ts)
+            ("html" . html-ts)
+            ("java" . java-ts)
+            ("js" . js-ts)
+            ("python" . python-ts)
+            ("rust" . rust-ts)
+            ("toml" . toml-ts)
+            ("yaml" . yaml-ts)
+            ))
     )
 
 #+end_src

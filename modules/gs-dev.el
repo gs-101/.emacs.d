@@ -7,20 +7,21 @@
 
 (use-package org-src
   :config
-  (add-to-list 'org-src-lang-modes '(
-                                     ("bash" . bash-ts)
-                                     ("C" . c-ts)
-                                     ("csharp" . csharp-ts)
-                                     ("css" . css-ts)
-                                     ("go" . go-ts)
-                                     ("html" . html-ts)
-                                     ("java" . java-ts)
-                                     ("js" . js-ts)
-                                     ("python" . python-ts)
-                                     ("rust" . rust-ts)
-                                     ("toml" . toml-ts)
-                                     ("yaml" . yaml-ts)
-                                     ))
+  (mapc (lambda (lang)
+          (add-to-list 'org-src-lang-modes lang)) '(
+          ("bash" . bash-ts)
+          ("C" . c-ts)
+          ("csharp" . csharp-ts)
+          ("css" . css-ts)
+          ("go" . go-ts)
+          ("html" . html-ts)
+          ("java" . java-ts)
+          ("js" . js-ts)
+          ("python" . python-ts)
+          ("rust" . rust-ts)
+          ("toml" . toml-ts)
+          ("yaml" . yaml-ts)
+          ))
   )
 
 (use-package treesit-auto

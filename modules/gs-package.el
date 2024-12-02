@@ -2,9 +2,11 @@
 
 (require 'package)
 (package-initialize)
-(add-to-list 'package-archives '(
-                                 "melpa" . "https://melpa.org/packages/"
-                                 ))
+(mapc (lambda (archive)
+        (add-to-list 'package-archives archive)) '(
+        ("melpa" . "https://melpa.org/packages/")
+        ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+        ))
 
 ;; 1
 (unless (package-installed-p 'use-package)
