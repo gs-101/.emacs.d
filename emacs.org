@@ -4430,6 +4430,24 @@ Jump to things in Emacs tree-style.
 
 #+end_src
 
+*** [[https://github.com/kickingvegas/casual-avy][Casual]]
+
+#+begin_quote
+
+An opinionated Transient menu for Avy.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package casual-avy
+    :bind
+    ("M-g A" . casual-avy-tmenu)
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/minad/consult][Consult]]
 
 #+begin_quote
