@@ -4302,7 +4302,7 @@ A Growl-like alerts notifier for Emacs.
 
 #+end_src
 
-** [[https://github.com/SqrtMinusOne/pomm.el][Pomm]]
+*** [[https://github.com/SqrtMinusOne/pomm.el][Pomm]]
 
 #+begin_quote
 
