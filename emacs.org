@@ -6115,6 +6115,8 @@ An extensible emacs dashboard.
 #+begin_src emacs-lisp
 
   (use-package dashboard
+    :bind
+    ("C-z <home>" . dashboard-open)
     :custom
     (dashboard-center-content t)
     (dashboard-vertically-center-content t)
