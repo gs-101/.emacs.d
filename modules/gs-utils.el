@@ -234,9 +234,11 @@ using Helpful."
 
 (use-package embark
   :bind
+  ([remap describe-bindings]. embark-bindings)
+  ("C-;" . embark-act)
   (
-   ([remap describe-bindings]. embark-bindings)
-   ("C-;" . embark-act)
+   :map embark-collect-mode-map
+   ("j" . goto-char)
    )
   :config
   ;; Hide the mode line of the Embark live/completions buffers
@@ -250,6 +252,27 @@ using Helpful."
   (embark-quit-after-action '(
                               (kill-buffer . nil)
                               ))
+  :ensure t
+  )
+
+(use-package avy-embark-collect
+  :after embark avy
+  :bind
+  (
+   :map embark-collect-mode-map
+   ([remap goto-char] . avy-embark-collect-act)
+   )
+  :config
+  (defun karthinks/avy-action-embark (pt)
+    "Jump to target at marker PT, and act on it using Embark."
+    (unwind-protect
+        (save-excursion
+          (goto-char pt)
+          (embark-act))
+      (select-window
+       (cdr (ring-ref avy-ring 0)))))
+
+  (setf (alist-get ?\; avy-dispatch-alist) 'karthinks/avy-action-embark)
   :ensure t
   )
 
