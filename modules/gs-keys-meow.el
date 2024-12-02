@@ -94,6 +94,7 @@
    '("j" . meow-pop-to-mark)
    '("J" . meow-pop-to-global-mark)
    '("k" . meow-kill)
+   '("K" . meow-kill-whole-line)
    '("l" . meow-visual-line)
    '("L" . meow-visual-line-expand)
    '("m" . meow-mark-word)
