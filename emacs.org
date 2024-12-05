@@ -3172,7 +3172,7 @@ Boost eglot using lsp-booster.
     :vc (:url "https://github.com/jdtsmith/eglot-booster")
     :ensure t
     :hook
-    (eglot-managed-mode . eglot-booster-mode)
+    (eglot-connect . eglot-booster-mode)
     )
 
 #+end_src
@@ -3275,7 +3275,6 @@ Additional language server functionality implemented with Eglot. There's also su
     )
 
 #+end_src
-
 
 ** Eldoc
 
