@@ -26,6 +26,109 @@
   (meow-cheatsheet-layout-qwerty t)
   )
 
+(use-package meow-command
+  :config
+  (defun gs-101/meow-super-prev ()
+    "Runs different upwards navigation commands based on the current major or minor mode.
+
+- `combobulate-mode' :: `combobulate-navigate-up'
+- `markdown-mode' :: `markdown-previous-visible-heading'
+- `org-mode' :: `org-previous-visible-heading'
+- `prog-mode' :: `backward-up-list'
+- Other :: `meow-prev-expand'"
+    (interactive)
+    (cond
+     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-up))
+     ((string-match-p "markdown-mode\\'" (symbol-name major-mode)) (markdown-previous-visible-heading 1))
+     ((string-match-p "org-mode\\'" (symbol-name major-mode)) (org-previous-visible-heading 1))
+     ((derived-mode-p 'prog-mode) (backward-up-list))
+     (t (meow-prev-expand)))
+    )
+
+  (defun gs-101/meow-super-next ()
+    "Runs different downwards navigation commands based on the current major or minor mode.
+
+- `combobulate-mode' :: `combobulate-navigate-down'
+- `markdown-mode' :: `markdown-next-visible-heading'
+- `org-mode' :: `org-next-visible-heading'
+- `prog-mode' :: `down-list'
+- Other :: `meow-next-expand'"
+    (interactive)
+    (cond
+     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-down))
+     ((string-match-p "markdown-mode\\'" (symbol-name major-mode)) (markdown-next-visible-heading 1))
+     ((string-match-p "org-mode\\'" (symbol-name major-mode)) (org-next-visible-heading 1))
+     ((derived-mode-p 'prog-mode) (down-list))
+     (t (meow-next-expand)))
+    )
+
+  (defun gs-101/meow-super-left ()
+    "Runs different leftwards navigation commands based on the current major or minor mode.
+
+- `combobulate-mode' :: `combobulate-navigate-previous'
+- `prog-mode' :: `backward-sexp'
+- `text-mode' :: `meow-back-word'
+- Other :: `meow-left-expand'"
+    (interactive)
+    (cond
+     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-previous))
+     ((derived-mode-p 'prog-mode) (backward-sexp))
+     ((derived-mode-p 'text-mode) (meow-back-word))
+     (t (meow-left-expand)))
+    )
+
+  (defun gs-101/meow-super-right ()
+    "Runs different rightwards navigation commands based on the current major or minor mode.
+
+- `combobulate-mode' :: `combobulate-navigate-next'
+- `prog-mode' :: `forward-sexp'
+- `text-mode' :: `meow-next-word'
+- Other :: `meow-right-expand'"
+    (interactive)
+    (cond
+     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-next))
+     ((derived-mode-p 'prog-mode) (forward-sexp))
+     ((derived-mode-p 'text-mode) (meow-next-word))
+     (t (meow-right-expand)))
+    )
+  (defun gs-101/meow-super-kill ()
+    "Runs different kill commands based on the current major or minor mode.
+
+- `combobulate-mode' :: `combobulate-kill-node-dwim'
+- `prog-mode' :: `kill-sexp'
+- Other :: `meow-kill-whole-line'"
+    (interactive)
+    (cond
+     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-kill-node-dwim))
+     ((derived-mode-p 'prog-mode) (kill-sexp))
+     (t (meow-kill-whole-line)))
+    )
+  (defun gs-101/meow-mark ()
+    "Runs different mark commands based on the current major or minor mode.
+
+- `combobulate-mode' :: `combobulate-mark-node-dwim'
+- `prog-mode' :: `meow-block'
+- Other :: `meow-mark-word'"
+    (interactive)
+    (cond
+     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-mark-node-dwim))
+     ((derived-mode-p 'prog-mode) (meow-block 1))
+     (t (meow-mark-word 1)))
+    )
+  (defun gs-101/meow-transpose ()
+    "Runs different transposition commands based on the current major or minor mode.
+
+- `combobulate-mode' :: `combobulate-transpose-sexps'
+- `prog-mode' :: `meow-transpose-sexp'
+- Other :: `transpose-words'"
+    (interactive)
+    (cond
+     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-transpose-sexps))
+     ((derived-mode-p 'prog-mode) (meow-transpose-sexp))
+     (t (transpose-words)))
+    )
+  )
+
 (use-package meow-helpers
   :config
   (meow-leader-define-key
@@ -78,37 +181,36 @@
    '("a" . meow-back-to-indentation)
    '("A" . meow-beginning-of-thing)
    '("b" . meow-left)
-   '("B" . backward-sexp)
+   '("B" . gs-101/meow-super-left)
    '("c" . meow-change)
    '("d" . meow-delete)
    '("e" . move-end-of-line)
    '("E" . meow-end-of-thing)
    '("f" . meow-right)
-   '("F" . forward-sexp)
+   '("F" . gs-101/meow-super-right)
    '("g" . meow-grab)
    '("G" . meow-swap-grab)
-   '("h" . meow-block)
-   '("H" . mark-sexp)
+   '("h" . gs-101/meow-mark)
    '("i" . meow-insert)
    '("I" . meow-append)
    '("j" . meow-pop-to-mark)
    '("J" . meow-pop-to-global-mark)
    '("k" . meow-kill)
-   '("K" . meow-kill-whole-line)
+   '("K" . gs-101/meow-super-kill)
    '("l" . meow-visual-line)
    '("L" . meow-visual-line-expand)
    '("m" . meow-mark-word)
    '("n" . meow-next)
-   '("N" . down-list)
+   '("N" . gs-101/meow-super-next)
    '("o" . meow-next-word)
    '("O" . meow-back-word)
    '("p" . meow-prev)
-   '("P" . backward-up-list)
+   '("P" . gs-101/meow-super-prev)
    '("q" . meow-quit)
    '("r" . meow-replace)
    '("R" . meow-query-replace-regexp)
    '("s" . isearch-forward)
-   '("t" . meow-transpose-sexp)
+   '("t" . gs-101/meow-transpose)
    '("u" . undo)
    '("U" . undo-redo)
    '("v" . meow-visit)
@@ -130,8 +232,6 @@
   :bind
   (
    :map meow-normal-state-keymap
-   ([remap meow-pop-to-mark] . favetelinguis/meow-jumper)
-   :map meow-word-state-keymap
    ([remap meow-pop-to-mark] . favetelinguis/meow-jumper)
    )
   :config
