@@ -110,6 +110,35 @@
   :ensure t
   )
 
+(use-package eglot-supplements
+  :vc (:url "https://codeberg.org/harald/eglot-supplements")
+  :ensure t
+  )
+
+(use-package eglot-cthier
+  :after eglot
+  :bind
+  (
+   :map eglot-mode-map
+   ("C-c e H" . eglot-cthier-request-call-hierarchy)
+   )
+  )
+
+(use-package eglot-marocc
+  :after eglot
+  :bind
+  (
+   :map eglot-mode-map
+   ("C-c e h" . eglot-marocc-request-highlights)
+   ("C-c e n" . eglot-marocc-goto-next-highlight)
+   ("C-c e p" . eglot-marocc-goto-previous-highlight)
+   )
+  )
+
+(use-package eglot-marocc
+  :after eglot-marocc catppuccin-theme
+  :custom
+  (set-face-attribute 'eglot-marocc-occurence-text nil :foreground (catppuccin-color 'green))
   )
 
 (use-package eldoc
