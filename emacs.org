@@ -3198,6 +3198,64 @@ This shows how many references (mentions in comments) a given symbol has through
 
 #+end_src
 
+*** [[https://codeberg.org/harald/eglot-supplements][Supplements]]
+
+Additional language server functionality implemented with Eglot. There's also support for semantic tokens, but I didn't use it here as it messes with the font lock. Only changes I'd make with font-locking are those with [[#prism][Prism]].
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-supplements
+    :vc (:url "https://codeberg.org/harald/eglot-supplements")
+    :ensure t
+    )
+
+#+end_src
+
+**** [[https://codeberg.org/harald/eglot-supplements#call-hierarchy][Call Hierarchy]]
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-cthier
+    :after eglot
+    :bind
+    (
+     :map eglot-mode-map
+     ("C-c e H" . eglot-cthier-request-call-hierarchy)
+     )
+    )
+
+#+end_src
+
+**** [[https://codeberg.org/harald/eglot-supplements#mark-occurrences][Mark Occurences]]
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-marocc
+    :after eglot
+    :bind
+    (
+     :map eglot-mode-map
+     ("C-c e h" . eglot-marocc-request-highlights)
+     ("C-c e n" . eglot-marocc-goto-next-highlight)
+     ("C-c e p" . eglot-marocc-goto-previous-highlight)
+     )
+    )
+
+#+end_src
+
+***** Catppuccin Colors
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-marocc
+    :after eglot-marocc catppuccin-theme
+    :custom
+    (set-face-attribute 'eglot-marocc-occurence-text nil :foreground (catppuccin-color 'green))
+    )
+
+#+end_src
+
+
 ** Eldoc
 
 #+begin_quote
@@ -3205,7 +3263,6 @@ This shows how many references (mentions in comments) a given symbol has through
 Show function arglist or variable docstring in echo area.
 
 #+end_quote
-
 
 #+begin_src emacs-lisp
 
@@ -7152,6 +7209,9 @@ Use a Gopher for walrus operators (~:=~).
 #+end_src
 
 ** [[https://github.com/alphapapa/prism.el][Prism]]
+:PROPERTIES:
+:CUSTOM_ID: prism
+:END:
 
 Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
