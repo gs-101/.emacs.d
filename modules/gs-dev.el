@@ -213,13 +213,6 @@
   :bind
   (
    :map combobulate-key-map
-   ([remap backward-up-list] . combobulate-navigate-up)
-   ([remap down-list] . combobulate-navigate-down)
-   ([remap forward-sexp] . combobulate-navigate-next)
-   ([remap backward-sexp] . combobulate-navigate-previous)
-   ([remap transpose-sexp] . combobulate-transpose-sexps)
-   ([remap kill-sexp] . combobulate-kill-node-dwim)
-   ([remap mark-sexp] . combobulate-mark-node-dwim)
    ([query-replace-regexp] . combobulate-cursor-edit-node-by-text-dwim)
    )
   :config
