@@ -373,6 +373,7 @@ targets."
   (popper-group-function 'popper-group-by-project)
   (popper-reference-buffers '(
                               compilation-mode
+                              geiser-repl-mode
                               vterm-mode
                               inferior-emacs-lisp-mode
                               inferior-lisp-mode
