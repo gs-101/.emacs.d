@@ -311,7 +311,7 @@
   ("C-z g a" . gptel-add)
   ("C-z g C-x C-f" . gptel-add-file)
   ("C-z g m" . gptel-menu)
-  ("C-z g r" . gptel-rewrite-menu)
+  ("C-z g r" . gptel-rewrite)
   ("C-z g RET" . gptel-send)
   ("C-z g p" . gptel-system-prompt)
   :custom
