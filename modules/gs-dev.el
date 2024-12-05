@@ -209,13 +209,16 @@
   (cargo-transient-buffer-name-function 'project-prefixed-buffer-name)
   )
 
-(use-package cmuscheme
+(use-package geiser-guile
   :bind
   (
    :map scheme-mode-map
-   ("C-c C-p" . run-scheme)
+   ("C-c C-p" . geiser)
    )
+  :custom
+  (geiser-guile-binary "guile3.0")
   :defer t
+  :ensure t
   )
 
 (use-package sh-script

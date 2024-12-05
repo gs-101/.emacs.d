@@ -3416,23 +3416,22 @@ A transient UI for Cargo, Rust's package manager.
 
 *** Scheme
 
-**** CMUScheme
+**** [[https://www.nongnu.org/geiser/][Geiser]]
 
-#+begin_quote
-
-Scheme process in a buffer. Adapted from tea.el
-
-#+end_quote
+Collection of modes for working with different Scheme interpreters.
 
 #+begin_src emacs-lisp
 
-  (use-package cmuscheme
+  (use-package geiser-guile
     :bind
     (
      :map scheme-mode-map
-     ("C-c C-p" . run-scheme)
+     ("C-c C-p" . geiser)
      )
+    :custom
+    (geiser-guile-binary "guile3.0")
     :defer t
+    :ensure t
     )
 
 #+end_src
@@ -4986,6 +4985,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
     (popper-group-function 'popper-group-by-project)
     (popper-reference-buffers '(
                                 compilation-mode
+                                geiser-repl-mode
                                 vterm-mode
                                 inferior-emacs-lisp-mode
                                 inferior-lisp-mode
