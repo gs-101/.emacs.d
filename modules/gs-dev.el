@@ -110,6 +110,19 @@
   :ensure t
   )
 
+(use-package eglot-x
+  :vc (:url "https://github.com/nemethf/eglot-x")
+  :bind
+  (
+   :map eglot-mode-map
+   ([remap compile] . eglot-x-ask-runnables)
+   ([remap newline] . eglot-x-on-enter)
+   )
+  :custom
+  (eglot-x-enable-server-status nil)
+  :ensure t
+  )
+
 (use-package eglot-supplements
   :vc (:url "https://codeberg.org/harald/eglot-supplements")
   :ensure t
