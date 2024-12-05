@@ -3291,6 +3291,21 @@ Show function arglist or variable docstring in echo area.
 
 #+end_src
 
+*** [[https://codeberg.org/mekeor/eglot-signature-eldoc-talkative][Verbose LSP Documentation]]
+
+Makes Eglot spew out more documentation information from the language server than it already does.
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-signature-eldoc-talkative
+    :after eglot
+    :config
+    (advice-add #'eglot-signature-eldoc-function :override #'eglot-signature-eldoc-talkative)
+    :ensure t
+    )
+
+#+end_src
+
 ** Flymake
 
 #+begin_quote

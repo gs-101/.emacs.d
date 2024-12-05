@@ -158,6 +158,13 @@
   (eldoc-idle-delay 0)
   )
 
+(use-package eglot-signature-eldoc-talkative
+  :after eglot
+  :config
+  (advice-add #'eglot-signature-eldoc-function :override #'eglot-signature-eldoc-talkative)
+  :ensure t
+  )
+
 ;; (use-package flymake
 ;;   :hook
 ;;   (prog-mode . flymake-mode)
