@@ -198,7 +198,6 @@
   )
 
 (use-package cargo-transient
-  :vc (:url "https://github.com/gs-101/cargo-transient" :branch custom)
   :after rust-ts-mode
   :bind
   (
