@@ -103,6 +103,13 @@
   :ensure t
   :hook
   (eglot-managed-mode . eglot-booster-mode)
+(use-package eglot-codelens
+  :vc (:url "https://github.com/Gavinok/eglot-codelens")
+  :hook
+  (eglot-managed-mode . eglot-codelens-mode)
+  :ensure t
+  )
+
   )
 
 (use-package eldoc

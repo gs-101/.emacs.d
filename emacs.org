@@ -3177,6 +3177,27 @@ Boost eglot using lsp-booster.
 
 #+end_src
 
+*** [[https://github.com/Gavinok/eglot-codelens][Code Lens]]
+
+#+begin_quote
+
+Eglot adds extensive support of the language server protocol to Emacs. However, one feature it lacks is [[https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_codeLens][Code Lens]] support.
+
+#+end_quote
+
+This shows how many references (mentions in comments) a given symbol has throughout the project.
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-codelens
+    :vc (:url "https://github.com/Gavinok/eglot-codelens")
+    :hook
+    (eglot-managed-mode . eglot-codelens-mode)
+    :ensure t
+    )
+
+#+end_src
+
 ** Eldoc
 
 #+begin_quote
