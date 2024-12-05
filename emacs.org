@@ -3198,6 +3198,22 @@ This shows how many references (mentions in comments) a given symbol has through
 
 #+end_src
 
+*** [[https://github.com/nemethf/eglot-x][Extensions]]
+
+Support for even more LSP extesnions, primarily for functionality introduced by [[https://rust-analyzer.github.io/][rust-analyzer]].
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-x
+    :vc (:url "https://github.com/nemethf/eglot-x")
+    :after eglot
+    :custom
+    (eglot-x-enable-server-status nil)
+    :ensure t
+    )
+
+#+end_src
+
 *** [[https://codeberg.org/harald/eglot-supplements][Supplements]]
 
 Additional language server functionality implemented with Eglot. There's also support for semantic tokens, but I didn't use it here as it messes with the font lock. Only changes I'd make with font-locking are those with [[#prism][Prism]].
