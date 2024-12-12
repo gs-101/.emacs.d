@@ -23,8 +23,8 @@
 
 (use-package compile
   :bind
-  ("C-c c c" . compile)
-  ("C-c c C" . recompile)
+  ("C-c c" . compile)
+  ("C-c C" . recompile)
   )
 
 (use-package eglot
