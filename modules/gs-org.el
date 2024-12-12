@@ -66,6 +66,14 @@
   (add-to-list 'org-babel-load-languages '(csharp . t))
   )
 
+(use-package ob-http
+  :vc (:url "https://github.com/ag91/ob-http")
+  :after org
+  :ensure t
+  :config
+  (add-to-list 'org-babel-load-languages '(http . t))
+  )
+
 (use-package org-agenda
   :config
   (add-to-list 'org-agenda-prefix-format '(agenda . "%-12t% s "))
