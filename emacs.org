@@ -3495,6 +3495,29 @@ The next generation Clojure major mode for Emacs, powered by TreeSitter.
 
 #+end_src
 
+*** Go
+
+#+begin_quote
+
+tree-sitter support for Go.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package go-ts-mode
+    :bind
+    (
+     :map go-ts-mode-map
+     ("C-c m t f" . go-ts-mode-test-this-file)
+     ("C-c m t p" . go-ts-mode-test-this-package)
+     ("C-c m t ." . go-ts-mode-test-this-function-at-point)
+     )
+    :defer t
+    )
+
+#+end_src
+
 *** Lisp
 
 #+begin_quote

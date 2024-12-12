@@ -198,6 +198,17 @@
   :ensure t
   )
 
+(use-package go-ts-mode
+  :bind
+  (
+   :map go-ts-mode-map
+   ("C-c m t f" . go-ts-mode-test-this-file)
+   ("C-c m t p" . go-ts-mode-test-this-package)
+   ("C-c m t ." . go-ts-mode-test-this-function-at-point)
+   )
+  :defer t
+  )
+
 (use-package lisp
   :bind
   (
