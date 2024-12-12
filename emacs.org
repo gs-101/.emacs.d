@@ -1435,11 +1435,15 @@ Key bindings for default packages.
     (defun gs-101/eval-dwim ()
       "Evaluate region if it is active; if not, evaluate the buffer.
   If the region is active, this function calls `eval-region'.
-  Otherwise, it calls `eval-buffer'."
+  Otherwise, it calls `eval-buffer'.
+
+  If the character before point is a closed parenthesis,
+  this calls `eval-last-sexp'."
       (interactive)
-      (if (use-region-p)
-          (eval-region (region-beginning) (region-end) t)
-        (eval-buffer nil nil)))
+      (cond
+       ((use-region-p) (eval-region (region-beginning) (region-end) t))
+       ((eq (char-before) '\)) (eval-last-sexp nil))
+       (t (eval-buffer nil nil))))
     )
 
 #+end_src
