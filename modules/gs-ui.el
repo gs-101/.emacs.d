@@ -407,6 +407,9 @@ This advice replaces the rocket icon with a electric plug icon."
   :config
   (mapc (lambda (command)
           (add-to-list 'keycast-substitute-alist command)) '(
+          (backward-delete-char-untabify "" "Erasing...")
+          (delete-backward-char "" "Erasing...")
+          (org-delete-backward-char "" "Erasing...")
           (self-insert-command "" "Typing...")
           (org-self-insert-command "" "Typing...")
           (vertico-next nil nil)
