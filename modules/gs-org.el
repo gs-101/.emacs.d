@@ -186,6 +186,13 @@ allowFullScreen>
   :defer t
   )
 
+(use-package engrave-faces
+  :after ox-latex
+  :ensure t
+  :custom
+  (org-latex-src-block-backend 'engraved)
+  )
+
 (use-package org-list
   :custom
   (org-list-allow-alphabetical t)
