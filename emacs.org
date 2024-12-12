@@ -4959,35 +4959,6 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 #+end_src
 
-** [[https://thanosapollo.org/projects/gnosis/][Gnosis]]
-
-#+begin_quote
-
-Spaced Repetition System for GNU Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package gnosis
-    :defer t
-    :ensure t
-    )
-
-#+end_src
-
-*** no-littering
-
-#+begin_src emacs-lisp
-
-  (use-package gnosis
-    :after gnosis no-littering
-    :custom
-    (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
-    )
-
-#+end_src
-
 ** [[https://github.com/zkry/p-search][p-search]]
 
 #+begin_quote
