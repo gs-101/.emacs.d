@@ -588,8 +588,46 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package nerd-icons-corfu
   :after nerd-icons corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+  :custom
+  (corfu-margin-formatters 'nerd-icons-corfu-formatter)
+  (nerd-icons-corfu-mapping '(
+                               (array :style "md" :icon "code_array" :face font-lock-type-face)
+                              (boolean :style "md" :icon "checkbox_intermediate" :face font-lock-builtin-face)
+                              (class :style "md" :icon "file_tree" :face font-lock-type-face)
+                              (color :style "md" :icon "format_paint" :face success)
+                              (command :style "dev" :icon "terminal" :face default)
+                              (constant :style "md" :icon "card_text_outline" :face font-lock-constant-face)
+                              (constructor :style "md" :icon "arrow_right" :face font-lock-function-name-face)
+                              (enummember :style "md" :icon "cards_outline" :face font-lock-builtin-face)
+                              (enum-member :style "md" :icon "cards_outline" :face font-lock-builtin-face)
+                              (enum :style "md" :icon "card_text_outline" :face font-lock-builtin-face)
+                              (event :style "md" :icon "lightning_bolts" :face font-lock-warning-face)
+                              (field :style "md" :icon "toy_brick" :face font-lock-variable-name-face)
+                              (file :style "md" :icon "file" :face font-lock-string-face)
+                              (folder :style "md" :icon "folder" :face font-lock-doc-face)
+                              (interface :style "md" :icon "transit_connection_variant" :face font-lock-type-face)
+                              (keyword :style "md" :icon "text" :face font-lock-keyword-face)
+                              (macro :style "md" :icon "arrow_expand" :face font-lock-keyword-face)
+                              (magic :style "md" :icon "magic_staff" :face font-lock-builtin-face)
+                              (method :style "md" :icon "cube_outline" :face font-lock-function-name-face)
+                              (function :style "md" :icon "function" :face font-lock-function-name-face)
+                              (module :style "md" :icon "file_send" :face font-lock-preprocessor-face)
+                              (numeric :style "md" :icon "numeric" :face font-lock-builtin-face)
+                              (operator :style "cod" :icon "symbol_operator" :face font-lock-comment-delimiter-face)
+                              (param :style "md" :icon "code_parentheses" :face default)
+                              (property :style "md" :icon "wrench" :face font-lock-variable-name-face)
+                              (reference :style "md" :icon "file_link" :face font-lock-variable-name-face)
+                              (snippet :style "md" :icon "note_text" :face font-lock-string-face)
+                              (string :style "md" :icon "code_string" :face font-lock-string-face)
+                              (struct :style "md" :icon "new_box" :face font-lock-variable-name-face)
+                              (text :style "md" :icon "format_text" :face font-lock-doc-face)
+                              (typeparameter :style "md" :icon "format_list_bulleted" :face font-lock-type-face)
+                              (type-parameter :style "md" :icon "format_list_bulleted" :face font-lock-type-face)
+                              (unit :style "md" :icon "ruler" :face font-lock-constant-face)
+                              (value :style "md" :icon "toy_brick" :face font-lock-builtin-face)
+                              (variable :style "md" :icon "toy_brick_outline" :face font-lock-variable-name-face)
+                              (t :style "md" :icon "code_tags" :face font-lock-variable-name-face)
+                              ))
   :ensure t
   )
 
