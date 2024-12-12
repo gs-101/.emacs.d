@@ -3544,6 +3544,32 @@ Lisp editing for Emacs.
 
 #+end_src
 
+*** PostgreSQL
+
+**** [[https://github.com/emarsden/pgmacs][PGmacs]]
+
+#+begin_quote
+
+Emacs editing PostgreSQL databases.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  ;; Library
+  (use-package pg
+    :vc (:url "https://github.com/emarsden/pg-el/")
+    :ensure t
+    )
+
+  (use-package pgmacs
+    :vc (:url "https://github.com/emarsden/pgmacs")
+    :defer t
+    :ensure t
+    )
+
+#+end_src
+
 *** Python
 
 #+begin_quote

@@ -221,6 +221,18 @@
   :defer t
   )
 
+;; Library
+(use-package pg
+  :vc (:url "https://github.com/emarsden/pg-el/")
+  :ensure t
+  )
+
+(use-package pgmacs
+  :vc (:url "https://github.com/emarsden/pgmacs")
+  :defer t
+  :ensure t
+  )
+
 (use-package python
   :custom
   (python-indent-guess-indent-offset-verbose nil)
