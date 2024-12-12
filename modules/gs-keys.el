@@ -256,7 +256,6 @@ Otherwise, it calls `eval-buffer'."
 
 (use-package simple
   :bind
-  ("C-c c w"  . delete-trailing-whitespace)
   ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
   ("C-?" . undo-redo)
   ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
