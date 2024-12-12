@@ -351,29 +351,6 @@
    )
   )
 
-(use-package evedel
-  :bind
-  (
-   :map prog-mode-map
-   ("C-z e d"   . evedel-create-directive)
-   ("C-z e m"   . evedel-modify-directive)
-   ("C-z e D"   . evedel-modify-directive-tag-query)
-   ("C-z e P"   . evedel-preview-directive-prompt)
-   ("C-z e RET" . evedel-process-directives)
-   ("C-z e TAB" . evedel-convert-instructions)
-   ("C-z e r"   . evedel-create-reference)
-   ("C-z e DEL" . evedel-delete-instructions)
-   ("C-z e C-'" . evedel-modify-reference-commentary)
-   ("C-z e n"   . evedel-next-instruction)
-   ("C-z e p"   . evedel-previous-instruction)
-   ("C-z e s"   . evedel-save-instructions)
-   ("C-z e l"   . evedel-load-instructions)
-   ("C-z e t"   . evedel-add-tags)
-   ("C-z e T"   . evedel-remove-tags)
-   )
-  :ensure t
-  )
-
 (use-package leetcode
   :custom
   (leetcode-directory (convert-standard-filename (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
