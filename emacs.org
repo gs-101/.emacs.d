@@ -3358,6 +3358,26 @@ Additional language server functionality implemented with Eglot. There's also su
 
 #+end_src
 
+*** [[https://github.com/fargiolas/eglot-inactive-regions][Inactive Regions]]
+
+#+begin_quote
+
+Emacs Eglot support for clangd inactiveRegions LSP extension and ccls skippedRegions. Make ifdef code semitransparent following build time flags and defines.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package eglot-inactive-regions
+    :ensure t
+    :custom
+    (eglot-inactive-regions-style 'darken-foreground)
+    (eglot-inactive-regions-opacity 0.3)
+    :hook
+    (eglot-connect . eglot-inactive-regions-mode)
+    )
+
+#+end_src
 
 ** Eldoc
 

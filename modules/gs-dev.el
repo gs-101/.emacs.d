@@ -152,6 +152,15 @@
   (set-face-attribute 'eglot-marocc-occurence-text nil :foreground (catppuccin-color 'green))
   )
 
+(use-package eglot-inactive-regions
+  :ensure t
+  :custom
+  (eglot-inactive-regions-style 'darken-foreground)
+  (eglot-inactive-regions-opacity 0.3)
+  :hook
+  (eglot-connect . eglot-inactive-regions-mode)
+  )
+
 (use-package eldoc
   :custom
   (eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
