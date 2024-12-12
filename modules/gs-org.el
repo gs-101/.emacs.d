@@ -48,8 +48,8 @@
      (scheme . t)
      (shell . t)
      (sql . t)
+     (sqlite . t)
      ))
-
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
   )
 
