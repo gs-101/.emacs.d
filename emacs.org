@@ -2106,6 +2106,8 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
     (nconc org-babel-default-header-args:java
            '((:dir . nil)
              (:results . "output")))
+    :custom
+    (org-export-babel-evaluate nil)
     )
 
 #+end_src
