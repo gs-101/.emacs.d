@@ -4442,11 +4442,12 @@ Jump to things in Emacs tree-style.
      ("M-j" . avy-isearch)
      )
     :custom
-    (avy-keys '(
-                ?q ?e ?r ?y ?u ?o ?p
-                ?a ?s ?d ?f ?g ?h ?j ?k ?l ?~
-                ?x ?c ?v ?b ?n ?, ?/
-                ))
+    ;; (avy-keys '(
+    ;;             ?q ?e ?r ?y ?u ?o ?p
+    ;;             ?a ?s ?d ?f ?g ?h ?j ?k ?l ?~
+    ;;             ?x ?c ?v ?b ?n ?, ?/
+    ;;             ))
+    (avy-keys '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?0))
     (avy-style 'de-bruijn) ;; More uniform style, most jumps start with the same character
     :config
     (defun karthinks/avy-action-kill-whole-line (pt)
@@ -4496,9 +4497,9 @@ Jump to things in Emacs tree-style.
      (alist-get ?y avy-dispatch-alist) 'avy-action-yank
      (alist-get ?Y avy-dispatch-alist) 'karthinks/avy-action-yank-whole-line
      )
+
     :ensure t
     )
-
 #+end_src
 
 - [[https://karthinks.com/software/avy-can-do-anything][Credits]]
