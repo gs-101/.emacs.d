@@ -38,6 +38,7 @@
    'org-babel-load-languages
    '(
      (C . t)
+     (clojure . t)
      (css . t)
      (emacs-lisp . t)
      (java . t)

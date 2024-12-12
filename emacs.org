@@ -2090,6 +2090,7 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
      'org-babel-load-languages
      '(
        (C . t)
+       (clojure . t)
        (css . t)
        (emacs-lisp . t)
        (java . t)
@@ -3018,6 +3019,7 @@ Source code examples in Org.
             (add-to-list 'org-src-lang-modes lang)) '(
             ("bash" . bash-ts)
             ("C" . c-ts)
+            ("clojure" . clojure-ts)
             ("csharp" . csharp-ts)
             ("css" . css-ts)
             ("go" . go-ts)
@@ -3378,6 +3380,27 @@ Collection of checkers for flymake.
 #+end_src
 
 ** Languages
+
+*** Clojure
+
+#+begin_quote
+
+The next generation Clojure major mode for Emacs, powered by TreeSitter.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package clojure-ts-mode
+    :custom
+    (clojure-ts-comment-macro-font-lock-body t)
+    (clojure-ts-indent-style 'fixed)
+    (clojure-ts-toplevel-inside-comment-form t)
+    :defer t
+    :ensure t
+    )
+
+#+end_src
 
 *** Lisp
 
@@ -7265,8 +7288,10 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
   (use-package prism
     :config
     (defun gs-101/prism-mode-lisp ()
-      "Check if MAJOR MODE is a Lisp mode.
+      "Check if MAJOR-MODE is a Lisp mode.
   If it is, enable `prism-mode'."
+      (when (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
+        (prism-mode))
       (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
         (prism-mode))
       (when (string-match-p "scheme-mode\\'" (symbol-name major-mode))

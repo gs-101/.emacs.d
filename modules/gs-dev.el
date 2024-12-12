@@ -11,6 +11,7 @@
           (add-to-list 'org-src-lang-modes lang)) '(
           ("bash" . bash-ts)
           ("C" . c-ts)
+          ("clojure" . clojure-ts)
           ("csharp" . csharp-ts)
           ("css" . css-ts)
           ("go" . go-ts)
@@ -177,6 +178,15 @@
   (push '((python-mode python-ts-mode) flymake-collection-flake8 (flymake-collection-pycodestyle :disabled t)) flymake-collection-hook-config)
   :hook
   (flymake-mode . flymake-collection-hook-setup)
+  )
+
+(use-package clojure-ts-mode
+  :custom
+  (clojure-ts-comment-macro-font-lock-body t)
+  (clojure-ts-indent-style 'fixed)
+  (clojure-ts-toplevel-inside-comment-form t)
+  :defer t
+  :ensure t
   )
 
 (use-package lisp

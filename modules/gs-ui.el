@@ -635,8 +635,10 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package prism
   :config
   (defun gs-101/prism-mode-lisp ()
-    "Check if MAJOR MODE is a Lisp mode.
+    "Check if MAJOR-MODE is a Lisp mode.
 If it is, enable `prism-mode'."
+    (when (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
+      (prism-mode))
     (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
       (prism-mode))
     (when (string-match-p "scheme-mode\\'" (symbol-name major-mode))
