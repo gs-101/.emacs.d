@@ -2338,11 +2338,32 @@ LaTeX Backend for Org Export Engine.
 
 1. ~dvipng~ doesn't work for me for some reason.
 
+*** [[https://code.tecosaur.net/tec/engrave-faces][Engrave Faces]]
+
+#+begin_quote
+
+There are some great packages for Exporting buffers to particular formats, but each one seems to reinvent the core mechanism of processing the font-lock in a buffer such that it can be exported to a particular format.
+
+This package aims to produce a versatile generic core which can process a fontified buffer and elegantly pass the data to any number of backends which can deal with specific output formats.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package engrave-faces
+    :after ox-latex
+    :ensure t
+    :custom
+    (org-latex-src-block-backend 'engraved)
+    )
+
+#+end_src
+
 *** Packages to install
 
 **** Fedora
 
-src_bash{sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm texlive-stackengine texlive-pgfplots texlive-mlmodern texlive-titling texlive-hyphenat}
+src_bash{sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm texlive-stackengine texlive-pgfplots texlive-mlmodern texlive-titling texlive-hyphenat texlive-fvextra texlive-tcolorbox}
 
 ** List
 
