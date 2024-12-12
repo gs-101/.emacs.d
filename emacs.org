@@ -2100,8 +2100,8 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
        (scheme . t)
        (shell . t)
        (sql . t)
+       (sqlite . t)
        ))
-
     (push '("conf-unix" . conf-unix) org-src-lang-modes)
     )
 
