@@ -2103,11 +2103,14 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
        (sqlite . t)
        ))
     (push '("conf-unix" . conf-unix) org-src-lang-modes)
+    (nconc org-babel-default-header-args:java
+           '((:dir . nil)
+             (:results . "output")))
     )
 
 #+end_src
 
-*** C#
+*** [[https://github.com/samwdp/ob-csharp][C#]]
 
 #+begin_src emacs-lisp
 
