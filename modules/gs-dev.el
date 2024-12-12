@@ -276,11 +276,20 @@ this calls `geiser-eval-last-sexp'."
   )
 
 (use-package aggressive-indent
+  :config
+  (defun gs-101/aggressive-indent-mode-lisp ()
+    "Check if MAJOR-MODE is a Lisp mode.
+If it is, enable `aggressive-indent-mode'."
+    (when (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
+      (aggressive-indent-mode))
+    (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
+      (aggressive-indent-mode))
+    (when (string-match-p "scheme-mode\\'" (symbol-name major-mode))
+      (aggressive-indent-mode)))
   :ensure t
   :hook
   (css-mode . aggressive-indent-mode)
-  (emacs-lisp-mode . aggressive-indent-mode)
-  (lisp-mode . agressive-indent-mode)
+  (prog-mode . gs-101/aggressive-indent-mode-lisp)
   )
 
 (use-package apheleia
