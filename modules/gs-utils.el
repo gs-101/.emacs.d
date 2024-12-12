@@ -69,9 +69,9 @@ without killing it."
 
   (defun karthinks/avy-action-mark-to-char (pt)
     "Start mark at current point, then jump to target at marker PT
-with the mark active. This selects the region between them."
+with the mark active. This sets an inclusive region selection between them."
     (activate-mark)
-    (goto-char pt))
+    (goto-char (+ pt 1)))
 
   (setf
    (alist-get ?w avy-dispatch-alist) 'avy-action-copy
