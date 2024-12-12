@@ -1,13 +1,12 @@
 ;;; -*- lexical-binding: t -*-
 
-(use-package vterm
+(use-package eat
   :bind
-  ([remap shell] . vterm)
-  :custom
-  (vterm-shell "bash")
-  (vterm-max-scrollback 10000)
-  (vterm-timer-delay 0.001)
+  ([remap shell] . eat)
   :ensure t
+  :hook
+  (eshell-load . eat-eshell-mode)
+  (eshell-load . eat-eshell-visual-command-mode)
   )
 
 (use-package vterm
@@ -28,8 +27,8 @@ if one already exists."
       (if (and shell-buffer (not current-prefix-arg))
           (if (comint-check-proc shell-buffer)
               (pop-to-buffer shell-buffer (bound-and-true-p display-comint-buffer-action))
-            (vterm shell-buffer))
-        (vterm (generate-new-buffer-name default-project-shell-name)))))
+           (eat shell-buffer))
+        (eat (generate-new-buffer-name default-project-shell-name)))))
   )
 
 (provide 'gs-cmd)

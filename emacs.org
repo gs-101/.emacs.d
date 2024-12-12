@@ -2916,24 +2916,23 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-** [[https://github.com/akermu/emacs-libvterm][vterm]]
+** [[https://codeberg.org/akib/emacs-eat][eat]]
 
 #+begin_quote
 
-Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based on [[https://github.com/neovim/libvterm][libvterm]], a C library. As a result of using compiled code (instead of elisp), emacs-libvterm is fully capable, fast, and it can seamlessly handle large outputs.
+Emulate A Terminal, in a region, in a buffer and in Eshell.
 
 #+end_quote
 
 #+begin_src emacs-lisp
 
-  (use-package vterm
+  (use-package eat
     :bind
-    ([remap shell] . vterm)
-    :custom
-    (vterm-shell "bash")
-    (vterm-max-scrollback 10000)
-    (vterm-timer-delay 0.001)
+    ([remap shell] . eat)
     :ensure t
+    :hook
+    (eshell-load . eat-eshell-mode)
+    (eshell-load . eat-eshell-visual-command-mode)
     )
 
 #+end_src
@@ -2951,7 +2950,7 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
       "Start an inferior shell in the current project's root directory.
   If a buffer already exists for running a shell in the project's root,
   switch to it.  Otherwise, create a new shell buffer.
-  With `universal-argument' prefix arg, create a new inferior shell buffer even
+  With \\[universal-argument] prefix arg, create a new inferior shell buffer even
   if one already exists."
       (interactive)
       (let* ((default-directory (project-root (project-current t)))
@@ -2960,8 +2959,8 @@ Emacs-libvterm (vterm) is fully-fledged terminal emulator inside GNU Emacs based
         (if (and shell-buffer (not current-prefix-arg))
             (if (comint-check-proc shell-buffer)
                 (pop-to-buffer shell-buffer (bound-and-true-p display-comint-buffer-action))
-              (vterm shell-buffer))
-          (vterm (generate-new-buffer-name default-project-shell-name)))))
+             (eat shell-buffer))
+          (eat (generate-new-buffer-name default-project-shell-name)))))
     )
 
 #+end_src
@@ -5015,6 +5014,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
     (popper-group-function 'popper-group-by-project)
     (popper-reference-buffers '(
                                 compilation-mode
+                                eat-mode
                                 geiser-repl-mode
                                 vterm-mode
                                 inferior-emacs-lisp-mode
@@ -6326,7 +6326,9 @@ Highlight the current line.
     :init
     (global-hl-line-mode)
     :hook
+    ;; Disable in some modes where I dislike how it looks
     (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
+    (eat-mode . (lambda () (setq-local global-hl-line-mode nil)))
     (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
     )
 
