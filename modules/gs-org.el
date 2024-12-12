@@ -45,6 +45,7 @@
      (js . t)
      (latex . t)
      (python . t)
+     (scheme . t)
      (shell . t)
      (sql . t)
      ))
