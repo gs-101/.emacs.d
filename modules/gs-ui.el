@@ -193,6 +193,13 @@ If it is, enable `color-identifiers-mode'."
 (use-package dashboard
   :bind
   ("C-z <home>" . dashboard-open)
+  (
+   :map dashboard-mode-map
+   ("j" . nil)
+   ("k" . nil)
+   ("n" . dashboard-next-line)
+   ("p" . dashboard-previous-line)
+   )
   :custom
   (dashboard-center-content t)
   (dashboard-vertically-center-content t)
