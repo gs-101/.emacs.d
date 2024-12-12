@@ -51,6 +51,9 @@
      (sqlite . t)
      ))
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
+  (nconc org-babel-default-header-args:java
+         '((:dir . nil)
+           (:results . "output")))
   )
 
 (use-package ob-csharp
