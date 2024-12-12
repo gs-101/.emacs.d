@@ -348,17 +348,6 @@ targets."
   (advice-add #'embark-completing-read-prompter :around #'embark-hide-which-key-indicator)
   )
 
-(use-package gnosis
-  :defer t
-  :ensure t
-  )
-
-(use-package gnosis
-  :after gnosis no-littering
-  :custom
-  (gnosis-dir (no-littering-expand-var-file-name "gnosis/"))
-  )
-
 (use-package p-search
   :vc (:url "https://github.com/zkry/p-search")
   :bind
