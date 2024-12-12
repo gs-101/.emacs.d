@@ -256,6 +256,11 @@
   (use-package-vc-prefer-newest t)
   )
 
+(use-package simple
+  :hook
+  (text-mode . visual-line-mode)
+  )
+
 (use-package warnings
   :custom
   (warning-suppress-log-types '((comp) (bytecomp)))
@@ -281,8 +286,8 @@
   :ensure t
   :custom
   (markdown-fontify-code-blocks-natively t)
-  :hook
-  (markdown-mode . visual-line-mode)
+  )
+
   )
 
 (use-package no-littering

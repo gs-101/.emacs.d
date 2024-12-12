@@ -24,7 +24,6 @@
   (org-use-sub-superscripts '{})
   :hook
   (org-mode . variable-pitch-mode)
-  (org-mode . visual-line-mode)
   )
 
 (use-package startup

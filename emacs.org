@@ -812,6 +812,23 @@ A configuration macro for simplifying your .emacs.
 
 #+end_src
 
+*** Visual Line Mode
+
+#+begin_quote
+
+When Visual Line mode is enabled, `word-wrap' is turned on in this buffer, and simple editing commands are redefined to act on visual lines, not logical lines.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package simple
+    :hook
+    (text-mode . visual-line-mode)
+    )
+
+#+end_src
+
 *** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/early-init.el#L21][Warnings]]
 
 #+begin_quote
@@ -889,8 +906,9 @@ Emacs Markdown Mode.
     :ensure t
     :custom
     (markdown-fontify-code-blocks-natively t)
-    :hook
-    (markdown-mode . visual-line-mode)
+    )
+
+#+end_src
     )
 
 #+end_src
@@ -2029,7 +2047,6 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
     (org-use-sub-superscripts '{})
     :hook
     (org-mode . variable-pitch-mode)
-    (org-mode . visual-line-mode)
     )
 
 #+end_src
