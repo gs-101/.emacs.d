@@ -18,7 +18,7 @@
     "Start an inferior shell in the current project's root directory.
 If a buffer already exists for running a shell in the project's root,
 switch to it.  Otherwise, create a new shell buffer.
-With `universal-argument' prefix arg, create a new inferior shell buffer even
+With \\[universal-argument] prefix arg, create a new inferior shell buffer even
 if one already exists."
     (interactive)
     (let* ((default-directory (project-root (project-current t)))
