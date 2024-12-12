@@ -54,6 +54,8 @@
   (nconc org-babel-default-header-args:java
          '((:dir . nil)
            (:results . "output")))
+  :custom
+  (org-export-babel-evaluate nil)
   )
 
 (use-package ob-csharp
