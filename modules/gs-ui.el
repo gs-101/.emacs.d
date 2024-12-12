@@ -56,7 +56,9 @@
   :init
   (global-hl-line-mode)
   :hook
+  ;; Disable in some modes where I dislike how it looks
   (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
+  (eat-mode . (lambda () (setq-local global-hl-line-mode nil)))
   (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
   )
 
