@@ -909,6 +909,20 @@ Emacs Markdown Mode.
     )
 
 #+end_src
+
+*** [[https://github.com/gs-101/nil-mode][nil-mode]]
+
+#+begin_quote
+
+ A major mode meant for doing nothing in Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package nil-mode
+    :vc (:url "https://github.com/gs-101/nil-mode")
+    :ensure t
     )
 
 #+end_src

@@ -288,6 +288,9 @@
   (markdown-fontify-code-blocks-natively t)
   )
 
+(use-package nil-mode
+  :vc (:url "https://github.com/gs-101/nil-mode")
+  :ensure t
   )
 
 (use-package no-littering
