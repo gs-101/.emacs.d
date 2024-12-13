@@ -39,8 +39,8 @@
     (interactive)
     (cond
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-up))
-     ((string-match-p "markdown-mode\\'" (symbol-name major-mode)) (markdown-previous-visible-heading 1))
-     ((string-match-p "org-mode\\'" (symbol-name major-mode)) (org-previous-visible-heading 1))
+     ((derived-mode-p 'markdown-mode) (markdown-previous-visible-heading 1))
+     ((derived-mode-p 'org-mode) (org-previous-visible-heading 1))
      ((derived-mode-p 'prog-mode) (backward-up-list))
      (t (meow-prev-expand)))
     )
@@ -56,8 +56,8 @@
     (interactive)
     (cond
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-down))
-     ((string-match-p "markdown-mode\\'" (symbol-name major-mode)) (markdown-next-visible-heading 1))
-     ((string-match-p "org-mode\\'" (symbol-name major-mode)) (org-next-visible-heading 1))
+     ((derived-mode-p 'markdown-mode) (markdown-next-visible-heading 1))
+     ((derived-mode-p 'org-mode) (org-next-visible-heading 1))
      ((derived-mode-p 'prog-mode) (down-list))
      (t (meow-next-expand)))
     )
