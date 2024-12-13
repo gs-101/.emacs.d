@@ -2948,17 +2948,17 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 #+begin_src emacs-lisp
 
   (use-package citar-embark
-    :after citar embark
+    :after citar-embark
     :config
     (setf (alist-get
            'key-at-point
            (alist-get '(org-mode) citar-major-mode-functions nil nil #'equal))
-          #'my/citar-org-key-at-point)
+          #'bdarcus/citar-org-key-at-point)
 
-    (defun my/citar-org-key-at-point ()
+    (defun bdarcus/citar-org-key-at-point ()
       "Return citekey at point, when in org property drawer.
 
-  Citkey must be formatted as `@key'."
+  Citekey must be formatted as `@key'."
       (or (citar-org-key-at-point)
           (when (and (equal (org-element-type (org-element-at-point)) 'node-property)
                      (org-in-regexp (concat "[[:space:]]" org-element-citation-key-re)))
