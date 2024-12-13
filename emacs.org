@@ -1347,8 +1347,6 @@ Key bindings for default packages.
 
 #+end_quote
 
-** [[./notes/keys_dired.org][Dired Bindings]]
-
 ** [[./notes/keys_window_management.org][Window Management Bindings]]
 
 #+begin_src emacs-lisp
@@ -1530,6 +1528,21 @@ Key bindings for default packages.
 
 #+end_src
 
+** [[./notes/keys_dired.org][Dired]]
+
+#+begin_src emacs-lisp
+
+  (use-package dired
+    :after dired
+    :bind
+    (
+     :map dired-mode-map
+     ("b" . dired-up-directory)
+     )
+    )
+
+#+end_src
+
 ** Emacs
 
 #+begin_src emacs-lisp
@@ -1538,17 +1551,6 @@ Key bindings for default packages.
     :bind
     ("C-c q f" . delete-frame)
     ("C-c i c" . insert-char)
-    )
-
-#+end_src
-
-** Emoji
-
-#+begin_src emacs-lisp
-
-  (use-package emoji
-    :bind
-    ("C-c i e" . emoji-insert)
     )
 
 #+end_src

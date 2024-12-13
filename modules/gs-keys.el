@@ -107,15 +107,19 @@ this calls `eval-last-sexp'."
    )
   )
 
+(use-package dired
+  :after dired
+  :bind
+  (
+   :map dired-mode-map
+   ("b" . dired-up-directory)
+   )
+  )
+
 (use-package emacs
   :bind
   ("C-c q f" . delete-frame)
   ("C-c i c" . insert-char)
-  )
-
-(use-package emoji
-  :bind
-  ("C-c i e" . emoji-insert)
   )
 
 (use-package files
