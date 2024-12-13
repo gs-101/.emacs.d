@@ -239,6 +239,7 @@ If it is, enable `color-identifiers-mode'."
   :after dashboard
   :custom
   (dashboard-agenda-prefix-format "%-12t% s ")
+  (dashboard-agenda-tags-format 'ignore)
   (dashboard-banner-logo-title "The Extensible Computing Enviroment")
   (dashboard-items '(
                      (agenda . 5)
