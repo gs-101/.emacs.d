@@ -3689,6 +3689,27 @@ Automatically activate python virtualenv using virtualenvwrapper.el.
 
 #+end_src
 
+**** [[https://github.com/wbolster/emacs-python-pytest][python-pytest.el]]
+
+#+begin_quote
+
+Run pytest inside Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package python-pytest
+    :bind
+    (
+     :map python-base-mode-map
+     ("C-c m t" . python-pytest-dispatch)
+     )
+    :ensure t
+    )
+
+#+end_src
+
 *** Rust
 
 **** [[https://github.com/peterstuart/cargo-transient][Cargo Transient]]
