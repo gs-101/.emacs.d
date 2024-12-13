@@ -60,6 +60,7 @@
   (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
   (eat-mode . (lambda () (setq-local global-hl-line-mode nil)))
   (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
+  (vundo-mode . (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package mouse
