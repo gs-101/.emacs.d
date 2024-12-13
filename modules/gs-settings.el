@@ -365,4 +365,25 @@
                  (concat "/sudo:root@localhost:" file))))
   )
 
+(use-package vundo
+  :bind
+  (
+   ([remap undo] . vundo)
+   ([remap undo-redo] . vundo)
+   :map vundo-mode-map
+   ("C-n" . vundo-next)
+   ("C-p" . vundo-previous)
+   ("C-f" . vundo-forward)
+   ("C-b" . vundo-previous)
+   ("C-a" . vundo-stem-root)
+   ("C-e" . vundo-stem-end)
+   ("l" . nil)
+   ("j" . vundo-goto-last-saved)
+   )
+  :custom
+  (vundo-compact-display t)
+  (vundo-glyph-alist vundo-unicode-symbols)
+  :ensure t
+  )
+
 (provide 'gs-settings)
