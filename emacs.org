@@ -1079,6 +1079,39 @@ Like [[https://github.com/nflath/sudo-edit][sudo-edit]], but just a single, non-
 
 #+end_src
 
+*** [[https://github.com/casouri/vundo][Vundo]]
+
+#+begin_quote
+
+Visualize the undo tree.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package vundo
+    :bind
+    (
+     ([remap undo] . vundo)
+     ([remap undo-redo] . vundo)
+     :map vundo-mode-map
+     ("C-n" . vundo-next)
+     ("C-p" . vundo-previous)
+     ("C-f" . vundo-forward)
+     ("C-b" . vundo-previous)
+     ("C-a" . vundo-stem-root)
+     ("C-e" . vundo-stem-end)
+     ("l" . nil)
+     ("j" . vundo-goto-last-saved)
+     )
+    :custom
+    (vundo-compact-display t)
+    (vundo-glyph-alist vundo-unicode-symbols)
+    :ensure t
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
@@ -6460,6 +6493,7 @@ Highlight the current line.
     (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
     (eat-mode . (lambda () (setq-local global-hl-line-mode nil)))
     (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
+    (vundo-mode . (lambda () (setq-local global-hl-line-mode nil)))
     )
 
 #+end_src
