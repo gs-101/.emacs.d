@@ -241,6 +241,31 @@
   :defer t
   )
 
+(use-package envrc
+  :ensure t
+  :hook
+  (change-major-mode-after-body . envrc-mode)
+  )
+
+(use-package pet
+  :custom
+  (pet-toml-to-json-program "yq")
+  :ensure t
+  ;; :hook
+  ;; (eglot-server-initialized . pet-eglot-setup)
+  )
+
+(use-package auto-virtualenvwrapper
+  :ensure t
+  :hook
+  (python-base-mode . (lambda ()
+                        (auto-virtualenvwrapper-activate)
+                        (pet-mode)
+                        (setq-local
+                         python-shell-interpreter (pet-executable-find "python")
+                         python-shell-virtualenv-root (pet-virtualenv-root))))
+  )
+
 (use-package cargo-transient
   :after rust-ts-mode
   :bind

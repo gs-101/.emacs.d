@@ -3624,6 +3624,71 @@ Python's flying circus support for Emacs.
 
 #+end_src
 
+**** [[https://github.com/purcell/envrc][envrc.el]]
+
+#+begin_quote
+
+Emacs support for direnv which operates buffer-locally.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package envrc
+    :ensure t
+    :hook
+    (change-major-mode-after-body . envrc-mode)
+    )
+
+#+end_src
+
+***** Packages to install
+
+src_bash{sudo dnf install direnv}
+
+**** [[https://github.com/wyuenho/emacs-pet][PET]]
+
+Python Executable Tracker. Keeps track of virtual enviroments.
+
+#+begin_src emacs-lisp
+
+  (use-package pet
+    :custom
+    (pet-toml-to-json-program "yq")
+    :ensure t
+    ;; :hook
+    ;; (eglot-server-initialized . pet-eglot-setup)
+    )
+
+#+end_src
+
+***** Packages to install
+
+src_bash{sudo dnf install yq}
+
+**** [[https://github.com/robert-zaremba/auto-virtualenvwrapper.el/][auto-virtualenvwrapper.el]]
+
+#+begin_quote
+
+Automatically activate python virtualenv using virtualenvwrapper.el.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package auto-virtualenvwrapper
+    :ensure t
+    :hook
+    (python-base-mode . (lambda ()
+                          (auto-virtualenvwrapper-activate)
+                          (pet-mode)
+                          (setq-local
+                           python-shell-interpreter (pet-executable-find "python")
+                           python-shell-virtualenv-root (pet-virtualenv-root))))
+    )
+
+#+end_src
+
 *** Rust
 
 **** [[https://github.com/peterstuart/cargo-transient][Cargo Transient]]
