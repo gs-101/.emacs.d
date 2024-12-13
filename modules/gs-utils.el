@@ -275,6 +275,7 @@ using Helpful."
        (cdr (ring-ref avy-ring 0)))))
 
   (setf (alist-get ?\; avy-dispatch-alist) 'karthinks/avy-action-embark)
+  :demand t
   :ensure t
   )
 

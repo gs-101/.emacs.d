@@ -73,7 +73,7 @@
     (cond
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-previous))
      ((derived-mode-p 'prog-mode) (backward-sexp))
-     ((derived-mode-p 'text-mode) (meow-back-word))
+     ((derived-mode-p 'text-mode) (meow-back-word 1))
      (t (meow-left-expand)))
     )
 
@@ -88,7 +88,7 @@
     (cond
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-next))
      ((derived-mode-p 'prog-mode) (forward-sexp))
-     ((derived-mode-p 'text-mode) (meow-next-word))
+     ((derived-mode-p 'text-mode) (meow-next-word 1))
      (t (meow-right-expand)))
     )
   (defun gs-101/meow-super-kill ()
@@ -103,7 +103,7 @@
      ((derived-mode-p 'prog-mode) (kill-sexp))
      (t (meow-kill-whole-line)))
     )
-  (defun gs-101/meow-mark ()
+  (defun gs-101/meow-super-mark ()
     "Runs different mark commands based on the current major or minor mode.
 
 - `combobulate-mode' :: `combobulate-mark-node-dwim'
@@ -166,8 +166,6 @@
    '("|" . align-regexp)
    '("<escape>" . ignore)
    '("?" . meow-comment)
-   '("%" . meow-query-replace)
-   '("&" . meow-query-replace-regexp)
    '("1" . meow-expand-1)
    '("2" . meow-expand-2)
    '("3" . meow-expand-3)
@@ -190,7 +188,8 @@
    '("F" . gs-101/meow-super-right)
    '("g" . meow-grab)
    '("G" . meow-swap-grab)
-   '("h" . gs-101/meow-mark)
+   '("h" . meow-mark-word)
+   '("H" . gs-101/meow-super-mark)
    '("i" . meow-insert)
    '("I" . meow-append)
    '("j" . meow-pop-to-mark)
@@ -199,11 +198,8 @@
    '("K" . gs-101/meow-super-kill)
    '("l" . meow-visual-line)
    '("L" . meow-visual-line-expand)
-   '("m" . meow-mark-word)
    '("n" . meow-next)
    '("N" . gs-101/meow-super-next)
-   '("o" . meow-next-word)
-   '("O" . meow-back-word)
    '("p" . meow-prev)
    '("P" . gs-101/meow-super-prev)
    '("q" . meow-quit)
@@ -220,11 +216,6 @@
    '("z" . meow-till)
    '("Z" . meow-till-expand)
    )
-  )
-
-(use-package meow-thing
-  :config
-  (meow-thing-register 'arrow '(pair ("<") (">")) '(pair ("<") (">")))
   )
 
 (use-package meow-command
@@ -256,7 +247,7 @@ This follows the parameters set by `meow-kill-whole-line'."
     "Switch between Meow search and Avy,
 depending on if the region is active.
 If the region is active, this function calls `meow-search'.
-Otherwise, it calls `avy-goto-char-timer."
+Otherwise, it calls `avy-goto-char-timer'."
     (interactive)
     (if (region-active-p)
         (meow-search arg)
