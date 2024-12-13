@@ -269,6 +269,15 @@
                          python-shell-virtualenv-root (pet-virtualenv-root))))
   )
 
+(use-package python-pytest
+  :bind
+  (
+   :map python-base-mode-map
+   ("C-c m t" . python-pytest-dispatch)
+   )
+  :ensure t
+  )
+
 (use-package cargo-transient
   :bind
   (
