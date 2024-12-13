@@ -343,7 +343,7 @@ If it is, enable `aggressive-indent-mode'."
       (aggressive-indent-mode))
     (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
       (aggressive-indent-mode))
-    (when (string-match-p "scheme-mode\\'" (symbol-name major-mode))
+    (when (derived-mode-p 'scheme-mode)
       (aggressive-indent-mode)))
   :ensure t
   :hook

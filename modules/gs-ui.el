@@ -701,7 +701,7 @@ If it is, enable `prism-mode'."
       (prism-mode))
     (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
       (prism-mode))
-    (when (string-match-p "scheme-mode\\'" (symbol-name major-mode))
+    (when (derived-mode-p 'scheme-mode)
       (prism-mode)))
   :ensure t
   :hook
