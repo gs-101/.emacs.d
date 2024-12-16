@@ -304,9 +304,12 @@ If the character before point is a closed parenthesis,
 this calls `geiser-eval-last-sexp'."
     (interactive)
     (cond
-     ((use-region-p) (geiser-eval-region (region-beginning) (region-end) t))
-     ((eq (char-before) '\)) (eval-last-sexp nil))
-     (t (eval-buffer nil nil))))
+     ((use-region-p) (geiser-eval-region (region-beginning) (region-end) t)
+      (message "Region evaluated"))
+     ((eq (char-before) ?\)) (eval-last-sexp nil)
+      (message "Sexp evaluated"))
+     (t (eval-buffer nil nil)
+        (message "Buffer evaluated"))))
   :custom
   (geiser-guile-binary "guile3.0")
   :defer t
