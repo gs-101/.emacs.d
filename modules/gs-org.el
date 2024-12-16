@@ -319,7 +319,7 @@ allowFullScreen>
   :bind
   (
    :map org-mode-map
-   ("C-z m r n" . org-srs-tiem-create)
+   ("C-z m r n" . org-srs-item-create)
    ("C-z m r e" . org-srs-review-rate-easy)
    ("C-z m r g" . org-srs-review-rate-good)
    ("C-z m r h" . org-srs-review-rate-hard)
@@ -328,9 +328,6 @@ allowFullScreen>
    ("C-z m r a" . org-srs-item-cloze-dwim)
    ("C-z m r k" . org-srs-item-uncloze-dwim)
    )
-  :config
-  (advice-add #'org-srs-item-cloze-dwim :after #'org-srs-item-cloze-update)
-  (advice-add #'org-srs-item-uncloze-dwim :after #'org-srs-item-cloze-update)
   :ensure t
   )
 
