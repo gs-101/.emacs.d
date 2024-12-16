@@ -377,9 +377,8 @@ This advice replaces the rocket icon with a electric plug icon."
                            ))
   :ensure t
   :hook
-  (markdown-mode . hl-todo-mode)
-  (org-mode . hl-todo-mode)
   (prog-mode . hl-todo-mode)
+  (text-mode . hl-todo-mode)
   )
 
 (use-package hl-todo

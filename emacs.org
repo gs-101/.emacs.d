@@ -7146,9 +7146,8 @@ Highlight TODO keywords.
                              ))
     :ensure t
     :hook
-    (markdown-mode . hl-todo-mode)
-    (org-mode . hl-todo-mode)
     (prog-mode . hl-todo-mode)
+    (text-mode . hl-todo-mode)
     )
 
 #+end_src
