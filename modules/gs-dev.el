@@ -128,6 +128,7 @@
 
 (use-package eglot-supplements
   :vc (:url "https://codeberg.org/harald/eglot-supplements")
+  :defer t
   :ensure t
   )
 
