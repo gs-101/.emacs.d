@@ -5475,7 +5475,7 @@ OrgMsg is a GNU/Emacs global minor mode mixing up Org mode and Message mode to c
 
   #+begin_signature
   --
-  *Gabriel Santos*
+  Gabriel Santos
   #+end_signature"
      )
     :ensure t
