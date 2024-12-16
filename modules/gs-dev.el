@@ -178,6 +178,14 @@
   :ensure t
   )
 
+(use-package eldoc-diffstat
+  :vc (:url "https://github.com/kljohann/eldoc-diffstat/")
+  :after eldoc
+  :ensure t
+  :hook
+  (magit-log-mode . eldoc-diffstat-mode)
+  )
+
 ;; (use-package flymake
 ;;   :hook
 ;;   (prog-mode . flymake-mode)
