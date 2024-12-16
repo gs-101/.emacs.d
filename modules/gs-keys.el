@@ -71,9 +71,12 @@ If the character before point is a closed parenthesis,
 this calls `eval-last-sexp'."
     (interactive)
     (cond
-     ((use-region-p) (eval-region (region-beginning) (region-end) t))
-     ((eq (char-before) '\)) (eval-last-sexp nil))
-     (t (eval-buffer nil nil))))
+     ((use-region-p) (eval-region (region-beginning) (region-end) t)
+      (message "Region evaluated"))
+     ((eq (char-before) ?\)) (eval-last-sexp nil)
+      (message "Sexp evaluated"))
+     (t (eval-buffer nil nil)
+        (message "Buffer evaluated"))))
   )
 
 (use-package files
