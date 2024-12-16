@@ -738,12 +738,21 @@ If it is, enable `prism-mode'."
               (prism-catppuccin-colors))))
   )
 
-(use-package transient-posframe
+(use-package posframe
   :after transient
-  :vc (:url "https://github.com/tarsiiformes/transient-posframe" :branch fix-sizing)
   :ensure t
-  :config
-  (transient-posframe-mode)
+  :custom
+  (transient-display-buffer-action
+   (list
+    (lambda (buffer _)
+      (posframe-show
+       buffer
+       :poshandler #'posframe-poshandler-frame-center
+       :min-width transient-minimal-frame-width ;; Use the same minimal width as transient, to avoid weird resizing
+       :lines-truncate t ;; Truncate lines instead of wrapping them
+       :internal-border-color (transient--prefix-color) ;; Use transient colors to indicate that the current frame is a transient
+       :internal-border-width 1)
+      (get-buffer-window transient--buffer t))))
   )
 
 (provide 'gs-ui)
