@@ -161,6 +161,8 @@
    '("." . meow-find-ref)
    '("[" . meow-inner-of-thing)
    '("]" . meow-bounds-of-thing)
+   '("<" . beginning-of-buffer)
+   '(">" . end-of-buffer)
    '("'" . repeat)
    '("=" . meow-indent)
    '("|" . align-regexp)
