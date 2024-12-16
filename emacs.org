@@ -7662,7 +7662,7 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
 #+end_src
 
-** [[https://github.com/yanghaoxie/transient-posframe][Transient Posframe]]
+** [[https://github.com/yanghaoxie/transient-posframe/pull/7#issuecomment-2538792470][Transient Posframe]]
 
 #+begin_quote
 
@@ -7672,12 +7672,21 @@ Pops the transient menu to a posframe (floating window).
 
 #+begin_src emacs-lisp
 
-  (use-package transient-posframe
+  (use-package posframe
     :after transient
-    :vc (:url "https://github.com/tarsiiformes/transient-posframe" :branch fix-sizing)
     :ensure t
-    :config
-    (transient-posframe-mode)
+    :custom
+    (transient-display-buffer-action
+     (list
+      (lambda (buffer _)
+        (posframe-show
+         buffer
+         :poshandler #'posframe-poshandler-frame-center
+         :min-width transient-minimal-frame-width ;; Use the same minimal width as transient, to avoid weird resizing
+         :lines-truncate t ;; Truncate lines instead of wrapping them
+         :internal-border-color (transient--prefix-color) ;; Use transient colors to indicate that the current frame is a transient
+         :internal-border-width 1)
+        (get-buffer-window transient--buffer t))))
     )
 
 #+end_src
