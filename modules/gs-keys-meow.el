@@ -42,7 +42,7 @@
      ((derived-mode-p 'markdown-mode) (markdown-previous-visible-heading 1))
      ((derived-mode-p 'org-mode) (org-previous-visible-heading 1))
      ((derived-mode-p 'prog-mode) (backward-up-list))
-     (t (meow-prev-expand)))
+     (t (meow-prev-expand 1)))
     )
 
   (defun gs-101/meow-super-next ()
@@ -59,7 +59,7 @@
      ((derived-mode-p 'markdown-mode) (markdown-next-visible-heading 1))
      ((derived-mode-p 'org-mode) (org-next-visible-heading 1))
      ((derived-mode-p 'prog-mode) (down-list))
-     (t (meow-next-expand)))
+     (t (meow-next-expand 1)))
     )
 
   (defun gs-101/meow-super-left ()
