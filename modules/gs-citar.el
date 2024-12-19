@@ -52,12 +52,17 @@ Citekey must be formatted as `@key'."
    ("C-c m q" . org-cite-insert)
    )
   :custom
-  (org-cite-csl-styles-dir "~/Documents/Zotero/styles/")
-  (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl"))))
   (org-cite-global-bibliography '("~/Documents/Bibliography.bib"))
   (org-cite-insert-processor 'citar)
   (org-cite-follow-processor 'citar)
   (org-cite-activate-processor 'citar)
+  )
+
+(use-package oc-csl
+  :after oc
+  :custom
+  (org-cite-csl-styles-dir "~/Documents/Zotero/styles/")
+  (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl"))))
   )
 
 (use-package citar-org-roam

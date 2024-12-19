@@ -2981,12 +2981,23 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
      ("C-c m q" . org-cite-insert)
      )
     :custom
-    (org-cite-csl-styles-dir "~/Documents/Zotero/styles/")
-    (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl"))))
     (org-cite-global-bibliography '("~/Documents/Bibliography.bib"))
     (org-cite-insert-processor 'citar)
     (org-cite-follow-processor 'citar)
     (org-cite-activate-processor 'citar)
+    )
+
+#+end_src
+
+*** CSL
+
+#+begin_src emacs-lisp
+
+  (use-package oc-csl
+    :after oc
+    :custom
+    (org-cite-csl-styles-dir "~/Documents/Zotero/styles/")
+    (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl"))))
     )
 
 #+end_src
