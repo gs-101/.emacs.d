@@ -3927,6 +3927,35 @@ Run code formatter on buffer contents without moving point, using RCS patches an
 
 src_bash{sudo dnf install black}
 
+** [[https://github.com/copilot-emacs/copilot.el][Copilot]]
+
+#+begin_quote
+
+An unofficial Copilot plugin for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package copilot
+    :ensure t
+    :bind
+    (
+     :map copilot-completion-map
+     ("<tab>" . copilot-accept-completion)
+     ("TAB" . copilot-accept-completion)
+     ("C-<tab>" . copilot-accept-completion-by-word)
+     ("C-TAB" . copilot-accept-completion-by-word)
+     ("C-n" . copilot-next-completion)
+     ("C-p" . copilot-previous-completion)
+     )
+    :config
+    (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
+    (add-to-list 'copilot-indentation-alist '(org-mode 2))
+    )
+
+#+end_src
+
 ** [[https://github.com/mickeynp/combobulate][Combobulate]]
 
 #+begin_quote
