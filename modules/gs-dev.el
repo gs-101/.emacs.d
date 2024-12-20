@@ -409,6 +409,8 @@ If it is, enable `aggressive-indent-mode'."
   :ensure t
   :bind
   (
+   :map prog-mode-map
+   ("C-z t c" . gs-101/copilot-toggle)
    :map copilot-completion-map
    ("<tab>" . copilot-accept-completion)
    ("TAB" . copilot-accept-completion)
@@ -418,6 +420,16 @@ If it is, enable `aggressive-indent-mode'."
    ("C-p" . copilot-previous-completion)
    )
   :config
+  (defun gs-101/copilot-toggle ()
+    "Toggle `copilot-mode' on or off."
+    (interactive)
+    (if copilot-mode
+        (progn
+          (copilot-mode -1)
+          (message "Copilot mode deactivated"))
+      (progn
+        (copilot-mode 1)
+        (message "Copilot mode activated"))))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   )
