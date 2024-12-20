@@ -131,6 +131,38 @@
   (org-habit-graph-column 100)
   )
 
+(use-package org
+  :after org
+  :config
+  (defun liron/org-hook-for-repeat-not-on-weekend ()
+    "Makes repeating tasks skip weekends."
+    (when (org-property-values "NO_WEEKEND")
+      ;; Get time from item at POINT
+      (let* ((scheduled-time (org-get-scheduled-time (point)))
+             ;; Convert to timestamp - required for the next step
+             (seconds-timestamp (time-to-seconds scheduled-time))
+             ;; Convert to decoded time - required to find out the weekday
+             (decoded-time (decode-time seconds-timestamp))
+             ;; Get weekday
+             (weekday (decoded-time-weekday decoded-time)))
+
+        (when (> weekday 5) ;; Saturday -> move to Sunday
+          (setq decoded-time
+                (decoded-time-add decoded-time (make-decoded-time :day 2))))
+
+        (when (> weekday 6) ;; Sunday - move to Monday
+          (setq decoded-time
+                (decoded-time-add decoded-time (make-decoded-time :day 1))))
+
+        (let ((encoded-time (encode-time decoded-time)))
+          (org-schedule nil encoded-time))
+
+        ))
+    )
+  :hook
+  (org-todo-repeat . liron/org-hook-for-repeat-not-on-weekend)
+  )
+
 (use-package org-clock
   :custom
   (org-clock-clocked-in-display 'frame-title)
