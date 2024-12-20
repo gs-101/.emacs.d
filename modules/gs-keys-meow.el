@@ -127,6 +127,16 @@
      ((derived-mode-p 'prog-mode) (meow-transpose-sexp))
      (t (transpose-words)))
     )
+  (defvar gs-101/meow-beginning-of-line "C-a"
+    "KBD macro for command`beginning-of-line'.")
+  (defun gs-101/meow-super-beginning ()
+    "Runs different beginning commands depending on current major mode.
+- `prog-mode' :: `meow-back-to-indentation'
+- Other :: `beginning-of-line'"
+    (interactive)
+    (cond
+     ((derived-mode-p 'prog-mode) (meow-back-to-indentation))
+     (t (meow--execute-kbd-macro gs-101/meow-beginning-of-line))))
   )
 
 (use-package meow-helpers
@@ -178,7 +188,7 @@
    '("8" . meow-digit-argument)
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
-   '("a" . meow-back-to-indentation)
+   '("a" . gs-101/meow-super-beginning)
    '("A" . meow-beginning-of-thing)
    '("b" . meow-left)
    '("B" . gs-101/meow-super-left)
