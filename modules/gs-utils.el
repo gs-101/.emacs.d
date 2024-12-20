@@ -364,6 +364,7 @@ targets."
   (popper-display-control t)
   (popper-group-function 'popper-group-by-project)
   (popper-reference-buffers '(
+                              cider-repl-mode
                               compilation-mode
                               eat-mode
                               geiser-repl-mode
