@@ -67,6 +67,14 @@
   (compilation-filter . ansi-color-compilation-filter)
   )
 
+(use-package compile
+  :after rust-ts-mode
+  :config
+  (push '(cargo "^\\ \\ -->\\ \\([/a-z_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3)
+        compilation-error-regexp-alist-alist)
+  (push 'cargo compilation-error-regexp-alist)
+  )
+
 (use-package compile-multi
   :bind
   ([remap compile] . compile-multi)
