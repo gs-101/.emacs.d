@@ -3598,6 +3598,30 @@ The next generation Clojure major mode for Emacs, powered by TreeSitter.
 
 #+end_src
 
+**** Cider
+
+#+begin_quote
+
+The Clojure Interactive Development Environment that Rocks for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package cider
+    :after clojure-ts-mode
+    :bind
+    (
+     :map cider-mode-map
+     ("C-c C-p" . cider-jack-in-clj)
+     )
+    :ensure t
+    :hook
+    (clojure-ts-mode . cider-mode)
+    )
+
+#+end_src
+
 *** Go
 
 #+begin_quote
@@ -5363,6 +5387,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
     (popper-display-control t)
     (popper-group-function 'popper-group-by-project)
     (popper-reference-buffers '(
+                                cider-repl-mode
                                 compilation-mode
                                 eat-mode
                                 geiser-repl-mode

@@ -222,6 +222,18 @@
   :ensure t
   )
 
+(use-package cider
+  :after clojure-ts-mode
+  :bind
+  (
+   :map cider-mode-map
+   ("C-c C-p" . cider-jack-in-clj)
+   )
+  :ensure t
+  :hook
+  (clojure-ts-mode . cider-mode)
+  )
+
 (use-package go-ts-mode
   :bind
   (
