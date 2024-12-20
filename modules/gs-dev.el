@@ -199,6 +199,11 @@
   (magit-log-mode . eldoc-diffstat-mode)
   )
 
+(use-package elec-pair
+  :hook
+  (prog-mode . electric-pair-local-mode)
+  )
+
 ;; (use-package flymake
 ;;   :hook
 ;;   (prog-mode . flymake-mode)
