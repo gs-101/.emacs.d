@@ -3520,6 +3520,23 @@ Make VCS diffstat available via eldoc.
 
 #+end_src
 
+** Electric Pairs
+
+#+begin_quote
+
+Automatic parenthesis pairing.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package elec-pair
+    :hook
+    (prog-mode . electric-pair-local-mode)
+    )
+
+#+end_src
+
 ** Flymake
 
 #+begin_quote
