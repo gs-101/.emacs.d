@@ -228,11 +228,6 @@ If it is, enable `color-identifiers-mode'."
   :ensure t
   :init
   (dashboard-setup-startup-hook)
-  :preface
-  (defun dashboard-create-scratch-buffer ()
-    "Create a scratch buffer."
-    (interactive)
-    (switch-to-buffer (get-buffer-create "*scratch*")))
   )
 
 (use-package dashboard-widgets
@@ -282,7 +277,7 @@ If it is, enable `color-identifiers-mode'."
       (,(nerd-icons-mdicon "nf-md-note_outline")
        "Open Scratch Buffer"
        "Switch to the scratch buffer"
-       (lambda (&rest _) (dashboard-create-scratch-buffer))
+       (lambda (&rest _) (scratch-buffer))
        'default)
       (,(nerd-icons-mdicon "nf-md-calendar_outline")
        "Open Org Agenda"
