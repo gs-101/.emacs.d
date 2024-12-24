@@ -12,6 +12,7 @@
           ("bash" . bash-ts)
           ("C" . c-ts)
           ("clojure" . clojure-ts)
+          ("cmake" . cmake-ts)
           ("csharp" . csharp-ts)
           ("css" . css-ts)
           ("go" . go-ts)
