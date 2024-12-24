@@ -16,5 +16,6 @@
 (require 'gs-chat)
 (require 'gs-elfeed)
 ;;(require 'gs-keys-evil)
-(require 'gs-keys-meow)
+;;(require 'gs-keys-meow)
+(require 'gs-keys-puni)
 (require 'gs-ui)
