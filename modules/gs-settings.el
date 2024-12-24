@@ -35,7 +35,7 @@
   (fast-but-imprecise-scrolling t) ;; 3
   (frame-resize-pixelwise t) ;; 1
   (history-delete-duplicates t) ;; 5
-  (hscroll-margin 2) ;; 3
+  (hscroll-margin 0)
   (hscroll-step 1) ;; 3
   (inhibit-compacting-font-caches t) ;; 3
   (load-prefer-newer t) ;; 2
@@ -50,7 +50,6 @@
   (read-process-output-max (* 512 1024)) ;; 3
   (resize-mini-windows 'grow-only)
   (scroll-conservatively 100000)
-  (scroll-margin 2)
   (scroll-step 1)
   (text-mode-ispell-word-completion nil)
   (user-full-name "Gabriel Santos")
