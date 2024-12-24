@@ -83,7 +83,8 @@ Variables used to reference to specific directories, using ~convert-standard-fil
   (require 'gs-chat)
   (require 'gs-elfeed)
   ;;(require 'gs-keys-evil)
-  (require 'gs-keys-meow)
+  ;;(require 'gs-keys-meow)
+  (require 'gs-keys-puni)
   (require 'gs-ui)
 
 #+end_src
