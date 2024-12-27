@@ -52,6 +52,7 @@
   (scroll-conservatively 100000)
   (scroll-margin 2)
   (scroll-step 1)
+  (tab-width 4)
   (text-mode-ispell-word-completion nil)
   (user-full-name "Gabriel Santos")
   (window-resize-pixelwise nil) ;; 1
