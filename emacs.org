@@ -330,6 +330,11 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
     (kept-new-versions 5) ;; 2
     (kept-old-versions 5) ;; 2
     (revert-without-query '("")) ;; 3
+    (trusted-content '(
+                       (package-user-dir)
+                       (gs-101/modules-directory)
+                       (gs-101/projects-code-directory)
+                       ))
     (version-control t) ;; 2
     (view-read-only t) ;; 3
     :preface
@@ -3587,10 +3592,10 @@ A universal on-the-fly syntax checker.
 
 #+begin_src emacs-lisp
 
-  ;; (use-package flymake
-  ;;   :hook
-  ;;   (prog-mode . flymake-mode)
-  ;;   )
+  (use-package flymake
+    :hook
+    (prog-mode . flymake-mode)
+    )
 
 #+end_src
 
@@ -4675,7 +4680,7 @@ COmpletion in Region FUnction.
     (corfu-history-mode)
     (corfu-popupinfo-mode)
     :custom
-    (corfu-auto nil)
+    (corfu-auto t)
     (corfu-auto-delay 0.0)
     (corfu-auto-prefix 2)
     (corfu-cycle t)

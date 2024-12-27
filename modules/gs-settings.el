@@ -79,6 +79,11 @@
   (kept-new-versions 5) ;; 2
   (kept-old-versions 5) ;; 2
   (revert-without-query '("")) ;; 3
+  (trusted-content '(
+                     (package-user-dir)
+                     (gs-101/modules-directory)
+                     (gs-101/projects-code-directory)
+                     ))
   (version-control t) ;; 2
   (view-read-only t) ;; 3
   :preface
