@@ -2,7 +2,6 @@
 
 (use-package org
   :custom
-  (org-adapt-indentation t)
   (org-auto-align-tags nil)
   (org-directory (convert-standard-filename (expand-file-name "~/Documents/Org")))
   (org-format-latex-options '(
@@ -18,7 +17,6 @@
   (org-log-done 'time)
   (org-log-into-drawer t)
   (org-reverse-note-order t)
-  (org-startup-indented t)
   (org-tags-column 0)
   (org-todo-repeat-to-state t)
   (org-use-sub-superscripts '{})
