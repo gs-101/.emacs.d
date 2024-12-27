@@ -205,10 +205,10 @@
   (prog-mode . electric-pair-local-mode)
   )
 
-;; (use-package flymake
-;;   :hook
-;;   (prog-mode . flymake-mode)
-;;   )
+(use-package flymake
+  :hook
+  (prog-mode . flymake-mode)
+  )
 
 (use-package flymake-collection
   :ensure t
