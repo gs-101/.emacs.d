@@ -150,6 +150,8 @@
                                      :unnarrowed t))))
   :custom
   (org-agenda-hide-tags-regexp "agenda")
+  :hook
+  (org-agenda-finalize . dw/org-roam-refresh-agenda-list)
   )
 
 (use-package org-roam-ui
