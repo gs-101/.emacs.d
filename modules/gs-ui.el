@@ -132,16 +132,6 @@
      " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
   )
 
-(use-package org-modern-indent
-  :after org-modern
-  :when (org-indent-mode)
-  :ensure t
-  :custom
-  (org-modern-block-name '("" . ""))
-  :hook
-  (org-mode . org-modern-indent-mode)
-  )
-
 (use-package scroll-bar
   :custom
   (scroll-bar-mode nil)

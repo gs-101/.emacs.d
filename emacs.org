@@ -6943,22 +6943,6 @@ Modern Org Style.
 
 #+end_src
 
-**** [[https://github.com/jdtsmith/org-modern-indent][Indented Blocks]]
-
-#+begin_src emacs-lisp
-
-  (use-package org-modern-indent
-    :after org-modern
-    :when (org-indent-mode)
-    :ensure t
-    :custom
-    (org-modern-block-name '("" . ""))
-    :hook
-    (org-mode . org-modern-indent-mode)
-    )
-
-#+end_src
-
 ** Scroll Bar
 
 #+begin_quote
