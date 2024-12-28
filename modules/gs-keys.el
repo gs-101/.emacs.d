@@ -181,13 +181,6 @@ this calls `eval-last-sexp'."
 (use-package org-agenda
   :bind
   ("C-c o a" . org-agenda)
-  (
-   :map org-mode-map
-   ("C-c m m" . (lambda ()
-                    (interactive)
-                    ;; Filter tasks by tag
-                    (org-tags-view t)))
-   )
   )
 
 (use-package org-clock

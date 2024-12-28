@@ -5,7 +5,10 @@
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./early-init.el
 :END:
 
-** [[https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217][Native and byte compilation]]
+** Native and byte compilation
+:PROPERTIES:
+:CREDITS:  https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217
+:END:
 
 If Emacs is built with native compilation support, activate it¹, if not, disable it².
 
@@ -89,9 +92,10 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 
 #+end_src
 
-* [[https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217][Package System Set-up]]
+* Package System Set-up
 :PROPERTIES:
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :link yes :tangle ./modules/gs-package.el
+:CREDITS:  https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217
 :END:
 
 ** Package
@@ -175,9 +179,7 @@ An overloading mechanism for Emacs Lisp functions.
 
 #+end_src
 
-**** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L104][Credits]]
-
-*** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/early-init.el#L20][Byte Compilation]]
+*** Byte Compilation
 
 #+begin_quote
 
@@ -194,7 +196,7 @@ The Emacs Lisp byte compiler. This crunches Lisp source into a sort of p-code (~
 
 #+end_src
 
-*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L104][Compilation Runtime]]
+*** Byte Compilation
 
 #+begin_quote
 
@@ -230,6 +232,9 @@ window manipulation utilities.
 #+end_src
 
 *** Emacs
+:PROPERTIES:
+:CREDITS:  1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]], 2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#recommended-packagessnippets-to-have-as-early-as-possible][gopar]], 3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#][jamescherti]], 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]], 5. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]]
+:END:
 
 Generic package used to configure functions and variables not included in any Emacs Lisp files. This is mainly used for files defied in C code.
 
@@ -277,14 +282,6 @@ Generic package used to configure functions and variables not included in any Em
 
 #+end_src
 
-**** Credits
-
-1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]];
-2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#recommended-packagessnippets-to-have-as-early-as-possible][gopar]];
-3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#][jamescherti]];
-4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
-5. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]].
-
 *** EPG Configuration
 
 #+begin_quote
@@ -308,6 +305,9 @@ Configuration of the EasyPG Library.
 #+end_src
 
 *** Files
+:PROPERTIES:
+:CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L178][jamescherti]], 2. [[https://github.com/Nathan-Furnal/dotemacs/blob/45defa98dfa7a7c401ca692e9479e588896b9261/init.el#L226][nathan-furnal]], 3. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]], 4. [[https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el][xenodium]]
+:END:
 
 #+begin_quote
 
@@ -349,13 +349,6 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
     )
 
 #+end_src
-
-**** Credits
-
-1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L178][jamescherti]];
-2. [[https://github.com/Nathan-Furnal/dotemacs/blob/45defa98dfa7a7c401ca692e9479e588896b9261/init.el#L226][nathan-furnal]];
-3. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]];
-4. [[https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el][xenodium]].
 
 *** Frame
 
@@ -426,7 +419,10 @@ Extensions for iBuffer.
 
 #+end_src
 
-*** [[https://codeberg.org/zyd/dotfiles/src/commit/e2deef9551ec259e62e19abe3a9b86feb4a5c870/emacs.d/init.el#L904][Image Mode]]
+*** Image Mode
+:PROPERTIES:
+:CREDITS:  https://codeberg.org/zyd/dotfiles/src/commit/e2deef9551ec259e62e19abe3a9b86feb4a5c870/emacs.d/init.el#L904
+:END:
 
 #+begin_quote
 
@@ -444,7 +440,7 @@ Support for visiting image files.
 
 #+end_src
 
-*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L232][iMenu]]
+*** iMenu
 
 #+begin_quote
 
@@ -505,6 +501,9 @@ Incremental search minor mode.
 #+end_src
 
 *** Minibuffer
+:PROPERTIES:
+:CREDITS:  1. [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L107][ashton314]], 2. [[https://github.com/minad/vertico?tab=readme-ov-file#completion-styles-and-tab-completion][minad]]
+:END:
 
 #+begin_src emacs-lisp
 
@@ -521,11 +520,6 @@ Incremental search minor mode.
     )
 
 #+end_src
-
-**** Credits
-
-1. [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L107][ashton314]];
-2. [[https://github.com/minad/vertico?tab=readme-ov-file#completion-styles-and-tab-completion][minad]].
 
 *** Mouse
 
@@ -561,6 +555,9 @@ Multilingual Enviroment.
 #+end_src
 
 **** Cmds
+:PROPERTIES:
+:CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L65][jamescherti]], 2. [[https://github.com/oantolin/emacs-config/blob/master/init.el][oantolin]]
+:END:
 
 #+begin_quote
 
@@ -581,11 +578,6 @@ Commands for Multilingual Enviroment.
     )
 
 #+end_src
-
-***** Credits
-
-1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L65][jamescherti]];
-2. [[https://github.com/oantolin/emacs-config/blob/master/init.el][oantolin]].
 
 **** Util
 
@@ -716,6 +708,9 @@ This mode provides mail-sending facilities from within Emacs.
 #+end_src
 
 *** Simple
+:PROPERTIES:
+:CREDITS:  1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]], 2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#simple][gopar]], 3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L112][jamescherti]], 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]], 5. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]]
+:END:
 
 #+begin_quote
 
@@ -743,13 +738,6 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 
 #+end_src
 
-**** Credits
-
-1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]];
-2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#simple][gopar]];
-3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L112][jamescherti]];
-4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]];
-5. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]].
 
 *** Transient
 
@@ -800,7 +788,7 @@ Unique buffer names dependent on file name.
 
 #+end_src
 
-*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L71][use-package]]
+*** use-package
 
 #+begin_quote
 
@@ -836,7 +824,7 @@ When Visual Line mode is enabled, `word-wrap' is turned on in this buffer, and s
 
 #+end_src
 
-*** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/early-init.el#L21][Warnings]]
+*** Warnings
 
 #+begin_quote
 
@@ -852,8 +840,6 @@ Log and display warnings.
     )
 
 #+end_src
-
-**** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L104][Credits]]
 
 ** Third-Party Packages
 
@@ -1136,6 +1122,9 @@ Visualize the undo tree.
 #+end_src
 
 ** Autorevert
+:PROPERTIES:
+:CREDITS:  https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el
+:END:
 
 #+begin_quote
 
@@ -1175,8 +1164,6 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
 
 #+end_src
 
-*** [[https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el][Credits]]
-
 ** Dired
 
 #+begin_quote
@@ -1200,11 +1187,6 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
     )
 
 #+end_src
-
-*** Credits
-
-1. [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#configuration][daviwil]];
-2. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L336][jamescherti]].
 
 *** Auxiliary
 
@@ -1666,20 +1648,13 @@ Key bindings for default packages.
 
 #+end_src
 
-*** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L52][Agenda]]
+*** Agenda
 
 #+begin_src emacs-lisp
 
   (use-package org-agenda
     :bind
     ("C-c o a" . org-agenda)
-    (
-     :map org-mode-map
-     ("C-c m m" . (lambda ()
-                      (interactive)
-                      ;; Filter tasks by tag
-                      (org-tags-view t)))
-     )
     )
 
 #+end_src
@@ -2232,6 +2207,9 @@ Dynamic task and appointment lists for Org.
 #+end_src
 
 *** Collapsable Headers
+:PROPERTIES:
+:CREDITS:  https://reddit.com/r/emacs/comments/1fjnqgy/weekly_tips_tricks_c_thread/
+:END:
 
 #+begin_src emacs-lisp
 
@@ -2252,8 +2230,6 @@ Dynamic task and appointment lists for Org.
     )
 
 #+end_src
-
-- [[https://reddit.com/r/emacs/comments/1fjnqgy/weekly_tips_tricks_c_thread/][Credits]]
 
 *** Org Habit
 
@@ -2330,6 +2306,9 @@ The time clocking code for Org mode.
 #+end_src
 
 ** Compat
+:PROPERTIES:
+:CREDITS:  https://github.com/xenodium/dotsies/blob/75f29e9d9d8f1aaebe1671b19614bb1e6bc5aac3/emacs/ar/ar-org-export-init.el#L37
+:END:
 
 #+begin_quote
 
@@ -2363,8 +2342,6 @@ Support for standard YouTube links is also included, translating them to embbede
     )
 
 #+end_src
-
-- [[https://github.com/xenodium/dotsies/blob/75f29e9d9d8f1aaebe1671b19614bb1e6bc5aac3/emacs/ar/ar-org-export-init.el#L37][Credits]]
 
 ** Cycle
 
@@ -2799,7 +2776,11 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 #+end_src
 
-*** [[https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L243][Capture templates]]
+*** Capture templates
+:PROPERTIES:
+:CREDITS:  https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L243
+:END:
+
 
 #+begin_src emacs-lisp
 
@@ -2837,7 +2818,11 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 #+end_src
 
-** [[https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-workflow.el][Roam Agenda]]
+** Roam Agenda
+:PROPERTIES:
+:CREDITS:  https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-workflow.el, 1. https://github.com/org-roam/org-roam/issues/2357#issuecomment-1614254880
+:END:
+
 
 #+begin_src emacs-lisp
 
@@ -2903,10 +2888,6 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
     )
 
 #+end_src
-
-*** Credits
-
-1. [[https://github.com/org-roam/org-roam/issues/2357#issuecomment-1614254880][pauljamesharper]].
 
 ** [[https://github.com/org-roam/org-roam-ui][User Interface]]
 
@@ -4060,6 +4041,9 @@ An unofficial Copilot plugin for Emacs.
 #+end_src
 
 ** [[https://github.com/mickeynp/combobulate][Combobulate]]
+:PROPERTIES:
+:CREDITS:  https://github.com/mickeynp/combobulate/issues/119#issuecomment-2435132123
+:END:
 
 #+begin_quote
 
@@ -4090,8 +4074,6 @@ Structured Editing and Navigation in Emacs with Tree-Sitter.
     )
 
 #+end_src
-
-- [[https://github.com/mickeynp/combobulate/issues/119#issuecomment-2435132123][Credits]]
 
 ** [[https://github.com/svaante/dape][Dape]]
 
@@ -4476,6 +4458,9 @@ Emacs plugin for automatic time tracking and metrics generated from your program
 #+end_src
 
 ** [[https://github.com/oantolin/orderless][Orderless]]
+:PROPERTIES:
+:CREDITS:  https://github.com/minad/consult/wiki#minads-orderless-configuration
+:END:
 
 #+begin_quote
 
@@ -4536,8 +4521,6 @@ Emacs completion style that matches multiple regexps in any order.
     )
 
 #+end_src
-
-- [[https://github.com/minad/consult/wiki#minads-orderless-configuration][Credits]]
 
 ** [[https://github.com/minad/cape][Cape]]
 
@@ -4903,6 +4886,9 @@ Implementation of Pomodoro and Third Time techniques for Emacs.
 #+end_src
 
 ** [[https://github.com/abo-abo/avy][Avy]]
+:PROPERTIES:
+:CREDITS:  https://karthinks.com/software/avy-can-do-anything
+:END:
 
 #+begin_quote
 
@@ -4982,8 +4968,6 @@ Jump to things in Emacs tree-style.
     )
 #+end_src
 
-- [[https://karthinks.com/software/avy-can-do-anything][Credits]]
-
 *** [[https://karthinks.com/software/avy-can-do-anything/#look-up-the-documentation-for-a-symbol][Helpful Support]]
 
 #+begin_src emacs-lisp
@@ -5025,6 +5009,9 @@ An opinionated Transient menu for Avy.
 #+end_src
 
 ** [[https://github.com/minad/consult][Consult]]
+:PROPERTIES:
+:CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L65][jamescherti]], 2. [[https://github.com/oantolin/emacs-config/blob/master/init.el][oantolin]]
+:END:
 
 #+begin_quote
 
@@ -5091,8 +5078,6 @@ Consulting completing-read.
     )
 
 #+end_src
-
-- [[https://github.com/oantolin/emacs-config/blob/master/init.el][Credits]]
 
 *** [[https://github.com/karthink/consult-dir][Dir]]
 
@@ -5659,6 +5644,7 @@ Jabber/XMPP client for Emacs.
 * [[https://github.com/skeeto/elfeed][Elfeed]]
 :PROPERTIES:
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-elfeed.el
+:CREDITS:  https://midirus.com/emacs/tutorial#elfeed
 :END:
 
 #+begin_quote
@@ -5694,8 +5680,6 @@ Elfeed is an extensible web feed reader for Emacs, supporting both Atom and RSS.
     )
 
 #+end_src
-
-- [[https://midirus.com/emacs/tutorial#elfeed][Credits]]
 
 ** [[https://github.com/remyhonig/elfeed-org][Org Mode]]
 
@@ -5831,6 +5815,9 @@ Core functionality.
 #+end_src
 
 ** Variables
+:PROPERTIES:
+:CREDITS:  1. [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-05/config.org#headline-28][blau_araujo]], 2. [[https://github.com/Gavinok/emacs.d/blob/main/lisp/evil-config.el][Gavinok]]
+:END:
 
 #+begin_quote
 
@@ -5855,12 +5842,10 @@ Settings and variables.
 
 #+end_src
 
-*** Credits
-
-1. [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-05/config.org#headline-28][blau_araujo]];
-2. [[https://github.com/Gavinok/emacs.d/blob/main/lisp/evil-config.el][Gavinok]].
-
 ** Commands
+:PROPERTIES:
+:CREDITS:  1. [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-05/config.org#headline-28][blau_araujo]], 2. [[https://github.com/Gavinok/emacs.d/blob/main/lisp/evil-config.el][Gavinok]]
+:END:
 
 #+begin_quote
 
@@ -5883,8 +5868,6 @@ Evil commands and operators.
 
 #+end_src
 
-*** [[https://github.com/Gavinok/emacs.d/blob/main/lisp/evil-config.el][Credits]]
-
 ** Search
 
 #+begin_quote
@@ -5903,6 +5886,9 @@ Search and substitute.
 #+end_src
 
 ** States
+:PROPERTIES:
+:CREDITS:  https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/emacs/config.el#L164
+:END:
 
 The different states found in Evil Mode.
 
@@ -5921,8 +5907,6 @@ The different states found in Evil Mode.
     )
 
 #+end_src
-
-*** [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/emacs/config.el#L164][Credits]]
 
 ** [[https://github.com/awth13/org-appear?tab=readme-ov-file#usage][Org Appear]]
 
@@ -6124,6 +6108,9 @@ A set of keybindings for evil-mode.
 #+end_src
 
 ** [[https://github.com/Somelauw/evil-org-mode][Org Mode]]
+:PROPERTIES:
+:CREDITS:  https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-keys-evil.el
+:END:
 
 #+begin_quote
 
@@ -6158,8 +6145,6 @@ Why is this one not included in the collection?
     )
 
 #+end_src
-
-*** [[https://github.com/daviwil/dotfiles/blob/master/.emacs.d/modules/dw-keys-evil.el][Credits]]
 
 ** Which Key
 
@@ -6828,7 +6813,11 @@ Highlight the current line.
 
 #+end_src
 
-** [[https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L73][Mouse]]
+** Mouse
+:PROPERTIES:
+:CREDITS:  https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L73
+:END:
+
 
 #+begin_src emacs-lisp
 
@@ -6964,6 +6953,9 @@ Window system-independent scroll bar support.
 #+end_src
 
 ** Startup
+:PROPERTIES:
+:CREDITS:  https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L182
+:END:
 
 #+begin_quote
 
@@ -6987,9 +6979,10 @@ This file parses the command line and gets Emacs running. Options on the command
 
 #+end_src
 
-*** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L182][Credits]]
-
-*** [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L100][Window]]
+*** Window
+:PROPERTIES:
+:CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/main/init.el][jamescherti]], 2. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el][oantolin]]
+:END:
 
 #+begin_quote
 
@@ -7010,12 +7003,11 @@ Window tree functions.
 
 #+end_src
 
-**** Credits
 
-1. [[https://github.com/jamescherti/minimal-emacs.d/blob/main/init.el][jamescherti]];
-2. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el][oantolin]].
-
-** [[https://codeberg.org/blau_araujo/edz/src/branch/main/parte-06-final/config.org#headline-37][Which Key]]
+** Which Key
+:PROPERTIES:
+:CREDITS:  https://codeberg.org/blau_araujo/edz/src/branch/main/parte-06-final/config.org#headline-37
+:END:
 
 #+begin_quote
 
