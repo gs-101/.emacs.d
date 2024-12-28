@@ -116,7 +116,6 @@ Also adds `cape-file' as a fallback."
   (corfu-history-mode)
   (corfu-popupinfo-mode)
   :custom
-  (corfu-auto t)
   (corfu-auto-delay 0.0)
   (corfu-auto-prefix 2)
   (corfu-cycle t)
@@ -125,6 +124,8 @@ Also adds `cape-file' as a fallback."
   :ensure t
   :init
   (global-corfu-mode)
+  :hook
+  (prog-mode . (lambda () (setq-local corfu-auto t)))
   )
 
 (use-package corfu
