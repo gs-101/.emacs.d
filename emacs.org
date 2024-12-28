@@ -4681,7 +4681,6 @@ COmpletion in Region FUnction.
     (corfu-history-mode)
     (corfu-popupinfo-mode)
     :custom
-    (corfu-auto t)
     (corfu-auto-delay 0.0)
     (corfu-auto-prefix 2)
     (corfu-cycle t)
@@ -4690,6 +4689,8 @@ COmpletion in Region FUnction.
     :ensure t
     :init
     (global-corfu-mode)
+    :hook
+    (prog-mode . (lambda () (setq-local corfu-auto t)))
     )
 
 #+end_src
