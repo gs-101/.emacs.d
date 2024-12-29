@@ -708,7 +708,7 @@ This mode provides mail-sending facilities from within Emacs.
 
 *** Simple
 :PROPERTIES:
-:CREDITS:  1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]], 2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#simple][gopar]], 3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L112][jamescherti]], 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]], 5. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]]
+:CREDITS:  1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]], 2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#simple][gopar]], 3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L112][jamescherti]], 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]], 5. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]], 6. [[https://emacs.dyerdwelling.family/emacs/20241118102423-emacs--copying-buffer-to-kill-ring/][James Dyer]]
 :END:
 
 #+begin_quote
@@ -720,6 +720,8 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 #+begin_src emacs-lisp
 
   (use-package simple
+    :bind
+    ("C-x M-h" . captainflasmr/copy-buffer-to-kill-ring)
     :custom
     (blink-matching-paren nil)
     (column-number-mode t)
@@ -733,6 +735,16 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
     (read-extended-command-predicate #'command-completion-default-include-p) ;; 4
     (save-interprogram-paste-before-kill t)
     (set-mark-command-repeat-pop t) ;; 5
+    :config
+    ;; 6
+    (defun captainflasmr/copy-buffer-to-kill-ring ()
+      "Mark the whole buffer, then copy it to the kill-ring without moving point."
+      (interactive)
+      (progn
+        (save-excursion
+          (kill-ring-save (point-min) (point-max)))
+        (message "Buffer copied to kill-ring")))
+    :demand t
     )
 
 #+end_src

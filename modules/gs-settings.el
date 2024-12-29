@@ -223,6 +223,8 @@
   )
 
 (use-package simple
+  :bind
+  ("C-x M-h" . captainflasmr/copy-buffer-to-kill-ring)
   :custom
   (blink-matching-paren nil)
   (column-number-mode t)
@@ -236,6 +238,16 @@
   (read-extended-command-predicate #'command-completion-default-include-p) ;; 4
   (save-interprogram-paste-before-kill t)
   (set-mark-command-repeat-pop t) ;; 5
+  :config
+  ;; 6
+  (defun captainflasmr/copy-buffer-to-kill-ring ()
+    "Mark the whole buffer, then copy it to the kill-ring without moving point."
+    (interactive)
+    (progn
+      (save-excursion
+        (kill-ring-save (point-min) (point-max)))
+      (message "Buffer copied to kill-ring")))
+  :demand t
   )
 
 (use-package transient
