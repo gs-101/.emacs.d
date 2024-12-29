@@ -15,6 +15,7 @@
           ("cmake" . cmake-ts)
           ("csharp" . csharp-ts)
           ("css" . css-ts)
+          ("dart" . dart-ts)
           ("go" . go-ts)
           ("html" . html-ts)
           ("java" . java-ts)
@@ -234,6 +235,17 @@
   :hook
   (clojure-ts-mode . cider-mode)
   )
+
+(use-package dart-ts-mode
+  :vc (:url "https://github.com/50ways2sayhard/dart-ts-mode")
+  :defer t
+  )
+
+(use-package dart-ts-mode
+  :after eglot
+  :config
+  (add-to-list 'eglot-server-programs
+               '(dart-ts-mode . ("dart" "language-server" "--client-id" "emacs.eglot-dart"))))
 
 (use-package go-ts-mode
   :bind

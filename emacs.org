@@ -2155,6 +2155,18 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 
 #+end_src
 
+*** [[https://github.com/mzimmerm/ob-dart][Dart]]
+
+#+begin_src emacs-lisp
+
+  (use-package ob-dart
+    :after org
+    :ensure t
+    :config
+    (add-to-list 'org-babel-load-languages '(dart . t)))
+
+#+end_src
+
 *** [[https://github.com/ag91/ob-http][HTTP]]
 
 #+begin_src emacs-lisp
@@ -3153,6 +3165,7 @@ Source code examples in Org.
             ("cmake" . cmake-ts)
             ("csharp" . csharp-ts)
             ("css" . css-ts)
+            ("dart" . dart-ts)
             ("go" . go-ts)
             ("html" . html-ts)
             ("java" . java-ts)
@@ -3629,6 +3642,37 @@ The Clojure Interactive Development Environment that Rocks for Emacs.
     :hook
     (clojure-ts-mode . cider-mode)
     )
+
+#+end_src
+
+*** Dart
+
+#+begin_quote
+
+A major mode for Dart programming language with tree-sitter supports.
+
+#+end_quote
+
+Dart is a language primarily used for [[https://flutter.dev/][Flutter]], a UI development kit.
+
+#+begin_src emacs-lisp
+
+  (use-package dart-ts-mode
+    :vc (:url "https://github.com/50ways2sayhard/dart-ts-mode")
+    :defer t
+    )
+
+#+end_src
+
+**** [[https://github.com/gs-101/dart-ts-mode#lsp-client-integration][Language Server Integration]]
+
+#+begin_src emacs-lisp
+
+  (use-package dart-ts-mode
+    :after eglot
+    :config
+    (add-to-list 'eglot-server-programs
+                 '(dart-ts-mode . ("dart" "language-server" "--client-id" "emacs.eglot-dart"))))
 
 #+end_src
 

@@ -64,6 +64,12 @@
   (add-to-list 'org-babel-load-languages '(csharp . t))
   )
 
+(use-package ob-dart
+  :after org
+  :ensure t
+  :config
+  (add-to-list 'org-babel-load-languages '(dart . t)))
+
 (use-package ob-http
   :vc (:url "https://github.com/ag91/ob-http")
   :after org
