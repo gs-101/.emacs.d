@@ -87,7 +87,6 @@ Variables used to reference to specific directories, using ~convert-standard-fil
   (require 'gs-elfeed)
   ;;(require 'gs-keys-evil)
   ;;(require 'gs-keys-meow)
-  (require 'gs-keys-puni)
   (require 'gs-ui)
 
 #+end_src
@@ -4393,6 +4392,69 @@ Projectile like project management library built on Emacs project.el.
 
 #+end_src
 
+** [[https://github.com/AmaiKinono/puni][Puni]]
+
+#+begin_quote
+
+Structured editing (soft deletion, expression navigating & manipulating) that supports many major modes out of the box.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package puni
+    :bind
+    (
+     :map puni-mode-map
+     ("M-h" . puni-expand-region)
+     ("M-H" . puni-contract-region)
+     ("C-k" . puni-kill-line)
+     ("C-M-n" . puni-forward-sexp-or-up-list)
+     ("C-M-p" . puni-backward-sexp-or-up-list)
+     ("C-M-<right>" . puni-forward-sexp-or-up-list)
+     ("C-M-<left>" . puni-backward-sexp-or-up-list)
+     ("C-M-@" . puni-mark-sexp-at-point)
+     ("C-M-SPC" . puni-mark-sexp-at-point)
+     ("M-k" . Gavinok/puni-kill-thing-at-point)
+     ("C-M-t" . puni-transpose)
+     ("C-)" . puni-slurp-forward)
+     ("C-(" . puni-slurp-backward)
+     ("C-M-)" . puni-barf-forward)
+     ("C-M-(" . puni-barf-backward)
+     )
+    :defer t
+    :config
+    (defun Gavinok/puni-kill-thing-at-point (&optional arg)
+      "Kill the next puni based thing at point."
+      (interactive)
+      (unless buffer-read-only
+        (puni-expand-region)
+        (kill-region (region-beginning) (region-end))))
+    (advice-add #'puni-kill-active-region :override
+                (defun AmaiKinono/puni-kill-active-region ()
+                  "Kill active region.
+  When this will cause unbalanced state, ask the user to confirm,
+  unless `puni-confirm-when-delete-unbalanced-active-region' is
+  nil.
+  When `rectangle-mark-mode' is enabled, kill the marked
+  rectangular region instead."
+                  (interactive)
+                  (if (use-region-p)
+                      (puni-kill-region)
+                    ;; Fall back to Emacs default behavior which is signaling an error or what
+                    ;; `kill-region-dwim' defines (since Emacs 31).
+                    (call-interactively #'kill-region))))
+    :ensure t
+    :custom
+    (cursor-type 'bar)
+    :hook
+    (text-mode . puni-disable-puni-mode)
+    :init
+    (puni-global-mode)
+    )
+
+#+end_src
+
 ** [[https://github.com/wakatime/wakatime-mode][Wakatime]]
 
 #+begin_quote
@@ -6566,85 +6628,6 @@ Tree-sitter powered motions for Meow.
 #+begin_src emacs-lisp
 
   (provide 'gs-keys-meow)
-#+end_src
-
-* [[https://github.com/AmaiKinono/puni][Puni]]
-:PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-keys-puni.el
-:END:
-
-#+begin_quote
-
-Structured editing (soft deletion, expression navigating & manipulating) that supports many major modes out of the box.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-  ;;; -*- lexical-binding: t -*-
-#+end_src
-
-#+begin_src emacs-lisp
-
-  (use-package puni
-    :bind
-    (
-     :map puni-mode-map
-     ("C-M-a" . puni-beginning-of-sexp)
-     ("C-M-e" . puni-end-of-sexp)
-     ("M-h" . puni-expand-region)
-     ("M-H" . puni-contract-region)
-     ("C-k" . puni-kill-line)
-     ("C-M-n" . puni-forward-sexp-or-up-list)
-     ("C-M-p" . puni-backward-sexp-or-up-list)
-     ("C-M-<right>" . puni-forward-sexp-or-up-list)
-     ("C-M-<left>" . puni-backward-sexp-or-up-list)
-     ("C-M-@" . puni-mark-sexp-at-point)
-     ("C-M-SPC" . puni-mark-sexp-at-point)
-     ("M-k" . Gavinok/puni-kill-thing-at-point)
-     ("C-M-t" . puni-transpose)
-     ("C-)" . puni-slurp-forward)
-     ("C-(" . puni-slurp-backward)
-     ("C-M-)" . puni-barf-forward)
-     ("C-M-(" . puni-barf-backward)
-     )
-    :defer t
-    :config
-    (defun Gavinok/puni-kill-thing-at-point (&optional arg)
-      "Kill the next puni based thing at point."
-      (interactive)
-      (unless buffer-read-only
-        (puni-expand-region)
-        (kill-region (region-beginning) (region-end))))
-    (advice-add #'puni-kill-active-region :override
-                (defun AmaiKinono/puni-kill-active-region ()
-                  "Kill active region.
-  When this will cause unbalanced state, ask the user to confirm,
-  unless `puni-confirm-when-delete-unbalanced-active-region' is
-  nil.
-  When `rectangle-mark-mode' is enabled, kill the marked
-  rectangular region instead."
-                  (interactive)
-                  (if (use-region-p)
-                      (puni-kill-region)
-                    ;; Fall back to Emacs default behavior which is signaling an error or what
-                    ;; `kill-region-dwim' defines (since Emacs 31).
-                    (call-interactively #'kill-region))))
-    :ensure t
-    :custom
-    (cursor-type 'bar)
-    :hook
-    (text-mode . puni-disable-puni-mode)
-    :init
-    (puni-global-mode)
-    )
-
-#+end_src
-
-** End
-
-#+begin_src emacs-lisp
-
-  (provide 'gs-keys-puni)
 #+end_src
 
 * User Interface
