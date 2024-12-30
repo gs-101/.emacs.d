@@ -16,7 +16,7 @@
   )
 
 (use-package citar-embark
-  :after citar embark
+  :after embark
   :custom
   (citar-at-point-function #'embark-act)
   :ensure t
@@ -68,7 +68,7 @@ Citekey must be formatted as `@key'."
 (use-package citar-org-roam
   :bind
   ("C-z r c" . citar-create-note)
-  :after citar org-roam
+  :after org-roam
   :config
   (citar-org-roam-mode)
   (add-to-list 'org-roam-capture-templates
