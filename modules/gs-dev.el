@@ -331,7 +331,7 @@
    )
   :ensure t
   :custom
-  (cargo-transient-buffer-name-function 'project-prefixed-buffer-name)
+  (cargo-transient-buffer-name-function #'project-prefixed-buffer-name)
   )
 
 (use-package geiser-guile

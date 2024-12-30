@@ -251,7 +251,7 @@ allowFullScreen>
 
 (use-package org-refile
   :config
-  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+  (advice-add #'org-refile :after #'org-save-all-org-buffers)
   :custom
   (org-outline-path-complete-in-steps nil)
   (org-refile-allow-creating-parent-nodes 'confirm)

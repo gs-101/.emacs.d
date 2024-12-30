@@ -19,13 +19,13 @@ If Emacs is built with native compilation support, activate it¹, if not, disabl
 #+begin_src emacs-lisp
 
   ;; 1
-  (if (and (featurep 'native-compile)
-           (fboundp 'native-comp-available-p)
+  (if (and (featurep #'native-compile)
+           (fboundp #'native-comp-available-p)
            (native-comp-available-p))
       (setq native-comp-jit-compilation t
             package-native-compile t)
     ;; 2
-    (setq features (delq 'native-compile features)))
+    (setq features (delq #'native-compile features)))
 
 #+end_src
 
@@ -35,7 +35,7 @@ Moves the Native Compilation Cache folder out of the Emacs base folder.
 
 #+begin_src emacs-lisp
 
-  (when (fboundp 'startup-redirect-eln-cache)
+  (when (fboundp #'startup-redirect-eln-cache)
     (startup-redirect-eln-cache
      (convert-standard-filename
       (expand-file-name  "var/eln-cache/" user-emacs-directory))))
@@ -2508,7 +2508,7 @@ Org refile allows you to refile subtrees to various locations.
 
   (use-package org-refile
     :config
-    (advice-add 'org-refile :after 'org-save-all-org-buffers)
+    (advice-add #'org-refile :after #'org-save-all-org-buffers)
     :custom
     (org-outline-path-complete-in-steps nil)
     (org-refile-allow-creating-parent-nodes 'confirm)
@@ -2965,9 +2965,9 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     (citar-bibliography "~/Documents/Bibliography.bib")
     (citar-citeproc-csl-styles-dir "~/Documents/Zotero/styles/")
     (citar-citeproc-csl-style "harvard-cite-them-right.csl")
-    (citar-format-reference-function 'citar-citeproc-format-reference)
+    (citar-format-reference-function #'citar-citeproc-format-reference)
     (citar-library-paths '("~/Documents/Zotero/storage/"))
-    (citar-open-entry-function 'citar-open-entry-in-zotero)
+    (citar-open-entry-function #'citar-open-entry-in-zotero)
     (citar-templates '((main . "${author editor:30%sn}     ${date year issued:4}     ${title:48}") (suffix . "          ${=key= id:15}    ${tags keywords keywords:*}    ${abstract abstract:*}") (preview . "${author editor:%etal} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.
   ") (note . "Notes on ${author editor:%etal}, ${title}")))
     :hook
@@ -2984,7 +2984,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
   (use-package citar-embark
     :after citar embark
     :custom
-    (citar-at-point-function 'embark-act)
+    (citar-at-point-function #'embark-act)
     :ensure t
     :hook
     (text-mode . citar-embark-mode)
@@ -3874,7 +3874,7 @@ A transient UI for Cargo, Rust's package manager.
      )
     :ensure t
     :custom
-    (cargo-transient-buffer-name-function 'project-prefixed-buffer-name)
+    (cargo-transient-buffer-name-function #'project-prefixed-buffer-name)
     )
 
 #+end_src
@@ -4801,7 +4801,7 @@ COmpletion in Region FUnction.
   (use-package cape
     :after corfu cape
     :config
-    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+    (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster)
     )
 
 #+end_src
@@ -5044,14 +5044,14 @@ Jump to things in Emacs tree-style.
       (goto-char (+ pt 1)))
 
     (setf
-     (alist-get ?w avy-dispatch-alist) 'avy-action-copy
-     (alist-get ?W avy-dispatch-alist) 'karthinks/avy-action-copy-whole-line
-     (alist-get ?k avy-dispatch-alist) 'avy-action-kill-stay
-     (alist-get ?K avy-dispatch-alist) 'karthinks/avy-action-kill-whole-line
-     (alist-get ?  avy-dispatch-alist) 'karthinks/avy-action-mark-to-char ;; This is bound to a space!
-     (alist-get ?t avy-dispatch-alist) 'avy-action-teleport
-     (alist-get ?y avy-dispatch-alist) 'avy-action-yank
-     (alist-get ?Y avy-dispatch-alist) 'karthinks/avy-action-yank-whole-line
+     (alist-get ?w avy-dispatch-alist) #'avy-action-copy
+     (alist-get ?W avy-dispatch-alist) #'karthinks/avy-action-copy-whole-line
+     (alist-get ?k avy-dispatch-alist) #'avy-action-kill-stay
+     (alist-get ?K avy-dispatch-alist) #'karthinks/avy-action-kill-whole-line
+     (alist-get ?  avy-dispatch-alist) #'karthinks/avy-action-mark-to-char ;; This is bound to a space!
+     (alist-get ?t avy-dispatch-alist) #'avy-action-teleport
+     (alist-get ?y avy-dispatch-alist) #'avy-action-yank
+     (alist-get ?Y avy-dispatch-alist) #'karthinks/avy-action-yank-whole-line
      )
 
     :ensure t
@@ -5075,7 +5075,7 @@ Jump to things in Emacs tree-style.
        (cdr (ring-ref avy-ring 0)))
       t)
 
-    (setf (alist-get ?H avy-dispatch-alist) 'karthinks/avy-action-helpful)
+    (setf (alist-get ?H avy-dispatch-alist) #'karthinks/avy-action-helpful)
     )
 
 #+end_src
@@ -5310,7 +5310,7 @@ Navigate the Xref stack with Consult.
        (mapcar (lambda (r) (consult--convert-regexp r type)) input)
        (lambda (str) (orderless--highlight input t str))))
     :custom
-    (consult--regexp-compiler 'minad/consult--orderless-regexp-compiler)
+    (consult--regexp-compiler #'minad/consult--orderless-regexp-compiler)
     )
 
 #+end_src
@@ -5415,7 +5415,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
   (use-package embark
     :after embark
-    :if (functionp 'karthinks/sudo-find-file)
+    :if (functionp #'karthinks/sudo-find-file)
     :bind
     (
      :map embark-file-map
@@ -5507,7 +5507,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
     ("M-[" . popper-toggle)
     :custom
     (popper-display-control t)
-    (popper-group-function 'popper-group-by-project)
+    (popper-group-function #'popper-group-by-project)
     (popper-reference-buffers '(
                                 cider-repl-mode
                                 compilation-mode
@@ -5649,9 +5649,9 @@ maildir indexer/searcher + emacs mail client + guile bindings.
     :custom
     (message-kill-buffer-on-exit t)
     (message-mail-user-agent t)
-    (message-send-mail-function 'smtpmail-send-it)
     (smtpmail-smtp-server "!mailprovider")
     (smtpmail-local-domain "!domain")
+    (message-send-mail-function #'smtpmail-send-it)
     (smtpmail-smtp-service 465)
     (smtpmail-stream-type 'ssl)
     )
@@ -6055,8 +6055,8 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>B") 'ibuffer)
-    (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
+    (evil-define-key 'normal 'global (kbd "<leader>B") #'ibuffer)
+    (evil-define-key 'normal 'global (kbd "<leader>b") #'switch-to-buffer)
     )
 
 #+end_src
@@ -6067,8 +6067,8 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>ie") 'emoji-insert)
-    (evil-define-key 'normal 'global (kbd "<leader>ic") 'insert-char)
+    (evil-define-key 'normal 'global (kbd "<leader>ie") #'emoji-insert)
+    (evil-define-key 'normal 'global (kbd "<leader>ic") #'insert-char)
     )
 
 #+end_src
@@ -6079,7 +6079,7 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>fe") '(lambda () (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory))))
+    (evil-define-key 'normal 'global (kbd "<leader>fe") #'(lambda () (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory))))
     )
 
 #+end_src
@@ -6090,13 +6090,13 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda)
-    (evil-define-key 'normal 'global (kbd "<leader>oc") 'org-clock-report)
-    (evil-define-key 'normal 'global (kbd "<leader>od") 'org-deadline)
-    (evil-define-key 'normal 'global (kbd "<leader>ol") 'org-insert-link)
-    (evil-define-key 'normal 'global (kbd "<leader>os") 'org-schedule)
-    (evil-define-key 'normal 'global (kbd "<leader>op") 'org-set-property)
-    (evil-define-key 'normal 'global (kbd "<leader>ot") 'org-todo)
+    (evil-define-key 'normal 'global (kbd "<leader>oa") #'org-agenda)
+    (evil-define-key 'normal 'global (kbd "<leader>oc") #'org-clock-report)
+    (evil-define-key 'normal 'global (kbd "<leader>od") #'org-deadline)
+    (evil-define-key 'normal 'global (kbd "<leader>ol") #'org-insert-link)
+    (evil-define-key 'normal 'global (kbd "<leader>os") #'org-schedule)
+    (evil-define-key 'normal 'global (kbd "<leader>op") #'org-set-property)
+    (evil-define-key 'normal 'global (kbd "<leader>ot") #'org-todo)
     )
 
 #+end_src
@@ -6107,11 +6107,11 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>wo") 'other-window)
-    (evil-define-key 'normal 'global (kbd "<leader>wk") 'windmove-up)
-    (evil-define-key 'normal 'global (kbd "<leader>wj") 'windmove-down)
-    (evil-define-key 'normal 'global (kbd "<leader>wh") 'windmove-left)
-    (evil-define-key 'normal 'global (kbd "<leader>wl") 'windmove-right)
+    (evil-define-key 'normal 'global (kbd "<leader>wo") #'other-window)
+    (evil-define-key 'normal 'global (kbd "<leader>wk") #'windmove-up)
+    (evil-define-key 'normal 'global (kbd "<leader>wj") #'windmove-down)
+    (evil-define-key 'normal 'global (kbd "<leader>wh") #'windmove-left)
+    (evil-define-key 'normal 'global (kbd "<leader>wl") #'windmove-right)
     )
 
 #+end_src
@@ -6122,7 +6122,7 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>ts") 'shell)
+    (evil-define-key 'normal 'global (kbd "<leader>ts") #'shell)
     )
 
 #+end_src
@@ -6134,8 +6134,8 @@ Toggles org-appear based on the current evil state.
   (use-package evil-core
     :after magit
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>mc") 'magit-clone)
-    (evil-define-key 'normal 'global (kbd "<leader>ms") 'magit-status)
+    (evil-define-key 'normal 'global (kbd "<leader>mc") #'magit-clone)
+    (evil-define-key 'normal 'global (kbd "<leader>ms") #'magit-status)
     )
 
 #+end_src
@@ -6147,10 +6147,10 @@ Toggles org-appear based on the current evil state.
   (use-package evil-core
     :after org-roam
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
-    (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
-    (evil-define-key 'normal 'global (kbd "<leader>rf") 'org-roam-node-find)
-    (evil-define-key 'normal 'global (kbd "<leader>ri") 'org-roam-node-insert)
+    (evil-define-key 'normal 'global (kbd "<leader>rb") #'dw/org-roam-capture-inbox)
+    (evil-define-key 'normal 'global (kbd "<leader>rd") #'org-roam-dailies-map)
+    (evil-define-key 'normal 'global (kbd "<leader>rf") #'org-roam-node-find)
+    (evil-define-key 'normal 'global (kbd "<leader>ri") #'org-roam-node-insert)
     )
 
 #+end_src
@@ -6162,7 +6162,7 @@ Toggles org-appear based on the current evil state.
   (use-package evil-core
     :after org-roam-ui
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>ru") 'org-roam-ui-open)
+    (evil-define-key 'normal 'global (kbd "<leader>ru") #'org-roam-ui-open)
     )
 
 #+end_src
@@ -6174,7 +6174,7 @@ Toggles org-appear based on the current evil state.
   (use-package evil-core
     :after nerd-icons
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>in") 'nerd-icons-insert)
+    (evil-define-key 'normal 'global (kbd "<leader>in") #'nerd-icons-insert)
     )
 
 #+end_src
@@ -6609,8 +6609,8 @@ Meow helpers for customization.
       (meow-block pt))
 
     (setf
-     (alist-get ?K avy-dispatch-alist) 'gs-101/meow-avy-action-kill-whole-line
-     (alist-get ?m avy-dispatch-alist) 'gs-101/meow-avy-action-block
+     (alist-get ?K avy-dispatch-alist) #'gs-101/meow-avy-action-kill-whole-line
+     (alist-get ?m avy-dispatch-alist) #'gs-101/meow-avy-action-block
      )
 
     (defun favetelinguis/meow-jumper (&optional arg)
@@ -7142,7 +7142,7 @@ A startup screen extracted from Spacemacs.
     :after dashboard
     :custom
     (dashboard-agenda-prefix-format "%-12t% s ")
-    (dashboard-agenda-tags-format 'ignore)
+    (dashboard-agenda-tags-format #'ignore)
     (dashboard-banner-logo-title "The Extensible Computing Enviroment")
     (dashboard-items '(
                        (agenda . 5)
@@ -7477,7 +7477,7 @@ Show current command and its key in the mode line.
       (setq this-command cmd
             keycast--this-command-keys (this-single-command-keys)
             keycast--this-command-desc cmd))
-    (advice-add 'embark-keymap-prompter :filter-return #'oantolin/keycast-store-action-key-cmd)
+    (advice-add #'embark-keymap-prompter :filter-return #'oantolin/keycast-store-action-key-cmd)
     (defun oantolin/keycast--update-force (&rest _)
       "Version of `keycast--update' that accepts (and ignore) parameters."
       (keycast--update))
@@ -7692,7 +7692,7 @@ A Library for Nerd Font icons.
   (use-package nerd-icons-corfu
     :after nerd-icons corfu
     :custom
-    (corfu-margin-formatters 'nerd-icons-corfu-formatter)
+    (corfu-margin-formatters #'nerd-icons-corfu-formatter)
     (nerd-icons-corfu-mapping '(
                                  (array :style "md" :icon "code_array" :face font-lock-type-face)
                                 (boolean :style "md" :icon "checkbox_intermediate" :face font-lock-builtin-face)

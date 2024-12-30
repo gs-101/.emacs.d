@@ -97,72 +97,72 @@
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>B") 'ibuffer)
-  (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>B") #'ibuffer)
+  (evil-define-key 'normal 'global (kbd "<leader>b") #'switch-to-buffer)
   )
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>ie") 'emoji-insert)
-  (evil-define-key 'normal 'global (kbd "<leader>ic") 'insert-char)
+  (evil-define-key 'normal 'global (kbd "<leader>ie") #'emoji-insert)
+  (evil-define-key 'normal 'global (kbd "<leader>ic") #'insert-char)
   )
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>fe") '(lambda () (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory))))
+  (evil-define-key 'normal 'global (kbd "<leader>fe") #'(lambda () (interactive) (find-file (expand-file-name "emacs.org" user-emacs-directory))))
   )
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda)
-  (evil-define-key 'normal 'global (kbd "<leader>oc") 'org-clock-report)
-  (evil-define-key 'normal 'global (kbd "<leader>od") 'org-deadline)
-  (evil-define-key 'normal 'global (kbd "<leader>ol") 'org-insert-link)
-  (evil-define-key 'normal 'global (kbd "<leader>os") 'org-schedule)
-  (evil-define-key 'normal 'global (kbd "<leader>op") 'org-set-property)
-  (evil-define-key 'normal 'global (kbd "<leader>ot") 'org-todo)
+  (evil-define-key 'normal 'global (kbd "<leader>oa") #'org-agenda)
+  (evil-define-key 'normal 'global (kbd "<leader>oc") #'org-clock-report)
+  (evil-define-key 'normal 'global (kbd "<leader>od") #'org-deadline)
+  (evil-define-key 'normal 'global (kbd "<leader>ol") #'org-insert-link)
+  (evil-define-key 'normal 'global (kbd "<leader>os") #'org-schedule)
+  (evil-define-key 'normal 'global (kbd "<leader>op") #'org-set-property)
+  (evil-define-key 'normal 'global (kbd "<leader>ot") #'org-todo)
   )
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>wo") 'other-window)
-  (evil-define-key 'normal 'global (kbd "<leader>wk") 'windmove-up)
-  (evil-define-key 'normal 'global (kbd "<leader>wj") 'windmove-down)
-  (evil-define-key 'normal 'global (kbd "<leader>wh") 'windmove-left)
-  (evil-define-key 'normal 'global (kbd "<leader>wl") 'windmove-right)
+  (evil-define-key 'normal 'global (kbd "<leader>wo") #'other-window)
+  (evil-define-key 'normal 'global (kbd "<leader>wk") #'windmove-up)
+  (evil-define-key 'normal 'global (kbd "<leader>wj") #'windmove-down)
+  (evil-define-key 'normal 'global (kbd "<leader>wh") #'windmove-left)
+  (evil-define-key 'normal 'global (kbd "<leader>wl") #'windmove-right)
   )
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>ts") 'shell)
+  (evil-define-key 'normal 'global (kbd "<leader>ts") #'shell)
   )
 
 (use-package evil-core
   :after magit
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>mc") 'magit-clone)
-  (evil-define-key 'normal 'global (kbd "<leader>ms") 'magit-status)
+  (evil-define-key 'normal 'global (kbd "<leader>mc") #'magit-clone)
+  (evil-define-key 'normal 'global (kbd "<leader>ms") #'magit-status)
   )
 
 (use-package evil-core
   :after org-roam
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>rb") 'dw/org-roam-capture-inbox)
-  (evil-define-key 'normal 'global (kbd "<leader>rd") 'org-roam-dailies-map)
-  (evil-define-key 'normal 'global (kbd "<leader>rf") 'org-roam-node-find)
-  (evil-define-key 'normal 'global (kbd "<leader>ri") 'org-roam-node-insert)
+  (evil-define-key 'normal 'global (kbd "<leader>rb") #'dw/org-roam-capture-inbox)
+  (evil-define-key 'normal 'global (kbd "<leader>rd") #'org-roam-dailies-map)
+  (evil-define-key 'normal 'global (kbd "<leader>rf") #'org-roam-node-find)
+  (evil-define-key 'normal 'global (kbd "<leader>ri") #'org-roam-node-insert)
   )
 
 (use-package evil-core
   :after org-roam-ui
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>ru") 'org-roam-ui-open)
+  (evil-define-key 'normal 'global (kbd "<leader>ru") #'org-roam-ui-open)
   )
 
 (use-package evil-core
   :after nerd-icons
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>in") 'nerd-icons-insert)
+  (evil-define-key 'normal 'global (kbd "<leader>in") #'nerd-icons-insert)
   )
 
 (use-package evil-collection
