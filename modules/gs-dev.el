@@ -241,6 +241,17 @@
   :defer t
   )
 
+(use-package flutter
+  :bind
+  (
+   :map dart-ts-mode-map
+   ([remap compile] . flutter-run-or-hot-reload)
+   )
+  :ensure t
+  :hook
+  (dart-ts-mode . flutter-test-mode)
+  )
+
 (use-package dart-ts-mode
   :after eglot
   :config

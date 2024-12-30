@@ -367,6 +367,7 @@ targets."
                               cider-repl-mode
                               compilation-mode
                               eat-mode
+                              flutter-mode
                               geiser-repl-mode
                               vterm-mode
                               inferior-emacs-lisp-mode

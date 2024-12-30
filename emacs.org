@@ -3611,6 +3611,29 @@ Dart is a language primarily used for [[https://flutter.dev/][Flutter]], a UI de
 
 #+end_src
 
+**** [[https://github.com/amake/flutter.el][Flutter]]
+
+#+begin_quote
+
+Flutter tools for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package flutter
+    :bind
+    (
+     :map dart-ts-mode-map
+     ([remap compile] . flutter-run-or-hot-reload)
+     )
+    :ensure t
+    :hook
+    (dart-ts-mode . flutter-test-mode)
+    )
+
+#+end_src
+
 **** [[https://github.com/gs-101/dart-ts-mode#lsp-client-integration][Language Server Integration]]
 
 #+begin_src emacs-lisp
@@ -5458,6 +5481,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
                                 cider-repl-mode
                                 compilation-mode
                                 eat-mode
+                                flutter-mode
                                 geiser-repl-mode
                                 vterm-mode
                                 inferior-emacs-lisp-mode
