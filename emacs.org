@@ -520,6 +520,21 @@ Incremental search minor mode.
 
 #+end_src
 
+*** Mode Local
+
+#+begin_quote
+
+There are buffer local variables (and there were frame local variables). This library gives the illusion of mode specific variables.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package mode-local
+    )
+
+#+end_src
+
 *** Mouse
 
 #+begin_quote
@@ -4753,6 +4768,7 @@ COmpletion in Region FUnction.
     :config
     (corfu-history-mode)
     (corfu-popupinfo-mode)
+    (setq-mode-local prog-mode corfu-auto t)
     :custom
     (corfu-auto-delay 0.0)
     (corfu-auto-prefix 2)
@@ -4762,8 +4778,6 @@ COmpletion in Region FUnction.
     :ensure t
     :init
     (global-corfu-mode)
-    :hook
-    (prog-mode . (lambda () (setq-local corfu-auto t)))
     )
 
 #+end_src
@@ -4774,8 +4788,8 @@ COmpletion in Region FUnction.
 
   (use-package corfu
     :after orderless
-    :hook
-    (corfu-mode . (lambda () (setq-local completion-styles '(minad/orderless-simple))))
+    :config
+    (setq-mode-local corfu-mode completion-styles '(minad/orderless-simple))
     )
 
 #+end_src
@@ -6789,12 +6803,11 @@ Multi-frame management independent of window systems.
 #+begin_src emacs-lisp
 
   (use-package frame
+    :config (setq-mode-local doc-view-mode blink-cursor-mode nil)
     :custom
     (window-divider-default-bottom-width 1)
     (window-divider-default-places t)
     (window-divider-default-right-width 1)
-    :hook
-    (doc-view-mode . (lambda () (setq-local blink-cursor-mode nil)))
     :init
     (window-divider-mode)
     )
@@ -6812,14 +6825,11 @@ Highlight the current line.
 #+begin_src emacs-lisp
 
   (use-package hl-line
+    :config
+    (mapc (lambda (mode)
+            (setq-mode-local mode global-hl-line-mode nil)))
     :init
     (global-hl-line-mode)
-    :hook
-    ;; Disable in some modes where I dislike how it looks
-    (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
-    (eat-mode . (lambda () (setq-local global-hl-line-mode nil)))
-    (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
-    (vundo-mode . (lambda () (setq-local global-hl-line-mode nil)))
     )
 
 #+end_src
@@ -7777,8 +7787,8 @@ Use a Gopher for walrus operators (~:=~).
     (defvar gs-101/go-prettify-symbols-alist
       '((":=" . ?))
       "Value for `prettify-symbols-alist' in `go-ts-mode'.")
+    (setq-mode-local prettify-symbols-alist gs-101/go-prettify-symbols-alist)
     :hook
-    (go-ts-mode . (lambda () (setq-local prettify-symbols-alist gs-101/go-prettify-symbols-alist)))
     (go-ts-mode . prettify-symbols-mode)
     )
 

@@ -42,25 +42,21 @@
   )
 
 (use-package frame
+  :config (setq-mode-local doc-view-mode blink-cursor-mode nil)
   :custom
   (window-divider-default-bottom-width 1)
   (window-divider-default-places t)
   (window-divider-default-right-width 1)
-  :hook
-  (doc-view-mode . (lambda () (setq-local blink-cursor-mode nil)))
   :init
   (window-divider-mode)
   )
 
 (use-package hl-line
+  :config
+  (mapc (lambda (mode)
+          (setq-mode-local mode global-hl-line-mode nil)))
   :init
   (global-hl-line-mode)
-  :hook
-  ;; Disable in some modes where I dislike how it looks
-  (dashboard-mode . (lambda () (setq-local global-hl-line-mode nil)))
-  (eat-mode . (lambda () (setq-local global-hl-line-mode nil)))
-  (vterm-mode . (lambda () (setq-local global-hl-line-mode nil)))
-  (vundo-mode . (lambda () (setq-local global-hl-line-mode nil)))
   )
 
 (use-package mouse
@@ -657,8 +653,8 @@ This advice replaces the rocket icon with a electric plug icon."
   (defvar gs-101/go-prettify-symbols-alist
     '((":=" . ?))
     "Value for `prettify-symbols-alist' in `go-ts-mode'.")
+  (setq-mode-local prettify-symbols-alist gs-101/go-prettify-symbols-alist)
   :hook
-  (go-ts-mode . (lambda () (setq-local prettify-symbols-alist gs-101/go-prettify-symbols-alist)))
   (go-ts-mode . prettify-symbols-mode)
   )
 

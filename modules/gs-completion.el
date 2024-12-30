@@ -115,6 +115,7 @@ Also adds `cape-file' as a fallback."
   :config
   (corfu-history-mode)
   (corfu-popupinfo-mode)
+  (setq-mode-local prog-mode corfu-auto t)
   :custom
   (corfu-auto-delay 0.0)
   (corfu-auto-prefix 2)
@@ -124,14 +125,12 @@ Also adds `cape-file' as a fallback."
   :ensure t
   :init
   (global-corfu-mode)
-  :hook
-  (prog-mode . (lambda () (setq-local corfu-auto t)))
   )
 
 (use-package corfu
   :after orderless
-  :hook
-  (corfu-mode . (lambda () (setq-local completion-styles '(minad/orderless-simple))))
+  :config
+  (setq-mode-local corfu-mode completion-styles '(minad/orderless-simple))
   )
 
 (use-package minibuffer
