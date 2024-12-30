@@ -5,9 +5,9 @@
   (citar-bibliography "~/Documents/Bibliography.bib")
   (citar-citeproc-csl-styles-dir "~/Documents/Zotero/styles/")
   (citar-citeproc-csl-style "harvard-cite-them-right.csl")
-  (citar-format-reference-function 'citar-citeproc-format-reference)
+  (citar-format-reference-function #'citar-citeproc-format-reference)
   (citar-library-paths '("~/Documents/Zotero/storage/"))
-  (citar-open-entry-function 'citar-open-entry-in-zotero)
+  (citar-open-entry-function #'citar-open-entry-in-zotero)
   (citar-templates '((main . "${author editor:30%sn}     ${date year issued:4}     ${title:48}") (suffix . "          ${=key= id:15}    ${tags keywords keywords:*}    ${abstract abstract:*}") (preview . "${author editor:%etal} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.
 ") (note . "Notes on ${author editor:%etal}, ${title}")))
   :hook
@@ -18,7 +18,7 @@
 (use-package citar-embark
   :after citar embark
   :custom
-  (citar-at-point-function 'embark-act)
+  (citar-at-point-function #'embark-act)
   :ensure t
   :hook
   (text-mode . citar-embark-mode)

@@ -75,14 +75,14 @@ with the mark active. This sets an inclusive region selection between them."
     (goto-char (+ pt 1)))
 
   (setf
-   (alist-get ?w avy-dispatch-alist) 'avy-action-copy
-   (alist-get ?W avy-dispatch-alist) 'karthinks/avy-action-copy-whole-line
-   (alist-get ?k avy-dispatch-alist) 'avy-action-kill-stay
-   (alist-get ?K avy-dispatch-alist) 'karthinks/avy-action-kill-whole-line
-   (alist-get ?  avy-dispatch-alist) 'karthinks/avy-action-mark-to-char ;; This is bound to a space!
-   (alist-get ?t avy-dispatch-alist) 'avy-action-teleport
-   (alist-get ?y avy-dispatch-alist) 'avy-action-yank
-   (alist-get ?Y avy-dispatch-alist) 'karthinks/avy-action-yank-whole-line
+   (alist-get ?w avy-dispatch-alist) #'avy-action-copy
+   (alist-get ?W avy-dispatch-alist) #'karthinks/avy-action-copy-whole-line
+   (alist-get ?k avy-dispatch-alist) #'avy-action-kill-stay
+   (alist-get ?K avy-dispatch-alist) #'karthinks/avy-action-kill-whole-line
+   (alist-get ?  avy-dispatch-alist) #'karthinks/avy-action-mark-to-char ;; This is bound to a space!
+   (alist-get ?t avy-dispatch-alist) #'avy-action-teleport
+   (alist-get ?y avy-dispatch-alist) #'avy-action-yank
+   (alist-get ?Y avy-dispatch-alist) #'karthinks/avy-action-yank-whole-line
    )
 
   :ensure t
@@ -101,7 +101,7 @@ using Helpful."
      (cdr (ring-ref avy-ring 0)))
     t)
 
-  (setf (alist-get ?H avy-dispatch-alist) 'karthinks/avy-action-helpful)
+  (setf (alist-get ?H avy-dispatch-alist) #'karthinks/avy-action-helpful)
   )
 
 (use-package casual-avy
@@ -231,7 +231,7 @@ using Helpful."
      (mapcar (lambda (r) (consult--convert-regexp r type)) input)
      (lambda (str) (orderless--highlight input t str))))
   :custom
-  (consult--regexp-compiler 'minad/consult--orderless-regexp-compiler)
+  (consult--regexp-compiler #'minad/consult--orderless-regexp-compiler)
   )
 
 (use-package embark
@@ -300,7 +300,7 @@ using Helpful."
 
 (use-package embark
   :after embark
-  :if (functionp 'karthinks/sudo-find-file)
+  :if (functionp #'karthinks/sudo-find-file)
   :bind
   (
    :map embark-file-map
@@ -362,7 +362,7 @@ targets."
   ("M-[" . popper-toggle)
   :custom
   (popper-display-control t)
-  (popper-group-function 'popper-group-by-project)
+  (popper-group-function #'popper-group-by-project)
   (popper-reference-buffers '(
                               cider-repl-mode
                               compilation-mode

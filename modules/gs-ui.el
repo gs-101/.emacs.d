@@ -224,7 +224,7 @@ If it is, enable `color-identifiers-mode'."
   :after dashboard
   :custom
   (dashboard-agenda-prefix-format "%-12t% s ")
-  (dashboard-agenda-tags-format 'ignore)
+  (dashboard-agenda-tags-format #'ignore)
   (dashboard-banner-logo-title "The Extensible Computing Enviroment")
   (dashboard-items '(
                      (agenda . 5)
@@ -438,7 +438,7 @@ This advice replaces the rocket icon with a electric plug icon."
     (setq this-command cmd
           keycast--this-command-keys (this-single-command-keys)
           keycast--this-command-desc cmd))
-  (advice-add 'embark-keymap-prompter :filter-return #'oantolin/keycast-store-action-key-cmd)
+  (advice-add #'embark-keymap-prompter :filter-return #'oantolin/keycast-store-action-key-cmd)
   (defun oantolin/keycast--update-force (&rest _)
     "Version of `keycast--update' that accepts (and ignore) parameters."
     (keycast--update))
@@ -592,7 +592,7 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package nerd-icons-corfu
   :after nerd-icons corfu
   :custom
-  (corfu-margin-formatters 'nerd-icons-corfu-formatter)
+  (corfu-margin-formatters #'nerd-icons-corfu-formatter)
   (nerd-icons-corfu-mapping '(
                                (array :style "md" :icon "code_array" :face font-lock-type-face)
                               (boolean :style "md" :icon "checkbox_intermediate" :face font-lock-builtin-face)

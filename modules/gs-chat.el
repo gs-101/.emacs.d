@@ -42,9 +42,9 @@
   :custom
   (message-kill-buffer-on-exit t)
   (message-mail-user-agent t)
-  (message-send-mail-function 'smtpmail-send-it)
   (smtpmail-smtp-server "!mailprovider")
   (smtpmail-local-domain "!domain")
+  (message-send-mail-function #'smtpmail-send-it)
   (smtpmail-smtp-service 465)
   (smtpmail-stream-type 'ssl)
   )

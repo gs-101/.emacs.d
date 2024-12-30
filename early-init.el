@@ -1,15 +1,15 @@
 ;;; -*- lexical-binding: t -*-
 
 ;; 1
-(if (and (featurep 'native-compile)
-         (fboundp 'native-comp-available-p)
+(if (and (featurep #'native-compile)
+         (fboundp #'native-comp-available-p)
          (native-comp-available-p))
     (setq native-comp-jit-compilation t
           package-native-compile t)
   ;; 2
-  (setq features (delq 'native-compile features)))
+  (setq features (delq #'native-compile features)))
 
-(when (fboundp 'startup-redirect-eln-cache)
+(when (fboundp #'startup-redirect-eln-cache)
   (startup-redirect-eln-cache
    (convert-standard-filename
     (expand-file-name  "var/eln-cache/" user-emacs-directory))))

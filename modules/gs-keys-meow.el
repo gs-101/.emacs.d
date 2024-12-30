@@ -251,8 +251,8 @@ This follows the parameters set by `meow-kill-whole-line'."
     (meow-block pt))
 
   (setf
-   (alist-get ?K avy-dispatch-alist) 'gs-101/meow-avy-action-kill-whole-line
-   (alist-get ?m avy-dispatch-alist) 'gs-101/meow-avy-action-block
+   (alist-get ?K avy-dispatch-alist) #'gs-101/meow-avy-action-kill-whole-line
+   (alist-get ?m avy-dispatch-alist) #'gs-101/meow-avy-action-block
    )
 
   (defun favetelinguis/meow-jumper (&optional arg)

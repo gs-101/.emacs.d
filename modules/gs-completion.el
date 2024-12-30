@@ -143,7 +143,7 @@ Also adds `cape-file' as a fallback."
 (use-package cape
   :after corfu cape
   :config
-  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster)
   )
 
 (use-package emacs
