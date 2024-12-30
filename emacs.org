@@ -1379,40 +1379,6 @@ Key bindings for default packages.
 
 #+end_src
 
-** Apropos
-
-#+begin_src emacs-lisp
-
-  (use-package apropos
-    :bind
-    ("<f1> a" . apropos)
-    ("<f1> A" . apropos-documentation)
-    )
-
-#+end_src
-
-** Custom
-
-#+begin_src emacs-lisp
-
-  (use-package custom
-    :bind
-    ("<f1> t" . load-theme)
-    )
-
-#+end_src
-
-** Describe Text
-
-#+begin_src emacs-lisp
-
-  (use-package descr-text
-    :bind
-    ("<f1> '". describe-char)
-    )
-
-#+end_src
-
 ** Development
 
 *** Compile
@@ -1587,17 +1553,6 @@ Key bindings for default packages.
 
 #+end_src
 
-** Find Function
-
-#+begin_src emacs-lisp
-
-  (use-package find-func
-    :bind
-    ("<f1> P" . find-library)
-    )
-
-#+end_src
-
 ** Git
 
 #+begin_src emacs-lisp
@@ -1628,19 +1583,7 @@ Key bindings for default packages.
 
   (use-package help
     :bind
-    ("<f1> M" . describe-minor-mode)
     ("C-h C-b" . describe-prefix-bindings)
-    )
-
-#+end_src
-
-** Help Functions
-
-#+begin_src emacs-lisp
-
-  (use-package help-fns
-    :bind
-    ("<f1> F" . describe-face)
     )
 
 #+end_src
@@ -1789,17 +1732,6 @@ Key bindings for default packages.
   (use-package paragraphs
     :bind
     ("M-h" . mark-paragraph)
-    )
-
-#+end_src
-
-** Profiler
-
-#+begin_src emacs-lisp
-
-  (use-package profiler
-    :bind
-    ("<f1> T" . profiler-start)
     )
 
 #+end_src

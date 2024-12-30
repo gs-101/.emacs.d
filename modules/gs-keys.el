@@ -5,22 +5,6 @@
   ("C-x |" . align-regexp)
   )
 
-(use-package apropos
-  :bind
-  ("<f1> a" . apropos)
-  ("<f1> A" . apropos-documentation)
-  )
-
-(use-package custom
-  :bind
-  ("<f1> t" . load-theme)
-  )
-
-(use-package descr-text
-  :bind
-  ("<f1> '". describe-char)
-  )
-
 (use-package compile
   :bind
   ("C-c c" . compile)
@@ -133,11 +117,6 @@ this calls `eval-last-sexp'."
   ("C-c q e" . save-buffers-kill-emacs)
   )
 
-(use-package find-func
-  :bind
-  ("<f1> P" . find-library)
-  )
-
 (use-package vc-git
   :bind
   ("M-s g v" . vc-git-grep)
@@ -152,13 +131,7 @@ this calls `eval-last-sexp'."
 
 (use-package help
   :bind
-  ("<f1> M" . describe-minor-mode)
   ("C-h C-b" . describe-prefix-bindings)
-  )
-
-(use-package help-fns
-  :bind
-  ("<f1> F" . describe-face)
   )
 
 (use-package ibuffer
@@ -241,11 +214,6 @@ this calls `eval-last-sexp'."
 (use-package paragraphs
   :bind
   ("M-h" . mark-paragraph)
-  )
-
-(use-package profiler
-  :bind
-  ("<f1> T" . profiler-start)
   )
 
 (use-package repeat
