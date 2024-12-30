@@ -6281,8 +6281,6 @@ Internal variables and customizable variables.
 #+begin_src emacs-lisp
 
   (use-package meow-var
-    :config
-    (add-to-list 'meow-char-thing-table '(?a . arrow))
     :custom
     (meow-use-clipboard t)
     )
