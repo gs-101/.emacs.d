@@ -10,8 +10,6 @@
   )
 
 (use-package meow-var
-  :config
-  (add-to-list 'meow-char-thing-table '(?a . arrow))
   :custom
   (meow-use-clipboard t)
   )
