@@ -157,6 +157,9 @@
   (minibuffer-electric-default-mode)
   )
 
+(use-package mode-local
+  )
+
 (use-package mouse
   :custom
   (mouse-yank-at-point t)
