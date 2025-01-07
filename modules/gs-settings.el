@@ -195,7 +195,7 @@
 
 (use-package paren
   :config
-  (set-face-attribute 'show-paren-match nil :box '(:line-width (-1 . -1)))
+  (set-face-attribute 'show-paren-match nil :foreground 'unspecified :box '(:line-width (-1 . -1)))
   :custom
   (show-paren-delay 0)
   :init
