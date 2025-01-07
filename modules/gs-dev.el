@@ -374,6 +374,16 @@ this calls `geiser-eval-last-sexp'."
   :ensure t
   )
 
+(use-package guix
+  :defer t
+  :ensure t
+  :hook
+  (dired-mode . guix-prettify-mode)
+  (scheme-mode . guix-devel-mode)
+  (shell-mode . guix-prettify-mode)
+  (shell-mode . guix-build-log-minor-mode)
+  )
+
 (use-package sh-script
   :bind
   (
