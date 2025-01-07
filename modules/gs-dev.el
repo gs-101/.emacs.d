@@ -448,8 +448,10 @@ If it is, enable `aggressive-indent-mode'."
    ("C-p" . copilot-previous-completion)
    )
   :config
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
-  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  (dolist (pair '((clojure-ts-mode lisp-indent-offset)
+                  (scheme-mode lisp-indent-offset)
+                  (org-mode 2)))
+    (add-to-list 'copilot-indentation-alist pair))
   )
 
 (use-package combobulate
