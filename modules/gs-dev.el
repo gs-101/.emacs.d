@@ -246,6 +246,7 @@
   (
    :map dart-ts-mode-map
    ([remap compile] . flutter-run-or-hot-reload)
+   ("C-c C-c" . flutter-run-or-hot-reload)
    )
   :ensure t
   :hook
