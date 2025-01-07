@@ -1036,26 +1036,6 @@ Minor mode to automatically balance window margins.
 
 #+end_src
 
-*** [[https://github.com/abougouffa/one-tab-per-project][One Tab Per Project]]
-
-#+begin_quote
-
-Automatically create a tab per project, providing a light tab-bar based workspace management for Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package otpp
-    :after project
-    :config
-    (otpp-mode)
-    (otpp-override-mode)
-    :ensure t
-    )
-
-#+end_src
-
 *** [[https://github.com/purcell/exec-path-from-shell][Path from Shell]]
 
 #+begin_quote

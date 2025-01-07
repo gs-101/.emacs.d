@@ -356,14 +356,6 @@
   :ensure t
   )
 
-(use-package otpp
-  :after project
-  :config
-  (otpp-mode)
-  (otpp-override-mode)
-  :ensure t
-  )
-
 (use-package exec-path-from-shell
   :ensure t
   :init
