@@ -289,7 +289,7 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package keycast
   :config
-  (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil)
+  (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified)
   :ensure t
   :init
   (define-minor-mode keycast-mode
@@ -323,7 +323,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (with-selected-frame frame
-                (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil))))
+                (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified))))
   )
 
 (use-package keycast

@@ -7270,7 +7270,7 @@ Show current command and its key in the mode line.
 
   (use-package keycast
     :config
-    (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil)
+    (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified)
     :ensure t
     :init
     (define-minor-mode keycast-mode
@@ -7316,7 +7316,7 @@ Show current command and its key in the mode line.
     (add-hook 'after-make-frame-functions
               (lambda (frame)
                 (with-selected-frame frame
-                  (set-face-attribute 'keycast-key nil :background nil :foreground "default" :box nil))))
+                  (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified))))
     )
 
 #+end_src
