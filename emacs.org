@@ -2537,6 +2537,34 @@ Toggle visibility of hidden Org mode element parts upon entering and leaving an 
 
 #+end_src
 
+** [[https://git.sr.ht/~bzg/org-contrib][Contrib]]
+
+Add-ons for Org Mode.
+
+#+begin_src emacs-lisp
+
+  (use-package org-contrib
+    :after org
+    :ensure t
+    )
+
+#+end_src
+
+*** Ox Extra
+
+Additional functionality for Org Mode exporters.
+
+#+begin_src emacs-lisp
+
+  (use-package ox-extra
+    :after org
+    :config
+    ;; Use the :ignore: tag to export content without the heading
+    (ox-extras-activate '(latex-header-blocks ignore-headlines))
+    )
+
+#+end_src
+
 ** [[https://github.com/nobiot/org-remark][Remark]]
 
 #+begin_quote

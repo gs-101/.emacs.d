@@ -315,6 +315,18 @@ allowFullScreen>
   (org-mode . org-appear-mode)
   )
 
+(use-package org-contrib
+  :after org
+  :ensure t
+  )
+
+(use-package ox-extra
+  :after org
+  :config
+  ;; Use the :ignore: tag to export content without the heading
+  (ox-extras-activate '(latex-header-blocks ignore-headlines))
+  )
+
 (use-package org-remark
   :bind
   (
