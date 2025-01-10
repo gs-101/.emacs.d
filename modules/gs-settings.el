@@ -207,11 +207,6 @@
   (password-cache-expiry 60)
   )
 
-(use-package pixel-scroll
-  :init
-  (pixel-scroll-precision-mode)
-  )
-
 (use-package savehist
   :custom
   (history-length 300)
@@ -376,6 +371,15 @@
                            "|sudo@root@"
                            (file-remote-p file 'host) ":" (file-remote-p file 'localname))
                  (concat "/sudo:root@localhost:" file))))
+  )
+
+(use-package ultra-scroll
+  :vc (:url "https://github.com/jdtsmith/ultra-scroll")
+  :custom
+  (scroll-conservatively 101)
+  (scroll-margin 0)
+  :init
+  (ultra-scroll-mode)
   )
 
 (use-package vundo

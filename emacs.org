@@ -667,23 +667,6 @@ Read passwords, possibly using a password cache.
 
 #+end_src
 
-*** Pixel Scroll
-
-#+begin_quote
-
-Scroll a line smoothly.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package pixel-scroll
-    :init
-    (pixel-scroll-precision-mode)
-    )
-
-#+end_src
-
 *** Save History
 
 #+begin_quote
@@ -1074,6 +1057,21 @@ Like [[https://github.com/nflath/sudo-edit][sudo-edit]], but just a single, non-
                              "|sudo@root@"
                              (file-remote-p file 'host) ":" (file-remote-p file 'localname))
                    (concat "/sudo:root@localhost:" file))))
+    )
+
+#+end_src
+
+*** [[https://github.com/jdtsmith/ultra-scroll][ultra-scroll]]
+
+#+begin_src emacs-lisp
+
+  (use-package ultra-scroll
+    :vc (:url "https://github.com/jdtsmith/ultra-scroll")
+    :custom
+    (scroll-conservatively 101)
+    (scroll-margin 0)
+    :init
+    (ultra-scroll-mode)
     )
 
 #+end_src
