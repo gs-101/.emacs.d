@@ -4490,12 +4490,12 @@ Projectile like project management library built on Emacs project.el.
 
 #+begin_src emacs-lisp
 
-    (use-package projection-multi-embark
-      :after projection compile-multi embark
-      :ensure t
-      :config
-      (projection-multi-embark-setup-command-map)
-      )
+  (use-package projection-multi-embark
+    :after projection compile-multi embark
+    :ensure t
+    :config
+    (projection-multi-embark-setup-command-map)
+    )
 
 #+end_src
 
