@@ -263,13 +263,8 @@ using Helpful."
   :ensure t
   )
 
-(use-package avy-embark-collect
+(use-package embark
   :after embark avy
-  :bind
-  (
-   :map embark-collect-mode-map
-   ([remap goto-char] . avy-embark-collect-act)
-   )
   :config
   (defun karthinks/avy-action-embark (pt)
     "Jump to target at marker PT, and act on it using Embark."
@@ -281,13 +276,10 @@ using Helpful."
        (cdr (ring-ref avy-ring 0)))))
 
   (setf (alist-get ?\; avy-dispatch-alist) 'karthinks/avy-action-embark)
-  :demand t
-  :ensure t
   )
 
 (use-package embark-consult
   :defer t
-  :ensure t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode)
   )
