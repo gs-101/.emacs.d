@@ -7737,7 +7737,12 @@ Use a Gopher for walrus operators (~:=~).
 :CUSTOM_ID: prism
 :END:
 
+#+begin_quote
+
 Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
+
+#+end_quote
+
 
 #+begin_src emacs-lisp
 
