@@ -5766,25 +5766,6 @@ OrgMsg is a GNU/Emacs global minor mode mixing up Org mode and Message mode to c
 
 #+end_src
 
-** [[https://codeberg.org/emacs-jabber/emacs-jabber][Jabber]]
-
-#+begin_quote
-
-Jabber/XMPP client for Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package jabber
-    :bind-keymap
-    ("C-z j" . jabber-global-keymap)
-    :defer t
-    :ensure t
-    )
-
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp

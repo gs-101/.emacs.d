@@ -83,11 +83,4 @@ Gabriel Santos
   (org-msg-mode)
   )
 
-(use-package jabber
-  :bind-keymap
-  ("C-z j" . jabber-global-keymap)
-  :defer t
-  :ensure t
-  )
-
 (provide 'gs-chat)
