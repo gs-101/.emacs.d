@@ -610,7 +610,7 @@ this calls `geiser-eval-last-sexp'."
   :vc (:url "https://github.com/magit/forge")
   :after magit
   :bind
-  ("C-c v '". forge-dispatch)
+  ("C-c v '" . forge-dispatch)
   ("C-c v c i" . forge-create-issue)
   ("C-c v c p" . forge-create-pullreq)
   ("C-c v f c" . forge-browse-commit)
