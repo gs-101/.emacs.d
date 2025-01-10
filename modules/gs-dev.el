@@ -266,12 +266,6 @@
   (dart-ts-mode . flutter-test-mode)
   )
 
-(use-package dart-ts-mode
-  :after eglot
-  :config
-  (add-to-list 'eglot-server-programs
-               '(dart-ts-mode . ("dart" "language-server" "--client-id" "emacs.eglot-dart"))))
-
 (use-package go-ts-mode
   :bind
   (

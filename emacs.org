@@ -3673,18 +3673,6 @@ Flutter tools for Emacs.
 
 #+end_src
 
-**** [[https://github.com/gs-101/dart-ts-mode#lsp-client-integration][Language Server Integration]]
-
-#+begin_src emacs-lisp
-
-  (use-package dart-ts-mode
-    :after eglot
-    :config
-    (add-to-list 'eglot-server-programs
-                 '(dart-ts-mode . ("dart" "language-server" "--client-id" "emacs.eglot-dart"))))
-
-#+end_src
-
 *** Go
 
 #+begin_quote
