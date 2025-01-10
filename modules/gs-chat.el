@@ -42,7 +42,6 @@
   )
 
 (use-package message
-  :after mu4e
   :custom
   (message-kill-buffer-on-exit t)
   (message-mail-user-agent t)

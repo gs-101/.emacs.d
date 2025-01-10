@@ -5706,7 +5706,6 @@ maildir indexer/searcher + emacs mail client + guile bindings.
 #+begin_src emacs-lisp
 
   (use-package message
-    :after mu4e
     :custom
     (message-kill-buffer-on-exit t)
     (message-mail-user-agent t)
