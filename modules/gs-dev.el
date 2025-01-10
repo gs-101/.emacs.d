@@ -431,8 +431,7 @@ this calls `geiser-eval-last-sexp'."
   :vc (:url "https://github.com/Malabarba/aggressive-indent-mode")
   :config
   (defun gs-101/aggressive-indent-mode-lisp ()
-    "Check if MAJOR-MODE is a Lisp mode.
-If it is, enable `aggressive-indent-mode'."
+    "Enable `aggressive-indent-mode' in Lisp modes."
     (when (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
       (aggressive-indent-mode))
     (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
@@ -488,7 +487,7 @@ If it is, enable `aggressive-indent-mode'."
    )
   :config
   (defun cxa/activate-combobulate-on-ts-mode ()
-    "Check if MAJOR MODE is a tree-sitter mode. If it is, enable `combobulate-mode'."
+    "Enable `combobulate-mode' in tree-sitter modes."
     (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
       (combobulate-mode)))
   :custom

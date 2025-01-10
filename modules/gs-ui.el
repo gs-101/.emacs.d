@@ -179,8 +179,9 @@
   :ensure t
   :config
   (defun gs-101/color-identifiers-toggle-on-ts-mode ()
-    "Check if MAJOR MODE is a tree-sitter mode.
-If it is, enable `color-identifiers-mode'."
+    "Enable `color-identifiers-mode' in tree-sitter modes.
+
+Disable if `prism-mode' is currently enabled on the buffer."
     (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
       (color-identifiers-mode))
     (when (bound-and-true-p prism-mode)
@@ -593,8 +594,7 @@ This advice replaces the rocket icon with a electric plug icon."
   :vc (:url "https://github.com/alphapapa/prism.el")
   :config
   (defun gs-101/prism-mode-lisp ()
-    "Check if MAJOR-MODE is a Lisp mode.
-If it is, enable `prism-mode'."
+    "Enable `prism-mode' in Lisp modes."
     (when (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
       (prism-mode))
     (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
