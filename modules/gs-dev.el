@@ -314,25 +314,6 @@
   (envrc-global-mode)
   )
 
-(use-package pet
-  :custom
-  (pet-toml-to-json-program "yq")
-  :ensure t
-  ;; :hook
-  ;; (eglot-server-initialized . pet-eglot-setup)
-  )
-
-(use-package auto-virtualenvwrapper
-  :ensure t
-  :hook
-  (python-base-mode . (lambda ()
-                        (auto-virtualenvwrapper-activate)
-                        (pet-mode)
-                        (setq-local
-                         python-shell-interpreter (pet-executable-find "python")
-                         python-shell-virtualenv-root (pet-virtualenv-root))))
-  )
-
 (use-package python-pytest
   :vc (:url "https://github.com/wbolster/emacs-python-pytest")
   :bind
