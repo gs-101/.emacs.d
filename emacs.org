@@ -4752,21 +4752,21 @@ Simple templates for Emacs.
 
 #+end_src
 
-*** [[https://github.com/fejfighter/eglot-tempel][Eglot]]
+*** [[https://github.com/svaante/lsp-snippet][lsp-snippet]]
 
 #+begin_quote
 
-Bridge for tempel templates with eglot.
+Templating agnostic LSP snippets.
 
 #+end_quote
 
 #+begin_src emacs-lisp
 
-  (use-package eglot-tempel
-    :after eglot tempel
-    :ensure t
+  (use-package lsp-snippet
+    :after tempel eglot
+    :vc (:url "https://github.com/svaante/lsp-snippet")
     :config
-    (eglot-tempel-mode)
+    (lsp-snippet-tempel-eglot-init)
     )
 
 #+end_src

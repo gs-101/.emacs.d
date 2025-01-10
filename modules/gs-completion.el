@@ -95,11 +95,11 @@ Also adds `cape-file' as a fallback."
   :ensure t
   )
 
-(use-package eglot-tempel
-  :after eglot tempel
-  :ensure t
+(use-package lsp-snippet
+  :after tempel eglot
+  :vc (:url "https://github.com/svaante/lsp-snippet")
   :config
-  (eglot-tempel-mode)
+  (lsp-snippet-tempel-eglot-init)
   )
 
 (use-package tempel-snippets
