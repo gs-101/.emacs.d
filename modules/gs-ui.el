@@ -574,7 +574,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (defvar gs-101/go-prettify-symbols-alist
     '((":=" . ?))
     "Value for `prettify-symbols-alist' in `go-ts-mode'.")
-  (setq-mode-local prettify-symbols-alist gs-101/go-prettify-symbols-alist)
+  (setq-mode-local go-ts-mode prettify-symbols-alist gs-101/go-prettify-symbols-alist)
   :hook
   (go-ts-mode . prettify-symbols-mode)
   )
