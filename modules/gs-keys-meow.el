@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package meow
+  :vc (:url "https://github.com/meow-edit/meow")
   :ensure t
   )
 
@@ -265,6 +266,7 @@ Otherwise, it calls `avy-goto-char-timer'."
   )
 
 (use-package meow-tree-sitter
+  :vc (:url "https://github.com/skissue/meow-tree-sitter")
   :ensure t
   :config
   (meow-tree-sitter-register-defaults)

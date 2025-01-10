@@ -166,6 +166,7 @@
   )
 
 (use-package eglot-inactive-regions
+  :vc (:url "https://github.com/fargiolas/eglot-inactive-regions")
   :ensure t
   :custom
   (eglot-inactive-regions-style 'darken-foreground)
@@ -182,6 +183,7 @@
   )
 
 (use-package eglot-signature-eldoc-talkative
+  :vc (:url "https://codeberg.org/mekeor/eglot-signature-eldoc-talkative")
   :after eglot
   :config
   (advice-add #'eglot-signature-eldoc-function :override #'eglot-signature-eldoc-talkative)
@@ -216,6 +218,7 @@
   )
 
 (use-package clojure-ts-mode
+  :vc (:url "https://github.com/clojure-emacs/clojure-ts-mode")
   :custom
   (clojure-ts-comment-macro-font-lock-body t)
   (clojure-ts-indent-style 'fixed)
@@ -225,6 +228,7 @@
   )
 
 (use-package cider
+  :vc (:url "https://github.com/clojure-emacs/cider")
   :after clojure-ts-mode
   :bind
   (
@@ -239,9 +243,11 @@
 (use-package dart-ts-mode
   :vc (:url "https://github.com/50ways2sayhard/dart-ts-mode")
   :defer t
+  :ensure t
   )
 
 (use-package flutter
+  :vc (:url "https://github.com/amake/flutter.el")
   :bind
   (
    :map dart-ts-mode-map
@@ -301,9 +307,10 @@
   )
 
 (use-package envrc
+  :vc (:url "https://github.com/purcell/envrc")
   :ensure t
-  :hook
-  (change-major-mode-after-body . envrc-mode)
+  :init
+  (envrc-global-mode)
   )
 
 (use-package pet
@@ -326,6 +333,7 @@
   )
 
 (use-package python-pytest
+  :vc (:url "https://github.com/wbolster/emacs-python-pytest")
   :bind
   (
    :map python-base-mode-map
@@ -335,10 +343,12 @@
   )
 
 (use-package cargo-transient
+  :vc (:url "https://github.com/peterstuart/cargo-transient")
   :after rust-ts-mode
   :bind
   (
    :map rust-ts-mode-map
+   ("C-c C-c" . compile)
    ("C-c C-p" . cargo-transient)
    )
   :ensure t
@@ -346,7 +356,17 @@
   (cargo-transient-buffer-name-function #'project-prefixed-buffer-name)
   )
 
+(use-package geiser
+  :vc
+  (
+   :url "https://gitlab.com/emacs-geiser/geiser"
+   :lisp-dir "elisp"
+   )
+  :ensure t
+  )
+
 (use-package geiser-guile
+  :vc (:url "https://gitlab.com/emacs-geiser/guile")
   :bind
   (
    :map scheme-mode-map
@@ -407,6 +427,7 @@ this calls `geiser-eval-last-sexp'."
   )
 
 (use-package aggressive-indent
+  :vc (:url "https://github.com/Malabarba/aggressive-indent-mode")
   :config
   (defun gs-101/aggressive-indent-mode-lisp ()
     "Check if MAJOR-MODE is a Lisp mode.
@@ -424,6 +445,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package apheleia
+  :vc (:url "https://github.com/radian-software/apheleia")
   :ensure t
   :config
   (setf (alist-get 'clang-format apheleia-formatters)
@@ -437,6 +459,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package copilot
+  :vc (:url "https://github.com/copilot-emacs/copilot.el")
   :ensure t
   :bind
   (
@@ -476,6 +499,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package dape
+  :vc (:url "https://github.com/svaante/dape")
   :defer t
   :ensure t
   :hook
@@ -483,6 +507,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package exercism
+  :vc (:url "https://github.com/anonimitoraf/exercism.el")
   :commands
   (exercism)
   :custom
@@ -492,11 +517,13 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package git-modes
+  :vc (:url "https://github.com/magit/git-modes")
   :defer t
   :ensure t
   )
 
 (use-package gptel
+  :vc (:url "https://github.com/karthink/gptel")
   :bind
   ("C-z g b" . gptel)
   ("C-z g DEL" . gptel-abort)
@@ -544,6 +571,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package leetcode
+  :vc (:url "https://github.com/kaiwk/leetcode.el")
   :custom
   (leetcode-directory (convert-standard-filename (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
   (leetcode--paid "$")
@@ -554,6 +582,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package magit
+  :vc (:url "https://github.com/magit/magit")
   :bind
   ("C-c v B" . magit-blame)
   ("C-c v C" . magit-clone)
@@ -578,6 +607,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package forge
+  :vc (:url "https://github.com/magit/forge")
   :after magit
   :bind
   ("C-c v '". forge-dispatch)
@@ -594,6 +624,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package orgit
+  :vc (:url "https://github.com/magit/orgit")
   :after magit
   :bind
   (
@@ -646,6 +677,7 @@ If it is, enable `aggressive-indent-mode'."
   )
 
 (use-package puni
+  :vc (:url "https://github.com/AmaiKinono/puni")
   :bind
   (
    :map puni-mode-map
@@ -697,6 +729,7 @@ rectangular region instead."
   )
 
 (use-package wakatime-mode
+  :vc (:url "https://github.com/wakatime/wakatime-mode")
   :custom
   (wakatime-api-key (auth-source-pick-first-password :host "wakatime.com"))
   :ensure t

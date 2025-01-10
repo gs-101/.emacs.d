@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package eat
+  :vc (:url "https://codeberg.org/akib/emacs-eat")
   :bind
   ([remap shell] . eat)
   :ensure t

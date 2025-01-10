@@ -1,7 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package mu4e
-  :load-path "/usr/share/emacs/site-lisp/mu4e/"
+  :vc (
+       :url "https://github.com/djcb/mu"
+       :lisp-dir "mu4e"
+       )
   :commands
   (mu4e)
   :custom
@@ -25,6 +28,7 @@
   )
 
 (use-package mu4e-column-faces
+  :vc (:url "https://github.com/Alexander-Miller/mu4e-column-faces")
   :after mu4e
   :config
   (mu4e-column-faces-mode)
@@ -56,6 +60,7 @@
   )
 
 (use-package org-msg
+  :vc (:url "https://github.com/jeremy-compostella/org-msg")
   :after mu4e
   :custom
   (org-msg-greeting-fmt "\nGreetings,\n\n")
@@ -69,6 +74,7 @@
    "Regards,
 
 #+begin_signature
+
 --
 Gabriel Santos
 #+end_signature"

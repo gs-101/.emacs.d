@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package orderless
+  :vc (:url "https://github.com/oantolin/orderless")
   :config
   (orderless-define-completion-style minad/orderless-initialism
     (orderless-matching-styles '(
@@ -51,6 +52,7 @@
   )
 
 (use-package cape
+  :vc (:url "https://github.com/minad/cape")
   :ensure t
   :hook
   (completion-at-point-functions . cape-dabbrev)
@@ -87,6 +89,7 @@ Also adds `cape-file' as a fallback."
   )
 
 (use-package tempel
+  :vc (:url "https://github.com/minad/tempel")
   :bind
   ("C-z i s" . tempel-insert)
   :ensure t
@@ -199,6 +202,7 @@ Hidden directories have a higher priority."
   )
 
 (use-package marginalia
+  :vc (:url "https://github.com/minad/marginalia")
   :ensure t
   :init
   (marginalia-mode)

@@ -1,12 +1,14 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package alert
+  :vc (:url "https://github.com/jwiegley/alert")
   :custom
   (alert-default-style 'notifications)
   :ensure t
   )
 
 (use-package pomm
+  :vc (:url "https://github.com/SqrtMinusOne/pomm.el")
   :config
   (pomm-mode-line-mode)
   :custom
@@ -19,6 +21,7 @@
   )
 
 (use-package avy
+  :vc (:url "https://github.com/abo-abo/avy")
   :bind
   ("M-g a" . avy-goto-char-timer)
   ([remap goto-char] . avy-goto-char)
@@ -111,6 +114,7 @@ using Helpful."
   )
 
 (use-package consult
+  :vc (:url "https://github.com/minad/consult")
   :bind
   (
    ([remap bookmark-jump] . consult-bookmark)
@@ -167,6 +171,7 @@ using Helpful."
   )
 
 (use-package consult-dir
+  :vc (:url "https://github.com/karthink/consult-dir")
   :after consult
   :bind
   ([remap list-directory] . consult-dir)
@@ -175,6 +180,7 @@ using Helpful."
   )
 
 (use-package consult-gh
+  :vc (:url "https://github.com/armindarvish/consult-gh")
   :after consult
   :custom
   (consult-gh-code-action #'consult-gh--code-view-action)
@@ -186,7 +192,6 @@ using Helpful."
 
 (use-package consult-gh-embark
   :after consult-gh embark
-  :ensure t
   )
 
 (use-package consult-gh-forge
@@ -196,7 +201,6 @@ using Helpful."
   (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
   (consult-gh-pr-action #'consult-gh--forge-pr-view-action)
   (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
-  :ensure t
   )
 
 (use-package consult-gh-transient
@@ -204,6 +208,7 @@ using Helpful."
   )
 
 (use-package consult-notes
+  :vc (:url "https://github.com/mclear-tools/consult-notes")
   :ensure t
   )
 
@@ -235,6 +240,7 @@ using Helpful."
   )
 
 (use-package embark
+  :vc (:url "https://github.com/oantolin/embark")
   :bind
   ([remap describe-bindings]. embark-bindings)
   ("C-;" . embark-act)
@@ -357,6 +363,7 @@ targets."
   )
 
 (use-package popper
+  :vc (:url "https://github.com/karthink/popper")
   :bind
   ("M-]" . popper-cycle)
   ("M-[" . popper-toggle)
@@ -397,6 +404,7 @@ targets."
   )
 
 (use-package uniline
+  :vc (:url "https://github.com/tbanel/uniline")
   :bind
   ("C-z i l" . uniline-mode)
   :ensure t

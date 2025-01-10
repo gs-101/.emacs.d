@@ -282,7 +282,15 @@
   (warning-suppress-log-types '((comp) (bytecomp)))
   )
 
+(use-package gcmh
+  :vc (:url "https://github.com/emacsmirror/gcmh")
+  :ensure t
+  :init
+  (gcmh-mode)
+  )
+
 (use-package disproject
+  :vc (:url "https://github.com/aurtzy/disproject")
   :bind
   (
    :map ctl-x-map
@@ -291,13 +299,8 @@
   :ensure t
   )
 
-(use-package gcmh
-  :ensure t
-  :init
-  (gcmh-mode)
-  )
-
 (use-package markdown-mode
+  :vc (:url "https://github.com/jrblevin/markdown-mode")
   :defer t
   :ensure t
   :custom
@@ -310,6 +313,7 @@
   )
 
 (use-package no-littering
+  :vc (:url "https://github.com/emacscollective/no-littering")
   :ensure t
   :init
   (no-littering-theme-backups)
@@ -345,6 +349,7 @@
   )
 
 (use-package olivetti
+  :vc (:url "https://github.com/rnkn/olivetti")
   :custom
   (olivetti-body-width 132)
   :defer t
@@ -352,6 +357,7 @@
   )
 
 (use-package exec-path-from-shell
+  :vc (:url "https://github.com/purcell/exec-path-from-shell")
   :ensure t
   :init
   (setq exec-path-from-shell-arguments nil)
@@ -383,6 +389,7 @@
   )
 
 (use-package vundo
+  :vc (:url "https://github.com/casouri/vundo")
   :bind
   (
    ([remap undo] . vundo)

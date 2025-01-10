@@ -166,12 +166,14 @@
   )
 
 (use-package evil-collection
+  :vc (:url "https://github.com/emacs-evil/evil-collection")
   :ensure t
   :init
   (evil-collection-init)
   )
 
 (use-package evil-org
+  :vc (:url "https://github.com/Somelauw/evil-org-mode")
   :hook
   (
    (org-agenda-mode . evil-org-mode)

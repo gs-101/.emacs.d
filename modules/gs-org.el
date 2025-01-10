@@ -65,10 +65,12 @@
   )
 
 (use-package ob-dart
+  :vc (:url "https://github.com/mzimmerm/ob-dart")
   :after org
   :ensure t
   :config
-  (add-to-list 'org-babel-load-languages '(dart . t)))
+  (add-to-list 'org-babel-load-languages '(dart . t))
+  )
 
 (use-package ob-http
   :vc (:url "https://github.com/ag91/ob-http")
@@ -224,6 +226,7 @@ allowFullScreen>
   )
 
 (use-package engrave-faces
+  :vc (:url "https://code.tecosaur.net/tec/engrave-faces")
   :after ox-latex
   :ensure t
   :custom
@@ -300,12 +303,14 @@ allowFullScreen>
   )
 
 (use-package org-fragtog
+  :vc (:url "https://github.com/io12/org-fragtog")
   :ensure t
   :hook
   (org-mode . org-fragtog-mode)
   )
 
 (use-package org-appear
+  :vc (:url "https://github.com/awth13/org-appear")
   :custom
   (org-appear-autoentities t)
   (org-appear-autolinks t)
@@ -328,6 +333,7 @@ allowFullScreen>
   )
 
 (use-package org-remark
+  :vc (:url "https://github.com/nobiot/org-remark")
   :bind
   (
    :map org-remark-mode-map

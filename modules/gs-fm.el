@@ -67,6 +67,7 @@
   )
 
 (use-package ready-player
+  :vc (:url "https://github.com/xenodium/ready-player")
   :custom
   (ready-player-previous-icon "󰒮")
   (ready-player-play-icon "󰐊")
@@ -84,6 +85,7 @@
   )
 
 (use-package show-font
+  :vc (:url "https://github.com/protesilaos/show-font")
   :ensure t
   )
 

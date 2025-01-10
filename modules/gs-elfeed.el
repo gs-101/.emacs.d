@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package elfeed
+  :vc (:url "https://github.com/skeeto/elfeed")
   :bind
   (
    :map elfeed-search-mode-map
@@ -21,6 +22,7 @@ marking all current messages as read."
   )
 
 (use-package elfeed-org
+  :vc (:url "https://github.com/remyhonig/elfeed-org")
   :after elfeed org
   :config
   (elfeed-org)

@@ -155,6 +155,7 @@
   )
 
 (use-package org-roam-ui
+  :vc (:url "https://github.com/org-roam/org-roam-ui")
   :bind
   ("C-z r u" . org-roam-ui-open)
   :custom

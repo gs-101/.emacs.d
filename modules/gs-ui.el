@@ -108,6 +108,7 @@
   )
 
 (use-package org-modern
+  :vc (:url "https://github.com/minad/org-modern")
   :custom
   (org-modern-star 'replace)
   (org-modern-replace-stars "󰪥󰪤󰪣󰪢󰪡󰪠󰪟")
@@ -174,6 +175,7 @@
   )
 
 (use-package color-identifiers-mode
+  :vc (:url "https://github.com/ankurdave/color-identifiers-mode")
   :ensure t
   :config
   (defun gs-101/color-identifiers-toggle-on-ts-mode ()
@@ -188,10 +190,12 @@ If it is, enable `color-identifiers-mode'."
   )
 
 (use-package doom-modeline
+  :vc (:url "https://github.com/seagle0128/doom-modeline")
   :config
   (advice-add #'doom-modeline-lsp-icon :override
               (defun gs-101/doom-modeline-lsp-icon (text face)
                 "Display LSP icon (or TEXT in terminal) with FACE.
+
 This advice replaces the rocket icon with a electric plug icon."
                 (if doom-modeline-lsp-icon
                     (doom-modeline-icon 'mdicon "nf-md-connection" "🔌" text :face face)
@@ -216,12 +220,14 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package diredfl
+  :vc (:url "https://github.com/purcell/diredfl")
   :ensure t
   :hook
   (dired-mode . diredfl-mode)
   )
 
 (use-package eldoc-box
+  :vc (:url "https://github.com/casouri/eldoc-box")
   :after eldoc
   :ensure t
   :hook
@@ -229,6 +235,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package helpful
+  :vc (:url "https://github.com/Wilfred/helpful")
   :bind
   ([remap describe-command] . helpful-command)
   ([remap describe-function] . helpful-callable)
@@ -241,6 +248,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package hl-todo
+  :vc (:url "https://github.com/tarsius/hl-todo")
   :custom
   (hl-todo-keyword-faces '(
                            ("FIXME" . "red")
@@ -288,6 +296,7 @@ This advice replaces the rocket icon with a electric plug icon."
 )
 
 (use-package keycast
+  :vc (:url "https://github.com/tarsius/keycast")
   :config
   (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified)
   :ensure t
@@ -343,6 +352,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package ligature
+  :vc (:url "https://github.com/mickeynp/ligature.el")
   :config
   (ligature-set-ligatures 't '("www"))
   ;; Enable traditional ligature support in eww-mode, if the `variable-pitch' face supports it
@@ -415,6 +425,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package nerd-icons
+  :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
   :bind
   ("C-z i n" . nerd-icons-insert)
   :demand t
@@ -469,6 +480,7 @@ This advice replaces the rocket icon with a electric plug icon."
     )
 
 (use-package nerd-icons-completion
+  :vc (:url "https://github.com/rainstormstudio/nerd-icons-completion")
   :after nerd-icons
   :ensure t
   :config
@@ -487,6 +499,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package nerd-icons-corfu
+  :vc (:url "https://github.com/LuigiPiucco/nerd-icons-corfu")
   :after nerd-icons corfu
   :custom
   (corfu-margin-formatters #'nerd-icons-corfu-formatter)
@@ -532,6 +545,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package nerd-icons-dired
+  :vc (:url "https://github.com/rainstormstudio/nerd-icons-dired")
   :after nerd-icons
   :ensure t
   :hook
@@ -560,6 +574,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package nerd-icons-ibuffer
+  :vc (:url "https://github.com/seagle0128/nerd-icons-ibuffer")
   :after nerd-icons
   :ensure t
   :hook
@@ -567,6 +582,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package magit-file-icons
+  :vc (:url "https://github.com/gekoke/magit-file-icons")
   :after nerd-icons magit
   :ensure t
   :hook
@@ -574,6 +590,7 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package prism
+  :vc (:url "https://github.com/alphapapa/prism.el")
   :config
   (defun gs-101/prism-mode-lisp ()
     "Check if MAJOR-MODE is a Lisp mode.
