@@ -125,26 +125,6 @@ Simple package system [...].
 
 #+end_src
 
-** use-package
-
-#+begin_quote
-
-A configuration macro for simplifying your .emacs.
-
-#+end_quote
-
-If ~use-package~ is not installed, refresh the package list and install it¹.
-
-#+begin_src emacs-lisp
-
-  ;; 1
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-  (eval-when-compile (require 'use-package))
-
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp

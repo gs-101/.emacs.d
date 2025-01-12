@@ -8,10 +8,4 @@
         ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
         ))
 
-;; 1
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile (require 'use-package))
-
 (provide 'gs-package)
