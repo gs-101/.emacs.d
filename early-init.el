@@ -9,6 +9,10 @@
   ;; 2
   (setq features (delq #'native-compile features)))
 
+;; Disable package initialization on startup
+;; packages are only used in the modules.
+(setq package-enable-at-startup nil)
+
 (when (fboundp #'startup-redirect-eln-cache)
   (startup-redirect-eln-cache
    (convert-standard-filename
