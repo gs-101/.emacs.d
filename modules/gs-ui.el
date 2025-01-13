@@ -51,16 +51,6 @@
   (window-divider-mode)
   )
 
-(use-package hl-line
-  :config
-  (mapc (lambda (mode)
-          (setq-mode-local mode global-hl-line-mode nil)) '(
-          dashboard-mode
-          vterm-mode))
-  :init
-  (global-hl-line-mode)
-  )
-
 (use-package mouse
   :if (display-graphic-p)
   :init

@@ -6787,28 +6787,6 @@ Multi-frame management independent of window systems.
 
 #+end_src
 
-** [[https://emacsredux.com/blog/2020/11/21/disable-global-hl-line-mode-for-specific-modes/][Highlight Line]]
-
-#+begin_quote
-
-Highlight the current line.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package hl-line
-    :config
-    (mapc (lambda (mode)
-            (setq-mode-local mode global-hl-line-mode nil)) '(
-            dashboard-mode
-            vterm-mode))
-    :init
-    (global-hl-line-mode)
-    )
-
-#+end_src
-
 ** Mouse
 :PROPERTIES:
 :CREDITS:  https://codeberg.org/ashton314/emacs-bedrock/src/commit/f17a4b4d5116ac7eec3b30a0d43fa46eb074da0b/init.el#L73
