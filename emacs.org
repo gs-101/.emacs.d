@@ -2468,6 +2468,7 @@ Org refile allows you to refile subtrees to various locations.
                          (sequence
                           "FIX(f@)"
                           "FEAT(F@)"
+                          "DOCS(D@)"
                           "STYLE(s)"
                           "REFACTOR(r)"
                           "CHORE(C@)"
@@ -7188,6 +7189,7 @@ Highlight TODO keywords.
                              ("ANSWER" . "green")
                              ("FIX" . "red")
                              ("FEAT" . "yellow")
+                             ("DOCS" . "white")
                              ("HACK" . "green")
                              ("STYLE" . "orange")
                              ("REFACTOR" . "white")
@@ -7222,6 +7224,7 @@ Highlight TODO keywords.
                ("ANSWER" . green)
                ("FIX" . red)
                ("FEAT" . yellow)
+               ("DOCS" . blue)
                ("HACK" . green)
                ("STYLE" . lavender)
                ("REFACTOR" . sapphire)
@@ -7230,7 +7233,7 @@ Highlight TODO keywords.
                ("MERGED" . green)
                ("CLOSED" . red)
                )))
-  )
+    )
 
 #+end_src
 

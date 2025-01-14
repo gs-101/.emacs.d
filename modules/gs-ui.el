@@ -253,6 +253,7 @@ This advice replaces the rocket icon with a electric plug icon."
                            ("ANSWER" . "green")
                            ("FIX" . "red")
                            ("FEAT" . "yellow")
+                           ("DOCS" . "white")
                            ("HACK" . "green")
                            ("STYLE" . "orange")
                            ("REFACTOR" . "white")
@@ -281,6 +282,7 @@ This advice replaces the rocket icon with a electric plug icon."
              ("ANSWER" . green)
              ("FIX" . red)
              ("FEAT" . yellow)
+             ("DOCS" . blue)
              ("HACK" . green)
              ("STYLE" . lavender)
              ("REFACTOR" . sapphire)
@@ -289,7 +291,7 @@ This advice replaces the rocket icon with a electric plug icon."
              ("MERGED" . green)
              ("CLOSED" . red)
              )))
-)
+  )
 
 (use-package keycast
   :vc (:url "https://github.com/tarsius/keycast")

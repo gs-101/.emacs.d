@@ -287,6 +287,7 @@ allowFullScreen>
                        (sequence
                         "FIX(f@)"
                         "FEAT(F@)"
+                        "DOCS(D@)"
                         "STYLE(s)"
                         "REFACTOR(r)"
                         "CHORE(C@)"
