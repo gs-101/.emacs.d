@@ -1176,6 +1176,7 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
     (dired-dwim-target t)
     (dired-kill-when-opening-new-dired-buffer t)
     (dired-listing-switches "-agho --group-directories-first") ;;1
+    (dired-maybe-use-globstar t)
     (dired-mouse-drag-files t)
     (dired-recursive-copies 'always)
     :defer t
