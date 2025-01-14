@@ -254,7 +254,6 @@
   )
 
 (use-package flutter
-  :vc (:url "https://github.com/amake/flutter.el")
   :bind
   (
    :map dart-ts-mode-map
