@@ -329,7 +329,7 @@ targets."
            (format "Act on %s '%s'%s"
                    (plist-get (car targets) :type)
                    (embark--truncate-target (plist-get (car targets) :target))
-                   (if (cdr targets) "…" "")))
+                   (if (cdr targets) 'truncate-string-ellipsis "")))
          (if prefix
              (pcase (lookup-key keymap prefix 'accept-default)
                ((and (pred keymapp) km) km)

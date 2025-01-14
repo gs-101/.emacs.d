@@ -85,7 +85,7 @@
 
 (use-package org
   :custom
-  (org-ellipsis "…")
+  (org-ellipsis 'truncate-string-ellipsis)
   (org-fontify-done-headline t)
   (org-fontify-quote-and-verse-blocks t)
   (org-fontify-whole-heading-line t)
@@ -195,7 +195,7 @@ This advice replaces the rocket icon with a electric plug icon."
                   (propertize text 'face face))))
   :custom
   (doom-modeline-buffer-encoding nil)
-  (doom-modeline-ellipsis "…")
+  (doom-modeline-ellipsis 'truncate-string-ellipsis)
   (doom-modeline-enable-word-count t)
   (doom-modeline-modal-modern-icon nil)
   :ensure t

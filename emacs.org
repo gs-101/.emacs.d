@@ -5447,7 +5447,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
              (format "Act on %s '%s'%s"
                      (plist-get (car targets) :type)
                      (embark--truncate-target (plist-get (car targets) :target))
-                     (if (cdr targets) "…" "")))
+                     (if (cdr targets) 'truncate-string-ellipsis "")))
            (if prefix
                (pcase (lookup-key keymap prefix 'accept-default)
                  ((and (pred keymapp) km) km)
@@ -6848,7 +6848,7 @@ Multi-frame management independent of window systems.
 
   (use-package org
     :custom
-    (org-ellipsis "…")
+    (org-ellipsis 'truncate-string-ellipsis)
     (org-fontify-done-headline t)
     (org-fontify-quote-and-verse-blocks t)
     (org-fontify-whole-heading-line t)
@@ -7076,7 +7076,7 @@ A fancy and fast mode-line inspired by minimalism design.
                     (propertize text 'face face))))
     :custom
     (doom-modeline-buffer-encoding nil)
-    (doom-modeline-ellipsis "…")
+    (doom-modeline-ellipsis 'truncate-string-ellipsis)
     (doom-modeline-enable-word-count t)
     (doom-modeline-modal-modern-icon nil)
     :ensure t
