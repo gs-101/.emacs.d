@@ -83,7 +83,6 @@ Variables used to reference to specific directories, using ~convert-standard-fil
   (require 'gs-org)
   (require 'gs-org-roam)
   (require 'gs-citar)
-  (require 'gs-cmd)
   (require 'gs-dev)
   (require 'gs-completion)
   (require 'gs-utils)
@@ -3044,44 +3043,6 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 #+begin_src emacs-lisp
 
   (provide 'gs-citar)
-#+end_src
-
-* Command Line
-:PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-cmd.el
-:END:
-
-#+begin_src emacs-lisp
-  ;;; -*- lexical-binding: t -*-
-#+end_src
-
-** [[https://codeberg.org/akib/emacs-eat][eat]]
-
-#+begin_quote
-
-Emulate A Terminal, in a region, in a buffer and in Eshell.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package eat
-    :vc (:url "https://codeberg.org/akib/emacs-eat")
-    :bind
-    ([remap shell] . eat)
-    :ensure t
-    :hook
-    (eshell-load . eat-eshell-mode)
-    (eshell-load . eat-eshell-visual-command-mode)
-    )
-
-#+end_src
-
-** End
-
-#+begin_src emacs-lisp
-
-  (provide 'gs-cmd)
 #+end_src
 
 * Development

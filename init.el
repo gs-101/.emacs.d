@@ -9,7 +9,6 @@
 (require 'gs-org)
 (require 'gs-org-roam)
 (require 'gs-citar)
-(require 'gs-cmd)
 (require 'gs-dev)
 (require 'gs-completion)
 (require 'gs-utils)
