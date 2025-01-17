@@ -238,13 +238,20 @@
   (set-mark-command-repeat-pop t) ;; 5
   :config
   ;; 6
-  (defun captainflasmr/copy-buffer-to-kill-ring ()
-    "Mark the whole buffer, then copy it to the kill-ring without moving point."
-    (interactive)
-    (progn
-      (save-excursion
-        (kill-ring-save (point-min) (point-max)))
-      (message "Buffer copied to kill-ring")))
+  (defun captainflasmr/copy-buffer-to-kill-ring (arg)
+    "Mark the whole buffer, then copy it to the kill-ring without moving point.
+With a ARG prefix argument, copy the buffer to the other window."
+    (interactive "P")
+    (if arg
+        (save-window-excursion
+          (kill-ring-save (point-min) (point-max))
+          (other-window 1)
+          (erase-buffer)
+          (yank))
+      (progn
+        (save-excursion
+          (kill-ring-save (point-min) (point-max)))
+        (message "Buffer copied to kill-ring"))))
   :demand t
   )
 
