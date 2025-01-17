@@ -137,6 +137,7 @@
   (eglot-x-setup)
   :custom
   (eglot-x-enable-server-status nil)
+  :demand t
   :ensure t
   )
 
