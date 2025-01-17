@@ -562,13 +562,10 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package go-ts-mode
   :after nerd-icons go-ts-mode
-  :config
-  (defvar gs-101/go-prettify-symbols-alist
-    '((":=" . ?))
-    "Value for `prettify-symbols-alist' in `go-ts-mode'.")
-  (setq-mode-local go-ts-mode prettify-symbols-alist gs-101/go-prettify-symbols-alist)
   :hook
   (go-ts-mode . prettify-symbols-mode)
+  (go-ts-mode . (lambda ()
+                  (push '(":=" . ?) prettify-symbols-alist)))
   )
 
 (use-package nerd-icons-ibuffer
