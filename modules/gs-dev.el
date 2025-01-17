@@ -390,9 +390,9 @@ this calls `geiser-eval-last-sexp'."
   :bind
   (
    :map bash-ts-mode-map
-   ("C-c C-p" . shell)
+   ("C-c C-p" . ansi-shell)
    :map sh-mode-map
-   ("C-c C-p" . shell)
+   ("C-c C-p" . ansi-shell)
    )
   :defer t
   )

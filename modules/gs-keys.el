@@ -247,7 +247,7 @@ Otherwise, it calls `switch-to-minibuffer'."
 
 (use-package shell
   :bind
-  ("C-c t s" . shell)
+  ("C-c t s" . ansi-shell)
   )
 
 (use-package casual

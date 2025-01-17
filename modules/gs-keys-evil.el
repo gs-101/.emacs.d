@@ -134,7 +134,7 @@
 
 (use-package evil-core
   :config
-  (evil-define-key 'normal 'global (kbd "<leader>ts") #'shell)
+  (evil-define-key 'normal 'global (kbd "<leader>ts") #'ansi-shell)
   )
 
 (use-package evil-core

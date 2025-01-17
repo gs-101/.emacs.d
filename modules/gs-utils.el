@@ -373,6 +373,7 @@ targets."
                               inferior-lisp-mode
                               inferior-python-mode
                               shell-mode
+                              "\\*ansi-term\\*"
                               "\\*Async Shell Command\\*"
                               "\\*Backtrace\\*"
                               "\\*compilation\\*"

@@ -1774,7 +1774,7 @@ Convenient way to repeat the previous command.
 
   (use-package shell
     :bind
-    ("C-c t s" . shell)
+    ("C-c t s" . ansi-shell)
     )
 
 #+end_src
@@ -3923,9 +3923,9 @@ Completion is available for filenames, variables known from the script, the shel
     :bind
     (
      :map bash-ts-mode-map
-     ("C-c C-p" . shell)
+     ("C-c C-p" . ansi-shell)
      :map sh-mode-map
-     ("C-c C-p" . shell)
+     ("C-c C-p" . ansi-shell)
      )
     :defer t
     )
@@ -5523,6 +5523,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
                                 inferior-lisp-mode
                                 inferior-python-mode
                                 shell-mode
+                                "\\*ansi-term\\*"
                                 "\\*Async Shell Command\\*"
                                 "\\*Backtrace\\*"
                                 "\\*compilation\\*"
@@ -6115,7 +6116,7 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>ts") #'shell)
+    (evil-define-key 'normal 'global (kbd "<leader>ts") #'ansi-shell)
     )
 
 #+end_src
