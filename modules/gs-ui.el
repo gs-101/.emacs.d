@@ -632,8 +632,12 @@ This advice replaces the rocket icon with a electric plug icon."
   )
 
 (use-package posframe
-  :after transient
+  :vc (:url "https://github.com/tumashu/posframe")
   :ensure t
+  )
+
+(use-package posframe
+  :after transient
   :custom
   (transient-display-buffer-action
    (list

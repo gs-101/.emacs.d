@@ -7699,19 +7699,29 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 
 #+end_src
 
-** [[https://github.com/yanghaoxie/transient-posframe/pull/7#issuecomment-2538792470][Transient Posframe]]
+** [[https://github.com/tumashu/posframe][posframe]]
 
 #+begin_quote
 
-Pops the transient menu to a posframe (floating window).
+Pop a posframe (just a child-frame) at point.
 
 #+end_quote
 
 #+begin_src emacs-lisp
 
   (use-package posframe
-    :after transient
+    :vc (:url "https://github.com/tumashu/posframe")
     :ensure t
+    )
+
+#+end_src
+
+*** [[https://github.com/yanghaoxie/transient-posframe/pull/7#issuecomment-2538792470][Transient]]
+
+#+begin_src emacs-lisp
+
+  (use-package posframe
+    :after transient
     :custom
     (transient-display-buffer-action
      (list
