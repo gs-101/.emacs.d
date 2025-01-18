@@ -296,7 +296,7 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package keycast
   :vc (:url "https://github.com/tarsius/keycast")
   :config
-  (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified)
+  (set-face-attribute 'keycast-key nil :background 'unspecified :foreground 'unspecified :box 'unspecified)
   :ensure t
   :init
   (define-minor-mode keycast-mode
