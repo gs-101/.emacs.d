@@ -366,6 +366,7 @@ targets."
                               cider-repl-mode
                               compilation-mode
                               eat-mode
+                              eshell-mode
                               flutter-mode
                               geiser-repl-mode
                               vterm-mode

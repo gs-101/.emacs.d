@@ -1517,6 +1517,17 @@ Key bindings for default packages.
 
 #+end_src
 
+** Eshell
+
+#+begin_src emacs-lisp
+
+  (use-package eshell
+    :bind
+    ("C-c t s" . eshell)
+    )
+
+#+end_src
+
 ** Files
 
 #+begin_src emacs-lisp
@@ -1763,17 +1774,6 @@ Convenient way to repeat the previous command.
       (if (minibufferp)
           (previous-window-any-frame)
         (switch-to-minibuffer)))
-    )
-
-#+end_src
-
-** Shell
-
-#+begin_src emacs-lisp
-
-  (use-package shell
-    :bind
-    ("C-c t s" . ansi-shell)
     )
 
 #+end_src
@@ -5478,6 +5478,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
                                 cider-repl-mode
                                 compilation-mode
                                 eat-mode
+                                eshell-mode
                                 flutter-mode
                                 geiser-repl-mode
                                 vterm-mode
@@ -6078,7 +6079,7 @@ Toggles org-appear based on the current evil state.
 
   (use-package evil-core
     :config
-    (evil-define-key 'normal 'global (kbd "<leader>ts") #'ansi-shell)
+    (evil-define-key 'normal 'global (kbd "<leader>ts") #'eshell)
     )
 
 #+end_src

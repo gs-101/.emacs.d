@@ -109,6 +109,11 @@ this calls `eval-last-sexp'."
   ("C-c i c" . insert-char)
   )
 
+(use-package eshell
+  :bind
+  ("C-c t s" . eshell)
+  )
+
 (use-package files
   :bind
   ("C-c f r" . recover-this-file)
@@ -243,11 +248,6 @@ Otherwise, it calls `switch-to-minibuffer'."
     (if (minibufferp)
         (previous-window-any-frame)
       (switch-to-minibuffer)))
-  )
-
-(use-package shell
-  :bind
-  ("C-c t s" . ansi-shell)
   )
 
 (use-package casual
