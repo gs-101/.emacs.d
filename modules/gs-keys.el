@@ -46,18 +46,20 @@
    ("C-c C-p" . ielm)
    )
   :config
-  (defun gs-101/eval-dwim ()
+  (defun gs-101/eval-dwim (arg)
     "Evaluate region if it is active; if not, evaluate the buffer.
 If the region is active, this function calls `eval-region'.
 Otherwise, it calls `eval-buffer'.
 
 If the character before point is a closed parenthesis,
-this calls `eval-last-sexp'."
-    (interactive)
+this calls `eval-last-sexp'.
+
+ARG is used for `eval-last-sexp'."
+    (interactive "P")
     (cond
      ((use-region-p) (eval-region (region-beginning) (region-end) t)
       (message "Region evaluated"))
-     ((eq (char-before) ?\)) (eval-last-sexp nil)
+     ((eq (char-before) ?\)) (eval-last-sexp arg)
       (message "Sexp evaluated"))
      (t (eval-buffer nil nil)
         (message "Buffer evaluated"))))
