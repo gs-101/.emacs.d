@@ -652,4 +652,14 @@ This advice replaces the rocket icon with a electric plug icon."
       (get-buffer-window transient--buffer t))))
   )
 
+(use-package vertico-posframe
+  :vc (:url "https://github.com/tumashu/vertico-posframe")
+  :after vertico
+  :ensure t
+  :custom
+  (vertico-posframe-border-width 1)
+  :config
+  (vertico-posframe-mode)
+  )
+
 (provide 'gs-ui)

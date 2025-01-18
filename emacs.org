@@ -7738,6 +7738,22 @@ Pop a posframe (just a child-frame) at point.
 
 #+end_src
 
+*** [[https://github.com/tumashu/vertico-posframe][Vertico]]
+
+#+begin_src emacs-lisp
+
+  (use-package vertico-posframe
+    :vc (:url "https://github.com/tumashu/vertico-posframe")
+    :after vertico
+    :ensure t
+    :custom
+    (vertico-posframe-border-width 1)
+    :config
+    (vertico-posframe-mode)
+    )
+
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
