@@ -109,6 +109,10 @@ Also adds `cape-file' as a fallback."
   )
 
 (use-package corfu
+  :vc (
+       :url "https://github.com/minad/corfu"
+       :lisp-dir "extensions"
+       )
   :bind
   (
    :map corfu-map
@@ -164,6 +168,11 @@ Also adds `cape-file' as a fallback."
   )
 
 (use-package vertico
+  :vc
+  (
+   :url "https://github.com/minad/vertico"
+   :lisp-dir "extensions"
+   )
   :custom
   (vertico-cycle t)
   :ensure t

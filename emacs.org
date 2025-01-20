@@ -4713,6 +4713,10 @@ COmpletion in Region FUnction.
 #+begin_src emacs-lisp
 
   (use-package corfu
+    :vc (
+         :url "https://github.com/minad/corfu"
+         :lisp-dir "extensions"
+         )
     :bind
     (
      :map corfu-map
@@ -4808,6 +4812,11 @@ VERTical Interactive COmpletion.
 #+begin_src emacs-lisp
 
   (use-package vertico
+    :vc
+    (
+     :url "https://github.com/minad/vertico"
+     :lisp-dir "extensions"
+     )
     :custom
     (vertico-cycle t)
     :ensure t
