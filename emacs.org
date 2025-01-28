@@ -7620,6 +7620,22 @@ Use a Gopher for walrus operators (~:=~).
 
 #+end_src
 
+*** Rust
+
+Use Ferris for match arms.
+
+#+begin_src emacs-lisp
+
+  (use-package rust-ts-mode
+    :after nerd-icons rust-ts-mode
+    :hook
+    (rust-ts-mode . prettify-symbols-mode)
+    (rust-ts-mode . (lambda ()
+                      (push '("=>" . ?) prettify-symbols-alist)))
+    )
+
+#+end_src
+
 *** [[https://github.com/seagle0128/nerd-icons-ibuffer][iBuffer]]
 
 #+begin_src emacs-lisp
