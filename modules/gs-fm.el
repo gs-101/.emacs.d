@@ -44,6 +44,7 @@
   :after dired
   :custom
   (dired-do-revert-buffer t)
+  (dired-isearch-filenames 'dwim)
   )
 
 (use-package dired-async

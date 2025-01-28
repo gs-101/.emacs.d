@@ -1204,6 +1204,7 @@ Less commonly used parts of Dired.
     :after dired
     :custom
     (dired-do-revert-buffer t)
+    (dired-isearch-filenames 'dwim)
     )
 
 #+end_src
