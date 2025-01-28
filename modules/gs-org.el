@@ -271,18 +271,11 @@ allowFullScreen>
   (org-todo-keywords '(
                        (sequence
                         "TODO(t)"
-                        "WRITE(W)"
                         "WAIT(w!)"
                         "|"
                         "DONE(d!)"
                         "BACKLOG(b)"
                         "CANCELLED(c@)"
-                        )
-                       (sequence
-                        "GOAL(g)"
-                        "PROJ(p)"
-                        "|"
-                        "DONE(d!)"
                         )
                        (sequence
                         "FIX(f@)"

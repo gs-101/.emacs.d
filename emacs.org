@@ -2456,24 +2456,16 @@ Org refile allows you to refile subtrees to various locations.
 ** TODOs
 
 #+begin_src emacs-lisp
-
   (use-package org
     :custom
     (org-todo-keywords '(
                          (sequence
                           "TODO(t)"
-                          "WRITE(W)"
                           "WAIT(w!)"
                           "|"
                           "DONE(d!)"
                           "BACKLOG(b)"
                           "CANCELLED(c@)"
-                          )
-                         (sequence
-                          "GOAL(g)"
-                          "PROJ(p)"
-                          "|"
-                          "DONE(d!)"
                           )
                          (sequence
                           "FIX(f@)"
