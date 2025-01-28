@@ -551,6 +551,33 @@ This advice replaces the rocket icon with a electric plug icon."
   (dired-mode . nerd-icons-dired-mode)
   )
 
+(use-package esh-mode
+  :defer t
+  :config
+  (defun thanos/eshell-git-info ()
+	"Return a string showing git information."
+	(when (eq (call-process "git" nil nil nil "rev-parse" "--is-inside-work-tree") 0)
+	  (let* ((branch-raw (shell-command-to-string "git rev-parse --abbrev-ref HEAD"))
+			 (branch (if (or (string-match-p "^fatal" branch-raw)
+							 (string-match-p "^error" branch-raw))
+						 "Unknown"
+					   (string-trim branch-raw))))
+		(concat (propertize "󰊢 " 'face 'nerd-icons-lred)
+				(propertize branch 'face 'nerd-icons-lred)))))
+  (defun thanos/eshell-prompt-multiline ()
+	"Eshell Multiline Git prompt."
+	(let ((separator (propertize " | " 'face 'shadow))
+		  (dir (propertize (format "%s" (abbreviate-file-name (eshell/pwd))) 'face 'dired-directory))
+		  (git-info (thanos/eshell-git-info))
+		  (sign (if (= (user-uid) 0)
+					(propertize "\#" 'face 'default)
+				  (propertize (format "\n\nλ %s\n↳" user-login-name) 'face 'nerd-icons-lpurple))))
+	  (concat "\n" dir separator git-info sign " ")))
+  :custom
+  (eshell-banner-message "")
+  (eshell-prompt-function 'thanos/eshell-prompt-multiline)
+  )
+
 (use-package emacs
   :custom
   (flymake-indicator-type 'margins)
