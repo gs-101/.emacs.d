@@ -195,6 +195,7 @@ This advice replaces the rocket icon with a electric plug icon."
                   (propertize text 'face face))))
   :custom
   (doom-modeline-buffer-encoding nil)
+  (doom-modeline-buffer-file-name-style 'relative-to-project)
   (doom-modeline-ellipsis 'truncate-string-ellipsis)
   (doom-modeline-enable-word-count t)
   (doom-modeline-modal-modern-icon nil)
