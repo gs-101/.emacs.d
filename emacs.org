@@ -6951,7 +6951,7 @@ This file parses the command line and gets Emacs running. Options on the command
 
 #+end_src
 
-*** Window
+** Window
 :PROPERTIES:
 :CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/main/init.el][jamescherti]], 2. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el][oantolin]]
 :END:
