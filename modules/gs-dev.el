@@ -256,9 +256,23 @@
    ([remap compile] . flutter-run-or-hot-reload)
    ("C-c C-c" . flutter-run-or-hot-reload)
    )
+  :config
+  (defcustom gs-101/flutter-hot-reload-mode-lighter " Flutter Hot Reload"
+    "Lighter for `gs-101/flutter-hot-reload-mode'."
+    :type '(choice :tag "Lighter" (const :tag "No lighter" nil) string)
+    :group 'flutter)
+
+  (define-minor-mode gs-101/flutter-hot-reload-mode
+    "Minor mode for running hot reload on save.
+
+Only runs if a Flutter buffer already exits."
+    :lighter gs-101/flutter-hot-reload-mode-lighter
+    (if (and gs-101/flutter-hot-reload-mode (get-buffer "*Flutter*"))
+        (add-hook 'after-save-hook #'flutter-hot-reload nil 'local)
+      (remove-hook 'after-save-hook #'flutter-hot-reload 'local)))
   :ensure t
   :hook
-  (dart-ts-mode . flutter-test-mode)
+  (dart-ts-mode . gs-101/flutter-hot-reload-mode)
   )
 
 (use-package go-ts-mode
