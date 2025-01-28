@@ -640,6 +640,26 @@ This advice replaces the rocket icon with a electric plug icon."
               (prism-catppuccin-colors))))
   )
 
+(use-package rainbow-delimiters
+  :vc (:url "https://github.com/Fanael/rainbow-delimiters")
+  :config
+  (defun gs-101/rainbow-delimiters-maybe ()
+    "Enable `rainbow-delimiters-mode' only in non-lisp modes.
+
+This is because I find `prism-mode' better for these modes.
+
+Also disable in Python because I use `prism-whitespace-mode' there."
+    (unless (or
+             (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
+             (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
+             (derived-mode-p 'scheme-mode)
+             (derived-mode-p 'python-base-mode))
+      (rainbow-delimiters-mode)))
+  :ensure t
+  :hook
+  (prog-mode . gs-101/rainbow-delimiters-maybe)
+  )
+
 (use-package posframe
   :vc (:url "https://github.com/tumashu/posframe")
   :ensure t
