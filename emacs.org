@@ -3872,6 +3872,18 @@ Emacs interface for the GNU Guix package manager.
 
 #+end_src
 
+*** Vue
+
+#+begin_src emacs-lisp
+
+  (use-package vue-ts-mode
+    :vc (:url "https://github.com/8uff3r/vue-ts-mode")
+    :defer t
+    :ensure t
+    )
+
+#+end_src
+
 *** Shell Script
 
 #+begin_quote

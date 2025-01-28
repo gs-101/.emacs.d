@@ -396,6 +396,12 @@ this calls `geiser-eval-last-sexp'."
   (shell-mode . guix-build-log-minor-mode)
   )
 
+(use-package vue-ts-mode
+  :vc (:url "https://github.com/8uff3r/vue-ts-mode")
+  :defer t
+  :ensure t
+  )
+
 (use-package sh-script
   :bind
   (

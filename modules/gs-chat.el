@@ -73,7 +73,6 @@
    "Regards,
 
 #+begin_signature
-
 --
 Gabriel Santos
 #+end_signature"
