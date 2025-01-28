@@ -128,11 +128,6 @@
 (use-package eglot-x
   :vc (:url "https://github.com/nemethf/eglot-x")
   :after eglot
-  :bind
-  (
-   :map rust-ts-mode-map
-   ([remap compile] . eglot-x-ask-runnables)
-   )
   :config
   (eglot-x-setup)
   :custom
