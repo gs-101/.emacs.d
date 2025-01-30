@@ -380,8 +380,9 @@ this calls `geiser-eval-last-sexp'."
       (message "Sexp evaluated"))
      (t (eval-buffer nil nil)
         (message "Buffer evaluated"))))
-  :custom
-  (geiser-guile-binary "guile3.0")
+
+  (when (gs-101/nobara-p)
+    (setq geiser-guile-binary "guile3.0"))
   :defer t
   :ensure t
   )

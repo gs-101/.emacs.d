@@ -3856,8 +3856,9 @@ Collection of modes for working with different Scheme interpreters.
         (message "Sexp evaluated"))
        (t (eval-buffer nil nil)
           (message "Buffer evaluated"))))
-    :custom
-    (geiser-guile-binary "guile3.0")
+
+    (when (gs-101/nobara-p)
+      (setq geiser-guile-binary "guile3.0"))
     :defer t
     :ensure t
     )
