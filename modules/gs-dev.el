@@ -387,6 +387,7 @@ this calls `geiser-eval-last-sexp'."
   )
 
 (use-package guix
+  :if (gs-101/guix-p)
   :defer t
   :ensure t
   :hook

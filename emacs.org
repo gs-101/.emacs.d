@@ -3875,6 +3875,7 @@ Emacs interface for the GNU Guix package manager.
 #+begin_src emacs-lisp
 
   (use-package guix
+    :if (gs-101/guix-p)
     :defer t
     :ensure t
     :hook
