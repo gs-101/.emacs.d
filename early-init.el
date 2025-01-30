@@ -26,3 +26,11 @@
   "Path for this configuration's modules."
   :type 'directory
   )
+
+(defun gs-101/guix-p ()
+  "Check if guix is installed in the current system."
+  (executable-find "guix"))
+
+(defun gs-101/nobara-p ()
+  "Check if the current system uses Nobara Linux as its distribution."
+  (executable-find "nobara-welcome"))

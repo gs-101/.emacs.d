@@ -63,6 +63,20 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 
 #+end_src
 
+** Helpers
+
+#+begin_src emacs-lisp
+
+  (defun gs-101/guix-p ()
+    "Check if guix is installed in the current system."
+    (executable-find "guix"))
+
+  (defun gs-101/nobara-p ()
+    "Check if the current system uses Nobara Linux as its distribution."
+    (executable-find "nobara-welcome"))
+
+#+end_src
+
 * Load Modules
 :PROPERTIES:
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./init.el
