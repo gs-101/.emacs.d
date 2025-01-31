@@ -240,11 +240,11 @@ allowFullScreen>
 
 (use-package org
   :config
-  (add-to-list 'org-modules '(
-                              org-habit
-                              org-id
-                              org-protocol
-                              ))
+  (mapc (lambda (module)
+          (add-to-list 'org-modules module)) '(
+          org-habit
+          org-id
+          ))
   )
 
 (use-package paragraphs
