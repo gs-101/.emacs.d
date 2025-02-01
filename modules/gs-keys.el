@@ -336,6 +336,14 @@ Otherwise, it calls `switch-to-minibuffer'."
    )
   )
 
+(use-package casual-image
+  :bind
+  (
+   :map image-mode-map
+   ("M-o" . casual-image-tmenu)
+   )
+  )
+
 (use-package casual-info
   :bind
   (

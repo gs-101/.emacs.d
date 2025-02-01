@@ -1941,6 +1941,20 @@ A collection of opinionated keyboard-driven user interfaces for various built-in
 
 #+end_src
 
+*** Image
+
+#+begin_src emacs-lisp
+
+  (use-package casual-image
+    :bind
+    (
+     :map image-mode-map
+     ("M-o" . casual-image-tmenu)
+     )
+    )
+
+#+end_src
+
 *** Info
 
 #+begin_src emacs-lisp
