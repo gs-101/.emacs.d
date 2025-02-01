@@ -20,7 +20,7 @@
   )
 
 (use-package faces
-  :preface
+  :config
   (defun dw/set-font-faces ()
     ;; Set the default face
     (set-face-attribute 'default nil :font "Cascadia Code NF")
@@ -28,7 +28,6 @@
     (set-face-attribute 'fixed-pitch nil :font "Cascadia Mono NF")
     ;; Set the variable pitch face
     (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
-  :init
   (dw/set-font-faces)
   )
 

@@ -96,7 +96,7 @@
 (use-package org-agenda
   :bind
   ("C-z r b" . dw/org-roam-capture-inbox)
-  :preface
+  :config
   (defun dw/org-roam-filter-by-tag (tag-name)
     "Filter org roam files by their tags."
     (lambda (node)

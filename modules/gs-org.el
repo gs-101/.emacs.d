@@ -119,7 +119,7 @@
 (use-package org-agenda
   :hook
   (org-agenda-mode . mlk/org-agenda-fold)
-  :preface
+  :config
   (defun mlk/org-agenda-fold()
     "Fold headers of the agenda starting with \"* \"."
     (interactive)

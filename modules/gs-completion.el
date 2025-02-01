@@ -12,23 +12,6 @@
   (orderless-define-completion-style minad/orderless-simple
     (orderless-style-dispatchers nil)
     (orderless-matching-styles '(orderless-literal)))
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-defaults nil)
-  (completion-category-overrides '(
-                                   (file (styles partial-completion))
-                                   (command (styles minad/orderless-initialism))
-                                   (variable (styles minad/orderless-initialism))
-                                   (symbol (styles minad/orderless-initialism))
-                                   (minibuffer (styles minad/orderless-initialism))
-                                   ))
-  (orderless-comment-separator #'orderless-escapable-split-on-space)
-  (orderless-style-dispatchers (list
-                                #'minad/orderless-consult-dispatch
-                                #'orderless-affix-dispatch
-                                ))
-  :ensure t
-  :preface
   (defun minad/orderless--consult-suffix ()
     "Regexp which matches the end of string with Consult tofu support."
     (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
@@ -49,6 +32,22 @@
                (derived-mode-p 'eshell-mode))
            (string-match-p "\\`\\.." word))
       `(orderless-regexp . ,(concat "\\." (substring word 1) (minad/orderless--consult-suffix))))))
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '(
+                                   (file (styles partial-completion))
+                                   (command (styles minad/orderless-initialism))
+                                   (variable (styles minad/orderless-initialism))
+                                   (symbol (styles minad/orderless-initialism))
+                                   (minibuffer (styles minad/orderless-initialism))
+                                   ))
+  (orderless-comment-separator #'orderless-escapable-split-on-space)
+  (orderless-style-dispatchers (list
+                                #'minad/orderless-consult-dispatch
+                                #'orderless-affix-dispatch
+                                ))
+  :ensure t
   )
 
 (use-package cape
@@ -154,7 +153,7 @@ Also adds `cape-file' as a fallback."
 
 (use-package emacs
   :after corfu cape tempel
-  :preface
+  :config
   (defun minad/eglot-capf ()
     "eglot capf with tempel and cape features."
     (setq-local completion-at-point-functions

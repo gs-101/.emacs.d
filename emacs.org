@@ -311,6 +311,13 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
   (use-package files
     :config
     (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 3
+    (defun xenodium/files-create-non-existent-directory ()
+      "Create a non-existent directory."
+      (when-let* ((file-name buffer-file-name)
+                  (parent-directory (file-name-parent-directory file-name)))
+        (when (and (not (file-exists-p parent-directory))
+                   (y-or-n-p (format "Create `%s' dir? " parent-directory)))
+          (make-directory parent-directory t))))
     (add-to-list 'find-file-not-found-functions #'xenodium/files-create-non-existent-directory) ;; 4
     :custom
     (auto-mode-case-fold nil)
@@ -329,14 +336,6 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
                        ))
     (version-control t) ;; 2
     (view-read-only t) ;; 3
-    :preface
-    (defun xenodium/files-create-non-existent-directory ()
-      "Create a non-existent directory."
-      (when-let* ((file-name buffer-file-name)
-                  (parent-directory (file-name-parent-directory file-name)))
-        (when (and (not (file-exists-p parent-directory))
-                   (y-or-n-p (format "Create `%s' dir? " parent-directory)))
-          (make-directory parent-directory t))))
     )
 
 #+end_src
@@ -1146,13 +1145,7 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
 #+begin_src emacs-lisp
 
   (use-package autorevert
-    :custom
-    (auto-revert-stop-on-user-input nil)
-    (auto-revert-verbose nil)
-    (global-auto-revert-non-file-buffers t)
-    :init
-    (global-auto-revert-mode t)
-    :preface
+    :config
     (add-to-list 'window-state-change-functions
                  (defun xenodium/window-state-state-change (state)
                    "Enable `global-auto-revert-mode' per active window."
@@ -1170,6 +1163,12 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
                        (with-current-buffer new-buffer
                          (when buffer-file-name
                            (auto-revert-mode +1)))))))
+    :custom
+    (auto-revert-stop-on-user-input nil)
+    (auto-revert-verbose nil)
+    (global-auto-revert-non-file-buffers t)
+    :init
+    (global-auto-revert-mode t)
     )
 
 #+end_src
@@ -2178,7 +2177,7 @@ Dynamic task and appointment lists for Org.
   (use-package org-agenda
     :hook
     (org-agenda-mode . mlk/org-agenda-fold)
-    :preface
+    :config
     (defun mlk/org-agenda-fold()
       "Fold headers of the agenda starting with \"* \"."
       (interactive)
@@ -2817,7 +2816,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
   (use-package org-agenda
     :bind
     ("C-z r b" . dw/org-roam-capture-inbox)
-    :preface
+    :config
     (defun dw/org-roam-filter-by-tag (tag-name)
       "Filter org roam files by their tags."
       (lambda (node)
@@ -4563,23 +4562,6 @@ Emacs completion style that matches multiple regexps in any order.
     (orderless-define-completion-style minad/orderless-simple
       (orderless-style-dispatchers nil)
       (orderless-matching-styles '(orderless-literal)))
-    :custom
-    (completion-styles '(orderless basic))
-    (completion-category-defaults nil)
-    (completion-category-overrides '(
-                                     (file (styles partial-completion))
-                                     (command (styles minad/orderless-initialism))
-                                     (variable (styles minad/orderless-initialism))
-                                     (symbol (styles minad/orderless-initialism))
-                                     (minibuffer (styles minad/orderless-initialism))
-                                     ))
-    (orderless-comment-separator #'orderless-escapable-split-on-space)
-    (orderless-style-dispatchers (list
-                                  #'minad/orderless-consult-dispatch
-                                  #'orderless-affix-dispatch
-                                  ))
-    :ensure t
-    :preface
     (defun minad/orderless--consult-suffix ()
       "Regexp which matches the end of string with Consult tofu support."
       (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
@@ -4600,6 +4582,22 @@ Emacs completion style that matches multiple regexps in any order.
                  (derived-mode-p 'eshell-mode))
              (string-match-p "\\`\\.." word))
         `(orderless-regexp . ,(concat "\\." (substring word 1) (minad/orderless--consult-suffix))))))
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-defaults nil)
+    (completion-category-overrides '(
+                                     (file (styles partial-completion))
+                                     (command (styles minad/orderless-initialism))
+                                     (variable (styles minad/orderless-initialism))
+                                     (symbol (styles minad/orderless-initialism))
+                                     (minibuffer (styles minad/orderless-initialism))
+                                     ))
+    (orderless-comment-separator #'orderless-escapable-split-on-space)
+    (orderless-style-dispatchers (list
+                                  #'minad/orderless-consult-dispatch
+                                  #'orderless-affix-dispatch
+                                  ))
+    :ensure t
     )
 
 #+end_src
@@ -4811,7 +4809,7 @@ With the combined features of cape and tempel, create a super capf for eglot com
 
   (use-package emacs
     :after corfu cape tempel
-    :preface
+    :config
     (defun minad/eglot-capf ()
       "eglot capf with tempel and cape features."
       (setq-local completion-at-point-functions
@@ -6744,7 +6742,7 @@ Lisp faces.
 #+begin_src emacs-lisp
 
   (use-package faces
-    :preface
+    :config
     (defun dw/set-font-faces ()
       ;; Set the default face
       (set-face-attribute 'default nil :font "Cascadia Code NF")
@@ -6752,7 +6750,6 @@ Lisp faces.
       (set-face-attribute 'fixed-pitch nil :font "Cascadia Mono NF")
       ;; Set the variable pitch face
       (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
-    :init
     (dw/set-font-faces)
     )
 
