@@ -254,6 +254,12 @@ With a ARG prefix argument, copy the buffer to the other window."
   :demand t
   )
 
+(use-package startup
+  :custom
+  (initial-major-mode 'fundamental-mode)
+  :defer t
+  )
+
 (use-package transient
   :custom
   (transient-mode-line-format nil)

@@ -24,12 +24,6 @@
   (org-mode . variable-pitch-mode)
   )
 
-(use-package startup
-  :custom
-  (initial-major-mode 'org-mode)
-  :defer t
-  )
-
 (use-package org
   :config
   (org-babel-do-load-languages

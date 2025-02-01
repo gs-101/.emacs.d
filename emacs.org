@@ -746,6 +746,18 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 #+end_src
 
 
+*** Startup
+
+#+begin_src emacs-lisp
+
+  (use-package startup
+    :custom
+    (initial-major-mode 'fundamental-mode)
+    :defer t
+    )
+
+#+end_src
+
 *** Transient
 
 #+begin_quote
@@ -2029,18 +2041,6 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
     (org-use-sub-superscripts '{})
     :hook
     (org-mode . variable-pitch-mode)
-    )
-
-#+end_src
-
-** Startup
-
-#+begin_src emacs-lisp
-
-  (use-package startup
-    :custom
-    (initial-major-mode 'org-mode)
-    :defer t
     )
 
 #+end_src
