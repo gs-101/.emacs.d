@@ -2,7 +2,6 @@
 
 (add-to-list 'load-path (expand-file-name gs-101/modules-directory))
 
-(require 'gs-package)
 (require 'gs-settings)
 (require 'gs-fm)
 (require 'gs-keys)
