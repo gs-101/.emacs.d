@@ -30,3 +30,10 @@
 (defun gs-101/nobara-p ()
   "Check if the current system uses Nobara Linux as its distribution."
   (executable-find "nobara-welcome"))
+
+(with-eval-after-load 'package
+  (mapc (lambda (archive)
+          (add-to-list 'package-archives archive)) '(
+          ("melpa" . "https://melpa.org/packages/")
+          ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+          )))

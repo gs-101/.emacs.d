@@ -73,6 +73,19 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 
 #+end_src
 
+** Package Archives
+
+#+begin_src emacs-lisp
+
+  (with-eval-after-load 'package
+    (mapc (lambda (archive)
+            (add-to-list 'package-archives archive)) '(
+            ("melpa" . "https://melpa.org/packages/")
+            ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
+            )))
+
+#+end_src
+
 * Load Modules
 :PROPERTIES:
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./init.el
