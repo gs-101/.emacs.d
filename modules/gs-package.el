@@ -1,7 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(require 'package)
-(package-initialize)
 (mapc (lambda (archive)
         (add-to-list 'package-archives archive)) '(
         ("melpa" . "https://melpa.org/packages/")

@@ -27,10 +27,6 @@ If Emacs is built with native compilation support, activate it¹, if not, disabl
     ;; 2
     (setq features (delq #'native-compile features)))
 
-  ;; Disable package initialization on startup
-  ;; packages are only used in the modules.
-  (setq package-enable-at-startup nil)
-
 #+end_src
 
 ** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#native-compilation-cache][Native Compilation Cache]]
@@ -128,8 +124,6 @@ Simple package system [...].
 
 #+begin_src emacs-lisp
 
-  (require 'package)
-  (package-initialize)
   (mapc (lambda (archive)
           (add-to-list 'package-archives archive)) '(
           ("melpa" . "https://melpa.org/packages/")
