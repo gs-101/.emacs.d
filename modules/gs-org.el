@@ -74,6 +74,11 @@
   (add-to-list 'org-babel-load-languages '(http . t))
   )
 
+(use-package org-nix-shell
+  :vc (:url "https://github.com/AntonHakansson/org-nix-shell")
+  :ensure t
+  )
+
 (use-package org-agenda
   :config
   (add-to-list 'org-agenda-prefix-format '(agenda . "%-12t% s "))

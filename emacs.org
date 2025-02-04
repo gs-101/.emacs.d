@@ -2104,6 +2104,17 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 
 #+end_src
 
+*** [[https://github.com/AntonHakansson/org-nix-shell][Nix]]
+
+#+begin_src emacs-lisp
+
+  (use-package org-nix-shell
+    :vc (:url "https://github.com/AntonHakansson/org-nix-shell")
+    :ensure t
+    )
+
+#+end_src
+
 ** Agenda
 
 #+begin_quote
