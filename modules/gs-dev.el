@@ -21,6 +21,7 @@
           ("java" . java-ts)
           ("js" . js-ts)
           ("json" . json-ts)
+          ("nix" . nix-ts)
           ("python" . python-ts)
           ("ruby" . ruby-ts)
           ("rust" . rust-ts)
@@ -295,6 +296,12 @@ Only runs if a Flutter buffer already exits."
   :custom
   (inferior-lisp-program "sbcl")
   (narrow-to-defun-include-comments t)
+  :defer t
+  )
+
+(use-package nix-ts-mode
+  :vc (:url "https://github.com/nix-community/nix-ts-mode")
+  :ensure t
   :defer t
   )
 
