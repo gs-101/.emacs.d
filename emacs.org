@@ -876,6 +876,29 @@ Transient interface for managing and interacting with projects.
 
 #+end_src
 
+*** Emacs as a Server
+:PROPERTIES:
+:CREDITS:  https://www.youtube.com/watch?v=nEmRr1j8LR0&t=255s
+:END:
+
+Since I'll move to Guix, I decided to dump the SystemD control over my Emacs instance and just use the regular server.
+
+#+begin_src emacs-lisp
+
+  (use-package server
+    :demand t
+    :ensure nil
+    :init
+    (defun positron-solutions/server ()
+      "Start the Emacs server if it's not running."
+      (unless (server-running-p)
+        (server-start)))
+    :hook
+    (add-hook 'after-init-hook #'positron-solutions/server)
+    )
+
+#+end_src
+
 *** [[https://github.com/jrblevin/markdown-mode][Markdown]]
 
 #+begin_quote
