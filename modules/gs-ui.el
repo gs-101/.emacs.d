@@ -550,6 +550,12 @@ This advice replaces the rocket icon with a electric plug icon."
   (dired-mode . nerd-icons-dired-mode)
   )
 
+(use-package eglot
+  :after nerd-icons eglot
+  :custom
+  (eglot-code-action-indicator "󰌵")
+  )
+
 (use-package esh-mode
   :defer t
   :config

@@ -7628,6 +7628,18 @@ A Library for Nerd Font icons.
 
 #+end_src
 
+*** Eglot
+
+#+begin_src emacs-lisp
+
+  (use-package eglot
+    :after nerd-icons eglot
+    :custom
+    (eglot-code-action-indicator "󰌵")
+    )
+
+#+end_src
+
 *** Eshell
 :PROPERTIES:
 :CREDITS:  https://thanosapollo.org/posts/emacs-shells-video/
