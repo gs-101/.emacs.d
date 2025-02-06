@@ -592,7 +592,8 @@ This advice replaces the rocket icon with a electric plug icon."
   :hook
   (go-ts-mode . prettify-symbols-mode)
   (go-ts-mode . (lambda ()
-                  (push '(":=" . ?) prettify-symbols-alist)))
+                  (push '(":=" . ?) prettify-symbols-alist)
+                  (push '("go" . ?󰟓) prettify-symbols-alist)))
   )
 
 (use-package rust-ts-mode

@@ -7681,7 +7681,7 @@ A Library for Nerd Font icons.
 
 *** Go
 
-Use a Gopher for walrus operators (~:=~).
+Use a Gopher for walrus operators (~:=~), and the Go logo for goroutines.
 
 #+begin_src emacs-lisp
 
@@ -7690,7 +7690,8 @@ Use a Gopher for walrus operators (~:=~).
     :hook
     (go-ts-mode . prettify-symbols-mode)
     (go-ts-mode . (lambda ()
-                    (push '(":=" . ?) prettify-symbols-alist)))
+                    (push '(":=" . ?) prettify-symbols-alist)
+                    (push '("go" . ?󰟓) prettify-symbols-alist)))
     )
 
 #+end_src
