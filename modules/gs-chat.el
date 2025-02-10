@@ -11,7 +11,7 @@
   (mu4e-compose-format-flowed t)
   (mu4e-change-filenames-when-moving t)
   (mu4e-get-mail-command "mbsync -a")
-  (mu4e-maildir (expand-file-name "!Mail-Provider/Personal/" mail-source-directory))
+  (mu4e-maildir (expand-file-name "Disroot/Personal/" mail-source-directory))
   (mu4e-view-show-addresses 't)
   (mu4e-view-show-images t)
   (mu4e-drafts-folder "/Drafts")
@@ -45,16 +45,16 @@
   :custom
   (message-kill-buffer-on-exit t)
   (message-mail-user-agent t)
-  (smtpmail-smtp-server "!mailprovider")
-  (smtpmail-local-domain "!domain")
   (message-send-mail-function #'smtpmail-send-it)
   (smtpmail-smtp-service 465)
   (smtpmail-stream-type 'ssl)
+  (smtpmail-smtp-server "disroot.org")
+  (smtpmail-local-domain "disroot.org")
   )
 
 (use-package startup
   :custom
-  (user-mail-address "!email")
+  (user-mail-address "gabrielsantosdesouza@disroot.org")
   :defer t
   )
 
