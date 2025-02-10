@@ -112,13 +112,6 @@
   :defer t
   )
 
-(use-package eglot-booster
-  :vc (:url "https://github.com/jdtsmith/eglot-booster")
-  :ensure t
-  :hook
-  (eglot-managed-mode . eglot-booster-mode)
-  )
-
 (use-package eglot-codelens
   :vc (:url "https://github.com/Gavinok/eglot-codelens")
   :hook
