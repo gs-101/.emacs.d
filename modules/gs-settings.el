@@ -317,10 +317,10 @@ With a ARG prefix argument, copy the buffer to the other window."
   :init
   (defun positron-solutions/server ()
     "Start the Emacs server if it's not running."
-    (unless (server-running-p)
+    (unless (bound-and-true-p server-process)
       (server-start)))
-  :hook
-  (add-hook 'after-init-hook #'positron-solutions/server)
+  :init
+  (positron-solutions/server)
   )
 
 (use-package markdown-mode

@@ -891,10 +891,10 @@ Since I'll move to Guix, I decided to dump the SystemD control over my Emacs ins
     :init
     (defun positron-solutions/server ()
       "Start the Emacs server if it's not running."
-      (unless (server-running-p)
+      (unless (bound-and-true-p server-process)
         (server-start)))
-    :hook
-    (add-hook 'after-init-hook #'positron-solutions/server)
+    :init
+    (positron-solutions/server)
     )
 
 #+end_src
