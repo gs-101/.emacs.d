@@ -4213,8 +4213,9 @@ Try, test, and deploy from a wide range of model types, sizes, and specializatio
                 gpt-4o-mini
                 meta-llama-3.1-405b-instruct
                 llama-3.2-90B-vision-instruct
+                DeepSeek-R1
                 ))
-  )
+    )
 
 #+end_src
 

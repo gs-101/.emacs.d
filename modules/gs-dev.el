@@ -550,8 +550,9 @@ this calls `geiser-eval-last-sexp'."
               gpt-4o-mini
               meta-llama-3.1-405b-instruct
               llama-3.2-90B-vision-instruct
+              DeepSeek-R1
               ))
-)
+  )
 
 (use-package gptel-quick
   :vc (:url "https://github.com/karthink/gptel-quick")
