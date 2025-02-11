@@ -4184,7 +4184,6 @@ A simple LLM client for Emacs.
     ("C-z g p" . gptel-system-prompt)
     :custom
     (gptel-default-mode 'org-mode)
-    (gptel-org-branching-context t)
     :ensure t
     )
 

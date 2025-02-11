@@ -533,7 +533,6 @@ this calls `geiser-eval-last-sexp'."
   ("C-z g p" . gptel-system-prompt)
   :custom
   (gptel-default-mode 'org-mode)
-  (gptel-org-branching-context t)
   :ensure t
   )
 
