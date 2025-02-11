@@ -531,8 +531,6 @@ this calls `geiser-eval-last-sexp'."
   ("C-z g r" . gptel-rewrite)
   ("C-z g RET" . gptel-send)
   ("C-z g p" . gptel-system-prompt)
-  :custom
-  (gptel-default-mode 'org-mode)
   :ensure t
   )
 
