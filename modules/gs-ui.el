@@ -618,12 +618,10 @@ This advice replaces the rocket icon with a electric plug icon."
   (ibuffer-mode . nerd-icons-ibuffer-mode)
   )
 
-(use-package magit-file-icons
-  :vc (:url "https://github.com/gekoke/magit-file-icons")
+(use-package magit
   :after nerd-icons magit
-  :ensure t
-  :hook
-  (magit-mode . magit-file-icons-mode)
+  :custom
+  (magit-format-file-function #'magit-format-file-nerd-icons)
   )
 
 (use-package prism

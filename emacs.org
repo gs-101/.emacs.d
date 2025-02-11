@@ -7719,16 +7719,14 @@ Use Ferris for match arms.
 
 #+end_src
 
-*** [[https://github.com/gekoke/magit-file-icons][Magit]]
+*** Magit
 
 #+begin_src emacs-lisp
 
-  (use-package magit-file-icons
-    :vc (:url "https://github.com/gekoke/magit-file-icons")
+  (use-package magit
     :after nerd-icons magit
-    :ensure t
-    :hook
-    (magit-mode . magit-file-icons-mode)
+    :custom
+    (magit-format-file-function #'magit-format-file-nerd-icons)
     )
 
 #+end_src
