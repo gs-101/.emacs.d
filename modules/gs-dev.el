@@ -78,26 +78,6 @@
   (push 'cargo compilation-error-regexp-alist)
   )
 
-(use-package compile-multi
-  :bind
-  ([remap compile] . compile-multi)
-  :ensure t
-  )
-
-(use-package consult-compile-multi
-  :after compile-multi consult
-  :ensure t
-  :config
-  (consult-compile-multi-mode)
-  )
-
-(use-package compile-multi-embark
-  :after compile-multi embark
-  :ensure t
-  :config
-  (compile-multi-embark-mode)
-  )
-
 (use-package diff-mode
   :custom
   (diff-add-log-use-relative-names t)

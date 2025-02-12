@@ -491,11 +491,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (marginalia-mode . nerd-icons-completion-marginalia-setup)
   )
 
-(use-package compile-multi-nerd-icons
-  :after nerd-icons compile-multi
-  :ensure t
-  )
-
 (use-package nerd-icons-corfu
   :vc (:url "https://github.com/LuigiPiucco/nerd-icons-corfu")
   :after nerd-icons corfu

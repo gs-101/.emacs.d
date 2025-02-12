@@ -3221,50 +3221,6 @@ Run compiler as inferior of Emacs, parse error messages.
 
 #+end_src
 
-*** [[https://github.com/mohkale/compile-multi][multi]]
-
-#+begin_quote
-
-Multi target interface to compile.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package compile-multi
-    :bind
-    ([remap compile] . compile-multi)
-    :ensure t
-    )
-
-#+end_src
-    
-**** [[https://github.com/mohkale/compile-multi?tab=readme-ov-file#consult-multi-compile][Consult]]
-
-#+begin_src emacs-lisp
-
-  (use-package consult-compile-multi
-    :after compile-multi consult
-    :ensure t
-    :config
-    (consult-compile-multi-mode)
-    )
-
-#+end_src
-
-**** [[https://github.com/mohkale/compile-multi?tab=readme-ov-file#compile-multi-embark][Embark]]
-
-#+begin_src emacs-lisp
-
-  (use-package compile-multi-embark
-    :after compile-multi embark
-    :ensure t
-    :config
-    (compile-multi-embark-mode)
-    )
-
-#+end_src
-
 ** Diff
 
 #+begin_quote
@@ -7527,17 +7483,6 @@ A Library for Nerd Font icons.
     :after nerd-icons
     :hook
     (marginalia-mode . nerd-icons-completion-marginalia-setup)
-    )
-
-#+end_src
-
-*** [[https://github.com/mohkale/compile-multi/tree/master?tab=readme-ov-file#compile-multi-nerd-icons][compile-multi]]
-
-#+begin_src emacs-lisp
-
-  (use-package compile-multi-nerd-icons
-    :after nerd-icons compile-multi
-    :ensure t
     )
 
 #+end_src
