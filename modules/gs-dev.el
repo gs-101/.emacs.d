@@ -622,37 +622,6 @@ this calls `geiser-eval-last-sexp'."
   (emacs-lisp-mode . package-lint-flymake-setup)
   )
 
-(use-package projection
-  :ensure t
-  :bind-keymap
-  ("C-z p" . projection-map)
-  :bind
-  (
-   :map projection-map
-   ("C" . projection-commands-build-project)
-   ("e" . projection-recentf)
-   )
-  :init
-  (global-projection-hook-mode)
-  )
-
-(use-package projection-multi
-  :after projection compile-multi
-  :ensure t
-  :bind
-  (
-   :map projection-map
-   ("c" . projection-multi-compile)
-   )
-  )
-
-(use-package projection-multi-embark
-  :after projection compile-multi embark
-  :ensure t
-  :config
-  (projection-multi-embark-setup-command-map)
-  )
-
 (use-package puni
   :vc (:url "https://github.com/AmaiKinono/puni")
   :bind

@@ -4349,61 +4349,6 @@ A linting library for elisp package metadata.
 
 #+end_src
 
-** [[https://github.com/mohkale/projection][Projection]]
-
-#+begin_quote
-
-Projectile like project management library built on Emacs project.el.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package projection
-    :ensure t
-    :bind-keymap
-    ("C-z p" . projection-map)
-    :bind
-    (
-     :map projection-map
-     ("C" . projection-commands-build-project)
-     ("e" . projection-recentf)
-     )
-    :init
-    (global-projection-hook-mode)
-    )
-
-#+end_src
-
-*** [[https://github.com/mohkale/projection?tab=readme-ov-file#projection-multi-compile][multi]]
-
-#+begin_src emacs-lisp
-
-  (use-package projection-multi
-    :after projection compile-multi
-    :ensure t
-    :bind
-    (
-     :map projection-map
-     ("c" . projection-multi-compile)
-     )
-    )
-
-#+end_src
-
-*** [[https://github.com/mohkale/projection?tab=readme-ov-file#projection-multi-embark][Embark]]
-
-#+begin_src emacs-lisp
-
-  (use-package projection-multi-embark
-    :after projection compile-multi embark
-    :ensure t
-    :config
-    (projection-multi-embark-setup-command-map)
-    )
-
-#+end_src
-
 ** [[https://github.com/AmaiKinono/puni][Puni]]
 
 #+begin_quote
