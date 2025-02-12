@@ -3830,17 +3830,7 @@ Collection of modes for working with different Scheme interpreters.
      :url "https://gitlab.com/emacs-geiser/geiser"
      :lisp-dir "elisp"
      )
-    :ensure t
-    )
-
-#+end_src
-
-***** Guile
-
-#+begin_src emacs-lisp
-
-  (use-package geiser-guile
-    :vc (:url "https://gitlab.com/emacs-geiser/guile")
+    :after scheme
     :bind
     (
      :map scheme-mode-map
@@ -3863,7 +3853,18 @@ Collection of modes for working with different Scheme interpreters.
         (message "Sexp evaluated"))
        (t (eval-buffer nil nil)
           (message "Buffer evaluated"))))
+    :ensure t
+    )
 
+#+end_src
+
+***** Guile
+
+#+begin_src emacs-lisp
+
+  (use-package geiser-guile
+    :vc (:url "https://gitlab.com/emacs-geiser/guile")
+    :config
     (when (gs-101/nobara-p)
       (setq geiser-guile-binary "guile3.0"))
     :defer t

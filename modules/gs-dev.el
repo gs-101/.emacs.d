@@ -353,11 +353,7 @@ Only runs if a Flutter buffer already exits."
    :url "https://gitlab.com/emacs-geiser/geiser"
    :lisp-dir "elisp"
    )
-  :ensure t
-  )
-
-(use-package geiser-guile
-  :vc (:url "https://gitlab.com/emacs-geiser/guile")
+  :after scheme
   :bind
   (
    :map scheme-mode-map
@@ -380,7 +376,12 @@ this calls `geiser-eval-last-sexp'."
       (message "Sexp evaluated"))
      (t (eval-buffer nil nil)
         (message "Buffer evaluated"))))
+  :ensure t
+  )
 
+(use-package geiser-guile
+  :vc (:url "https://gitlab.com/emacs-geiser/guile")
+  :config
   (when (gs-101/nobara-p)
     (setq geiser-guile-binary "guile3.0"))
   :defer t
