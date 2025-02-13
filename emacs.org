@@ -2399,12 +2399,6 @@ This package aims to produce a versatile generic core which can process a fontif
 
 #+end_src
 
-*** Packages to install
-
-**** Fedora
-
-src_bash{sudo dnf install texlive-collection-basic texlive-bookmark texlive-cancel texlive-chemfig texlive-circuitikz texlive-dvipng texlive-dvisvgm texlive-stackengine texlive-pgfplots texlive-mlmodern texlive-titling texlive-hyphenat texlive-fvextra texlive-tcolorbox}
-
 ** List
 
 #+begin_quote
@@ -3979,12 +3973,6 @@ Run code formatter on buffer contents without moving point, using RCS patches an
 
 #+end_src
 
-*** Packages to install
-
-**** Fedora
-
-src_bash{sudo dnf install black}
-
 ** [[https://github.com/copilot-emacs/copilot.el][Copilot]]
 
 #+begin_quote
@@ -4071,12 +4059,6 @@ Debug Adapter Protocol for Emacs.
     )
 
 #+end_src
-
-*** Packages to Install
-
-**** Fedora
-
-src_bash{sudo dnf install delve}
 
 ** [[https://github.com/anonimitoraf/exercism.el][Exercism]]
 
