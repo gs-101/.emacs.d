@@ -380,14 +380,6 @@ With a ARG prefix argument, copy the buffer to the other window."
   :ensure t
   )
 
-(use-package exec-path-from-shell
-  :vc (:url "https://github.com/purcell/exec-path-from-shell")
-  :ensure t
-  :init
-  (setq exec-path-from-shell-arguments nil)
-  (exec-path-from-shell-initialize)
-  )
-
 (use-package emacs
   :init
   (defun karthinks/sudo-find-file (file)
