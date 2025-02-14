@@ -669,8 +669,12 @@ rectangular region instead."
 
 (use-package wakatime-mode
   :vc (:url "https://github.com/wakatime/wakatime-mode")
-  :custom
-  (wakatime-api-key (auth-source-pick-first-password :host "wakatime.com"))
+  :config
+  (defun gs-101/wakatime-api-key-from-auth ()
+    "Get the Wakatime API key from either auth-source or password-store."
+    (or (auth-source-pick-first-password :host "wakatime.com")
+        (auth-source-pass-search :host "wakatime.com")))
+  (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))
   :ensure t
   :hook
   (prog-mode . global-wakatime-mode)
