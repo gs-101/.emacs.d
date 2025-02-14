@@ -554,6 +554,14 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package esh-mode
   :defer t
   :config
+  (defun gs-101/eshell-lambda ()
+    "This is just the code of the regular eshell prompt, but with a lambda
+instead of $."
+    (let ((prompt (concat (abbreviate-file-name (eshell/pwd))
+                          (unless (eshell-exit-success-p)
+                            (format " [%d]" eshell-last-command-status))
+                          (if (= (file-user-uid) 0) " # " " λ "))))
+      (propertize prompt 'face 'nerd-icons-lpurple)))
   (defun thanos/eshell-git-info ()
 	"Return a string showing git information."
 	(when (eq (call-process "git" nil nil nil "rev-parse" "--is-inside-work-tree") 0)
@@ -575,7 +583,7 @@ This advice replaces the rocket icon with a electric plug icon."
 	  (concat "\n" dir separator git-info sign " ")))
   :custom
   (eshell-banner-message "")
-  (eshell-prompt-function 'thanos/eshell-prompt-multiline)
+  (eshell-prompt-function 'gs-101/eshell-lambda)
   )
 
 (use-package emacs
