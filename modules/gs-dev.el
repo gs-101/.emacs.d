@@ -84,6 +84,11 @@
   :defer t
   )
 
+(use-package editorconfig
+  :hook
+  (prog-mode . editorconfig-mode)
+  )
+
 (use-package eglot
   :custom
   (eglot-autoshutdown t)
