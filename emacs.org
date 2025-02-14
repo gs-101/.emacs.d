@@ -146,6 +146,24 @@ An overloading mechanism for Emacs Lisp functions.
 
 #+end_src
 
+*** Auth Source Pass
+
+#+begin_quote
+
+Integrates [[https://passwordstore.org/][password-store]] within ~auth-source~.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package auth-source-pass
+    :if (executable-find "pass")
+    :config
+    (auth-source-pass-enable)
+    )
+
+#+end_src
+
 *** Byte Compilation
 
 #+begin_quote

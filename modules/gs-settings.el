@@ -5,6 +5,12 @@
   (ad-redefinition-action 'accept)
   )
 
+(use-package auth-source-pass
+  :if (executable-find "pass")
+  :config
+  (auth-source-pass-enable)
+  )
+
 (use-package bytecomp
   :custom
   (byte-compile-warnings '(not obsolete))
