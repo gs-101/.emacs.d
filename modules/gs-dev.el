@@ -517,11 +517,15 @@ this calls `geiser-eval-last-sexp'."
 (use-package gptel-openai
   :after gptel
   :config
+  (defun gs-101/gptel-github-models-key-from-auth ()
+    "Get the GitHub Models token from either auth-source or password-store."
+    (or (gptel-api-key-from-auth-source)
+        (auth-source-pass-search :host "models.inference.ai.azure.com")))
   (gptel-make-openai "Github Models"
     :host "models.inference.ai.azure.com"
     :endpoint "/chat/completions"
     :stream t
-    :key #'gptel-api-key
+    :key #'gs-101/gptel-github-models-key-from-auth
     :models '(
               gpt-4o
               gpt-4o-mini
