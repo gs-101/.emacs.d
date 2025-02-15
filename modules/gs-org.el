@@ -20,8 +20,6 @@
   (org-tags-column 0)
   (org-todo-repeat-to-state t)
   (org-use-sub-superscripts '{})
-  :hook
-  (org-mode . variable-pitch-mode)
   )
 
 (use-package org
