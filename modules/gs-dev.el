@@ -111,6 +111,7 @@
   (eglot-x-setup)
   :custom
   (eglot-x-enable-server-status nil)
+  (eglot-x-enable-menu nil)
   :demand t
   :ensure t
   )

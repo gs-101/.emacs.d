@@ -3306,6 +3306,7 @@ Support for even more LSP extesnions, primarily for functionality introduced by 
     (eglot-x-setup)
     :custom
     (eglot-x-enable-server-status nil)
+    (eglot-x-enable-menu nil)
     :demand t
     :ensure t
     )
