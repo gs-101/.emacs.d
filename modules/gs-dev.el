@@ -266,6 +266,11 @@ Only runs if a Flutter buffer already exits."
   :defer t
   )
 
+(use-package hyprlang-ts-mode
+  :vc (:url "https://github.com/Nathan-Melaku/hyprlang-ts-mode")
+  :ensure t
+  )
+
 (use-package lisp
   :bind
   (

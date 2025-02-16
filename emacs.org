@@ -3631,6 +3631,23 @@ tree-sitter support for Go.
 
 #+end_src
 
+*** [[https://github.com/Nathan-Melaku/hyprlang-ts-mode][Hyprlang]]
+
+#+begin_quote
+
+A major mode for editing hyprland configuration files in emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package hyprlang-ts-mode
+    :vc (:url "https://github.com/Nathan-Melaku/hyprlang-ts-mode")
+    :ensure t
+    )
+
+#+end_src
+
 *** Lisp
 
 #+begin_quote
