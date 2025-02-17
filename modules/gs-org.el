@@ -3,7 +3,7 @@
 (use-package org
   :custom
   (org-auto-align-tags nil)
-  (org-directory (convert-standard-filename (expand-file-name "~/Documents/Org")))
+  (org-directory (convert-standard-filename (expand-file-name "~/Documents/org")))
   (org-format-latex-options '(
                               :foreground default
                               :background nil

@@ -14,7 +14,7 @@
    (convert-standard-filename
     (expand-file-name  "var/eln-cache/" user-emacs-directory))))
 
-(defcustom gs-101/projects-code-directory (convert-standard-filename (expand-file-name "~/Projects/Code/"))
+(defcustom gs-101/projects-code-directory (convert-standard-filename (expand-file-name "~/Projects/code/"))
   "Path for project related to code, like applications."
   :type 'directory
   )

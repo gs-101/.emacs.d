@@ -48,7 +48,7 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 
 #+begin_src emacs-lisp
 
-  (defcustom gs-101/projects-code-directory (convert-standard-filename (expand-file-name "~/Projects/Code/"))
+  (defcustom gs-101/projects-code-directory (convert-standard-filename (expand-file-name "~/Projects/code/"))
     "Path for project related to code, like applications."
     :type 'directory
     )
@@ -2028,7 +2028,7 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
   (use-package org
     :custom
     (org-auto-align-tags nil)
-    (org-directory (convert-standard-filename (expand-file-name "~/Documents/Org")))
+    (org-directory (convert-standard-filename (expand-file-name "~/Documents/org")))
     (org-format-latex-options '(
                                 :foreground default
                                 :background nil
@@ -2706,7 +2706,7 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
      )
     :custom
     (org-roam-completion-everywhere t)
-    (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/Org Roam")))
+    (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/org-roam/")))
     :demand t
     :ensure t
     :init
@@ -2719,36 +2719,36 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
 
 #+begin_src emacs-lisp
 
-            (use-package org-roam
-              :custom
-              (org-roam-capture-templates '(
-                                            ("d" "default" plain
-                                             (file "~/Documents/Org Roam/Templates/default.org")
-                                             :if-new
-                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
-                                             :unnarrowed t)
-                                            ("p" "padrão" plain
-                                             (file "~/Documents/Org Roam/Templates/padrão.org")
-                                             :if-new
-                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
-                                             :unnarrowed t)
-                                            ("n" "notegpt.io" plain
-                                             (file "~/Documents/Org Roam/Templates/notegpt.io.org")
-                                             :if-new
-                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt_io:hacker_news:\n\n")
-                                             :unnarrowed t)
-                                            ("r" "redação" plain
-                                             (file "~/Documents/Org Roam/Templates/redação.org")
-                                             :if-new
-                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :redação:\n\n")
-                                             :unnarrowed t)
-                                            ("s" "summarize.ing" plain
-                                             (file "~/Documents/Org Roam/Templates/summarize.ing.org")
-                                             :if-new
-                                             (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
-                                             :unnarrowed t)
-                                            ))
-              )
+  (use-package org-roam
+    :custom
+    (org-roam-capture-templates '(
+                                  ("d" "default" plain
+                                   (file "~/Documents/org-roam/templates/default.org")
+                                   :if-new
+                                   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
+                                   :unnarrowed t)
+                                  ("p" "padrão" plain
+                                   (file "~/Documents/org-roam/templates/padrão.org")
+                                   :if-new
+                                   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
+                                   :unnarrowed t)
+                                  ("n" "notegpt.io" plain
+                                   (file "~/Documents/org-roam/templates/notegpt.io.org")
+                                   :if-new
+                                   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt_io:hacker_news:\n\n")
+                                   :unnarrowed t)
+                                  ("r" "redação" plain
+                                   (file "~/Documents/org-roam/templates/redação.org")
+                                   :if-new
+                                   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :redação:\n\n")
+                                   :unnarrowed t)
+                                  ("s" "summarize.ing" plain
+                                   (file "~/Documents/org-roam/templates/summarize.ing.org")
+                                   :if-new
+                                   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
+                                   :unnarrowed t)
+                                  ))
+    )
 
 #+end_src
 
@@ -2937,11 +2937,11 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
   (use-package citar
     :vc (:url "https://github.com/emacs-citar/citar")
     :custom
-    (citar-bibliography "~/Documents/Bibliography.bib")
-    (citar-citeproc-csl-styles-dir "~/Documents/Zotero/styles/")
+    (citar-bibliography "~/Documents/bibliography.bib")
+    (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")
     (citar-citeproc-csl-style "harvard-cite-them-right.csl")
     (citar-format-reference-function #'citar-citeproc-format-reference)
-    (citar-library-paths '("~/Documents/Zotero/storage/"))
+    (citar-library-paths '("~/Documents/zotero/storage/"))
     (citar-open-entry-function #'citar-open-entry-in-zotero)
     (citar-templates '((main . "${author editor:30%sn}     ${date year issued:4}     ${title:48}") (suffix . "          ${=key= id:15}    ${tags keywords keywords:*}    ${abstract abstract:*}") (preview . "${author editor:%etal} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.
   ") (note . "Notes on ${author editor:%etal}, ${title}")))
@@ -3004,7 +3004,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
      ("C-c m q" . org-cite-insert)
      )
     :custom
-    (org-cite-global-bibliography '("~/Documents/Bibliography.bib"))
+    (org-cite-global-bibliography '("~/Documents/bibliography.bib"))
     (org-cite-insert-processor 'citar)
     (org-cite-follow-processor 'citar)
     (org-cite-activate-processor 'citar)
@@ -3019,7 +3019,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
   (use-package oc-csl
     :after oc
     :custom
-    (org-cite-csl-styles-dir "~/Documents/Zotero/styles/")
+    (org-cite-csl-styles-dir "~/Documents/zotero/styles/")
     (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl"))))
     )
 
