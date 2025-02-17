@@ -691,8 +691,8 @@ rectangular region instead."
         (auth-source-pass-search :host "wakatime.com")))
   (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))
   :ensure t
-  :hook
-  (prog-mode . global-wakatime-mode)
+  :init
+  (global-wakatime-mode)
   )
 
 (provide 'gs-dev)

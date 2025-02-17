@@ -4446,8 +4446,8 @@ Emacs plugin for automatic time tracking and metrics generated from your program
           (auth-source-pass-search :host "wakatime.com")))
     (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))
     :ensure t
-    :hook
-    (prog-mode . global-wakatime-mode)
+    :init
+    (global-wakatime-mode)
     )
 
 #+end_src
