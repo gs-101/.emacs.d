@@ -533,7 +533,7 @@ this calls `geiser-eval-last-sexp'."
   (defun gs-101/gptel-github-models-key-from-auth ()
     "Get the GitHub Models token from either auth-source or password-store."
     (or (gptel-api-key-from-auth-source)
-        (auth-source-pass-search :host "models.inference.ai.azure.com")))
+        (auth-source-pass-get 'secret "models.inference.ai.azure.com")))
   (gptel-make-openai "Github Models"
     :host "models.inference.ai.azure.com"
     :endpoint "/chat/completions"
@@ -696,7 +696,7 @@ rectangular region instead."
   (defun gs-101/wakatime-api-key-from-auth ()
     "Get the Wakatime API key from either auth-source or password-store."
     (or (auth-source-pick-first-password :host "wakatime.com")
-        (auth-source-pass-search :host "wakatime.com")))
+        (auth-source-pass-get 'secret "wakatime.com")))
   (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))
   :ensure t
   :init
