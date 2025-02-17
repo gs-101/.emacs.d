@@ -339,6 +339,7 @@ Only runs if a Flutter buffer already exits."
   )
 
 (use-package geiser
+  :unless (gs-101/guix-p)
   :vc
   (
    :url "https://gitlab.com/emacs-geiser/geiser"
@@ -376,6 +377,13 @@ this calls `geiser-eval-last-sexp'."
   (when (gs-101/nobara-p)
     (setq geiser-guile-binary "guile3.0"))
   :defer t
+  :ensure t
+  )
+
+(use-package arei
+  :when (gs-101/guix-p)
+  :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
+  :after scheme
   :ensure t
   )
 

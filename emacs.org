@@ -3810,6 +3810,7 @@ Collection of modes for working with different Scheme interpreters.
 #+begin_src emacs-lisp
 
   (use-package geiser
+    :unless (gs-101/guix-p)
     :vc
     (
      :url "https://gitlab.com/emacs-geiser/geiser"
@@ -3853,6 +3854,25 @@ Collection of modes for working with different Scheme interpreters.
     (when (gs-101/nobara-p)
       (setq geiser-guile-binary "guile3.0"))
     :defer t
+    :ensure t
+    )
+
+#+end_src
+
+**** Arei
+
+#+begin_quote
+
+Asynchronous Reliable Extensible IDE for Guile Scheme.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package arei
+    :when (gs-101/guix-p)
+    :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
+    :after scheme
     :ensure t
     )
 
