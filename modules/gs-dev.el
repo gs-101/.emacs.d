@@ -692,15 +692,24 @@ rectangular region instead."
 
 (use-package wakatime-mode
   :vc (:url "https://github.com/wakatime/wakatime-mode")
-  :config
+  :ensure t
+  :init
   (defun gs-101/wakatime-api-key-from-auth ()
     "Get the Wakatime API key from either auth-source or password-store."
     (or (auth-source-pick-first-password :host "wakatime.com")
         (auth-source-pass-get 'secret "wakatime.com")))
-  (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))
-  :ensure t
-  :init
-  (global-wakatime-mode)
+  (defun gs-101/wakatime-enable-prompt ()
+    "Prompt if the user wants to enable wakatime tracking.
+
+Better asked on startup with an init hook:
+
+(add-hook \'after-init-hook #\'gs-101/wakatime-enable-prompt)"
+    ;; Disable dialog box
+    (setq-local use-dialog-box nil)
+    (when (y-or-n-p "Enable wakatime tracking?")
+      (global-wakatime-mode)
+      (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))))
+  (gs-101/wakatime-enable-prompt)
   )
 
 (provide 'gs-dev)
