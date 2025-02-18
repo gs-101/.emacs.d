@@ -374,6 +374,7 @@ targets."
                               inferior-lisp-mode
                               inferior-python-mode
                               shell-mode
+                              arei-connection-mode
                               "\\*ansi-term\\*"
                               "\\*Async Shell Command\\*"
                               "\\*Backtrace\\*"
