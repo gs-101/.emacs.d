@@ -160,7 +160,8 @@
   )
 
 (use-package catppuccin-theme
-  :preface
+  :when (gs-101/nobara-p)
+  :config
   (load-theme 'catppuccin t)
   :ensure t
   )
