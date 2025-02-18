@@ -345,17 +345,6 @@ Only runs if a Flutter buffer already exits."
   :ensure t
   )
 
-(use-package guix
-  :if (gs-101/guix-p)
-  :defer t
-  :ensure t
-  :hook
-  (dired-mode . guix-prettify-mode)
-  (scheme-mode . guix-devel-mode)
-  (shell-mode . guix-prettify-mode)
-  (shell-mode . guix-build-log-minor-mode)
-  )
-
 (use-package vue-ts-mode
   :vc (:url "https://github.com/8uff3r/vue-ts-mode")
   :defer t

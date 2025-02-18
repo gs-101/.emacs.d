@@ -3822,29 +3822,6 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
 
 #+end_src
 
-**** [[https://github.com/alezost/guix.el][Guix]]
-
-#+begin_quote
-
-Emacs interface for the GNU Guix package manager.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package guix
-    :if (gs-101/guix-p)
-    :defer t
-    :ensure t
-    :hook
-    (dired-mode . guix-prettify-mode)
-    (scheme-mode . guix-devel-mode)
-    (shell-mode . guix-prettify-mode)
-    (shell-mode . guix-build-log-minor-mode)
-    )
-
-#+end_src
-
 *** Vue
 
 #+begin_src emacs-lisp
