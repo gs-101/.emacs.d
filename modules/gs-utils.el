@@ -361,7 +361,6 @@ targets."
   ("M-[" . popper-toggle)
   :custom
   (popper-display-control t)
-  (popper-group-function #'popper-group-by-project)
   (popper-reference-buffers '(
                               cider-repl-mode
                               compilation-mode

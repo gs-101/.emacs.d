@@ -5388,7 +5388,6 @@ Emacs minor-mode to summon and dismiss buffers easily.
     ("M-[" . popper-toggle)
     :custom
     (popper-display-control t)
-    (popper-group-function #'popper-group-by-project)
     (popper-reference-buffers '(
                                 cider-repl-mode
                                 compilation-mode
