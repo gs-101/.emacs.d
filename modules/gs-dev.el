@@ -338,48 +338,6 @@ Only runs if a Flutter buffer already exits."
   (cargo-transient-buffer-name-function #'project-prefixed-buffer-name)
   )
 
-(use-package geiser
-  :unless (gs-101/guix-p)
-  :vc
-  (
-   :url "https://gitlab.com/emacs-geiser/geiser"
-   :lisp-dir "elisp"
-   )
-  :after scheme
-  :bind
-  (
-   :map scheme-mode-map
-   ("C-c C-p" . geiser)
-   ("C-c C-c" . gs-101/geiser-eval-dwim)
-   )
-  :config
-  (defun gs-101/geiser-eval-dwim ()
-    "Evaluate region if it is active; if not, evaluate the buffer.
-If the region is active, this function calls `geiser-eval-region'.
-Otherwise, it calls `geiser-eval-buffer'.
-
-If the character before point is a closed parenthesis,
-this calls `geiser-eval-last-sexp'."
-    (interactive)
-    (cond
-     ((use-region-p) (geiser-eval-region (region-beginning) (region-end) t)
-      (message "Region evaluated"))
-     ((eq (char-before) ?\)) (eval-last-sexp nil)
-      (message "Sexp evaluated"))
-     (t (eval-buffer nil nil)
-        (message "Buffer evaluated"))))
-  :ensure t
-  )
-
-(use-package geiser-guile
-  :vc (:url "https://gitlab.com/emacs-geiser/guile")
-  :config
-  (when (gs-101/nobara-p)
-    (setq geiser-guile-binary "guile3.0"))
-  :defer t
-  :ensure t
-  )
-
 (use-package arei
   :when (gs-101/guix-p)
   :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
