@@ -7031,6 +7031,20 @@ Childframe doc for eglot and anything that uses eldoc.
 
 #+end_src
 
+** [[https://github.com/protesilaos/ef-themes][ef-themes]]
+
+#+begin_src emacs-lisp
+
+  (use-package ef-themes
+    :vc (:url "https://github.com/protesilaos/ef-themes")
+    :when (gs-101/guix-p)
+    :config
+    (load-theme 'ef-maris-dark)
+    :ensure t
+    )
+
+#+end_src
+
 ** [[https://github.com/Wilfred/helpful][Helpful]]
 
 #+begin_quote

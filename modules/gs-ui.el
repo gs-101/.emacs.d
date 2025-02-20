@@ -231,6 +231,14 @@ This advice replaces the rocket icon with a electric plug icon."
   (eldoc-mode . eldoc-box-hover-mode)
   )
 
+(use-package ef-themes
+  :vc (:url "https://github.com/protesilaos/ef-themes")
+  :when (gs-101/guix-p)
+  :config
+  (load-theme 'ef-maris-dark)
+  :ensure t
+  )
+
 (use-package helpful
   :vc (:url "https://github.com/Wilfred/helpful")
   :bind
