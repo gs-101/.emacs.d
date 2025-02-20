@@ -144,8 +144,8 @@ using Helpful."
    ([remap vc-git-grep] . consult-git-grep)
    ([remap yank-from-kill-ring] . consult-yank-from-kill-ring)
    ([remap yank-pop] . consult-yank-pop)
+   ([remap execute-extended-command-for-buffer] . consult-mode-command)
    ("M-g I" . consult-imenu-multi)
-   ("C-z M-x" . consult-mode-command)
    )
   :config
   (defun oantolin/choose-completion-in-region ()
