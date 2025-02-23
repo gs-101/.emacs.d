@@ -569,7 +569,7 @@ instead of $."
     (let ((prompt (concat (abbreviate-file-name (eshell/pwd))
                           (unless (eshell-exit-success-p)
                             (format " [%d]" eshell-last-command-status))
-                          (if (= (file-user-uid) 0) " # " " λ "))))
+                          " λ ")))
       (propertize prompt 'face 'nerd-icons-lpurple)))
   (defun thanos/eshell-git-info ()
 	"Return a string showing git information."
