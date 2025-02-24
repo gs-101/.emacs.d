@@ -22,6 +22,11 @@
   (native-comp-async-report-warnings-errors 'silent)
   )
 
+(use-package completion-preview
+  :init
+  (global-completion-preview-mode)
+  )
+
 (use-package ediff-wind
   :custom
   (ediff-window-setup-function 'ediff-setup-windows-plain)

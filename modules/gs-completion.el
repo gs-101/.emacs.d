@@ -34,6 +34,7 @@
       `(orderless-regexp . ,(concat "\\." (substring word 1) (minad/orderless--consult-suffix))))))
   :custom
   (completion-styles '(orderless basic))
+  (completion-preview-completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '(
                                    (file (styles partial-completion))
@@ -130,7 +131,7 @@ Also adds `cape-file' as a fallback."
   (corfu-preselect 'directory)
   :ensure t
   :init
-  (global-corfu-mode)
+  ;; (global-corfu-mode)
   )
 
 (use-package corfu

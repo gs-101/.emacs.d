@@ -199,6 +199,23 @@ This file contains all the code needed to drive async compilations and any Lisp 
 
 #+end_src
 
+*** Completion Preview
+
+#+begin_quote
+
+Preview completion with inline overlay
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package completion-preview
+    :init
+    (global-completion-preview-mode)
+    )
+
+#+end_src
+
 *** Ediff Window
 
 #+begin_quote
@@ -4465,6 +4482,7 @@ Emacs completion style that matches multiple regexps in any order.
         `(orderless-regexp . ,(concat "\\." (substring word 1) (minad/orderless--consult-suffix))))))
     :custom
     (completion-styles '(orderless basic))
+    (completion-preview-completion-styles '(orderless basic))
     (completion-category-defaults nil)
     (completion-category-overrides '(
                                      (file (styles partial-completion))
@@ -4639,7 +4657,7 @@ COmpletion in Region FUnction.
     (corfu-preselect 'directory)
     :ensure t
     :init
-    (global-corfu-mode)
+    ;; (global-corfu-mode)
     )
 
 #+end_src
