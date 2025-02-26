@@ -256,50 +256,25 @@ This advice replaces the rocket icon with a electric plug icon."
   :vc (:url "https://github.com/tarsius/hl-todo")
   :custom
   (hl-todo-keyword-faces '(
-                           ("FIXME" . "red")
-                           ("NOTE" . "yellow")
-                           ("QUESTION" . "yellow")
-                           ("ANSWER" . "green")
-                           ("FIX" . "red")
-                           ("FEAT" . "yellow")
-                           ("DOCS" . "white")
-                           ("HACK" . "green")
-                           ("STYLE" . "orange")
-                           ("REFACTOR" . "white")
-                           ("REVIEW" . "white")
-                           ("CHORE" . "grey")
-                           ("MERGED" . "green")
-                           ("CLOSED" . "red")
+                           ("FIXME" . flymake-error-echo)
+                           ("NOTE" . flymake-warning-echo)
+                           ("QUESTION" . flymake-warning-echo)
+                           ("ANSWER" . flymake-note-echo)
+                           ("FIX" . flymake-error-echo)
+                           ("FEAT" . flymake-warning-echo)
+                           ("DOCS" . flymake-note-echo)
+                           ("HACK" . flymake-note-echo)
+                           ("STYLE" . flymake-note-echo)
+                           ("REFACTOR" . flymake-note-echo)
+                           ("REVIEW" . flymake-note-echo)
+                           ("CHORE" . flymake-note-echo)
+                           ("MERGED" . flymake-note-echo)
+                           ("CLOSED" . flymake-error-echo)
                            ))
   :ensure t
   :hook
   (prog-mode . hl-todo-mode)
   (text-mode . hl-todo-mode)
-  )
-
-(use-package hl-todo
-  :after hl-todo catppuccin-theme
-  :custom
-  (hl-todo-keyword-faces
-   (mapcar (lambda (keyword-color)
-             (cons (car keyword-color)
-                   (catppuccin-get-color (cdr keyword-color))))
-           '(
-             ("FIXME" . red)
-             ("NOTE" . yellow)
-             ("QUESTION" . yellow)
-             ("ANSWER" . green)
-             ("FIX" . red)
-             ("FEAT" . yellow)
-             ("DOCS" . blue)
-             ("HACK" . green)
-             ("STYLE" . lavender)
-             ("REFACTOR" . sapphire)
-             ("REVIEW" . sapphire)
-             ("CHORE" . overlay0)
-             ("MERGED" . green)
-             ("CLOSED" . red)
-             )))
   )
 
 (use-package keycast
