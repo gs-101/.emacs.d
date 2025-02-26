@@ -165,6 +165,7 @@ using Helpful."
   (register-preview-function #'consult-register-format)
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref)
+  (completion-in-region-function 'consult-completion-in-region)
   :ensure t
   :hook
   (minibuffer-setup . oantolin/choose-completion-in-region)
