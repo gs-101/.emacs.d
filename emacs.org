@@ -71,6 +71,12 @@ Variables used to reference to specific directories, using ~convert-standard-fil
     "Check if the current system uses Nobara Linux as its distribution."
     (executable-find "nobara-welcome"))
 
+  (defun gs-101/add-many-to-list (list many)
+    "Return a function for adding MANY items to a LIST.
+  Without putting them in a separate list."
+    (mapc (lambda (item)
+            (add-to-list list item))
+          many))
 #+end_src
 
 ** Package Archives
@@ -78,11 +84,10 @@ Variables used to reference to specific directories, using ~convert-standard-fil
 #+begin_src emacs-lisp
 
   (with-eval-after-load 'package
-    (mapc (lambda (archive)
-            (add-to-list 'package-archives archive)) '(
-            ("melpa" . "https://melpa.org/packages/")
-            ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
-            )))
+    (gs-101/add-many-to-list 'package-archives
+                             '(("melpa" . "https://melpa.org/packages/")
+                               ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
+    )
 
 #+end_src
 
@@ -210,6 +215,10 @@ Preview completion with inline overlay
 #+begin_src emacs-lisp
 
   (use-package completion-preview
+    :config
+    (gs-101/add-many-to-list 'completion-preview-commands
+                             '(org-self-insert-command
+                               org-delete-backward-char))
     :init
     (global-completion-preview-mode)
     )

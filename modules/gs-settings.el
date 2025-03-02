@@ -23,6 +23,10 @@
   )
 
 (use-package completion-preview
+  :config
+  (gs-101/add-many-to-list 'completion-preview-commands
+                           '(org-self-insert-command
+                             org-delete-backward-char))
   :init
   (global-completion-preview-mode)
   )

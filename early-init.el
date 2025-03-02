@@ -31,9 +31,15 @@
   "Check if the current system uses Nobara Linux as its distribution."
   (executable-find "nobara-welcome"))
 
+(defun gs-101/add-many-to-list (list many)
+  "Return a function for adding MANY items to a LIST.
+Without putting them in a separate list."
+  (mapc (lambda (item)
+          (add-to-list list item))
+        many))
+
 (with-eval-after-load 'package
-  (mapc (lambda (archive)
-          (add-to-list 'package-archives archive)) '(
-          ("melpa" . "https://melpa.org/packages/")
-          ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")
-          )))
+  (gs-101/add-many-to-list 'package-archives
+                           '(("melpa" . "https://melpa.org/packages/")
+                             ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
+  )
