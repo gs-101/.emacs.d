@@ -645,7 +645,10 @@ Highlight matching paren.
 
   (use-package paren
     :config
-    (set-face-attribute 'show-paren-match nil :foreground 'unspecified :box '(:line-width (-1 . -1)))
+    (set-face-attribute 'show-paren-match nil
+                        :background 'unspecified
+                        :foreground 'unspecified
+                        :box '(:line-width (-1 . -1)))
     :custom
     (show-paren-delay 0)
     :init
