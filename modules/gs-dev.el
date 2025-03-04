@@ -485,7 +485,7 @@ Only runs if a Flutter buffer already exits."
     :host "models.inference.ai.azure.com"
     :endpoint "/chat/completions"
     :stream t
-    :key #'gs-101/gptel-github-models-key-from-auth
+    :key #'gptel-api-key
     :models '(
               gpt-4o
               gpt-4o-mini
@@ -493,6 +493,8 @@ Only runs if a Flutter buffer already exits."
               llama-3.2-90B-vision-instruct
               DeepSeek-R1
               ))
+  :custom
+  (gptel-api-key #'gs-101/gptel-github-models-key-from-auth)
   )
 
 (use-package gptel-quick
