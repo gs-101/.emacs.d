@@ -64,24 +64,6 @@
               (context-menu-mode)))
   )
 
-(use-package org-faces
-  :config
-  (dolist
-      (face '(
-              (org-level-1 . 1.30)
-              (org-level-2 . 1.29)
-              (org-level-3 . 1.28)
-              (org-level-4 . 1.27)
-              (org-level-5 . 1.26)
-              (org-level-6 . 1.25)
-              (org-level-7 . 1.24)
-              (org-level-8 . 1.23)
-              )
-            )
-    (set-face-attribute (car face) nil :font "Cascadia Code NF" :weight 'medium :height (cdr face)))
-  (set-face-attribute 'org-document-title nil :font "Cascadia Code NF" :weight 'medium :height 1.40)
-  )
-
 (use-package org
   :custom
   (org-ellipsis 'truncate-string-ellipsis)
