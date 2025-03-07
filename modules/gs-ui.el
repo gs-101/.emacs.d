@@ -166,22 +166,6 @@
   :ensure t
   )
 
-(use-package color-identifiers-mode
-  :vc (:url "https://github.com/ankurdave/color-identifiers-mode")
-  :ensure t
-  :config
-  (defun gs-101/color-identifiers-toggle-on-ts-mode ()
-    "Enable `color-identifiers-mode' in tree-sitter modes.
-
-Disable if `prism-mode' is currently enabled on the buffer."
-    (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
-      (color-identifiers-mode))
-    (when (bound-and-true-p prism-mode)
-      (setq-local color-identifiers-mode nil)))
-  :hook
-  (prog-mode . gs-101/color-identifiers-toggle-on-ts-mode)
-  )
-
 (use-package doom-modeline
   :vc (:url "https://github.com/seagle0128/doom-modeline")
   :config
