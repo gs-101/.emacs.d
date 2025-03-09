@@ -6917,6 +6917,7 @@ Soothing pastel theme for Emacs.
 #+begin_src emacs-lisp
 
   (use-package catppuccin-theme
+    :vc (:url "https://github.com/catppuccin/emacs")
     :when (gs-101/nobara-p)
     :config
     (load-theme 'catppuccin t)

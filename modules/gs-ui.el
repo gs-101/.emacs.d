@@ -142,6 +142,7 @@
   )
 
 (use-package catppuccin-theme
+  :vc (:url "https://github.com/catppuccin/emacs")
   :when (gs-101/nobara-p)
   :config
   (load-theme 'catppuccin t)
