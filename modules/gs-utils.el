@@ -13,6 +13,7 @@
   (pomm-mode-line-mode)
   :custom
   (pomm-audio-enabled t)
+  (pomm-audio-player-executable (executable-find "mpv"))
   :defer t
   :ensure t
   :hook
