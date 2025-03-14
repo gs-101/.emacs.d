@@ -43,6 +43,8 @@
 (use-package dired-aux
   :after dired
   :custom
+  (dired-create-destination-dirs 'always)
+  (dired-create-destination-dirs-on-trailing-dirsep t)
   (dired-do-revert-buffer t)
   (dired-isearch-filenames 'dwim)
   )

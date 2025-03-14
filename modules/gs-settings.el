@@ -83,14 +83,6 @@
 (use-package files
   :config
   (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ;; 3
-  (defun xenodium/files-create-non-existent-directory ()
-    "Create a non-existent directory."
-    (when-let* ((file-name buffer-file-name)
-                (parent-directory (file-name-parent-directory file-name)))
-      (when (and (not (file-exists-p parent-directory))
-                 (y-or-n-p (format "Create `%s' dir? " parent-directory)))
-        (make-directory parent-directory t))))
-  (add-to-list 'find-file-not-found-functions #'xenodium/files-create-non-existent-directory) ;; 4
   :custom
   (auto-mode-case-fold nil)
   (backup-by-copying t) ;; 2
