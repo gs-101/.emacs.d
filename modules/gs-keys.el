@@ -370,6 +370,14 @@ Otherwise, it calls `switch-to-minibuffer'."
    )
   )
 
+(use-package casual-make
+  :bind
+  (
+   :map makefile-mode-map
+   ("M-o" . casual-make-tmenu)
+   )
+)
+
 (use-package casual-re-builder
   :bind
   (

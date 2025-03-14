@@ -2013,6 +2013,20 @@ A collection of opinionated keyboard-driven user interfaces for various built-in
 
 #+end_src
 
+*** Make
+
+#+begin_src emacs-lisp
+
+  (use-package casual-make
+    :bind
+    (
+     :map makefile-mode-map
+     ("M-o" . casual-make-tmenu)
+     )
+  )
+
+#+end_src
+
 *** RE-Builder
 
 #+begin_src emacs-lisp
