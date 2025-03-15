@@ -635,8 +635,6 @@ rectangular region instead."
                   ;; `kill-region-dwim' defines (since Emacs 31).
                   (call-interactively #'kill-region))))
   :ensure t
-  :custom
-  (cursor-type 'bar)
   :hook
   (text-mode . puni-disable-puni-mode)
   :init
