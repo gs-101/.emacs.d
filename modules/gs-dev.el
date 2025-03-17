@@ -400,26 +400,6 @@ Only runs if a Flutter buffer already exits."
   (prog-mode . apheleia-mode)
   )
 
-(use-package copilot
-  :vc (:url "https://github.com/copilot-emacs/copilot.el")
-  :ensure t
-  :bind
-  (
-   :map copilot-completion-map
-   ("<tab>" . copilot-accept-completion)
-   ("TAB" . copilot-accept-completion)
-   ("C-<tab>" . copilot-accept-completion-by-word)
-   ("C-TAB" . copilot-accept-completion-by-word)
-   ("C-n" . copilot-next-completion)
-   ("C-p" . copilot-previous-completion)
-   )
-  :config
-  (dolist (pair '((clojure-ts-mode lisp-indent-offset)
-                  (scheme-mode lisp-indent-offset)
-                  (org-mode 2)))
-    (add-to-list 'copilot-indentation-alist pair))
-  )
-
 (use-package combobulate
   :vc (:url "https://github.com/mickeynp/combobulate")
   :bind
@@ -462,58 +442,6 @@ Only runs if a Flutter buffer already exits."
   :vc (:url "https://github.com/magit/git-modes")
   :defer t
   :ensure t
-  )
-
-(use-package gptel
-  :vc (:url "https://github.com/karthink/gptel")
-  :bind
-  ("C-z g b" . gptel)
-  ("C-z g DEL" . gptel-abort)
-  ("C-z g a" . gptel-add)
-  ("C-z g C-x C-f" . gptel-add-file)
-  ("C-z g m" . gptel-menu)
-  ("C-z g r" . gptel-rewrite)
-  ("C-z g RET" . gptel-send)
-  ("C-z g p" . gptel-system-prompt)
-  :ensure t
-  )
-
-(use-package gptel-openai
-  :after gptel
-  :config
-  (defun gs-101/gptel-github-models-key-from-auth ()
-    "Get the GitHub Models token from either auth-source or password-store."
-    (or (gptel-api-key-from-auth-source)
-        (auth-source-pass-get 'secret "models.inference.ai.azure.com")))
-  (gptel-make-openai "Github Models"
-    :host "models.inference.ai.azure.com"
-    :endpoint "/chat/completions"
-    :stream t
-    :key #'gptel-api-key
-    :models '(
-              gpt-4o
-              gpt-4o-mini
-              meta-llama-3.1-405b-instruct
-              llama-3.2-90B-vision-instruct
-              DeepSeek-R1
-              ))
-  :custom
-  (gptel-api-key #'gs-101/gptel-github-models-key-from-auth)
-  )
-
-(use-package gptel-quick
-  :vc (:url "https://github.com/karthink/gptel-quick")
-  :after gptel
-  :ensure t
-  )
-
-(use-package gptel-quick
-  :after gptel-quick embark
-  :bind
-  (
-   :map embark-general-map
-   ("g" . gptel-quick)
-   )
   )
 
 (use-package leetcode

@@ -3982,38 +3982,6 @@ Run code formatter on buffer contents without moving point, using RCS patches an
 
 #+end_src
 
-** [[https://github.com/copilot-emacs/copilot.el][Copilot]]
-
-#+begin_quote
-
-An unofficial Copilot plugin for Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package copilot
-    :vc (:url "https://github.com/copilot-emacs/copilot.el")
-    :ensure t
-    :bind
-    (
-     :map copilot-completion-map
-     ("<tab>" . copilot-accept-completion)
-     ("TAB" . copilot-accept-completion)
-     ("C-<tab>" . copilot-accept-completion-by-word)
-     ("C-TAB" . copilot-accept-completion-by-word)
-     ("C-n" . copilot-next-completion)
-     ("C-p" . copilot-previous-completion)
-     )
-    :config
-    (dolist (pair '((clojure-ts-mode lisp-indent-offset)
-                    (scheme-mode lisp-indent-offset)
-                    (org-mode 2)))
-      (add-to-list 'copilot-indentation-alist pair))
-    )
-
-#+end_src
-
 ** [[https://github.com/mickeynp/combobulate][Combobulate]]
 :PROPERTIES:
 :CREDITS:  https://github.com/mickeynp/combobulate/issues/119#issuecomment-2435132123
@@ -4105,100 +4073,6 @@ Emacs major modes for Git configuration files.
     :vc (:url "https://github.com/magit/git-modes")
     :defer t
     :ensure t
-    )
-
-#+end_src
-
-** [[https://github.com/karthink/gptel][gptel]]
-
-#+begin_quote
-
-A simple LLM client for Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package gptel
-    :vc (:url "https://github.com/karthink/gptel")
-    :bind
-    ("C-z g b" . gptel)
-    ("C-z g DEL" . gptel-abort)
-    ("C-z g a" . gptel-add)
-    ("C-z g C-x C-f" . gptel-add-file)
-    ("C-z g m" . gptel-menu)
-    ("C-z g r" . gptel-rewrite)
-    ("C-z g RET" . gptel-send)
-    ("C-z g p" . gptel-system-prompt)
-    :ensure t
-    )
-
-#+end_src
-
-*** [[https://github.com/marketplace/models][Github Models]]
-
-#+begin_quote
-
-Try, test, and deploy from a wide range of model types, sizes, and specializations.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package gptel-openai
-    :after gptel
-    :config
-    (defun gs-101/gptel-github-models-key-from-auth ()
-      "Get the GitHub Models token from either auth-source or password-store."
-      (or (gptel-api-key-from-auth-source)
-          (auth-source-pass-get 'secret "models.inference.ai.azure.com")))
-    (gptel-make-openai "Github Models"
-      :host "models.inference.ai.azure.com"
-      :endpoint "/chat/completions"
-      :stream t
-      :key #'gptel-api-key
-      :models '(
-                gpt-4o
-                gpt-4o-mini
-                meta-llama-3.1-405b-instruct
-                llama-3.2-90B-vision-instruct
-                DeepSeek-R1
-                ))
-    :custom
-    (gptel-api-key #'gs-101/gptel-github-models-key-from-auth)
-    )
-
-#+end_src
-
-*** [[https://github.com/karthink/gptel-quick][quick]]
-
-#+begin_quote
-
-Quick LLM lookups in Emacs.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-
-  (use-package gptel-quick
-    :vc (:url "https://github.com/karthink/gptel-quick")
-    :after gptel
-    :ensure t
-    )
-
-#+end_src
-
-**** [[https://github.com/karthink/gptel-quick?tab=readme-ov-file#setup][Embark]]
-
-#+begin_src emacs-lisp
-
-  (use-package gptel-quick
-    :after gptel-quick embark
-    :bind
-    (
-     :map embark-general-map
-     ("g" . gptel-quick)
-     )
     )
 
 #+end_src
