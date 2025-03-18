@@ -564,6 +564,7 @@ rectangular region instead."
                   (call-interactively #'kill-region))))
   :ensure t
   :hook
+  (minibuffer-mode . puni-disable-puni-mode)
   (text-mode . puni-disable-puni-mode)
   :init
   (puni-global-mode)

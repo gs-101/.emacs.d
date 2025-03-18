@@ -4275,6 +4275,7 @@ Structured editing (soft deletion, expression navigating & manipulating) that su
                     (call-interactively #'kill-region))))
     :ensure t
     :hook
+    (minibuffer-mode . puni-disable-puni-mode)
     (text-mode . puni-disable-puni-mode)
     :init
     (puni-global-mode)
