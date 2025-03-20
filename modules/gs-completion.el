@@ -151,21 +151,6 @@ Also adds `cape-file' as a fallback."
   (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster)
   )
 
-(use-package emacs
-  :after corfu cape tempel
-  :config
-  (defun minad/eglot-capf ()
-    "eglot capf with tempel and cape features."
-    (setq-local completion-at-point-functions
-                (list (cape-capf-super
-                       #'cape-file
-                       #'eglot-completion-at-point
-                       #'tempel-expand
-                       ))))
-  :hook
-  (eglot-managed-mode . minad/eglot-capf)
-  )
-
 (use-package vertico
   :vc
   (

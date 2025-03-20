@@ -4597,29 +4597,6 @@ COmpletion in Region FUnction.
 
 #+end_src
 
-**** [[https://github.com/minad/corfu/wiki#making-a-cape-super-capf-for-eglot][Emacs]]
-
-With the combined features of cape and tempel, create a super capf for eglot completion.
-
-#+begin_src emacs-lisp
-
-  (use-package emacs
-    :after corfu cape tempel
-    :config
-    (defun minad/eglot-capf ()
-      "eglot capf with tempel and cape features."
-      (setq-local completion-at-point-functions
-                  (list (cape-capf-super
-                         #'cape-file
-                         #'eglot-completion-at-point
-                         #'tempel-expand
-                         ))))
-    :hook
-    (eglot-managed-mode . minad/eglot-capf)
-    )
-
-#+end_src
-
 ** [[https://github.com/minad/vertico][Vertico]]
 
 #+begin_quote
