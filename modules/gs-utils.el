@@ -125,8 +125,6 @@ using Helpful."
    ([remap imenu] . consult-imenu)
    ([remap info] . consult-info)
    ([remap info-search] . consult-info)
-   ([remap isearch-forward] . consult-line)
-   ([remap isearch-forward-word] . consult-line)
    ([remap kmacro-menu] . consult-kmacro)
    ([remap list-buffers] . consult-buffer)
    ([remap load-theme] . consult-theme)
