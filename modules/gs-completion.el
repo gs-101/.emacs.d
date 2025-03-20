@@ -56,7 +56,6 @@
   :ensure t
   :hook
   (completion-at-point-functions . cape-dabbrev)
-  (completion-at-point-functions . cape-emoji)
   (completion-at-point-functions . cape-file)
   )
 
