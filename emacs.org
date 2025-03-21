@@ -3247,6 +3247,27 @@ Run compiler as inferior of Emacs, parse error messages.
 
 #+end_src
 
+** [[https://github.com/astoff/devdocs.el][DevDocs]]
+
+#+begin_quote
+
+Emacs viewer for [[https://devdocs.io/][DevDocs]].
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package devdocs
+    :vc (:url "https://github.com/astoff/devdocs.el")
+    :ensure t
+    :bind
+    (
+     ("C-h D" . devdocs-lookup)
+     )
+    )
+
+#+end_src
+
 ** Diff
 
 #+begin_quote

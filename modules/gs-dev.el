@@ -78,6 +78,15 @@
   (push 'cargo compilation-error-regexp-alist)
   )
 
+(use-package devdocs
+  :vc (:url "https://github.com/astoff/devdocs.el")
+  :ensure t
+  :bind
+  (
+   ("C-h D" . devdocs-lookup)
+   )
+  )
+
 (use-package diff-mode
   :custom
   (diff-add-log-use-relative-names t)
