@@ -3944,13 +3944,8 @@ Basic Lisp subroutines for Emacs.
 
 #+begin_src emacs-lisp
 
-  (use-package subr
-    :bind
-    (
-     :map prog-mode-map
-     ([remap forward-word] . forward-symbol)
-     ([remap backward-word] . gs-101/backward-symbol)
-     )
+  (use-package emacs
+    :ensure nil
     :config
     (defun gs-101/backward-symbol (&optional arg)
       "Move backward until encountering the beginning of a symbol.
@@ -3960,6 +3955,105 @@ Basic Lisp subroutines for Emacs.
   NOTE: This should definitely be upstreamed."
       (interactive "^p")
       (forward-symbol (- (or arg 1))))
+    (defun gs-101/kill-symbol (arg)
+      "Kill characters forward until encountering the end of a symbol.
+  With argument ARG, do this that many times."
+      (interactive "p")
+      (kill-region (point) (progn (forward-symbol arg) (point))))
+    (defun gs-101/mark-symbol (&optional arg allow-extend)
+      "Set mark ARG symbols from point or move mark one symbol.
+  When called from Lisp with ALLOW-EXTEND omitted or nil, mark is
+  set ARG symbols from point.
+  With ARG and ALLOW-EXTEND both non-nil (interactively with prefix
+  argument), the place to which mark goes is the same place \\[forward-symbol]
+  would move to with the same argument; if the mark is active, it moves
+  ARG symbols from its current position, otherwise it is set ARG symbols
+  from point.
+  When invoked interactively without a prefix argument and no active
+  region, mark moves one symbol forward.
+  When invoked interactively without a prefix argument, and region
+  is active, mark moves one symbol away of point (i.e., forward
+  if mark is at or after point, back if mark is before point), thus
+  extending the region by one symbol.  Since the direction of region
+  extension depends on the relative position of mark and point, you
+  can change the direction by \\[exchange-point-and-mark]."
+      (interactive "P\np")
+      (cond ((and allow-extend
+                  (or (and (eq last-command this-command) (mark t))
+                      (region-active-p)))
+             (setq arg (if arg (prefix-numeric-value arg)
+                         (if (< (mark) (point)) -1 1)))
+             (set-mark
+              (save-excursion
+                (goto-char (mark))
+                (forward-symbol arg)
+                (point))))
+            (t
+             (push-mark
+              (save-excursion
+                (forward-symbol (prefix-numeric-value arg))
+                (point))
+              nil t))))
+    (defun gs-101/backward-kill-symbol (arg)
+      "Kill characters backward until encountering the beginning of a symbol.
+  With argument ARG, do this that many times."
+      (interactive "p")
+      (gs-101/kill-symbol (- arg)))
+    (defun gs-101/left-symbol (&optional n)
+      "Move point N symbols to the left (to the right if N is negative).
+
+  Depending on the bidirectional context, this may move either backward
+  of forward in the buffer.  This is contrast with \\[gs-101/backward-symbol]
+  and \\[forward-symbol], which see.
+
+  Value is normally t.
+
+  If an edge of the buffer or a field boundary is reached, point is left there
+  and the function returns nil.  Field boundaries are not noticed
+  if `inhibit-field-text-motion' is non-nil."
+      (interactive "^p")
+      (if (eq (current-bidi-paragraph-direction) 'left-to-right)
+          (gs-101/backward-symbol n)
+        (forward-symbol n)))
+    (defun gs-101/right-symbol (&optional n)
+      "Move point N symbols to the right (to the left if N is negative).
+
+  Depending on the bidirectional context, this may move either backward
+  of forward in the buffer.  This is contrast with \\[gs-101/forward-symbol]
+  and \\[backward-symbol], which see.
+
+  Value is normally t.
+
+  If an edge of the buffer or a field boundary is reached, point is left there
+  and the function returns nil.  Field boundaries are not noticed
+  if `inhibit-field-text-motion' is non-nil."
+      (interactive "^p")
+      (if (eq (current-bidi-paragraph-direction) 'left-to-right)
+          (forward-symbol n)
+        (gs-101/backward-symbol n)))
+    (defun gs-101/transpose-symbols (arg)
+      "Interchange symbols around point, leaving point at the end of them.
+  With prefix arg ARG, effect is to take word before or around point
+  and drag it foward past ARG or other symbols (backward if ARG negative).
+  If ARG is zero, the symbols around or arger point and around of after mark
+  are interchanged."
+      (interactive "*p")
+      (transpose-subr 'forward-symbol arg))
+    ;; Capitalization functions are defined in C. Check this later.
+    (defvar-keymap gs-101/symbol-mode-map
+      :doc "Keymap used for `gs-101/symbol-mode'."
+      "<remap> <forward-word>" #'forward-symbol
+      "<remap> <backward-word>" #'gs-101/backward-symbol
+      "<remap> <kill-word>" #'gs-101/kill-symbol
+      "<remap> <mark-word>" #'gs-101/mark-symbol
+      "<remap> <backward-kill-word>" #'gs-101/backward-kill-symbol
+      "<remap> <left-word>" #'gs-101/left-symbol
+      "<remap> <right-word>" #'gs-101/right-symbol
+      "<remap> <transpose-words>" #'gs-101/transpose-symbols)
+    (define-minor-mode gs-101/symbol-mode
+      "Enable keybindings for symbol commands."
+      :keymap gs-101/symbol-mode-map)
+    (add-hook 'prog-mode-hook #'gs-101/symbol-mode)
     )
 
 #+end_src
