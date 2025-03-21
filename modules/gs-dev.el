@@ -376,6 +376,24 @@ Only runs if a Flutter buffer already exits."
   (smerge-mode)
   )
 
+(use-package subr
+  :bind
+  (
+   :map prog-mode-map
+   ([remap forward-word] . forward-symbol)
+   ([remap backward-word] . gs-101/backward-symbol)
+   )
+  :config
+  (defun gs-101/backward-symbol (&optional arg)
+    "Move backward until encountering the beginning of a symbol.
+With argument ARG, do this that many times.
+If ARG is omitted or nil, move point backward one symbol.
+
+NOTE: This should definitely be upstreamed."
+    (interactive "^p")
+    (forward-symbol (- (or arg 1))))
+  )
+
 (use-package subword
   :hook
   (prog-mode . subword-mode)

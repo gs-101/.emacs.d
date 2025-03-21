@@ -3934,6 +3934,36 @@ Minor mode to resolve diff3 conflicts.
 
 #+end_src
 
+** Subr
+
+#+begin_quote
+
+Basic Lisp subroutines for Emacs.
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package subr
+    :bind
+    (
+     :map prog-mode-map
+     ([remap forward-word] . forward-symbol)
+     ([remap backward-word] . gs-101/backward-symbol)
+     )
+    :config
+    (defun gs-101/backward-symbol (&optional arg)
+      "Move backward until encountering the beginning of a symbol.
+  With argument ARG, do this that many times.
+  If ARG is omitted or nil, move point backward one symbol.
+
+  NOTE: This should definitely be upstreamed."
+      (interactive "^p")
+      (forward-symbol (- (or arg 1))))
+    )
+
+#+end_src
+
 ** SubWord
 
 #+begin_quote
