@@ -488,11 +488,6 @@ are interchanged."
   (add-hook 'prog-mode-hook #'gs-101/symbol-mode)
   )
 
-(use-package subword
-  :hook
-  (prog-mode . subword-mode)
-  )
-
 (use-package aggressive-indent
   :vc (:url "https://github.com/Malabarba/aggressive-indent-mode")
   :config
