@@ -252,8 +252,6 @@ Generic package used to configure functions and variables not included in any Em
 #+begin_src emacs-lisp
 
   (use-package emacs
-    :config
-    (setq define-coding-system-alias '(UTF-8 'utf-8))
     :custom
     (auto-save-include-big-deletions)
     (auto-window-vscroll nil) ;; 3
@@ -269,7 +267,6 @@ Generic package used to configure functions and variables not included in any Em
     (hscroll-step 1) ;; 3
     (inhibit-compacting-font-caches t) ;; 3
     (load-prefer-newer t) ;; 2
-    (locale-coding-system 'utf-8)
     ;; Disable the cursor in the minibuffer prompt
     (minibuffer-prompt-properties '(
                                     cursor-intangible t
@@ -557,9 +554,8 @@ Multilingual Enviroment.
 
   (use-package mule
     :config
-    (set-keyboard-coding-system 'utf-8)
-    (set-selection-coding-system 'utf-8)
-    (set-terminal-coding-system 'utf-8)
+    ;; All that is needed for UTF-8.
+    (modify-coding-system-alist 'file "" 'utf-8)
     :defer t
     )
 
@@ -567,7 +563,7 @@ Multilingual Enviroment.
 
 **** Cmds
 :PROPERTIES:
-:CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L65][jamescherti]], 2. [[https://github.com/oantolin/emacs-config/blob/master/init.el][oantolin]]
+:CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L65][jamescherti]]
 :END:
 
 #+begin_quote
@@ -579,11 +575,7 @@ Commands for Multilingual Enviroment.
 #+begin_src emacs-lisp
 
   (use-package mule-cmds
-    :config
-    (set-language-environment 'utf-8)
-    (prefer-coding-system 'utf-8)
     :custom
-    (current-language-environment "UTF-8") ;; 2
     (default-input-method nil) ;; 1
     :defer t
     )
