@@ -135,6 +135,7 @@ using Helpful."
    ([remap project-find-regexp] . consult-grep)
    ([remap project-list-buffers] . consult-project-buffer)
    ([remap project-switch-to-buffer] . consult-project-buffer)
+   ([remap recentf] . consult-recent-file)
    ([remap rgrep] . consult-ripgrep)
    ([remap switch-to-buffer] . consult-buffer)
    ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
