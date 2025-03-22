@@ -2683,23 +2683,6 @@ Makes Eglot spew out more documentation information from the language server tha
     :ensure t)
 #+end_src
 
-*** [[https://github.com/kljohann/eldoc-diffstat/][diffstat]]
-
-#+begin_quote
-Make VCS diffstat available via eldoc.
-#+end_quote
-
-NOTE: DELETE.
-
-#+begin_src emacs-lisp
-  (use-package eldoc-diffstat
-    :vc (:url "https://github.com/kljohann/eldoc-diffstat/")
-    :after eldoc
-    :ensure t
-    :hook
-    (magit-log-mode . eldoc-diffstat-mode))
-#+end_src
-
 ** Electric Pairs
 
 #+begin_quote

@@ -147,13 +147,6 @@
   (advice-add #'eglot-signature-eldoc-function :override #'eglot-signature-eldoc-talkative)
   :ensure t)
 
-(use-package eldoc-diffstat
-  :vc (:url "https://github.com/kljohann/eldoc-diffstat/")
-  :after eldoc
-  :ensure t
-  :hook
-  (magit-log-mode . eldoc-diffstat-mode))
-
 (use-package elec-pair
   :hook
   (prog-mode . electric-pair-local-mode))
