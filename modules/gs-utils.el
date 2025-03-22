@@ -163,34 +163,6 @@ using Helpful."
   ([remap dired-jump] . consult-dir-jump-file)
   :ensure t)
 
-(use-package consult-gh
-  :vc (:url "https://github.com/armindarvish/consult-gh")
-  :after consult
-  :custom
-  (consult-gh-code-action #'consult-gh--code-view-action)
-  (consult-gh-default-clone-directory (expand-file-name gs-101/projects-code-directory))
-  (consult-gh-default-orgs-list "gs-101")
-  :defer t
-  :ensure t
-  )
-
-(use-package consult-gh-embark
-  :after consult-gh embark
-  )
-
-(use-package consult-gh-forge
-  :after consult-gh forge
-  :custom
-  (consult-gh-file-action #'consult-gh--files-view-action)
-  (consult-gh-issue-action #'consult-gh-forge--issue-view-action)
-  (consult-gh-pr-action #'consult-gh--forge-pr-view-action)
-  (consult-gh-repo-action #'consult-gh--repo-browse-files-action)
-  )
-
-(use-package consult-gh-transient
-  :after consult-gh
-  )
-
 (use-package consult-notes
   :vc (:url "https://github.com/mclear-tools/consult-notes")
   :ensure t)
