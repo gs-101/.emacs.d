@@ -223,6 +223,11 @@ ARG is used for `eval-last-sexp'."
   ("M-h" . mark-paragraph)
   )
 
+(use-package recentf
+  :bind
+  ("M-g r" . recentf)
+  )
+
 (use-package repeat
   :init
   (repeat-mode)
