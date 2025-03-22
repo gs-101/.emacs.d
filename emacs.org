@@ -3978,34 +3978,34 @@ Basic Lisp subroutines for Emacs.
     :config
     (defun gs-101/backward-symbol (&optional arg)
       "Move backward until encountering the beginning of a symbol.
-  With argument ARG, do this that many times.
-  If ARG is omitted or nil, move point backward one symbol.
+    With argument ARG, do this that many times.
+    If ARG is omitted or nil, move point backward one symbol.
 
-  NOTE: This should definitely be upstreamed."
+    NOTE: This should definitely be upstreamed."
       (interactive "^p")
       (forward-symbol (- (or arg 1))))
     (defun gs-101/kill-symbol (arg)
       "Kill characters forward until encountering the end of a symbol.
-  With argument ARG, do this that many times."
+    With argument ARG, do this that many times."
       (interactive "p")
       (kill-region (point) (progn (forward-symbol arg) (point))))
     (defun gs-101/mark-symbol (&optional arg allow-extend)
       "Set mark ARG symbols from point or move mark one symbol.
-  When called from Lisp with ALLOW-EXTEND omitted or nil, mark is
-  set ARG symbols from point.
-  With ARG and ALLOW-EXTEND both non-nil (interactively with prefix
-  argument), the place to which mark goes is the same place \\[forward-symbol]
-  would move to with the same argument; if the mark is active, it moves
-  ARG symbols from its current position, otherwise it is set ARG symbols
-  from point.
-  When invoked interactively without a prefix argument and no active
-  region, mark moves one symbol forward.
-  When invoked interactively without a prefix argument, and region
-  is active, mark moves one symbol away of point (i.e., forward
-  if mark is at or after point, back if mark is before point), thus
-  extending the region by one symbol.  Since the direction of region
-  extension depends on the relative position of mark and point, you
-  can change the direction by \\[exchange-point-and-mark]."
+    When called from Lisp with ALLOW-EXTEND omitted or nil, mark is
+    set ARG symbols from point.
+    With ARG and ALLOW-EXTEND both non-nil (interactively with prefix
+    argument), the place to which mark goes is the same place \\[forward-symbol]
+    would move to with the same argument; if the mark is active, it moves
+    ARG symbols from its current position, otherwise it is set ARG symbols
+    from point.
+    When invoked interactively without a prefix argument and no active
+    region, mark moves one symbol forward.
+    When invoked interactively without a prefix argument, and region
+    is active, mark moves one symbol away of point (i.e., forward
+    if mark is at or after point, back if mark is before point), thus
+    extending the region by one symbol.  Since the direction of region
+    extension depends on the relative position of mark and point, you
+    can change the direction by \\[exchange-point-and-mark]."
       (interactive "P\np")
       (cond ((and allow-extend
                   (or (and (eq last-command this-command) (mark t))
@@ -4025,21 +4025,21 @@ Basic Lisp subroutines for Emacs.
               nil t))))
     (defun gs-101/backward-kill-symbol (arg)
       "Kill characters backward until encountering the beginning of a symbol.
-  With argument ARG, do this that many times."
+    With argument ARG, do this that many times."
       (interactive "p")
       (gs-101/kill-symbol (- arg)))
     (defun gs-101/left-symbol (&optional n)
       "Move point N symbols to the left (to the right if N is negative).
 
-  Depending on the bidirectional context, this may move either backward
-  of forward in the buffer.  This is contrast with \\[gs-101/backward-symbol]
-  and \\[forward-symbol], which see.
+    Depending on the bidirectional context, this may move either backward
+    of forward in the buffer.  This is contrast with \\[gs-101/backward-symbol]
+    and \\[forward-symbol], which see.
 
-  Value is normally t.
+    Value is normally t.
 
-  If an edge of the buffer or a field boundary is reached, point is left there
-  and the function returns nil.  Field boundaries are not noticed
-  if `inhibit-field-text-motion' is non-nil."
+    If an edge of the buffer or a field boundary is reached, point is left there
+    and the function returns nil.  Field boundaries are not noticed
+    if `inhibit-field-text-motion' is non-nil."
       (interactive "^p")
       (if (eq (current-bidi-paragraph-direction) 'left-to-right)
           (gs-101/backward-symbol n)
@@ -4047,28 +4047,78 @@ Basic Lisp subroutines for Emacs.
     (defun gs-101/right-symbol (&optional n)
       "Move point N symbols to the right (to the left if N is negative).
 
-  Depending on the bidirectional context, this may move either backward
-  of forward in the buffer.  This is contrast with \\[gs-101/forward-symbol]
-  and \\[backward-symbol], which see.
+    Depending on the bidirectional context, this may move either backward
+    of forward in the buffer.  This is contrast with \\[forward-symbol]
+    and \\[backward-symbol], which see.
 
-  Value is normally t.
+    Value is normally t.
 
-  If an edge of the buffer or a field boundary is reached, point is left there
-  and the function returns nil.  Field boundaries are not noticed
-  if `inhibit-field-text-motion' is non-nil."
+    If an edge of the buffer or a field boundary is reached, point is left there
+    and the function returns nil.  Field boundaries are not noticed
+    if `inhibit-field-text-motion' is non-nil."
       (interactive "^p")
       (if (eq (current-bidi-paragraph-direction) 'left-to-right)
           (forward-symbol n)
         (gs-101/backward-symbol n)))
     (defun gs-101/transpose-symbols (arg)
       "Interchange symbols around point, leaving point at the end of them.
-  With prefix arg ARG, effect is to take word before or around point
-  and drag it foward past ARG or other symbols (backward if ARG negative).
-  If ARG is zero, the symbols around or arger point and around of after mark
-  are interchanged."
+    With prefix arg ARG, effect is to take word before or around point
+    and drag it foward past ARG or other symbols (backward if ARG negative).
+    If ARG is zero, the symbols around or arger point and around of after mark
+    are interchanged."
       (interactive "*p")
       (transpose-subr 'forward-symbol arg))
-    ;; Capitalization functions are defined in C. Check this later.
+    (defun gs-101/downcase-symbol (arg)
+      "Convert to lower case from point to end of symbol, moving over.
+
+  If point is in the middle of a symbol, the part of that symbol before point
+  is ignored when moving forward.
+
+  With negative argument, convert previous symbols but do not move."
+      (interactive "p")
+      (let ((start (point)))
+        (if (minusp arg)
+            (progn
+              (forward-symbol arg)
+              (downcase-region start (point))
+              (goto-char start))
+          (downcase-region (point) (forward-symbol arg)))))
+    (defun gs-101/upcase-symbol (arg)
+      "Convert to upper case from point to end of symbol, moving over.
+
+  If point is in the middle of a symbol, the part of that symbol before point
+  is ignored when moving forward.
+
+  With negative argument, convert previous symbols but do not move.
+  See also `gs-101/capitalize-symbol'."
+      (interactive "p")
+      (let ((start (point)))
+        (if (minusp arg)
+            (progn
+              (forward-symbol arg)
+              (upcase-region start (point))
+              (goto-char start))
+          (upcase-region (point) (forward-symbol arg)))))
+    (defun gs-101/capitalize-symbol (arg)
+      "Capitalize from point to the end of symbol, moving over.
+
+  With numerical argument ARG, capitalize the next ARG-1 symbols as well.
+  This gives the symbol(s) a first character in upper case
+  and the rest lower case.
+
+  If point is in the middle of a word, the part of that word before point
+  is ignored when moving forward.
+
+  With negative arugment, capitalize previous words but do not move."
+      (interactive "p")
+      (let ((start (point)))
+        (if (minusp arg)
+            (progn
+              (forward-symbol arg)
+              (capitalize-region start (point))
+              (goto-char start))
+          (capitalize-region (point) (forward-symbol arg)))))
+    ;; capitalization functions are defined in C. Check this later.
     (defvar-keymap gs-101/symbol-mode-map
       :doc "Keymap used for `gs-101/symbol-mode'."
       "<remap> <forward-word>" #'forward-symbol
@@ -4078,10 +4128,16 @@ Basic Lisp subroutines for Emacs.
       "<remap> <backward-kill-word>" #'gs-101/backward-kill-symbol
       "<remap> <left-word>" #'gs-101/left-symbol
       "<remap> <right-word>" #'gs-101/right-symbol
-      "<remap> <transpose-words>" #'gs-101/transpose-symbols)
+      "<remap> <transpose-words>" #'gs-101/transpose-symbols
+      "<remap> <downcase-word>" #'gs-101/downcase-symbol
+      "<remap> <upcase-word>" #'gs-101/upcase-symbol
+      "<remap> <capitalize-word>" #'gs-101/capitalize-symbol)
     (define-minor-mode gs-101/symbol-mode
       "Enable keybindings for symbol commands."
-      :keymap gs-101/symbol-mode-map)
+      :keymap gs-101/symbol-mode-map
+      :after-hook
+      (setq-local case-symbols-as-words 't)
+      )
     (add-hook 'prog-mode-hook #'gs-101/symbol-mode)
     )
 
