@@ -5780,7 +5780,8 @@ A Library for Nerd Font icons.
     (flymake-indicator-type 'margins)
     (flymake-margin-indicators-string '((error "󰃤" compilation-error)
                                         (warning "" compilation-warning)
-                                        (note "󰎚" compilation-info))))
+                                        (note "󰎚" compilation-info)))
+    (flymake-show-diagnostics-at-end-of-line 'short))
 #+end_src
 
 *** Go
