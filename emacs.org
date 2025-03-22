@@ -869,6 +869,24 @@ Log and display warnings.
 
 #+end_src
 
+*** Xref
+
+#+begin_quote
+
+This file provides a somewhat generic infrastructure for cross referencing commands, in particular "find-definition".
+
+#+end_quote
+
+#+begin_src emacs-lisp
+
+  (use-package xref
+    :config
+    (when (executable-find "rg")
+      (setopt xref-search-program 'ripgrep))
+    )
+
+#+end_src
+
 ** Third-Party Packages
 
 Packages which I think should be part of Emacs core.

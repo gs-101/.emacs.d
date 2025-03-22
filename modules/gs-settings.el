@@ -303,6 +303,12 @@ With a ARG prefix argument, copy the buffer to the other window."
   (warning-suppress-log-types '((comp) (bytecomp)))
   )
 
+(use-package xref
+  :config
+  (when (executable-find "rg")
+    (setopt xref-search-program 'ripgrep))
+  )
+
 (use-package gcmh
   :vc (:url "https://github.com/emacsmirror/gcmh")
   :ensure t
