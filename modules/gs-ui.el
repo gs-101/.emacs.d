@@ -11,15 +11,14 @@
   (use-file-dialog nil)
   (visible-bell nil)
   (x-stretch-cursor t)
-  (x-underline-at-descent-line nil)
-  )
+  (x-underline-at-descent-line nil))
 
 (use-package display-line-numbers
   :hook
-  (prog-mode . display-line-numbers-mode)
-  )
+  (prog-mode . display-line-numbers-mode))
 
 (use-package faces
+  :when (gs-101/nobara-p)
   :config
   (defun dw/set-font-faces ()
     ;; Set the default face
@@ -28,8 +27,7 @@
     (set-face-attribute 'fixed-pitch nil :font "Cascadia Mono NF")
     ;; Set the variable pitch face
     (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
-  (dw/set-font-faces)
-  )
+  (dw/set-font-faces))
 
 (use-package faces
   :if (daemonp)
@@ -37,8 +35,7 @@
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (with-selected-frame frame
-                (dw/set-font-faces))))
-  )
+                (dw/set-font-faces)))))
 
 (use-package frame
   :config (setq-mode-local doc-view-mode blink-cursor-mode nil)
@@ -47,22 +44,19 @@
   (window-divider-default-places t)
   (window-divider-default-right-width 1)
   :init
-  (window-divider-mode)
-  )
+  (window-divider-mode))
 
 (use-package mouse
   :if (display-graphic-p)
   :init
-  (context-menu-mode)
-  )
+  (context-menu-mode))
 
 (use-package mouse
   :if (daemonp)
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)
-              (context-menu-mode)))
-  )
+              (context-menu-mode))))
 
 (use-package org
   :custom
@@ -71,14 +65,12 @@
   (org-fontify-quote-and-verse-blocks t)
   (org-fontify-whole-heading-line t)
   (org-hide-emphasis-markers t)
-  (org-hide-leading-stars)
-  )
+  (org-hide-leading-stars))
 
 (use-package org
   :custom
   (org-pretty-entities t)
-  (org-pretty-entities-include-sub-superscripts t)
-  )
+  (org-pretty-entities-include-sub-superscripts t))
 
 (use-package org-modern
   :vc (:url "https://github.com/minad/org-modern")
@@ -88,8 +80,7 @@
   (org-modern-table-vertical 1)
   :ensure t
   :init
-  (global-org-modern-mode)
-  )
+  (global-org-modern-mode))
 
 (use-package org-agenda
   :custom
@@ -99,13 +90,11 @@
   (org-agenda-time-grid
    '((daily today require-timed)
      (600 800 1000 1200 1400 1600 1800 2000 2200)
-     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
-  )
+     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")))
 
 (use-package scroll-bar
   :custom
-  (scroll-bar-mode nil)
-  )
+  (scroll-bar-mode nil))
 
 (use-package startup
   :config
@@ -116,17 +105,16 @@
   (inhibit-startup-echo-area-message t)
   (inhibit-startup-message t)
   (inhibit-startup-screen t)
-  :defer t
-  )
+  :defer t)
 
 (use-package window
   :custom
-  (recenter-positions '(top middle bottom)) ;; 2
-  (scroll-error-top-bottom t) ;; 1
-  (split-height-threshold nil) ;;1
-  (split-width-threshold 170) ;; 1
-  (switch-to-buffer-obey-display-actions t) ;; 2
-  )
+  (recenter-positions '(top middle bottom)) ; 2
+  (scroll-error-top-bottom t) ; 1
+  (split-height-threshold nil) ;1
+  (split-width-threshold 170) ; 1
+  ;; 2
+  (switch-to-buffer-obey-display-actions t))
 
 (use-package which-key
   :custom
@@ -138,16 +126,14 @@
   (which-key-sort-order #'which-key-key-order-alpha)
   (which-key-sort-uppercase-first nil)
   :init
-  (which-key-mode)
-  )
+  (which-key-mode))
 
 (use-package catppuccin-theme
   :vc (:url "https://github.com/catppuccin/emacs")
   :when (gs-101/nobara-p)
   :config
   (load-theme 'catppuccin t)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package doom-modeline
   :vc (:url "https://github.com/seagle0128/doom-modeline")
@@ -168,8 +154,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (doom-modeline-modal-modern-icon nil)
   :ensure t
   :init
-  (doom-modeline-mode)
-  )
+  (doom-modeline-mode))
 
 (use-package doom-modeline
   :after doom-modeline
@@ -177,15 +162,13 @@ This advice replaces the rocket icon with a electric plug icon."
   :config
   (add-hook 'after-make-frame-functions
             (lambda (frame)
-              (setq doom-modeline-icon t)))
-  )
+              (setq doom-modeline-icon t))))
 
 (use-package diredfl
   :vc (:url "https://github.com/purcell/diredfl")
   :ensure t
   :hook
-  (dired-mode . diredfl-mode)
-  )
+  (dired-mode . diredfl-mode))
 
 (use-package eldoc-box
   :vc (:url "https://github.com/casouri/eldoc-box")
@@ -195,16 +178,14 @@ This advice replaces the rocket icon with a electric plug icon."
   (setq-mode-local typescript-ts-base-mode eldoc-box-buffer-setup-function #'eldoc-box-prettify-ts-errors-setup)
   (setq-mode-local tsx-ts-mode eldoc-box-buffer-setup-function #'eldoc-box-prettify-ts-errors-setup)
   :hook
-  (eldoc-mode . eldoc-box-hover-mode)
-  )
+  (eldoc-mode . eldoc-box-hover-mode))
 
 (use-package ef-themes
   :vc (:url "https://github.com/protesilaos/ef-themes")
   :when (gs-101/guix-p)
   :config
   (load-theme 'ef-maris-dark)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package helpful
   :vc (:url "https://github.com/Wilfred/helpful")
@@ -216,14 +197,12 @@ This advice replaces the rocket icon with a electric plug icon."
   ([remap describe-variable] . helpful-variable)
   :config
   (set-face-attribute 'helpful-heading nil :height 1.5)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package hl-todo
   :vc (:url "https://github.com/tarsius/hl-todo")
   :custom
-  (hl-todo-keyword-faces '(
-                           ("FIXME" . flymake-error-echo)
+  (hl-todo-keyword-faces '(("FIXME" . flymake-error-echo)
                            ("NOTE" . flymake-warning-echo)
                            ("QUESTION" . flymake-warning-echo)
                            ("ANSWER" . flymake-note-echo)
@@ -236,13 +215,11 @@ This advice replaces the rocket icon with a electric plug icon."
                            ("REVIEW" . flymake-note-echo)
                            ("CHORE" . flymake-note-echo)
                            ("MERGED" . flymake-note-echo)
-                           ("CLOSED" . flymake-error-echo)
-                           ))
+                           ("CLOSED" . flymake-error-echo)))
   :ensure t
   :hook
   (prog-mode . hl-todo-mode)
-  (text-mode . hl-todo-mode)
-  )
+  (text-mode . hl-todo-mode))
 
 (use-package keycast
   :vc (:url "https://github.com/tarsius/keycast")
@@ -257,23 +234,19 @@ This advice replaces the rocket icon with a electric plug icon."
         (add-hook 'pre-command-hook 'keycast--update t)
       (remove-hook 'pre-command-hook 'keycast--update)))
   (add-to-list 'global-mode-string '("" keycast-mode-line))
-  (keycast-mode)
-  )
+  (keycast-mode))
 
 (use-package keycast
   :after keycast
   :config
-  (mapc (lambda (command)
-          (add-to-list 'keycast-substitute-alist command)) '(
-          (backward-delete-char-untabify "" "Erasing...")
-          (delete-backward-char "" "Erasing...")
-          (org-delete-backward-char "" "Erasing...")
-          (self-insert-command "" "Typing...")
-          (org-self-insert-command "" "Typing...")
-          (vertico-next nil nil)
-          (vertico-previous nil nil)
-          ))
-  )
+  (gs-101/add-many-to-list 'keycast-substitute-alist
+                           '((backward-delete-char-untabify "" "Erasing...")
+                             (delete-backward-char "" "Erasing...")
+                             (org-delete-backward-char "" "Erasing...")
+                             (self-insert-command "" "Typing...")
+                             (org-self-insert-command "" "Typing...")
+                             (vertico-next nil nil)
+                             (vertico-previous nil nil))))
 
 (use-package keycast
   :if (daemonp)
@@ -281,8 +254,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (with-selected-frame frame
-                (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified))))
-  )
+                (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified)))))
 
 (use-package keycast
   :after embark
@@ -297,8 +269,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (defun oantolin/keycast--update-force (&rest _)
     "Version of `keycast--update' that accepts (and ignore) parameters."
     (keycast--update))
-  (advice-add 'embark-act :before #'oantolin/keycast--update-force)
-  )
+  (advice-add 'embark-act :before #'oantolin/keycast--update-force))
 
 (use-package ligature
   :vc (:url "https://github.com/mickeynp/ligature.el")
@@ -363,92 +334,86 @@ This advice replaces the rocket icon with a electric plug icon."
                             "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
   :ensure t
   :hook
-  (prog-mode . ligature-mode)
-  )
+  (prog-mode . ligature-mode))
 
 (use-package markdown-mode
   :after markdown-mode
   :custom
   (markdown-enable-highlighting-syntax t)
-  (markdown-hide-markup t)
-  )
+  (markdown-hide-markup t))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
   :bind
   ("C-z i n" . nerd-icons-insert)
   :demand t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package citar
   :after citar nerd-icons
   :config
-    (defvar citar-indicator-cited-icons
-      (citar-indicator-create
-       :symbol (nerd-icons-mdicon
-                "nf-md-record"
-                :face 'nerd-icons-lgreen)
-       :function #'citar-is-cited
-       :padding "  "
-       :tag "is:cited"))
-      (defvar citar-indicator-files-icons
-      (citar-indicator-create
-       :symbol (nerd-icons-mdicon
-                "nf-md-file"
-                :face 'nerd-icons-blue
-                :v-adjust -0.1)
-       :function #'citar-has-files
-       :padding "  " ; need this because the default padding is too low for these icons
-       :tag "has:files"))
-    (defvar citar-indicator-links-icons
-      (citar-indicator-create
-       :symbol (nerd-icons-mdicon
-                "nf-md-link"
-                :face 'nerd-icons-lblue
-                :v-adjust 0.01)
-       :function #'citar-has-links
-       :padding "  "
-       :tag "has:links"))
-    (defvar citar-indicator-notes-icons
-      (citar-indicator-create
-       :symbol (nerd-icons-mdicon
-                "nf-md-text"
-                :face 'nerd-icons-blue
-                :v-adjust -0.3)
-       :function #'citar-has-notes
-       :padding "    "
-       :tag "has:notes"))
-    (setq citar-indicators
-     (list
-      citar-indicator-cited-icons
-      citar-indicator-files-icons
-      citar-indicator-links-icons
-      citar-indicator-notes-icons
-      ))
-    )
+  (defvar citar-indicator-cited-icons
+    (citar-indicator-create
+     :symbol (nerd-icons-mdicon
+              "nf-md-record"
+              :face 'nerd-icons-lgreen)
+     :function #'citar-is-cited
+     :padding "  "
+     :tag "is:cited"))
+
+  (defvar citar-indicator-files-icons
+    (citar-indicator-create
+     :symbol (nerd-icons-mdicon
+              "nf-md-file"
+              :face 'nerd-icons-blue
+              :v-adjust -0.1)
+     :function #'citar-has-files
+     :padding "  " ; need this because the default padding is too low for these icons
+     :tag "has:files"))
+
+  (defvar citar-indicator-links-icons
+    (citar-indicator-create
+     :symbol (nerd-icons-mdicon
+              "nf-md-link"
+              :face 'nerd-icons-lblue
+              :v-adjust 0.01)
+     :function #'citar-has-links
+     :padding "  "
+     :tag "has:links"))
+
+  (defvar citar-indicator-notes-icons
+    (citar-indicator-create
+     :symbol (nerd-icons-mdicon
+              "nf-md-text"
+              :face 'nerd-icons-blue
+              :v-adjust -0.3)
+     :function #'citar-has-notes
+     :padding "    "
+     :tag "has:notes"))
+  (setq citar-indicators
+        (list citar-indicator-cited-icons
+              citar-indicator-files-icons
+              citar-indicator-links-icons
+              citar-indicator-notes-icons)))
 
 (use-package nerd-icons-completion
   :vc (:url "https://github.com/rainstormstudio/nerd-icons-completion")
   :after nerd-icons
   :ensure t
   :config
-  (nerd-icons-completion-mode)
-  )
+  (nerd-icons-completion-mode))
 
 (use-package nerd-icons-completion
   :after nerd-icons
   :hook
-  (marginalia-mode . nerd-icons-completion-marginalia-setup)
-  )
+  (marginalia-mode . nerd-icons-completion-marginalia-setup))
 
 (use-package nerd-icons-corfu
   :vc (:url "https://github.com/LuigiPiucco/nerd-icons-corfu")
   :after nerd-icons corfu
   :custom
   (corfu-margin-formatters #'nerd-icons-corfu-formatter)
-  (nerd-icons-corfu-mapping '(
-                               (array :style "md" :icon "code_array" :face font-lock-type-face)
+  (nerd-icons-corfu-mapping '((array :style "md" :icon "code_array" :face font-lock-type-face)
                               (boolean :style "md" :icon "checkbox_intermediate" :face font-lock-builtin-face)
                               (class :style "md" :icon "file_tree" :face font-lock-type-face)
                               (color :style "md" :icon "format_paint" :face success)
@@ -483,24 +448,20 @@ This advice replaces the rocket icon with a electric plug icon."
                               (unit :style "md" :icon "ruler" :face font-lock-constant-face)
                               (value :style "md" :icon "toy_brick" :face font-lock-builtin-face)
                               (variable :style "md" :icon "toy_brick_outline" :face font-lock-variable-name-face)
-                              (t :style "md" :icon "code_tags" :face font-lock-variable-name-face)
-                              ))
-  :ensure t
-  )
+                              (t :style "md" :icon "code_tags" :face font-lock-variable-name-face)))
+  :ensure t)
 
 (use-package nerd-icons-dired
   :vc (:url "https://github.com/rainstormstudio/nerd-icons-dired")
   :after nerd-icons
   :ensure t
   :hook
-  (dired-mode . nerd-icons-dired-mode)
-  )
+  (dired-mode . nerd-icons-dired-mode))
 
 (use-package eglot
   :after nerd-icons eglot
   :custom
-  (eglot-code-action-indicator "󰌵")
-  )
+  (eglot-code-action-indicator "󰌵"))
 
 (use-package esh-mode
   :defer t
@@ -513,39 +474,37 @@ instead of $."
                             (format " [%d]" eshell-last-command-status))
                           " λ ")))
       (propertize prompt 'face 'nerd-icons-lpurple)))
+
   (defun thanos/eshell-git-info ()
-	"Return a string showing git information."
-	(when (eq (call-process "git" nil nil nil "rev-parse" "--is-inside-work-tree") 0)
-	  (let* ((branch-raw (shell-command-to-string "git rev-parse --abbrev-ref HEAD"))
-			 (branch (if (or (string-match-p "^fatal" branch-raw)
-							 (string-match-p "^error" branch-raw))
-						 "Unknown"
-					   (string-trim branch-raw))))
-		(concat (propertize "󰊢 " 'face 'nerd-icons-lred)
-				(propertize branch 'face 'nerd-icons-lred)))))
+    "Return a string showing git information."
+    (when (eq (call-process "git" nil nil nil "rev-parse" "--is-inside-work-tree") 0)
+      (let* ((branch-raw (shell-command-to-string "git rev-parse --abbrev-ref HEAD"))
+             (branch (if (or (string-match-p "^fatal" branch-raw)
+                             (string-match-p "^error" branch-raw))
+                         "Unknown"
+                       (string-trim branch-raw))))
+        (concat (propertize "󰊢 " 'face 'nerd-icons-lred)
+                (propertize branch 'face 'nerd-icons-lred)))))
+
   (defun thanos/eshell-prompt-multiline ()
-	"Eshell Multiline Git prompt."
-	(let ((separator (propertize " | " 'face 'shadow))
-		  (dir (propertize (format "%s" (abbreviate-file-name (eshell/pwd))) 'face 'dired-directory))
-		  (git-info (thanos/eshell-git-info))
-		  (sign (if (= (user-uid) 0)
-					(propertize "\#" 'face 'default)
-				  (propertize (format "\n\nλ %s\n↳" user-login-name) 'face 'nerd-icons-lpurple))))
-	  (concat "\n" dir separator git-info sign " ")))
+    "Eshell Multiline Git prompt."
+    (let ((separator (propertize " | " 'face 'shadow))
+          (dir (propertize (format "%s" (abbreviate-file-name (eshell/pwd))) 'face 'dired-directory))
+          (git-info (thanos/eshell-git-info))
+          (sign (if (= (user-uid) 0)
+                    (propertize "\#" 'face 'default)
+                  (propertize (format "\n\nλ %s\n↳" user-login-name) 'face 'nerd-icons-lpurple))))
+      (concat "\n" dir separator git-info sign " ")))
   :custom
   (eshell-banner-message "")
-  (eshell-prompt-function 'gs-101/eshell-lambda)
-  )
+  (eshell-prompt-function 'gs-101/eshell-lambda))
 
 (use-package emacs
   :custom
   (flymake-indicator-type 'margins)
-  (flymake-margin-indicators-string '(
-                                      (error "󰃤" compilation-error)
+  (flymake-margin-indicators-string '((error "󰃤" compilation-error)
                                       (warning "" compilation-warning)
-                                      (note "󰎚" compilation-info)
-                                      ))
-  )
+                                      (note "󰎚" compilation-info))))
 
 (use-package go-ts-mode
   :after nerd-icons go-ts-mode
@@ -553,30 +512,26 @@ instead of $."
   (go-ts-mode . prettify-symbols-mode)
   (go-ts-mode . (lambda ()
                   (push '(":=" . ?) prettify-symbols-alist)
-                  (push '("go" . ?󰟓) prettify-symbols-alist)))
-  )
+                  (push '("go" . ?󰟓) prettify-symbols-alist))))
 
 (use-package rust-ts-mode
   :after nerd-icons rust-ts-mode
   :hook
   (rust-ts-mode . prettify-symbols-mode)
   (rust-ts-mode . (lambda ()
-                    (push '("=>" . ?) prettify-symbols-alist)))
-  )
+                    (push '("=>" . ?) prettify-symbols-alist))))
 
 (use-package nerd-icons-ibuffer
   :vc (:url "https://github.com/seagle0128/nerd-icons-ibuffer")
   :after nerd-icons
   :ensure t
   :hook
-  (ibuffer-mode . nerd-icons-ibuffer-mode)
-  )
+  (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (use-package magit
   :after nerd-icons magit
   :custom
-  (magit-format-file-function #'magit-format-file-nerd-icons)
-  )
+  (magit-format-file-function #'magit-format-file-nerd-icons))
 
 (use-package prism
   :vc (:url "https://github.com/alphapapa/prism.el")
@@ -592,8 +547,7 @@ instead of $."
   :ensure t
   :hook
   (prog-mode . gs-101/prism-mode-lisp)
-  (python-base-mode . prism-whitespace-mode)
-  )
+  (python-base-mode . prism-whitespace-mode))
 
 (use-package prism
   :after prism catppuccin-theme
@@ -603,17 +557,14 @@ instead of $."
     (prism-set-colors
       :lightens '(0 5 10)
       :desaturations '(-2.5 0 2.5)
-      :colors (-map #'catppuccin-get-color '(
-                                             red
+      :colors (-map #'catppuccin-get-color '(red
                                              peach
                                              yellow
                                              green
                                              sapphire
                                              lavender
-                                             mauve
-                                             ))))
-  (prism-catppuccin-colors)
-  )
+                                             mauve))))
+  (prism-catppuccin-colors))
 
 (use-package prism
   :if (daemonp)
@@ -634,21 +585,18 @@ instead of $."
 This is because I find `prism-mode' better for these modes.
 
 Also disable in Python because I use `prism-whitespace-mode' there."
-    (unless (or
-             (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
-             (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
-             (derived-mode-p 'scheme-mode)
-             (derived-mode-p 'python-base-mode))
+    (unless (or (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
+                (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
+                (derived-mode-p 'scheme-mode)
+                (derived-mode-p 'python-base-mode))
       (rainbow-delimiters-mode)))
   :ensure t
   :hook
-  (prog-mode . gs-101/rainbow-delimiters-maybe)
-  )
+  (prog-mode . gs-101/rainbow-delimiters-maybe))
 
 (use-package posframe
   :vc (:url "https://github.com/tumashu/posframe")
-  :ensure t
-  )
+  :ensure t)
 
 (use-package posframe
   :after transient
@@ -659,12 +607,11 @@ Also disable in Python because I use `prism-whitespace-mode' there."
       (posframe-show
        buffer
        :poshandler #'posframe-poshandler-frame-center
-       :min-width transient-minimal-frame-width ;; Use the same minimal width as transient, to avoid weird resizing
-       :lines-truncate t ;; Truncate lines instead of wrapping them
-       :internal-border-color (transient--prefix-color) ;; Use transient colors to indicate that the current frame is a transient
+       :min-width transient-minimal-frame-width ; Use the same minimal width as transient, to avoid weird resizing
+       :lines-truncate t ; Truncate lines instead of wrapping them
+       :internal-border-color (transient--prefix-color) ; Use transient colors to indicate that the current frame is a transient
        :internal-border-width 1)
-      (get-buffer-window transient--buffer t))))
-  )
+      (get-buffer-window transient--buffer t)))))
 
 (use-package vertico-posframe
   :vc (:url "https://github.com/tumashu/vertico-posframe")
@@ -673,7 +620,6 @@ Also disable in Python because I use `prism-whitespace-mode' there."
   :custom
   (vertico-posframe-border-width 1)
   :config
-  (vertico-posframe-mode)
-  )
+  (vertico-posframe-mode))
 
 (provide 'gs-ui)

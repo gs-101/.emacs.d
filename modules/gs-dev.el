@@ -2,33 +2,29 @@
 
 (use-package treesit
   :custom
-  (treesit-font-lock-level 4)
-  )
+  (treesit-font-lock-level 4))
 
 (use-package org-src
   :config
-  (mapc (lambda (lang)
-          (add-to-list 'org-src-lang-modes lang)) '(
-          ("bash" . bash-ts)
-          ("C" . c-ts)
-          ("clojure" . clojure-ts)
-          ("cmake" . cmake-ts)
-          ("csharp" . csharp-ts)
-          ("css" . css-ts)
-          ("dart" . dart-ts)
-          ("go" . go-ts)
-          ("html" . html-ts)
-          ("java" . java-ts)
-          ("js" . js-ts)
-          ("json" . json-ts)
-          ("nix" . nix-ts)
-          ("python" . python-ts)
-          ("ruby" . ruby-ts)
-          ("rust" . rust-ts)
-          ("toml" . toml-ts)
-          ("yaml" . yaml-ts)
-          ))
-  )
+  (gs-101/add-many-to-list 'org-src-lang-modes
+                           '(("bash" . bash-ts)
+                             ("C" . c-ts)
+                             ("clojure" . clojure-ts)
+                             ("cmake" . cmake-ts)
+                             ("csharp" . csharp-ts)
+                             ("css" . css-ts)
+                             ("dart" . dart-ts)
+                             ("go" . go-ts)
+                             ("html" . html-ts)
+                             ("java" . java-ts)
+                             ("js" . js-ts)
+                             ("json" . json-ts)
+                             ("nix" . nix-ts)
+                             ("python" . python-ts)
+                             ("ruby" . ruby-ts)
+                             ("rust" . rust-ts)
+                             ("toml" . toml-ts)
+                             ("yaml" . yaml-ts))))
 
 (use-package treesit-auto
   :vc (:url "https://github.com/gs-101/treesit-auto" :branch custom)
@@ -37,28 +33,23 @@
   (treesit-auto-add-to-auto-mode-alist 'all)
   :custom
   (treesit-auto-install t)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package git-commit-ts-mode
   :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
-  :ensure t
-  )
+  :ensure t)
 
 (use-package magit
   :after git-commit-ts-mode magit
   :custom
-  (git-commit-major-mode 'git-commit-ts-mode)
-  )
+  (git-commit-major-mode 'git-commit-ts-mode))
 
 (use-package compile
   :bind
-  (
-   :map compilation-mode-map
-   ("n" . next-error-no-select)
-   ("p" . previous-error-no-select)
-   ("q" . kill-buffer-and-window)
-   )
+  (:map compilation-mode-map
+        ("n" . next-error-no-select)
+        ("p" . previous-error-no-select)
+        ("q" . kill-buffer-and-window))
   :custom
   (compilation-auto-jump-to-first-error t)
   (compilation-max-output-line-length nil)
@@ -67,51 +58,42 @@
   :defer t
   :hook
   (compilation-mode . goto-address-mode)
-  (compilation-filter . ansi-color-compilation-filter)
-  )
+  (compilation-filter . ansi-color-compilation-filter))
 
 (use-package compile
   :after rust-ts-mode
   :config
   (push '(cargo "^\\ \\ -->\\ \\([/a-z_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3)
         compilation-error-regexp-alist-alist)
-  (push 'cargo compilation-error-regexp-alist)
-  )
+  (push 'cargo compilation-error-regexp-alist))
 
 (use-package devdocs
   :vc (:url "https://github.com/astoff/devdocs.el")
   :ensure t
   :bind
-  (
-   ("C-h D" . devdocs-lookup)
-   )
-  )
+  (("C-h D" . devdocs-lookup)))
 
 (use-package diff-mode
   :custom
   (diff-add-log-use-relative-names t)
-  :defer t
-  )
+  :defer t)
 
 (use-package editorconfig
   :hook
-  (prog-mode . editorconfig-mode)
-  )
+  (prog-mode . editorconfig-mode))
 
 (use-package eglot
   :custom
   (eglot-autoshutdown t)
   (eglot-connect-timeout nil)
   (eglot-sync-connect nil)
-  :defer t
-  )
+  :defer t)
 
 (use-package eglot-codelens
   :vc (:url "https://github.com/Gavinok/eglot-codelens")
   :hook
   (eglot-managed-mode . eglot-codelens-mode)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package eglot-x
   :vc (:url "https://github.com/nemethf/eglot-x")
@@ -122,40 +104,26 @@
   (eglot-x-enable-server-status nil)
   (eglot-x-enable-menu nil)
   :demand t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package eglot-supplements
   :vc (:url "https://codeberg.org/harald/eglot-supplements")
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package eglot-cthier
   :after eglot
   :bind
-  (
-   :map eglot-mode-map
-   ("C-c e H" . eglot-cthier-request-call-hierarchy)
-   )
-  )
+  (:map eglot-mode-map
+        ("C-c e H" . eglot-cthier-request-call-hierarchy)))
 
 (use-package eglot-marocc
   :after eglot
   :bind
-  (
-   :map eglot-mode-map
-   ("C-c e h" . eglot-marocc-request-highlights)
-   ("C-c e n" . eglot-marocc-goto-next-highlight)
-   ("C-c e p" . eglot-marocc-goto-previous-highlight)
-   )
-  )
-
-(use-package eglot-marocc
-  :after eglot-marocc catppuccin-theme
-  :custom
-  (set-face-attribute 'eglot-marocc-occurence-text nil :foreground (catppuccin-color 'green))
-  )
+  (:map eglot-mode-map
+        ("C-c e h" . eglot-marocc-request-highlights)
+        ("C-c e n" . eglot-marocc-goto-next-highlight)
+        ("C-c e p" . eglot-marocc-goto-previous-highlight)))
 
 (use-package eglot-inactive-regions
   :vc (:url "https://github.com/fargiolas/eglot-inactive-regions")
@@ -164,41 +132,35 @@
   (eglot-inactive-regions-style 'darken-foreground)
   (eglot-inactive-regions-opacity 0.3)
   :hook
-  (eglot-connect . eglot-inactive-regions-mode)
-  )
+  (eglot-connect . eglot-inactive-regions-mode))
 
 (use-package eldoc
   :custom
   (eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
   (eldoc-echo-area-use-multiline-p nil)
-  (eldoc-idle-delay 0)
-  )
+  (eldoc-idle-delay 0))
 
 (use-package eglot-signature-eldoc-talkative
   :vc (:url "https://codeberg.org/mekeor/eglot-signature-eldoc-talkative")
   :after eglot
   :config
   (advice-add #'eglot-signature-eldoc-function :override #'eglot-signature-eldoc-talkative)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package eldoc-diffstat
   :vc (:url "https://github.com/kljohann/eldoc-diffstat/")
   :after eldoc
   :ensure t
   :hook
-  (magit-log-mode . eldoc-diffstat-mode)
-  )
+  (magit-log-mode . eldoc-diffstat-mode))
 
 (use-package elec-pair
   :hook
-  (prog-mode . electric-pair-local-mode)
-  )
+  (prog-mode . electric-pair-local-mode))
 
 (use-package flymake
   :hook
-  (prog-mode . flymake-mode)
-  )
+  (prog-mode . flymake-mode))
 
 (use-package flymake-collection
   :ensure t
@@ -206,8 +168,7 @@
   (push '((c-mode c-ts-mode) flymake-collection-gcc (flymake-collection-clang :disabled t)) flymake-collection-hook-config)
   (push '((python-mode python-ts-mode) flymake-collection-flake8 (flymake-collection-pycodestyle :disabled t)) flymake-collection-hook-config)
   :hook
-  (flymake-mode . flymake-collection-hook-setup)
-  )
+  (flymake-mode . flymake-collection-hook-setup))
 
 (use-package clojure-ts-mode
   :vc (:url "https://github.com/clojure-emacs/clojure-ts-mode")
@@ -216,35 +177,28 @@
   (clojure-ts-indent-style 'fixed)
   (clojure-ts-toplevel-inside-comment-form t)
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package cider
   :vc (:url "https://github.com/clojure-emacs/cider")
   :after clojure-ts-mode
   :bind
-  (
-   :map cider-mode-map
-   ("C-c C-p" . cider-jack-in-clj)
-   )
+  (:map cider-mode-map
+        ("C-c C-p" . cider-jack-in-clj))
   :ensure t
   :hook
-  (clojure-ts-mode . cider-mode)
-  )
+  (clojure-ts-mode . cider-mode))
 
 (use-package dart-ts-mode
   :vc (:url "https://github.com/50ways2sayhard/dart-ts-mode")
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package flutter
   :bind
-  (
-   :map dart-ts-mode-map
-   ([remap compile] . flutter-run-or-hot-reload)
-   ("C-c C-c" . flutter-run-or-hot-reload)
-   )
+  (:map dart-ts-mode-map
+        ([remap compile] . flutter-run-or-hot-reload)
+        ("C-c C-c" . flutter-run-or-hot-reload))
   :config
   (defcustom gs-101/flutter-hot-reload-mode-lighter " Flutter Hot Reload"
     "Lighter for `gs-101/flutter-hot-reload-mode'."
@@ -254,127 +208,102 @@
   (define-minor-mode gs-101/flutter-hot-reload-mode
     "Minor mode for running hot reload on save.
 
-Only runs if a Flutter buffer already exits."
+Only runs if a `flutter' buffer already exits."
     :lighter gs-101/flutter-hot-reload-mode-lighter
     (if (and gs-101/flutter-hot-reload-mode (get-buffer "*Flutter*"))
         (add-hook 'after-save-hook #'flutter-hot-reload nil 'local)
       (remove-hook 'after-save-hook #'flutter-hot-reload 'local)))
   :ensure t
   :hook
-  (dart-ts-mode . gs-101/flutter-hot-reload-mode)
-  )
+  (dart-ts-mode . gs-101/flutter-hot-reload-mode))
 
 (use-package go-ts-mode
   :bind
-  (
-   :map go-ts-mode-map
-   ("C-c m t f" . go-ts-mode-test-this-file)
-   ("C-c m t p" . go-ts-mode-test-this-package)
-   ("C-c m t ." . go-ts-mode-test-this-function-at-point)
-   )
-  :defer t
-  )
+  (:map go-ts-mode-map
+        ("C-c m t f" . go-ts-mode-test-this-file)
+        ("C-c m t p" . go-ts-mode-test-this-package)
+        ("C-c m t ." . go-ts-mode-test-this-function-at-point))
+  :defer t)
 
 (use-package hyprlang-ts-mode
   :vc (:url "https://github.com/Nathan-Melaku/hyprlang-ts-mode")
-  :ensure t
-  )
+  :ensure t)
 
 (use-package lisp
   :bind
-  (
-   :map lisp-mode-map
-   ("C-c C-p" . run-lisp)
-   )
+  (:map lisp-mode-map
+        ("C-c C-p" . run-lisp))
   :custom
   (inferior-lisp-program "sbcl")
   (narrow-to-defun-include-comments t)
-  :defer t
-  )
+  :defer t)
 
 (use-package nix-ts-mode
   :vc (:url "https://github.com/nix-community/nix-ts-mode")
   :ensure t
-  :defer t
-  )
+  :defer t)
 
 ;; Library
 (use-package pg
   :vc (:url "https://github.com/emarsden/pg-el/")
-  :ensure t
-  )
+  :ensure t)
 
 (use-package pgmacs
   :vc (:url "https://github.com/emarsden/pgmacs")
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package python
   :custom
   (python-indent-guess-indent-offset-verbose nil)
-  :defer t
-  )
+  :defer t)
 
 (use-package envrc
   :vc (:url "https://github.com/purcell/envrc")
   :ensure t
   :init
-  (envrc-global-mode)
-  )
+  (envrc-global-mode))
 
 (use-package python-pytest
   :vc (:url "https://github.com/wbolster/emacs-python-pytest")
   :bind
-  (
-   :map python-base-mode-map
-   ("C-c m t" . python-pytest-dispatch)
-   )
-  :ensure t
-  )
+  (:map python-base-mode-map
+        ("C-c m t" . python-pytest-dispatch))
+  :ensure t)
 
 (use-package cargo-transient
   :vc (:url "https://github.com/peterstuart/cargo-transient")
   :after rust-ts-mode
   :bind
-  (
-   :map rust-ts-mode-map
-   ("C-c C-c" . compile)
-   ("C-c C-p" . cargo-transient)
-   )
+  (:map rust-ts-mode-map
+        ("C-c C-c" . compile)
+        ("C-c C-p" . cargo-transient))
   :ensure t
   :custom
-  (cargo-transient-buffer-name-function #'project-prefixed-buffer-name)
-  )
+  (cargo-transient-buffer-name-function #'project-prefixed-buffer-name))
 
 (use-package arei
   :when (gs-101/guix-p)
   :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
   :after scheme
-  :ensure t
-  )
+  :ensure t)
 
 (use-package vue-ts-mode
   :vc (:url "https://github.com/8uff3r/vue-ts-mode")
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package sh-script
   :bind
-  (
-   :map bash-ts-mode-map
-   ("C-c C-p" . ansi-shell)
-   :map sh-mode-map
-   ("C-c C-p" . ansi-shell)
-   )
-  :defer t
-  )
+  (:map bash-ts-mode-map
+        ("C-c C-p" . ansi-shell))
+  (:map sh-mode-map
+        ("C-c C-p" . ansi-shell))
+  :defer t)
 
 (use-package smerge-mode
   :init
-  (smerge-mode)
-  )
+  (smerge-mode))
 
 (use-package emacs
   :ensure nil
@@ -387,11 +316,13 @@ Only runs if a Flutter buffer already exits."
   NOTE: This should definitely be upstreamed."
     (interactive "^p")
     (forward-symbol (- (or arg 1))))
+
   (defun gs-101/kill-symbol (arg)
     "Kill characters forward until encountering the end of a symbol.
   With argument ARG, do this that many times."
     (interactive "p")
     (kill-region (point) (progn (forward-symbol arg) (point))))
+
   (defun gs-101/mark-symbol (&optional arg allow-extend)
     "Set mark ARG symbols from point or move mark one symbol.
   When called from Lisp with ALLOW-EXTEND omitted or nil, mark is
@@ -426,11 +357,13 @@ Only runs if a Flutter buffer already exits."
               (forward-symbol (prefix-numeric-value arg))
               (point))
             nil t))))
+
   (defun gs-101/backward-kill-symbol (arg)
     "Kill characters backward until encountering the beginning of a symbol.
   With argument ARG, do this that many times."
     (interactive "p")
     (gs-101/kill-symbol (- arg)))
+
   (defun gs-101/left-symbol (&optional n)
     "Move point N symbols to the left (to the right if N is negative).
 
@@ -447,6 +380,7 @@ Only runs if a Flutter buffer already exits."
     (if (eq (current-bidi-paragraph-direction) 'left-to-right)
         (gs-101/backward-symbol n)
       (forward-symbol n)))
+
   (defun gs-101/right-symbol (&optional n)
     "Move point N symbols to the right (to the left if N is negative).
 
@@ -463,6 +397,7 @@ Only runs if a Flutter buffer already exits."
     (if (eq (current-bidi-paragraph-direction) 'left-to-right)
         (forward-symbol n)
       (gs-101/backward-symbol n)))
+
   (defun gs-101/transpose-symbols (arg)
     "Interchange symbols around point, leaving point at the end of them.
   With prefix arg ARG, effect is to take word before or around point
@@ -471,6 +406,7 @@ Only runs if a Flutter buffer already exits."
   are interchanged."
     (interactive "*p")
     (transpose-subr 'forward-symbol arg))
+
   (defun gs-101/downcase-symbol (arg)
     "Convert to lower case from point to end of symbol, moving over.
 
@@ -486,6 +422,7 @@ With negative argument, convert previous symbols but do not move."
             (downcase-region start (point))
             (goto-char start))
         (downcase-region (point) (forward-symbol arg)))))
+
   (defun gs-101/upcase-symbol (arg)
     "Convert to upper case from point to end of symbol, moving over.
 
@@ -502,6 +439,7 @@ See also `gs-101/capitalize-symbol'."
             (upcase-region start (point))
             (goto-char start))
         (upcase-region (point) (forward-symbol arg)))))
+
   (defun gs-101/capitalize-symbol (arg)
     "Capitalize from point to the end of symbol, moving over.
 
@@ -521,6 +459,7 @@ With negative arugment, capitalize previous words but do not move."
             (capitalize-region start (point))
             (goto-char start))
         (capitalize-region (point) (forward-symbol arg)))))
+
   ;; capitalization functions are defined in C. Check this later.
   (defvar-keymap gs-101/symbol-mode-map
     :doc "Keymap used for `gs-101/symbol-mode'."
@@ -535,14 +474,14 @@ With negative arugment, capitalize previous words but do not move."
     "<remap> <downcase-word>" #'gs-101/downcase-symbol
     "<remap> <upcase-word>" #'gs-101/upcase-symbol
     "<remap> <capitalize-word>" #'gs-101/capitalize-symbol)
+
   (define-minor-mode gs-101/symbol-mode
     "Enable keybindings for symbol commands."
     :keymap gs-101/symbol-mode-map
     :after-hook
-    (setq-local case-symbols-as-words 't)
-    )
-  (add-hook 'prog-mode-hook #'gs-101/symbol-mode)
-  )
+    (setq-local case-symbols-as-words 't))
+
+  (add-hook 'prog-mode-hook #'gs-101/symbol-mode))
 
 (use-package aggressive-indent
   :vc (:url "https://github.com/Malabarba/aggressive-indent-mode")
@@ -558,27 +497,22 @@ With negative arugment, capitalize previous words but do not move."
   :ensure t
   :hook
   (css-mode . aggressive-indent-mode)
-  (prog-mode . gs-101/aggressive-indent-mode-lisp)
-  )
+  (prog-mode . gs-101/aggressive-indent-mode-lisp))
 
 (use-package apheleia
   :vc (:url "https://github.com/radian-software/apheleia")
   :ensure t
   :config
   ;; Enabling code simplification for Go.
-  (setf (alist-get 'gofmt apheleia-formatters)
-        '("gofmt" "-s"))
+  (setf (alist-get 'gofmt apheleia-formatters) '("gofmt" "-s"))
   :hook
-  (prog-mode . apheleia-mode)
-  )
+  (prog-mode . apheleia-mode))
 
 (use-package combobulate
   :vc (:url "https://github.com/mickeynp/combobulate")
   :bind
-  (
-   :map combobulate-key-map
-   ([query-replace-regexp] . combobulate-cursor-edit-node-by-text-dwim)
-   )
+  (:map combobulate-key-map
+        ([query-replace-regexp] . combobulate-cursor-edit-node-by-text-dwim))
   :config
   (defun cxa/activate-combobulate-on-ts-mode ()
     "Enable `combobulate-mode' in tree-sitter modes."
@@ -589,43 +523,41 @@ With negative arugment, capitalize previous words but do not move."
   :ensure t
   :hook
   (text-mode . cxa/activate-combobulate-on-ts-mode)
-  (prog-mode . cxa/activate-combobulate-on-ts-mode)
-  )
+  (prog-mode . cxa/activate-combobulate-on-ts-mode))
 
 (use-package dape
   :vc (:url "https://github.com/svaante/dape")
   :defer t
   :ensure t
   :hook
-  (dape-display-source . pulse-momentary-highlight-one-line)
-  )
+  (dape-display-source . pulse-momentary-highlight-one-line))
 
 (use-package exercism
   :vc (:url "https://github.com/anonimitoraf/exercism.el")
   :commands
   (exercism)
   :custom
-  (exercism--workspace (convert-standard-filename (expand-file-name "study/exercism/" gs-101/projects-code-directory)))
+  (exercism--workspace
+   (convert-standard-filename
+    (expand-file-name "study/exercism/" gs-101/projects-code-directory)))
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package git-modes
   :vc (:url "https://github.com/magit/git-modes")
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package leetcode
   :vc (:url "https://github.com/kaiwk/leetcode.el")
   :custom
-  (leetcode-directory (convert-standard-filename (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
+  (leetcode-directory
+   (convert-standard-filename
+    (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
   (leetcode--paid "$")
   (leetcode-save-solutions t)
-  (leetcode--User-Agent ("User Agent" . "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.1"))
   :defer t
-  :ensure t
-  )
+  :ensure t)
 
 (use-package magit
   :vc (:url "https://github.com/magit/magit")
@@ -649,8 +581,7 @@ With negative arugment, capitalize previous words but do not move."
   :ensure t
   :hook
   (magit-mode . magit-wip-mode)
-  (magit-process-find-password-functions . magit-process-password-auth-source)
-  )
+  (magit-process-find-password-functions . magit-process-password-auth-source))
 
 (use-package forge
   :vc (:url "https://github.com/magit/forge")
@@ -666,46 +597,38 @@ With negative arugment, capitalize previous words but do not move."
   ("C-c v l n" . forge-list-notifications)
   ("C-c v l p" . forge-list-pullreqs)
   ("C-c v l r" . forge-list-repositories)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package orgit
   :vc (:url "https://github.com/magit/orgit")
-  :after magit
+  :after magit org
   :bind
-  (
-   :map magit-mode-map
-   ("C-c m l s" . org-store-link)
-   )
-  :ensure t
-  )
+  (:map magit-mode-map
+        ("C-c m l s" . org-store-link))
+  :ensure t)
 
 (use-package package-lint
-  :ensure t
-  )
+  :ensure t)
 
 (use-package package-lint-flymake
   :after package-lint flymake
   :ensure t
   :hook
-  (emacs-lisp-mode . package-lint-flymake-setup)
-  )
+  (emacs-lisp-mode . package-lint-flymake-setup))
 
 (use-package puni
   :vc (:url "https://github.com/AmaiKinono/puni")
   :bind
-  (
-   :map puni-mode-map
-   ("M-h" . puni-expand-region)
-   ("M-H" . puni-contract-region)
-   ([remap mark-sexp] . puni-mark-sexp-at-point)
-   ("M-k" . Gavinok/puni-kill-thing-at-point)
-   ([reamp transpose-sexps] . puni-transpose)
-   ("C-)" . puni-slurp-forward)
-   ("C-(" . puni-slurp-backward)
-   ("C-M-)" . puni-barf-forward)
-   ("C-M-(" . puni-barf-backward)
-   )
+  (:map puni-mode-map
+        ("M-h" . puni-expand-region)
+        ("M-H" . puni-contract-region)
+        ([remap mark-sexp] . puni-mark-sexp-at-point)
+        ("M-k" . Gavinok/puni-kill-thing-at-point)
+        ([reamp transpose-sexps] . puni-transpose)
+        ("C-)" . puni-slurp-forward)
+        ("C-(" . puni-slurp-backward)
+        ("C-M-)" . puni-barf-forward)
+        ("C-M-(" . puni-barf-backward))
   :defer t
   :config
   (defun Gavinok/puni-kill-thing-at-point (&optional arg)
@@ -733,8 +656,7 @@ rectangular region instead."
   (minibuffer-mode . puni-disable-puni-mode)
   (text-mode . puni-disable-puni-mode)
   :init
-  (puni-global-mode)
-  )
+  (puni-global-mode))
 
 (use-package wakatime-mode
   :vc (:url "https://github.com/wakatime/wakatime-mode")
@@ -744,6 +666,7 @@ rectangular region instead."
     "Get the Wakatime API key from either auth-source or password-store."
     (or (auth-source-pick-first-password :host "wakatime.com")
         (auth-source-pass-get 'secret "wakatime.com")))
+
   (defun gs-101/wakatime-enable-prompt ()
     "Prompt if the user wants to enable wakatime tracking.
 
@@ -755,7 +678,7 @@ Better asked on startup with an init hook:
     (when (y-or-n-p "Enable wakatime tracking?")
       (global-wakatime-mode)
       (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))))
-  (gs-101/wakatime-enable-prompt)
-  )
+
+  (gs-101/wakatime-enable-prompt))
 
 (provide 'gs-dev)

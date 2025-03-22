@@ -3,23 +3,19 @@
 (use-package org-roam
   :bind
   ("C-z r f" . org-roam-node-find)
-  (
-   :map org-mode-map
-   ("C-z r i" . org-roam-node-insert)
-   )
+  (:map org-mode-map
+        ("C-z r i" . org-roam-node-insert))
   :custom
   (org-roam-completion-everywhere t)
   (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/org-roam/")))
   :demand t
   :ensure t
   :init
-  (org-roam-db-autosync-mode)
-  )
+  (org-roam-db-autosync-mode))
 
 (use-package org-roam
   :custom
-  (org-roam-capture-templates '(
-                                ("d" "default" plain
+  (org-roam-capture-templates '(("d" "default" plain
                                  (file "~/Documents/org-roam/templates/default.org")
                                  :if-new
                                  (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
@@ -43,29 +39,23 @@
                                  (file "~/Documents/org-roam/templates/summarize.ing.org")
                                  :if-new
                                  (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
-                                 :unnarrowed t)
-                                ))
-  )
+                                 :unnarrowed t))))
 
 (use-package org-roam-dailies
   :bind-keymap
   ("C-z r d" . org-roam-dailies-map)
   :bind
-  (
-   :map org-roam-dailies-map
-   ("Y" . org-roam-dailies-capture-yesterday)
-   ("T" . org-roam-dailies-capture-tomorrow)
-   )
+  (:map org-roam-dailies-map
+        ("Y" . org-roam-dailies-capture-yesterday)
+        ("T" . org-roam-dailies-capture-tomorrow))
   :custom
   (dw/daily-note-filename "%<%Y-%m-%d>.org")
-  (dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-  )
+  (dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n"))
 
 (use-package org-roam-dailies
   :after org-roam-dailies
   :custom
-  (org-roam-dailies-capture-templates '(
-                                        ("d" "default" entry
+  (org-roam-dailies-capture-templates '(("d" "default" entry
                                          "* %?"
                                          :if-new (file+head ,dw/daily-note-filename
                                                             ,dw/daily-note-header))
@@ -89,9 +79,7 @@
                                          "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
                                          :if-new (file+head+olp ,dw/daily-note-filename
                                                                 ,dw/daily-note-header
-                                                                ("Log")))
-                                        ))
-  )
+                                                                ("Log"))))))
 
 (use-package org-agenda
   :bind
@@ -124,12 +112,14 @@
     (unless org-note-abort
       (with-current-buffer (org-capture-get :buffer)
         (add-to-list 'org-agenda-files (buffer-file-name)))))
+
   (defun dw/org-roam-capture-inbox ()
     "Create a org roam inbox file."
     (interactive)
     (org-roam-capture- :node (org-roam-node-create)
                        :templates '(("i" "inbox" plain "* %?"
                                      :if-new (file+head "inbox.org" "#+title: Inbox\n#+filetags: :agenda:\n\n")))))
+
   (defun dw/org-roam-goto-month ()
     "Lists the files of the selected month with the set tag."
     (interactive)
@@ -139,6 +129,7 @@
                                      :if-new (file+head "%<%Y-%B>.org"
                                                         "#+title: %<%Y-%B>\n#+filetags: :agenda:\n\n")
                                      :unnarrowed t))))
+
   (defun dw/org-roam-goto-year ()
     "Lists the files of the selected year with the set tag."
     (interactive)
@@ -151,8 +142,7 @@
   :custom
   (org-agenda-hide-tags-regexp "agenda")
   :hook
-  (org-agenda-finalize . dw/org-roam-refresh-agenda-list)
-  )
+  (org-agenda-finalize . dw/org-roam-refresh-agenda-list))
 
 (use-package org-roam-ui
   :vc (:url "https://github.com/org-roam/org-roam-ui")
@@ -164,7 +154,6 @@
   (org-roam-ui-update-on-save t)
   (org-roam-ui-open-on-start nil)
   (org-roam-ui-browser-function #'browse-url-chromium)
-  :ensure t
-  )
+  :ensure t)
 
 (provide 'gs-org-roam)

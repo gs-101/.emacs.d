@@ -24,8 +24,7 @@
   (auto-revert-verbose nil)
   (global-auto-revert-non-file-buffers t)
   :init
-  (global-auto-revert-mode t)
-  )
+  (global-auto-revert-mode t))
 
 (use-package dired
   :custom
@@ -37,8 +36,7 @@
   (dired-maybe-use-globstar t)
   (dired-mouse-drag-files t)
   (dired-recursive-copies 'always)
-  :defer t
-  )
+  :defer t)
 
 (use-package dired-aux
   :after dired
@@ -46,29 +44,24 @@
   (dired-create-destination-dirs 'always)
   (dired-create-destination-dirs-on-trailing-dirsep t)
   (dired-do-revert-buffer t)
-  (dired-isearch-filenames 'dwim)
-  )
+  (dired-isearch-filenames 'dwim))
 
 (use-package dired-async
   :hook
-  (dired-mode . dired-async-mode)
-  )
+  (dired-mode . dired-async-mode))
 
 (use-package emacs
   :custom
-  (delete-by-moving-to-trash t)
-  )
+  (delete-by-moving-to-trash t))
 
 (use-package mouse
   :custom
-  (mouse-drag-and-drop-region-cross-program t)
-  )
+  (mouse-drag-and-drop-region-cross-program t))
 
 (use-package nov
   :custom
   (nov-header-line-format nil)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package ready-player
   :vc (:url "https://github.com/xenodium/ready-player")
@@ -85,12 +78,10 @@
   (ready-player-autoplay-icon "󰼛")
   :ensure t
   :hook
-  (dired-mode . ready-player-mode)
-  )
+  (dired-mode . ready-player-mode))
 
 (use-package show-font
   :vc (:url "https://github.com/protesilaos/show-font")
-  :ensure t
-  )
+  :ensure t)
 
 (provide 'gs-fm)

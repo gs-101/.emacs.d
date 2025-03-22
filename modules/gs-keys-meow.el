@@ -2,28 +2,23 @@
 
 (use-package meow
   :vc (:url "https://github.com/meow-edit/meow")
-  :ensure t
-  )
+  :ensure t)
 
 (use-package meow-core
   :init
-  (meow-global-mode)
-  )
+  (meow-global-mode))
 
 (use-package meow-var
   :custom
-  (meow-use-clipboard t)
-  )
+  (meow-use-clipboard t))
 
 (use-package meow-cheatsheet
   :custom
-  (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-  )
+  (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty))
 
 (use-package meow-cheatsheet-layout
   :custom
-  (meow-cheatsheet-layout-qwerty t)
-  )
+  (meow-cheatsheet-layout-qwerty t))
 
 (use-package meow-command
   :config
@@ -41,8 +36,7 @@
      ((derived-mode-p 'markdown-mode) (markdown-previous-visible-heading 1))
      ((derived-mode-p 'org-mode) (org-previous-visible-heading 1))
      ((derived-mode-p 'prog-mode) (backward-up-list))
-     (t (meow-prev-expand 1)))
-    )
+     (t (meow-prev-expand 1))))
 
   (defun gs-101/meow-super-next ()
     "Runs different downwards navigation commands based on the current major or minor mode.
@@ -58,8 +52,7 @@
      ((derived-mode-p 'markdown-mode) (markdown-next-visible-heading 1))
      ((derived-mode-p 'org-mode) (org-next-visible-heading 1))
      ((derived-mode-p 'prog-mode) (down-list))
-     (t (meow-next-expand 1)))
-    )
+     (t (meow-next-expand 1))))
 
   (defun gs-101/meow-super-left ()
     "Runs different leftwards navigation commands based on the current major or minor mode.
@@ -73,8 +66,7 @@
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-previous))
      ((derived-mode-p 'prog-mode) (backward-sexp))
      ((derived-mode-p 'text-mode) (meow-back-word 1))
-     (t (meow-left-expand)))
-    )
+     (t (meow-left-expand))))
 
   (defun gs-101/meow-super-right ()
     "Runs different rightwards navigation commands based on the current major or minor mode.
@@ -88,8 +80,8 @@
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-next))
      ((derived-mode-p 'prog-mode) (forward-sexp))
      ((derived-mode-p 'text-mode) (meow-next-word 1))
-     (t (meow-right-expand)))
-    )
+     (t (meow-right-expand))))
+
   (defun gs-101/meow-super-kill ()
     "Runs different kill commands based on the current major or minor mode.
 
@@ -100,8 +92,8 @@
     (cond
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-kill-node-dwim))
      ((derived-mode-p 'prog-mode) (kill-sexp))
-     (t (meow-kill-whole-line)))
-    )
+     (t (meow-kill-whole-line))))
+
   (defun gs-101/meow-super-mark ()
     "Runs different mark commands based on the current major or minor mode.
 
@@ -112,8 +104,8 @@
     (cond
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-mark-node-dwim))
      ((derived-mode-p 'prog-mode) (meow-block 1))
-     (t (meow-mark-word 1)))
-    )
+     (t (meow-mark-word 1))))
+
   (defun gs-101/meow-transpose ()
     "Runs different transposition commands based on the current major or minor mode.
 
@@ -124,10 +116,11 @@
     (cond
      ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-transpose-sexps))
      ((derived-mode-p 'prog-mode) (meow-transpose-sexp))
-     (t (transpose-words)))
-    )
+     (t (transpose-words))))
+
   (defvar gs-101/meow-beginning-of-line "C-a"
     "KBD macro for command`beginning-of-line'.")
+
   (defun gs-101/meow-super-beginning ()
     "Runs different beginning commands depending on current major mode.
 - `prog-mode' :: `meow-back-to-indentation'
@@ -135,8 +128,7 @@
     (interactive)
     (cond
      ((derived-mode-p 'prog-mode) (meow-back-to-indentation))
-     (t (meow--execute-kbd-macro gs-101/meow-beginning-of-line))))
-  )
+     (t (meow--execute-kbd-macro gs-101/meow-beginning-of-line)))))
 
 (use-package meow-helpers
   :config
@@ -154,12 +146,9 @@
    '("7" . meow-digit-argument)
    '("8" . meow-digit-argument)
    '("9" . meow-digit-argument)
-   '("0" . meow-digit-argument)
-   )
+   '("0" . meow-digit-argument))
   (meow-motion-overwrite-define-key
-   '("<escape>" . ignore)
-   )
-  )
+   '("<escape>" . ignore)))
 
 (use-package meow-helpers
   :config
@@ -225,17 +214,13 @@
    '("y" . meow-yank)
    '("Y" . meow-yank-pop)
    '("z" . meow-till)
-   '("Z" . meow-till-expand)
-   )
-  )
+   '("Z" . meow-till-expand)))
 
 (use-package meow-command
   :after meow avy
   :bind
-  (
-   :map meow-normal-state-keymap
-   ([remap meow-pop-to-mark] . favetelinguis/meow-jumper)
-   )
+  (:map meow-normal-state-keymap
+        ([remap meow-pop-to-mark] . favetelinguis/meow-jumper))
   :config
   (defun gs-101/meow-avy-action-kill-whole-line (pt)
     "Jump to target at marker PT, killing its whole line after the jump.
@@ -251,8 +236,7 @@ This follows the parameters set by `meow-kill-whole-line'."
 
   (setf
    (alist-get ?K avy-dispatch-alist) #'gs-101/meow-avy-action-kill-whole-line
-   (alist-get ?m avy-dispatch-alist) #'gs-101/meow-avy-action-block
-   )
+   (alist-get ?m avy-dispatch-alist) #'gs-101/meow-avy-action-block)
 
   (defun favetelinguis/meow-jumper (&optional arg)
     "Switch between Meow search and Avy,
@@ -262,22 +246,19 @@ Otherwise, it calls `avy-goto-char-timer'."
     (interactive)
     (if (region-active-p)
         (meow-search arg)
-      (avy-goto-char-timer)))
-  )
+      (avy-goto-char-timer))))
 
 (use-package meow-tree-sitter
   :vc (:url "https://github.com/skissue/meow-tree-sitter")
   :ensure t
   :config
-  (meow-tree-sitter-register-defaults)
-  )
+  (meow-tree-sitter-register-defaults))
 
 (use-package meow-helpers
   :after embark
   :config
   (meow-normal-define-key
-   '(";" . embark-act))
-  )
+   '(";" . embark-act)))
 
 (use-package meow-core
   :after org-appear
@@ -292,7 +273,6 @@ Otherwise, it calls `avy-goto-char-timer'."
                              (add-hook 'meow-insert-exit-hook
                                        #'org-appear-manual-stop
                                        nil
-                                       t)))
-  )
+                                       t))))
 
 (provide 'gs-keys-meow)

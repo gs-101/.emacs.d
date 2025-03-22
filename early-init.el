@@ -16,12 +16,11 @@
 
 (defcustom gs-101/projects-code-directory (convert-standard-filename (expand-file-name "~/Projects/code/"))
   "Path for project related to code, like applications."
-  :type 'directory
-  )
+  :type 'directory)
+
 (defcustom gs-101/modules-directory (convert-standard-filename (expand-file-name "modules" user-emacs-directory))
   "Path for this configuration's modules."
-  :type 'directory
-  )
+  :type 'directory)
 
 (defun gs-101/guix-p ()
   "Check if guix is installed in the current system."
@@ -35,11 +34,10 @@
   "Return a function for adding MANY items to a LIST.
 Without putting them in a separate list."
   (mapc (lambda (item)
-          (add-to-list list item))
-        many))
+          (add-to-list list item)) many))
 
 (with-eval-after-load 'package
-  (gs-101/add-many-to-list 'package-archives
-                           '(("melpa" . "https://melpa.org/packages/")
-                             ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
-  )
+  (gs-101/add-many-to-list
+   'package-archives
+   '(("melpa" . "https://melpa.org/packages/")
+     ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/"))))

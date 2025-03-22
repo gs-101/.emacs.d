@@ -9,20 +9,20 @@
   (citar-format-reference-function #'citar-citeproc-format-reference)
   (citar-library-paths '("~/Documents/zotero/storage/"))
   (citar-open-entry-function #'citar-open-entry-in-zotero)
-  (citar-templates '((main . "${author editor:30%sn}     ${date year issued:4}     ${title:48}") (suffix . "          ${=key= id:15}    ${tags keywords keywords:*}    ${abstract abstract:*}") (preview . "${author editor:%etal} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.
-") (note . "Notes on ${author editor:%etal}, ${title}")))
+  (citar-templates '((main . "${author editor:30%sn}     ${date year issued:4}     ${title:48}")
+                     (suffix . "          ${=key= id:15}    ${tags keywords keywords:*}    ${abstract abstract:*}")
+                     (preview . "${author editor:%etal} (${year issued date}) ${title}, ${journal journaltitle publisher container-title collection-title}.")
+                     (note . "Notes on ${author editor:%etal}, ${title}")))
   :hook
   (org-mode . citar-capf-setup)
-  :ensure t
-  )
+  :ensure t)
 
 (use-package citar-embark
   :after embark
   :custom
   (citar-at-point-function #'embark-act)
   :hook
-  (text-mode . citar-embark-mode)
-  )
+  (text-mode . citar-embark-mode))
 
 (use-package citar-embark
   :after citar-embark
@@ -42,21 +42,17 @@ Citekey must be formatted as `@key'."
           (cons (substring (match-string 0) 2)
                 (cons (match-beginning 0)
                       (match-end 0))))))
-  (add-to-list 'embark-keymap-alist '(bib-reference . citar-map))
-  )
+  (add-to-list 'embark-keymap-alist '(bib-reference . citar-map)))
 
 (use-package oc
   :bind
-  (
-   :map org-mode-map
-   ("C-c m q" . org-cite-insert)
-   )
+  (:map org-mode-map
+        ("C-c m q" . org-cite-insert))
   :custom
   (org-cite-global-bibliography '("~/Documents/bibliography.bib"))
   (org-cite-insert-processor 'citar)
   (org-cite-follow-processor 'citar)
-  (org-cite-activate-processor 'citar)
-  )
+  (org-cite-activate-processor 'citar))
 
 (use-package oc-csl
   :after oc
@@ -74,14 +70,13 @@ Citekey must be formatted as `@key'."
   (citar-org-roam-mode)
   (add-to-list 'org-roam-capture-templates
                '("b" "bibliographic" plain
-                (file "~/Documents/org-roam/templates/default.org")
-                :if-new
-                (file+head "%<%Y%m%d%H%M%S>-${citar-citekey}.org" "#+title: ${title}\n\n")
-                :unnarrowed t))
+                 (file "~/Documents/org-roam/templates/default.org")
+                 :if-new
+                 (file+head "%<%Y%m%d%H%M%S>-${citar-citekey}.org" "#+title: ${title}\n\n")
+                 :unnarrowed t))
   :custom
   (citar-org-roam-capture-template-key "b")
   (citar-org-roam-note-title-template "${title}")
-  :ensure t
-  )
+  :ensure t)
 
 (provide 'gs-citar)

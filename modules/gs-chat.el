@@ -49,14 +49,12 @@
   (smtpmail-smtp-service 465)
   (smtpmail-stream-type 'ssl)
   (smtpmail-smtp-server "disroot.org")
-  (smtpmail-local-domain "disroot.org")
-  )
+  (smtpmail-local-domain "disroot.org"))
 
 (use-package startup
   :custom
   (user-mail-address "gabrielsantosdesouza@disroot.org")
-  :defer t
-  )
+  :defer t)
 
 (use-package org-msg
   :vc (:url "https://github.com/jeremy-compostella/org-msg")
@@ -79,7 +77,6 @@ Gabriel Santos
    )
   :ensure t
   :config
-  (org-msg-mode)
-  )
+  (org-msg-mode))
 
 (provide 'gs-chat)
