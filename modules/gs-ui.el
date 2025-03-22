@@ -29,14 +29,6 @@
     (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
   (dw/set-font-faces))
 
-(use-package faces
-  :if (daemonp)
-  :config
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (with-selected-frame frame
-                (dw/set-font-faces)))))
-
 (use-package frame
   :config (setq-mode-local doc-view-mode blink-cursor-mode nil)
   :custom
@@ -50,13 +42,6 @@
   :if (display-graphic-p)
   :init
   (context-menu-mode))
-
-(use-package mouse
-  :if (daemonp)
-  :config
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (context-menu-mode))))
 
 (use-package org
   :custom
@@ -156,14 +141,6 @@ This advice replaces the rocket icon with a electric plug icon."
   :init
   (doom-modeline-mode))
 
-(use-package doom-modeline
-  :after doom-modeline
-  :if (daemonp)
-  :config
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (setq doom-modeline-icon t))))
-
 (use-package diredfl
   :vc (:url "https://github.com/purcell/diredfl")
   :ensure t
@@ -247,14 +224,6 @@ This advice replaces the rocket icon with a electric plug icon."
                              (org-self-insert-command "" "Typing...")
                              (vertico-next nil nil)
                              (vertico-previous nil nil))))
-
-(use-package keycast
-  :if (daemonp)
-  :config
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (with-selected-frame frame
-                (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified)))))
 
 (use-package keycast
   :after embark
@@ -565,16 +534,6 @@ instead of $."
                                              lavender
                                              mauve))))
   (prism-catppuccin-colors))
-
-(use-package prism
-  :if (daemonp)
-  :after prism catppuccin-theme
-  :config
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (with-selected-frame frame
-              (prism-catppuccin-colors))))
-  )
 
 (use-package rainbow-delimiters
   :vc (:url "https://github.com/Fanael/rainbow-delimiters")

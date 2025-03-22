@@ -5132,20 +5132,6 @@ Lisp faces.
     (dw/set-font-faces))
 #+end_src
 
-*** Daemon Support
-
-NOTE: Delete.
-
-#+begin_src emacs-lisp
-  (use-package faces
-    :if (daemonp)
-    :config
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (with-selected-frame frame
-                  (dw/set-font-faces)))))
-#+end_src
-
 *** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L106][Frame]]
 
 #+begin_quote
@@ -5174,17 +5160,6 @@ Multi-frame management independent of window systems.
     :if (display-graphic-p)
     :init
     (context-menu-mode))
-#+end_src
-
-*** Daemon Support
-
-#+begin_src emacs-lisp
-  (use-package mouse
-    :if (daemonp)
-    :config
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (context-menu-mode))))
 #+end_src
 
 ** Org Mode
@@ -5365,20 +5340,6 @@ A fancy and fast mode-line inspired by minimalism design.
     (doom-modeline-mode))
 #+end_src
 
-*** Daemon Support
-
-NOTE: Delete.
-
-#+begin_src emacs-lisp
-  (use-package doom-modeline
-    :after doom-modeline
-    :if (daemonp)
-    :config
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (setq doom-modeline-icon t))))
-#+end_src
-
 ** [[https://github.com/purcell/diredfl][diredfl]]
 
 #+begin_quote
@@ -5508,21 +5469,6 @@ Show current command and its key in the mode line.
                                (org-self-insert-command "" "Typing...")
                                (vertico-next nil nil)
                                (vertico-previous nil nil))))
-#+end_src
-
-*** Daemon Support
-
-NOTE: Delete.
-
-#+begin_src emacs-lisp
-
-  (use-package keycast
-    :if (daemonp)
-    :config
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (with-selected-frame frame
-                  (set-face-attribute 'keycast-key nil :background 'unspecified :foreground "default" :box 'unspecified)))))
 #+end_src
 
 *** [[https://github.com/oantolin/embark/wiki/Additional-Configuration#showing-embark-actions-keys-in-keycast-mode][Embark Support]]
@@ -5931,24 +5877,6 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
                                                lavender
                                                mauve))))
     (prism-catppuccin-colors))
-#+end_src
-
-**** Daemon Support
-
-NOTE: Delete.
-
-#+begin_src emacs-lisp
-
-  (use-package prism
-    :if (daemonp)
-    :after prism catppuccin-theme
-    :config
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (with-selected-frame frame
-                (prism-catppuccin-colors))))
-    )
-
 #+end_src
 
 ** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
