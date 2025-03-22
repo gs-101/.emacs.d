@@ -4279,79 +4279,7 @@ Easily draw Unicode lines and boxes.
 
 Configuration for different chat clients.
 
-** [[https://github.com/djcb/mu][mu4e]]
-
-#+begin_quote
-
-maildir indexer/searcher + emacs mail client + guile bindings.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-  ;;; -*- lexical-binding: t -*-
-#+end_src
-
-
-NOTE: Delete.
-
-#+begin_src emacs-lisp
-
-  (use-package mu4e
-    :vc (
-         :url "https://github.com/djcb/mu"
-         :lisp-dir "mu4e"
-         )
-    :commands
-    (mu4e)
-    :custom
-    (mu4e-compose-format-flowed t)
-    (mu4e-change-filenames-when-moving t)
-    (mu4e-get-mail-command "mbsync -a")
-    (mu4e-maildir (expand-file-name "Disroot/Personal/" mail-source-directory))
-    (mu4e-view-show-addresses 't)
-    (mu4e-view-show-images t)
-    (mu4e-drafts-folder "/Drafts")
-    (mu4e-sent-folder "/Sent")
-    (mu4e-refile-folder "/All Mail")
-    (mu4e-trash-folder "/Trash")
-    (mu4e-maildir-shortcuts '(
-                              ("/Inbox" . ?i)
-                              ("/Drafts" . ?d)
-                              ("/Sent" . ?s)
-                              ("/Trash" . ?t)
-                              ("/All Mail" . ?a)
-                              ))
-    )
-
-#+end_src
-
-*** [[https://github.com/Alexander-Miller/mu4e-column-faces][Column Faces]]
-
-#+begin_src emacs-lisp
-
-  (use-package mu4e-column-faces
-    :vc (:url "https://github.com/Alexander-Miller/mu4e-column-faces")
-    :after mu4e
-    :config
-    (mu4e-column-faces-mode)
-    :ensure t
-    )
-
-#+end_src
-
-*** Simple
-
-#+begin_src emacs-lisp
-
-  (use-package simple
-    :after mu4e
-    :custom
-    (mail-user-agent 'mu4e-user-agent)
-    )
-
-#+end_src
-
-*** Message
+** Message
 
 #+begin_src emacs-lisp
   (use-package message
@@ -4365,7 +4293,7 @@ NOTE: Delete.
     (smtpmail-local-domain "disroot.org"))
 #+end_src
 
-*** Startup
+** Startup
 
 #+begin_src emacs-lisp
   (use-package startup
