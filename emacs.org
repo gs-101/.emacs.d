@@ -4302,39 +4302,6 @@ Configuration for different chat clients.
     :defer t)
 #+end_src
 
-** [[https://github.com/jeremy-compostella/org-msg][OrgMsg]]
-
-#+begin_quote
-OrgMsg is a GNU/Emacs global minor mode mixing up Org mode and Message mode to compose and reply to emails in a Outlook HTML friendly style. 
-#+end_quote
-
-NOTE: Delete.
-
-#+begin_src emacs-lisp
-
-  (use-package org-msg
-    :vc (:url "https://github.com/jeremy-compostella/org-msg")
-    :after mu4e
-    :custom
-    (org-msg-greeting-fmt "\nGreetings,\n\n")
-    (org-msg-default-alternatives '(
-                                    (new . (text html))
-                                    (reply-to-html . (text html))
-                                    (reply-to-text . (text))
-                                    ))
-    (org-msg-convert-citation t)
-    (org-msg-signature
-     "Regards,
-
-  ,#+begin_signature
-  --
-  Gabriel Santos
-  ,#+end_signature"
-     )
-    :ensure t
-    :config
-    (org-msg-mode))
-#+end_src
 
 ** End
 

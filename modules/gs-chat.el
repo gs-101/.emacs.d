@@ -13,27 +13,4 @@
   (user-mail-address "gabrielsantosdesouza@disroot.org")
   :defer t)
 
-(use-package org-msg
-  :vc (:url "https://github.com/jeremy-compostella/org-msg")
-  :after mu4e
-  :custom
-  (org-msg-greeting-fmt "\nGreetings,\n\n")
-  (org-msg-default-alternatives '(
-                                  (new . (text html))
-                                  (reply-to-html . (text html))
-                                  (reply-to-text . (text))
-                                  ))
-  (org-msg-convert-citation t)
-  (org-msg-signature
-   "Regards,
-
-#+begin_signature
---
-Gabriel Santos
-#+end_signature"
-   )
-  :ensure t
-  :config
-  (org-msg-mode))
-
 (provide 'gs-chat)
