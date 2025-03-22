@@ -144,16 +144,4 @@
   :hook
   (org-agenda-finalize . dw/org-roam-refresh-agenda-list))
 
-(use-package org-roam-ui
-  :vc (:url "https://github.com/org-roam/org-roam-ui")
-  :bind
-  ("C-z r u" . org-roam-ui-open)
-  :custom
-  (org-roam-ui-sync-theme t)
-  (org-roam-ui-follow t)
-  (org-roam-ui-update-on-save t)
-  (org-roam-ui-open-on-start nil)
-  (org-roam-ui-browser-function #'browse-url-chromium)
-  :ensure t)
-
 (provide 'gs-org-roam)

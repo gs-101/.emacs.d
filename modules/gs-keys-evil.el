@@ -133,11 +133,6 @@
   (gs-101/evil-define-leader-key "ri" #'org-roam-node-insert))
 
 (use-package evil-core
-  :after org-roam-ui
-  :config
-  (gs-101/evil-define-leader-key "ru" #'org-roam-ui))
-
-(use-package evil-core
   :after nerd-icons
   :config
   (gs-101/evil-define-leader-key "in" #'nerd-icons-insert))

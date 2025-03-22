@@ -2241,26 +2241,6 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
     (org-agenda-finalize . dw/org-roam-refresh-agenda-list))
 #+end_src
 
-** [[https://github.com/org-roam/org-roam-ui][User Interface]]
-
-#+begin_quote
-A graphical frontend for exploring your org-roam Zettelkasten.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package org-roam-ui
-    :vc (:url "https://github.com/org-roam/org-roam-ui")
-    :bind
-    ("C-z r u" . org-roam-ui-open)
-    :custom
-    (org-roam-ui-sync-theme t)
-    (org-roam-ui-follow t)
-    (org-roam-ui-update-on-save t)
-    (org-roam-ui-open-on-start nil)
-    (org-roam-ui-browser-function #'browse-url-chromium)
-    :ensure t)
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp
@@ -4302,7 +4282,6 @@ Configuration for different chat clients.
     :defer t)
 #+end_src
 
-
 ** End
 
 #+begin_src emacs-lisp
@@ -4648,15 +4627,6 @@ Toggles org-appear based on the current evil state.
 #+end_src
 
 **** User Interface
-
-NOTE: Delete.
-
-#+begin_src emacs-lisp
-  (use-package evil-core
-    :after org-roam-ui
-    :config
-    (gs-101/evil-define-leader-key "ru" #'org-roam-ui))
-#+end_src
 
 *** Nerd Icons
 
