@@ -4383,11 +4383,9 @@ Structured editing (soft deletion, expression navigating & manipulating) that su
      :map puni-mode-map
      ("M-h" . puni-expand-region)
      ("M-H" . puni-contract-region)
-     ("C-k" . puni-kill-line)
-     ("C-M-@" . puni-mark-sexp-at-point)
-     ("C-M-SPC" . puni-mark-sexp-at-point)
+     ([remap mark-sexp] . puni-mark-sexp-at-point)
      ("M-k" . Gavinok/puni-kill-thing-at-point)
-     ("C-M-t" . puni-transpose)
+     ([reamp transpose-sexps] . puni-transpose)
      ("C-)" . puni-slurp-forward)
      ("C-(" . puni-slurp-backward)
      ("C-M-)" . puni-barf-forward)
