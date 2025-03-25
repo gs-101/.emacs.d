@@ -14,6 +14,7 @@
                              ("csharp" . csharp-ts)
                              ("css" . css-ts)
                              ("dart" . dart-ts)
+                             ("dockerfile" . dockerfile-ts)
                              ("go" . go-ts)
                              ("html" . html-ts)
                              ("java" . java-ts)
