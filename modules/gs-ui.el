@@ -19,7 +19,7 @@
 
 (use-package faces
   :when (gs-101/nobara-p)
-  :config
+  :init
   (defun dw/set-font-faces ()
     ;; Set the default face
     (set-face-attribute 'default nil :font "Cascadia Code NF")
