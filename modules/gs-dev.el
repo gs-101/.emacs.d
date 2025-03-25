@@ -84,6 +84,13 @@
   (prog-mode . editorconfig-mode))
 
 (use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs
+               '((c-ts-mode c++-ts-mode) . ("clangd"
+                                            "--all-scopes-completion"
+                                            "--background-index"
+                                            "--clang-tidy"
+                                            "--completion-style=detailed")))
   :custom
   (eglot-autoshutdown t)
   (eglot-connect-timeout nil)
