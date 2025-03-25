@@ -63,7 +63,9 @@
 
 (use-package org-nix-shell
   :vc (:url "https://github.com/AntonHakansson/org-nix-shell")
-  :ensure t)
+  :ensure t
+  :hook
+  (org-mode . org-nix-shell-mode))
 
 (use-package org-agenda
   :config
