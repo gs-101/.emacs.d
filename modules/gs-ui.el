@@ -473,8 +473,7 @@ instead of $."
   (flymake-indicator-type 'margins)
   (flymake-margin-indicators-string '((error "󰃤" compilation-error)
                                       (warning "" compilation-warning)
-                                      (note "󰎚" compilation-info)))
-  (flymake-show-diagnostics-at-end-of-line 'short))
+                                      (note "󰎚" compilation-info))))
 
 (use-package go-ts-mode
   :after nerd-icons go-ts-mode
