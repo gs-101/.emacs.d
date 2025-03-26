@@ -630,8 +630,8 @@ With negative arugment, capitalize previous words but do not move."
         ([remap backward-kill-word] . gs-101/puni-backward-kill-symbol)
         ("C-)" . puni-slurp-forward)
         ("C-(" . puni-slurp-backward)
-        ("C-M-)" . puni-barf-forward)
-        ("C-M-(" . puni-barf-backward))
+        ("C-}" . puni-barf-forward)
+        ("C-{" . puni-barf-backward))
   :defer t
   :config
   (defun Gavinok/puni-kill-thing-at-point (&optional arg)
