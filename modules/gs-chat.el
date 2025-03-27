@@ -5,8 +5,7 @@
   (message-send-mail-function #'smtpmail-send-it)
   (smtpmail-smtp-service 465)
   (smtpmail-stream-type 'ssl)
-  (smtpmail-smtp-server "disroot.org")
-  (smtpmail-local-domain "disroot.org"))
+  (smtpmail-smtp-server "disroot.org"))
 
 (use-package startup
   :custom
