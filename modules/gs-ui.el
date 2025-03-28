@@ -483,13 +483,6 @@ instead of $."
                   (push '(":=" . ?) prettify-symbols-alist)
                   (push '("go" . ?󰟓) prettify-symbols-alist))))
 
-(use-package rust-ts-mode
-  :after nerd-icons rust-ts-mode
-  :hook
-  (rust-ts-mode . prettify-symbols-mode)
-  (rust-ts-mode . (lambda ()
-                    (push '("=>" . ?) prettify-symbols-alist))))
-
 (use-package nerd-icons-ibuffer
   :vc (:url "https://github.com/seagle0128/nerd-icons-ibuffer")
   :after nerd-icons
