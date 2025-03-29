@@ -16,7 +16,7 @@
                              ("dart" . dart-ts)
                              ("dockerfile" . dockerfile-ts)
                              ("go" . go-ts)
-                             ("html" . html-ts)
+                             ("html" . mhtml-ts)
                              ("java" . java-ts)
                              ("js" . js-ts)
                              ("json" . json-ts)
