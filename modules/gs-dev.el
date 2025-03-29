@@ -533,6 +533,9 @@ With negative arugment, capitalize previous words but do not move."
   :hook
   (dape-display-source . pulse-momentary-highlight-one-line))
 
+(use-package debbugs
+  :ensure t)
+
 (use-package exercism
   :vc (:url "https://github.com/anonimitoraf/exercism.el")
   :commands

@@ -3259,6 +3259,17 @@ Debug Adapter Protocol for Emacs.
     (dape-display-source . pulse-momentary-highlight-one-line))
 #+end_src
 
+** [[https://elpa.gnu.org/packages/debbugs.html][Debbugs]]
+
+#+begin_quote
+This package lets you access the GNU Bug Tracker from within Emacs.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package debbugs
+    :ensure t)
+#+end_src
+
 ** [[https://github.com/anonimitoraf/exercism.el][Exercism]]
 
 #+begin_quote
