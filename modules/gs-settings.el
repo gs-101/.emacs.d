@@ -4,11 +4,6 @@
   :custom
   (ad-redefinition-action 'accept))
 
-(use-package auth-source-pass
-  :if (executable-find "pass")
-  :config
-  (auth-source-pass-enable))
-
 (use-package bytecomp
   :custom
   (byte-compile-warnings '(not obsolete)))
@@ -178,6 +173,8 @@
   (history-length 300)
   :init
   (savehist-mode))
+
+(use-package secrets)
 
 (use-package sendmail
   :custom

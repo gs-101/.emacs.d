@@ -133,19 +133,6 @@ An overloading mechanism for Emacs Lisp functions.
     (ad-redefinition-action 'accept))
 #+end_src
 
-*** Auth Source Pass
-
-#+begin_quote
-Integrates [[https://passwordstore.org/][password-store]] within ~auth-source~.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package auth-source-pass
-    :if (executable-find "pass")
-    :config
-    (auth-source-pass-enable))
-#+end_src
-
 *** Byte Compilation
 
 #+begin_quote
@@ -507,6 +494,16 @@ Save minibuffer history.
     (history-length 300)
     :init
     (savehist-mode))
+#+end_src
+
+*** Secrets
+
+#+begin_quote
+This package provides an implementation of the [[https://www.freedesktop.org/wiki/Specifications/secret-storage-spec][Secret Service API]].
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package secrets)
 #+end_src
 
 *** Send Mail
@@ -3508,7 +3505,7 @@ Emacs plugin for automatic time tracking and metrics generated from your program
     (defun gs-101/wakatime-api-key-from-auth ()
       "Get the Wakatime API key from either auth-source or password-store."
       (or (auth-source-pick-first-password :host "wakatime.com")
-          (auth-source-pass-get 'secret "wakatime.com")))
+          (secrets-get-attribute "Keepass" "Wakatime" "api-key")))
 
     (defun gs-101/wakatime-enable-prompt ()
       "Prompt if the user wants to enable wakatime tracking.

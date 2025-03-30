@@ -695,7 +695,7 @@ means kill symbols backward."
   (defun gs-101/wakatime-api-key-from-auth ()
     "Get the Wakatime API key from either auth-source or password-store."
     (or (auth-source-pick-first-password :host "wakatime.com")
-        (auth-source-pass-get 'secret "wakatime.com")))
+        (secrets-get-attribute "Keepass" "Wakatime" "api-key")))
 
   (defun gs-101/wakatime-enable-prompt ()
     "Prompt if the user wants to enable wakatime tracking.
