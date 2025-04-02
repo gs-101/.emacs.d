@@ -190,6 +190,8 @@ This advice replaces the rocket icon with a electric plug icon."
   :vc (:url "https://github.com/tarsius/keycast")
   :config
   (set-face-attribute 'keycast-key nil :background 'unspecified :foreground 'unspecified :box 'unspecified)
+  :custom
+  (echo-keystrokes 0)
   :ensure t
   :init
   (define-minor-mode keycast-mode
