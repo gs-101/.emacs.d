@@ -497,7 +497,7 @@ With negative arugment, capitalize previous words but do not move."
       (aggressive-indent-mode)))
   :ensure t
   :hook
-  (css-mode . aggressive-indent-mode)
+  (mhtml-ts-mode . aggressive-indent-mode)
   (prog-mode . gs-101/aggressive-indent-mode-lisp))
 
 (use-package apheleia

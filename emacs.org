@@ -3192,7 +3192,7 @@ Emacs minor mode that keeps your code always indented. More reliable than electr
         (aggressive-indent-mode)))
     :ensure t
     :hook
-    (css-mode . aggressive-indent-mode)
+    (mhtml-ts-mode . aggressive-indent-mode)
     (prog-mode . gs-101/aggressive-indent-mode-lisp))
 #+end_src
 
