@@ -101,18 +101,6 @@
   ;; 2
   (switch-to-buffer-obey-display-actions t))
 
-(use-package which-key
-  :custom
-  (which-key-add-column-padding 1)
-  (which-key-idle-delay 0.5)
-  (which-key-min-display-lines 6)
-  (which-key-separator " = ")
-  (which-key-side-window-slot -10)
-  (which-key-sort-order #'which-key-key-order-alpha)
-  (which-key-sort-uppercase-first nil)
-  :init
-  (which-key-mode))
-
 (use-package catppuccin-theme
   :vc (:url "https://github.com/catppuccin/emacs")
   :when (gs-101/nobara-p)

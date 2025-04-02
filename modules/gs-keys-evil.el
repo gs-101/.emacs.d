@@ -156,8 +156,4 @@
   :config
   (evil-org-agenda-set-keys))
 
-(use-package which-key
-  :custom
-  (which-key-allow-evil-operators t))
-
 (provide 'gs-keys-evil)

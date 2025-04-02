@@ -240,45 +240,6 @@ using Helpful."
   :hook
   (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 
-(use-package embark
-  :after embark
-  :custom
-  (embark-indicators '(oantolin/embark-which-key-indicator
-                       embark-highlight-indicator
-                       embark-isearch-highlight-indicator))
-  :config
-  (defun oantolin/embark-which-key-indicator ()
-    "An embark indicator that displays keymaps using which-key.
-The which-key help message will show the type and value of the
-current target followed by an ellipsis if there are further
-targets."
-    (lambda (&optional keymap targets prefix)
-      (if (null keymap)
-          (which-key--hide-popup-ignore-command)
-        (which-key--show-keymap
-         (if (eq (plist-get (car targets) :type) 'embark-become)
-             "Become"
-           (format "Act on %s '%s'%s"
-                   (plist-get (car targets) :type)
-                   (embark--truncate-target (plist-get (car targets) :target))
-                   (if (cdr targets) 'truncate-string-ellipsis "")))
-         (if prefix
-             (pcase (lookup-key keymap prefix 'accept-default)
-               ((and (pred keymapp) km) km)
-               (_ (key-binding prefix 'accept-default)))
-           keymap)
-         nil nil t (lambda (binding)
-                     (not (string-suffix-p "-argument" (car binding))))))))
-
-  (defun oantolin/embark-hide-which-key-indicator (fn &rest args)
-    "Hide the which-key indicator immediately when using the completing-read prompter."
-    (which-key--hide-popup-ignore-command)
-    (let ((embark-indicators
-           (remq #'oantolin/embark-which-key-indicator embark-indicators)))
-      (apply fn args)))
-
-  (advice-add #'embark-completing-read-prompter :around #'oantolin/embark-hide-which-key-indicator))
-
 (use-package p-search
   :vc (:url "https://github.com/zkry/p-search")
   :bind
