@@ -364,4 +364,9 @@ With a ARG prefix argument, copy the buffer to the other window."
   (vundo-glyph-alist vundo-unicode-symbols)
   :ensure t)
 
+(use-package with-editor
+  :vc (:url "https://github.com/magit/with-editor")
+  :init
+  (shell-command-with-editor-mode))
+
 (provide 'gs-settings)

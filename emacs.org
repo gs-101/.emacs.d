@@ -858,6 +858,19 @@ Visualize the undo tree.
     :ensure t)
 #+end_src
 
+*** [[https://github.com/magit/with-editor][With-Editor]]
+
+#+begin_quote
+Use the Emacsclient as the $EDITOR of child processes.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package with-editor
+    :vc (:url "https://github.com/magit/with-editor")
+    :init
+    (shell-command-with-editor-mode))
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
