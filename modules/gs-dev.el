@@ -265,13 +265,6 @@ Only runs if a `flutter' buffer already exits."
   :init
   (envrc-global-mode))
 
-(use-package python-pytest
-  :vc (:url "https://github.com/wbolster/emacs-python-pytest")
-  :bind
-  (:map python-base-mode-map
-        ("C-c m t" . python-pytest-dispatch))
-  :ensure t)
-
 (use-package cargo-transient
   :vc (:url "https://github.com/peterstuart/cargo-transient")
   :after rust-ts-mode
