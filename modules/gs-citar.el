@@ -58,8 +58,7 @@ Citekey must be formatted as `@key'."
   :after oc
   :custom
   (org-cite-csl-styles-dir "~/Documents/zotero/styles/")
-  (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl"))))
-  )
+  (org-cite-export-processors '((t . (csl "harvard-cite-them-right.csl")))))
 
 (use-package citar-org-roam
   :vc (:url "https://github.com/emacs-citar/citar-org-roam")
