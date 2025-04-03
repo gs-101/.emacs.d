@@ -181,6 +181,17 @@
   (sendmail-program (executable-find "msmtp"))
   :defer t)
 
+(use-package server
+  :demand t
+  :ensure nil
+  :init
+  (defun positron-solutions/server ()
+    "Start the Emacs server if it's not running."
+    (unless (bound-and-true-p server-process)
+      (server-start)))
+  :init
+  (positron-solutions/server))
+
 (use-package simple
   :bind
   ("C-x M-h" . captainflasmr/copy-buffer-to-kill-ring)
@@ -219,6 +230,20 @@ With a ARG prefix argument, copy the buffer to the other window."
   :custom
   (initial-major-mode 'fundamental-mode)
   :defer t)
+
+(use-package emacs
+  :init
+  (defun karthinks/sudo-find-file (file)
+    "Open FILE as root."
+    (interactive "FOpen file as root: ")
+    (when (file-writable-p file)
+      (user-error "File is user-writable, aborting sudo"))
+    (find-file (if (file-remote-p file)
+                   (concat "/" (file-remote-p file 'method) ":"
+                           (file-remote-p file 'user) "@" (file-remote-p file 'host)
+                           "|sudo@root@"
+                           (file-remote-p file 'host) ":" (file-remote-p file 'localname))
+                 (concat "/sudo:root@localhost:" file)))))
 
 (use-package transient
   :custom
@@ -269,24 +294,6 @@ With a ARG prefix argument, copy the buffer to the other window."
         ("p" . disproject-dispatch))
   :ensure t)
 
-(use-package server
-  :demand t
-  :ensure nil
-  :init
-  (defun positron-solutions/server ()
-    "Start the Emacs server if it's not running."
-    (unless (bound-and-true-p server-process)
-      (server-start)))
-  :init
-  (positron-solutions/server))
-
-(use-package markdown-mode
-  :vc (:url "https://github.com/jrblevin/markdown-mode")
-  :defer t
-  :ensure t
-  :custom
-  (markdown-fontify-code-blocks-natively t))
-
 (use-package nil-mode
   :vc (:url "https://github.com/gs-101/nil-mode")
   :ensure t)
@@ -329,20 +336,6 @@ With a ARG prefix argument, copy the buffer to the other window."
   (olivetti-body-width 132)
   :defer t
   :ensure t)
-
-(use-package emacs
-  :init
-  (defun karthinks/sudo-find-file (file)
-    "Open FILE as root."
-    (interactive "FOpen file as root: ")
-    (when (file-writable-p file)
-      (user-error "File is user-writable, aborting sudo"))
-    (find-file (if (file-remote-p file)
-                   (concat "/" (file-remote-p file 'method) ":"
-                           (file-remote-p file 'user) "@" (file-remote-p file 'host)
-                           "|sudo@root@"
-                           (file-remote-p file 'host) ":" (file-remote-p file 'localname))
-                 (concat "/sudo:root@localhost:" file)))))
 
 (use-package ultra-scroll
   :vc (:url "https://github.com/jdtsmith/ultra-scroll")

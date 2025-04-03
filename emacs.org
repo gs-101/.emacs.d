@@ -519,6 +519,26 @@ This mode provides mail-sending facilities from within Emacs.
     :defer t)
 #+end_src
 
+*** Emacs as a Server
+:PROPERTIES:
+:CREDITS:  https://www.youtube.com/watch?v=nEmRr1j8LR0&t=255s
+:END:
+
+Since I'll move to Guix, I decided to dump the SystemD control over my Emacs instance and just use the regular server.
+
+#+begin_src emacs-lisp
+  (use-package server
+    :demand t
+    :ensure nil
+    :init
+    (defun positron-solutions/server ()
+      "Start the Emacs server if it's not running."
+      (unless (bound-and-true-p server-process)
+        (server-start)))
+    :init
+    (positron-solutions/server))
+#+end_src
+
 *** Simple
 :PROPERTIES:
 :CREDITS:  1. [[https://codeberg.org/ashton314/emacs-bedrock/src/branch/main/early-init.el][ashton]], 2. [[https://github.com/gopar/.emacs.d/blob/main/README.org#simple][gopar]], 3. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L112][jamescherti]], 4. [[https://github.com/minad/vertico?tab=readme-ov-file#configuration][minad]], 5. [[https://github.com/oantolin/emacs-config/blob/a80c3b6a4c7e0fa87254a0c148fe7f9b2976edd1/init.el#L55][oantolin]], 6. [[https://emacs.dyerdwelling.family/emacs/20241118102423-emacs--copying-buffer-to-kill-ring/][James Dyer]]
@@ -564,7 +584,6 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
     :demand t)
 #+end_src
 
-
 *** Startup
 
 #+begin_src emacs-lisp
@@ -572,6 +591,26 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
     :custom
     (initial-major-mode 'fundamental-mode)
     :defer t)
+#+end_src
+
+*** [[https://karthinks.com/software/fifteen-ways-to-use-embark/#open-a-file-as-root-without-losing-your-session][Sudo Command]]
+
+Like [[https://github.com/nflath/sudo-edit][sudo-edit]], but just a single, non-packaged command.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :init
+    (defun karthinks/sudo-find-file (file)
+      "Open FILE as root."
+      (interactive "FOpen file as root: ")
+      (when (file-writable-p file)
+        (user-error "File is user-writable, aborting sudo"))
+      (find-file (if (file-remote-p file)
+                     (concat "/" (file-remote-p file 'method) ":"
+                             (file-remote-p file 'user) "@" (file-remote-p file 'host)
+                             "|sudo@root@"
+                             (file-remote-p file 'host) ":" (file-remote-p file 'localname))
+                   (concat "/sudo:root@localhost:" file)))))
 #+end_src
 
 *** Transient
@@ -697,41 +736,6 @@ Transient interface for managing and interacting with projects.
     :ensure t)
 #+end_src
 
-*** Emacs as a Server
-:PROPERTIES:
-:CREDITS:  https://www.youtube.com/watch?v=nEmRr1j8LR0&t=255s
-:END:
-
-Since I'll move to Guix, I decided to dump the SystemD control over my Emacs instance and just use the regular server.
-
-#+begin_src emacs-lisp
-  (use-package server
-    :demand t
-    :ensure nil
-    :init
-    (defun positron-solutions/server ()
-      "Start the Emacs server if it's not running."
-      (unless (bound-and-true-p server-process)
-        (server-start)))
-    :init
-    (positron-solutions/server))
-#+end_src
-
-*** [[https://github.com/jrblevin/markdown-mode][Markdown]]
-
-#+begin_quote
-Emacs Markdown Mode.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package markdown-mode
-    :vc (:url "https://github.com/jrblevin/markdown-mode")
-    :defer t
-    :ensure t
-    :custom
-    (markdown-fontify-code-blocks-natively t))
-#+end_src
-
 *** [[https://github.com/gs-101/nil-mode][nil-mode]]
 
 #+begin_quote
@@ -813,26 +817,6 @@ Minor mode to automatically balance window margins.
     (olivetti-body-width 132)
     :defer t
     :ensure t)
-#+end_src
-
-*** [[https://karthinks.com/software/fifteen-ways-to-use-embark/#open-a-file-as-root-without-losing-your-session][Sudo Command]]
-
-Like [[https://github.com/nflath/sudo-edit][sudo-edit]], but just a single, non-packaged command.
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :init
-    (defun karthinks/sudo-find-file (file)
-      "Open FILE as root."
-      (interactive "FOpen file as root: ")
-      (when (file-writable-p file)
-        (user-error "File is user-writable, aborting sudo"))
-      (find-file (if (file-remote-p file)
-                     (concat "/" (file-remote-p file 'method) ":"
-                             (file-remote-p file 'user) "@" (file-remote-p file 'host)
-                             "|sudo@root@"
-                             (file-remote-p file 'host) ":" (file-remote-p file 'localname))
-                   (concat "/sudo:root@localhost:" file)))))
 #+end_src
 
 *** [[https://github.com/jdtsmith/ultra-scroll][ultra-scroll]]
