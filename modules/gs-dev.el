@@ -620,7 +620,6 @@ With negative arugment, capitalize previous words but do not move."
         ("M-h" . puni-expand-region)
         ("M-H" . puni-contract-region)
         ([remap mark-sexp] . puni-mark-sexp-at-point)
-        ("M-k" . Gavinok/puni-kill-thing-at-point)
         ([remap transpose-sexps] . puni-transpose)
         ([remap kill-word] . gs-101/puni-forward-kill-symbol)
         ([remap backward-kill-word] . gs-101/puni-backward-kill-symbol)
@@ -630,12 +629,6 @@ With negative arugment, capitalize previous words but do not move."
         ("C-{" . puni-barf-backward))
   :defer t
   :config
-  (defun Gavinok/puni-kill-thing-at-point (&optional arg)
-    "Kill the next puni based thing at point."
-    (interactive)
-    (unless buffer-read-only
-      (puni-expand-region)
-      (kill-region (region-beginning) (region-end))))
   (advice-add #'puni-kill-active-region :override
               (defun AmaiKinono/puni-kill-active-region ()
                 "Kill active region.
