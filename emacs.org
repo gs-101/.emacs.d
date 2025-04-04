@@ -2789,6 +2789,13 @@ tree-sitter support for Go.
     :defer t)
 #+end_src
 
+*** [[https://codeberg.org/pranshu/haskell-ts-mode][Haskell]]
+
+#+begin_src emacs-lisp
+  (use-package hasktell-ts-mode
+    :vc (:url "https://codeberg.org/pranshu/haskell-ts-mode"))
+#+end_src
+
 *** [[https://github.com/Nathan-Melaku/hyprlang-ts-mode][Hyprlang]]
 
 #+begin_quote

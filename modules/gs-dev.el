@@ -226,6 +226,9 @@ Only runs if a `flutter' buffer already exits."
         ("C-c m t ." . go-ts-mode-test-this-function-at-point))
   :defer t)
 
+(use-package hasktell-ts-mode
+  :vc (:url "https://codeberg.org/pranshu/haskell-ts-mode"))
+
 (use-package hyprlang-ts-mode
   :vc (:url "https://github.com/Nathan-Melaku/hyprlang-ts-mode")
   :ensure t)
