@@ -19,19 +19,7 @@
 
 (use-package citar-embark
   :after embark
-  :custom
-  (citar-at-point-function #'embark-act)
-  :hook
-  (text-mode . citar-embark-mode))
-
-(use-package citar-embark
-  :after citar-embark
   :config
-  (setf (alist-get
-         'key-at-point
-         (alist-get '(org-mode) citar-major-mode-functions nil nil #'equal))
-        #'bdarcus/citar-org-key-at-point)
-
   (defun bdarcus/citar-org-key-at-point ()
     "Return citekey at point, when in org property drawer.
 
@@ -42,7 +30,17 @@ Citekey must be formatted as `@key'."
           (cons (substring (match-string 0) 2)
                 (cons (match-beginning 0)
                       (match-end 0))))))
-  (add-to-list 'embark-keymap-alist '(bib-reference . citar-map)))
+
+  (setf (alist-get
+         'key-at-point
+         (alist-get '(org-mode) citar-major-mode-functions nil nil #'equal))
+        #'bdarcus/citar-org-key-at-point)
+
+  (add-to-list 'embark-keymap-alist '(bib-reference . citar-map))
+  :custom
+  (citar-at-point-function #'embark-act)
+  :hook
+  (text-mode . citar-embark-mode))
 
 (use-package oc
   :bind
