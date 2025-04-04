@@ -164,28 +164,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (set-face-attribute 'helpful-heading nil :height 1.5)
   :ensure t)
 
-(use-package hl-todo
-  :vc (:url "https://github.com/tarsius/hl-todo")
-  :custom
-  (hl-todo-keyword-faces '(("FIXME" . flymake-error-echo)
-                           ("NOTE" . flymake-warning-echo)
-                           ("QUESTION" . flymake-warning-echo)
-                           ("ANSWER" . flymake-note-echo)
-                           ("FIX" . flymake-error-echo)
-                           ("FEAT" . flymake-warning-echo)
-                           ("DOCS" . flymake-note-echo)
-                           ("HACK" . flymake-note-echo)
-                           ("STYLE" . flymake-note-echo)
-                           ("REFACTOR" . flymake-note-echo)
-                           ("REVIEW" . flymake-note-echo)
-                           ("CHORE" . flymake-note-echo)
-                           ("MERGED" . flymake-note-echo)
-                           ("CLOSED" . flymake-error-echo)))
-  :ensure t
-  :hook
-  (prog-mode . hl-todo-mode)
-  (text-mode . hl-todo-mode))
-
 (use-package keycast
   :vc (:url "https://github.com/tarsius/keycast")
   :config
