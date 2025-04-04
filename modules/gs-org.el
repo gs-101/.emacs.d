@@ -21,24 +21,16 @@
 
 (use-package org
   :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages '((C . t)
-                               (clojure . t)
-                               (css . t)
-                               (emacs-lisp . t)
-                               (java . t)
-                               (js . t)
-                               (latex . t)
-                               (python . t)
-                               (scheme . t)
-                               (shell . t)
-                               (sql . t)
-                               (sqlite . t))
-   (push '("conf-unix" . conf-unix) org-src-lang-modes)
-   (nconc org-babel-default-header-args:java '((:dir . nil)
-                                               (:results . "output")))
+  (gs-101/add-many-to-list 'org-babel-load-languages '((C . t)
+                                                       (clojure . t)
+                                                       (js . t)
+                                                       (latex . t)
+                                                       (python . t)
+                                                       (scheme . t)
+                                                       (sql . t)
+                                                       (sqlite . t)))
    :custom
-   (org-export-babel-evaluate nil)))
+   (org-export-babel-evaluate nil))
 
 (use-package ob-csharp
   :vc (:url "https://github.com/samwdp/ob-csharp")
