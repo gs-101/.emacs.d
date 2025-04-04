@@ -2250,7 +2250,6 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 
 #+begin_src emacs-lisp
   (use-package citar
-    :vc (:url "https://github.com/emacs-citar/citar")
     :custom
     (citar-bibliography "~/Documents/bibliography.bib")
     (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")
@@ -2292,6 +2291,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     (add-to-list 'embark-keymap-alist '(bib-reference . citar-map))
     :custom
     (citar-at-point-function #'embark-act)
+    :ensure t
     :hook
     (text-mode . citar-embark-mode))
 #+end_src
