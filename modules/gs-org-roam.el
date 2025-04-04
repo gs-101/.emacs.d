@@ -1,19 +1,41 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package org-roam
-  :bind
-  ("C-z r f" . org-roam-node-find)
-  (:map org-mode-map
-        ("C-z r i" . org-roam-node-insert))
   :custom
-  (org-roam-completion-everywhere t)
   (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/org-roam/")))
   :demand t
-  :ensure t
-  :init
-  (org-roam-db-autosync-mode))
+  :ensure t)
 
-(use-package org-roam
+(use-package org-roam-dailies
+  :after org-roam-dailies
+  :custom
+  (org-roam-dailies-capture-templates '(("d" "default" entry
+                                         "* %?"
+                                         :if-new (file+head ,dw/daily-note-filename
+                                                            ,dw/daily-note-header))
+                                        ("t" "task" entry
+                                         "* TODO %?\n  %U\n  %a\n  %i"
+                                         :if-new (file+head+olp ,dw/daily-note-filename
+                                                                ,dw/daily-note-header
+                                                                ("Tasks"))
+                                         :empty-lines 1)
+                                        ("l" "log entry" entry
+                                         "* %<%I:%M %p> - %?"
+                                         :if-new (file+head+olp ,dw/daily-note-filename
+                                                                ,dw/daily-note-header
+                                                                ("Log")))
+                                        ("j" "journal" entry
+                                         "* %<%I:%M %p> - Journal  :journal:\n\n%?\n\n"
+                                         :if-new (file+head+olp ,dw/daily-note-filename
+                                                                ,dw/daily-note-header
+                                                                ("Log")))
+                                        ("m" "meeting" entry
+                                         "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
+                                         :if-new (file+head+olp ,dw/daily-note-filename
+                                                                ,dw/daily-note-header
+                                                                ("Log"))))))
+
+(use-package org-roam-capture
   :custom
   (org-roam-capture-templates '(("d" "default" plain
                                  (file "~/Documents/org-roam/templates/default.org")
@@ -52,34 +74,16 @@
   (dw/daily-note-filename "%<%Y-%m-%d>.org")
   (dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n"))
 
-(use-package org-roam-dailies
-  :after org-roam-dailies
+(use-package org-roam-db
+  :init
+  (org-roam-db-autosync-mode))
+
+(use-package org-roam-node
+  :bind
+  ("C-z r f" . org-roam-node-find)
+  ("C-z r i" . org-roam-node-insert)
   :custom
-  (org-roam-dailies-capture-templates '(("d" "default" entry
-                                         "* %?"
-                                         :if-new (file+head ,dw/daily-note-filename
-                                                            ,dw/daily-note-header))
-                                        ("t" "task" entry
-                                         "* TODO %?\n  %U\n  %a\n  %i"
-                                         :if-new (file+head+olp ,dw/daily-note-filename
-                                                                ,dw/daily-note-header
-                                                                ("Tasks"))
-                                         :empty-lines 1)
-                                        ("l" "log entry" entry
-                                         "* %<%I:%M %p> - %?"
-                                         :if-new (file+head+olp ,dw/daily-note-filename
-                                                                ,dw/daily-note-header
-                                                                ("Log")))
-                                        ("j" "journal" entry
-                                         "* %<%I:%M %p> - Journal  :journal:\n\n%?\n\n"
-                                         :if-new (file+head+olp ,dw/daily-note-filename
-                                                                ,dw/daily-note-header
-                                                                ("Log")))
-                                        ("m" "meeting" entry
-                                         "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
-                                         :if-new (file+head+olp ,dw/daily-note-filename
-                                                                ,dw/daily-note-header
-                                                                ("Log"))))))
+  (org-roam-completion-everywhere t))
 
 (use-package org-agenda
   :bind

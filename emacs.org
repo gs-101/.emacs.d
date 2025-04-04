@@ -2059,27 +2059,58 @@ Rudimentary Roam replica with Org-mode.
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-REFACTOR: Separate ~use-package org-roam~ into its different files.
-
 #+begin_src emacs-lisp
   (use-package org-roam
-    :bind
-    ("C-z r f" . org-roam-node-find)
-    (:map org-mode-map
-          ("C-z r i" . org-roam-node-insert))
     :custom
-    (org-roam-completion-everywhere t)
     (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/org-roam/")))
     :demand t
-    :ensure t
-    :init
-    (org-roam-db-autosync-mode))
+    :ensure t)
 #+end_src
 
 ** Capture templates
+:PROPERTIES:
+:CREDITS:  https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L243
+:END:
 
 #+begin_src emacs-lisp
-  (use-package org-roam
+  (use-package org-roam-dailies
+    :after org-roam-dailies
+    :custom
+    (org-roam-dailies-capture-templates '(("d" "default" entry
+                                           "* %?"
+                                           :if-new (file+head ,dw/daily-note-filename
+                                                              ,dw/daily-note-header))
+                                          ("t" "task" entry
+                                           "* TODO %?\n  %U\n  %a\n  %i"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Tasks"))
+                                           :empty-lines 1)
+                                          ("l" "log entry" entry
+                                           "* %<%I:%M %p> - %?"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Log")))
+                                          ("j" "journal" entry
+                                           "* %<%I:%M %p> - Journal  :journal:\n\n%?\n\n"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Log")))
+                                          ("m" "meeting" entry
+                                           "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
+                                           :if-new (file+head+olp ,dw/daily-note-filename
+                                                                  ,dw/daily-note-header
+                                                                  ("Log"))))))
+#+end_src
+
+** Capture
+
+#+begin_quote
+This module provides ~org-capture~ functionality for Org-roam. With this module the user can capture new nodes or capture new content to existing nodes.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package org-roam-capture
     :custom
     (org-roam-capture-templates '(("d" "default" plain
                                    (file "~/Documents/org-roam/templates/default.org")
@@ -2123,40 +2154,31 @@ REFACTOR: Separate ~use-package org-roam~ into its different files.
     (dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n"))
 #+end_src
 
-*** Capture templates
-:PROPERTIES:
-:CREDITS:  https://github.com/daviwil/dotfiles/blob/f5e2ff06e72f2f92ab53c77a98900476274cb3ee/.emacs.d/modules/dw-workflow.el#L243
-:END:
+** Database
+
+#+begin_quote
+This module provides the underlying database API to Org-roam.
+#+end_quote
 
 #+begin_src emacs-lisp
-  (use-package org-roam-dailies
-    :after org-roam-dailies
+  (use-package org-roam-db
+    :init
+    (org-roam-db-autosync-mode))
+#+end_src
+
+** Node
+
+#+begin_quote
+This module is dedicated for Org-roam nodes and its components. It provides standard means to interface with them, both programmatically and interactively.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package org-roam-node
+    :bind
+    ("C-z r f" . org-roam-node-find)
+    ("C-z r i" . org-roam-node-insert)
     :custom
-    (org-roam-dailies-capture-templates '(("d" "default" entry
-                                           "* %?"
-                                           :if-new (file+head ,dw/daily-note-filename
-                                                              ,dw/daily-note-header))
-                                          ("t" "task" entry
-                                           "* TODO %?\n  %U\n  %a\n  %i"
-                                           :if-new (file+head+olp ,dw/daily-note-filename
-                                                                  ,dw/daily-note-header
-                                                                  ("Tasks"))
-                                           :empty-lines 1)
-                                          ("l" "log entry" entry
-                                           "* %<%I:%M %p> - %?"
-                                           :if-new (file+head+olp ,dw/daily-note-filename
-                                                                  ,dw/daily-note-header
-                                                                  ("Log")))
-                                          ("j" "journal" entry
-                                           "* %<%I:%M %p> - Journal  :journal:\n\n%?\n\n"
-                                           :if-new (file+head+olp ,dw/daily-note-filename
-                                                                  ,dw/daily-note-header
-                                                                  ("Log")))
-                                          ("m" "meeting" entry
-                                           "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
-                                           :if-new (file+head+olp ,dw/daily-note-filename
-                                                                  ,dw/daily-note-header
-                                                                  ("Log"))))))
+    (org-roam-completion-everywhere t))
 #+end_src
 
 ** Roam Agenda
