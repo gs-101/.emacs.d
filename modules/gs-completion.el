@@ -46,6 +46,8 @@
 (use-package cape
   :vc (:url "https://github.com/minad/cape")
   :ensure t
+  :config
+  (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster)
   :hook
   (completion-at-point-functions . cape-dabbrev)
   (completion-at-point-functions . cape-file))
@@ -94,39 +96,6 @@ Also adds `cape-file' as a fallback."
   :vc (:url "https://github.com/gs-101/tempel-snippets")
   :after tempel
   :ensure t)
-
-(use-package corfu
-  :vc (:url "https://github.com/minad/corfu" :lisp-dir "extensions")
-  :bind
-  (:map corfu-map
-        ("M-SPC" . corfu-insert-separator)
-        ("RET" . nil))
-  :config
-  (corfu-history-mode)
-  (corfu-popupinfo-mode)
-  :custom
-  (corfu-auto t)
-  (corfu-auto-delay 0.0)
-  (corfu-auto-prefix 2)
-  (corfu-cycle t)
-  (corfu-popupinfo-delay '(0.5 . 0.2))
-  (corfu-preselect 'directory)
-  :ensure t)
-
-(use-package corfu
-  :after orderless
-  :config
-  (setq-mode-local corfu-mode completion-styles '(minad/orderless-simple)))
-
-(use-package minibuffer
-  :after eglot
-  :custom
-  (completion-category-defaults nil))
-
-(use-package cape
-  :after corfu cape
-  :config
-  (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster))
 
 (use-package vertico
   :vc
