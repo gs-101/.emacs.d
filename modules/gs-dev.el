@@ -508,20 +508,11 @@ With negative arugment, capitalize previous words but do not move."
 
 (use-package combobulate
   :vc (:url "https://github.com/mickeynp/combobulate")
-  :bind
-  (:map combobulate-key-map
-        ([query-replace-regexp] . combobulate-cursor-edit-node-by-text-dwim))
-  :config
-  (defun cxa/activate-combobulate-on-ts-mode ()
-    "Enable `combobulate-mode' in tree-sitter modes."
-    (when (string-match-p "-ts-mode\\'" (symbol-name major-mode))
-      (combobulate-mode)))
   :custom
   (combobulate-key-prefix "C-z t c")
   :ensure t
   :hook
-  (text-mode . cxa/activate-combobulate-on-ts-mode)
-  (prog-mode . cxa/activate-combobulate-on-ts-mode))
+  (prog-mode . combobulate-mode))
 
 (use-package dape
   :vc (:url "https://github.com/svaante/dape")
