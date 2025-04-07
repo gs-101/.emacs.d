@@ -145,13 +145,6 @@ This advice replaces the rocket icon with a electric plug icon."
   :hook
   (eldoc-mode . eldoc-box-hover-mode))
 
-(use-package ef-themes
-  :vc (:url "https://github.com/protesilaos/ef-themes")
-  :when (gs-101/guix-p)
-  :config
-  (load-theme 'ef-maris-dark)
-  :ensure t)
-
 (use-package helpful
   :vc (:url "https://github.com/Wilfred/helpful")
   :bind
@@ -278,6 +271,11 @@ This advice replaces the rocket icon with a electric plug icon."
   :custom
   (markdown-enable-highlighting-syntax t)
   (markdown-hide-markup t))
+
+(use-package modus-themes
+  :when (gs-101/guix-p)
+  :config
+  (load-theme 'modus-vivendi-tinted))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
