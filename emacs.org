@@ -5274,17 +5274,6 @@ Childframe doc for eglot and anything that uses eldoc.
     (eldoc-mode . eldoc-box-hover-mode))
 #+end_src
 
-** [[https://github.com/protesilaos/ef-themes][ef-themes]]
-
-#+begin_src emacs-lisp
-  (use-package ef-themes
-    :vc (:url "https://github.com/protesilaos/ef-themes")
-    :when (gs-101/guix-p)
-    :config
-    (load-theme 'ef-maris-dark)
-    :ensure t)
-#+end_src
-
 ** [[https://github.com/Wilfred/helpful][Helpful]]
 
 #+begin_quote
@@ -5448,6 +5437,15 @@ Display typographical ligatures in Emacs.
     (markdown-hide-markup t))
 #+end_src
 
+
+** Modus Themes
+
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :when (gs-101/guix-p)
+    :config
+    (load-theme 'modus-vivendi-tinted))
+#+end_src
 
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]
 
