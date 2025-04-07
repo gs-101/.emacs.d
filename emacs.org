@@ -2749,6 +2749,15 @@ The Clojure Interactive Development Environment that Rocks for Emacs.
     (clojure-ts-mode . cider-mode))
 #+end_src
 
+*** CSS
+
+#+begin_src emacs-lisp
+  (use-package css-mode
+    :custom
+    ;; It's two everywhere, really.
+    (css-indent-offset 2))
+#+end_src
+
 *** Dart
 
 #+begin_quote
