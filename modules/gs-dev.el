@@ -190,6 +190,11 @@
   :hook
   (clojure-ts-mode . cider-mode))
 
+(use-package css-mode
+  :custom
+  ;; It's two everywhere, really.
+  (css-indent-offset 2))
+
 (use-package dart-ts-mode
   :vc (:url "https://github.com/50ways2sayhard/dart-ts-mode")
   :defer t
