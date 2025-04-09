@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (use-package message
   :custom
   (message-kill-buffer-on-exit t)

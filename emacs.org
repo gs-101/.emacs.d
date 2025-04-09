@@ -4194,6 +4194,10 @@ Easily draw Unicode lines and boxes.
 
 Configuration for different chat clients.
 
+#+begin_src emacs-lisp
+  ;;; -*- lexical-binding: t -*-
+#+end_src
+
 ** Message
 
 #+begin_src emacs-lisp
