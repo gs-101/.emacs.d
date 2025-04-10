@@ -36,6 +36,7 @@
   (enable-recursive-minibuffers t)
   (fast-but-imprecise-scrolling t) ; 3
   (frame-resize-pixelwise t) ; 1
+  (frame-title-format "GNU Emacs")
   (history-delete-duplicates t) ; 5
   (hscroll-margin 2) ; 3
   (hscroll-step 1) ; 3
@@ -43,9 +44,8 @@
   (load-prefer-newer t) ; 2
   ;; Disable the cursor in the minibuffer prompt
   ;; 4
-  (minibuffer-prompt-properties '(cursor-intangible t
-                                  read-only t
-                                  face minibuffer-prompt))
+  (minibuffer-prompt-properties
+   '(cursor-intangible t read-only t face minibuffer-prompt))
   (read-buffer-completion-ignore-case t) ; 4
   (read-process-output-max (* 512 1024)) ; 3
   (resize-mini-windows 'grow-only)
