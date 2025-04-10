@@ -5449,7 +5449,7 @@ Display typographical ligatures in Emacs.
   (use-package custom
     :when (gs-101/guix-p)
     :config
-    (load-theme 'modus-vivendi-tinted))
+    (load-theme 'modus-vivendi))
 #+end_src
 
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]
