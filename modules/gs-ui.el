@@ -180,6 +180,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (gs-101/add-many-to-list 'keycast-substitute-alist
                            '((backward-delete-char-untabify "" "Erasing...")
                              (delete-backward-char "" "Erasing...")
+                             (isearch-printing-char "" "Searching...")
                              (org-delete-backward-char "" "Erasing...")
                              (self-insert-command "" "Typing...")
                              (org-self-insert-command "" "Typing...")
