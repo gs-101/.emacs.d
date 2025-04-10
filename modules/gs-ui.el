@@ -276,7 +276,7 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package custom
   :when (gs-101/guix-p)
   :config
-  (load-theme 'modus-vivendi-tinted))
+  (load-theme 'modus-vivendi))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
