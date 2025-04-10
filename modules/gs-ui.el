@@ -272,7 +272,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (markdown-enable-highlighting-syntax t)
   (markdown-hide-markup t))
 
-(use-package modus-themes
+(use-package custom
   :when (gs-101/guix-p)
   :config
   (load-theme 'modus-vivendi-tinted))

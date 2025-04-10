@@ -5445,7 +5445,7 @@ Display typographical ligatures in Emacs.
 ** Modus Themes
 
 #+begin_src emacs-lisp
-  (use-package modus-themes
+  (use-package custom
     :when (gs-101/guix-p)
     :config
     (load-theme 'modus-vivendi-tinted))
