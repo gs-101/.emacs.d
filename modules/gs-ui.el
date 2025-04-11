@@ -273,10 +273,22 @@ This advice replaces the rocket icon with a electric plug icon."
   (markdown-enable-highlighting-syntax t)
   (markdown-hide-markup t))
 
-(use-package custom
+(use-package modus-themes
   :when (gs-101/guix-p)
-  :config
-  (load-theme 'modus-vivendi))
+  :ensure nil
+  :demand t
+  :custom
+  (modus-themes-bold-constructs t)
+  (modus-themes-italic-constructs t)
+  (modus-themes-mixed-fonts t)
+  (modus-themes-variable-pitch-ui t)
+  (modus-themes-completions
+   '((matches . (semibold))
+     (selection . (extrabold underline))))
+  (modus-themes-headings
+   '((t . (rainbow regular))))
+  :init
+  (load-theme 'modus-vivendi t))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
