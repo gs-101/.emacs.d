@@ -2681,6 +2681,7 @@ Automatic parenthesis pairing.
 #+begin_src emacs-lisp
   (use-package elec-pair
     :hook
+    (minibuffer-mode . electric-pair-local-mode)
     (prog-mode . electric-pair-local-mode))
 #+end_src
 
