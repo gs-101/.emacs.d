@@ -5447,10 +5447,22 @@ Display typographical ligatures in Emacs.
 ** Modus Themes
 
 #+begin_src emacs-lisp
-  (use-package custom
+  (use-package modus-themes
     :when (gs-101/guix-p)
-    :config
-    (load-theme 'modus-vivendi))
+    :ensure nil
+    :demand t
+    :custom
+    (modus-themes-bold-constructs t)
+    (modus-themes-italic-constructs t)
+    (modus-themes-mixed-fonts t)
+    (modus-themes-variable-pitch-ui t)
+    (modus-themes-completions
+     '((matches . (semibold))
+       (selection . (extrabold underline))))
+    (modus-themes-headings
+     '((t . (rainbow regular))))
+    :init
+    (load-theme 'modus-vivendi t))
 #+end_src
 
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]
