@@ -157,6 +157,7 @@
 
 (use-package elec-pair
   :hook
+  (minibuffer-mode . electric-pair-local-mode)
   (prog-mode . electric-pair-local-mode))
 
 (use-package flymake
