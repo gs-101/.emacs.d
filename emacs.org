@@ -5436,6 +5436,10 @@ Display typographical ligatures in Emacs.
        (selection . (extrabold underline))))
     (modus-themes-headings
      '((t . (rainbow regular))))
+    :config
+    (let ((matugen "~/.emacs.d/var/matugen/matugen.el"))
+      (when (file-exists-p matugen)
+        (load-file matugen)))
     :init
     (load-theme 'modus-vivendi t))
 #+end_src
