@@ -147,10 +147,6 @@
   (modify-coding-system-alist 'file "" 'utf-8)
   :defer t)
 
-(use-package mule-util
-  :custom
-  (truncate-string-ellipsis "…"))
-
 (use-package newcomment
   :custom
   (comment-empty-lines t))

@@ -437,18 +437,6 @@ Multilingual Enviroment.
     :defer t)
 #+end_src
 
-**** Util
-
-#+begin_quote
-Utility functions for Multilingual Enviroment.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package mule-util
-    :custom
-    (truncate-string-ellipsis "…"))
-#+end_src
-
 *** New Comment
 
 #+begin_quote
@@ -5075,7 +5063,6 @@ Multi-frame management independent of window systems.
 #+begin_src emacs-lisp
   (use-package org
     :custom
-    (org-ellipsis 'truncate-string-ellipsis)
     (org-fontify-done-headline t)
     (org-fontify-quote-and-verse-blocks t)
     (org-fontify-whole-heading-line t)
@@ -5214,7 +5201,6 @@ A fancy and fast mode-line inspired by minimalism design.
     :custom
     (doom-modeline-buffer-encoding nil)
     (doom-modeline-buffer-file-name-style 'relative-to-project)
-    (doom-modeline-ellipsis 'truncate-string-ellipsis)
     (doom-modeline-enable-word-count t)
     (doom-modeline-modal-modern-icon nil)
     :ensure t
