@@ -4830,27 +4830,7 @@ Interface for display-line-numbers.
     (prog-mode . display-line-numbers-mode))
 #+end_src
 
-** [[https://github.com/daviwil/emacs-from-scratch/blob/master/Emacs.org#font-configuration][Faces]]
-
-#+begin_quote
-Lisp faces.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package faces
-    :when (gs-101/nobara-p)
-    :init
-    (defun dw/set-font-faces ()
-      ;; Set the default face
-      (set-face-attribute 'default nil :font "Cascadia Code NF")
-      ;; Set the fixed pitch face
-      (set-face-attribute 'fixed-pitch nil :font "Cascadia Mono NF")
-      ;; Set the variable pitch face
-      (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
-    (dw/set-font-faces))
-#+end_src
-
-*** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L106][Frame]]
+** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L106][Frame]]
 
 #+begin_quote
 Multi-frame management independent of window systems.

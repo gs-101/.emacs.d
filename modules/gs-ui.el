@@ -17,18 +17,6 @@
   :hook
   (prog-mode . display-line-numbers-mode))
 
-(use-package faces
-  :when (gs-101/nobara-p)
-  :init
-  (defun dw/set-font-faces ()
-    ;; Set the default face
-    (set-face-attribute 'default nil :font "Cascadia Code NF")
-    ;; Set the fixed pitch face
-    (set-face-attribute 'fixed-pitch nil :font "Cascadia Mono NF")
-    ;; Set the variable pitch face
-    (set-face-attribute 'variable-pitch nil :font "Cascadia Code NF" :weight 'regular))
-  (dw/set-font-faces))
-
 (use-package frame
   :config (setq-mode-local doc-view-mode blink-cursor-mode nil)
   :custom
