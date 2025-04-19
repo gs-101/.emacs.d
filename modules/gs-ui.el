@@ -206,8 +206,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (modus-themes-completions
    '((matches . (semibold))
      (selection . (extrabold underline))))
-  (modus-themes-headings
-   '((t . (rainbow regular))))
   :config
   (let ((matugen "~/.emacs.d/var/matugen/matugen.el"))
     (when (file-exists-p matugen)

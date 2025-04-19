@@ -5125,8 +5125,6 @@ Show current command and its key in the mode line.
     (modus-themes-completions
      '((matches . (semibold))
        (selection . (extrabold underline))))
-    (modus-themes-headings
-     '((t . (rainbow regular))))
     :config
     (let ((matugen "~/.emacs.d/var/matugen/matugen.el"))
       (when (file-exists-p matugen)
