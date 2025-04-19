@@ -448,8 +448,6 @@ Only runs if a `flutter' buffer already exits."
         ("M-H" . puni-contract-region)
         ([remap mark-sexp] . puni-mark-sexp-at-point)
         ([remap transpose-sexps] . puni-transpose)
-        ([remap kill-word] . gs-101/puni-forward-kill-symbol)
-        ([remap backward-kill-word] . gs-101/puni-backward-kill-symbol)
         ("C-)" . puni-slurp-forward)
         ("C-(" . puni-slurp-backward)
         ("C-}" . puni-barf-forward)
@@ -470,30 +468,6 @@ rectangular region instead."
                   ;; Fall back to Emacs default behavior which is signaling an error or what
                   ;; `kill-region-dwim' defines (since Emacs 31).
                   (call-interactively #'kill-region))))
-
-  (defun gs-101/puni-backward-kill-symbol (&optional n)
-    "Kill symbol backward while keeping expressions balanced.
-With prefix argument N, kill that many symbols.  Negative argument
-means kill symbols forward."
-    (interactive "p")
-    (setq n (or n 1))
-    (if (< n 0)
-        (gs-101/puni-forward-kill-symbol (- n))
-      (dotimes (_ n)
-        (puni-soft-delete-by-move #'gs-101/backward-symbol nil nil 'kill
-                                  'jump-and-reverse-delete))))
-
-  (defun gs-101/puni-forward-kill-symbol (&optional n)
-    "Kill symbol forward while keeping expressions balanced.
-With prefix argument N, kill that many symbols.  Negative argument
-means kill symbols backward."
-    (interactive "p")
-    (setq n (or n 1))
-    (if (< n 0)
-        (gs-101/puni-backward-kill-symbol (- n))
-      (dotimes (_ n)
-        (puni-soft-delete-by-move #'forward-symbol nil nil 'kill
-                                  'jump-and-reverse-delete))))
   :ensure t
   :hook
   (minibuffer-mode . puni-disable-puni-mode)
