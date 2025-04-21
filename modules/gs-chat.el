@@ -4,7 +4,11 @@
   :custom
   (message-kill-buffer-on-exit t)
   (message-mail-user-agent t)
-  (message-send-mail-function #'smtpmail-send-it)
+  (message-send-mail-function #'smtpmail-send-it))
+
+(use-package smtpmail
+  :custom
+  (smtpmail-local-domain "gabrielsantosdesouza")
   (smtpmail-smtp-service 465)
   (smtpmail-stream-type 'ssl)
   (smtpmail-smtp-server "disroot.org"))
