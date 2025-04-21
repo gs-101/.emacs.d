@@ -3968,7 +3968,15 @@ Configuration for different chat clients.
     :custom
     (message-kill-buffer-on-exit t)
     (message-mail-user-agent t)
-    (message-send-mail-function #'smtpmail-send-it)
+    (message-send-mail-function #'smtpmail-send-it))
+#+end_src
+
+** SMTP
+
+#+begin_src emacs-lisp
+  (use-package smtpmail
+    :custom
+    (smtpmail-local-domain "gabrielsantosdesouza")
     (smtpmail-smtp-service 465)
     (smtpmail-stream-type 'ssl)
     (smtpmail-smtp-server "disroot.org"))
