@@ -70,6 +70,28 @@ Variables used to reference to specific directories, using ~convert-standard-fil
             (add-to-list list item)) many))
 #+end_src
 
+** Useless Code
+
+#+begin_src emacs-lisp
+  (defun gs-101/fizz-buzz (num)
+    "Play the FizzBuzz game from 1 to NUM.
+  This was written from a distraction while reading this:
+  <https://www.theodinproject.com/lessons/foundations-problem-solving#solving-fizz-buzz>
+
+  This is my first time using `cl-loop' for anything."
+    (interactive "n")
+    (cl-loop for n from 1 to num
+             if (and (eq (% n 3) 0) (eq (% n 5) 0))
+             collect "Fizzbuzz" into output
+             if (eq (% n 3) 0)
+             collect "Fizz" into output
+             if (eq (% n 5) 0)
+             collect "Buzz" into output
+             else
+             collect n into output
+             finally return (print output)))
+#+end_src
+
 ** Package Archives
 
 #+begin_src emacs-lisp
