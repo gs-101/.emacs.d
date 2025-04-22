@@ -36,6 +36,24 @@ Without putting them in a separate list."
   (mapc (lambda (item)
           (add-to-list list item)) many))
 
+(defun gs-101/fizz-buzz (num)
+  "Play the FizzBuzz game from 1 to NUM.
+This was written from a distraction while reading this:
+<https://www.theodinproject.com/lessons/foundations-problem-solving#solving-fizz-buzz>
+
+This is my first time using `cl-loop' for anything."
+  (interactive "n")
+  (cl-loop for n from 1 to num
+           if (and (eq (% n 3) 0) (eq (% n 5) 0))
+           collect "Fizzbuzz" into output
+           if (eq (% n 3) 0)
+           collect "Fizz" into output
+           if (eq (% n 5) 0)
+           collect "Buzz" into output
+           else
+           collect n into output
+           finally return (print output)))
+
 (with-eval-after-load 'package
   (gs-101/add-many-to-list
    'package-archives
