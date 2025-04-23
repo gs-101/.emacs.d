@@ -188,12 +188,6 @@ This advice replaces the rocket icon with a electric plug icon."
     (keycast--update))
   (advice-add 'embark-act :before #'oantolin/keycast--update-force))
 
-(use-package markdown-mode
-  :after markdown-mode
-  :custom
-  (markdown-enable-highlighting-syntax t)
-  (markdown-hide-markup t))
-
 (use-package modus-themes
   :when (gs-101/guix-p)
   :ensure nil
