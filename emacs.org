@@ -2744,7 +2744,7 @@ The Clojure Interactive Development Environment that Rocks for Emacs.
     (css-indent-offset 2))
 #+end_src
 
-*** Dart
+*** [[https://github.com/50ways2sayhard/dart-ts-mode][Dart]]
 
 #+begin_quote
 A major mode for Dart programming language with tree-sitter supports.
@@ -2841,6 +2841,15 @@ Lisp editing for Emacs.
     (inferior-lisp-program "sbcl")
     (narrow-to-defun-include-comments t)
     :defer t)
+#+end_src
+
+*** [[https://gitlab.com/bricka/emacs-kotlin-ts-mode][Kotlin]]
+
+#+begin_src emacs-lisp
+  (use-package kotlin-ts-mode
+    :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
+    :defer t
+    :ensure t)
 #+end_src
 
 *** Nix
