@@ -4,7 +4,7 @@
   :custom
   (message-kill-buffer-on-exit t)
   (message-mail-user-agent t)
-  (message-send-mail-function #'smtpmail-send-it))
+  (message-send-mail-function #'message-send-mail-with-sendmail))
 
 (use-package smtpmail
   :custom
