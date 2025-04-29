@@ -285,6 +285,9 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package esh-mode
   :defer t
+  :bind
+  (:map eshell-mode-map
+        ([remap completion-preview-insert] . thanos/eshell-preview-insert))
   :config
   (defun gs-101/eshell-lambda ()
     "This is just the code of the regular eshell prompt, but with a lambda
@@ -315,6 +318,13 @@ instead of $."
                     (propertize "\#" 'face 'default)
                   (propertize (format "\n\nλ %s\n↳" user-login-name) 'face 'nerd-icons-lpurple))))
       (concat "\n" dir separator git-info sign " ")))
+
+  (defun thanos/eshell-preview-insert ()
+    "Alternative version of `completion-preview-insert' that doesn't insert an
+additional space after completion."
+    (interactive)
+    (completion-preview-insert)
+    (delete-char -1))
   :custom
   (eshell-banner-message "")
   (eshell-prompt-function 'gs-101/eshell-lambda))
