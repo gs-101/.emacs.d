@@ -48,6 +48,8 @@
   :ensure t
   :config
   (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster)
+  :custom
+  (cape-file-prefix "/")
   :hook
   (completion-at-point-functions . cape-dabbrev)
   (completion-at-point-functions . cape-file))
