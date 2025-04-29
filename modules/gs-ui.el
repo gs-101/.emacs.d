@@ -125,10 +125,8 @@ This advice replaces the rocket icon with a electric plug icon."
   :vc (:url "https://github.com/casouri/eldoc-box")
   :after eldoc
   :ensure t
-  :config
-  (setq-mode-local typescript-ts-base-mode eldoc-box-buffer-setup-function #'eldoc-box-prettify-ts-errors-setup)
-  (setq-mode-local tsx-ts-mode eldoc-box-buffer-setup-function #'eldoc-box-prettify-ts-errors-setup)
   :hook
+  (eldoc-box-buffer-setup . eldoc-box-prettify-ts-errors)
   (eldoc-mode . eldoc-box-hover-mode))
 
 (use-package helpful
