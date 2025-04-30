@@ -249,8 +249,8 @@ using Helpful."
 (use-package popper
   :vc (:url "https://github.com/karthink/popper")
   :bind
-  ("M-]" . popper-cycle)
-  ("M-[" . popper-toggle)
+  ("C-z <up>" . popper-toggle)
+  ("C-z <down>" . popper-cycle)
   :custom
   (popper-display-control t)
   (popper-reference-buffers '(cider-repl-mode
