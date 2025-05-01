@@ -153,10 +153,10 @@
 
 (use-package paren
   :config
-  (set-face-attribute 'show-paren-match nil
-                      :background 'unspecified
-                      :foreground 'unspecified
-                      :box '(:line-width (-1 . -1)))
+  (custom-set-faces
+   '(show-paren-match ((t :background nil
+                          :foreground nil
+                          :box (:line-width (-1 . -1))))))
   :custom
   (show-paren-delay 0)
   :init

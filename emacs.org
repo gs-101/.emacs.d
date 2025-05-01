@@ -480,10 +480,10 @@ Highlight matching paren.
 #+begin_src emacs-lisp
   (use-package paren
     :config
-    (set-face-attribute 'show-paren-match nil
-                        :background 'unspecified
-                        :foreground 'unspecified
-                        :box '(:line-width (-1 . -1)))
+    (custom-set-faces
+     '(show-paren-match ((t :background nil
+                            :foreground nil
+                            :box (:line-width (-1 . -1))))))
     :custom
     (show-paren-delay 0)
     :init
@@ -5083,7 +5083,7 @@ A better Emacs help buffer.
     ([remap describe-symbol] . helpful-symbol)
     ([remap describe-variable] . helpful-variable)
     :config
-    (set-face-attribute 'helpful-heading nil :height 1.5)
+    (custom-set-faces '(helpful-heading ((t :height 1.5))))
     :ensure t)
 #+end_src
 
@@ -5097,7 +5097,10 @@ Show current command and its key in the mode line.
   (use-package keycast
     :vc (:url "https://github.com/tarsius/keycast")
     :config
-    (set-face-attribute 'keycast-key nil :background 'unspecified :foreground 'unspecified :box 'unspecified)
+    (custom-set-faces
+     '(keycast-key ((t :background nil
+                       :foreground nil
+                       :box nil))))
     :custom
     (echo-keystrokes 0)
     :ensure t
