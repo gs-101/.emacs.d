@@ -138,13 +138,16 @@ This advice replaces the rocket icon with a electric plug icon."
   ([remap describe-symbol] . helpful-symbol)
   ([remap describe-variable] . helpful-variable)
   :config
-  (set-face-attribute 'helpful-heading nil :height 1.5)
+  (custom-set-faces '(helpful-heading ((t :height 1.5))))
   :ensure t)
 
 (use-package keycast
   :vc (:url "https://github.com/tarsius/keycast")
   :config
-  (set-face-attribute 'keycast-key nil :background 'unspecified :foreground 'unspecified :box 'unspecified)
+  (custom-set-faces
+   '(keycast-key ((t :background nil
+                     :foreground nil
+                     :box nil))))
   :custom
   (echo-keystrokes 0)
   :ensure t
