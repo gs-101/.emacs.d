@@ -68,6 +68,10 @@
         compilation-error-regexp-alist-alist)
   (push 'cargo compilation-error-regexp-alist))
 
+(use-package devcontainer
+  :vc (:url "https://github.com/lina-bh/devcontainer.el")
+  :ensure t)
+
 (use-package devdocs
   :vc (:url "https://github.com/astoff/devdocs.el")
   :ensure t
