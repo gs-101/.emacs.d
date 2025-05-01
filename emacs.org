@@ -2480,12 +2480,22 @@ Run compiler as inferior of Emacs, parse error messages.
     (push 'cargo compilation-error-regexp-alist))
 #+end_src
 
+*** [[https://github.com/lina-bh/devcontainer.el][devcontainer.el]]
+
+#+begin_quote
+Adding support for Visual Studio Code-compatible [[https://containers.dev/][devcontainers]] to Emacs.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package devcontainer
+    :vc (:url "https://github.com/lina-bh/devcontainer.el")
+    :ensure t)
+#+end_src
+
 ** [[https://github.com/astoff/devdocs.el][DevDocs]]
 
 #+begin_quote
-
 Emacs viewer for [[https://devdocs.io/][DevDocs]].
-
 #+end_quote
 
 #+begin_src emacs-lisp
