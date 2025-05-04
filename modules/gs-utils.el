@@ -263,6 +263,7 @@ using Helpful."
                               inferior-emacs-lisp-mode
                               inferior-lisp-mode
                               inferior-python-mode
+                              inferior-scheme-mode
                               shell-mode
                               arei-connection-mode
                               "\\*ansi-term\\*"

@@ -2852,6 +2852,16 @@ Lisp editing for Emacs.
     :defer t)
 #+end_src
 
+**** Scheme
+
+#+begin_src emacs-lisp
+  (use-package cmuscheme
+    :bind
+    (:map scheme-mode-map
+          ("C-c C-p" . "run-scheme"))
+    :defer t)
+#+end_src
+
 *** [[https://gitlab.com/bricka/emacs-kotlin-ts-mode][Kotlin]]
 
 #+begin_src emacs-lisp
@@ -3946,6 +3956,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
                                 inferior-emacs-lisp-mode
                                 inferior-lisp-mode
                                 inferior-python-mode
+                                inferior-scheme-mode
                                 shell-mode
                                 arei-connection-mode
                                 "\\*ansi-term\\*"
