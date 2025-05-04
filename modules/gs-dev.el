@@ -253,6 +253,12 @@ Only runs if a `flutter' buffer already exits."
   (narrow-to-defun-include-comments t)
   :defer t)
 
+(use-package cmuscheme
+  :bind
+  (:map scheme-mode-map
+        ("C-c C-p" . "run-scheme"))
+  :defer t)
+
 (use-package kotlin-ts-mode
   :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
   :defer t
