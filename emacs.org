@@ -3437,20 +3437,6 @@ Completion At Point Extensions.
     (emacs-lisp-mode . minad/emacs-lisp-capf))
 #+end_src
 
-** [[https://github.com/isamert/corg.el][Corg]]
-
-#+begin_quote
-Auto complete org-mode headers seamlessly.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package corg
-    :vc (:url "https://github.com/isamert/corg.el")
-    :ensure t
-    :hook
-    (org-mode . corg-setup))
-#+end_src
-
 ** [[https://github.com/minad/tempel][Tempel]]
 
 #+begin_quote

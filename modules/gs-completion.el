@@ -76,12 +76,6 @@ Also adds `cape-file' as a fallback."
   :hook
   (emacs-lisp-mode . minad/emacs-lisp-capf))
 
-(use-package corg
-  :vc (:url "https://github.com/isamert/corg.el")
-  :ensure t
-  :hook
-  (org-mode . corg-setup))
-
 (use-package tempel
   :vc (:url "https://github.com/minad/tempel")
   :bind
