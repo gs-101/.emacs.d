@@ -2488,7 +2488,7 @@ Adding support for Visual Studio Code-compatible [[https://containers.dev/][devc
 
 #+begin_src emacs-lisp
   (use-package devcontainer
-    :vc (:url "https://github.com/lina-bh/devcontainer.el")
+    :vc (:url "https://github.com/johannes-mueller/devcontainer.el")
     :ensure t)
 #+end_src
 

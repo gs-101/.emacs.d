@@ -69,7 +69,7 @@
   (push 'cargo compilation-error-regexp-alist))
 
 (use-package devcontainer
-  :vc (:url "https://github.com/lina-bh/devcontainer.el")
+  :vc (:url "https://github.com/johannes-mueller/devcontainer.el")
   :ensure t)
 
 (use-package devdocs
