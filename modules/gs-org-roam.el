@@ -35,34 +35,6 @@
                                                                 ,dw/daily-note-header
                                                                 ("Log"))))))
 
-(use-package org-roam-capture
-  :custom
-  (org-roam-capture-templates '(("d" "default" plain
-                                 (file "~/Documents/org-roam/templates/default.org")
-                                 :if-new
-                                 (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
-                                 :unnarrowed t)
-                                ("p" "padrão" plain
-                                 (file "~/Documents/org-roam/templates/padrão.org")
-                                 :if-new
-                                 (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n")
-                                 :unnarrowed t)
-                                ("n" "notegpt.io" plain
-                                 (file "~/Documents/org-roam/templates/notegpt.io.org")
-                                 :if-new
-                                 (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :notegpt_io:hacker_news:\n\n")
-                                 :unnarrowed t)
-                                ("r" "redação" plain
-                                 (file "~/Documents/org-roam/templates/redação.org")
-                                 :if-new
-                                 (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :redação:\n\n")
-                                 :unnarrowed t)
-                                ("s" "summarize.ing" plain
-                                 (file "~/Documents/org-roam/templates/summarize.ing.org")
-                                 :if-new
-                                 (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :summarize_ing:\n\n")
-                                 :unnarrowed t))))
-
 (use-package org-roam-dailies
   :bind-keymap
   ("C-z r d" . org-roam-dailies-map)
