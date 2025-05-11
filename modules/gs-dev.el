@@ -287,6 +287,12 @@ Only runs if a `flutter' buffer already exits."
 (use-package envrc
   :vc (:url "https://github.com/purcell/envrc")
   :ensure t
+  :config
+  (defun elfehr/advice-org-latex-preview-restart-envrc (&rest args)
+    "Restart `envrc-global-mode' during Org startup."
+    (if (and org-mode-loading envrc-global-mode)
+        (envrc-mode 1)))
+  (advice-add 'org-latex-preview :before 'elfehr/advice-org-latex-preview-restart-envrc)
   :init
   (envrc-global-mode))
 
