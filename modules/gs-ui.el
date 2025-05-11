@@ -146,8 +146,7 @@ This advice replaces the rocket icon with a electric plug icon."
   :config
   (custom-set-faces
    '(keycast-key ((t :background nil
-                     :foreground nil
-                     :box nil))))
+                     :foreground nil))))
   :custom
   (echo-keystrokes 0)
   :ensure t

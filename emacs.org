@@ -5059,8 +5059,7 @@ Show current command and its key in the mode line.
     :config
     (custom-set-faces
      '(keycast-key ((t :background nil
-                       :foreground nil
-                       :box nil))))
+                       :foreground nil))))
     :custom
     (echo-keystrokes 0)
     :ensure t
