@@ -106,10 +106,15 @@ This advice replaces the rocket icon with a electric plug icon."
                 (if doom-modeline-lsp-icon
                     (doom-modeline-icon 'mdicon "nf-md-connection" "🔌" text :face face)
                   (propertize text 'face face))))
+  :config
+  ;; Enable only when there's a graphical environment available.
+  (when (getenv "DISPLAY")
+    (setopt doom-modeline-icon t))
   :custom
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-buffer-file-name-style 'relative-to-project)
   (doom-modeline-enable-word-count t)
+  (doom-modeline-icon nil)
   (doom-modeline-modal-modern-icon nil)
   :ensure t
   :init
