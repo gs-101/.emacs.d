@@ -3274,9 +3274,22 @@ Emacs plugin for automatic time tracking and metrics generated from your program
     :ensure t
     :init
     (defun gs-101/wakatime-api-key-from-auth ()
-      "Get the Wakatime API key from either auth-source or password-store."
+      "Get the Wakatime API key from either auth-source or secrets."
       (or (auth-source-pick-first-password :host "wakatime.com")
           (secrets-get-attribute "Keepass" "Wakatime" "api-key")))
+
+    (defun gs-101/wakatime--enable-question ()
+      "Let the user give one of the following answers regarding the value of
+  `wakatime-api-key':
+
+  - \"yes\" :: Get it from the system's secret tool
+  - \"from custom.el\" :: Get it from the value already saved in `custom-file'
+  - \"no\" :: Do not get the value"
+      (let ((read-answer-short t))
+        (read-answer "Enable wakatime tracking? "
+                     '(("yes" ?y "Get API key from secrets")
+                       ("from custom.el" ?c "Get API key from custom.el")
+                       ("no" ?n "Do not get a key, disabling wakatime")))))
 
     (defun gs-101/wakatime-enable-prompt ()
       "Prompt if the user wants to enable wakatime tracking.
@@ -3286,11 +3299,15 @@ Emacs plugin for automatic time tracking and metrics generated from your program
   (add-hook \'after-init-hook #\'gs-101/wakatime-enable-prompt)"
       ;; Disable dialog box
       (setq-local use-dialog-box nil)
-      (when (y-or-n-p "Enable wakatime tracking?")
-        (global-wakatime-mode)
-        (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))))
+      (pcase (gs-101/wakatime--enable-question)
+        ("yes"
+         (progn
+           (global-wakatime-mode)
+           (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))))
+        ("yes, from custom.el" (global-wakatime-mode))
+        ("no" (message "Ok, no tracking for you!"))))
 
-    (gs-101/wakatime-enable-prompt))
+    (add-hook 'after-init-hook #'gs-101/wakatime-enable-prompt))
 #+end_src
 
 ** End
