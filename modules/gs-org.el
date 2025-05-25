@@ -167,7 +167,6 @@ allowFullScreen>
   (org-latex-tables-centered nil)
   (org-latex-toc-command "\\tableofcontents \\pagebreak")
   (org-startup-with-latex-preview t)
-  (org-preview-latex-default-process 'dvisvgm) ;; 1
   (org-preview-latex-image-directory (convert-standard-filename (expand-file-name "ltximg/" temporary-file-directory)))
   :config
   (add-to-list 'org-latex-classes '("org-plain-latex"
