@@ -351,6 +351,13 @@ additional space after completion."
                   (push '(":=" . ?) prettify-symbols-alist)
                   (push '("go" . ?󰟓) prettify-symbols-alist))))
 
+(use-package nerd-icons-grep
+  :vc (:url "https://github.com/hron/nerd-icons-grep")
+  :after nerd-icons
+  :ensure t
+  :hook
+  (grep-mode . nerd-icons-grep-mode))
+
 (use-package nerd-icons-ibuffer
   :vc (:url "https://github.com/seagle0128/nerd-icons-ibuffer")
   :after nerd-icons

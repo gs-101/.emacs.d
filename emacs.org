@@ -5344,6 +5344,17 @@ Use a Gopher for walrus operators (~:=~), and the Go logo for goroutines.
                     (push '("go" . ?󰟓) prettify-symbols-alist))))
 #+end_src
 
+*** Grep
+
+#+begin_src emacs-lisp
+  (use-package nerd-icons-grep
+    :vc (:url "https://github.com/hron/nerd-icons-grep")
+    :after nerd-icons
+    :ensure t
+    :hook
+    (grep-mode . nerd-icons-grep-mode))
+#+end_src
+
 *** [[https://github.com/seagle0128/nerd-icons-ibuffer][iBuffer]]
 
 #+begin_src emacs-lisp
