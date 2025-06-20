@@ -240,6 +240,10 @@ using Helpful."
   :hook
   (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 
+(use-package emacs-everywhere
+  :vc (:url "https://github.com/tecosaur/emacs-everywhere")
+  :ensure t)
+
 (use-package p-search
   :vc (:url "https://github.com/zkry/p-search")
   :bind

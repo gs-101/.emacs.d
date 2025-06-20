@@ -3889,6 +3889,16 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 #+end_src
 
+** [[https://github.com/tecosaur/emacs-everywhere][Emacs Everywhere]]
+
+Pop-up an Emacs frame to fill in any text field.
+
+#+begin_src emacs-lisp
+  (use-package emacs-everywhere
+    :vc (:url "https://github.com/tecosaur/emacs-everywhere")
+    :ensure t)
+#+end_src
+
 ** [[https://github.com/zkry/p-search][p-search]]
 
 #+begin_quote
