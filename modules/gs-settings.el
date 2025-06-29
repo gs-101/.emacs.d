@@ -288,6 +288,12 @@ With a ARG prefix argument, copy the buffer to the other window."
         ("p" . disproject-dispatch))
   :ensure t)
 
+(use-package kkp
+  :vc (:url "https://github.com/benotn/kkp")
+  :ensure t
+  :init
+  (global-kkp-mode))
+
 (use-package nil-mode
   :vc (:url "https://github.com/gs-101/nil-mode")
   :ensure t)

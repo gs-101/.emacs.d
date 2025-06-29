@@ -744,6 +744,20 @@ Transient interface for managing and interacting with projects.
     :ensure t)
 #+end_src
 
+*** [[https://github.com/benotn/kkp][kkp]]
+
+#+begin_quote
+Emacs support for the Kitty Keyboard Protocol.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package kkp
+    :vc (:url "https://github.com/benotn/kkp")
+    :ensure t
+    :init
+    (global-kkp-mode))
+#+end_src
+
 *** [[https://github.com/gs-101/nil-mode][nil-mode]]
 
 #+begin_quote
