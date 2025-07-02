@@ -421,32 +421,4 @@ Also disable in Python because I use `prism-whitespace-mode' there."
   :hook
   (prog-mode . gs-101/rainbow-delimiters-maybe))
 
-(use-package posframe
-  :vc (:url "https://github.com/tumashu/posframe")
-  :ensure t)
-
-(use-package posframe
-  :after transient
-  :custom
-  (transient-display-buffer-action
-   (list
-    (lambda (buffer _)
-      (posframe-show
-       buffer
-       :poshandler #'posframe-poshandler-frame-center
-       :min-width transient-minimal-frame-width ; Use the same minimal width as transient, to avoid weird resizing
-       :lines-truncate t ; Truncate lines instead of wrapping them
-       :internal-border-color (transient--prefix-color) ; Use transient colors to indicate that the current frame is a transient
-       :internal-border-width 1)
-      (get-buffer-window transient--buffer t)))))
-
-(use-package vertico-posframe
-  :vc (:url "https://github.com/tumashu/vertico-posframe")
-  :after vertico
-  :ensure t
-  :custom
-  (vertico-posframe-border-width 1)
-  :config
-  (vertico-posframe-mode))
-
 (provide 'gs-ui)
