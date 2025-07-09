@@ -154,8 +154,8 @@
 (use-package paren
   :config
   (custom-set-faces
-   '(show-paren-match ((t :background nil
-                          :foreground nil
+   '(show-paren-match ((t :background unspecified
+                          :foreground unspecified
                           :box (:line-width (-1 . -1))))))
   :custom
   (show-paren-delay 0)
