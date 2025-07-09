@@ -115,15 +115,9 @@ Also adds `cape-file' as a fallback."
 (use-package vertico-multiform
   :after vertico
   :config
-  (defun minad/sort-directories-first (files)
-    "Sort FILES by directories first, but still maintain the history,
-length and alphabetical sorting. Hidden directories have a higher priority."
-    (setq files (vertico-sort-history-length-alpha files))
-    (nconc (seq-filter (lambda (x) (string-suffix-p "/" x)) files)
-           (seq-remove (lambda (x) (string-suffix-p "/" x)) files)))
   :custom
   (vertico-multiform-categories '((symbol (vertico-sort-function . vertico-sort-alpha))
-                                  (file (vertico-sort-function . minad/sort-directories-first)))))
+                                  (file (vertico-sort-function . vertico-sort-directories-first)))))
 
 (use-package marginalia
   :vc (:url "https://github.com/minad/marginalia")
