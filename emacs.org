@@ -1472,6 +1472,23 @@ A collection of opinionated keyboard-driven user interfaces for various built-in
     ("M-o" . casual-editkit-main-tmenu))
 #+end_src
 
+*** Help
+
+#+begin_src emacs-lisp
+  (use-package casual-help
+    :bind
+    (:map help-mode-map
+          ("M-o" . casual-help-tmenu)
+          ("p" . casual-lib-browse-backward-paragraph)
+          ("n" . casual-lib-browse-forward-paragraph)
+          ("M-[" . help-go-back)
+          ("M-]" . help-go-forward)
+          ("P" . help-goto-previous-page)
+          ("N" . help-goto-next-page)
+          ("j" . forward-button)
+          ("k" . backward-button)))
+#+end_src
+
 *** iBuffer
 
 #+begin_src emacs-lisp

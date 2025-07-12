@@ -242,6 +242,19 @@ Otherwise, it calls `switch-to-minibuffer'."
   :bind
   ("M-o" . casual-editkit-main-tmenu))
 
+(use-package casual-help
+  :bind
+  (:map help-mode-map
+        ("M-o" . casual-help-tmenu)
+        ("p" . casual-lib-browse-backward-paragraph)
+        ("n" . casual-lib-browse-forward-paragraph)
+        ("M-[" . help-go-back)
+        ("M-]" . help-go-forward)
+        ("P" . help-goto-previous-page)
+        ("N" . help-goto-next-page)
+        ("j" . forward-button)
+        ("k" . backward-button)))
+
 (use-package casual-ibuffer
   :bind
   (:map ibuffer-mode-map
