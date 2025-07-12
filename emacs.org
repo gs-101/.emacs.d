@@ -5,37 +5,8 @@
 :header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./early-init.el
 :END:
 
-** Native and byte compilation
-:PROPERTIES:
-:CREDITS:  https://github.com/jamescherti/minimal-emacs.d/blob/9fdfca3265246341ab63fe790b99bd4a2f3cca6d/early-init.el#L217
-:END:
-
-If Emacs is built with native compilation support, activate it¹, if not, disable it².
-
 #+begin_src emacs-lisp
   ;;; -*- lexical-binding: t -*-
-#+end_src
-
-#+begin_src emacs-lisp
-  ;; 1
-  (if (and (featurep #'native-compile)
-           (fboundp #'native-comp-available-p)
-           (native-comp-available-p))
-      (setq native-comp-jit-compilation t
-            package-native-compile t)
-    ;; 2
-    (setq features (delq #'native-compile features)))
-#+end_src
-
-** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#native-compilation-cache][Native Compilation Cache]]
-
-Moves the Native Compilation Cache folder out of the Emacs base folder.
-
-#+begin_src emacs-lisp
-  (when (fboundp #'startup-redirect-eln-cache)
-    (startup-redirect-eln-cache
-     (convert-standard-filename
-      (expand-file-name  "var/eln-cache/" user-emacs-directory))))
 #+end_src
 
 ** Directory Variables
