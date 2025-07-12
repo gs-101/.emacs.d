@@ -1551,6 +1551,23 @@ A collection of opinionated keyboard-driven user interfaces for various built-in
           ("M-o" . casual-make-tmenu)))
 #+end_src
 
+*** Man
+
+#+begin_src emacs-lisp
+  (use-package casual-man
+    :bind
+    (:map Man-mode-map
+          ("n" . casual-lib-browse-forward-paragraph)
+          ("p" . casual-lib-browse-backward-paragraph)
+          ("o" . casual-man-occur-options)
+          ("M-o" . casual-man-tmenu)
+          ("K" . Man-kill)
+          ("[" . Man-previous-section)
+          ("]" . Man-next-section)
+          ("n" . next-line)
+          ("p" . previous-line)))
+#+end_src
+
 *** RE-Builder
 
 #+begin_src emacs-lisp

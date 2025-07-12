@@ -297,6 +297,19 @@ Otherwise, it calls `switch-to-minibuffer'."
   (:map makefile-mode-map
         ("M-o" . casual-make-tmenu)))
 
+(use-package casual-man
+  :bind
+  (:map Man-mode-map
+        ("n" . casual-lib-browse-forward-paragraph)
+        ("p" . casual-lib-browse-backward-paragraph)
+        ("o" . casual-man-occur-options)
+        ("M-o" . casual-man-tmenu)
+        ("K" . Man-kill)
+        ("[" . Man-previous-section)
+        ("]" . Man-next-section)
+        ("n" . next-line)
+        ("p" . previous-line)))
+
 (use-package casual-re-builder
   :bind
   (:map reb-mode-map
