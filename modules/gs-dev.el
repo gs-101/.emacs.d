@@ -246,6 +246,7 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package lisp
   :bind
+  ("C-c d" . delete-pair)
   (:map lisp-mode-map
         ("C-c C-p" . run-lisp))
   :custom

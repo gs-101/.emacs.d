@@ -2825,6 +2825,7 @@ Lisp editing for Emacs.
 #+begin_src emacs-lisp
   (use-package lisp
     :bind
+    ("C-c d" . delete-pair)
     (:map lisp-mode-map
           ("C-c C-p" . run-lisp))
     :custom
