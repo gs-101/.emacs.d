@@ -3903,13 +3903,13 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 #+end_src
 
-** [[https://github.com/tecosaur/emacs-everywhere][Emacs Everywhere]]
+** [[https://codeberg.org/tusharhero/tinee][tinee]]
 
 Pop-up an Emacs frame to fill in any text field.
 
 #+begin_src emacs-lisp
-  (use-package emacs-everywhere
-    :vc (:url "https://github.com/tecosaur/emacs-everywhere")
+  (use-package tinee
+    :vc (:url "https://codeberg.org/tusharhero/tinee")
     :ensure t)
 #+end_src
 
