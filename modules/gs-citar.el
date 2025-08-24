@@ -67,9 +67,9 @@ Citekey must be formatted as `@key'."
   (citar-org-roam-mode)
   (add-to-list 'org-roam-capture-templates
                '("b" "bibliographic" plain
-                 (file "~/Documents/org-roam/templates/default.org")
-                 :if-new
-                 (file+head "%<%Y%m%d%H%M%S>-${citar-citekey}.org" "#+title: ${title}\n\n")
+                 "%?"
+                 :target
+                 (file+head "%<%Y%m%d%H%M%S>-${citar-citekey}.org" "#+title: ${title}\n")
                  :unnarrowed t))
   :custom
   (citar-org-roam-capture-template-key "b")
