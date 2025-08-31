@@ -94,11 +94,6 @@ using Helpful."
 
   (setf (alist-get ?H avy-dispatch-alist) #'karthinks/avy-action-helpful))
 
-(use-package casual-avy
-  :bind
-  ("M-g A" . casual-avy-tmenu)
-  :ensure t)
-
 (use-package consult
   :vc (:url "https://github.com/minad/consult")
   :bind
