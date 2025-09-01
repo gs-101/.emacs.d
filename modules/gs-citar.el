@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package citar
-  :vc (:url "https://github.com/emacs-citar/citar")
   :custom
   (citar-bibliography "~/Documents/bibliography.bib")
   (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")
@@ -17,7 +16,7 @@
   (org-mode . citar-capf-setup)
   :ensure t)
 
-(use-package citar
+(use-package citar-embark
   :after embark
   :config
   (defun bdarcus/citar-org-key-at-point ()
@@ -40,7 +39,8 @@ Citekey must be formatted as `@key'."
   :custom
   (citar-at-point-function #'embark-act)
   :hook
-  (text-mode . citar-embark-mode))
+  (text-mode . citar-embark-mode)
+  :ensure t)
 
 (use-package oc
   :bind
