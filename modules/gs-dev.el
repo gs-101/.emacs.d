@@ -516,7 +516,6 @@ rectangular region instead."
     (let ((read-answer-short t))
       (read-answer "Enable wakatime tracking? "
                    '(("yes" ?y "Get API key from secrets")
-                     ("from custom.el" ?c "Get API key from custom.el")
                      ("no" ?n "Do not get a key, disabling wakatime")))))
 
   (defun gs-101/wakatime-enable-prompt ()
@@ -527,13 +526,13 @@ Better asked on startup with an init hook:
 (add-hook \'after-init-hook #\'gs-101/wakatime-enable-prompt)"
     ;; Disable dialog box
     (setq-local use-dialog-box nil)
-    (pcase (gs-101/wakatime--enable-question)
-      ("yes"
-       (progn
-         (global-wakatime-mode)
-         (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))))
-      ("yes, from custom.el" (global-wakatime-mode))
-      ("no" (message "Ok, no tracking for you!"))))
+    (unless wakatime-api-key
+      (pcase (gs-101/wakatime--enable-question)
+        ("yes"
+         (progn
+           (global-wakatime-mode)
+           (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))))
+        ("no" (message "Ok, no tracking for you!")))))
 
   (add-hook 'after-init-hook #'gs-101/wakatime-enable-prompt))
 
