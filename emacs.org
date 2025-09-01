@@ -2046,6 +2046,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 
 #+begin_src emacs-lisp
   (use-package citar
+    :vc (:url "https://github.com/emacs-citar/citar")
     :custom
     (citar-bibliography "~/Documents/bibliography.bib")
     (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")
@@ -2065,7 +2066,7 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 ** [[https://github.com/emacs-citar/citar?tab=readme-ov-file#embark][Embark]]
 
 #+begin_src emacs-lisp
-  (use-package citar-embark
+  (use-package citar
     :after embark
     :config
     (defun bdarcus/citar-org-key-at-point ()
@@ -2087,7 +2088,6 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     (add-to-list 'embark-keymap-alist '(bib-reference . citar-map))
     :custom
     (citar-at-point-function #'embark-act)
-    :ensure t
     :hook
     (text-mode . citar-embark-mode))
 #+end_src
@@ -3638,7 +3638,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 #+begin_src emacs-lisp
   (use-package embark
-    :vc (:url "https://github.com/oantolin/embark")
+    :vc (:url "https://github.com/gs-101/embark")
     :bind
     ([remap describe-bindings]. embark-bindings)
     ("C-;" . embark-act)
