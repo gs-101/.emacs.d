@@ -406,7 +406,6 @@ Only runs if a `flutter' buffer already exits."
   :ensure t)
 
 (use-package magit
-  :vc (:url "https://github.com/magit/magit")
   :bind
   ("C-c v B" . magit-blame)
   ("C-c v C" . magit-clone)
@@ -430,19 +429,7 @@ Only runs if a `flutter' buffer already exits."
   (magit-process-find-password-functions . magit-process-password-auth-source))
 
 (use-package forge
-  :vc (:url "https://github.com/magit/forge")
   :after magit
-  :bind
-  ("C-c v '" . forge-dispatch)
-  ("C-c v c i" . forge-create-issue)
-  ("C-c v c p" . forge-create-pullreq)
-  ("C-c v f c" . forge-browse-commit)
-  ("C-c v f i" . forge-browse-issue)
-  ("C-c v f p" . forge-browse-pullreq)
-  ("C-c v l i" . forge-list-issues)
-  ("C-c v l n" . forge-list-notifications)
-  ("C-c v l p" . forge-list-pullreqs)
-  ("C-c v l r" . forge-list-repositories)
   :ensure t)
 
 (use-package orgit
