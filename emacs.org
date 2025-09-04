@@ -1805,51 +1805,6 @@ Additional functionality for Org Mode exporters.
     (ox-extras-activate '(latex-header-blocks ignore-headlines)))
 #+end_src
 
-** [[https://github.com/nobiot/org-remark][Remark]]
-
-#+begin_quote
-Highlight & annotate text, EWW, Info, and EPUB.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package org-remark
-    :vc (:url "https://github.com/nobiot/org-remark")
-    :bind
-    (:map org-remark-mode-map
-          ("C-z M m" . org-remark-mark)
-          ("C-z M o" . org-remark-open)
-          ("C-z M n" . org-remark-view-next)
-          ("C-z M p" . org-remark-view-prev)
-          ("C-z M DEL" . org-remark-delete))
-    :ensure t
-    :config
-    (org-remark-global-tracking-mode))
-#+end_src
-
-*** EWW
-
-#+begin_src emacs-lisp
-  (use-package org-remark-eww
-    :hook
-    (eww-mode . org-remark-eww-mode))
-#+end_src
-
-*** Info
-
-#+begin_src emacs-lisp
-  (use-package org-remark-info
-    :hook
-    (info-mode . org-remark-info-mode))
-#+end_src
-
-*** nov.el
-
-#+begin_src emacs-lisp
-  (use-package org-remark
-    :hook
-    (nov-mode . org-remark-nov-mode))
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp
@@ -2178,7 +2133,7 @@ Source code examples in Org.
     :config
     (gs-101/add-many-to-list 'org-src-lang-modes
                              '(("bash" . bash-ts)
-                               ("C" . c-ts)
+                               ("c" . c-ts)
                                ("clojure" . clojure-ts)
                                ("cmake" . cmake-ts)
                                ("csharp" . csharp-ts)

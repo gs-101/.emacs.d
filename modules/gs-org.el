@@ -265,29 +265,4 @@ allowFullScreen>
   ;; Use the :ignore: tag to export content without the heading
   (ox-extras-activate '(latex-header-blocks ignore-headlines)))
 
-(use-package org-remark
-  :vc (:url "https://github.com/nobiot/org-remark")
-  :bind
-  (:map org-remark-mode-map
-        ("C-z M m" . org-remark-mark)
-        ("C-z M o" . org-remark-open)
-        ("C-z M n" . org-remark-view-next)
-        ("C-z M p" . org-remark-view-prev)
-        ("C-z M DEL" . org-remark-delete))
-  :ensure t
-  :config
-  (org-remark-global-tracking-mode))
-
-(use-package org-remark-eww
-  :hook
-  (eww-mode . org-remark-eww-mode))
-
-(use-package org-remark-info
-  :hook
-  (info-mode . org-remark-info-mode))
-
-(use-package org-remark
-  :hook
-  (nov-mode . org-remark-nov-mode))
-
 (provide 'gs-org)

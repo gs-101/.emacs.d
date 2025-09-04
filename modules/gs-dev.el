@@ -8,7 +8,7 @@
   :config
   (gs-101/add-many-to-list 'org-src-lang-modes
                            '(("bash" . bash-ts)
-                             ("C" . c-ts)
+                             ("c" . c-ts)
                              ("clojure" . clojure-ts)
                              ("cmake" . cmake-ts)
                              ("csharp" . csharp-ts)
