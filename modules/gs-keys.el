@@ -93,6 +93,7 @@ ARG is used for `eval-last-sexp'."
 
 (use-package files
   :bind
+  ("<f5>" . revert-buffer)
   ("C-c f r" . recover-this-file)
   ("C-c b r" . revert-buffer)
   ("C-c q r" . restart-emacs)
