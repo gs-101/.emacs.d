@@ -3675,8 +3675,9 @@ Emacs minor-mode to summon and dismiss buffers easily.
   (use-package popper
     :vc (:url "https://github.com/karthink/popper")
     :bind
-    ("C-z <up>" . popper-toggle)
-    ("C-z <down>" . popper-cycle)
+    ("C-z <prior>" . popper-toggle)
+    ("C-z <next>" . popper-cycle)
+    ("C-z <home>" . popper-toggle-type)
     :custom
     (popper-display-control t)
     (popper-reference-buffers '(cider-repl-mode
