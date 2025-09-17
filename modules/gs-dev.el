@@ -9,6 +9,7 @@
   (gs-101/add-many-to-list 'org-src-lang-modes
                            '(("bash" . bash-ts)
                              ("c" . c-ts)
+                             ("c++" . c++-ts)
                              ("clojure" . clojure-ts)
                              ("cmake" . cmake-ts)
                              ("csharp" . csharp-ts)
@@ -25,6 +26,7 @@
                              ("ruby" . ruby-ts)
                              ("rust" . rust-ts)
                              ("toml" . toml-ts)
+                             ("typescript" . typescript-ts)
                              ("yaml" . yaml-ts))))
 
 (use-package treesit-auto
