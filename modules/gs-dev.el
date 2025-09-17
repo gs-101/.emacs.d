@@ -68,6 +68,10 @@
         compilation-error-regexp-alist-alist)
   (push 'cargo compilation-error-regexp-alist))
 
+(use-package rmsbolt
+  :vc (:url "https://gitlab.com/jgkamat/rmsbolt")
+  :ensure t)
+
 (use-package devcontainer
   :vc (:url "https://github.com/johannes-mueller/devcontainer.el")
   :ensure t)

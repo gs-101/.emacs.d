@@ -2225,6 +2225,18 @@ Run compiler as inferior of Emacs, parse error messages.
     (push 'cargo compilation-error-regexp-alist))
 #+end_src
 
+**** [[https://gitlab.com/jgkamat/rmsbolt][rmsbolt]]
+
+#+begin_quote
+A supercharged [[https://godbolt.org/][godbolt]] embedded in Emacs.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package rmsbolt
+    :vc (:url "https://gitlab.com/jgkamat/rmsbolt")
+    :ensure t)
+#+end_src
+
 *** [[https://github.com/lina-bh/devcontainer.el][devcontainer.el]]
 
 #+begin_quote
