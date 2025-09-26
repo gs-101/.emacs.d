@@ -35,8 +35,7 @@
   (dired-listing-switches "-agho --group-directories-first") ;;1
   (dired-maybe-use-globstar t)
   (dired-mouse-drag-files t)
-  (dired-recursive-copies 'always)
-  :defer t)
+  (dired-recursive-copies 'always))
 
 (use-package dired-aux
   :after dired

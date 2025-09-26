@@ -15,7 +15,6 @@ marking all current messages as read."
     (interactive)
     (mark-whole-buffer)
     (elfeed-search-untag-all-unread))
-  :defer t
   :ensure t)
 
 (use-package elfeed-org

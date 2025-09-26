@@ -58,7 +58,6 @@
   (compilation-max-output-line-length nil)
   (compilation-scroll-output t)
   (compilation-skip-threshold 2)
-  :defer t
   :hook
   (compilation-mode . goto-address-mode)
   (compilation-filter . ansi-color-compilation-filter))
@@ -86,8 +85,7 @@
 
 (use-package diff-mode
   :custom
-  (diff-add-log-use-relative-names t)
-  :defer t)
+  (diff-add-log-use-relative-names t))
 
 (use-package editorconfig
   :hook
@@ -104,8 +102,7 @@
   :custom
   (eglot-autoshutdown t)
   (eglot-connect-timeout nil)
-  (eglot-sync-connect nil)
-  :defer t)
+  (eglot-sync-connect nil))
 
 (use-package eglot-codelens
   :vc (:url "https://github.com/Gavinok/eglot-codelens")
@@ -126,7 +123,6 @@
 
 (use-package eglot-supplements
   :vc (:url "https://codeberg.org/harald/eglot-supplements")
-  :defer t
   :ensure t)
 
 (use-package eglot-cthier
@@ -188,7 +184,6 @@
   (clojure-ts-comment-macro-font-lock-body t)
   (clojure-ts-indent-style 'fixed)
   (clojure-ts-toplevel-inside-comment-form t)
-  :defer t
   :ensure t)
 
 (use-package cider
@@ -208,7 +203,6 @@
 
 (use-package dart-ts-mode
   :vc (:url "https://github.com/50ways2sayhard/dart-ts-mode")
-  :defer t
   :ensure t)
 
 (use-package flutter
@@ -239,8 +233,7 @@ Only runs if a `flutter' buffer already exits."
   (:map go-ts-mode-map
         ("C-c m t f" . go-ts-mode-test-this-file)
         ("C-c m t p" . go-ts-mode-test-this-package)
-        ("C-c m t ." . go-ts-mode-test-this-function-at-point))
-  :defer t)
+        ("C-c m t ." . go-ts-mode-test-this-function-at-point)))
 
 (use-package haskell-ts-mode
   :vc (:url "https://codeberg.org/pranshu/haskell-ts-mode")
@@ -257,24 +250,20 @@ Only runs if a `flutter' buffer already exits."
         ("C-c C-p" . run-lisp))
   :custom
   (inferior-lisp-program "sbcl")
-  (narrow-to-defun-include-comments t)
-  :defer t)
+  (narrow-to-defun-include-comments t))
 
 (use-package cmuscheme
   :bind
   (:map scheme-mode-map
-        ("C-c C-p" . "run-scheme"))
-  :defer t)
+        ("C-c C-p" . "run-scheme")))
 
 (use-package kotlin-ts-mode
   :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
-  :defer t
   :ensure t)
 
 (use-package nix-ts-mode
   :vc (:url "https://github.com/nix-community/nix-ts-mode")
-  :ensure t
-  :defer t)
+  :ensure t)
 
 ;; Library
 (use-package pg
@@ -283,13 +272,11 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package pgmacs
   :vc (:url "https://github.com/emarsden/pgmacs")
-  :defer t
   :ensure t)
 
 (use-package python
   :custom
-  (python-indent-guess-indent-offset-verbose nil)
-  :defer t)
+  (python-indent-guess-indent-offset-verbose nil))
 
 (use-package envrc
   :vc (:url "https://github.com/purcell/envrc")
@@ -322,7 +309,6 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package vue-ts-mode
   :vc (:url "https://github.com/8uff3r/vue-ts-mode")
-  :defer t
   :ensure t)
 
 (use-package sh-script
@@ -330,8 +316,7 @@ Only runs if a `flutter' buffer already exits."
   (:map bash-ts-mode-map
         ("C-c C-p" . ansi-shell))
   (:map sh-mode-map
-        ("C-c C-p" . ansi-shell))
-  :defer t)
+        ("C-c C-p" . ansi-shell)))
 
 (use-package smerge-mode
   :init
@@ -376,7 +361,6 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package dape
   :vc (:url "https://github.com/svaante/dape")
-  :defer t
   :ensure t
   :hook
   (dape-display-source . pulse-momentary-highlight-one-line))
@@ -397,7 +381,6 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package git-modes
   :vc (:url "https://github.com/magit/git-modes")
-  :defer t
   :ensure t)
 
 (use-package leetcode
@@ -408,7 +391,6 @@ Only runs if a `flutter' buffer already exits."
     (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
   (leetcode--paid "$")
   (leetcode-save-solutions t)
-  :defer t
   :ensure t)
 
 (use-package magit
@@ -467,7 +449,6 @@ Only runs if a `flutter' buffer already exits."
         ("C-(" . puni-slurp-backward)
         ("C-}" . puni-barf-forward)
         ("C-{" . puni-barf-backward))
-  :defer t
   :config
   (advice-add #'puni-kill-active-region :override
               (defun AmaiKinono/puni-kill-active-region ()

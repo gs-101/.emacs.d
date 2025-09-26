@@ -312,7 +312,6 @@ Extensions for iBuffer.
 
 #+begin_src emacs-lisp
   (use-package ibuf-ext
-    :defer t
     :hook
     (ibuffer-mode . ibuffer-auto-mode))
 #+end_src
@@ -358,8 +357,7 @@ Commands for making and changing indentation in text. These are described in the
 #+begin_src emacs-lisp
   (use-package indent
     :custom
-    (tab-always-indent 'complete)
-    :defer t)
+    (tab-always-indent 'complete))
 #+end_src
 
 *** iSearch
@@ -426,8 +424,7 @@ Multilingual Enviroment.
   (use-package mule
     :config
     ;; All that is needed for UTF-8.
-    (modify-coding-system-alist 'file "" 'utf-8)
-    :defer t)
+    (modify-coding-system-alist 'file "" 'utf-8))
 #+end_src
 
 *** New Comment
@@ -494,8 +491,7 @@ This mode provides mail-sending facilities from within Emacs.
 #+begin_src emacs-lisp
   (use-package sendmail
     :custom
-    (sendmail-program (executable-find "msmtp"))
-    :defer t)
+    (sendmail-program (executable-find "msmtp")))
 #+end_src
 
 *** Emacs as a Server
@@ -568,8 +564,7 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
 #+begin_src emacs-lisp
   (use-package startup
     :custom
-    (initial-major-mode 'fundamental-mode)
-    :defer t)
+    (initial-major-mode 'fundamental-mode))
 #+end_src
 
 *** [[https://karthinks.com/software/fifteen-ways-to-use-embark/#open-a-file-as-root-without-losing-your-session][Sudo Command]]
@@ -808,7 +803,6 @@ Minor mode to automatically balance window margins.
     :vc (:url "https://github.com/rnkn/olivetti")
     :custom
     (olivetti-body-width 132)
-    :defer t
     :ensure t)
 #+end_src
 
@@ -933,8 +927,7 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
     (dired-listing-switches "-agho --group-directories-first") ;;1
     (dired-maybe-use-globstar t)
     (dired-mouse-drag-files t)
-    (dired-recursive-copies 'always)
-    :defer t)
+    (dired-recursive-copies 'always))
 #+end_src
 
 *** Auxiliary
@@ -1647,8 +1640,7 @@ LaTeX Backend for Org Export Engine.
                                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
                                       ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-    (add-to-list 'org-latex-pdf-process "bibtex %b" t)
-    :defer t)
+    (add-to-list 'org-latex-pdf-process "bibtex %b" t))
 #+end_src
 
 *** [[https://code.tecosaur.net/tec/engrave-faces][Engrave Faces]]
@@ -1698,8 +1690,7 @@ Paragraph and sentence parsing.
 #+begin_src emacs-lisp
   (use-package paragraphs
     :custom
-    (sentence-end-double-space nil)
-    :defer t)
+    (sentence-end-double-space nil))
 #+end_src
 
 ** Refile
@@ -2208,7 +2199,6 @@ Run compiler as inferior of Emacs, parse error messages.
     (compilation-max-output-line-length nil)
     (compilation-scroll-output t)
     (compilation-skip-threshold 2)
-    :defer t
     :hook
     (compilation-mode . goto-address-mode)
     (compilation-filter . ansi-color-compilation-filter))
@@ -2274,8 +2264,7 @@ Provides support for font-lock, outline, navigation commands, editing and variou
 #+begin_src emacs-lisp
   (use-package diff-mode
     :custom
-    (diff-add-log-use-relative-names t)
-    :defer t)
+    (diff-add-log-use-relative-names t))
 #+end_src
 
 ** Editorconfig
@@ -2312,8 +2301,7 @@ Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
     :custom
     (eglot-autoshutdown t)
     (eglot-connect-timeout nil)
-    (eglot-sync-connect nil)
-    :defer t)
+    (eglot-sync-connect nil))
 #+end_src
 
 *** [[https://github.com/Gavinok/eglot-codelens][Code Lens]]
@@ -2356,7 +2344,6 @@ Additional language server functionality implemented with Eglot. There's also su
 #+begin_src emacs-lisp
   (use-package eglot-supplements
     :vc (:url "https://codeberg.org/harald/eglot-supplements")
-    :defer t
     :ensure t)
 #+end_src
 
@@ -2482,7 +2469,6 @@ The next generation Clojure major mode for Emacs, powered by TreeSitter.
     (clojure-ts-comment-macro-font-lock-body t)
     (clojure-ts-indent-style 'fixed)
     (clojure-ts-toplevel-inside-comment-form t)
-    :defer t
     :ensure t)
 #+end_src
 
@@ -2524,7 +2510,6 @@ Dart is a language primarily used for [[https://flutter.dev/][Flutter]], a UI de
 #+begin_src emacs-lisp
   (use-package dart-ts-mode
     :vc (:url "https://github.com/50ways2sayhard/dart-ts-mode")
-    :defer t
     :ensure t)
 #+end_src
 
@@ -2571,8 +2556,7 @@ tree-sitter support for Go.
     (:map go-ts-mode-map
           ("C-c m t f" . go-ts-mode-test-this-file)
           ("C-c m t p" . go-ts-mode-test-this-package)
-          ("C-c m t ." . go-ts-mode-test-this-function-at-point))
-    :defer t)
+          ("C-c m t ." . go-ts-mode-test-this-function-at-point)))
 #+end_src
 
 *** [[https://codeberg.org/pranshu/haskell-ts-mode][Haskell]]
@@ -2609,8 +2593,7 @@ Lisp editing for Emacs.
           ("C-c C-p" . run-lisp))
     :custom
     (inferior-lisp-program "sbcl")
-    (narrow-to-defun-include-comments t)
-    :defer t)
+    (narrow-to-defun-include-comments t))
 #+end_src
 
 **** Scheme
@@ -2628,7 +2611,6 @@ Lisp editing for Emacs.
 #+begin_src emacs-lisp
   (use-package kotlin-ts-mode
     :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
-    :defer t
     :ensure t)
 #+end_src
 
@@ -2637,8 +2619,7 @@ Lisp editing for Emacs.
 #+begin_src emacs-lisp
   (use-package nix-ts-mode
     :vc (:url "https://github.com/nix-community/nix-ts-mode")
-    :ensure t
-    :defer t)
+    :ensure t)
 #+end_src
 
 *** PostgreSQL
@@ -2657,7 +2638,6 @@ Emacs editing PostgreSQL databases.
 
   (use-package pgmacs
     :vc (:url "https://github.com/emarsden/pgmacs")
-    :defer t
     :ensure t)
 #+end_src
 
@@ -2670,8 +2650,7 @@ Python's flying circus support for Emacs.
 #+begin_src emacs-lisp
   (use-package python
     :custom
-    (python-indent-guess-indent-offset-verbose nil)
-    :defer t)
+    (python-indent-guess-indent-offset-verbose nil))
 #+end_src
 
 **** [[https://github.com/purcell/envrc][envrc.el]]
@@ -2736,7 +2715,6 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
 #+begin_src emacs-lisp
   (use-package vue-ts-mode
     :vc (:url "https://github.com/8uff3r/vue-ts-mode")
-    :defer t
     :ensure t)
 #+end_src
 
@@ -2755,8 +2733,7 @@ Completion is available for filenames, variables known from the script, the shel
     (:map bash-ts-mode-map
           ("C-c C-p" . ansi-shell))
     (:map sh-mode-map
-          ("C-c C-p" . ansi-shell))
-    :defer t)
+          ("C-c C-p" . ansi-shell)))
 #+end_src
 
 ** Smerge
@@ -2850,7 +2827,6 @@ Debug Adapter Protocol for Emacs.
 #+begin_src emacs-lisp
   (use-package dape
     :vc (:url "https://github.com/svaante/dape")
-    :defer t
     :ensure t
     :hook
     (dape-display-source . pulse-momentary-highlight-one-line))
@@ -2895,7 +2871,6 @@ Emacs major modes for Git configuration files.
 #+begin_src emacs-lisp
   (use-package git-modes
     :vc (:url "https://github.com/magit/git-modes")
-    :defer t
     :ensure t)
 #+end_src
 
@@ -2914,7 +2889,6 @@ An Emacs LeetCode client.
       (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory)))
     (leetcode--paid "$")
     (leetcode-save-solutions t)
-    :defer t
     :ensure t)
 #+end_src
 
@@ -3021,7 +2995,6 @@ Structured editing (soft deletion, expression navigating & manipulating) that su
           ("C-(" . puni-slurp-backward)
           ("C-}" . puni-barf-forward)
           ("C-{" . puni-barf-backward))
-    :defer t
     :config
     (advice-add #'puni-kill-active-region :override
                 (defun AmaiKinono/puni-kill-active-region ()
@@ -3352,7 +3325,6 @@ Implementation of Pomodoro and Third Time techniques for Emacs.
     :custom
     (pomm-audio-enabled t)
     (pomm-audio-player-executable (executable-find "mpv"))
-    :defer t
     :ensure t
     :hook
     (pomm-on-status-changed . pomm--sync-org-clock)
@@ -3635,7 +3607,6 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 #+begin_src emacs-lisp
   (use-package embark-consult
-    :defer t
     :hook
     (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
@@ -3787,8 +3758,7 @@ Configuration for different chat clients.
 #+begin_src emacs-lisp
   (use-package startup
     :custom
-    (user-mail-address "gabrielsantosdesouza@disroot.org")
-    :defer t)
+    (user-mail-address "gabrielsantosdesouza@disroot.org"))
 #+end_src
 
 ** End
@@ -3827,7 +3797,6 @@ Elfeed is an extensible web feed reader for Emacs, supporting both Atom and RSS.
       (interactive)
       (mark-whole-buffer)
       (elfeed-search-untag-all-unread))
-    :defer t
     :ensure t)
 #+end_src
 
@@ -4727,8 +4696,7 @@ This file parses the command line and gets Emacs running. Options on the command
     (initial-scratch-message nil)
     (inhibit-startup-echo-area-message t)
     (inhibit-startup-message t)
-    (inhibit-startup-screen t)
-    :defer t)
+    (inhibit-startup-screen t))
 #+end_src
 
 ** Window
@@ -4917,8 +4885,6 @@ Show current command and its key in the mode line.
 #+begin_src emacs-lisp
   (use-package modus-themes
     :when (gs-101/guix-p)
-    :ensure nil
-    :demand t
     :custom
     (modus-themes-bold-constructs t)
     (modus-themes-italic-constructs t)
@@ -5050,7 +5016,6 @@ A Library for Nerd Font icons.
 
 #+begin_src emacs-lisp
   (use-package esh-mode
-    :defer t
     :bind
     (:map eshell-mode-map
           ([remap completion-preview-insert] . thanos/eshell-preview-insert))

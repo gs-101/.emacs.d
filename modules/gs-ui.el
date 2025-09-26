@@ -76,8 +76,7 @@
   (initial-scratch-message nil)
   (inhibit-startup-echo-area-message t)
   (inhibit-startup-message t)
-  (inhibit-startup-screen t)
-  :defer t)
+  (inhibit-startup-screen t))
 
 (use-package window
   :custom
@@ -195,8 +194,6 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package modus-themes
   :when (gs-101/guix-p)
-  :ensure nil
-  :demand t
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-italic-constructs t)
@@ -291,7 +288,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (eglot-code-action-indicator "󰌵"))
 
 (use-package esh-mode
-  :defer t
   :bind
   (:map eshell-mode-map
         ([remap completion-preview-insert] . thanos/eshell-preview-insert))

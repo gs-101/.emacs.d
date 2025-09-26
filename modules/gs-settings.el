@@ -97,7 +97,6 @@
   (help-window-select t))
 
 (use-package ibuf-ext
-  :defer t
   :hook
   (ibuffer-mode . ibuffer-auto-mode))
 
@@ -113,8 +112,7 @@
 
 (use-package indent
   :custom
-  (tab-always-indent 'complete)
-  :defer t)
+  (tab-always-indent 'complete))
 
 (use-package isearch
   :custom
@@ -144,8 +142,7 @@
 (use-package mule
   :config
   ;; All that is needed for UTF-8.
-  (modify-coding-system-alist 'file "" 'utf-8)
-  :defer t)
+  (modify-coding-system-alist 'file "" 'utf-8))
 
 (use-package newcomment
   :custom
@@ -172,8 +169,7 @@
 
 (use-package sendmail
   :custom
-  (sendmail-program (executable-find "msmtp"))
-  :defer t)
+  (sendmail-program (executable-find "msmtp")))
 
 (use-package server
   :demand t
@@ -222,8 +218,7 @@ With a ARG prefix argument, copy the buffer to the other window."
 
 (use-package startup
   :custom
-  (initial-major-mode 'fundamental-mode)
-  :defer t)
+  (initial-major-mode 'fundamental-mode))
 
 (use-package emacs
   :init
@@ -334,7 +329,6 @@ With a ARG prefix argument, copy the buffer to the other window."
   :vc (:url "https://github.com/rnkn/olivetti")
   :custom
   (olivetti-body-width 132)
-  :defer t
   :ensure t)
 
 (use-package ultra-scroll

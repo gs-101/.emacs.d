@@ -13,7 +13,6 @@
   :custom
   (pomm-audio-enabled t)
   (pomm-audio-player-executable (executable-find "mpv"))
-  :defer t
   :ensure t
   :hook
   (pomm-on-status-changed . pomm--sync-org-clock)
@@ -220,7 +219,6 @@ using Helpful."
   (setf (alist-get ?\; avy-dispatch-alist) 'karthinks/avy-action-embark))
 
 (use-package embark-consult
-  :defer t
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
