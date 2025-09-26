@@ -252,6 +252,10 @@ Only runs if a `flutter' buffer already exits."
   (inferior-lisp-program "sbcl")
   (narrow-to-defun-include-comments t))
 
+(use-package slime
+  :vc (:url "https://github.com/slime/slime")
+  :ensure t)
+
 (use-package cmuscheme
   :bind
   (:map scheme-mode-map

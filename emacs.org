@@ -2602,6 +2602,18 @@ Lisp editing for Emacs.
     (narrow-to-defun-include-comments t))
 #+end_src
 
+**** [[https://github.com/slime/slime][slime]]
+
+#+begin_quote
+The Superior Lisp Interaction Mode for Emacs.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package slime
+    :vc (:url "https://github.com/slime/slime")
+    :ensure t)
+#+end_src
+
 **** Scheme
 
 #+begin_src emacs-lisp
