@@ -3,7 +3,7 @@
 (use-package org
   :custom
   (org-auto-align-tags nil)
-  (org-directory (convert-standard-filename (expand-file-name "~/Documents/org")))
+  (org-directory (gs-101/filename "~/Documents/org"))
   (org-format-latex-options '(:foreground default
                                           :background nil
                                           :scale 1.0
@@ -167,7 +167,7 @@ allowFullScreen>
   (org-latex-tables-centered nil)
   (org-latex-toc-command "\\tableofcontents \\pagebreak")
   (org-startup-with-latex-preview t)
-  (org-preview-latex-image-directory (convert-standard-filename (expand-file-name "ltximg/" temporary-file-directory)))
+  (org-preview-latex-image-directory (gs-101/filename "ltximg/" temporary-file-directory))
   :config
   (add-to-list 'org-latex-classes '("org-plain-latex"
                                     "

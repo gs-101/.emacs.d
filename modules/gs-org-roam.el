@@ -2,7 +2,7 @@
 
 (use-package org-roam
   :custom
-  (org-roam-directory (convert-standard-filename (expand-file-name "~/Documents/org-roam/")))
+  (org-roam-directory (gs-101/filename "~/Documents/org-roam/"))
   :demand t
   :ensure t)
 

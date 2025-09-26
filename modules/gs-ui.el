@@ -203,9 +203,8 @@ This advice replaces the rocket icon with a electric plug icon."
    '((matches . (semibold))
      (selection . (extrabold underline))))
   :config
-  (let ((matugen "~/.emacs.d/var/matugen/matugen.el"))
-    (when (file-exists-p matugen)
-      (load-file matugen)))
+  (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
+    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el")))
   :init
   (load-theme 'modus-vivendi t))
 
