@@ -243,6 +243,10 @@ Only runs if a `flutter' buffer already exits."
   :vc (:url "https://github.com/Nathan-Melaku/hyprlang-ts-mode")
   :ensure t)
 
+(use-package kotlin-ts-mode
+  :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
+  :ensure t)
+
 (use-package lisp
   :bind
   ("C-c d" . delete-pair)
@@ -261,8 +265,10 @@ Only runs if a `flutter' buffer already exits."
   (:map scheme-mode-map
         ("C-c C-p" . "run-scheme")))
 
-(use-package kotlin-ts-mode
-  :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
+(use-package arei
+  :when (gs-101/guix-p)
+  :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
+  :after scheme
   :ensure t)
 
 (use-package nix-ts-mode
@@ -305,22 +311,20 @@ Only runs if a `flutter' buffer already exits."
   :custom
   (cargo-transient-buffer-name-function #'project-prefixed-buffer-name))
 
-(use-package arei
-  :when (gs-101/guix-p)
-  :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
-  :after scheme
-  :ensure t)
-
-(use-package vue-ts-mode
-  :vc (:url "https://github.com/8uff3r/vue-ts-mode")
-  :ensure t)
-
 (use-package sh-script
   :bind
   (:map bash-ts-mode-map
         ("C-c C-p" . ansi-shell))
   (:map sh-mode-map
         ("C-c C-p" . ansi-shell)))
+
+(use-package verilog-ts-mode
+  :vc (:url "https://github.com/gmlarumbe/verilog-ts-mode")
+  :ensure t)
+
+(use-package vue-ts-mode
+  :vc (:url "https://github.com/8uff3r/vue-ts-mode")
+  :ensure t)
 
 (use-package smerge-mode
   :init

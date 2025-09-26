@@ -2585,6 +2585,14 @@ A major mode for editing hyprland configuration files in emacs.
     :ensure t)
 #+end_src
 
+*** [[https://gitlab.com/bricka/emacs-kotlin-ts-mode][Kotlin]]
+
+#+begin_src emacs-lisp
+  (use-package kotlin-ts-mode
+    :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
+    :ensure t)
+#+end_src
+
 *** Lisp
 
 #+begin_quote
@@ -2623,13 +2631,20 @@ The Superior Lisp Interaction Mode for Emacs.
           ("C-c C-p" . "run-scheme")))
 #+end_src
 
-*** [[https://gitlab.com/bricka/emacs-kotlin-ts-mode][Kotlin]]
+***** [[https://git.sr.ht/~abcdw/emacs-arei][Arei]]
+
+#+begin_quote
+Asynchronous Reliable Extensible IDE for Guile Scheme.
+#+end_quote
 
 #+begin_src emacs-lisp
-  (use-package kotlin-ts-mode
-    :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
+  (use-package arei
+    :when (gs-101/guix-p)
+    :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
+    :after scheme
     :ensure t)
 #+end_src
+
 
 *** Nix
 
@@ -2711,30 +2726,6 @@ A transient UI for Cargo, Rust's package manager.
     (cargo-transient-buffer-name-function #'project-prefixed-buffer-name))
 #+end_src
 
-*** Scheme
-
-**** Arei
-
-#+begin_quote
-Asynchronous Reliable Extensible IDE for Guile Scheme.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package arei
-    :when (gs-101/guix-p)
-    :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
-    :after scheme
-    :ensure t)
-#+end_src
-
-*** Vue
-
-#+begin_src emacs-lisp
-  (use-package vue-ts-mode
-    :vc (:url "https://github.com/8uff3r/vue-ts-mode")
-    :ensure t)
-#+end_src
-
 *** Shell Script
 
 #+begin_quote
@@ -2751,6 +2742,22 @@ Completion is available for filenames, variables known from the script, the shel
           ("C-c C-p" . ansi-shell))
     (:map sh-mode-map
           ("C-c C-p" . ansi-shell)))
+#+end_src
+
+*** Verliog
+
+#+begin_src emacs-lisp
+  (use-package verilog-ts-mode
+    :vc (:url "https://github.com/gmlarumbe/verilog-ts-mode")
+    :ensure t)
+#+end_src
+
+*** Vue
+
+#+begin_src emacs-lisp
+  (use-package vue-ts-mode
+    :vc (:url "https://github.com/8uff3r/vue-ts-mode")
+    :ensure t)
 #+end_src
 
 ** Smerge
