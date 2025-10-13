@@ -101,7 +101,6 @@
   (require 'gs-completion)
   (require 'gs-utils)
   (require 'gs-chat)
-  (require 'gs-elfeed)
   ;;(require 'gs-keys-evil)
   ;;(require 'gs-keys-meow)
   (require 'gs-ui)
@@ -2106,6 +2105,14 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
+** [[https://ess.r-project.org/][Emacs Speaks Statistics]]
+
+#+begin_src emacs-lisp
+  (use-package ess
+    :vc (:url "https://github.com/emacs-ess/ESS")
+    :ensure t)
+#+end_src
+
 ** Tree-Sitter
 
 #+begin_quote
@@ -2461,6 +2468,14 @@ Collection of checkers for flymake.
 #+end_src
 
 ** Languages
+
+*** [[https://repo.or.cz/arduino-mode.git][Arduino]]
+
+#+begin_src emacs-lisp
+  (use-package arduino-mode
+    :vc (:url "https://repo.or.cz/arduino-mode.git")
+    :ensure t)
+#+end_src
 
 *** [[https://github.com/clojure-emacs/clojure-ts-mode][Clojure]]
 
@@ -3786,85 +3801,6 @@ Configuration for different chat clients.
 
 #+begin_src emacs-lisp
   (provide 'gs-chat)
-#+end_src
-
-* [[https://github.com/skeeto/elfeed][Elfeed]]
-:PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-elfeed.el
-:CREDITS:  https://midirus.com/emacs/tutorial#elfeed
-:END:
-
-#+begin_quote
-Elfeed is an extensible web feed reader for Emacs, supporting both Atom and RSS.
-#+end_quote
-
-#+begin_src emacs-lisp
-  ;;; -*- lexical-binding: t -*-
-#+end_src
-
-#+begin_src emacs-lisp
-  (use-package elfeed
-    :vc (:url "https://github.com/skeeto/elfeed")
-    :bind
-    (:map elfeed-search-mode-map
-          ("R" . kaushal-modi/elfeed-search-mark-all-as-read))
-    (:map elfeed-show-mode-map
-          ("C-c C-o" . shr-browse-url))
-    :config
-    ;; https://emacs.stackexchange.com/a/2441
-    (defun kaushal-modi/elfeed-search-mark-all-as-read ()
-      "Call `mark-whole-buffer' and `elfeed-search-untag-all-undead' in unison,
-  marking all current messages as read."
-      (interactive)
-      (mark-whole-buffer)
-      (elfeed-search-untag-all-unread))
-    :ensure t)
-#+end_src
-
-** [[https://github.com/remyhonig/elfeed-org][Org Mode]]
-
-#+begin_quote
-Configure the Elfeed RSS reader with an Orgmode file.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package elfeed-org
-    :vc (:url "https://github.com/remyhonig/elfeed-org")
-    :after elfeed org
-    :config
-    (elfeed-org)
-    :custom
-    (rmh-elfeed-org-files (list (expand-file-name "elfeed.org" org-directory)))
-    :ensure t)
-#+end_src
-
-** [[https://karthinks.com/software/lazy-elfeed/#open-feeds-in-emacs][EWW]]
-
-#+begin_src emacs-lisp
-  (use-package elfeed
-    :bind
-    (:map elfeed-show-mode-map
-          ("B" . karthinks/elfeed-show-eww-open))
-    (:map elfeed-search-mode-map
-          ("B" . karthinks/elfeed-search-eww-open))
-    :config
-    (defun karthinks/elfeed-show-eww-open (&optional use-generic-p)
-      "Open elfeed show entry with \\[eww]."
-      (interactive "P")
-      (let ((browse-url-browser-function #'eww-browse-url))
-        (elfeed-show-visit use-generic-p)))
-
-    (defun karthinks/elfeed-search-eww-open (&optional use-generic-p)
-      "Open elfeed search entry with \\[eww]."
-      (interactive "P")
-      (let ((browse-url-browser-function #'eww-browse-url))
-        (elfeed-search-browse-url use-generic-p))))
-#+end_src
-
-** End
-
-#+begin_src emacs-lisp
-  (provide 'gs-elfeed)
 #+end_src
 
 * [[https://github.com/emacs-evil/evil][Evil Mode]]

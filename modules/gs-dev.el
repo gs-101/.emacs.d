@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package ess
+  :vc (:url "https://github.com/emacs-ess/ESS")
+  :ensure t)
+
 (use-package treesit
   :custom
   (treesit-font-lock-level 4))
@@ -177,6 +181,10 @@
   (push '((python-mode python-ts-mode) flymake-collection-flake8 (flymake-collection-pycodestyle :disabled t)) flymake-collection-hook-config)
   :hook
   (flymake-mode . flymake-collection-hook-setup))
+
+(use-package arduino-mode
+  :vc (:url "https://repo.or.cz/arduino-mode.git")
+  :ensure t)
 
 (use-package clojure-ts-mode
   :vc (:url "https://github.com/clojure-emacs/clojure-ts-mode")
