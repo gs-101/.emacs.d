@@ -4691,6 +4691,18 @@ Soothing pastel theme for Emacs.
     :ensure t)
 #+end_src
 
+** [[https://github.com/laluxx/crystal-point][Crystal Point]]
+
+Makes the cursor the color of the current face.
+
+#+begin_src emacs-lisp
+  (use-package crystal-point
+    :vc (:url "https://github.com/laluxx/crystal-point")
+    :init
+    (crystal-point-enable)
+    :ensure t)
+#+end_src
+
 ** [[https://github.com/seagle0128/doom-modeline][DOOM Modeline]]
 
 #+begin_quote
