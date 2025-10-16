@@ -2194,6 +2194,18 @@ Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
     (git-commit-major-mode 'git-commit-ts-mode))
 #+end_src
 
+** Language Servers
+
+*** [[https://github.com/deirn/mason.el][mason.el]]
+
+#+begin_src emacs-lisp
+  (use-package mason
+    :vc (:url "https://github.com/deirn/mason.el")
+    :ensure t
+    :init
+    (mason-ensure))
+#+end_src
+
 ** Compile
 
 #+begin_quote

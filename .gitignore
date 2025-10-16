@@ -2,6 +2,7 @@
 eln-cache/
 elpa/
 etc/
+mason/
 tree-sitter/
 var/
 
