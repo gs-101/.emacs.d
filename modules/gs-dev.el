@@ -29,6 +29,7 @@
                              ("python" . python-ts)
                              ("ruby" . ruby-ts)
                              ("rust" . rust-ts)
+                             ("swift" . swift-ts)
                              ("toml" . toml-ts)
                              ("typescript" . typescript-ts)
                              ("yaml" . yaml-ts))))
