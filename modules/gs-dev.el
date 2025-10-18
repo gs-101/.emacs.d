@@ -287,6 +287,10 @@ Only runs if a `flutter' buffer already exits."
   :after scheme
   :ensure t)
 
+(use-package meson-mode
+  :vc (:url "https://github.com/wentasah/meson-mode")
+  :ensure t)
+
 (use-package nix-ts-mode
   :vc (:url "https://github.com/nix-community/nix-ts-mode")
   :ensure t)

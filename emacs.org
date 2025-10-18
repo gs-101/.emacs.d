@@ -2681,6 +2681,14 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
 #+end_src
 
 
+*** [[https://github.com/wentasah/meson-mode][Meson]]
+
+#+begin_src emacs-lisp
+  (use-package meson-mode
+    :vc (:url "https://github.com/wentasah/meson-mode")
+    :ensure t)
+#+end_src
+
 *** Nix
 
 #+begin_src emacs-lisp
