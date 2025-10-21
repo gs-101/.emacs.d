@@ -218,6 +218,8 @@ This advice replaces the rocket icon with a electric plug icon."
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
   :bind
   ("C-z i n" . nerd-icons-insert)
+  :config
+  (nerd-icons-set-font "Symbols Nerd Font Mono")
   :demand t
   :ensure t)
 
