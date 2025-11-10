@@ -258,8 +258,8 @@ With a ARG prefix argument, copy the buffer to the other window."
   (use-package-vc-prefer-newest t))
 
 (use-package simple
-  :hook
-  (text-mode . visual-line-mode))
+  :init
+  (global-visual-line-mode))
 
 (use-package warnings
   :custom

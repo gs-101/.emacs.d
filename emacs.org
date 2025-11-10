@@ -653,8 +653,8 @@ When Visual Line mode is enabled, `word-wrap' is turned on in this buffer, and s
 
 #+begin_src emacs-lisp
   (use-package simple
-    :hook
-    (text-mode . visual-line-mode))
+    :init
+    (global-visual-line-mode))
 #+end_src
 
 *** Warnings
