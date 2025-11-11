@@ -180,6 +180,7 @@ This advice replaces the rocket icon with a electric plug icon."
                              (org-delete-backward-char "" "Erasing...")
                              (self-insert-command "" "Typing...")
                              (org-self-insert-command "" "Typing...")
+                             (vertico-directory-enter nil nil)
                              (vertico-next nil nil)
                              (vertico-previous nil nil))))
 

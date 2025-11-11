@@ -4838,6 +4838,7 @@ Show current command and its key in the mode line.
                                (org-delete-backward-char "" "Erasing...")
                                (self-insert-command "" "Typing...")
                                (org-self-insert-command "" "Typing...")
+                               (vertico-directory-enter nil nil)
                                (vertico-next nil nil)
                                (vertico-previous nil nil))))
 #+end_src
