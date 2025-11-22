@@ -182,9 +182,6 @@
 
 (use-package flymake-collection
   :ensure t
-  :config
-  (push '((c-mode c-ts-mode) flymake-collection-gcc (flymake-collection-clang :disabled t)) flymake-collection-hook-config)
-  (push '((python-mode python-ts-mode) flymake-collection-flake8 (flymake-collection-pycodestyle :disabled t)) flymake-collection-hook-config)
   :hook
   (flymake-mode . flymake-collection-hook-setup))
 
