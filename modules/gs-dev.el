@@ -261,6 +261,9 @@ Only runs if a `flutter' buffer already exits."
   :vc (:url "https://gitlab.com/bricka/emacs-kotlin-ts-mode")
   :ensure t)
 
+(use-package auctex
+  :ensure t)
+
 (use-package lisp
   :bind
   ("C-c d" . delete-pair)
