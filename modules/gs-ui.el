@@ -387,8 +387,7 @@ additional space after completion."
       (prism-mode)))
   :ensure t
   :hook
-  (prog-mode . gs-101/prism-mode-lisp)
-  (python-base-mode . prism-whitespace-mode))
+  (prog-mode . gs-101/prism-mode-lisp))
 
 (use-package prism
   :after prism catppuccin-theme
@@ -413,13 +412,10 @@ additional space after completion."
   (defun gs-101/rainbow-delimiters-maybe ()
     "Enable `rainbow-delimiters-mode' only in non-lisp modes.
 
-This is because I find `prism-mode' better for these modes.
-
-Also disable in Python because I use `prism-whitespace-mode' there."
+This is because I find `prism-mode' better for these modes."
     (unless (or (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
                 (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
-                (derived-mode-p 'scheme-mode)
-                (derived-mode-p 'python-base-mode))
+                (derived-mode-p 'scheme-mode))
       (rainbow-delimiters-mode)))
   :ensure t
   :hook
