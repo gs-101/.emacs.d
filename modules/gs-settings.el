@@ -64,6 +64,12 @@
   :custom
   (epg-pinentry-mode 'loopback))
 
+(use-package eshell
+  :config
+  (defun christiantietze/new-buffer ()
+    "Create and switch to a new empty buffer named `untitled'."
+    (switch-to-buffer (generate-new-buffer "untitled"))))
+
 (use-package files
   :config
   (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ; 3
