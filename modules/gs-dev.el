@@ -265,10 +265,12 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package lisp
   :bind
-  ("C-c d" . delete-pair)
+  ("C-M-z" . delete-pair)
   (:map lisp-mode-map
         ("C-c C-p" . run-lisp))
   :custom
+  (delete-pair-blink-delay 0)
+  (delete-pair-push-mark t)
   (inferior-lisp-program "sbcl")
   (narrow-to-defun-include-comments t))
 

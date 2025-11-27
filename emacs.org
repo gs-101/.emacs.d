@@ -2632,10 +2632,12 @@ Lisp editing for Emacs.
 #+begin_src emacs-lisp
   (use-package lisp
     :bind
-    ("C-c d" . delete-pair)
+    ("C-M-z" . delete-pair)
     (:map lisp-mode-map
           ("C-c C-p" . run-lisp))
     :custom
+    (delete-pair-blink-delay 0)
+    (delete-pair-push-mark t)
     (inferior-lisp-program "sbcl")
     (narrow-to-defun-include-comments t))
 #+end_src
