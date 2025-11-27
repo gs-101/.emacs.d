@@ -259,6 +259,9 @@ allowFullScreen>
   :after org
   :ensure t)
 
+(use-package org-checklist
+  :after org)
+
 (use-package ox-extra
   :after org
   :config

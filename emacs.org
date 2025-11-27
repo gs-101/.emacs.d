@@ -1785,6 +1785,15 @@ Add-ons for Org Mode.
     :ensure t)
 #+end_src
 
+*** Org Checklist
+
+Additional functionality for Org Mode checklists
+
+#+begin_src emacs-lisp
+  (use-package org-checklist
+    :after org)
+#+end_src
+
 *** Ox Extra
 
 Additional functionality for Org Mode exporters.
