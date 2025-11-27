@@ -3785,6 +3785,18 @@ Easily draw Unicode lines and boxes.
 #+end_src
 
 
+** [[https://thanosapollo.org/projects/yeetube/][YeeTube]]
+
+#+begin_quote
+YouTube front-end for GNU Emacs.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package yeetube
+    :vc (:url "https://git.thanosapollo.org/yeetube/")
+    :ensure t)
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp

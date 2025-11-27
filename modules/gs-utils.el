@@ -291,4 +291,8 @@ using Helpful."
   ("C-z i l" . uniline-mode)
   :ensure t)
 
+(use-package yeetube
+  :vc (:url "https://git.thanosapollo.org/yeetube/")
+  :ensure t)
+
 (provide 'gs-utils)
