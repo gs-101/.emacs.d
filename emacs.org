@@ -972,16 +972,15 @@ Asynchronous dired actions.
     (mouse-drag-and-drop-region-cross-program t))
 #+end_src
 
-** [[https://depp.brause.cc/nov.el/][nov.el]]
+** [[https://codeberg.org/divyaranjan/emacs-reader][Reader]]
 
 #+begin_quote
-Major mode for reading EPUBs in Emacs.
+An all-in-one document reader for all formats in Emacs, backed by MuPDF.
 #+end_quote
 
 #+begin_src emacs-lisp
-  (use-package nov
-    :custom
-    (nov-header-line-format nil)
+  (use-package reader
+    :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")
     :ensure t)
 #+end_src
 

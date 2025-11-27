@@ -57,9 +57,8 @@
   :custom
   (mouse-drag-and-drop-region-cross-program t))
 
-(use-package nov
-  :custom
-  (nov-header-line-format nil)
+(use-package reader
+  :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")
   :ensure t)
 
 (use-package ready-player
