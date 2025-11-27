@@ -8,12 +8,6 @@
   "Check if the current system uses Nobara Linux as its distribution."
   (executable-find "nobara-welcome"))
 
-(defun gs-101/add-many-to-list (list many)
-  "Return a function for adding MANY items to a LIST.
-Without putting them in a separate list."
-  (mapc (lambda (item)
-          (add-to-list list item)) many))
-
 (defun gs-101/filename (name &optional default-directory)
   "Return a path to FILE suitable for the current operating system.
 DEFAULT-DIRECTORY defines where to start looking for the file."
@@ -48,7 +42,6 @@ This is my first time using `cl-loop' for anything."
            finally return (print output)))
 
 (with-eval-after-load 'package
-  (gs-101/add-many-to-list
-   'package-archives
-   '(("melpa" . "https://melpa.org/packages/")
-     ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/"))))
+  (dolist (archive '(("melpa" . "https://melpa.org/packages/")
+                     ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
+    (add-to-list 'package-archives archive)))

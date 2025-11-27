@@ -15,9 +15,9 @@
 
 (use-package completion-preview
   :config
-  (gs-101/add-many-to-list 'completion-preview-commands
-                           '(org-self-insert-command
-                             org-delete-backward-char))
+  (dolist (command '(org-self-insert-command
+                     org-delete-backward-char))
+    (add-to-list 'completion-preview-commands command))
   :init
   (global-completion-preview-mode))
 

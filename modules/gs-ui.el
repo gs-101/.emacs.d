@@ -173,16 +173,16 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package keycast
   :after keycast
   :config
-  (gs-101/add-many-to-list 'keycast-substitute-alist
-                           '((backward-delete-char-untabify "" "Erasing...")
-                             (delete-backward-char "" "Erasing...")
-                             (isearch-printing-char "" "Searching...")
-                             (org-delete-backward-char "" "Erasing...")
-                             (self-insert-command "" "Typing...")
-                             (org-self-insert-command "" "Typing...")
-                             (vertico-directory-enter nil nil)
-                             (vertico-next nil nil)
-                             (vertico-previous nil nil))))
+  (dolist (substitute '((backward-delete-char-untabify "" "Erasing...")
+                        (delete-backward-char "" "Erasing...")
+                        (isearch-printing-char "" "Searching...")
+                        (org-delete-backward-char "" "Erasing...")
+                        (self-insert-command "" "Typing...")
+                        (org-self-insert-command "" "Typing...")
+                        (vertico-directory-enter nil nil)
+                        (vertico-next nil nil)
+                        (vertico-previous nil nil)))
+    (add-to-list 'keycast-substitute-alist substitute)))
 
 (use-package keycast
   :after embark

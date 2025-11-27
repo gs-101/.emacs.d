@@ -20,12 +20,6 @@
     "Check if the current system uses Nobara Linux as its distribution."
     (executable-find "nobara-welcome"))
 
-  (defun gs-101/add-many-to-list (list many)
-    "Return a function for adding MANY items to a LIST.
-  Without putting them in a separate list."
-    (mapc (lambda (item)
-            (add-to-list list item)) many))
-
   (defun gs-101/filename (name &optional default-directory)
     "Return a path to FILE suitable for the current operating system.
   DEFAULT-DIRECTORY defines where to start looking for the file."
@@ -73,10 +67,9 @@
 
 #+begin_src emacs-lisp
   (with-eval-after-load 'package
-    (gs-101/add-many-to-list
-     'package-archives
-     '(("melpa" . "https://melpa.org/packages/")
-       ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/"))))
+    (dolist (archive '(("melpa" . "https://melpa.org/packages/")
+                       ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
+      (add-to-list 'package-archives archive)))
 #+end_src
 
 * Load Modules
@@ -165,9 +158,9 @@ Preview completion with inline overlay
 #+begin_src emacs-lisp
   (use-package completion-preview
     :config
-    (gs-101/add-many-to-list 'completion-preview-commands
-                             '(org-self-insert-command
-                               org-delete-backward-char))
+    (dolist (command '(org-self-insert-command
+                       org-delete-backward-char))
+      (add-to-list 'completion-preview-commands command))
     :init
     (global-completion-preview-mode))
 #+end_src
@@ -1403,16 +1396,17 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 #+begin_src emacs-lisp
   (use-package org
     :config
-    (gs-101/add-many-to-list 'org-babel-load-languages '((C . t)
-                                                         (clojure . t)
-                                                         (js . t)
-                                                         (latex . t)
-                                                         (python . t)
-                                                         (scheme . t)
-                                                         (sql . t)
-                                                         (sqlite . t)))
-     :custom
-     (org-export-babel-evaluate nil))
+    (dolist (language '((C . t)
+                        (clojure . t)
+                        (js . t)
+                        (latex . t)
+                        (python . t)
+                        (scheme . t)
+                        (sql . t)
+                        (sqlite . t)))
+      (add-to-list 'org-babel-load-languages language))
+    :custom
+    (org-export-babel-evaluate nil))
 #+end_src
 
 *** [[https://github.com/samwdp/ob-csharp][C#]]
@@ -1682,8 +1676,9 @@ Plain lists for Org.
 #+begin_src emacs-lisp
   (use-package org
     :config
-    (gs-101/add-many-to-list 'org-modules '(org-habit
-                                            org-id)))
+    (dolist (module '(org-habit
+                      org-id))
+      (add-to-list 'org-modules module)))
 #+end_src
 
 ** Paragraphs
@@ -2136,30 +2131,30 @@ Source code examples in Org.
 #+begin_src emacs-lisp
   (use-package org-src
     :config
-    (gs-101/add-many-to-list 'org-src-lang-modes
-                             '(("bash" . bash-ts)
-                               ("c" . c-ts)
-                               ("c++" . c++-ts)
-                               ("clojure" . clojure-ts)
-                               ("cmake" . cmake-ts)
-                               ("csharp" . csharp-ts)
-                               ("css" . css-ts)
-                               ("dart" . dart-ts)
-                               ("dockerfile" . dockerfile-ts)
-                               ("go" . go-ts)
-                               ("haskell" . haskell-ts)
-                               ("html" . mhtml-ts)
-                               ("java" . java-ts)
-                               ("js" . js-ts)
-                               ("json" . json-ts)
-                               ("nix" . nix-ts)
-                               ("python" . python-ts)
-                               ("ruby" . ruby-ts)
-                               ("rust" . rust-ts)
-                               ("swift" . swift-ts)
-                               ("toml" . toml-ts)
-                               ("typescript" . typescript-ts)
-                               ("yaml" . yaml-ts))))
+    (dolist (language '(("bash" . bash-ts)
+                        ("c" . c-ts)
+                        ("c++" . c++-ts)
+                        ("clojure" . clojure-ts)
+                        ("cmake" . cmake-ts)
+                        ("csharp" . csharp-ts)
+                        ("css" . css-ts)
+                        ("dart" . dart-ts)
+                        ("dockerfile" . dockerfile-ts)
+                        ("go" . go-ts)
+                        ("haskell" . haskell-ts)
+                        ("html" . mhtml-ts)
+                        ("java" . java-ts)
+                        ("js" . js-ts)
+                        ("json" . json-ts)
+                        ("nix" . nix-ts)
+                        ("python" . python-ts)
+                        ("ruby" . ruby-ts)
+                        ("rust" . rust-ts)
+                        ("swift" . swift-ts)
+                        ("toml" . toml-ts)
+                        ("typescript" . typescript-ts)
+                        ("yaml" . yaml-ts)))
+      (add-to-list 'org-src-lang-modes language)))
 #+end_src
 
 *** [[https://github.com/renzmann/treesit-auto][Auto]]
@@ -4847,16 +4842,16 @@ Show current command and its key in the mode line.
   (use-package keycast
     :after keycast
     :config
-    (gs-101/add-many-to-list 'keycast-substitute-alist
-                             '((backward-delete-char-untabify "" "Erasing...")
-                               (delete-backward-char "" "Erasing...")
-                               (isearch-printing-char "" "Searching...")
-                               (org-delete-backward-char "" "Erasing...")
-                               (self-insert-command "" "Typing...")
-                               (org-self-insert-command "" "Typing...")
-                               (vertico-directory-enter nil nil)
-                               (vertico-next nil nil)
-                               (vertico-previous nil nil))))
+    (dolist (substitute '((backward-delete-char-untabify "" "Erasing...")
+                          (delete-backward-char "" "Erasing...")
+                          (isearch-printing-char "" "Searching...")
+                          (org-delete-backward-char "" "Erasing...")
+                          (self-insert-command "" "Typing...")
+                          (org-self-insert-command "" "Typing...")
+                          (vertico-directory-enter nil nil)
+                          (vertico-next nil nil)
+                          (vertico-previous nil nil)))
+      (add-to-list 'keycast-substitute-alist substitute)))
 #+end_src
 
 *** [[https://github.com/oantolin/embark/wiki/Additional-Configuration#showing-embark-actions-keys-in-keycast-mode][Embark Support]]

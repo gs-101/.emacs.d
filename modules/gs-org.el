@@ -21,16 +21,17 @@
 
 (use-package org
   :config
-  (gs-101/add-many-to-list 'org-babel-load-languages '((C . t)
-                                                       (clojure . t)
-                                                       (js . t)
-                                                       (latex . t)
-                                                       (python . t)
-                                                       (scheme . t)
-                                                       (sql . t)
-                                                       (sqlite . t)))
-   :custom
-   (org-export-babel-evaluate nil))
+  (dolist (language '((C . t)
+                      (clojure . t)
+                      (js . t)
+                      (latex . t)
+                      (python . t)
+                      (scheme . t)
+                      (sql . t)
+                      (sqlite . t)))
+    (add-to-list 'org-babel-load-languages language))
+  :custom
+  (org-export-babel-evaluate nil))
 
 (use-package ob-csharp
   :vc (:url "https://github.com/samwdp/ob-csharp")
@@ -196,8 +197,9 @@ allowFullScreen>
 
 (use-package org
   :config
-  (gs-101/add-many-to-list 'org-modules '(org-habit
-                                          org-id)))
+  (dolist (module '(org-habit
+                    org-id))
+    (add-to-list 'org-modules module)))
 
 (use-package paragraphs
   :custom
