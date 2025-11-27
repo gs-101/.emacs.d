@@ -200,7 +200,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (advice-add 'embark-act :before #'oantolin/keycast--update-force))
 
 (use-package modus-themes
-  :when (dw/guix-p)
+  :when dw/guix-p
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-italic-constructs t)

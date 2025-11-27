@@ -234,6 +234,8 @@ using Helpful."
   (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 
 (use-package tinee
+  :ensure-system-package
+  wtype
   :vc (:url "https://codeberg.org/tusharhero/tinee")
   :ensure t)
 
@@ -292,6 +294,8 @@ using Helpful."
   :ensure t)
 
 (use-package yeetube
+  :ensure-system-package
+  (mpv yt-dlp)
   :vc (:url "https://git.thanosapollo.org/yeetube/")
   :ensure t)
 

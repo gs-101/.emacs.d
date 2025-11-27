@@ -312,6 +312,8 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package envrc
   :vc (:url "https://github.com/purcell/envrc")
+  :ensure-system-package
+  direnv
   :ensure t
   :config
   (defun elfehr/advice-org-latex-preview-restart-envrc (&rest args)
@@ -421,6 +423,9 @@ Only runs if a `flutter' buffer already exits."
   :ensure t)
 
 (use-package magit
+  ;; Requires perl for some rebasing commands.
+  :ensure-system-package
+  perl
   :bind
   ("C-c v B" . magit-blame)
   ("C-c v C" . magit-clone)
@@ -499,6 +504,8 @@ rectangular region instead."
   (puni-global-mode))
 
 (use-package wakatime-mode
+  :ensure-system-package
+  (wakatime-cli . wakatime)
   :vc (:url "https://github.com/wakatime/wakatime-mode")
   :ensure t
   :init

@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package citar
+  :ensure-system-package
+  zotero
   :custom
   (citar-bibliography "~/Documents/bibliography.bib")
   (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")

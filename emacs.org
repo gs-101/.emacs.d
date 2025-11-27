@@ -999,6 +999,8 @@ An all-in-one document reader for all formats in Emacs, backed by MuPDF.
 #+begin_src emacs-lisp
   (use-package reader
     :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")
+    :ensure-system-package
+    (mupdf-gl . mupdf)
     :ensure t)
 #+end_src
 
@@ -1011,6 +1013,8 @@ A lightweight major mode to open media (audio/video) files in an Emacs buffer.
 #+begin_src emacs-lisp
   (use-package ready-player
     :vc (:url "https://github.com/xenodium/ready-player")
+    :ensure-system-package
+    (ffmpeg mpv)
     :custom
     (ready-player-previous-icon "󰒮")
     (ready-player-play-icon "󰐊")
@@ -2019,6 +2023,8 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
 
 #+begin_src emacs-lisp
   (use-package citar
+    :ensure-system-package
+    zotero
     :custom
     (citar-bibliography "~/Documents/bibliography.bib")
     (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")
@@ -2760,6 +2766,8 @@ Emacs support for direnv which operates buffer-locally.
 #+begin_src emacs-lisp
   (use-package envrc
     :vc (:url "https://github.com/purcell/envrc")
+    :ensure-system-package
+    direnv
     :ensure t
     :config
     (defun elfehr/advice-org-latex-preview-restart-envrc (&rest args)
@@ -2987,6 +2995,9 @@ It's Magit! A Git Porcelain inside Emacs.
 
 #+begin_src emacs-lisp
   (use-package magit
+    ;; Requires perl for some rebasing commands.
+    :ensure-system-package
+    perl
     :bind
     ("C-c v B" . magit-blame)
     ("C-c v C" . magit-clone)
@@ -3113,6 +3124,8 @@ Emacs plugin for automatic time tracking and metrics generated from your program
 
 #+begin_src emacs-lisp
   (use-package wakatime-mode
+    :ensure-system-package
+    (wakatime-cli . wakatime)
     :vc (:url "https://github.com/wakatime/wakatime-mode")
     :ensure t
     :init
@@ -3715,10 +3728,12 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 ** [[https://codeberg.org/tusharhero/tinee][tinee]]
 
-Pop-up an Emacs frame to fill in any text field.
+Pop-up an Emacs frame to fill in any text field (Emacs Everywhere).
 
 #+begin_src emacs-lisp
   (use-package tinee
+    :ensure-system-package
+    wtype
     :vc (:url "https://codeberg.org/tusharhero/tinee")
     :ensure t)
 #+end_src
@@ -3810,6 +3825,8 @@ YouTube front-end for GNU Emacs.
 
 #+begin_src emacs-lisp
   (use-package yeetube
+    :ensure-system-package
+    (mpv yt-dlp)
     :vc (:url "https://git.thanosapollo.org/yeetube/")
     :ensure t)
 #+end_src
@@ -4917,7 +4934,7 @@ Show current command and its key in the mode line.
 
 #+begin_src emacs-lisp
   (use-package modus-themes
-    :when (dw/guix-p)
+    :when dw/guix-p
     :custom
     (modus-themes-bold-constructs t)
     (modus-themes-italic-constructs t)

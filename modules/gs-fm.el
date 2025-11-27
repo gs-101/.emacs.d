@@ -59,10 +59,14 @@
 
 (use-package reader
   :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")
+  :ensure-system-package
+  (mupdf-gl . mupdf)
   :ensure t)
 
 (use-package ready-player
   :vc (:url "https://github.com/xenodium/ready-player")
+  :ensure-system-package
+  (ffmpeg mpv)
   :custom
   (ready-player-previous-icon "󰒮")
   (ready-player-play-icon "󰐊")
