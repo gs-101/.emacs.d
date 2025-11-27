@@ -1,13 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(defun gs-101/guix-p ()
-  "Check if guix is installed in the current system."
-  (executable-find "guix"))
-
-(defun gs-101/nobara-p ()
-  "Check if the current system uses Nobara Linux as its distribution."
-  (executable-find "nobara-welcome"))
-
 (defun gs-101/filename (name &optional default-directory)
   "Return a path to FILE suitable for the current operating system.
 DEFAULT-DIRECTORY defines where to start looking for the file."
@@ -22,6 +14,24 @@ DEFAULT-DIRECTORY defines where to start looking for the file."
 (defcustom gs-101/modules-directory (gs-101/filename "modules" user-emacs-directory)
   "Path for this configuration's modules."
   :type 'directory)
+
+(defcustom dw/current-distro
+  (or (and (eq system-type 'gnu/linux)
+           (file-exists-p "/etc/os-release")
+           (with-temp-buffer
+             (insert-file-contents "/etc/os-release")
+             (search-forward-regexp "^ID=\"?\\(.*\\)\"?$")
+             (intern (or (match-string 1)
+                         "unknown"))))
+      'unknown)
+  "Current GNU/Linux distro being used."
+  :type 'symbol)
+
+(defvar dw/guix-p
+  (eql dw/current-distro 'guix))
+
+(defvar gs-101/nobara-p
+  (eql dw/current-distro 'nobara))
 
 (defun gs-101/fizz-buzz (num)
   "Play the FizzBuzz game from 1 to NUM.

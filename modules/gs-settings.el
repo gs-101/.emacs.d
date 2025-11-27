@@ -325,6 +325,10 @@ With a ARG prefix argument, copy the buffer to the other window."
   :custom
   (custom-file (no-littering-expand-etc-file-name "custom.el")))
 
+(use-package system-packages
+  :vc (:url "https://gitlab.com/jabranham/system-packages")
+  :ensure t)
+
 (use-package olivetti
   :vc (:url "https://github.com/rnkn/olivetti")
   :custom

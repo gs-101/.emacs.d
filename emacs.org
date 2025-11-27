@@ -9,17 +9,9 @@
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-** Helpers
+** Functions
 
 #+begin_src emacs-lisp
-  (defun gs-101/guix-p ()
-    "Check if guix is installed in the current system."
-    (executable-find "guix"))
-
-  (defun gs-101/nobara-p ()
-    "Check if the current system uses Nobara Linux as its distribution."
-    (executable-find "nobara-welcome"))
-
   (defun gs-101/filename (name &optional default-directory)
     "Return a path to FILE suitable for the current operating system.
   DEFAULT-DIRECTORY defines where to start looking for the file."
@@ -28,7 +20,7 @@
       (convert-standard-filename (expand-file-name name))))
 #+end_src
 
-** Directory Variables
+** Variables
 
 
 #+begin_src emacs-lisp
@@ -39,6 +31,24 @@
   (defcustom gs-101/modules-directory (gs-101/filename "modules" user-emacs-directory)
     "Path for this configuration's modules."
     :type 'directory)
+
+  (defcustom dw/current-distro
+    (or (and (eq system-type 'gnu/linux)
+             (file-exists-p "/etc/os-release")
+             (with-temp-buffer
+               (insert-file-contents "/etc/os-release")
+               (search-forward-regexp "^ID=\"?\\(.*\\)\"?$")
+               (intern (or (match-string 1)
+                           "unknown"))))
+        'unknown)
+    "Current GNU/Linux distro being used."
+    :type 'symbol)
+
+  (defvar dw/guix-p
+    (eql dw/current-distro 'guix))
+
+  (defvar gs-101/nobara-p
+    (eql dw/current-distro 'nobara))
 #+end_src
 
 ** Useless Code
@@ -788,6 +798,14 @@ Keep track of recently opened files.
       (load-file custom-file))
     :custom
     (custom-file (no-littering-expand-etc-file-name "custom.el")))
+#+end_src
+
+*** [[https://gitlab.com/jabranham/system-packages][system-packages]]
+
+#+begin_src emacs-lisp
+  (use-package system-packages
+    :vc (:url "https://gitlab.com/jabranham/system-packages")
+    :ensure t)
 #+end_src
 
 *** [[https://github.com/rnkn/olivetti][Olivetti]]
@@ -2679,7 +2697,7 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
 
 #+begin_src emacs-lisp
   (use-package arei
-    :when (gs-101/guix-p)
+    :when dw/guix-p
     :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
     :after scheme
     :ensure t)
@@ -4730,7 +4748,7 @@ Soothing pastel theme for Emacs.
 #+begin_src emacs-lisp
   (use-package catppuccin-theme
     :vc (:url "https://github.com/catppuccin/emacs")
-    :when (gs-101/nobara-p)
+    :when gs-101/nobara-p
     :config
     (load-theme 'catppuccin t)
     :ensure t)
@@ -4899,7 +4917,7 @@ Show current command and its key in the mode line.
 
 #+begin_src emacs-lisp
   (use-package modus-themes
-    :when (gs-101/guix-p)
+    :when (dw/guix-p)
     :custom
     (modus-themes-bold-constructs t)
     (modus-themes-italic-constructs t)

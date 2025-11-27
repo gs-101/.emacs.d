@@ -284,7 +284,7 @@ Only runs if a `flutter' buffer already exits."
         ("C-c C-p" . "run-scheme")))
 
 (use-package arei
-  :when (gs-101/guix-p)
+  :when dw/guix-p
   :vc (:url "https://git.sr.ht/~abcdw/emacs-arei")
   :after scheme
   :ensure t)

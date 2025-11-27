@@ -89,7 +89,7 @@
 
 (use-package catppuccin-theme
   :vc (:url "https://github.com/catppuccin/emacs")
-  :when (gs-101/nobara-p)
+  :when gs-101/nobara-p
   :config
   (load-theme 'catppuccin t)
   :ensure t)
@@ -200,7 +200,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (advice-add 'embark-act :before #'oantolin/keycast--update-force))
 
 (use-package modus-themes
-  :when (gs-101/guix-p)
+  :when (dw/guix-p)
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-italic-constructs t)
