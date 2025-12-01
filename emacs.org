@@ -4962,9 +4962,31 @@ Show current command and its key in the mode line.
 
 ** Modus Themes
 
+*** Guix System
+
 #+begin_src emacs-lisp
   (use-package modus-themes
     :when dw/guix-p
+    :config
+    (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
+      (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el")))
+    :init
+    (load-theme 'modus-vivendi t))
+#+end_src
+
+*** Other
+
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :unless dw/guix-p
+    :init
+    (load-theme 'modus-operandi t))
+#+end_src
+
+*** Configuration
+
+#+begin_src emacs-lisp
+  (use-package modus-themes
     :custom
     (modus-themes-bold-constructs t)
     (modus-themes-italic-constructs t)
@@ -4972,12 +4994,7 @@ Show current command and its key in the mode line.
     (modus-themes-variable-pitch-ui t)
     (modus-themes-completions
      '((matches . (semibold))
-       (selection . (extrabold underline))))
-    :config
-    (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
-      (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el")))
-    :init
-    (load-theme 'modus-vivendi t))
+       (selection . (extrabold underline)))))
 #+end_src
 
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]

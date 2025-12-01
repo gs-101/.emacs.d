@@ -202,6 +202,18 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package modus-themes
   :when dw/guix-p
+  :config
+  (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
+    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el")))
+  :init
+  (load-theme 'modus-vivendi t))
+
+(use-package modus-themes
+  :unless dw/guix-p
+  :init
+  (load-theme 'modus-operandi t))
+
+(use-package modus-themes
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-italic-constructs t)
@@ -209,12 +221,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (modus-themes-variable-pitch-ui t)
   (modus-themes-completions
    '((matches . (semibold))
-     (selection . (extrabold underline))))
-  :config
-  (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
-    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el")))
-  :init
-  (load-theme 'modus-vivendi t))
+     (selection . (extrabold underline)))))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
