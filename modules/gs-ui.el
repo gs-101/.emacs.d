@@ -76,7 +76,8 @@
   (initial-scratch-message nil)
   (inhibit-startup-echo-area-message t)
   (inhibit-startup-message t)
-  (inhibit-startup-screen t))
+  (inhibit-startup-screen t)
+  :defer t)
 
 (use-package window
   :custom
@@ -220,7 +221,10 @@ This advice replaces the rocket icon with a electric plug icon."
   :bind
   ("C-z i n" . nerd-icons-insert)
   :config
-  (nerd-icons-set-font "Symbols Nerd Font Mono")
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (with-selected-frame frame
+                (nerd-icons-set-font))))
   :demand t
   :ensure t)
 

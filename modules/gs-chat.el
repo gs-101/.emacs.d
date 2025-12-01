@@ -15,6 +15,7 @@
 
 (use-package startup
   :custom
-  (user-mail-address "gabrielsantosdesouza@disroot.org"))
+  (user-mail-address "gabrielsantosdesouza@disroot.org")
+  :defer t)
 
 (provide 'gs-chat)

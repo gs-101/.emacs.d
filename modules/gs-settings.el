@@ -118,7 +118,8 @@
 
 (use-package indent
   :custom
-  (tab-always-indent 'complete))
+  (tab-always-indent 'complete)
+  :defer t)
 
 (use-package isearch
   :custom
@@ -224,7 +225,8 @@ With a ARG prefix argument, copy the buffer to the other window."
 
 (use-package startup
   :custom
-  (initial-major-mode 'fundamental-mode))
+  (initial-major-mode 'fundamental-mode)
+  :defer t)
 
 (use-package emacs
   :init
