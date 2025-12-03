@@ -375,11 +375,8 @@ Only runs if a `flutter' buffer already exits."
   (prog-mode . gs-101/aggressive-indent-mode-lisp))
 
 (use-package apheleia
-  :vc (:url "https://github.com/radian-software/apheleia")
+  :vc (:url "https://github.com/gs-101/apheleia" :branch custom)
   :ensure t
-  :config
-  ;; Enabling code simplification for Go.
-  (setf (alist-get 'gofmt apheleia-formatters) '("gofmt" "-s"))
   :hook
   (prog-mode . apheleia-mode))
 
