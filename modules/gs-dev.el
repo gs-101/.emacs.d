@@ -263,12 +263,6 @@ Only runs if a `flutter' buffer already exits."
 (use-package auctex
   :ensure t)
 
-(use-package auctex-cluttex
-  :hook
-  (LaTeX-mode . auctex-cluttex-mode)
-  (plain-tex-mode . auctex-cluttex-mode)
-  :ensure t)
-
 (use-package lisp
   :bind
   ("C-M-z" . delete-pair)
