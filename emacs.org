@@ -3018,22 +3018,7 @@ It's Magit! A Git Porcelain inside Emacs.
     :ensure-system-package
     perl
     :bind
-    ("C-c v B" . magit-blame)
-    ("C-c v C" . magit-clone)
-    ("C-c v /" . magit-dispatch)
-    ("C-c v F" . magit-fetch)
-    ("C-c M-g" . magit-file-dispatch)
-    ("C-c v x" . magit-file-delete)
-    ("C-c v ." . magit-file-dispatch)
-    ("C-c v L" . magit-log)
-    ("C-c v g" . magit-status)
-    ("C-c v G" . magit-status-here)
-    ("C-c v c c" . magit-commit)
-    ("C-c v c f" . magit-commit-fixup)
-    ("C-c v l s" . magit-list-submodules)
-    :custom
-    (magit-diff-refine-hunk t)
-    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+    ("C-c v" . magit-dispatch)
     :ensure t
     :hook
     (magit-mode . magit-wip-mode)
