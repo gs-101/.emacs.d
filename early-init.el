@@ -7,6 +7,12 @@ DEFAULT-DIRECTORY defines where to start looking for the file."
       (convert-standard-filename (expand-file-name name default-directory))
     (convert-standard-filename (expand-file-name name))))
 
+(defmacro gs-101/run-at-time-daily (time &rest body)
+  "Runs BODY daily at TIME."
+  `(run-at-time ,time (* 60 60 24)
+                (lambda ()
+                  ,@body)))
+
 (defcustom gs-101/projects-code-directory (gs-101/filename "~/Projects/code/")
   "Path for project related to code, like applications."
   :type 'directory)

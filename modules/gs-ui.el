@@ -204,14 +204,21 @@ This advice replaces the rocket icon with a electric plug icon."
   :when dw/guix-p
   :config
   (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
-    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el")))
-  :init
-  (load-theme 'modus-vivendi t))
+    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))))
 
 (use-package modus-themes
   :unless dw/guix-p
+  :config
+  (gs-101/run-at-time-daily
+   "06:00"
+   (modus-themes-load-theme 'modus-operandi))
+
+  (gs-101/run-at-time-daily
+   "18:00"
+   (modus-themes-load-theme 'modus-vivendi))
   :init
-  (load-theme 'modus-operandi t))
+  (load-theme 'modus-operandi t)
+  (load-theme 'modus-vivendi t))
 
 (use-package modus-themes
   :custom
