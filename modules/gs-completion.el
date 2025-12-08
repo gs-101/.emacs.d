@@ -78,9 +78,9 @@ Also adds `cape-file' as a fallback."
 
 (use-package tempel
   :vc (:url "https://github.com/minad/tempel")
-  :bind
-  ("C-z i s" . tempel-insert)
-  :ensure t)
+  :ensure t
+  :hook
+  (completion-at-point-functions . tempel-complete))
 
 (use-package lsp-snippet
   :after tempel eglot

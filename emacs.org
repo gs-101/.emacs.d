@@ -3292,9 +3292,9 @@ Simple templates for Emacs.
 #+begin_src emacs-lisp
   (use-package tempel
     :vc (:url "https://github.com/minad/tempel")
-    :bind
-    ("C-z i s" . tempel-insert)
-    :ensure t)
+    :ensure t
+    :hook
+    (completion-at-point-functions . tempel-complete))
 #+end_src
 
 *** [[https://github.com/svaante/lsp-snippet][lsp-snippet]]
