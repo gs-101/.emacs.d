@@ -64,6 +64,7 @@
   (:map compilation-mode-map
         ("p" . previous-error-no-select))
   :custom
+  (compilation-ask-about-save nil)
   (compilation-auto-jump-to-first-error t)
   (compilation-max-output-line-length nil)
   (compilation-scroll-output t)
