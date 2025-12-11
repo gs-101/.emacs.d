@@ -62,9 +62,7 @@
 (use-package compile
   :bind
   (:map compilation-mode-map
-        ("n" . next-error-no-select)
-        ("p" . previous-error-no-select)
-        ("q" . kill-buffer-and-window))
+        ("p" . previous-error-no-select))
   :custom
   (compilation-auto-jump-to-first-error t)
   (compilation-max-output-line-length nil)
