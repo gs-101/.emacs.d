@@ -424,6 +424,8 @@ Only runs if a `flutter' buffer already exits."
   perl
   :bind
   ("C-c v" . magit-dispatch)
+  :custom
+  (magit-diff-refine-hunk t)
   :ensure t
   :hook
   (magit-mode . magit-wip-mode)

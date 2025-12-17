@@ -3018,6 +3018,8 @@ It's Magit! A Git Porcelain inside Emacs.
     perl
     :bind
     ("C-c v" . magit-dispatch)
+    :custom
+    (magit-diff-refine-hunk t)
     :ensure t
     :hook
     (magit-mode . magit-wip-mode)
@@ -4956,7 +4958,6 @@ Show current command and its key in the mode line.
     (gs-101/run-at-time-daily
      "06:00"
      (modus-themes-load-theme 'modus-operandi))
-
     (gs-101/run-at-time-daily
      "18:00"
      (modus-themes-load-theme 'modus-vivendi))
@@ -5238,7 +5239,7 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
       (prism-set-colors
         :lightens '(0 5 10)
         :desaturations '(-2.5 0 2.5)
-        :colors (-map #'catppuccin-get-color '(red
+        :colors (mapcar #'catppuccin-get-color '(red
                                                peach
                                                yellow
                                                green

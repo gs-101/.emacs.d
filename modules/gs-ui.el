@@ -212,7 +212,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (gs-101/run-at-time-daily
    "06:00"
    (modus-themes-load-theme 'modus-operandi))
-
   (gs-101/run-at-time-daily
    "18:00"
    (modus-themes-load-theme 'modus-vivendi))
@@ -415,7 +414,7 @@ additional space after completion."
     (prism-set-colors
       :lightens '(0 5 10)
       :desaturations '(-2.5 0 2.5)
-      :colors (-map #'catppuccin-get-color '(red
+      :colors (mapcar #'catppuccin-get-color '(red
                                              peach
                                              yellow
                                              green
