@@ -2063,6 +2063,16 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     :ensure t)
 #+end_src
 
+** BibTeX
+
+#+begin_src emacs-lisp
+  (use-package citar
+    :after bibtex
+    :bind
+    (:map bibtex-mode-map
+          ("C-c m q" . citar-insert-bibtex)))
+#+end_src
+
 ** [[https://github.com/emacs-citar/citar?tab=readme-ov-file#embark][Embark]]
 
 #+begin_src emacs-lisp
