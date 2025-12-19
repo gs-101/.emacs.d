@@ -4939,6 +4939,30 @@ Show current command and its key in the mode line.
 
 ** Modus Themes
 
+*** Configuration
+
+#+begin_src emacs-lisp
+  (use-package modus-themes
+    :config
+    (gs-101/run-at-time-daily
+     "06:00"
+     (modus-themes-load-theme 'modus-operandi))
+    (gs-101/run-at-time-daily
+     "18:00"
+     (modus-themes-load-theme 'modus-vivendi))
+    :custom
+    (modus-themes-bold-constructs t)
+    (modus-themes-italic-constructs t)
+    (modus-themes-mixed-fonts t)
+    (modus-themes-variable-pitch-ui t)
+    (modus-themes-completions
+     '((matches . (semibold))
+       (selection . (extrabold underline))))
+    :init
+    (load-theme 'modus-operandi t)
+    (load-theme 'modus-vivendi t))
+#+end_src
+
 *** Guix System
 
 #+begin_src emacs-lisp
@@ -4947,37 +4971,6 @@ Show current command and its key in the mode line.
     :config
     (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
       (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))))
-#+end_src
-
-*** Other
-
-#+begin_src emacs-lisp
-  (use-package modus-themes
-    :unless dw/guix-p
-    :config
-    (gs-101/run-at-time-daily
-     "06:00"
-     (modus-themes-load-theme 'modus-operandi))
-    (gs-101/run-at-time-daily
-     "18:00"
-     (modus-themes-load-theme 'modus-vivendi))
-    :init
-    (load-theme 'modus-operandi t)
-    (load-theme 'modus-vivendi t))
-#+end_src
-
-*** Configuration
-
-#+begin_src emacs-lisp
-  (use-package modus-themes
-    :custom
-    (modus-themes-bold-constructs t)
-    (modus-themes-italic-constructs t)
-    (modus-themes-mixed-fonts t)
-    (modus-themes-variable-pitch-ui t)
-    (modus-themes-completions
-     '((matches . (semibold))
-       (selection . (extrabold underline)))))
 #+end_src
 
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]

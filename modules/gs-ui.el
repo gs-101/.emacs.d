@@ -201,13 +201,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (advice-add 'embark-act :before #'oantolin/keycast--update-force))
 
 (use-package modus-themes
-  :when dw/guix-p
-  :config
-  (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
-    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))))
-
-(use-package modus-themes
-  :unless dw/guix-p
   :config
   (gs-101/run-at-time-daily
    "06:00"
@@ -215,11 +208,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (gs-101/run-at-time-daily
    "18:00"
    (modus-themes-load-theme 'modus-vivendi))
-  :init
-  (load-theme 'modus-operandi t)
-  (load-theme 'modus-vivendi t))
-
-(use-package modus-themes
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-italic-constructs t)
@@ -227,7 +215,16 @@ This advice replaces the rocket icon with a electric plug icon."
   (modus-themes-variable-pitch-ui t)
   (modus-themes-completions
    '((matches . (semibold))
-     (selection . (extrabold underline)))))
+     (selection . (extrabold underline))))
+  :init
+  (load-theme 'modus-operandi t)
+  (load-theme 'modus-vivendi t))
+
+(use-package modus-themes
+  :when dw/guix-p
+  :config
+  (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
+    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
