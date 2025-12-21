@@ -21,15 +21,16 @@
 
 (use-package org
   :config
-  (dolist (language '((C . t)
-                      (clojure . t)
-                      (js . t)
-                      (latex . t)
-                      (python . t)
-                      (scheme . t)
-                      (sql . t)
-                      (sqlite . t)))
-    (add-to-list 'org-babel-load-languages language))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)
+     (clojure . t)
+     (js . t)
+     (latex . t)
+     (python . t)
+     (scheme . t)
+     (sql . t)
+     (sqlite . t)))
   :custom
   (org-export-babel-evaluate nil))
 
