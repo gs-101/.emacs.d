@@ -132,24 +132,6 @@
   :demand t
   :ensure t)
 
-(use-package eglot-supplements
-  :vc (:url "https://codeberg.org/harald/eglot-supplements")
-  :ensure t)
-
-(use-package eglot-cthier
-  :after eglot
-  :bind
-  (:map eglot-mode-map
-        ("C-c e H" . eglot-cthier-request-call-hierarchy)))
-
-(use-package eglot-marocc
-  :after eglot
-  :bind
-  (:map eglot-mode-map
-        ("C-c e h" . eglot-marocc-request-highlights)
-        ("C-c e n" . eglot-marocc-goto-next-highlight)
-        ("C-c e p" . eglot-marocc-goto-previous-highlight)))
-
 (use-package eglot-inactive-regions
   :vc (:url "https://github.com/fargiolas/eglot-inactive-regions")
   :ensure t
@@ -441,6 +423,10 @@ Only runs if a `flutter' buffer already exits."
   :bind
   (:map magit-mode-map
         ("C-c m l s" . org-store-link))
+  :ensure t)
+
+(use-package pr-review
+  :vc (:url "https://github.com/blahgeek/emacs-pr-review")
   :ensure t)
 
 (use-package package-lint

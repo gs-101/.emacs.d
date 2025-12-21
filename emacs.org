@@ -2423,38 +2423,6 @@ Support for even more LSP extesnions, primarily for functionality introduced by 
     :ensure t)
 #+end_src
 
-*** [[https://codeberg.org/harald/eglot-supplements][Supplements]]
-
-Additional language server functionality implemented with Eglot. There's also support for semantic tokens, but I didn't use it here as it messes with the font lock. Only changes I'd make with font-locking are those with [[#prism][Prism]].
-
-#+begin_src emacs-lisp
-  (use-package eglot-supplements
-    :vc (:url "https://codeberg.org/harald/eglot-supplements")
-    :ensure t)
-#+end_src
-
-**** [[https://codeberg.org/harald/eglot-supplements#call-hierarchy][Call Hierarchy]]
-
-#+begin_src emacs-lisp
-  (use-package eglot-cthier
-    :after eglot
-    :bind
-    (:map eglot-mode-map
-          ("C-c e H" . eglot-cthier-request-call-hierarchy)))
-#+end_src
-
-**** [[https://codeberg.org/harald/eglot-supplements#mark-occurrences][Mark Occurences]]
-
-#+begin_src emacs-lisp
-  (use-package eglot-marocc
-    :after eglot
-    :bind
-    (:map eglot-mode-map
-          ("C-c e h" . eglot-marocc-request-highlights)
-          ("C-c e n" . eglot-marocc-goto-next-highlight)
-          ("C-c e p" . eglot-marocc-goto-previous-highlight)))
-#+end_src
-
 *** [[https://github.com/fargiolas/eglot-inactive-regions][Inactive Regions]]
 
 #+begin_quote
@@ -3066,6 +3034,14 @@ Support for Org links to Magit buffers.
     :bind
     (:map magit-mode-map
           ("C-c m l s" . org-store-link))
+    :ensure t)
+#+end_src
+
+** [[https://github.com/blahgeek/emacs-pr-review][Emacs PR Review]]
+
+#+begin_src emacs-lisp
+  (use-package pr-review
+    :vc (:url "https://github.com/blahgeek/emacs-pr-review")
     :ensure t)
 #+end_src
 
