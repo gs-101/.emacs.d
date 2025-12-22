@@ -2291,17 +2291,6 @@ Run compiler as inferior of Emacs, parse error messages.
 
 *** Compilers
 
-**** Cargo
-
-#+begin_src emacs-lisp
-  (use-package compile
-    :after rust-ts-mode
-    :config
-    (push '(cargo "^\\ \\ -->\\ \\([/a-z_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3)
-          compilation-error-regexp-alist-alist)
-    (push 'cargo compilation-error-regexp-alist))
-#+end_src
-
 **** [[https://gitlab.com/jgkamat/rmsbolt][rmsbolt]]
 
 #+begin_quote
