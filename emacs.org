@@ -829,20 +829,6 @@ Keep track of recently opened files.
     :ensure t)
 #+end_src
 
-*** [[https://github.com/rnkn/olivetti][Olivetti]]
-
-#+begin_quote
-Minor mode to automatically balance window margins.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package olivetti
-    :vc (:url "https://github.com/rnkn/olivetti")
-    :custom
-    (olivetti-body-width 132)
-    :ensure t)
-#+end_src
-
 *** [[https://github.com/jdtsmith/ultra-scroll][ultra-scroll]]
 
 #+begin_src emacs-lisp

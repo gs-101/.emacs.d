@@ -337,12 +337,6 @@ With a ARG prefix argument, copy the buffer to the other window."
   :vc (:url "https://gitlab.com/jabranham/system-packages")
   :ensure t)
 
-(use-package olivetti
-  :vc (:url "https://github.com/rnkn/olivetti")
-  :custom
-  (olivetti-body-width 132)
-  :ensure t)
-
 (use-package ultra-scroll
   :vc (:url "https://github.com/jdtsmith/ultra-scroll")
   :custom
