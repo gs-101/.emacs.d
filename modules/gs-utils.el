@@ -261,6 +261,7 @@ using Helpful."
                               geiser-repl-mode
                               vterm-mode
                               inferior-emacs-lisp-mode
+                              inferior-ess-r-mode
                               inferior-lisp-mode
                               inferior-python-mode
                               inferior-scheme-mode
