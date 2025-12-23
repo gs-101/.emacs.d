@@ -249,6 +249,9 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package slime
   :vc (:url "https://github.com/slime/slime")
+  :bind (:map slime-mode-map
+              ("C-h f" . slime-describe-function)
+              ("C-h v" . slime-describe-symbol))
   :ensure t)
 
 (use-package cmuscheme
