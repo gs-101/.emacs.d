@@ -35,6 +35,7 @@
   (debugger-stack-frame-as-list t) ; 5
   (enable-recursive-minibuffers t)
   (fast-but-imprecise-scrolling t) ; 3
+  (focus-follows-mouse t)
   (frame-resize-pixelwise t) ; 1
   (frame-title-format "GNU Emacs")
   (history-delete-duplicates t) ; 5
@@ -46,6 +47,7 @@
   ;; 4
   (minibuffer-prompt-properties
    '(cursor-intangible t read-only t face minibuffer-prompt))
+  (mouse-autoselect-window t)
   (read-buffer-completion-ignore-case t) ; 4
   (read-process-output-max (* 512 1024)) ; 3
   (resize-mini-windows 'grow-only)
