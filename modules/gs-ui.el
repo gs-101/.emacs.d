@@ -230,11 +230,6 @@ This advice replaces the rocket icon with a electric plug icon."
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")
   :bind
   ("C-z i n" . nerd-icons-insert)
-  :config
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (with-selected-frame frame
-                (nerd-icons-set-font))))
   :demand t
   :ensure t)
 
