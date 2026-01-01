@@ -21,4 +21,8 @@
 (use-package notmuch
   :ensure t)
 
+(use-package notmuch-transient
+  :vc (:url "https://github.com/tarsius/notmuch-transient")
+  :ensure t)
+
 (provide 'gs-chat)

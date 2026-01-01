@@ -28,7 +28,6 @@
 
 ** Variables
 
-
 #+begin_src emacs-lisp
   (defcustom gs-101/projects-code-directory (gs-101/filename "~/Projects/code/")
     "Path for project related to code, like applications."
@@ -3862,6 +3861,14 @@ Configuration for different chat clients.
 
 #+begin_src emacs-lisp
   (use-package notmuch
+    :ensure t)
+#+end_src
+
+*** [[https://github.com/tarsius/notmuch-transient][notmuch-transient]]
+
+#+begin_src emacs-lisp
+  (use-package notmuch-transient
+    :vc (:url "https://github.com/tarsius/notmuch-transient")
     :ensure t)
 #+end_src
 
