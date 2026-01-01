@@ -166,6 +166,10 @@ using Helpful."
   :config
   (consult-notes-org-roam-mode))
 
+(use-package consult-notmuch
+  :vc (:url "https://codeberg.org/jao/consult-notmuch")
+  :ensure t)
+
 (use-package consult-xref-stack
   :vc (:url "https://github.com/brett-lempereur/consult-xref-stack")
   :bind

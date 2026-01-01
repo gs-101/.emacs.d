@@ -3598,6 +3598,14 @@ Use consult to search notes.
     (consult-notes-org-roam-mode))
 #+end_src
 
+*** [[https://codeberg.org/jao/consult-notmuch][Notmuch]]
+
+#+begin_src emacs-lisp
+  (use-package consult-notmuch
+    :vc (:url "https://codeberg.org/jao/consult-notmuch")
+    :ensure t)
+#+end_src
+
 *** [[https://github.com/brett-lempereur/consult-xref-stack][xref]]
 
 #+begin_quote
