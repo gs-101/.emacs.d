@@ -18,4 +18,7 @@
   (user-mail-address "gabrielsantosdesouza@disroot.org")
   :defer t)
 
+(use-package notmuch
+  :ensure t)
+
 (provide 'gs-chat)

@@ -3850,6 +3850,13 @@ Configuration for different chat clients.
     :defer t)
 #+end_src
 
+** Notmuch
+
+#+begin_src emacs-lisp
+  (use-package notmuch
+    :ensure t)
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
