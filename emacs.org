@@ -2623,6 +2623,14 @@ A major mode for editing hyprland configuration files in emacs.
     :ensure t)
 #+end_src
 
+*** [[https://github.com/taquangtrung/emacs-kdl-mode][KDL]]
+
+#+begin_src emacs-lisp
+  (use-package kdl-mode
+    :vc (:url "https://github.com/taquangtrung/emacs-kdl-mode")
+    :ensure t)
+#+end_src
+
 *** [[https://gitlab.com/bricka/emacs-kotlin-ts-mode][Kotlin]]
 
 #+begin_src emacs-lisp
