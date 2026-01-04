@@ -124,6 +124,10 @@
   :demand t
   :ensure t)
 
+(use-package eglot-hover
+  :vc (:url "https://codeberg.org/slotThe/eglot-hover")
+  :ensure t)
+
 (use-package eglot-inactive-regions
   :vc (:url "https://github.com/fargiolas/eglot-inactive-regions")
   :ensure t

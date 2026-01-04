@@ -2398,6 +2398,16 @@ Support for even more LSP extesnions, primarily for functionality introduced by 
     :ensure t)
 #+end_src
 
+*** [[https://codeberg.org/slotThe/eglot-hover][Hover]]
+
+More useful eglot messages. This gives more focus to type hints, for example.
+
+#+begin_src emacs-lisp
+  (use-package eglot-hover
+    :vc (:url "https://codeberg.org/slotThe/eglot-hover")
+    :ensure t)
+#+end_src
+
 *** [[https://github.com/fargiolas/eglot-inactive-regions][Inactive Regions]]
 
 #+begin_quote
