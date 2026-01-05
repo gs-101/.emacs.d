@@ -270,6 +270,7 @@ using Helpful."
                               inferior-python-mode
                               inferior-scheme-mode
                               shell-mode
+                              slime-repl-mode
                               arei-connection-mode
                               "\\*ansi-term\\*"
                               "\\*Async Shell Command\\*"
