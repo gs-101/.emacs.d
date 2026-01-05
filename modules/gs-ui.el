@@ -383,6 +383,21 @@ additional space after completion."
   :custom
   (magit-format-file-function #'magit-format-file-nerd-icons))
 
+(use-package ready-player
+  :after nerd-icons ready-player
+  :custom
+  (ready-player-autoplay-icon "󰼛")
+  (ready-player-help-icon "󰋖")
+  (ready-player-next-icon "󰒭")
+  (ready-player-open-externally-icon "󰒖")
+  (ready-player-open-my-media-collection-icon "󰋜")
+  (ready-player-play-icon "󰐊")
+  (ready-player-previous-icon "󰒮")
+  (ready-player-repeat-icon "󰑖")
+  (ready-player-search-icon "󰍉")
+  (ready-player-shuffle-icon "󰒝")
+  (ready-player-stop-icon "󰓛"))
+
 (use-package prism
   :vc (:url "https://github.com/alphapapa/prism.el")
   :config
