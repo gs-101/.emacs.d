@@ -68,16 +68,19 @@
   :ensure-system-package
   (ffmpeg mpv)
   :custom
+  (ready-player-set-global-bindings nil)
   (ready-player-previous-icon "󰒮")
   (ready-player-play-icon "󰐊")
   (ready-player-stop-icon "󰓛")
   (ready-player-next-icon "󰒭")
   (ready-player-search-icon "󰍉")
-  (ready-player-set-global-bindings nil)
   (ready-player-shuffle-icon "󰒝")
   (ready-player-open-externally-icon "󰒖")
   (ready-player-repeat-icon "󰑖")
   (ready-player-autoplay-icon "󰼛")
+  (ready-player-help-icon "󰋖")
+  (ready-player-autoplay-icon "󰔡")
+  (ready-player-open-my-media-collection-icon "󰋜")
   :ensure t
   :hook
   (dired-mode . ready-player-mode))
