@@ -416,6 +416,10 @@ Only runs if a `flutter' buffer already exits."
   (magit-mode . magit-wip-mode)
   (magit-process-find-password-functions . magit-process-password-auth-source))
 
+(use-package agitjo
+  :vc (:url "https://codeberg.org/halvin/agitjo")
+  :ensure t)
+
 (use-package forge
   :after magit
   :ensure t)

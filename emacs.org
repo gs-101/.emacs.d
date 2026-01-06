@@ -3028,6 +3028,14 @@ It's Magit! A Git Porcelain inside Emacs.
     (magit-process-find-password-functions . magit-process-password-auth-source))
 #+end_src
 
+*** [[https://codeberg.org/halvin/agitjo][AGitjo]]
+
+#+begin_src emacs-lisp
+  (use-package agitjo
+    :vc (:url "https://codeberg.org/halvin/agitjo")
+    :ensure t)
+#+end_src
+
 *** [[https://github.com/magit/forge][Forge]]
 
 #+begin_quote
