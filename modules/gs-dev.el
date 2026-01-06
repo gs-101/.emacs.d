@@ -428,10 +428,6 @@ Only runs if a `flutter' buffer already exits."
         ("C-c m l s" . org-store-link))
   :ensure t)
 
-(use-package pr-review
-  :vc (:url "https://github.com/blahgeek/emacs-pr-review")
-  :ensure t)
-
 (use-package package-lint
   :ensure t)
 
