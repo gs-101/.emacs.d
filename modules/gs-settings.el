@@ -371,4 +371,29 @@ With a ARG prefix argument, copy the buffer to the other window."
   :init
   (shell-command-with-editor-mode))
 
+(use-package xdg-launcher
+  :vc (:url "https://github.com/emacs-exwm/xdg-launcher")
+  :ensure t)
+
+(use-package xdg-launcher
+  :after xdg-launcher
+  :config
+  (defun gs-101/emacs-app-launcher ()
+    "Create a minibuffer-only buffer for selecting an application to be opened."
+    (interactive)
+    (with-selected-frame
+        (make-frame '((name . "emacs-app-launcher")
+                      (minibuffer . only)
+                      (fullscreen . 0)
+                      (undecorated . t)
+                      (auto-raise . t)
+                      (tool-bar-lines . 0)
+                      (menu-bar-lines . 0)
+                      (internal-border-width . 10)
+                      (width . 80)
+                      (height . 11)))
+      (unwind-protect
+          (xdg-launcher-run-app)
+        (delete-frame)))))
+
 (provide 'gs-settings)

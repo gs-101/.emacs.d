@@ -882,6 +882,42 @@ Use the Emacsclient as the $EDITOR of child processes.
     (shell-command-with-editor-mode))
 #+end_src
 
+*** [[https://github.com/emacs-exwm/xdg-launcher][xdg-launcher]]
+
+#+begin_src emacs-lisp
+  (use-package xdg-launcher
+    :vc (:url "https://github.com/emacs-exwm/xdg-launcher")
+    :ensure t)
+#+end_src
+
+**** Application Launcher
+:PROPERTIES:
+:CREDITS:  https://gitlab.com/dwt1/configuring-emacs/-/blob/main/07-the-final-touches/scripts/app-launchers.el?ref_type=heads
+:END:
+
+#+begin_src emacs-lisp
+  (use-package xdg-launcher
+    :after xdg-launcher
+    :config
+    (defun gs-101/emacs-app-launcher ()
+      "Create a minibuffer-only buffer for selecting an application to be opened."
+      (interactive)
+      (with-selected-frame
+          (make-frame '((name . "emacs-app-launcher")
+                        (minibuffer . only)
+                        (fullscreen . 0)
+                        (undecorated . t)
+                        (auto-raise . t)
+                        (tool-bar-lines . 0)
+                        (menu-bar-lines . 0)
+                        (internal-border-width . 10)
+                        (width . 80)
+                        (height . 11)))
+        (unwind-protect
+            (xdg-launcher-run-app)
+          (delete-frame)))))
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
