@@ -1064,7 +1064,7 @@ A lightweight major mode to open media (audio/video) files in an Emacs buffer.
     (ready-player-set-global-bindings nil)
     :ensure t
     :hook
-    (dired-mode . ready-player-mode))
+    (dired-mode . ready-player-dired-mode))
 #+end_src
 
 ** End

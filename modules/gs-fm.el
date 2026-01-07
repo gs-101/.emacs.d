@@ -72,6 +72,6 @@
   (ready-player-set-global-bindings nil)
   :ensure t
   :hook
-  (dired-mode . ready-player-mode))
+  (dired-mode . ready-player-dired-mode))
 
 (provide 'gs-fm)
