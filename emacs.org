@@ -3697,7 +3697,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 #+begin_src emacs-lisp
   (use-package embark
-    :vc (:url "https://github.com/gs-101/embark")
+    :vc (:url "https://github.com/oantolin/embark")
     :bind
     ([remap describe-bindings]. embark-bindings)
     ("C-;" . embark-act)

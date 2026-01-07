@@ -190,7 +190,7 @@ using Helpful."
   (consult--regexp-compiler #'minad/consult--orderless-regexp-compiler))
 
 (use-package embark
-  :vc (:url "https://github.com/gs-101/embark")
+  :vc (:url "https://github.com/oantolin/embark")
   :bind
   ([remap describe-bindings]. embark-bindings)
   ("C-;" . embark-act)
