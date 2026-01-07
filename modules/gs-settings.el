@@ -335,6 +335,10 @@ With a ARG prefix argument, copy the buffer to the other window."
   :custom
   (custom-file (no-littering-expand-etc-file-name "custom.el")))
 
+(use-package qrencode
+  :vc (:url "https://github.com/ruediger/qrencode-el")
+  :ensure t)
+
 (use-package system-packages
   :vc (:url "https://gitlab.com/jabranham/system-packages")
   :ensure t)

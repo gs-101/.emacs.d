@@ -822,6 +822,14 @@ Keep track of recently opened files.
     (custom-file (no-littering-expand-etc-file-name "custom.el")))
 #+end_src
 
+*** [[https://github.com/ruediger/qrencode-el][QREncode EL]]
+
+#+begin_src emacs-lisp
+  (use-package qrencode
+    :vc (:url "https://github.com/ruediger/qrencode-el")
+    :ensure t)
+#+end_src
+
 *** [[https://gitlab.com/jabranham/system-packages][system-packages]]
 
 #+begin_src emacs-lisp
