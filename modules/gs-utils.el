@@ -237,6 +237,19 @@ using Helpful."
   :hook
   (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 
+(use-package dwim-shell-command
+  :vc (:url "https://github.com/xenodium/dwim-shell-command")
+  :ensure t
+  :bind
+  (([remap shell-command] . dwim-shell-command)
+   :map dired-mode-map
+   ([remap dired-do-async-shell-command] . dwim-shell-command)
+   ([remap dired-do-shell-command] . dwim-shell-command)
+   ([remap dired-smart-shell-command] . dwim-shell-command)))
+
+(use-package dwim-shell-commands
+  :after dwim-shell-command)
+
 (use-package tinee
   :ensure-system-package
   wtype

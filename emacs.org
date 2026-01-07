@@ -822,14 +822,6 @@ Keep track of recently opened files.
     (custom-file (no-littering-expand-etc-file-name "custom.el")))
 #+end_src
 
-*** [[https://github.com/ruediger/qrencode-el][QREncode EL]]
-
-#+begin_src emacs-lisp
-  (use-package qrencode
-    :vc (:url "https://github.com/ruediger/qrencode-el")
-    :ensure t)
-#+end_src
-
 *** [[https://gitlab.com/jabranham/system-packages][system-packages]]
 
 #+begin_src emacs-lisp
@@ -3755,6 +3747,27 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
                               (floor (frame-height) 2) 1)))
     :hook
     (embark-collect-post-revert . oantolin/embark-collect-resize-window))
+#+end_src
+
+** [[https://github.com/xenodium/dwim-shell-command][dwim-shell-command]]
+
+#+begin_src emacs-lisp
+  (use-package dwim-shell-command
+    :vc (:url "https://github.com/xenodium/dwim-shell-command")
+    :ensure t
+    :bind
+    (([remap shell-command] . dwim-shell-command)
+     :map dired-mode-map
+     ([remap dired-do-async-shell-command] . dwim-shell-command)
+     ([remap dired-do-shell-command] . dwim-shell-command)
+     ([remap dired-smart-shell-command] . dwim-shell-command)))
+#+end_src
+
+*** [[https://github.com/xenodium/dwim-shell-command#my-toolbox][Toolbox]]
+
+#+begin_src emacs-lisp
+  (use-package dwim-shell-commands
+    :after dwim-shell-command)
 #+end_src
 
 ** [[https://codeberg.org/tusharhero/tinee][tinee]]
