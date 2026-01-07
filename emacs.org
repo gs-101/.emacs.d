@@ -2930,8 +2930,6 @@ Structured editing and navigation in Emacs with tree-sitter.
 #+begin_src emacs-lisp
   (use-package combobulate
     :vc (:url "https://github.com/mickeynp/combobulate")
-    :custom
-    (combobulate-key-prefix "C-z t c")
     :ensure t
     :hook
     (prog-mode . combobulate-mode))
