@@ -366,8 +366,6 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package combobulate
   :vc (:url "https://github.com/mickeynp/combobulate")
-  :custom
-  (combobulate-key-prefix "C-z t c")
   :ensure t
   :hook
   (prog-mode . combobulate-mode))
