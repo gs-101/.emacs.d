@@ -43,7 +43,8 @@
   (dired-create-destination-dirs 'always)
   (dired-create-destination-dirs-on-trailing-dirsep t)
   (dired-do-revert-buffer t)
-  (dired-isearch-filenames 'dwim))
+  (dired-isearch-filenames 'dwim)
+  (dired-vc-rename-file t))
 
 (use-package dired-async
   :hook
