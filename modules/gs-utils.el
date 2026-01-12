@@ -248,6 +248,8 @@ using Helpful."
    ([remap dired-smart-shell-command] . dwim-shell-command)))
 
 (use-package dwim-shell-commands
+  :ensure-system-package
+  (atool unzip)
   :after dwim-shell-command)
 
 (use-package tinee

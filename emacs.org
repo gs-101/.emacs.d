@@ -3766,6 +3766,8 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
 
 #+begin_src emacs-lisp
   (use-package dwim-shell-commands
+    :ensure-system-package
+    (atool unzip)
     :after dwim-shell-command)
 #+end_src
 
