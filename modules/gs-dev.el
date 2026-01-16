@@ -242,7 +242,18 @@ Only runs if a `flutter' buffer already exits."
   :ensure t)
 
 (use-package auctex
-  :ensure t)
+  :ensure t
+  :custom
+  (reftex-plug-into-AUCTeX t)
+  :hook
+  (LaTeX-mode . turn-on-reftex))
+
+(use-package tex
+  :custom
+  (TeX-auto-local ".auto")
+  (TeX-auto-save t)
+  (TeX-master 'dwim)
+  (TeX-parse-self t))
 
 (use-package lisp
   :bind

@@ -2673,7 +2673,22 @@ A major mode for editing hyprland configuration files in emacs.
 
 #+begin_src emacs-lisp
   (use-package auctex
-    :ensure t)
+    :ensure t
+    :custom
+    (reftex-plug-into-AUCTeX t)
+    :hook
+    (LaTeX-mode . turn-on-reftex))
+#+end_src
+
+***** TeX
+
+#+begin_src emacs-lisp
+  (use-package tex
+    :custom
+    (TeX-auto-local ".auto")
+    (TeX-auto-save t)
+    (TeX-master 'dwim)
+    (TeX-parse-self t))
 #+end_src
 
 *** Lisp
