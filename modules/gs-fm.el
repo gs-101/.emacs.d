@@ -32,7 +32,7 @@
   (dired-clean-confirm-killing-deleted-buffers nil)
   (dired-dwim-target t)
   (dired-kill-when-opening-new-dired-buffer t)
-  (dired-listing-switches "-agho --group-directories-first") ;;1
+  (dired-listing-switches "--all --author --color=auto --group-directories-first --human-readable --dereference-command-line -l")
   (dired-maybe-use-globstar t)
   (dired-mouse-drag-files t)
   (dired-recursive-copies 'always))
@@ -57,6 +57,38 @@
 (use-package mouse
   :custom
   (mouse-drag-and-drop-region-cross-program t))
+
+(use-package dirvish
+  :ensure-system-package
+  (fd (vipsthumbnail . vips))
+  :bind
+  ([remap dired] . dirvish)
+  ([remap dired-jump] . dirvish-history-jump)
+  (:map dirvish-mode-map
+        ("<mouse-3>" . dirvish-mouse-find-file)
+        ("<mouse-2>" . dirvish-mouse-find-file-other-window)
+        ("<mouse-1>" . dirvish-subtree-toggle-or-open))
+  :config
+  (put 'dired-find-alternate-file 'disabled nil)
+  (setq mouse1-click-follows-link nil)
+  :custom
+  (dirvish-attributes
+   (append
+    ;; Attributes whose order doesn't matter.
+    '(vc-state collapse)
+    ;; Attributes whose order doesn't matter.
+    '(git-msg file-modes file-time)))
+  (dirvish-header-line-format '(:left (path free-space) :right (index)))
+  (dirvish-large-directory-threshold 20000)
+  (dirvish-path-separators '(" ~" " /" "/"))
+  ;; Disable most preview dispatchers so I can use Emacs alternatives
+  ;; instead.
+  (dirvish-preview-dispatchers '(gif font))
+  (dirvish-use-mode-line nil)
+  :init
+  (dirvish-override-dired-mode)
+  (dirvish-peek-mode)
+  :ensure t)
 
 (use-package reader
   :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")

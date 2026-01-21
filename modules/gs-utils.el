@@ -154,7 +154,6 @@ using Helpful."
   :after consult
   :bind
   ([remap list-directory] . consult-dir)
-  ([remap dired-jump] . consult-dir-jump-file)
   :ensure t)
 
 (use-package consult-notes

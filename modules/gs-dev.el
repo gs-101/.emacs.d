@@ -53,6 +53,12 @@
   :custom
   (git-commit-major-mode 'git-commit-ts-mode))
 
+(use-package treesit-sexp
+  :vc (:url "https://github.com/alexispurslane/treesit-sexp")
+  :ensure t
+  :init
+  (global-treesit-sexp-mode))
+
 (use-package mason
   :vc (:url "https://github.com/deirn/mason.el")
   :ensure t
@@ -374,12 +380,6 @@ Only runs if a `flutter' buffer already exits."
   :ensure t
   :hook
   (prog-mode . apheleia-mode))
-
-(use-package combobulate
-  :vc (:url "https://github.com/mickeynp/combobulate")
-  :ensure t
-  :hook
-  (prog-mode . combobulate-mode))
 
 (use-package dape
   :vc (:url "https://github.com/svaante/dape")

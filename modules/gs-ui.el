@@ -126,12 +126,6 @@ This advice replaces the rocket icon with a electric plug icon."
   :init
   (doom-modeline-mode))
 
-(use-package diredfl
-  :vc (:url "https://github.com/purcell/diredfl")
-  :ensure t
-  :hook
-  (dired-mode . diredfl-mode))
-
 (use-package eldoc-box
   :vc (:url "https://github.com/casouri/eldoc-box")
   :after eldoc

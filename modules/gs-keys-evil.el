@@ -12,17 +12,12 @@
   :ensure t)
 
 (use-package evil-core
-  :config
-  ;; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   :init
   (evil-mode))
 
 (use-package evil-vars
   :custom
   (evil-disable-insert-state-bindings t) ;; 2
-  (evil-respect-visual-line-mode t) ;; 1
   (evil-undo-system 'undo-redo)
   (evil-split-window-below t) ;; 1
   (evil-v$-excludes-newline t) ;; 1

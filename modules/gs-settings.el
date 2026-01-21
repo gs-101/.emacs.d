@@ -57,6 +57,7 @@
   (text-mode-ispell-word-completion nil)
   (user-full-name "Gabriel Santos")
   (window-resize-pixelwise nil) ; 1
+  (word-wrap t)
   (words-include-escapes t)
   :hook
   ;; 4
@@ -267,10 +268,6 @@ With a ARG prefix argument, copy the buffer to the other window."
   (use-package-enable-imenu-support t)
   (use-package-vc-prefer-newest t))
 
-(use-package simple
-  :init
-  (global-visual-line-mode))
-
 (use-package warnings
   :custom
   (warning-suppress-log-types '((comp) (bytecomp))))
@@ -279,6 +276,12 @@ With a ARG prefix argument, copy the buffer to the other window."
   :config
   (when (executable-find "rg")
     (setopt xref-search-program 'ripgrep)))
+
+(use-package diredfl
+  :vc (:url "https://github.com/purcell/diredfl")
+  :ensure t
+  :hook
+  (dired-mode . diredfl-mode))
 
 (use-package gcmh
   :vc (:url "https://github.com/emacsmirror/gcmh")

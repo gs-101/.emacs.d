@@ -232,6 +232,7 @@ Generic package used to configure functions and variables not included in any Em
     (text-mode-ispell-word-completion nil)
     (user-full-name "Gabriel Santos")
     (window-resize-pixelwise nil) ; 1
+    (word-wrap t)
     (words-include-escapes t)
     :hook
     ;; 4
@@ -670,18 +671,6 @@ A configuration macro for simplifying your .emacs.
     (use-package-vc-prefer-newest t))
 #+end_src
 
-*** Visual Line Mode
-
-#+begin_quote
-When Visual Line mode is enabled, `word-wrap' is turned on in this buffer, and simple editing commands are redefined to act on visual lines, not logical lines.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package simple
-    :init
-    (global-visual-line-mode))
-#+end_src
-
 *** Warnings
 
 #+begin_quote
@@ -710,6 +699,20 @@ This file provides a somewhat generic infrastructure for cross referencing comma
 ** Third-Party Packages
 
 Packages which I think should be part of Emacs core.
+
+*** [[https://github.com/purcell/diredfl][diredfl]]
+
+#+begin_quote
+Extra Emacs font lock rules for a more colourful dired.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package diredfl
+    :vc (:url "https://github.com/purcell/diredfl")
+    :ensure t
+    :hook
+    (dired-mode . diredfl-mode))
+#+end_src
 
 *** [[https://github.com/emacsmirror/gcmh][Garbage Collector Magic Hack]]
 
@@ -984,7 +987,7 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
     (dired-clean-confirm-killing-deleted-buffers nil)
     (dired-dwim-target t)
     (dired-kill-when-opening-new-dired-buffer t)
-    (dired-listing-switches "-agho --group-directories-first") ;;1
+    (dired-listing-switches "--all --author --color=auto --group-directories-first --human-readable --dereference-command-line -l")
     (dired-maybe-use-globstar t)
     (dired-mouse-drag-files t)
     (dired-recursive-copies 'always))
@@ -1034,6 +1037,46 @@ Asynchronous dired actions.
     :custom
     (mouse-drag-and-drop-region-cross-program t))
 #+end_src
+
+** [[https://github.com/alexluigit/dirvish][Dirvish]]
+
+#+begin_quote
+A polished Dired with batteries included.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package dirvish
+    :ensure-system-package
+    (fd (vipsthumbnail . vips))
+    :bind
+    ([remap dired] . dirvish)
+    ([remap dired-jump] . dirvish-history-jump)
+    (:map dirvish-mode-map
+          ("<mouse-3>" . dirvish-mouse-find-file)
+          ("<mouse-2>" . dirvish-mouse-find-file-other-window)
+          ("<mouse-1>" . dirvish-subtree-toggle-or-open))
+    :config
+    (put 'dired-find-alternate-file 'disabled nil)
+    (setq mouse1-click-follows-link nil)
+    :custom
+    (dirvish-attributes
+     (append
+      ;; Attributes whose order doesn't matter.
+      '(vc-state collapse)
+      ;; Attributes whose order doesn't matter.
+      '(git-msg file-modes file-time)))
+    (dirvish-header-line-format '(:left (path free-space) :right (index)))
+    (dirvish-large-directory-threshold 20000)
+    (dirvish-path-separators '(" ~" " /" "/"))
+    ;; Disable most preview dispatchers so I can use Emacs alternatives
+    ;; instead.
+    (dirvish-preview-dispatchers '(gif font))
+    (dirvish-use-mode-line nil)
+    :init
+    (dirvish-override-dired-mode)
+    (dirvish-peek-mode)
+    :ensure t)
+    #+end_src
 
 ** [[https://codeberg.org/divyaranjan/emacs-reader][Reader]]
 
@@ -2269,6 +2312,18 @@ Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
     (git-commit-major-mode 'git-commit-ts-mode))
 #+end_src
 
+*** [[https://github.com/alexispurslane/treesit-sexp][treesit-sexp]]
+
+Sexp interaction commands for Tree-Sitter based modes.
+
+#+begin_src emacs-lisp
+  (use-package treesit-sexp
+    :vc (:url "https://github.com/alexispurslane/treesit-sexp")
+    :ensure t
+    :init
+    (global-treesit-sexp-mode))
+#+end_src
+
 ** Language Servers
 
 *** [[https://github.com/deirn/mason.el][mason.el]]
@@ -2929,23 +2984,6 @@ Run code formatter on buffer contents without moving point, using RCS patches an
     :ensure t
     :hook
     (prog-mode . apheleia-mode))
-#+end_src
-
-** [[https://github.com/mickeynp/combobulate][Combobulate]]
-:PROPERTIES:
-:CREDITS:  https://github.com/mickeynp/combobulate/issues/119#issuecomment-2435132123
-:END:
-
-#+begin_quote
-Structured editing and navigation in Emacs with tree-sitter.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package combobulate
-    :vc (:url "https://github.com/mickeynp/combobulate")
-    :ensure t
-    :hook
-    (prog-mode . combobulate-mode))
 #+end_src
 
 ** [[https://github.com/svaante/dape][Dape]]
@@ -3627,7 +3665,6 @@ Insert paths into the minibuffer prompt in Emacs.
     :after consult
     :bind
     ([remap list-directory] . consult-dir)
-    ([remap dired-jump] . consult-dir-jump-file)
     :ensure t)
 #+end_src
 
@@ -4011,10 +4048,6 @@ Core functionality.
 
 #+begin_src emacs-lisp
   (use-package evil-core
-    :config
-    ;; Use visual line motions even outside of visual-line-mode buffers
-    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
     :init
     (evil-mode))
 #+end_src
@@ -4032,7 +4065,6 @@ Settings and variables.
   (use-package evil-vars
     :custom
     (evil-disable-insert-state-bindings t) ;; 2
-    (evil-respect-visual-line-mode t) ;; 1
     (evil-undo-system 'undo-redo)
     (evil-split-window-below t) ;; 1
     (evil-v$-excludes-newline t) ;; 1
@@ -4361,14 +4393,12 @@ Implementation of all commands in Meow.
     (defun gs-101/meow-super-prev ()
       "Runs different upwards navigation commands based on the current major or minor mode.
 
-  - `combobulate-mode' :: `combobulate-navigate-up'
   - `markdown-mode' :: `markdown-previous-visible-heading'
   - `org-mode' :: `org-previous-visible-heading'
   - `prog-mode' :: `backward-up-list'
   - Other :: `meow-prev-expand'"
       (interactive)
       (cond
-       ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-up))
        ((derived-mode-p 'markdown-mode) (markdown-previous-visible-heading 1))
        ((derived-mode-p 'org-mode) (org-previous-visible-heading 1))
        ((derived-mode-p 'prog-mode) (backward-up-list))
@@ -4377,14 +4407,12 @@ Implementation of all commands in Meow.
     (defun gs-101/meow-super-next ()
       "Runs different downwards navigation commands based on the current major or minor mode.
 
-  - `combobulate-mode' :: `combobulate-navigate-down'
   - `markdown-mode' :: `markdown-next-visible-heading'
   - `org-mode' :: `org-next-visible-heading'
   - `prog-mode' :: `down-list'
   - Other :: `meow-next-expand'"
       (interactive)
       (cond
-       ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-down))
        ((derived-mode-p 'markdown-mode) (markdown-next-visible-heading 1))
        ((derived-mode-p 'org-mode) (org-next-visible-heading 1))
        ((derived-mode-p 'prog-mode) (down-list))
@@ -4393,13 +4421,11 @@ Implementation of all commands in Meow.
     (defun gs-101/meow-super-left ()
       "Runs different leftwards navigation commands based on the current major or minor mode.
 
-  - `combobulate-mode' :: `combobulate-navigate-previous'
   - `prog-mode' :: `backward-sexp'
   - `text-mode' :: `meow-back-word'
   - Other :: `meow-left-expand'"
       (interactive)
       (cond
-       ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-previous))
        ((derived-mode-p 'prog-mode) (backward-sexp))
        ((derived-mode-p 'text-mode) (meow-back-word 1))
        (t (meow-left-expand))))
@@ -4407,13 +4433,11 @@ Implementation of all commands in Meow.
     (defun gs-101/meow-super-right ()
       "Runs different rightwards navigation commands based on the current major or minor mode.
 
-  - `combobulate-mode' :: `combobulate-navigate-next'
   - `prog-mode' :: `forward-sexp'
   - `text-mode' :: `meow-next-word'
   - Other :: `meow-right-expand'"
       (interactive)
       (cond
-       ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-next))
        ((derived-mode-p 'prog-mode) (forward-sexp))
        ((derived-mode-p 'text-mode) (meow-next-word 1))
        (t (meow-right-expand))))
@@ -4421,36 +4445,30 @@ Implementation of all commands in Meow.
     (defun gs-101/meow-super-kill ()
       "Runs different kill commands based on the current major or minor mode.
 
-  - `combobulate-mode' :: `combobulate-kill-node-dwim'
   - `prog-mode' :: `kill-sexp'
   - Other :: `meow-kill-whole-line'"
       (interactive)
       (cond
-       ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-kill-node-dwim))
        ((derived-mode-p 'prog-mode) (kill-sexp))
        (t (meow-kill-whole-line))))
 
     (defun gs-101/meow-super-mark ()
       "Runs different mark commands based on the current major or minor mode.
 
-  - `combobulate-mode' :: `combobulate-mark-node-dwim'
   - `prog-mode' :: `meow-block'
   - Other :: `meow-mark-word'"
       (interactive)
       (cond
-       ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-mark-node-dwim))
        ((derived-mode-p 'prog-mode) (meow-block 1))
        (t (meow-mark-word 1))))
 
     (defun gs-101/meow-transpose ()
       "Runs different transposition commands based on the current major or minor mode.
 
-  - `combobulate-mode' :: `combobulate-transpose-sexps'
   - `prog-mode' :: `meow-transpose-sexp'
   - Other :: `transpose-words'"
       (interactive)
       (cond
-       ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-transpose-sexps))
        ((derived-mode-p 'prog-mode) (meow-transpose-sexp))
        (t (transpose-words))))
 
@@ -4544,8 +4562,8 @@ Meow helpers for customization.
      '("J" . meow-pop-to-global-mark)
      '("k" . meow-kill)
      '("K" . gs-101/meow-super-kill)
-     '("l" . meow-visual-line)
-     '("L" . meow-visual-line-expand)
+     '("l" . meow)
+     '("L" . meow-expand)
      '("n" . meow-next)
      '("N" . gs-101/meow-super-next)
      '("p" . meow-prev)
@@ -4891,20 +4909,6 @@ A fancy and fast mode-line inspired by minimalism design.
     :ensure t
     :init
     (doom-modeline-mode))
-#+end_src
-
-** [[https://github.com/purcell/diredfl][diredfl]]
-
-#+begin_quote
-Extra Emacs font lock rules for a more colourful dired.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package diredfl
-    :vc (:url "https://github.com/purcell/diredfl")
-    :ensure t
-    :hook
-    (dired-mode . diredfl-mode))
 #+end_src
 
 ** [[https://github.com/casouri/eldoc-box][ElDoc Box]]

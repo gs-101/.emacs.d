@@ -25,14 +25,12 @@
   (defun gs-101/meow-super-prev ()
     "Runs different upwards navigation commands based on the current major or minor mode.
 
-- `combobulate-mode' :: `combobulate-navigate-up'
 - `markdown-mode' :: `markdown-previous-visible-heading'
 - `org-mode' :: `org-previous-visible-heading'
 - `prog-mode' :: `backward-up-list'
 - Other :: `meow-prev-expand'"
     (interactive)
     (cond
-     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-up))
      ((derived-mode-p 'markdown-mode) (markdown-previous-visible-heading 1))
      ((derived-mode-p 'org-mode) (org-previous-visible-heading 1))
      ((derived-mode-p 'prog-mode) (backward-up-list))
@@ -41,14 +39,12 @@
   (defun gs-101/meow-super-next ()
     "Runs different downwards navigation commands based on the current major or minor mode.
 
-- `combobulate-mode' :: `combobulate-navigate-down'
 - `markdown-mode' :: `markdown-next-visible-heading'
 - `org-mode' :: `org-next-visible-heading'
 - `prog-mode' :: `down-list'
 - Other :: `meow-next-expand'"
     (interactive)
     (cond
-     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-down))
      ((derived-mode-p 'markdown-mode) (markdown-next-visible-heading 1))
      ((derived-mode-p 'org-mode) (org-next-visible-heading 1))
      ((derived-mode-p 'prog-mode) (down-list))
@@ -57,13 +53,11 @@
   (defun gs-101/meow-super-left ()
     "Runs different leftwards navigation commands based on the current major or minor mode.
 
-- `combobulate-mode' :: `combobulate-navigate-previous'
 - `prog-mode' :: `backward-sexp'
 - `text-mode' :: `meow-back-word'
 - Other :: `meow-left-expand'"
     (interactive)
     (cond
-     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-previous))
      ((derived-mode-p 'prog-mode) (backward-sexp))
      ((derived-mode-p 'text-mode) (meow-back-word 1))
      (t (meow-left-expand))))
@@ -71,13 +65,11 @@
   (defun gs-101/meow-super-right ()
     "Runs different rightwards navigation commands based on the current major or minor mode.
 
-- `combobulate-mode' :: `combobulate-navigate-next'
 - `prog-mode' :: `forward-sexp'
 - `text-mode' :: `meow-next-word'
 - Other :: `meow-right-expand'"
     (interactive)
     (cond
-     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-navigate-next))
      ((derived-mode-p 'prog-mode) (forward-sexp))
      ((derived-mode-p 'text-mode) (meow-next-word 1))
      (t (meow-right-expand))))
@@ -85,36 +77,30 @@
   (defun gs-101/meow-super-kill ()
     "Runs different kill commands based on the current major or minor mode.
 
-- `combobulate-mode' :: `combobulate-kill-node-dwim'
 - `prog-mode' :: `kill-sexp'
 - Other :: `meow-kill-whole-line'"
     (interactive)
     (cond
-     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-kill-node-dwim))
      ((derived-mode-p 'prog-mode) (kill-sexp))
      (t (meow-kill-whole-line))))
 
   (defun gs-101/meow-super-mark ()
     "Runs different mark commands based on the current major or minor mode.
 
-- `combobulate-mode' :: `combobulate-mark-node-dwim'
 - `prog-mode' :: `meow-block'
 - Other :: `meow-mark-word'"
     (interactive)
     (cond
-     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-mark-node-dwim))
      ((derived-mode-p 'prog-mode) (meow-block 1))
      (t (meow-mark-word 1))))
 
   (defun gs-101/meow-transpose ()
     "Runs different transposition commands based on the current major or minor mode.
 
-- `combobulate-mode' :: `combobulate-transpose-sexps'
 - `prog-mode' :: `meow-transpose-sexp'
 - Other :: `transpose-words'"
     (interactive)
     (cond
-     ((seq-some (lambda (mode) (string-match-p "combobulate" (symbol-name mode))) local-minor-modes) (combobulate-transpose-sexps))
      ((derived-mode-p 'prog-mode) (meow-transpose-sexp))
      (t (transpose-words))))
 
@@ -196,8 +182,8 @@
    '("J" . meow-pop-to-global-mark)
    '("k" . meow-kill)
    '("K" . gs-101/meow-super-kill)
-   '("l" . meow-visual-line)
-   '("L" . meow-visual-line-expand)
+   '("l" . meow)
+   '("L" . meow-expand)
    '("n" . meow-next)
    '("N" . gs-101/meow-super-next)
    '("p" . meow-prev)
