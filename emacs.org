@@ -1049,8 +1049,6 @@ A polished Dired with batteries included.
     :ensure-system-package
     (fd (vipsthumbnail . vips))
     :bind
-    ([remap dired] . dirvish)
-    ([remap dired-jump] . dirvish-history-jump)
     (:map dirvish-mode-map
           ("<mouse-3>" . dirvish-mouse-find-file)
           ("<mouse-2>" . dirvish-mouse-find-file-other-window)
@@ -1071,12 +1069,22 @@ A polished Dired with batteries included.
     ;; Disable most preview dispatchers so I can use Emacs alternatives
     ;; instead.
     (dirvish-preview-dispatchers '(gif font))
+    (dirvish-side-attributes nil)
     (dirvish-use-mode-line nil)
     :init
     (dirvish-override-dired-mode)
     (dirvish-peek-mode)
+    (dirvish-side-follow-mode)
     :ensure t)
     #+end_src
+
+** [[https://codeberg.org/pale/pale][PALE]]
+
+#+begin_src emacs-lisp
+  (use-package pale
+    :vc (:url "https://codeberg.org/pale/pale")
+    :ensure t)
+#+end_src
 
 ** [[https://codeberg.org/divyaranjan/emacs-reader][Reader]]
 
@@ -2229,6 +2237,8 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     :ensure t)
 #+end_src
 
+*** [[
+
 ** Tree-Sitter
 
 #+begin_quote
@@ -2846,8 +2856,9 @@ Python's flying circus support for Emacs.
 #+begin_src emacs-lisp
   (use-package python
     :custom
-    (python-indent-guess-indent-offset-verbose nil))
-#+end_src
+    (python-indent-guess-indent-offset-verbose nil)
+    (python-shell-completion-native-enable nil))
+    #+end_src
 
 **** [[https://github.com/purcell/envrc][envrc.el]]
 
@@ -3728,6 +3739,46 @@ Navigate the Xref stack with Consult.
        (lambda (str) (orderless--highlight input t str))))
     :custom
     (consult--regexp-compiler #'minad/consult--orderless-regexp-compiler))
+    #+end_src
+
+** [[https://codeberg.org/emacs-weirdware/debase][Debase]]
+
+#+begin_quote
+D-Bus convenience layer for Emacs.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package debase
+    :vc (:url "https://codeberg.org/emacs-weirdware/debase")
+    :ensure t)
+#+end_src
+
+*** [[https://codeberg.org/emacs-weirdware/discomfort][discomfort]]
+
+Disk manager.
+
+#+begin_src emacs-lisp
+  (use-package discomfort
+    :vc (:url "https://codeberg.org/emacs-weirdware/discomfort")
+    :ensure t)
+#+end_src
+
+** [[https://github.com/jacktasia/dumb-jump][dumb-jump]]
+
+#+begin_src emacs-lisp
+  (use-package dumb-jump
+    :vc (:url "use-package-ensure-system-package-consify")
+    :ensure t
+    :hook
+    (xref-backend-functions . dumb-jump-xref-activate))
+#+end_src
+
+** [[https://codeberg.org/rstocker/emacs-bluetooth][Emacs Bluetooth Mode]]
+
+#+begin_src emacs-lisp
+  (use-package bluetooth
+    :vc (:url "https://codeberg.org/rstocker/emacs-bluetooth")
+    :ensure t)
 #+end_src
 
 ** [[https://github.com/oantolin/embark][Embark]]
@@ -3821,15 +3872,21 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     :after dwim-shell-command)
 #+end_src
 
-** [[https://codeberg.org/tusharhero/tinee][tinee]]
-
-Pop-up an Emacs frame to fill in any text field (Emacs Everywhere).
+** [[https://codeberg.org/rahguzar/filechooser][filechooser.el]]
 
 #+begin_src emacs-lisp
-  (use-package tinee
-    :ensure-system-package
-    wtype
-    :vc (:url "https://codeberg.org/tusharhero/tinee")
+  (use-package filechooser
+    :vc (:url "https://codeberg.org/rahguzar/filechooser")
+    :bind
+    (:map filechooser-multiple-selection-map
+          ("TAB" . #'rahguzar/filechooser-multiple-vertico-tab))
+    :config
+    (defun rahguzar/filechooser-multiple-vertico-tab ()
+      "Use `vertico' to select multiple files."
+      (interactive)
+      (vertico-insert)
+      (unless (file-directory-p (minibuffer-contents))
+        (filechooser-multiple-continue)))
     :ensure t)
 #+end_src
 
@@ -3844,6 +3901,15 @@ p-search is an Emacs tool to find things. It combines concepts from information 
     :vc (:url "https://github.com/zkry/p-search")
     :bind
     ("M-s p" . p-search)
+    :ensure t)
+#+end_src
+
+** [[https://elpa.gnu.org/packages/pinentry.html][pinentry]]
+
+#+begin_src emacs-lisp
+  (use-package pinentry
+    :init
+    (pinentry-start)
     :ensure t)
 #+end_src
 
@@ -3897,6 +3963,18 @@ Emacs minor-mode to summon and dismiss buffers easily.
     :init
     (popper-mode)
     (popper-echo-mode))
+#+end_src
+
+** [[https://codeberg.org/tusharhero/tinee][tinee]]
+
+Pop-up an Emacs frame to fill in any text field (Emacs Everywhere).
+
+#+begin_src emacs-lisp
+  (use-package tinee
+    :ensure-system-package
+    wtype
+    :vc (:url "https://codeberg.org/tusharhero/tinee")
+    :ensure t)
 #+end_src
 
 ** [[https://github.com/tbanel/uniline][Uniline]]

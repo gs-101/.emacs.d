@@ -62,8 +62,6 @@
   :ensure-system-package
   (fd (vipsthumbnail . vips))
   :bind
-  ([remap dired] . dirvish)
-  ([remap dired-jump] . dirvish-history-jump)
   (:map dirvish-mode-map
         ("<mouse-3>" . dirvish-mouse-find-file)
         ("<mouse-2>" . dirvish-mouse-find-file-other-window)
@@ -84,10 +82,16 @@
   ;; Disable most preview dispatchers so I can use Emacs alternatives
   ;; instead.
   (dirvish-preview-dispatchers '(gif font))
+  (dirvish-side-attributes nil)
   (dirvish-use-mode-line nil)
   :init
   (dirvish-override-dired-mode)
   (dirvish-peek-mode)
+  (dirvish-side-follow-mode)
+  :ensure t)
+
+(use-package pale
+  :vc (:url "https://codeberg.org/pale/pale")
   :ensure t)
 
 (use-package reader

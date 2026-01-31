@@ -188,6 +188,24 @@ using Helpful."
   :custom
   (consult--regexp-compiler #'minad/consult--orderless-regexp-compiler))
 
+(use-package debase
+  :vc (:url "https://codeberg.org/emacs-weirdware/debase")
+  :ensure t)
+
+(use-package discomfort
+  :vc (:url "https://codeberg.org/emacs-weirdware/discomfort")
+  :ensure t)
+
+(use-package dumb-jump
+  :vc (:url "use-package-ensure-system-package-consify")
+  :ensure t
+  :hook
+  (xref-backend-functions . dumb-jump-xref-activate))
+
+(use-package bluetooth
+  :vc (:url "https://codeberg.org/rstocker/emacs-bluetooth")
+  :ensure t)
+
 (use-package embark
   :vc (:url "https://github.com/oantolin/embark")
   :bind
@@ -251,16 +269,29 @@ using Helpful."
   (atool unzip)
   :after dwim-shell-command)
 
-(use-package tinee
-  :ensure-system-package
-  wtype
-  :vc (:url "https://codeberg.org/tusharhero/tinee")
+(use-package filechooser
+  :vc (:url "https://codeberg.org/rahguzar/filechooser")
+  :bind
+  (:map filechooser-multiple-selection-map
+        ("TAB" . #'rahguzar/filechooser-multiple-vertico-tab))
+  :config
+  (defun rahguzar/filechooser-multiple-vertico-tab ()
+    "Use `vertico' to select multiple files."
+    (interactive)
+    (vertico-insert)
+    (unless (file-directory-p (minibuffer-contents))
+      (filechooser-multiple-continue)))
   :ensure t)
 
 (use-package p-search
   :vc (:url "https://github.com/zkry/p-search")
   :bind
   ("M-s p" . p-search)
+  :ensure t)
+
+(use-package pinentry
+  :init
+  (pinentry-start)
   :ensure t)
 
 (use-package popper
@@ -306,6 +337,12 @@ using Helpful."
   :init
   (popper-mode)
   (popper-echo-mode))
+
+(use-package tinee
+  :ensure-system-package
+  wtype
+  :vc (:url "https://codeberg.org/tusharhero/tinee")
+  :ensure t)
 
 (use-package uniline
   :vc (:url "https://github.com/tbanel/uniline")

@@ -309,7 +309,8 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package python
   :custom
-  (python-indent-guess-indent-offset-verbose nil))
+  (python-indent-guess-indent-offset-verbose nil)
+  (python-shell-completion-native-enable nil))
 
 (use-package envrc
   :vc (:url "https://github.com/purcell/envrc")
