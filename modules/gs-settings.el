@@ -350,25 +350,6 @@ With a ARG prefix argument, copy the buffer to the other window."
   :init
   (ultra-scroll-mode))
 
-(use-package vundo
-  :vc (:url "https://github.com/casouri/vundo")
-  :bind
-  (([remap undo] . vundo)
-   ([remap undo-redo] . vundo)
-   :map vundo-mode-map
-   ("C-n" . vundo-next)
-   ("C-p" . vundo-previous)
-   ("C-f" . vundo-forward)
-   ("C-b" . vundo-previous)
-   ("C-a" . vundo-stem-root)
-   ("C-e" . vundo-stem-end)
-   ("l" . nil)
-   ("j" . vundo-goto-last-saved))
-  :custom
-  (vundo-compact-display t)
-  (vundo-glyph-alist vundo-unicode-symbols)
-  :ensure t)
-
 (use-package with-editor
   :vc (:url "https://github.com/magit/with-editor")
   :init

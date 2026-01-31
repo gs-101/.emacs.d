@@ -175,7 +175,6 @@ ARG is used for `eval-last-sexp'."
 (use-package simple
   :bind
   ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
-  ("C-?" . undo-redo)
   ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
   ([remap capitalize-word] . capitalize-dwim)
   ([remap upcase-word] . upcase-dwim)

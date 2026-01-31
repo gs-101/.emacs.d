@@ -845,33 +845,6 @@ Keep track of recently opened files.
     (ultra-scroll-mode))
 #+end_src
 
-*** [[https://github.com/casouri/vundo][Vundo]]
-
-#+begin_quote
-Visualize the undo tree.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package vundo
-    :vc (:url "https://github.com/casouri/vundo")
-    :bind
-    (([remap undo] . vundo)
-     ([remap undo-redo] . vundo)
-     :map vundo-mode-map
-     ("C-n" . vundo-next)
-     ("C-p" . vundo-previous)
-     ("C-f" . vundo-forward)
-     ("C-b" . vundo-previous)
-     ("C-a" . vundo-stem-root)
-     ("C-e" . vundo-stem-end)
-     ("l" . nil)
-     ("j" . vundo-goto-last-saved))
-    :custom
-    (vundo-compact-display t)
-    (vundo-glyph-alist vundo-unicode-symbols)
-    :ensure t)
-#+end_src
-
 *** [[https://github.com/magit/with-editor][With-Editor]]
 
 #+begin_quote
@@ -1441,7 +1414,6 @@ Convenient way to repeat the previous command.
   (use-package simple
     :bind
     ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
-    ("C-?" . undo-redo)
     ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
     ([remap capitalize-word] . capitalize-dwim)
     ([remap upcase-word] . upcase-dwim)
