@@ -452,40 +452,6 @@ Only runs if a `flutter' buffer already exits."
   :hook
   (emacs-lisp-mode . package-lint-flymake-setup))
 
-(use-package puni
-  :vc (:url "https://github.com/AmaiKinono/puni")
-  :bind
-  (:map puni-mode-map
-        ("M-h" . puni-expand-region)
-        ("M-H" . puni-contract-region)
-        ([remap mark-sexp] . puni-mark-sexp-at-point)
-        ([remap transpose-sexps] . puni-transpose)
-        ("C-)" . puni-slurp-forward)
-        ("C-(" . puni-slurp-backward)
-        ("C-}" . puni-barf-forward)
-        ("C-{" . puni-barf-backward))
-  :config
-  (advice-add #'puni-kill-active-region :override
-              (defun AmaiKinono/puni-kill-active-region ()
-                "Kill active region.
-When this will cause unbalanced state, ask the user to confirm,
-unless `puni-confirm-when-delete-unbalanced-active-region' is
-nil.
-When `rectangle-mark-mode' is enabled, kill the marked
-rectangular region instead."
-                (interactive)
-                (if (use-region-p)
-                    (puni-kill-region)
-                  ;; Fall back to Emacs default behavior which is signaling an error or what
-                  ;; `kill-region-dwim' defines (since Emacs 31).
-                  (call-interactively #'kill-region))))
-  :ensure t
-  :hook
-  (minibuffer-mode . puni-disable-puni-mode)
-  (text-mode . puni-disable-puni-mode)
-  :init
-  (puni-global-mode))
-
 (use-package wakatime-mode
   :ensure-system-package
   (wakatime-cli . wakatime)
