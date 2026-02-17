@@ -94,7 +94,7 @@ Also adds `cape-file' as a fallback."
   :ensure t)
 
 (use-package vertico
-  :vc (:url "https://github.com/gs-101/vertico" :branch custom :lisp-dir "lisp/")
+  :vc (:url "https://github.com/gs-101/vertico" :branch custom)
   :custom
   (vertico-cycle t)
   :ensure t
