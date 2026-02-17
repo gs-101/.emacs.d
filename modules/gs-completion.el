@@ -94,7 +94,6 @@ Also adds `cape-file' as a fallback."
   :ensure t)
 
 (use-package vertico
-  :vc (:url "https://github.com/gs-101/vertico" :branch custom)
   :custom
   (vertico-cycle t)
   :ensure t
@@ -116,8 +115,9 @@ Also adds `cape-file' as a fallback."
   :after vertico
   :config
   :custom
-  (vertico-multiform-categories '((symbol (vertico-sort-function . vertico-sort-alpha))
-                                  (file (vertico-sort-function . vertico-sort-directories-first)))))
+  (vertico-multiform-categories
+   '((symbol (vertico-sort-function . vertico-sort-alpha))
+     (file (vertico-sort-function . vertico-sort-directories-first)))))
 
 (use-package marginalia
   :vc (:url "https://github.com/minad/marginalia")

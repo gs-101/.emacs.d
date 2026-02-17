@@ -3295,7 +3295,6 @@ VERTical Interactive COmpletion.
 
 #+begin_src emacs-lisp
   (use-package vertico
-    :vc (:url "https://github.com/gs-101/vertico" :branch custom)
     :custom
     (vertico-cycle t)
     :ensure t
@@ -3329,8 +3328,9 @@ Commands for Ido-like directory navigation.
     :after vertico
     :config
     :custom
-    (vertico-multiform-categories '((symbol (vertico-sort-function . vertico-sort-alpha))
-                                    (file (vertico-sort-function . vertico-sort-directories-first)))))
+    (vertico-multiform-categories
+     '((symbol (vertico-sort-function . vertico-sort-alpha))
+       (file (vertico-sort-function . vertico-sort-directories-first)))))
 #+end_src
 
 ** [[https://github.com/minad/marginalia][Marginalia]]
