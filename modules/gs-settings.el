@@ -40,6 +40,7 @@
   (enable-recursive-minibuffers t)
   (fast-but-imprecise-scrolling t) ; 3
   (focus-follows-mouse t)
+  (font-use-system-font t)
   (frame-resize-pixelwise t) ; 1
   (frame-title-format "GNU Emacs")
   (history-delete-duplicates t) ; 5
