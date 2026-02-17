@@ -168,16 +168,42 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package keycast
   :after keycast
   :config
-  (dolist (substitute '((backward-delete-char-untabify "" "Erasing...")
-                        (delete-backward-char "" "Erasing...")
-                        (isearch-printing-char "" "Searching...")
-                        (org-delete-backward-char "" "Erasing...")
-                        (self-insert-command "" "Typing...")
-                        (org-self-insert-command "" "Typing...")
-                        (vertico-directory-enter nil nil)
-                        (vertico-next nil nil)
-                        (vertico-previous nil nil)))
-    (add-to-list 'keycast-substitute-alist substitute)))
+  (setq gs-101/keycast-animation-alist
+        '((backward-delete-char-untabify . "Erasing")
+          (delete-backward-char          . "Erasing")
+          (isearch-printing-char         . "Searching")
+          (org-delete-backward-char      . "Erasing")
+          (org-self-insert-command       . "Typing")
+          (self-insert-command           . "Typing")
+          (undo                          . "Undoing")))
+  (setq gs-101/keycast-no-message-commands
+        '(vertico-directory-enter
+          vertico-next
+          vertico-previous))
+  (dolist (substitute (append (mapcar (lambda (pair)
+                                        (list (car pair) "" (cdr pair)))
+                                      gs-101/keycast-animation-alist)
+                              (mapcar (lambda (cmd)
+                                        (list cmd nil nil))
+                                      gs-101/keycast-no-message-commands)))
+    (add-to-list 'keycast-substitute-alist (copy-sequence substitute)))
+  (setq gs-101/keycast-comma-count 0)
+  (defun gs-101/keycast-step-animation ()
+    "Advance an ellipsis animation for commands in keycast."
+    (when (assq this-command gs-101/keycast-animation-alist)
+      (if (not (eq this-command last-command))
+          (setq gs-101/keycast-comma-count 0)
+        (when (< gs-101/keycast-comma-count 3)
+          (cl-incf gs-101/keycast-comma-count)))
+      (let ((dots (make-string gs-101/keycast-comma-count ?.)))
+        (dolist (pair gs-101/keycast-animation-alist)
+          (let* ((cmd (car pair))
+                 (base (cdr pair))
+                 (entry (assq cmd keycast-substitute-alist)))
+            (when entry
+              ;; Concatenate the base string from the alist with the dots.
+              (setf (nth 2 entry) (concat base dots))))))))
+  (add-hook 'pre-command-hook #'gs-101/keycast-step-animation))
 
 (use-package keycast
   :after embark
