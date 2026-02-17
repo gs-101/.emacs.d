@@ -302,7 +302,6 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
     (find-file-visit-truename t)
     (kept-new-versions 5) ; 2
     (kept-old-versions 5) ; 2
-    (revert-without-query '("")) ; 3
     (trusted-content '("~/.emacs.d/elpa/"
                        "~/.emacs.d/modules/"
                        "~/Projects/"))
@@ -687,6 +686,18 @@ A configuration macro for simplifying your .emacs.
     (use-package-vc-prefer-newest t))
 #+end_src
 
+*** vc-hooks
+
+#+begin_quote
+This is the preloaded portion of VC.  It takes care of VC-related activities that are done when you visit a file, so that vc.el itself is loaded only when you use a VC command.  See commentary of vc.el.
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package vc-hooks
+    :init
+    (vc-auto-revert-mode))
+#+end_src
+
 *** Warnings
 
 #+begin_quote
@@ -925,44 +936,6 @@ Use the Emacsclient as the $EDITOR of child processes.
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-** Autorevert
-:PROPERTIES:
-:CREDITS:  https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-files.el
-:END:
-
-#+begin_quote
-Whenever a file that Emacs is editing has been changed by another program the user normally has to execute the command ~revert-buffer~ to load the new content of the file into Emacs.
-This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert Mode. Both modes automatically revert buffers whenever the corresponding files have been changed on disk and the buffer contains no unsaved changes.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package autorevert
-    :config
-    (add-to-list 'window-state-change-functions
-                 (defun xenodium/window-state-state-change (state)
-                   "Enable `global-auto-revert-mode' per active window."
-                   (let* ((old-selected-window (old-selected-window))
-                          (old-buffer (when old-selected-window
-                                        (window-buffer old-selected-window)))
-                          (selected-window (selected-window))
-                          (new-buffer (when selected-window
-                                        (window-buffer selected-window))))
-                     (when old-buffer
-                       (with-current-buffer old-buffer
-                         (when buffer-file-name
-                           (auto-revert-mode -1))))
-                     (when new-buffer
-                       (with-current-buffer new-buffer
-                         (when buffer-file-name
-                           (auto-revert-mode +1)))))))
-    :custom
-    (auto-revert-stop-on-user-input nil)
-    (auto-revert-verbose nil)
-    (global-auto-revert-non-file-buffers t)
-    :init
-    (global-auto-revert-mode t))
-#+end_src
-
 ** Dired
 
 #+begin_quote
@@ -972,7 +945,6 @@ This package contains two minor modes: Global Auto-Revert Mode and Auto-Revert M
 #+begin_src emacs-lisp
   (use-package dired
     :custom
-    (dired-auto-revert-buffer t)
     (dired-clean-confirm-killing-deleted-buffers nil)
     (dired-dwim-target t)
     (dired-kill-when-opening-new-dired-buffer t)
@@ -994,7 +966,6 @@ Less commonly used parts of Dired.
     :custom
     (dired-create-destination-dirs 'always)
     (dired-create-destination-dirs-on-trailing-dirsep t)
-    (dired-do-revert-buffer t)
     (dired-isearch-filenames 'dwim)
     (dired-vc-rename-file t))
 #+end_src

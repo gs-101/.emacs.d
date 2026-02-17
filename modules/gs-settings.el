@@ -89,7 +89,6 @@
   (find-file-visit-truename t)
   (kept-new-versions 5) ; 2
   (kept-old-versions 5) ; 2
-  (revert-without-query '("")) ; 3
   (trusted-content '("~/.emacs.d/elpa/"
                      "~/.emacs.d/modules/"
                      "~/Projects/"))
@@ -271,6 +270,10 @@ With a ARG prefix argument, copy the buffer to the other window."
   (use-package-compute-statistics t)
   (use-package-enable-imenu-support t)
   (use-package-vc-prefer-newest t))
+
+(use-package vc-hooks
+  :init
+  (vc-auto-revert-mode))
 
 (use-package warnings
   :custom

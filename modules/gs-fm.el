@@ -1,34 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
-(use-package autorevert
-  :config
-  (add-to-list 'window-state-change-functions
-               (defun xenodium/window-state-state-change (state)
-                 "Enable `global-auto-revert-mode' per active window."
-                 (let* ((old-selected-window (old-selected-window))
-                        (old-buffer (when old-selected-window
-                                      (window-buffer old-selected-window)))
-                        (selected-window (selected-window))
-                        (new-buffer (when selected-window
-                                      (window-buffer selected-window))))
-                   (when old-buffer
-                     (with-current-buffer old-buffer
-                       (when buffer-file-name
-                         (auto-revert-mode -1))))
-                   (when new-buffer
-                     (with-current-buffer new-buffer
-                       (when buffer-file-name
-                         (auto-revert-mode +1)))))))
-  :custom
-  (auto-revert-stop-on-user-input nil)
-  (auto-revert-verbose nil)
-  (global-auto-revert-non-file-buffers t)
-  :init
-  (global-auto-revert-mode t))
-
 (use-package dired
   :custom
-  (dired-auto-revert-buffer t)
   (dired-clean-confirm-killing-deleted-buffers nil)
   (dired-dwim-target t)
   (dired-kill-when-opening-new-dired-buffer t)
@@ -42,7 +15,6 @@
   :custom
   (dired-create-destination-dirs 'always)
   (dired-create-destination-dirs-on-trailing-dirsep t)
-  (dired-do-revert-buffer t)
   (dired-isearch-filenames 'dwim)
   (dired-vc-rename-file t))
 
