@@ -96,10 +96,6 @@
   :custom
   (diff-add-log-use-relative-names t))
 
-(use-package editorconfig
-  :hook
-  (prog-mode . editorconfig-mode))
-
 (use-package eglot
   :config
   (add-to-list 'eglot-server-programs

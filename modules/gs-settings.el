@@ -25,6 +25,10 @@
   :custom
   (ediff-window-setup-function 'ediff-setup-windows-plain))
 
+(use-package editorconfig
+  :init
+  (editorconfig-mode))
+
 (use-package emacs
   :custom
   (auto-save-include-big-deletions)
