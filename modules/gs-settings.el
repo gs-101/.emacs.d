@@ -248,6 +248,10 @@ With a ARG prefix argument, copy the buffer to the other window."
                            (file-remote-p file 'host) ":" (file-remote-p file 'localname))
                  (concat "/sudo:root@localhost:" file)))))
 
+(use-package text-mode
+  :hook
+  (text-mode . visual-line-mode))
+
 (use-package transient
   :custom
   (transient-mode-line-format nil))

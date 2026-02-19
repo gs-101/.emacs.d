@@ -633,6 +633,14 @@ Like [[https://github.com/nflath/sudo-edit][sudo-edit]], but just a single, non-
                    (concat "/sudo:root@localhost:" file)))))
 #+end_src
 
+*** Text Mode
+
+#+begin_src emacs-lisp
+  (use-package text-mode
+    :hook
+    (text-mode . visual-line-mode))
+#+end_src
+
 *** Transient
 
 #+begin_quote
@@ -2155,8 +2163,6 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     :vc (:url "https://github.com/emacs-ess/ESS")
     :ensure t)
 #+end_src
-
-*** [[
 
 ** Tree-Sitter
 
