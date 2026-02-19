@@ -137,6 +137,7 @@
 
 (use-package minibuffer
   :custom
+  (completion-pcm-leading-wildcard t)
   (completions-detailed t) ; 1
   (completions-format 'vertical)
   (completions-group t) ; 1
