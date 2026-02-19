@@ -12,13 +12,6 @@
 ** Functions
 
 #+begin_src emacs-lisp
-  (defun gs-101/filename (name &optional default-directory)
-    "Return a path to FILE suitable for the current operating system.
-  DEFAULT-DIRECTORY defines where to start looking for the file."
-    (if default-directory
-        (convert-standard-filename (expand-file-name name default-directory))
-      (convert-standard-filename (expand-file-name name))))
-
   (defmacro gs-101/run-at-time-daily (time &rest body)
     "Runs BODY daily at TIME."
     `(run-at-time ,time (* 60 60 24)
@@ -29,11 +22,11 @@
 ** Variables
 
 #+begin_src emacs-lisp
-  (defcustom gs-101/projects-code-directory (gs-101/filename "~/Projects/code/")
+  (defcustom gs-101/projects-code-directory (expand-file-name "~/Projects/code/")
     "Path for project related to code, like applications."
     :type 'directory)
 
-  (defcustom gs-101/modules-directory (gs-101/filename "modules" user-emacs-directory)
+  (defcustom gs-101/modules-directory (expand-file-name "modules" user-emacs-directory)
     "Path for this configuration's modules."
     :type 'directory)
 
@@ -1406,7 +1399,7 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
   (use-package org
     :custom
     (org-auto-align-tags nil)
-    (org-directory (gs-101/filename "~/Documents/org"))
+    (org-directory (expand-file-name "~/Documents/org"))
     (org-format-latex-options '(:foreground default
                                             :background nil
                                             :scale 1.0
@@ -1658,7 +1651,7 @@ LaTeX Backend for Org Export Engine.
     (org-latex-tables-centered nil)
     (org-latex-toc-command "\\tableofcontents \\pagebreak")
     (org-startup-with-latex-preview t)
-    (org-preview-latex-image-directory (gs-101/filename "ltximg/" temporary-file-directory))
+    (org-preview-latex-image-directory (expand-file-name "ltximg/" temporary-file-directory))
     :config
     (add-to-list 'org-latex-classes '("org-plain-latex"
                                       "
@@ -1862,7 +1855,7 @@ Rudimentary Roam replica with Org-mode.
 #+begin_src emacs-lisp
   (use-package org-roam
     :custom
-    (org-roam-directory (gs-101/filename "~/Documents/org-roam/"))
+    (org-roam-directory (expand-file-name "~/Documents/org-roam/"))
     :demand t
     :ensure t)
 #+end_src
@@ -2944,7 +2937,7 @@ Emacs integration for [[https://exercism.org][Exercism]].
     (exercism)
     :custom
     (exercism--workspace
-     (gs-101/filename "study/exercism/" gs-101/projects-code-directory))
+     (expand-file-name "study/exercism/" gs-101/projects-code-directory))
     :ensure t)
 #+end_src
 
@@ -2971,7 +2964,7 @@ An Emacs LeetCode client.
     :vc (:url "https://github.com/kaiwk/leetcode.el")
     :custom
     (leetcode-directory
-     (gs-101/filename "study/leetcode-solutions/" gs-101/projects-code-directory))
+     (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory))
     (leetcode--paid "$")
     (leetcode-save-solutions t)
     :ensure t)
@@ -4342,8 +4335,8 @@ Show current command and its key in the mode line.
   (use-package modus-themes
     :when dw/guix-p
     :config
-    (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
-      (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))))
+    (when (file-exists-p (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))
+      (load-file (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))))
 #+end_src
 
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]

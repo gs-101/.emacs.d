@@ -243,8 +243,8 @@ This advice replaces the rocket icon with a electric plug icon."
 (use-package modus-themes
   :when dw/guix-p
   :config
-  (when (file-exists-p (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))
-    (load-file (gs-101/filename "~/.emacs.d/var/matugen/matugen.el"))))
+  (when (file-exists-p (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))
+    (load-file (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")

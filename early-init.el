@@ -1,23 +1,16 @@
 ;;; -*- lexical-binding: t -*-
 
-(defun gs-101/filename (name &optional default-directory)
-  "Return a path to FILE suitable for the current operating system.
-DEFAULT-DIRECTORY defines where to start looking for the file."
-  (if default-directory
-      (convert-standard-filename (expand-file-name name default-directory))
-    (convert-standard-filename (expand-file-name name))))
-
 (defmacro gs-101/run-at-time-daily (time &rest body)
   "Runs BODY daily at TIME."
   `(run-at-time ,time (* 60 60 24)
                 (lambda ()
                   ,@body)))
 
-(defcustom gs-101/projects-code-directory (gs-101/filename "~/Projects/code/")
+(defcustom gs-101/projects-code-directory (expand-file-name "~/Projects/code/")
   "Path for project related to code, like applications."
   :type 'directory)
 
-(defcustom gs-101/modules-directory (gs-101/filename "modules" user-emacs-directory)
+(defcustom gs-101/modules-directory (expand-file-name "modules" user-emacs-directory)
   "Path for this configuration's modules."
   :type 'directory)
 

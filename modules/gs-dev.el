@@ -394,7 +394,7 @@ Only runs if a `flutter' buffer already exits."
   (exercism)
   :custom
   (exercism--workspace
-   (gs-101/filename "study/exercism/" gs-101/projects-code-directory))
+   (expand-file-name "study/exercism/" gs-101/projects-code-directory))
   :ensure t)
 
 (use-package git-modes
@@ -405,7 +405,7 @@ Only runs if a `flutter' buffer already exits."
   :vc (:url "https://github.com/kaiwk/leetcode.el")
   :custom
   (leetcode-directory
-   (gs-101/filename "study/leetcode-solutions/" gs-101/projects-code-directory))
+   (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory))
   (leetcode--paid "$")
   (leetcode-save-solutions t)
   :ensure t)
