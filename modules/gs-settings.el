@@ -235,20 +235,6 @@ With a ARG prefix argument, copy the buffer to the other window."
   (initial-major-mode 'fundamental-mode)
   :defer t)
 
-(use-package emacs
-  :init
-  (defun karthinks/sudo-find-file (file)
-    "Open FILE as root."
-    (interactive "FOpen file as root: ")
-    (when (file-writable-p file)
-      (user-error "File is user-writable, aborting sudo"))
-    (find-file (if (file-remote-p file)
-                   (concat "/" (file-remote-p file 'method) ":"
-                           (file-remote-p file 'user) "@" (file-remote-p file 'host)
-                           "|sudo@root@"
-                           (file-remote-p file 'host) ":" (file-remote-p file 'localname))
-                 (concat "/sudo:root@localhost:" file)))))
-
 (use-package text-mode
   :hook
   (text-mode . visual-line-mode))
