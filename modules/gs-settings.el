@@ -89,8 +89,7 @@
   (find-file-visit-truename t)
   (kept-new-versions 5) ; 2
   (kept-old-versions 5) ; 2
-  (trusted-content '("~/.emacs.d/elpa/"
-                     "~/.emacs.d/modules/"
+  (trusted-content `(,user-emacs-directory
                      "~/Projects/"))
   (version-control t) ; 2
   ;; 3
