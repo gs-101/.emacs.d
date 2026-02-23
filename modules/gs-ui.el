@@ -221,6 +221,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (advice-add 'embark-act :before #'oantolin/keycast--update-force))
 
 (use-package modus-themes
+  :unless dw/guix-p
   :config
   (gs-101/run-at-time-daily
    "06:00"
@@ -240,11 +241,9 @@ This advice replaces the rocket icon with a electric plug icon."
   (load-theme 'modus-operandi t)
   (load-theme 'modus-vivendi t))
 
-(use-package modus-themes
-  :when dw/guix-p
-  :config
-  (when (file-exists-p (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))
-    (load-file (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))))
+(when dw/guix-p
+  (add-to-list 'custom-theme-load-path (expand-file-name "themes/" user-emacs-directory))
+  (load-theme 'noctalia t))
 
 (use-package nerd-icons
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el")

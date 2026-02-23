@@ -4284,10 +4284,9 @@ Show current command and its key in the mode line.
 
 ** Modus Themes
 
-*** Configuration
-
 #+begin_src emacs-lisp
   (use-package modus-themes
+    :unless dw/guix-p
     :config
     (gs-101/run-at-time-daily
      "06:00"
@@ -4308,14 +4307,12 @@ Show current command and its key in the mode line.
     (load-theme 'modus-vivendi t))
 #+end_src
 
-*** Guix System
+** Noctalia Shell
 
 #+begin_src emacs-lisp
-  (use-package modus-themes
-    :when dw/guix-p
-    :config
-    (when (file-exists-p (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))
-      (load-file (expand-file-name "~/.emacs.d/var/matugen/matugen.el"))))
+  (when dw/guix-p
+    (add-to-list 'custom-theme-load-path (expand-file-name "themes/" user-emacs-directory))
+    (load-theme 'noctalia t))
 #+end_src
 
 ** [[https://github.com/rainstormstudio/nerd-icons.el][Nerd Icons]]

@@ -1,11 +1,12 @@
-# Directories
+# Directories.
 eln-cache/
 elpa/
 etc/
 mason/
+themes/
 tree-sitter/
 var/
 
-# Files
+# Files.
 .last-package-update-day
 *.gpg
