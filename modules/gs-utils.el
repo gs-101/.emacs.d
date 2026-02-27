@@ -344,6 +344,10 @@ using Helpful."
   :vc (:url "https://codeberg.org/tusharhero/tinee")
   :ensure t)
 
+(use-package vterm
+  :vc (:url "https://github.com/akermu/emacs-libvterm")
+  :ensure t)
+
 (use-package uniline
   :vc (:url "https://github.com/tbanel/uniline")
   :bind

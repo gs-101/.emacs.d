@@ -3816,6 +3816,14 @@ Pop-up an Emacs frame to fill in any text field (Emacs Everywhere).
     :ensure t)
 #+end_src
 
+** [[https://github.com/akermu/emacs-libvterm][vterm]]
+
+#+begin_src emacs-lisp
+  (use-package vterm
+    :vc (:url "https://github.com/akermu/emacs-libvterm")
+    :ensure t)
+#+end_src
+
 ** [[https://github.com/tbanel/uniline][Uniline]]
 
 #+begin_quote
