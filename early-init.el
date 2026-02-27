@@ -1,11 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(defmacro gs-101/run-at-time-daily (time &rest body)
-  "Runs BODY daily at TIME."
-  `(run-at-time ,time (* 60 60 24)
-                (lambda ()
-                  ,@body)))
-
 (defcustom gs-101/projects-code-directory (expand-file-name "~/Projects/code/")
   "Path for project related to code, like applications."
   :type 'directory)

@@ -88,6 +88,15 @@
   ;; 2
   (switch-to-buffer-obey-display-actions t))
 
+(use-package auto-dark
+  :vc (:url "https://github.com/LionyxML/auto-dark-emacs")
+  :unless dw/guix-p
+  :ensure t
+  :custom
+  (auto-dark-themes '((modus-vivendi) (modus-operandi)))
+  :init
+  (auto-dark-mode))
+
 (use-package catppuccin-theme
   :vc (:url "https://github.com/catppuccin/emacs")
   :when gs-101/nobara-p
@@ -222,13 +231,6 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package modus-themes
   :unless dw/guix-p
-  :config
-  (gs-101/run-at-time-daily
-   "06:00"
-   (modus-themes-load-theme 'modus-operandi))
-  (gs-101/run-at-time-daily
-   "18:00"
-   (modus-themes-load-theme 'modus-vivendi))
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-italic-constructs t)
@@ -236,10 +238,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (modus-themes-variable-pitch-ui t)
   (modus-themes-completions
    '((matches . (semibold))
-     (selection . (extrabold underline))))
-  :init
-  (load-theme 'modus-operandi t)
-  (load-theme 'modus-vivendi t))
+     (selection . (extrabold underline)))))
 
 (when dw/guix-p
   (add-to-list 'custom-theme-load-path (expand-file-name "themes/" user-emacs-directory))

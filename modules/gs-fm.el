@@ -34,12 +34,6 @@
   :vc (:url "https://codeberg.org/pale/pale")
   :ensure t)
 
-(use-package reader
-  :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")
-  :ensure-system-package
-  (mupdf-gl . mupdf)
-  :ensure t)
-
 (use-package ready-player
   :vc (:url "https://github.com/xenodium/ready-player")
   :ensure-system-package

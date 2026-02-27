@@ -9,16 +9,6 @@
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-** Functions
-
-#+begin_src emacs-lisp
-  (defmacro gs-101/run-at-time-daily (time &rest body)
-    "Runs BODY daily at TIME."
-    `(run-at-time ,time (* 60 60 24)
-                  (lambda ()
-                    ,@body)))
-#+end_src
-
 ** Variables
 
 #+begin_src emacs-lisp
@@ -991,7 +981,7 @@ Asynchronous dired actions.
 An all-in-one document reader for all formats in Emacs, backed by MuPDF.
 #+end_quote
 
-#+begin_src emacs-lisp
+#+begin_src
   (use-package reader
     :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")
     :ensure-system-package
@@ -4104,6 +4094,19 @@ Window tree functions.
     (switch-to-buffer-obey-display-actions t))
 #+end_src
 
+** [[https://github.com/LionyxML/auto-dark-emacs][Auto-Dark for Emacs]]
+
+#+begin_src emacs-lisp
+  (use-package auto-dark
+    :vc (:url "https://github.com/LionyxML/auto-dark-emacs")
+    :unless dw/guix-p
+    :ensure t
+    :custom
+    (auto-dark-themes '((modus-vivendi) (modus-operandi)))
+    :init
+    (auto-dark-mode))
+#+end_src
+
 ** [[https://github.com/catppuccin/emacs][Catppuccin]]
 
 #+begin_quote
@@ -4295,13 +4298,6 @@ Show current command and its key in the mode line.
 #+begin_src emacs-lisp
   (use-package modus-themes
     :unless dw/guix-p
-    :config
-    (gs-101/run-at-time-daily
-     "06:00"
-     (modus-themes-load-theme 'modus-operandi))
-    (gs-101/run-at-time-daily
-     "18:00"
-     (modus-themes-load-theme 'modus-vivendi))
     :custom
     (modus-themes-bold-constructs t)
     (modus-themes-italic-constructs t)
@@ -4309,10 +4305,7 @@ Show current command and its key in the mode line.
     (modus-themes-variable-pitch-ui t)
     (modus-themes-completions
      '((matches . (semibold))
-       (selection . (extrabold underline))))
-    :init
-    (load-theme 'modus-operandi t)
-    (load-theme 'modus-vivendi t))
+       (selection . (extrabold underline)))))
 #+end_src
 
 ** Noctalia Shell
