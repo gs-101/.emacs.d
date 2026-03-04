@@ -4,6 +4,10 @@
   :custom
   (ad-redefinition-action 'accept))
 
+(use-package auth-source-pass
+  :config
+  (auth-source-pass-enable))
+
 (use-package bytecomp
   :custom
   (byte-compile-warnings '(not obsolete)))
@@ -154,8 +158,7 @@
 
 (use-package mule
   :config
-  ;; All that is needed for UTF-8.
-  (modify-coding-system-alist 'file "" 'utf-8))
+  (prefer-coding-system 'utf-8))
 
 (use-package newcomment
   :custom

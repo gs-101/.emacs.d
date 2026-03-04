@@ -289,6 +289,11 @@ using Helpful."
   ("M-s p" . p-search)
   :ensure t)
 
+(use-package pass
+  ;; Commit is pinned for security reasons.
+  :vc (:url "https://github.com/NicolasPetton/pass" :rev "143456809fd2dbece9f241f4361085e1de0b0e75")
+  :ensure t)
+
 (use-package pinentry
   :init
   (pinentry-start)

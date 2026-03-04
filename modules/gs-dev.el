@@ -446,40 +446,7 @@ Only runs if a `flutter' buffer already exits."
   (wakatime-cli . wakatime)
   :vc (:url "https://github.com/wakatime/wakatime-mode")
   :ensure t
-  :init
-  (defun gs-101/wakatime-api-key-from-auth ()
-    "Get the Wakatime API key from either auth-source or secrets."
-    (or (auth-source-pick-first-password :host "wakatime.com")
-        (secrets-get-attribute "Keepass" "Wakatime" "api-key")))
-
-  (defun gs-101/wakatime--enable-question ()
-    "Let the user give one of the following answers regarding the value of
-`wakatime-api-key':
-
-- \"yes\" :: Get it from the system's secret tool
-- \"from custom.el\" :: Get it from the value already saved in `custom-file'
-- \"no\" :: Do not get the value"
-    (let ((read-answer-short t))
-      (read-answer "Enable wakatime tracking? "
-                   '(("yes" ?y "Get API key from secrets")
-                     ("no" ?n "Do not get a key, disabling wakatime")))))
-
-  (defun gs-101/wakatime-enable-prompt ()
-    "Prompt if the user wants to enable wakatime tracking.
-
-Better asked on startup with an init hook:
-
-(add-hook \'after-init-hook #\'gs-101/wakatime-enable-prompt)"
-    ;; Disable dialog box
-    (setq-local use-dialog-box nil)
-    (unless wakatime-api-key
-      (pcase (gs-101/wakatime--enable-question)
-        ("yes"
-         (progn
-           (global-wakatime-mode)
-           (setopt wakatime-api-key (gs-101/wakatime-api-key-from-auth))))
-        ("no" (message "Ok, no tracking for you!")))))
-
-  (add-hook 'after-init-hook #'gs-101/wakatime-enable-prompt))
+  :custom
+  (wakatime-api-key (auth-source-pass-get "api-key" "wakatime.com/gabrielsantosdesouza@disroot.org")))
 
 (provide 'gs-dev)
