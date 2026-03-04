@@ -2162,6 +2162,18 @@ Automatic installation, usage, and fallback for tree-sitter major modes in Emacs
     :ensure t)
 #+end_src
 
+*** [[https://github.com/casouri/expreg][expreg]]
+
+Tree-sitter based region interaction.
+
+#+begin_src emacs-lisp
+  (use-package expreg
+    :vc (:url "https://github.com/casouri/expreg")
+    :bind
+    ("M-h" . expreg-expand)
+    :ensure t)
+#+end_src
+
 *** [[https://github.com/danilshvalov/git-commit-ts-mode][git-commit]]
 
 #+begin_src emacs-lisp

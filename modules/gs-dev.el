@@ -44,6 +44,12 @@
   (treesit-auto-install t)
   :ensure t)
 
+(use-package expreg
+  :vc (:url "https://github.com/casouri/expreg")
+  :bind
+  ("M-h" . expreg-expand)
+  :ensure t)
+
 (use-package git-commit-ts-mode
   :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
   :ensure t)
