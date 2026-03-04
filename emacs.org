@@ -2766,16 +2766,6 @@ Minor mode to resolve diff3 conflicts.
     (smerge-mode))
 #+end_src
 
-** Superword
-
-Changes the word syntax table so that symbols (this_is_a_symbol) counts as words.
-
-#+begin_src emacs-lisp
-  (use-package subword
-    :hook
-    (prog-mode . superword-mode))
-#+end_src
-
 ** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive Indent]]
 
 #+begin_quote

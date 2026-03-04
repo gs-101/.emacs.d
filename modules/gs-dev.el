@@ -344,10 +344,6 @@ Only runs if a `flutter' buffer already exits."
   :init
   (smerge-mode))
 
-(use-package subword
-  :hook
-  (prog-mode . superword-mode))
-
 (use-package aggressive-indent
   :vc (:url "https://github.com/Malabarba/aggressive-indent-mode")
   :config
