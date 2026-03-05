@@ -10,4 +10,8 @@
         gptel-backend
         (gptel-make-gh-copilot "Copilot")))
 
+(use-package gptel-agent
+  :vc (:url "https://github.com/karthink/gptel-agent")
+  :ensure t)
+
 (provide 'gs-llm)

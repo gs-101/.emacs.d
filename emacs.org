@@ -3869,6 +3869,14 @@ Configuration for Large Language Models.
           (gptel-make-gh-copilot "Copilot")))
 #+end_src
 
+*** [[https://github.com/karthink/gptel-agent][agent]]
+
+#+begin_src emacs-lisp
+  (use-package gptel-agent
+    :vc (:url "https://github.com/karthink/gptel-agent")
+    :ensure t)
+#+end_src
+
 ** End
 
 #+begin_src emacs-lisp
