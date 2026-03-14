@@ -340,6 +340,7 @@ With a ARG prefix argument, copy the buffer to the other window."
 
 (use-package system-packages
   :vc (:url "https://gitlab.com/jabranham/system-packages")
+  :config
   :ensure t)
 
 (use-package ultra-scroll

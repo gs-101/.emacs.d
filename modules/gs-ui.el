@@ -92,7 +92,7 @@
 
 (use-package auto-dark
   :vc (:url "https://github.com/LionyxML/auto-dark-emacs")
-  :unless dw/guix-p
+  :unless (or dw/guix-p gs-101/nixos-p)
   :ensure t
   :custom
   (auto-dark-themes '((modus-vivendi) (modus-operandi)))
@@ -232,7 +232,7 @@ This advice replaces the rocket icon with a electric plug icon."
   (advice-add 'embark-act :before #'oantolin/keycast--update-force))
 
 (use-package modus-themes
-  :unless dw/guix-p
+  :unless (or dw/guix-p gs-101/nixos-p)
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-italic-constructs t)
@@ -242,7 +242,7 @@ This advice replaces the rocket icon with a electric plug icon."
    '((matches . (semibold))
      (selection . (extrabold underline)))))
 
-(when dw/guix-p
+(when (or dw/guix-p gs-101/nixos-p)
   (add-to-list 'custom-theme-load-path (expand-file-name "themes/" user-emacs-directory))
   (load-theme 'noctalia t))
 
