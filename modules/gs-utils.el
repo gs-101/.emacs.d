@@ -343,12 +343,6 @@ using Helpful."
   (popper-mode)
   (popper-echo-mode))
 
-(use-package tinee
-  :ensure-system-package
-  wtype
-  :vc (:url "https://codeberg.org/tusharhero/tinee")
-  :ensure t)
-
 (use-package vterm
   :vc (:url "https://github.com/akermu/emacs-libvterm")
   :ensure t)

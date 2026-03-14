@@ -3729,18 +3729,6 @@ Emacs minor-mode to summon and dismiss buffers easily.
     (popper-echo-mode))
 #+end_src
 
-** [[https://codeberg.org/tusharhero/tinee][tinee]]
-
-Pop-up an Emacs frame to fill in any text field (Emacs Everywhere).
-
-#+begin_src emacs-lisp
-  (use-package tinee
-    :ensure-system-package
-    wtype
-    :vc (:url "https://codeberg.org/tusharhero/tinee")
-    :ensure t)
-#+end_src
-
 ** [[https://github.com/akermu/emacs-libvterm][vterm]]
 
 #+begin_src emacs-lisp
