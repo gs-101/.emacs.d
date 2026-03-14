@@ -14,6 +14,8 @@
   (x-underline-at-descent-line nil))
 
 (use-package display-line-numbers
+  :custom
+  (display-line-numbers-type 'relative)
   :hook
   (prog-mode . display-line-numbers-mode))
 

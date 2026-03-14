@@ -3922,6 +3922,8 @@ Interface for display-line-numbers.
 
 #+begin_src emacs-lisp
   (use-package display-line-numbers
+    :custom
+    (display-line-numbers-type 'relative)
     :hook
     (prog-mode . display-line-numbers-mode))
 #+end_src
