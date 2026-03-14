@@ -23,6 +23,9 @@
 (defvar dw/guix-p
   (eql dw/current-distro 'guix))
 
+(defvar gs-101/nixos-p
+  (eql dw/current-distro 'nixos))
+
 (defvar gs-101/nobara-p
   (eql dw/current-distro 'nobara))
 
