@@ -1171,8 +1171,7 @@ Key bindings for default packages.
 #+begin_src emacs-lisp
   (use-package emacs
     :bind
-    ("C-c q f" . delete-frame)
-    ("C-c i c" . insert-char))
+    ("C-c q f" . delete-frame))
 #+end_src
 
 ** Eshell

@@ -84,8 +84,7 @@ ARG is used for `eval-last-sexp'."
 
 (use-package emacs
   :bind
-  ("C-c q f" . delete-frame)
-  ("C-c i c" . insert-char))
+  ("C-c q f" . delete-frame))
 
 (use-package eshell
   :bind
