@@ -3816,7 +3816,9 @@ Configuration for different chat clients.
 
 #+begin_src emacs-lisp
   (use-package notmuch
-    :ensure t)
+    :ensure t
+    :custom
+    (notmuch-show-logo nil))
 #+end_src
 
 *** [[https://github.com/tarsius/notmuch-transient][notmuch-transient]]

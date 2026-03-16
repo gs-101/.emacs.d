@@ -19,7 +19,9 @@
   :defer t)
 
 (use-package notmuch
-  :ensure t)
+  :ensure t
+  :custom
+  (notmuch-show-logo nil))
 
 (use-package notmuch-transient
   :vc (:url "https://github.com/tarsius/notmuch-transient")
