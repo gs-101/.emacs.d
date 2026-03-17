@@ -2958,6 +2958,14 @@ Support for Org links to Magit buffers.
     :ensure t)
 #+end_src
 
+*** [[https://github.com/jonathanchu/magit-git-toolbelt][git-toolbelt]]
+
+#+begin_src emacs-lisp
+  (use-package magit-git-toolbelt
+    :vc (:url "https://github.com/jonathanchu/magit-git-toolbelt")
+    :ensure t)
+#+end_src
+
 ** [[https://github.com/purcell/package-lint][package-lint]]
 
 #+begin_quote

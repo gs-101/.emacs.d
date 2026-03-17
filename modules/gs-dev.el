@@ -431,6 +431,10 @@ Only runs if a `flutter' buffer already exits."
         ("C-c m l s" . org-store-link))
   :ensure t)
 
+(use-package magit-git-toolbelt
+  :vc (:url "https://github.com/jonathanchu/magit-git-toolbelt")
+  :ensure t)
+
 (use-package package-lint
   :ensure t)
 
