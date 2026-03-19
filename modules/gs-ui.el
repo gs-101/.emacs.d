@@ -131,7 +131,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (doom-modeline-buffer-encoding nil)
   (doom-modeline-buffer-file-name-style 'relative-to-project)
   (doom-modeline-enable-word-count t)
-  (doom-modeline-icon nil)
   (doom-modeline-modal-modern-icon nil)
   :ensure t
   :init
