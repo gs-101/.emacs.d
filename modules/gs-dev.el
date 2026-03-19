@@ -231,6 +231,10 @@ Only runs if a `flutter' buffer already exits."
   :vc (:url "https://github.com/Nathan-Melaku/hyprlang-ts-mode")
   :ensure t)
 
+(use-package just-ts-mode
+  :vc (:url "https://github.com/leon-barrett/just-ts-mode.el")
+  :ensure t)
+
 (use-package kdl-mode
   :vc (:url "https://github.com/taquangtrung/emacs-kdl-mode")
   :ensure t)

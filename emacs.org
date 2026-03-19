@@ -2552,6 +2552,14 @@ A major mode for editing hyprland configuration files in emacs.
     :ensure t)
 #+end_src
 
+*** [[Just][https://github.com/leon-barrett/just-ts-mode.el]]
+
+#+begin_src emacs-lisp
+  (use-package just-ts-mode
+    :vc (:url "https://github.com/leon-barrett/just-ts-mode.el")
+    :ensure t)
+#+end_src
+
 *** [[https://github.com/taquangtrung/emacs-kdl-mode][KDL]]
 
 #+begin_src emacs-lisp
