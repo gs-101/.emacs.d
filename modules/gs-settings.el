@@ -349,12 +349,14 @@ With a ARG prefix argument, copy the buffer to the other window."
   (scroll-conservatively 101)
   (scroll-margin 0)
   :init
-  (ultra-scroll-mode))
+  (ultra-scroll-mode)
+  :ensure t)
 
 (use-package with-editor
   :vc (:url "https://github.com/magit/with-editor")
   :init
-  (shell-command-with-editor-mode))
+  (shell-command-with-editor-mode)
+  :ensure t)
 
 (use-package xdg-launcher
   :vc (:url "https://github.com/emacs-exwm/xdg-launcher")

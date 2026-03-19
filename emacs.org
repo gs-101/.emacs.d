@@ -850,7 +850,8 @@ Keep track of recently opened files.
     (scroll-conservatively 101)
     (scroll-margin 0)
     :init
-    (ultra-scroll-mode))
+    (ultra-scroll-mode)
+    :ensure t)
 #+end_src
 
 *** [[https://github.com/magit/with-editor][With-Editor]]
@@ -863,7 +864,8 @@ Use the Emacsclient as the $EDITOR of child processes.
   (use-package with-editor
     :vc (:url "https://github.com/magit/with-editor")
     :init
-    (shell-command-with-editor-mode))
+    (shell-command-with-editor-mode)
+    :ensure t)
 #+end_src
 
 *** [[https://github.com/emacs-exwm/xdg-launcher][xdg-launcher]]
@@ -993,7 +995,7 @@ Asynchronous dired actions.
 An all-in-one document reader for all formats in Emacs, backed by MuPDF.
 #+end_quote
 
-#+begin_src
+#+begin_src emacs-lisp
   (use-package reader
     :vc (:url "https://codeberg.org/divyaranjan/emacs-reader")
     :ensure-system-package
@@ -1413,17 +1415,6 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
        (sqlite . t)))
     :custom
     (org-export-babel-evaluate nil))
-#+end_src
-
-*** [[https://github.com/samwdp/ob-csharp][C#]]
-
-#+begin_src emacs-lisp
-  (use-package ob-csharp
-    :vc (:url "https://github.com/samwdp/ob-csharp")
-    :after org
-    :ensure t
-    :config
-    (add-to-list 'org-babel-load-languages '(csharp . t)))
 #+end_src
 
 *** [[https://github.com/mzimmerm/ob-dart][Dart]]
@@ -2201,18 +2192,6 @@ Tree-sitter based region interaction.
     (git-commit-major-mode 'git-commit-ts-mode))
 #+end_src
 
-*** [[https://github.com/alexispurslane/treesit-sexp][treesit-sexp]]
-
-Sexp interaction commands for Tree-Sitter based modes.
-
-#+begin_src emacs-lisp
-  (use-package treesit-sexp
-    :vc (:url "https://github.com/alexispurslane/treesit-sexp")
-    :ensure t
-    :init
-    (global-treesit-sexp-mode))
-#+end_src
-
 ** Language Servers
 
 *** [[https://github.com/deirn/mason.el][mason.el]]
@@ -2856,23 +2835,6 @@ This package lets you access the GNU Bug Tracker from within Emacs.
 
 #+begin_src emacs-lisp
   (use-package debbugs
-    :ensure t)
-#+end_src
-
-** [[https://github.com/anonimitoraf/exercism.el][Exercism]]
-
-#+begin_quote
-Emacs integration for [[https://exercism.org][Exercism]].
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package exercism
-    :vc (:url "https://github.com/anonimitoraf/exercism.el")
-    :commands
-    (exercism)
-    :custom
-    (exercism--workspace
-     (expand-file-name "study/exercism/" gs-101/projects-code-directory))
     :ensure t)
 #+end_src
 
@@ -3537,7 +3499,7 @@ Disk manager.
 
 #+begin_src emacs-lisp
   (use-package dumb-jump
-    :vc (:url "use-package-ensure-system-package-consify")
+    :vc (:url "https://github.com/jacktasia/dumb-jump")
     :ensure t
     :hook
     (xref-backend-functions . dumb-jump-xref-activate))
@@ -3640,24 +3602,6 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     :ensure-system-package
     (atool unzip)
     :after dwim-shell-command)
-#+end_src
-
-** [[https://codeberg.org/rahguzar/filechooser][filechooser.el]]
-
-#+begin_src emacs-lisp
-  (use-package filechooser
-    :vc (:url "https://codeberg.org/rahguzar/filechooser")
-    :bind
-    (:map filechooser-multiple-selection-map
-          ("TAB" . #'rahguzar/filechooser-multiple-vertico-tab))
-    :config
-    (defun rahguzar/filechooser-multiple-vertico-tab ()
-      "Use `vertico' to select multiple files."
-      (interactive)
-      (vertico-insert)
-      (unless (file-directory-p (minibuffer-contents))
-        (filechooser-multiple-continue)))
-    :ensure t)
 #+end_src
 
 ** [[https://github.com/zkry/p-search][p-search]]

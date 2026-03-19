@@ -34,13 +34,6 @@
   :custom
   (org-export-babel-evaluate nil))
 
-(use-package ob-csharp
-  :vc (:url "https://github.com/samwdp/ob-csharp")
-  :after org
-  :ensure t
-  :config
-  (add-to-list 'org-babel-load-languages '(csharp . t)))
-
 (use-package ob-dart
   :vc (:url "https://github.com/mzimmerm/ob-dart")
   :after org

@@ -197,7 +197,7 @@ using Helpful."
   :ensure t)
 
 (use-package dumb-jump
-  :vc (:url "use-package-ensure-system-package-consify")
+  :vc (:url "https://github.com/jacktasia/dumb-jump")
   :ensure t
   :hook
   (xref-backend-functions . dumb-jump-xref-activate))
@@ -268,20 +268,6 @@ using Helpful."
   :ensure-system-package
   (atool unzip)
   :after dwim-shell-command)
-
-(use-package filechooser
-  :vc (:url "https://codeberg.org/rahguzar/filechooser")
-  :bind
-  (:map filechooser-multiple-selection-map
-        ("TAB" . #'rahguzar/filechooser-multiple-vertico-tab))
-  :config
-  (defun rahguzar/filechooser-multiple-vertico-tab ()
-    "Use `vertico' to select multiple files."
-    (interactive)
-    (vertico-insert)
-    (unless (file-directory-p (minibuffer-contents))
-      (filechooser-multiple-continue)))
-  :ensure t)
 
 (use-package p-search
   :vc (:url "https://github.com/zkry/p-search")

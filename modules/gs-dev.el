@@ -58,12 +58,6 @@
   :custom
   (git-commit-major-mode 'git-commit-ts-mode))
 
-(use-package treesit-sexp
-  :vc (:url "https://github.com/alexispurslane/treesit-sexp")
-  :ensure t
-  :init
-  (global-treesit-sexp-mode))
-
 (use-package mason
   :vc (:url "https://github.com/deirn/mason.el")
   :ensure t
@@ -382,15 +376,6 @@ Only runs if a `flutter' buffer already exits."
   (dape-display-source . pulse-momentary-highlight-one-line))
 
 (use-package debbugs
-  :ensure t)
-
-(use-package exercism
-  :vc (:url "https://github.com/anonimitoraf/exercism.el")
-  :commands
-  (exercism)
-  :custom
-  (exercism--workspace
-   (expand-file-name "study/exercism/" gs-101/projects-code-directory))
   :ensure t)
 
 (use-package git-modes
