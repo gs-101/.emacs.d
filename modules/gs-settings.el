@@ -34,6 +34,30 @@
   (editorconfig-mode))
 
 (use-package emacs
+  :bind
+  (:map emacs-lisp-mode-map
+        ("C-c C-c" . gs-101/eval-dwim)
+        ("C-c m e b" . eval-buffer)
+        ("C-c m e r" . eval-region)
+        ("C-c C-p" . ielm))
+  :config
+  (defun gs-101/eval-dwim (arg)
+    "Evaluate region if it is active; if not, evaluate the buffer.
+If the region is active, this function calls `eval-region'.
+Otherwise, it calls `eval-buffer'.
+
+If the character before point is a closed parenthesis,
+this calls `eval-last-sexp'.
+
+ARG is used for `eval-last-sexp'."
+    (interactive "P")
+    (cond
+     ((use-region-p) (eval-region (region-beginning) (region-end) t)
+      (message "Region evaluated"))
+     ((eq (char-before) ?\)) (eval-last-sexp arg)
+      (message "Sexp evaluated"))
+     (t (eval-buffer nil nil)
+        (message "Buffer evaluated"))))
   :custom
   (auto-save-include-big-deletions)
   (auto-window-vscroll nil) ; 3
@@ -76,12 +100,16 @@
   (epg-pinentry-mode 'loopback))
 
 (use-package eshell
+  :bind
+  ("C-c t s" . eshell)
   :config
   (defun christiantietze/new-buffer ()
     "Create and switch to a new empty buffer named `untitled'."
     (switch-to-buffer (generate-new-buffer "untitled"))))
 
 (use-package files
+  :bind
+  ("C-c f r" . recover-this-file)
   :config
   (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ; 3
   :custom
@@ -104,6 +132,10 @@
   ("C-z" . nil))
 
 (use-package grep
+  :bind
+  ("M-s g g" . grep)
+  ("M-s g l" . lgrep)
+  ("M-s g r" . rgrep)
   :custom
   (grep-use-headings t))
 
@@ -201,6 +233,20 @@
 (use-package simple
   :bind
   ("C-x M-h" . captainflasmr/copy-buffer-to-kill-ring)
+  ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
+  ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
+  ([remap capitalize-word] . capitalize-dwim)
+  ([remap upcase-word] . upcase-dwim)
+  ([remap downcase-word] . downcase-dwim)
+  :config
+  (defun gs-101/switch-to-minibuffer-dwim ()
+    "Switch to minibuffer in a regular window. In minibuffer, switch to previous window.
+If currently in the minibuffer, this function calls `previous-window-any-frame'.
+Otherwise, it calls `switch-to-minibuffer'."
+    (interactive)
+    (if (minibufferp)
+        (previous-window-any-frame)
+      (switch-to-minibuffer)))
   :custom
   (blink-matching-paren nil)
   (column-number-mode t)

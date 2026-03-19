@@ -66,6 +66,8 @@
 
 (use-package compile
   :bind
+  ("C-c c" . compile)
+  ("C-c C" . recompile)
   (:map compilation-mode-map
         ("p" . previous-error-no-select))
   :custom
@@ -96,6 +98,16 @@
   (diff-add-log-use-relative-names t))
 
 (use-package eglot
+  :bind
+  (:map prog-mode-map
+        ("C-c t e" . eglot))
+  (:map eglot-mode-map
+        ("C-c e a" . eglot-code-actions)
+        ("C-c e o" . eglot-code-action-organize-imports)
+        ("C-c e i" . eglot-find-implementation)
+        ("C-c e t" . eglot-find-typeDefinition)
+        ("C-c e f" . eglot-format)
+        ("C-c e r" . eglot-rename))
   :config
   (add-to-list 'eglot-server-programs
                '((c-ts-mode c++-ts-mode) . ("clangd"

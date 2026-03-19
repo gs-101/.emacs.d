@@ -210,6 +210,30 @@ Generic package used to configure functions and variables not included in any Em
 
 #+begin_src emacs-lisp
   (use-package emacs
+    :bind
+    (:map emacs-lisp-mode-map
+          ("C-c C-c" . gs-101/eval-dwim)
+          ("C-c m e b" . eval-buffer)
+          ("C-c m e r" . eval-region)
+          ("C-c C-p" . ielm))
+    :config
+    (defun gs-101/eval-dwim (arg)
+      "Evaluate region if it is active; if not, evaluate the buffer.
+  If the region is active, this function calls `eval-region'.
+  Otherwise, it calls `eval-buffer'.
+
+  If the character before point is a closed parenthesis,
+  this calls `eval-last-sexp'.
+
+  ARG is used for `eval-last-sexp'."
+      (interactive "P")
+      (cond
+       ((use-region-p) (eval-region (region-beginning) (region-end) t)
+        (message "Region evaluated"))
+       ((eq (char-before) ?\)) (eval-last-sexp arg)
+        (message "Sexp evaluated"))
+       (t (eval-buffer nil nil)
+          (message "Buffer evaluated"))))
     :custom
     (auto-save-include-big-deletions)
     (auto-window-vscroll nil) ; 3
@@ -267,6 +291,8 @@ Configuration of the EasyPG Library.
 
 #+begin_src emacs-lisp
   (use-package eshell
+    :bind
+    ("C-c t s" . eshell)
     :config
     (defun christiantietze/new-buffer ()
       "Create and switch to a new empty buffer named `untitled'."
@@ -284,6 +310,8 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
 
 #+begin_src emacs-lisp
   (use-package files
+    :bind
+    ("C-c f r" . recover-this-file)
     :config
     (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p) ; 3
     :custom
@@ -324,6 +352,10 @@ run `grep' and display the results.
 
 #+begin_src emacs-lisp
   (use-package grep
+    :bind
+    ("M-s g g" . grep)
+    ("M-s g l" . lgrep)
+    ("M-s g r" . rgrep)
     :custom
     (grep-use-headings t))
 #+end_src
@@ -564,6 +596,20 @@ A grab-bag of basic Emacs commands not specifically related to some major mode o
   (use-package simple
     :bind
     ("C-x M-h" . captainflasmr/copy-buffer-to-kill-ring)
+    ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
+    ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
+    ([remap capitalize-word] . capitalize-dwim)
+    ([remap upcase-word] . upcase-dwim)
+    ([remap downcase-word] . downcase-dwim)
+    :config
+    (defun gs-101/switch-to-minibuffer-dwim ()
+      "Switch to minibuffer in a regular window. In minibuffer, switch to previous window.
+  If currently in the minibuffer, this function calls `previous-window-any-frame'.
+  Otherwise, it calls `switch-to-minibuffer'."
+      (interactive)
+      (if (minibufferp)
+          (previous-window-any-frame)
+        (switch-to-minibuffer)))
     :custom
     (blink-matching-paren nil)
     (column-number-mode t)
@@ -927,6 +973,9 @@ Use the Emacsclient as the $EDITOR of child processes.
 
 #+begin_src emacs-lisp
   (use-package dired
+    :bind
+    (:map dired-mode-map
+          ("b" . dired-up-directory))
     :custom
     (dired-clean-confirm-killing-deleted-buffers nil)
     (dired-dwim-target t)
@@ -1062,91 +1111,6 @@ Key bindings for default packages.
 
 ** Development
 
-*** Compile
-
-#+begin_src emacs-lisp
-  (use-package compile
-    :bind
-    ("C-c c" . compile)
-    ("C-c C" . recompile))
-#+end_src
-
-*** Eglot
-
-#+begin_src emacs-lisp
-  (use-package eglot
-    :bind
-    (:map prog-mode-map
-          ("C-c t e" . eglot))
-    (:map eglot-mode-map
-          ("C-c e a" . eglot-code-actions)
-          ("C-c e o" . eglot-code-action-organize-imports)
-          ("C-c e i" . eglot-find-implementation)
-          ("C-c e t" . eglot-find-typeDefinition)
-          ("C-c e f" . eglot-format)
-          ("C-c e r" . eglot-rename)))
-#+end_src
-
-*** Emacs Lisp
-
-#+begin_src emacs-lisp
-  (use-package elisp-mode
-    :bind
-    (:map emacs-lisp-mode-map
-          ("C-c m C-b" . elisp-byte-compile-buffer)
-          ("C-c m e d" . eval-defun)
-          ("C-c m C-e" . elisp-eval-region-or-buffer)))
-#+end_src
-
-**** Emacs
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :bind
-    (:map emacs-lisp-mode-map
-          ("C-c C-c" . gs-101/eval-dwim)
-          ("C-c m e b" . eval-buffer)
-          ("C-c m e r" . eval-region)
-          ("C-c C-p" . ielm))
-    :config
-    (defun gs-101/eval-dwim (arg)
-      "Evaluate region if it is active; if not, evaluate the buffer.
-  If the region is active, this function calls `eval-region'.
-  Otherwise, it calls `eval-buffer'.
-
-  If the character before point is a closed parenthesis,
-  this calls `eval-last-sexp'.
-
-  ARG is used for `eval-last-sexp'."
-      (interactive "P")
-      (cond
-       ((use-region-p) (eval-region (region-beginning) (region-end) t)
-        (message "Region evaluated"))
-       ((eq (char-before) ?\)) (eval-last-sexp arg)
-        (message "Sexp evaluated"))
-       (t (eval-buffer nil nil)
-          (message "Buffer evaluated")))))
-#+end_src
-
-**** Files
-
-#+begin_src emacs-lisp
-  (use-package files
-    :bind
-    (:map emacs-lisp-mode-map
-          ("C-c m l" . load-library)))
-#+end_src
-
-**** Find Functions
-
-#+begin_src emacs-lisp
-  (use-package find-func
-    :bind
-    (:map emacs-lisp-mode-map
-          ("C-c m g f" . find-function)
-          ("C-c m g l" . find-library)
-          ("C-c m g v" . find-variable)))
-#+end_src
 
 *** Flymake
 
@@ -1162,58 +1126,12 @@ Key bindings for default packages.
           ("C-c t f" . flymake-start)))
 #+end_src
 
-** [[./notes/keys_dired.org][Dired]]
-
-#+begin_src emacs-lisp
-  (use-package dired
-    :after dired
-    :bind
-    (:map dired-mode-map
-          ("b" . dired-up-directory)))
-#+end_src
-
-** Emacs
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :bind
-    ("C-c q f" . delete-frame))
-#+end_src
-
-** Eshell
-
-#+begin_src emacs-lisp
-  (use-package eshell
-    :bind
-    ("C-c t s" . eshell))
-#+end_src
-
-** Files
-
-#+begin_src emacs-lisp
-  (use-package files
-    :bind
-    ("C-c f r" . recover-this-file)
-    ("C-c q r" . restart-emacs)
-    ("C-c q e" . save-buffers-kill-emacs))
-#+end_src
-
 ** Git
 
 #+begin_src emacs-lisp
   (use-package vc-git
     :bind
     ("M-s g v" . vc-git-grep))
-#+end_src
-
-** Grep
-
-#+begin_src emacs-lisp
-  (use-package grep
-    :bind
-    ("M-s g g" . grep)
-    ("M-s g l" . lgrep)
-    ("M-s g r" . rgrep))
 #+end_src
 
 ** Help
@@ -1234,44 +1152,6 @@ Key bindings for default packages.
 
 ** Org Mode
 
-#+begin_src emacs-lisp
-  (use-package org
-    :bind
-    (:map org-mode-map
-          ([remap org-narrow-to-subtree] . org-toggle-narrow-to-subtree)
-          ([remap save-buffer] . org-save-all-org-buffers)
-          ("M-p" . org-move-subtree-up)
-          ("M-n" . org-move-subtree-down)
-          ("C-c m s e" . org-sort-entries)))
-#+end_src
-
-*** Agenda
-
-#+begin_src emacs-lisp
-  (use-package org-agenda
-    :bind
-    ("C-c o a" . org-agenda))
-#+end_src
-
-*** Clock
-
-#+begin_src emacs-lisp
-  (use-package org-clock
-    :bind
-    (:map org-mode-map
-          ("C-c m c" . org-clock-in-last)
-          ("C-c m C" . org-clock-cancel)))
-#+end_src
-
-*** Export
-
-#+begin_src emacs-lisp
-  (use-package ox
-    :bind
-    (:map org-mode-map
-          ("C-c m x" . org-export-dispatch)))
-#+end_src
-
 *** Links
 
 #+begin_src emacs-lisp
@@ -1280,24 +1160,6 @@ Key bindings for default packages.
     (:map org-mode-map
           ("C-c m l i" . org-insert-link)
           ("C-c m l s" . org-store-link)))
-#+end_src
-
-*** List
-
-#+begin_src emacs-lisp
-  (use-package org-list
-    :bind
-    (:map org-mode-map
-          ("C-c m s l" . org-sort-list)))
-#+end_src
-
-*** Refile
-
-#+begin_src emacs-lisp
-  (use-package org-refile
-    :bind
-    (:map org-mode-map
-          ("C-c m r" . org-refile)))
 #+end_src
 
 *** Table
@@ -1337,27 +1199,6 @@ Convenient way to repeat the previous command.
     ("C-c l d" . delete-duplicate-lines))
 #+end_src
 
-** Simple
-
-#+begin_src emacs-lisp
-  (use-package simple
-    :bind
-    ("M-g M-c" . gs-101/switch-to-minibuffer-dwim)
-    ("M-\\" . nil) ;; unbind `delete-horizontal-space', use `cycle-spacing' instead
-    ([remap capitalize-word] . capitalize-dwim)
-    ([remap upcase-word] . upcase-dwim)
-    ([remap downcase-word] . downcase-dwim)
-    :config
-    (defun gs-101/switch-to-minibuffer-dwim ()
-      "Switch to minibuffer in a regular window. In minibuffer, switch to previous window.
-  If currently in the minibuffer, this function calls `previous-window-any-frame'.
-  Otherwise, it calls `switch-to-minibuffer'."
-      (interactive)
-      (if (minibufferp)
-          (previous-window-any-frame)
-        (switch-to-minibuffer))))
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp
@@ -1379,6 +1220,13 @@ Org is a mode for keeping notes, maintaining ToDo lists, and doing project plann
 
 #+begin_src emacs-lisp
   (use-package org
+    :bind
+    (:map org-mode-map
+          ([remap org-narrow-to-subtree] . org-toggle-narrow-to-subtree)
+          ([remap save-buffer] . org-save-all-org-buffers)
+          ("M-p" . org-move-subtree-up)
+          ("M-n" . org-move-subtree-down)
+          ("C-c m s e" . org-sort-entries))
     :custom
     (org-auto-align-tags nil)
     (org-directory (expand-file-name "~/Documents/org"))
@@ -1459,6 +1307,8 @@ Dynamic task and appointment lists for Org.
 
 #+begin_src emacs-lisp
   (use-package org-agenda
+    :bind
+    ("C-c o a" . org-agenda)
     :config
     (add-to-list 'org-agenda-prefix-format '(agenda . "%-12t% s "))
     :custom
@@ -1530,6 +1380,10 @@ The time clocking code for Org mode.
 
 #+begin_src emacs-lisp
   (use-package org-clock
+    :bind
+    (:map org-mode-map
+          ("C-c m c" . org-clock-in-last)
+          ("C-c m C" . org-clock-cancel))
     :custom
     (org-clock-clocked-in-display 'frame-title)
     (org-clock-persist t)
@@ -1589,6 +1443,9 @@ LaTeX Backend for Org Export Engine.
 
 #+begin_src emacs-lisp
   (use-package ox-latex
+    :bind
+    (:map org-mode-map
+          ("C-c m x" . org-export-dispatch))
     :custom
     (org-latex-tables-centered nil)
     (org-latex-toc-command "\\tableofcontents \\pagebreak")
@@ -1635,6 +1492,9 @@ Plain lists for Org.
 
 #+begin_src emacs-lisp
   (use-package org-list
+    :bind
+    (:map org-mode-map
+          ("C-c m s l" . org-sort-list))
     :custom
     (org-list-allow-alphabetical t))
 #+end_src
@@ -1670,6 +1530,9 @@ Org refile allows you to refile subtrees to various locations.
 
 #+begin_src emacs-lisp
   (use-package org-refile
+    :bind
+    (:map org-mode-map
+          ("C-c m r" . org-refile))
     :config
     (advice-add #'org-refile :after #'org-save-all-org-buffers)
     :custom
@@ -2213,6 +2076,8 @@ Run compiler as inferior of Emacs, parse error messages.
 #+begin_src emacs-lisp
   (use-package compile
     :bind
+    ("C-c c" . compile)
+    ("C-c C" . recompile)
     (:map compilation-mode-map
           ("p" . previous-error-no-select))
     :custom
@@ -2285,6 +2150,16 @@ Eglot ("Emacs Polyglot") is an Emacs LSP client that stays out of your way.
 
 #+begin_src emacs-lisp
   (use-package eglot
+    :bind
+    (:map prog-mode-map
+          ("C-c t e" . eglot))
+    (:map eglot-mode-map
+          ("C-c e a" . eglot-code-actions)
+          ("C-c e o" . eglot-code-action-organize-imports)
+          ("C-c e i" . eglot-find-implementation)
+          ("C-c e t" . eglot-find-typeDefinition)
+          ("C-c e f" . eglot-format)
+          ("C-c e r" . eglot-rename))
     :config
     (add-to-list 'eglot-server-programs
                  '((c-ts-mode c++-ts-mode) . ("clangd"
@@ -2531,7 +2406,7 @@ A major mode for editing hyprland configuration files in emacs.
     :ensure t)
 #+end_src
 
-*** [[Just][https://github.com/leon-barrett/just-ts-mode.el]]
+*** [[https://github.com/leon-barrett/just-ts-mode.el][Just]]
 
 #+begin_src emacs-lisp
   (use-package just-ts-mode

@@ -1,6 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package dired
+  :bind
+  (:map dired-mode-map
+        ("b" . dired-up-directory))
   :custom
   (dired-clean-confirm-killing-deleted-buffers nil)
   (dired-dwim-target t)

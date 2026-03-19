@@ -1,6 +1,13 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package org
+  :bind
+  (:map org-mode-map
+        ([remap org-narrow-to-subtree] . org-toggle-narrow-to-subtree)
+        ([remap save-buffer] . org-save-all-org-buffers)
+        ("M-p" . org-move-subtree-up)
+        ("M-n" . org-move-subtree-down)
+        ("C-c m s e" . org-sort-entries))
   :custom
   (org-auto-align-tags nil)
   (org-directory (expand-file-name "~/Documents/org"))
@@ -55,6 +62,8 @@
   (org-mode . org-nix-shell-mode))
 
 (use-package org-agenda
+  :bind
+  ("C-c o a" . org-agenda)
   :config
   (add-to-list 'org-agenda-prefix-format '(agenda . "%-12t% s "))
   :custom
@@ -103,6 +112,10 @@
   (org-habit-graph-column 100))
 
 (use-package org-clock
+  :bind
+  (:map org-mode-map
+        ("C-c m c" . org-clock-in-last)
+        ("C-c m C" . org-clock-cancel))
   :custom
   (org-clock-clocked-in-display 'frame-title)
   (org-clock-persist t)
@@ -133,6 +146,9 @@ allowFullScreen>
   (org-cycle-emulate-tab 'whitestart))
 
 (use-package ox-latex
+  :bind
+  (:map org-mode-map
+        ("C-c m x" . org-export-dispatch))
   :custom
   (org-latex-tables-centered nil)
   (org-latex-toc-command "\\tableofcontents \\pagebreak")
@@ -161,6 +177,9 @@ allowFullScreen>
   (org-latex-src-block-backend 'engraved))
 
 (use-package org-list
+  :bind
+  (:map org-mode-map
+        ("C-c m s l" . org-sort-list))
   :custom
   (org-list-allow-alphabetical t))
 
@@ -176,6 +195,9 @@ allowFullScreen>
   :defer t)
 
 (use-package org-refile
+  :bind
+  (:map org-mode-map
+        ("C-c m r" . org-refile))
   :config
   (advice-add #'org-refile :after #'org-save-all-org-buffers)
   :custom
