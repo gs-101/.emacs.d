@@ -289,6 +289,10 @@ Only runs if a `flutter' buffer already exits."
   :vc (:url "https://github.com/nix-community/nix-ts-mode")
   :ensure t)
 
+(use-package qml-ts-mode
+  :vc (:url "https://github.com/xhcoding/qml-ts-mode")
+  :ensure t)
+
 ;; Library
 (use-package pg
   :vc (:url "https://github.com/emarsden/pg-el/")

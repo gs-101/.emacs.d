@@ -2654,6 +2654,14 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
     :ensure t)
 #+end_src
 
+*** QML
+
+#+begin_src emacs-lisp
+  (use-package qml-ts-mode
+    :vc (:url "https://github.com/xhcoding/qml-ts-mode")
+    :ensure t)
+#+end_src
+
 *** PostgreSQL
 
 **** [[https://github.com/emarsden/pgmacs][PGmacs]]
