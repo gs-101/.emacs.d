@@ -3760,8 +3760,8 @@ Interface for display-line-numbers.
   (use-package display-line-numbers
     :custom
     (display-line-numbers-type 'relative)
-    :hook
-    (prog-mode . display-line-numbers-mode))
+    :init
+    (display-line-numbers-mode))
 #+end_src
 
 ** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L106][Frame]]

@@ -16,8 +16,8 @@
 (use-package display-line-numbers
   :custom
   (display-line-numbers-type 'relative)
-  :hook
-  (prog-mode . display-line-numbers-mode))
+  :init
+  (display-line-numbers-mode))
 
 (use-package frame
   :config (setq-mode-local doc-view-mode blink-cursor-mode nil)
