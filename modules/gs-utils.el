@@ -219,6 +219,14 @@ using Helpful."
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
                  (window-parameters (mode-line-format . none))))
+  ;; https://github.com/oantolin/embark/wiki/Additional-Configuration#automatically-resizing-auto-updating-embark-collect-buffers-to-fit-their-contents
+  (defun oantolin/embark-collect-resize-window (&rest _)
+    "Resize the `embark-collect' window to match its contents."
+    (when (memq embark-collect--kind '(:live :completions))
+      (fit-window-to-buffer (get-buffer-window)
+                            (floor (frame-height) 2) 1)))
+  :hook
+  (embark-collect-post-revert . oantolin/embark-collect-resize-window)
   :custom
   (prefix-help-command #'embark-prefix-help-command)
   ;; Disable quitting after killing a buffer in an action
@@ -242,17 +250,6 @@ using Helpful."
 (use-package embark-consult
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
-
-(use-package embark
-  :after embark
-  :config
-  (defun oantolin/embark-collect-resize-window (&rest _)
-    "Resize the `embark-collect' window to match its contents."
-    (when (memq embark-collect--kind '(:live :completions))
-      (fit-window-to-buffer (get-buffer-window)
-                            (floor (frame-height) 2) 1)))
-  :hook
-  (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 
 (use-package dwim-shell-command
   :vc (:url "https://github.com/xenodium/dwim-shell-command")
@@ -331,7 +328,27 @@ using Helpful."
 
 (use-package vterm
   :vc (:url "https://github.com/akermu/emacs-libvterm")
-  :ensure t)
+  :ensure t
+  :bind
+  (:map project-prefix-map
+        ("s" . gs-101/project-vterm))
+  :config
+  (defun gs-101/project-vterm ()
+    "Start Vterm in the current project's root directory.
+
+If a buffer already exists for running Vterm in the project's root,
+switch to it. Otherwise, create a new Vterm buffer.
+With \\[universal-argument] prefix arg, create a new Vterm buffer even
+if one already exists.
+With numeric prefix arg, switch to the session with that number, or
+create it if it doesn't already exist."
+    (interactive)
+    (defvar vterm-buffer-name)
+    (let* ((default-directory (project-root (project-current t)))
+           (vterm-buffer-name (project-prefixed-buffer-name "vterm")))
+      (vterm current-prefix-arg)))
+  :custom
+  (disproject-shell-command #'gs-101/project-vterm))
 
 (use-package uniline
   :vc (:url "https://github.com/tbanel/uniline")

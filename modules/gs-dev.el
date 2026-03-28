@@ -51,10 +51,7 @@
 
 (use-package git-commit-ts-mode
   :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
-  :ensure t)
-
-(use-package magit
-  :after git-commit-ts-mode magit
+  :ensure t
   :custom
   (git-commit-major-mode 'git-commit-ts-mode))
 

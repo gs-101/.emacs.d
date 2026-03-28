@@ -284,21 +284,6 @@ Configuration of the EasyPG Library.
     (epg-pinentry-mode 'loopback))
 #+end_src
 
-*** Eshell
-:PROPERTIES:
-:CREDITS:  https://christiantietze.de/posts/2025/10/redirect-output-to-buffers-from-emacs-eshell/
-:END:
-
-#+begin_src emacs-lisp
-  (use-package eshell
-    :bind
-    ("C-c t s" . eshell)
-    :config
-    (defun christiantietze/new-buffer ()
-      "Create and switch to a new empty buffer named `untitled'."
-      (switch-to-buffer (generate-new-buffer "untitled"))))
-#+end_src
-
 *** Files
 :PROPERTIES:
 :CREDITS:  1. [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/early-init.el#L178][jamescherti]], 2. [[https://github.com/Nathan-Furnal/dotemacs/blob/45defa98dfa7a7c401ca692e9479e588896b9261/init.el#L226][nathan-furnal]], 3. [[https://github.com/oantolin/emacs-config/tree/master][oantolin]]
@@ -395,7 +380,6 @@ Support for visiting image files.
 
 #+begin_src emacs-lisp
   (use-package image-mode
-    :after dired
     :custom
     (image-animate-loop t))
 #+end_src
@@ -832,19 +816,17 @@ The default paths used to store configuration files and persistent data are not 
   (use-package no-littering
     :vc (:url "https://github.com/emacscollective/no-littering")
     :ensure t
-    :init
-    (no-littering-theme-backups))
-#+end_src
-
-**** [[https://github.com/emacscollective/no-littering#lock-files][Lock Files]]
-
-#+begin_src emacs-lisp
-  (use-package no-littering
-    :after no-littering
     :config
+    ;; https://github.com/emacscollective/no-littering#lock-files
     (let ((dir (no-littering-expand-var-file-name "lock-files/")))
       (make-directory dir t)
-      (setq lock-file-name-transforms `((".*" ,dir t)))))
+      (setq lock-file-name-transforms `((".*" ,dir t))))
+    (when (file-exists-p custom-file)
+      (load-file custom-file))
+    :custom
+    (custom-file (no-littering-expand-etc-file-name "custom.el"))
+    :init
+    (no-littering-theme-backups))
 #+end_src
 
 **** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#recent-files][Recent Files]]
@@ -864,18 +846,6 @@ Keep track of recently opened files.
                  (recentf-expand-file-name no-littering-var-directory))
     :config
     (recentf-mode))
-#+end_src
-
-**** [[https://github.com/emacscollective/no-littering?tab=readme-ov-file#saved-customizations][Saved Customizations]]
-
-#+begin_src emacs-lisp
-  (use-package no-littering
-    :after no-littering
-    :config
-    (when (file-exists-p custom-file)
-      (load-file custom-file))
-    :custom
-    (custom-file (no-littering-expand-etc-file-name "custom.el")))
 #+end_src
 
 *** [[https://gitlab.com/jabranham/system-packages][system-packages]]
@@ -921,35 +891,6 @@ Use the Emacsclient as the $EDITOR of child processes.
     :vc (:url "https://github.com/emacs-exwm/xdg-launcher")
     :ensure t)
 #+end_src
-
-**** Application Launcher
-:PROPERTIES:
-:CREDITS:  https://gitlab.com/dwt1/configuring-emacs/-/blob/main/07-the-final-touches/scripts/app-launchers.el?ref_type=heads
-:END:
-
-#+begin_src emacs-lisp
-  (use-package xdg-launcher
-    :after xdg-launcher
-    :config
-    (defun gs-101/emacs-app-launcher ()
-      "Create a minibuffer-only buffer for selecting an application to be opened."
-      (interactive)
-      (with-selected-frame
-          (make-frame '((name . "emacs-app-launcher")
-                        (minibuffer . only)
-                        (fullscreen . 0)
-                        (undecorated . t)
-                        (auto-raise . t)
-                        (tool-bar-lines . 0)
-                        (menu-bar-lines . 0)
-                        (internal-border-width . 10)
-                        (width . 80)
-                        (height . 11)))
-        (unwind-protect
-            (xdg-launcher-run-app)
-          (delete-frame)))))
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp
@@ -1836,6 +1777,9 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
   (use-package citar
     :ensure-system-package
     zotero
+    :bind
+    (:map bibtex-mode-map
+          ("C-c m q" . citar-insert-bibtex))
     :custom
     (citar-bibliography "~/Documents/bibliography.bib")
     (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")
@@ -1850,16 +1794,6 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     :hook
     (org-mode . citar-capf-setup)
     :ensure t)
-#+end_src
-
-** BibTeX
-
-#+begin_src emacs-lisp
-  (use-package citar
-    :after bibtex
-    :bind
-    (:map bibtex-mode-map
-          ("C-c m q" . citar-insert-bibtex)))
 #+end_src
 
 ** [[https://github.com/emacs-citar/citar?tab=readme-ov-file#embark][Embark]]
@@ -2043,14 +1977,7 @@ Tree-sitter based region interaction.
 #+begin_src emacs-lisp
   (use-package git-commit-ts-mode
     :vc (:url "https://github.com/danilshvalov/git-commit-ts-mode")
-    :ensure t)
-#+end_src
-
-**** [[https://github.com/danilshvalov/git-commit-ts-mode?tab=readme-ov-file#magit-integration][Magit]]
-
-#+begin_src emacs-lisp
-  (use-package magit
-    :after git-commit-ts-mode magit
+    :ensure t
     :custom
     (git-commit-major-mode 'git-commit-ts-mode))
 #+end_src
@@ -2511,7 +2438,6 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
     :after scheme
     :ensure t)
 #+end_src
-
 
 *** [[https://github.com/wentasah/meson-mode][Meson]]
 
@@ -3416,6 +3342,14 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                    nil
                    (window-parameters (mode-line-format . none))))
+    ;; https://github.com/oantolin/embark/wiki/Additional-Configuration#automatically-resizing-auto-updating-embark-collect-buffers-to-fit-their-contents
+    (defun oantolin/embark-collect-resize-window (&rest _)
+      "Resize the `embark-collect' window to match its contents."
+      (when (memq embark-collect--kind '(:live :completions))
+        (fit-window-to-buffer (get-buffer-window)
+                              (floor (frame-height) 2) 1)))
+    :hook
+    (embark-collect-post-revert . oantolin/embark-collect-resize-window)
     :custom
     (prefix-help-command #'embark-prefix-help-command)
     ;; Disable quitting after killing a buffer in an action
@@ -3447,21 +3381,6 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
   (use-package embark-consult
     :hook
     (embark-collect-mode . consult-preview-at-point-mode))
-#+end_src
-
-*** [[https://github.com/oantolin/embark/wiki/Additional-Configuration#automatically-resizing-auto-updating-embark-collect-buffers-to-fit-their-contents][Collect Resizing]]
-
-#+begin_src emacs-lisp
-  (use-package embark
-    :after embark
-    :config
-    (defun oantolin/embark-collect-resize-window (&rest _)
-      "Resize the `embark-collect' window to match its contents."
-      (when (memq embark-collect--kind '(:live :completions))
-        (fit-window-to-buffer (get-buffer-window)
-                              (floor (frame-height) 2) 1)))
-    :hook
-    (embark-collect-post-revert . oantolin/embark-collect-resize-window))
 #+end_src
 
 ** [[https://github.com/xenodium/dwim-shell-command][dwim-shell-command]]
@@ -3576,7 +3495,27 @@ Emacs minor-mode to summon and dismiss buffers easily.
 #+begin_src emacs-lisp
   (use-package vterm
     :vc (:url "https://github.com/akermu/emacs-libvterm")
-    :ensure t)
+    :ensure t
+    :bind
+    (:map project-prefix-map
+          ("s" . gs-101/project-vterm))
+    :config
+    (defun gs-101/project-vterm ()
+      "Start Vterm in the current project's root directory.
+
+  If a buffer already exists for running Vterm in the project's root,
+  switch to it. Otherwise, create a new Vterm buffer.
+  With \\[universal-argument] prefix arg, create a new Vterm buffer even
+  if one already exists.
+  With numeric prefix arg, switch to the session with that number, or
+  create it if it doesn't already exist."
+      (interactive)
+      (defvar vterm-buffer-name)
+      (let* ((default-directory (project-root (project-current t)))
+             (vterm-buffer-name (project-prefixed-buffer-name "vterm")))
+        (vterm current-prefix-arg)))
+    :custom
+    (disproject-shell-command #'gs-101/project-vterm))
 #+end_src
 
 ** [[https://github.com/tbanel/uniline][Uniline]]
@@ -3760,8 +3699,8 @@ Interface for display-line-numbers.
   (use-package display-line-numbers
     :custom
     (display-line-numbers-type 'relative)
-    :init
-    (display-line-numbers-mode))
+    :hook
+    (prog-mode . display-line-numbers-mode))
 #+end_src
 
 ** [[https://github.com/jamescherti/minimal-emacs.d/blob/837e3d46acfe5a6c385b4ae253b9549d89ece1cf/init.el#L106][Frame]]
@@ -4024,26 +3963,6 @@ Show current command and its key in the mode line.
     (custom-set-faces
      '(keycast-key ((t :background nil
                        :foreground nil))))
-    :custom
-    (echo-keystrokes 0)
-    :ensure t
-    :init
-    (define-minor-mode keycast-mode
-      "Show current command and its key binding in the mode line (fix for use with `doom-modeline')."
-      :global t
-      (if keycast-mode
-          (add-hook 'pre-command-hook 'keycast--update t)
-        (remove-hook 'pre-command-hook 'keycast--update)))
-    (add-to-list 'global-mode-string '("" keycast-mode-line))
-    (keycast-mode))
-#+end_src
-
-*** Command Customization
-
-#+begin_src emacs-lisp
-  (use-package keycast
-    :after keycast
-    :config
     (setq gs-101/keycast-animation-alist
           '((backward-delete-char-untabify . "Erasing")
             (delete-backward-char          . "Erasing")
@@ -4056,6 +3975,7 @@ Show current command and its key in the mode line.
           '(vertico-directory-enter
             vertico-next
             vertico-previous))
+    (setq gs-101/keycast-comma-count 0)
     (dolist (substitute (append (mapcar (lambda (pair)
                                           (list (car pair) "" (cdr pair)))
                                         gs-101/keycast-animation-alist)
@@ -4063,7 +3983,6 @@ Show current command and its key in the mode line.
                                           (list cmd nil nil))
                                         gs-101/keycast-no-message-commands)))
       (add-to-list 'keycast-substitute-alist (copy-sequence substitute)))
-    (setq gs-101/keycast-comma-count 0)
     (defun gs-101/keycast-step-animation ()
       "Advance an ellipsis animation for commands in keycast."
       (when (assq this-command gs-101/keycast-animation-alist)
@@ -4079,7 +3998,19 @@ Show current command and its key in the mode line.
               (when entry
                 ;; Concatenate the base string from the alist with the dots.
                 (setf (nth 2 entry) (concat base dots))))))))
-    (add-hook 'pre-command-hook #'gs-101/keycast-step-animation))
+    (add-hook 'pre-command-hook #'gs-101/keycast-step-animation)
+    :custom
+    (echo-keystrokes 0)
+    :ensure t
+    :init
+    (define-minor-mode keycast-mode
+      "Show current command and its key binding in the mode line (fix for use with `doom-modeline')."
+      :global t
+      (if keycast-mode
+          (add-hook 'pre-command-hook 'keycast--update t)
+        (remove-hook 'pre-command-hook 'keycast--update)))
+    (add-to-list 'global-mode-string '("" keycast-mode-line))
+    (keycast-mode))
 #+end_src
 
 *** [[https://github.com/oantolin/embark/wiki/Additional-Configuration#showing-embark-actions-keys-in-keycast-mode][Embark Support]]
@@ -4230,58 +4161,6 @@ A Library for Nerd Font icons.
     :after nerd-icons eglot
     :custom
     (eglot-code-action-indicator "󰌵"))
-#+end_src
-
-*** Eshell
-:PROPERTIES:
-:CREDITS:  https://thanosapollo.org/posts/emacs-shells-video/
-:END:
-
-#+begin_src emacs-lisp
-  (use-package esh-mode
-    :bind
-    (:map eshell-mode-map
-          ([remap completion-preview-insert] . thanos/eshell-preview-insert))
-    :config
-    (defun gs-101/eshell-lambda ()
-      "This is just the code of the regular eshell prompt, but with a lambda
-  instead of $."
-      (let ((prompt (concat (abbreviate-file-name (eshell/pwd))
-                            (unless (eshell-exit-success-p)
-                              (format " [%d]" eshell-last-command-status))
-                            " λ ")))
-        (propertize prompt 'face 'nerd-icons-lpurple)))
-
-    (defun thanos/eshell-git-info ()
-      "Return a string showing git information."
-      (when (eq (call-process "git" nil nil nil "rev-parse" "--is-inside-work-tree") 0)
-        (let* ((branch-raw (shell-command-to-string "git rev-parse --abbrev-ref HEAD"))
-               (branch (if (or (string-match-p "^fatal" branch-raw)
-                               (string-match-p "^error" branch-raw))
-                           "Unknown"
-                         (string-trim branch-raw))))
-          (concat (propertize "󰊢 " 'face 'nerd-icons-lred)
-                  (propertize branch 'face 'nerd-icons-lred)))))
-
-    (defun thanos/eshell-prompt-multiline ()
-      "Eshell Multiline Git prompt."
-      (let ((separator (propertize " | " 'face 'shadow))
-            (dir (propertize (format "%s" (abbreviate-file-name (eshell/pwd))) 'face 'dired-directory))
-            (git-info (thanos/eshell-git-info))
-            (sign (if (= (user-uid) 0)
-                      (propertize "\#" 'face 'default)
-                    (propertize (format "\n\nλ %s\n↳" user-login-name) 'face 'nerd-icons-lpurple))))
-        (concat "\n" dir separator git-info sign " ")))
-
-    (defun thanos/eshell-preview-insert ()
-      "Alternative version of `completion-preview-insert' that doesn't insert an
-  additional space after completion."
-      (interactive)
-      (completion-preview-insert)
-      (delete-char -1))
-    :custom
-    (eshell-banner-message "")
-    (eshell-prompt-function 'gs-101/eshell-lambda))
 #+end_src
 
 *** Flymake

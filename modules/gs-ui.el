@@ -16,8 +16,8 @@
 (use-package display-line-numbers
   :custom
   (display-line-numbers-type 'relative)
-  :init
-  (display-line-numbers-mode))
+  :hook
+  (prog-mode . display-line-numbers-mode))
 
 (use-package frame
   :config (setq-mode-local doc-view-mode blink-cursor-mode nil)
@@ -162,22 +162,6 @@ This advice replaces the rocket icon with a electric plug icon."
   (custom-set-faces
    '(keycast-key ((t :background nil
                      :foreground nil))))
-  :custom
-  (echo-keystrokes 0)
-  :ensure t
-  :init
-  (define-minor-mode keycast-mode
-    "Show current command and its key binding in the mode line (fix for use with `doom-modeline')."
-    :global t
-    (if keycast-mode
-        (add-hook 'pre-command-hook 'keycast--update t)
-      (remove-hook 'pre-command-hook 'keycast--update)))
-  (add-to-list 'global-mode-string '("" keycast-mode-line))
-  (keycast-mode))
-
-(use-package keycast
-  :after keycast
-  :config
   (setq gs-101/keycast-animation-alist
         '((backward-delete-char-untabify . "Erasing")
           (delete-backward-char          . "Erasing")
@@ -190,6 +174,7 @@ This advice replaces the rocket icon with a electric plug icon."
         '(vertico-directory-enter
           vertico-next
           vertico-previous))
+  (setq gs-101/keycast-comma-count 0)
   (dolist (substitute (append (mapcar (lambda (pair)
                                         (list (car pair) "" (cdr pair)))
                                       gs-101/keycast-animation-alist)
@@ -197,7 +182,6 @@ This advice replaces the rocket icon with a electric plug icon."
                                         (list cmd nil nil))
                                       gs-101/keycast-no-message-commands)))
     (add-to-list 'keycast-substitute-alist (copy-sequence substitute)))
-  (setq gs-101/keycast-comma-count 0)
   (defun gs-101/keycast-step-animation ()
     "Advance an ellipsis animation for commands in keycast."
     (when (assq this-command gs-101/keycast-animation-alist)
@@ -213,7 +197,19 @@ This advice replaces the rocket icon with a electric plug icon."
             (when entry
               ;; Concatenate the base string from the alist with the dots.
               (setf (nth 2 entry) (concat base dots))))))))
-  (add-hook 'pre-command-hook #'gs-101/keycast-step-animation))
+  (add-hook 'pre-command-hook #'gs-101/keycast-step-animation)
+  :custom
+  (echo-keystrokes 0)
+  :ensure t
+  :init
+  (define-minor-mode keycast-mode
+    "Show current command and its key binding in the mode line (fix for use with `doom-modeline')."
+    :global t
+    (if keycast-mode
+        (add-hook 'pre-command-hook 'keycast--update t)
+      (remove-hook 'pre-command-hook 'keycast--update)))
+  (add-to-list 'global-mode-string '("" keycast-mode-line))
+  (keycast-mode))
 
 (use-package keycast
   :after embark
@@ -322,51 +318,6 @@ This advice replaces the rocket icon with a electric plug icon."
   :after nerd-icons eglot
   :custom
   (eglot-code-action-indicator "󰌵"))
-
-(use-package esh-mode
-  :bind
-  (:map eshell-mode-map
-        ([remap completion-preview-insert] . thanos/eshell-preview-insert))
-  :config
-  (defun gs-101/eshell-lambda ()
-    "This is just the code of the regular eshell prompt, but with a lambda
-instead of $."
-    (let ((prompt (concat (abbreviate-file-name (eshell/pwd))
-                          (unless (eshell-exit-success-p)
-                            (format " [%d]" eshell-last-command-status))
-                          " λ ")))
-      (propertize prompt 'face 'nerd-icons-lpurple)))
-
-  (defun thanos/eshell-git-info ()
-    "Return a string showing git information."
-    (when (eq (call-process "git" nil nil nil "rev-parse" "--is-inside-work-tree") 0)
-      (let* ((branch-raw (shell-command-to-string "git rev-parse --abbrev-ref HEAD"))
-             (branch (if (or (string-match-p "^fatal" branch-raw)
-                             (string-match-p "^error" branch-raw))
-                         "Unknown"
-                       (string-trim branch-raw))))
-        (concat (propertize "󰊢 " 'face 'nerd-icons-lred)
-                (propertize branch 'face 'nerd-icons-lred)))))
-
-  (defun thanos/eshell-prompt-multiline ()
-    "Eshell Multiline Git prompt."
-    (let ((separator (propertize " | " 'face 'shadow))
-          (dir (propertize (format "%s" (abbreviate-file-name (eshell/pwd))) 'face 'dired-directory))
-          (git-info (thanos/eshell-git-info))
-          (sign (if (= (user-uid) 0)
-                    (propertize "\#" 'face 'default)
-                  (propertize (format "\n\nλ %s\n↳" user-login-name) 'face 'nerd-icons-lpurple))))
-      (concat "\n" dir separator git-info sign " ")))
-
-  (defun thanos/eshell-preview-insert ()
-    "Alternative version of `completion-preview-insert' that doesn't insert an
-additional space after completion."
-    (interactive)
-    (completion-preview-insert)
-    (delete-char -1))
-  :custom
-  (eshell-banner-message "")
-  (eshell-prompt-function 'gs-101/eshell-lambda))
 
 (use-package emacs
   :custom

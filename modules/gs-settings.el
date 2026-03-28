@@ -99,14 +99,6 @@ ARG is used for `eval-last-sexp'."
   :custom
   (epg-pinentry-mode 'loopback))
 
-(use-package eshell
-  :bind
-  ("C-c t s" . eshell)
-  :config
-  (defun christiantietze/new-buffer ()
-    "Create and switch to a new empty buffer named `untitled'."
-    (switch-to-buffer (generate-new-buffer "untitled"))))
-
 (use-package files
   :bind
   ("C-c f r" . recover-this-file)
@@ -148,7 +140,6 @@ ARG is used for `eval-last-sexp'."
   (ibuffer-mode . ibuffer-auto-mode))
 
 (use-package image-mode
-  :after dired
   :custom
   (image-animate-loop t))
 
@@ -355,15 +346,17 @@ With a ARG prefix argument, copy the buffer to the other window."
 (use-package no-littering
   :vc (:url "https://github.com/emacscollective/no-littering")
   :ensure t
-  :init
-  (no-littering-theme-backups))
-
-(use-package no-littering
-  :after no-littering
   :config
+  ;; https://github.com/emacscollective/no-littering#lock-files
   (let ((dir (no-littering-expand-var-file-name "lock-files/")))
     (make-directory dir t)
-    (setq lock-file-name-transforms `((".*" ,dir t)))))
+    (setq lock-file-name-transforms `((".*" ,dir t))))
+  (when (file-exists-p custom-file)
+    (load-file custom-file))
+  :custom
+  (custom-file (no-littering-expand-etc-file-name "custom.el"))
+  :init
+  (no-littering-theme-backups))
 
 (use-package recentf
   :after no-littering
@@ -375,14 +368,6 @@ With a ARG prefix argument, copy the buffer to the other window."
                (recentf-expand-file-name no-littering-var-directory))
   :config
   (recentf-mode))
-
-(use-package no-littering
-  :after no-littering
-  :config
-  (when (file-exists-p custom-file)
-    (load-file custom-file))
-  :custom
-  (custom-file (no-littering-expand-etc-file-name "custom.el")))
 
 (use-package system-packages
   :vc (:url "https://gitlab.com/jabranham/system-packages")
@@ -407,26 +392,5 @@ With a ARG prefix argument, copy the buffer to the other window."
 (use-package xdg-launcher
   :vc (:url "https://github.com/emacs-exwm/xdg-launcher")
   :ensure t)
-
-(use-package xdg-launcher
-  :after xdg-launcher
-  :config
-  (defun gs-101/emacs-app-launcher ()
-    "Create a minibuffer-only buffer for selecting an application to be opened."
-    (interactive)
-    (with-selected-frame
-        (make-frame '((name . "emacs-app-launcher")
-                      (minibuffer . only)
-                      (fullscreen . 0)
-                      (undecorated . t)
-                      (auto-raise . t)
-                      (tool-bar-lines . 0)
-                      (menu-bar-lines . 0)
-                      (internal-border-width . 10)
-                      (width . 80)
-                      (height . 11)))
-      (unwind-protect
-          (xdg-launcher-run-app)
-        (delete-frame)))))
 
 (provide 'gs-settings)

@@ -3,6 +3,9 @@
 (use-package citar
   :ensure-system-package
   zotero
+  :bind
+  (:map bibtex-mode-map
+        ("C-c m q" . citar-insert-bibtex))
   :custom
   (citar-bibliography "~/Documents/bibliography.bib")
   (citar-citeproc-csl-styles-dir "~/Documents/zotero/styles/")
@@ -17,12 +20,6 @@
   :hook
   (org-mode . citar-capf-setup)
   :ensure t)
-
-(use-package citar
-  :after bibtex
-  :bind
-  (:map bibtex-mode-map
-        ("C-c m q" . citar-insert-bibtex)))
 
 (use-package citar-embark
   :after embark
