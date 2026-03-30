@@ -4,9 +4,9 @@
   :custom
   (ad-redefinition-action 'accept))
 
-(use-package auth-source-pass
+(use-package auth-source
   :config
-  (auth-source-pass-enable))
+  (add-to-list 'auth-sources "~/.config/sops-nix/secrets/authinfo"))
 
 (use-package bytecomp
   :custom

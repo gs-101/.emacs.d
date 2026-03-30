@@ -124,12 +124,12 @@ An overloading mechanism for Emacs Lisp functions.
     (ad-redefinition-action 'accept))
 #+end_src
 
-*** Auth Source Pass
+*** Auth Source
 
 #+begin_src emacs-lisp
-  (use-package auth-source-pass
+  (use-package auth-source
     :config
-    (auth-source-pass-enable))
+    (add-to-list 'auth-sources "~/.config/sops-nix/secrets/authinfo"))
 #+end_src
 
 *** Byte Compilation
@@ -2779,7 +2779,7 @@ Emacs plugin for automatic time tracking and metrics generated from your program
     :vc (:url "https://github.com/wakatime/wakatime-mode")
     :ensure t
     :custom
-    (wakatime-api-key (auth-source-pass-get "api-key" "wakatime.com/gabrielsantosdesouza@disroot.org")))
+    (wakatime-api-key (auth-source-pick-first-password :host "wakatime.com")))
 #+end_src
 
 ** End
