@@ -452,6 +452,8 @@ Only runs if a `flutter' buffer already exits."
   :vc (:url "https://github.com/wakatime/wakatime-mode")
   :ensure t
   :custom
-  (wakatime-api-key (auth-source-pick-first-password :host "wakatime.com")))
+  (wakatime-api-key (auth-source-pick-first-password :host "wakatime.com"))
+  :init
+  (global-wakatime-mode))
 
 (provide 'gs-dev)
