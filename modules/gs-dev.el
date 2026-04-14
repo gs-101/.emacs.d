@@ -55,12 +55,6 @@
   :custom
   (git-commit-major-mode 'git-commit-ts-mode))
 
-(use-package mason
-  :vc (:url "https://github.com/deirn/mason.el")
-  :ensure t
-  :init
-  (mason-ensure))
-
 (use-package compile
   :bind
   ("C-c c" . compile)
