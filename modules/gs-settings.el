@@ -35,6 +35,7 @@
 
 (use-package emacs
   :bind
+  ("<WakeUp>" . gs-101/greeter)
   (:map emacs-lisp-mode-map
         ("C-c C-c" . gs-101/eval-dwim)
         ("C-c m e b" . eval-buffer)
@@ -58,6 +59,10 @@ ARG is used for `eval-last-sexp'."
       (message "Sexp evaluated"))
      (t (eval-buffer nil nil)
         (message "Buffer evaluated"))))
+  (defun gs-101/greeter ()
+    "Print a \"Welcome back!\" message after waking up from suspend."
+    (interactive)
+    (message "Welcome back!"))
   :custom
   (auto-save-include-big-deletions)
   (auto-window-vscroll nil) ; 3
