@@ -3418,15 +3418,6 @@ p-search is an Emacs tool to find things. It combines concepts from information 
     :ensure t)
 #+end_src
 
-** [[https://github.com/NicolasPetton/pass][pass]]
-
-#+begin_src emacs-lisp
-  (use-package pass
-    ;; Commit is pinned for security reasons.
-    :vc (:url "https://github.com/NicolasPetton/pass" :rev "143456809fd2dbece9f241f4361085e1de0b0e75")
-    :ensure t)
-#+end_src
-
 ** [[https://elpa.gnu.org/packages/pinentry.html][pinentry]]
 
 #+begin_src emacs-lisp
