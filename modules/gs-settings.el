@@ -139,7 +139,13 @@ ARG is used for `eval-last-sexp'."
   :custom
   (grep-use-headings t))
 
+(use-package vc-git
+  :bind
+  ("M-s g v" . vc-git-grep))
+
 (use-package help
+  :bind
+  ("C-h C-b" . describe-prefix-bindings)
   :custom
   (help-window-select t))
 
@@ -205,6 +211,10 @@ ARG is used for `eval-last-sexp'."
   (show-paren-delay 0)
   :init
   (show-paren-mode))
+
+(use-package repeat
+  :init
+  (repeat-mode))
 
 (use-package savehist
   :custom

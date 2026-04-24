@@ -4,7 +4,6 @@
 
 (require 'gs-settings)
 (require 'gs-fm)
-(require 'gs-keys)
 (require 'gs-org)
 (require 'gs-org-roam)
 (require 'gs-citar)

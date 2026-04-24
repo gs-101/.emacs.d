@@ -87,7 +87,6 @@
 
   (require 'gs-settings)
   (require 'gs-fm)
-  (require 'gs-keys)
   (require 'gs-org)
   (require 'gs-org-roam)
   (require 'gs-citar)
@@ -353,6 +352,13 @@ run `grep' and display the results.
     (grep-use-headings t))
 #+end_src
 
+*** vc-git
+
+#+begin_src emacs-lisp
+  (use-package vc-git
+    :bind
+    ("M-s g v" . vc-git-grep))
+#+end_src
 *** Help
 
 #+begin_quote
@@ -361,6 +367,8 @@ Help commands for Emacs.
 
 #+begin_src emacs-lisp
   (use-package help
+    :bind
+    ("C-h C-b" . describe-prefix-bindings)
     :custom
     (help-window-select t))
 #+end_src
@@ -517,6 +525,14 @@ Highlight matching paren.
     (show-paren-delay 0)
     :init
     (show-paren-mode))
+#+end_src
+
+*** repeat
+
+#+begin_src emacs-lisp
+  (use-package repeat
+    :init
+    (repeat-mode))
 #+end_src
 
 *** Save History
@@ -1023,135 +1039,6 @@ A lightweight major mode to open media (audio/video) files in an Emacs buffer.
 
 #+begin_src emacs-lisp
   (provide 'gs-fm)
-#+end_src
-
-* Key Binding
-:PROPERTIES:
-:header-args:emacs-lisp: :results none :lexical t :mkdirp yes :tangle ./modules/gs-keys.el
-:END:
-
-Key bindings for default packages.
-
-** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html][Key Binding Conventions]]
-
-#+begin_quote
-- Don't define C-c letter as a key in Lisp programs. Sequences consisting of C-c and a letter (either upper or lower case; ASCII or non-ASCII) are reserved for users [...];
-- Function keys F5 through F9 without modifier keys are also reserved for users to define.
-- Sequences consisting of C-c followed by a control character or a digit are reserved for major modes;
-- Sequences consisting of C-c followed by {, }, <, >, : or ; are also reserved for major modes;
-- Sequences consisting of C-c followed by any other ASCII punctuation or symbol character are allocated for minor modes [...];
-- Don't bind C-h following any prefix character (including C-c);
-- [...] don't bind a key sequence ending in C-g, since that is commonly used to cancel a key sequence.
-#+end_quote
-
-** [[./notes/keys_window_management.org][Window Management Bindings]]
-
-#+begin_src emacs-lisp
-  ;;; -*- lexical-binding: t -*-
-#+end_src
-
-** Align
-
-#+begin_src emacs-lisp
-  (use-package align
-    :bind
-    ("C-x |" . align-regexp))
-#+end_src
-
-** Development
-
-
-*** Flymake
-
-#+begin_src emacs-lisp
-  (use-package flymake
-    :bind
-    (:map flymake-mode-map
-          ([remap next-error] . flymake-goto-next-error)
-          ([remap previous-error] . flymake-goto-prev-error))
-    (:map project-prefix-map
-          ("t f" . flymake-show-project-diagnostics))
-    (:map prog-mode-map
-          ("C-c t f" . flymake-start)))
-#+end_src
-
-** Git
-
-#+begin_src emacs-lisp
-  (use-package vc-git
-    :bind
-    ("M-s g v" . vc-git-grep))
-#+end_src
-
-** Help
-
-#+begin_src emacs-lisp
-  (use-package help
-    :bind
-    ("C-h C-b" . describe-prefix-bindings))
-#+end_src
-
-** iBuffer
-
-#+begin_src emacs-lisp
-  (use-package ibuffer
-    :bind
-    ("C-x B" . ibuffer))
-#+end_src
-
-** Org Mode
-
-*** Links
-
-#+begin_src emacs-lisp
-  (use-package ol
-    :bind
-    (:map org-mode-map
-          ("C-c m l i" . org-insert-link)
-          ("C-c m l s" . org-store-link)))
-#+end_src
-
-*** Table
-
-#+begin_src emacs-lisp
-  (use-package org-table
-    :bind
-    (:map org-mode-map
-          ("C-c m -" . org-table-insert-hline)))
-#+end_src
-
-** Recentf
-
-#+begin_src emacs-lisp
-  (use-package recentf
-    :bind
-    ("M-g r" . recentf))
-#+end_src
-
-** Repeat Mode
-
-#+begin_quote
-Convenient way to repeat the previous command.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package repeat
-    :init
-    (repeat-mode))
-#+end_src
-
-** Sort
-
-#+begin_src emacs-lisp
-  (use-package sort
-    :bind
-    ("C-c l d" . delete-duplicate-lines))
-#+end_src
-
-** End
-
-#+begin_src emacs-lisp
-  (provide 'gs-keys)
 #+end_src
 
 * Org Mode
