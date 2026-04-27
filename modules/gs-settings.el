@@ -181,6 +181,7 @@ ARG is used for `eval-last-sexp'."
   (completions-detailed t) ; 1
   (completions-format 'vertical)
   (completions-group t) ; 1
+  (completion-styles '(flex partial-completion basic))
   (read-file-name-completion-ignore-case t) ; 2
   (resize-mini-windows t)
   :init

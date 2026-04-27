@@ -26,9 +26,6 @@
 (defvar gs-101/nixos-p
   (eql dw/current-distro 'nixos))
 
-(defvar gs-101/nobara-p
-  (eql dw/current-distro 'nobara))
-
 (defun gs-101/fizz-buzz (num)
   "Play the FizzBuzz game from 1 to NUM.
 This was written from a distraction while reading this:

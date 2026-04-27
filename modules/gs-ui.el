@@ -99,13 +99,6 @@
   :init
   (auto-dark-mode))
 
-(use-package catppuccin-theme
-  :vc (:url "https://github.com/catppuccin/emacs")
-  :when gs-101/nobara-p
-  :config
-  (load-theme 'catppuccin t)
-  :ensure t)
-
 (use-package crystal-point
   :vc (:url "https://github.com/laluxx/crystal-point")
   :init
@@ -370,49 +363,8 @@ This advice replaces the rocket icon with a electric plug icon."
 
 (use-package prism
   :vc (:url "https://github.com/alphapapa/prism.el")
-  :config
-  (defun gs-101/prism-mode-lisp ()
-    "Enable `prism-mode' in Lisp modes."
-    (when (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
-      (prism-mode))
-    (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
-      (prism-mode))
-    (when (derived-mode-p 'scheme-mode)
-      (prism-mode)))
   :ensure t
   :hook
-  (prog-mode . gs-101/prism-mode-lisp))
-
-(use-package prism
-  :after prism catppuccin-theme
-  :config
-  (defun prism-catppuccin-colors ()
-    "Grab color definitions from catppuccin and use them to set prism's colors."
-    (prism-set-colors
-      :lightens '(0 5 10)
-      :desaturations '(-2.5 0 2.5)
-      :colors (mapcar #'catppuccin-get-color '(red
-                                             peach
-                                             yellow
-                                             green
-                                             sapphire
-                                             lavender
-                                             mauve))))
-  (prism-catppuccin-colors))
-
-(use-package rainbow-delimiters
-  :vc (:url "https://github.com/Fanael/rainbow-delimiters")
-  :config
-  (defun gs-101/rainbow-delimiters-maybe ()
-    "Enable `rainbow-delimiters-mode' only in non-lisp modes.
-
-This is because I find `prism-mode' better for these modes."
-    (unless (or (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
-                (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
-                (derived-mode-p 'scheme-mode))
-      (rainbow-delimiters-mode)))
-  :ensure t
-  :hook
-  (prog-mode . gs-101/rainbow-delimiters-maybe))
+  (prog-mode . prism-mode))
 
 (provide 'gs-ui)

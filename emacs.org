@@ -37,9 +37,6 @@
 
   (defvar gs-101/nixos-p
     (eql dw/current-distro 'nixos))
-
-  (defvar gs-101/nobara-p
-    (eql dw/current-distro 'nobara))
 #+end_src
 
 ** Useless Code
@@ -457,6 +454,7 @@ Incremental search minor mode.
     (completions-detailed t) ; 1
     (completions-format 'vertical)
     (completions-group t) ; 1
+    (completion-styles '(flex partial-completion basic))
     (read-file-name-completion-ignore-case t) ; 2
     (resize-mini-windows t)
     :init
@@ -2023,6 +2021,7 @@ More useful eglot messages. This gives more focus to type hints, for example.
 #+begin_src emacs-lisp
   (use-package eglot-hover
     :vc (:url "https://codeberg.org/slotThe/eglot-hover")
+    :after eglot
     :ensure t)
 #+end_src
 
@@ -2346,30 +2345,7 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
     :ensure t)
 #+end_src
 
-*** PostgreSQL
-
-**** [[https://github.com/emarsden/pgmacs][PGmacs]]
-
-#+begin_quote
-Emacs editing PostgreSQL databases.
-#+end_quote
-
-#+begin_src emacs-lisp
-  ;; Library
-  (use-package pg
-    :vc (:url "https://github.com/emarsden/pg-el/")
-    :ensure t)
-
-  (use-package pgmacs
-    :vc (:url "https://github.com/emarsden/pgmacs")
-    :ensure t)
-#+end_src
-
 *** Python
-
-#+begin_quote
-Python's flying circus support for Emacs.
-#+end_quote
 
 #+begin_src emacs-lisp
   (use-package python
@@ -2379,10 +2355,6 @@ Python's flying circus support for Emacs.
     #+end_src
 
 **** [[https://github.com/purcell/envrc][envrc.el]]
-
-#+begin_quote
-Emacs support for direnv which operates buffer-locally.
-#+end_quote
 
 #+begin_src emacs-lisp
   (use-package envrc
@@ -2580,13 +2552,6 @@ It's Magit! A Git Porcelain inside Emacs.
     (magit-process-find-password-functions . magit-process-password-auth-source))
 #+end_src
 
-*** [[https://codeberg.org/halvin/agitjo][AGitjo]]
-
-#+begin_src emacs-lisp
-  (use-package agitjo
-    :vc (:url "https://codeberg.org/halvin/agitjo")
-    :ensure t)
-#+end_src
 
 *** [[https://github.com/magit/forge][Forge]]
 
@@ -2602,29 +2567,12 @@ To make use of this package a [[https://magit.vc/manual/forge/Token-Creation.htm
     :ensure t)
 #+end_src
 
-*** [[https://github.com/magit/orgit][Orgit]]
-
-#+begin_quote
-
-Support for Org links to Magit buffers.
-
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package orgit
-    :vc (:url "https://github.com/magit/orgit")
-    :after magit org
-    :bind
-    (:map magit-mode-map
-          ("C-c m l s" . org-store-link))
-    :ensure t)
-#+end_src
-
 *** [[https://github.com/jonathanchu/magit-git-toolbelt][git-toolbelt]]
 
 #+begin_src emacs-lisp
   (use-package magit-git-toolbelt
     :vc (:url "https://github.com/jonathanchu/magit-git-toolbelt")
+    :after magit
     :ensure t)
 #+end_src
 
@@ -2682,60 +2630,6 @@ Emacs plugin for automatic time tracking and metrics generated from your program
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-** [[https://github.com/oantolin/orderless][Orderless]]
-:PROPERTIES:
-:CREDITS:  https://github.com/minad/consult/wiki#minads-orderless-configuration
-:END:
-
-#+begin_quote
-Emacs completion style that matches multiple regexps in any order.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package orderless
-    :vc (:url "https://github.com/oantolin/orderless")
-    :config
-    (orderless-define-completion-style minad/orderless-initialism
-      (orderless-matching-styles '(orderless-initialism
-                                   orderless-literal
-                                   orderless-regexp)))
-    (orderless-define-completion-style minad/orderless-simple
-      (orderless-style-dispatchers nil)
-      (orderless-matching-styles '(orderless-literal)))
-    (defun minad/orderless--consult-suffix ()
-      "Regexp which matches the end of string with Consult tofu support."
-      (if (and (boundp 'consult--tofu-char) (boundp 'consult--tofu-range))
-          (format "[%c-%c]*$"
-                  consult--tofu-char
-                  (+ consult--tofu-char consult--tofu-range -1)) "$"))
-    ;; Recognizes the following patterns:
-    ;; * .ext (file extension)
-    ;; * regexp$ (regexp matching at end)
-    (defun minad/orderless-consult-dispatch (word _index _total)
-      "Ensure that $ works with Consult commands, witch add disambiguation suffixes."
-      (cond
-       ((string-suffix-p "$" word)
-        `(orderless-regexp . ,(concat (substring word 0 -1) (minad/orderless--consult-suffix))))
-       ;; File extensions
-       ((and (or minibuffer-completing-file-name
-                 (derived-mode-p 'eshell-mode))
-             (string-match-p "\\`\\.." word))
-        `(orderless-regexp . ,(concat "\\." (substring word 1) (minad/orderless--consult-suffix))))))
-    :custom
-    (completion-styles '(orderless basic))
-    (completion-preview-completion-styles '(orderless basic))
-    (completion-category-defaults nil)
-    (completion-category-overrides '((file (styles partial-completion))
-                                     (command (styles minad/orderless-initialism))
-                                     (variable (styles minad/orderless-initialism))
-                                     (symbol (styles minad/orderless-initialism))
-                                     (minibuffer (styles minad/orderless-initialism))))
-    (orderless-comment-separator #'orderless-escapable-split-on-space)
-    (orderless-style-dispatchers (list #'minad/orderless-consult-dispatch
-                                       #'orderless-affix-dispatch))
-    :ensure t)
-#+end_src
-
 ** [[https://github.com/minad/cape][Cape]]
 
 #+begin_quote
@@ -2746,39 +2640,11 @@ Completion At Point Extensions.
   (use-package cape
     :vc (:url "https://github.com/minad/cape")
     :ensure t
-    :config
-    (advice-add #'eglot-completion-at-point :around #'cape-wrap-buster)
     :custom
     (cape-file-prefix "/")
     :hook
     (completion-at-point-functions . cape-dabbrev)
     (completion-at-point-functions . cape-file))
-#+end_src
-
-*** [[https://github.com/minad/corfu/wiki#using-cape-to-tweak-and-combine-capfs][Emacs Lisp Configuration]]
-
-#+begin_src emacs-lisp
-  (use-package cape
-    :config
-    (defun minad/emacs-lisp-ignore-keywords (cand)
-      "Remove keywords from the CAND list, unless the completion text
-  starts with a `:'."
-      (or (not (keywordp cand))
-          (eq (char-after (car completion-in-region--data)) ?:)))
-    (defun minad/emacs-lisp-capf ()
-      "`completion-at-point-functions' for `emacs-lisp-mode', including
-  support for symbols currently unknown to Emacs, using `cape-dabbrev'.
-  Also adds `cape-file' as a fallback."
-      (setq-local completion-at-point-functions
-                  `(,(cape-capf-super
-                      (cape-capf-predicate
-                       #'elisp-completion-at-point
-                       #'minad/emacs-lisp-ignore-keywords)
-                      #'cape-dabbrev)
-                    cape-file)
-                  cape-dabbrev-min-length 5))
-    :hook
-    (emacs-lisp-mode . minad/emacs-lisp-capf))
 #+end_src
 
 ** [[https://github.com/minad/tempel][Tempel]]
@@ -3090,21 +2956,6 @@ Consulting completing-read.
     (minibuffer-setup . oantolin/choose-completion-in-region))
 #+end_src
 
-*** [[https://github.com/karthink/consult-dir][Dir]]
-
-#+begin_quote
-Insert paths into the minibuffer prompt in Emacs.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package consult-dir
-    :vc (:url "https://github.com/karthink/consult-dir")
-    :after consult
-    :bind
-    ([remap list-directory] . consult-dir)
-    :ensure t)
-#+end_src
-
 *** [[https://github.com/mclear-tools/consult-notes][Notes]]
 
 #+begin_quote
@@ -3133,6 +2984,7 @@ Use consult to search notes.
 #+begin_src emacs-lisp
   (use-package consult-notmuch
     :vc (:url "https://codeberg.org/jao/consult-notmuch")
+    :after notmuch
     :ensure t)
 #+end_src
 
@@ -3148,44 +3000,6 @@ Navigate the Xref stack with Consult.
     :bind
     ([remap xref-go-back] . consult-xref-stack-backward)
     ([remap xref-go-forward] . consult-xref-stack-forward)
-    :ensure t)
-#+end_src
-
-*** [[https://github.com/minad/consult/wiki#use-orderless-as-pattern-compiler-for-consult-grepripgrepfind][Orderless]]
-
-#+begin_src emacs-lisp
-  (use-package consult
-    :after consult orderless
-    :config
-    (defun minad/consult--orderless-regexp-compiler (input type &rest _config)
-      "Regular expression pattern compiler based on `orderless'."
-      (setq input (cdr (orderless-compile input)))
-      (cons
-       (mapcar (lambda (r) (consult--convert-regexp r type)) input)
-       (lambda (str) (orderless--highlight input t str))))
-    :custom
-    (consult--regexp-compiler #'minad/consult--orderless-regexp-compiler))
-    #+end_src
-
-** [[https://codeberg.org/emacs-weirdware/debase][Debase]]
-
-#+begin_quote
-D-Bus convenience layer for Emacs.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package debase
-    :vc (:url "https://codeberg.org/emacs-weirdware/debase")
-    :ensure t)
-#+end_src
-
-*** [[https://codeberg.org/emacs-weirdware/discomfort][discomfort]]
-
-Disk manager.
-
-#+begin_src emacs-lisp
-  (use-package discomfort
-    :vc (:url "https://codeberg.org/emacs-weirdware/discomfort")
     :ensure t)
 #+end_src
 
@@ -3291,29 +3105,6 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
     :after dwim-shell-command)
 #+end_src
 
-** [[https://github.com/zkry/p-search][p-search]]
-
-#+begin_quote
-p-search is an Emacs tool to find things. It combines concepts from information retrievial and [[https://www2.stat.duke.edu/~banks/130-labs.dir/lab10.dir/Lab10_bayesian_search.pdf][Bayesian search theory]] to assist a user in finding documents.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package p-search
-    :vc (:url "https://github.com/zkry/p-search")
-    :bind
-    ("M-s p" . p-search)
-    :ensure t)
-#+end_src
-
-** [[https://elpa.gnu.org/packages/pinentry.html][pinentry]]
-
-#+begin_src emacs-lisp
-  (use-package pinentry
-    :init
-    (pinentry-start)
-    :ensure t)
-#+end_src
-
 ** [[https://github.com/karthink/popper][Popper]]
 
 #+begin_quote
@@ -3373,6 +3164,7 @@ Emacs minor-mode to summon and dismiss buffers easily.
     :vc (:url "https://github.com/akermu/emacs-libvterm")
     :ensure t
     :bind
+    ("C-c t s" . vterm)
     (:map project-prefix-map
           ("s" . gs-101/project-vterm))
     :config
@@ -3407,22 +3199,6 @@ Easily draw Unicode lines and boxes.
     ("C-z i l" . uniline-mode)
     :ensure t)
 #+end_src
-
-
-** [[https://thanosapollo.org/projects/yeetube/][YeeTube]]
-
-#+begin_quote
-YouTube front-end for GNU Emacs.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package yeetube
-    :ensure-system-package
-    (mpv yt-dlp)
-    :vc (:url "https://git.thanosapollo.org/yeetube/")
-    :ensure t)
-#+end_src
-
 ** End
 
 #+begin_src emacs-lisp
@@ -3747,21 +3523,6 @@ Window tree functions.
     (auto-dark-themes '((modus-vivendi) (modus-operandi)))
     :init
     (auto-dark-mode))
-#+end_src
-
-** [[https://github.com/catppuccin/emacs][Catppuccin]]
-
-#+begin_quote
-Soothing pastel theme for Emacs.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package catppuccin-theme
-    :vc (:url "https://github.com/catppuccin/emacs")
-    :when gs-101/nobara-p
-    :config
-    (load-theme 'catppuccin t)
-    :ensure t)
 #+end_src
 
 ** [[https://github.com/laluxx/crystal-point][Crystal Point]]
@@ -4145,58 +3906,9 @@ Disperse Lisp forms (and other languages) into a spectrum of colors by depth.
 #+begin_src emacs-lisp
   (use-package prism
     :vc (:url "https://github.com/alphapapa/prism.el")
-    :config
-    (defun gs-101/prism-mode-lisp ()
-      "Enable `prism-mode' in Lisp modes."
-      (when (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
-        (prism-mode))
-      (when (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
-        (prism-mode))
-      (when (derived-mode-p 'scheme-mode)
-        (prism-mode)))
     :ensure t
     :hook
-    (prog-mode . gs-101/prism-mode-lisp))
-#+end_src
-
-*** Catppuccin Colors
-
-#+begin_src emacs-lisp
-  (use-package prism
-    :after prism catppuccin-theme
-    :config
-    (defun prism-catppuccin-colors ()
-      "Grab color definitions from catppuccin and use them to set prism's colors."
-      (prism-set-colors
-        :lightens '(0 5 10)
-        :desaturations '(-2.5 0 2.5)
-        :colors (mapcar #'catppuccin-get-color '(red
-                                               peach
-                                               yellow
-                                               green
-                                               sapphire
-                                               lavender
-                                               mauve))))
-    (prism-catppuccin-colors))
-#+end_src
-
-** [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]]
-
-#+begin_src emacs-lisp
-  (use-package rainbow-delimiters
-    :vc (:url "https://github.com/Fanael/rainbow-delimiters")
-    :config
-    (defun gs-101/rainbow-delimiters-maybe ()
-      "Enable `rainbow-delimiters-mode' only in non-lisp modes.
-
-  This is because I find `prism-mode' better for these modes."
-      (unless (or (string-match-p "clojure.*-mode\\'" (symbol-name major-mode))
-                  (string-match-p "lisp.*-mode\\'" (symbol-name major-mode))
-                  (derived-mode-p 'scheme-mode))
-        (rainbow-delimiters-mode)))
-    :ensure t
-    :hook
-    (prog-mode . gs-101/rainbow-delimiters-maybe))
+    (prog-mode . prism-mode))
 #+end_src
 
 ** End

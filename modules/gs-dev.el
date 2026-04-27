@@ -130,6 +130,7 @@
 
 (use-package eglot-hover
   :vc (:url "https://codeberg.org/slotThe/eglot-hover")
+  :after eglot
   :ensure t)
 
 (use-package eglot-inactive-regions
@@ -296,15 +297,6 @@ Only runs if a `flutter' buffer already exits."
   :vc (:url "https://github.com/xhcoding/qml-ts-mode")
   :ensure t)
 
-;; Library
-(use-package pg
-  :vc (:url "https://github.com/emarsden/pg-el/")
-  :ensure t)
-
-(use-package pgmacs
-  :vc (:url "https://github.com/emarsden/pgmacs")
-  :ensure t)
-
 (use-package python
   :custom
   (python-indent-guess-indent-offset-verbose nil)
@@ -411,24 +403,13 @@ Only runs if a `flutter' buffer already exits."
   (magit-mode . magit-wip-mode)
   (magit-process-find-password-functions . magit-process-password-auth-source))
 
-(use-package agitjo
-  :vc (:url "https://codeberg.org/halvin/agitjo")
-  :ensure t)
-
 (use-package forge
   :after magit
   :ensure t)
 
-(use-package orgit
-  :vc (:url "https://github.com/magit/orgit")
-  :after magit org
-  :bind
-  (:map magit-mode-map
-        ("C-c m l s" . org-store-link))
-  :ensure t)
-
 (use-package magit-git-toolbelt
   :vc (:url "https://github.com/jonathanchu/magit-git-toolbelt")
+  :after magit
   :ensure t)
 
 (use-package package-lint

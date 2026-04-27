@@ -149,13 +149,6 @@ using Helpful."
   :hook
   (minibuffer-setup . oantolin/choose-completion-in-region))
 
-(use-package consult-dir
-  :vc (:url "https://github.com/karthink/consult-dir")
-  :after consult
-  :bind
-  ([remap list-directory] . consult-dir)
-  :ensure t)
-
 (use-package consult-notes
   :vc (:url "https://github.com/mclear-tools/consult-notes")
   :ensure t)
@@ -167,6 +160,7 @@ using Helpful."
 
 (use-package consult-notmuch
   :vc (:url "https://codeberg.org/jao/consult-notmuch")
+  :after notmuch
   :ensure t)
 
 (use-package consult-xref-stack
@@ -174,26 +168,6 @@ using Helpful."
   :bind
   ([remap xref-go-back] . consult-xref-stack-backward)
   ([remap xref-go-forward] . consult-xref-stack-forward)
-  :ensure t)
-
-(use-package consult
-  :after consult orderless
-  :config
-  (defun minad/consult--orderless-regexp-compiler (input type &rest _config)
-    "Regular expression pattern compiler based on `orderless'."
-    (setq input (cdr (orderless-compile input)))
-    (cons
-     (mapcar (lambda (r) (consult--convert-regexp r type)) input)
-     (lambda (str) (orderless--highlight input t str))))
-  :custom
-  (consult--regexp-compiler #'minad/consult--orderless-regexp-compiler))
-
-(use-package debase
-  :vc (:url "https://codeberg.org/emacs-weirdware/debase")
-  :ensure t)
-
-(use-package discomfort
-  :vc (:url "https://codeberg.org/emacs-weirdware/discomfort")
   :ensure t)
 
 (use-package dumb-jump
@@ -266,17 +240,6 @@ using Helpful."
   (atool unzip)
   :after dwim-shell-command)
 
-(use-package p-search
-  :vc (:url "https://github.com/zkry/p-search")
-  :bind
-  ("M-s p" . p-search)
-  :ensure t)
-
-(use-package pinentry
-  :init
-  (pinentry-start)
-  :ensure t)
-
 (use-package popper
   :vc (:url "https://github.com/karthink/popper")
   :bind
@@ -325,6 +288,7 @@ using Helpful."
   :vc (:url "https://github.com/akermu/emacs-libvterm")
   :ensure t
   :bind
+  ("C-c t s" . vterm)
   (:map project-prefix-map
         ("s" . gs-101/project-vterm))
   :config
@@ -349,12 +313,6 @@ create it if it doesn't already exist."
   :vc (:url "https://github.com/tbanel/uniline")
   :bind
   ("C-z i l" . uniline-mode)
-  :ensure t)
-
-(use-package yeetube
-  :ensure-system-package
-  (mpv yt-dlp)
-  :vc (:url "https://git.thanosapollo.org/yeetube/")
   :ensure t)
 
 (provide 'gs-utils)
