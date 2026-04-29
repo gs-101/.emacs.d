@@ -65,8 +65,7 @@
 
 #+begin_src emacs-lisp
   (with-eval-after-load 'package
-    (dolist (archive '(("melpa" . "https://melpa.org/packages/")
-                       ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
+    (dolist (archive '(("melpa" . "https://melpa.org/packages/")))
       (add-to-list 'package-archives archive)))
 #+end_src
 
@@ -317,6 +316,16 @@ Defines most of Emacs's file- and directory-handling functions, including basic 
     (version-control t) ; 2
     ;; 3
     (view-read-only t))
+#+end_src
+
+*** Flymake
+
+#+begin_src emacs-lisp
+  (use-package flymake
+    :bind
+    (:map prog-mode-map
+          ([remap previous-error] . flymake-goto-prev-error)
+          ([remap next-error] . flymake-goto-next-error)))
 #+end_src
 
 *** Frame
@@ -963,18 +972,6 @@ Less commonly used parts of Dired.
     (dired-create-destination-dirs-on-trailing-dirsep t)
     (dired-isearch-filenames 'dwim)
     (dired-vc-rename-file t))
-#+end_src
-
-*** Async
-
-#+begin_quote
-Asynchronous dired actions.
-#+end_quote
-
-#+begin_src emacs-lisp
-  (use-package dired-async
-    :hook
-    (dired-mode . dired-async-mode))
 #+end_src
 
 ** Emacs

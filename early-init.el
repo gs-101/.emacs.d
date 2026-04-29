@@ -45,6 +45,5 @@ This is my first time using `cl-loop' for anything."
            finally return (print output)))
 
 (with-eval-after-load 'package
-  (dolist (archive '(("melpa" . "https://melpa.org/packages/")
-                     ("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/")))
+  (dolist (archive '(("melpa" . "https://melpa.org/packages/")))
     (add-to-list 'package-archives archive)))

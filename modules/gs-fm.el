@@ -21,10 +21,6 @@
   (dired-isearch-filenames 'dwim)
   (dired-vc-rename-file t))
 
-(use-package dired-async
-  :hook
-  (dired-mode . dired-async-mode))
-
 (use-package emacs
   :custom
   (delete-by-moving-to-trash t))

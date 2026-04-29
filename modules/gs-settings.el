@@ -127,6 +127,12 @@ ARG is used for `eval-last-sexp'."
   ;; 3
   (view-read-only t))
 
+(use-package flymake
+  :bind
+  (:map prog-mode-map
+        ([remap previous-error] . flymake-goto-prev-error)
+        ([remap next-error] . flymake-goto-next-error)))
+
 (use-package frame
   :bind
   ("C-z" . nil))
