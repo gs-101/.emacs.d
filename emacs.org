@@ -3015,7 +3015,9 @@ Navigate the Xref stack with Consult.
 #+begin_src emacs-lisp
   (use-package bluetooth
     :vc (:url "https://codeberg.org/rstocker/emacs-bluetooth")
-    :ensure t)
+    :ensure t
+    :custom
+    (bluetooth-battery-display-warning nil))
 #+end_src
 
 ** [[https://github.com/oantolin/embark][Embark]]

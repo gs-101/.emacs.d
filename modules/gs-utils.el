@@ -178,7 +178,9 @@ using Helpful."
 
 (use-package bluetooth
   :vc (:url "https://codeberg.org/rstocker/emacs-bluetooth")
-  :ensure t)
+  :ensure t
+  :custom
+  (bluetooth-battery-display-warning nil))
 
 (use-package embark
   :vc (:url "https://github.com/oantolin/embark")
