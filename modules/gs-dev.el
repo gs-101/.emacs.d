@@ -359,7 +359,7 @@ Only runs if a `flutter' buffer already exits."
   (prog-mode . gs-101/aggressive-indent-mode-lisp))
 
 (use-package apheleia
-  :vc (:url "https://github.com/gs-101/apheleia" :branch custom)
+  :vc (:url "https://github.com/radian-software/apheleia")
   :ensure t
   :hook
   (prog-mode . apheleia-mode))
