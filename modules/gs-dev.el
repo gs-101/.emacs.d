@@ -1,5 +1,15 @@
 ;;; -*- lexical-binding: t -*-
 
+(use-package ben
+  :vc (:url "https://codeberg.org/pastor/ben.el")
+  :ensure-system-package
+  direnv
+  :ensure t
+  :custom
+  (ben-indicator nil)
+  :init
+  (ben-global-mode))
+
 (use-package ess
   :vc (:url "https://github.com/emacs-ess/ESS")
   :ensure t)
@@ -301,20 +311,6 @@ Only runs if a `flutter' buffer already exits."
   :custom
   (python-indent-guess-indent-offset-verbose nil)
   (python-shell-completion-native-enable nil))
-
-(use-package envrc
-  :vc (:url "https://github.com/purcell/envrc")
-  :ensure-system-package
-  direnv
-  :ensure t
-  :config
-  (defun elfehr/advice-org-latex-preview-restart-envrc (&rest args)
-    "Restart `envrc-global-mode' during Org startup."
-    (if (and org-mode-loading envrc-global-mode)
-        (envrc-mode 1)))
-  (advice-add 'org-latex-preview :before 'elfehr/advice-org-latex-preview-restart-envrc)
-  :init
-  (envrc-global-mode))
 
 (use-package cargo-transient
   :vc (:url "https://github.com/peterstuart/cargo-transient")

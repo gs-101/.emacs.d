@@ -1777,6 +1777,20 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
+** [[https://codeberg.org/pastor/ben.el][ben.el]]
+
+#+begin_src emacs-lisp
+  (use-package ben
+    :vc (:url "https://codeberg.org/pastor/ben.el")
+    :ensure-system-package
+    direnv
+    :ensure t
+    :custom
+    (ben-indicator nil)
+    :init
+    (ben-global-mode))
+#+end_src
+
 ** [[https://ess.r-project.org/][Emacs Speaks Statistics]]
 
 #+begin_src emacs-lisp
@@ -2350,24 +2364,6 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
     (python-indent-guess-indent-offset-verbose nil)
     (python-shell-completion-native-enable nil))
     #+end_src
-
-**** [[https://github.com/purcell/envrc][envrc.el]]
-
-#+begin_src emacs-lisp
-  (use-package envrc
-    :vc (:url "https://github.com/purcell/envrc")
-    :ensure-system-package
-    direnv
-    :ensure t
-    :config
-    (defun elfehr/advice-org-latex-preview-restart-envrc (&rest args)
-      "Restart `envrc-global-mode' during Org startup."
-      (if (and org-mode-loading envrc-global-mode)
-          (envrc-mode 1)))
-    (advice-add 'org-latex-preview :before 'elfehr/advice-org-latex-preview-restart-envrc)
-    :init
-    (envrc-global-mode))
-#+end_src
 
 *** Rust
 
