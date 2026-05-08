@@ -5,10 +5,8 @@
   (:map dired-mode-map
         ("b" . dired-up-directory))
   :custom
-  (dired-clean-confirm-killing-deleted-buffers nil)
   (dired-dwim-target t)
-  (dired-kill-when-opening-new-dired-buffer t)
-  (dired-listing-switches "--all --author --color=auto --group-directories-first --human-readable --dereference-command-line -l")
+  (dired-listing-switches "-ahlH --author --group-directories-first")
   (dired-maybe-use-globstar t)
   (dired-mouse-drag-files t)
   (dired-recursive-copies 'always))
