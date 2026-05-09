@@ -16,8 +16,7 @@
   :custom
   (dired-create-destination-dirs 'always)
   (dired-create-destination-dirs-on-trailing-dirsep t)
-  (dired-isearch-filenames 'dwim)
-  (dired-vc-rename-file t))
+  (dired-isearch-filenames 'dwim))
 
 (use-package emacs
   :custom

@@ -98,6 +98,17 @@
   :custom
   (diff-add-log-use-relative-names t))
 
+(use-package diff-hl
+  :vc (:url "https://github.com/dgutov/diff-hl")
+  :ensure t
+  :custom
+  (diff-hl-update-async t)
+  :init
+  (global-diff-hl-mode)
+  :hook
+  (dired-mode . diff-hl-dired-mode)
+  (magit-post-refresh . diff-hl-magit-post-refresh))
+
 (use-package eglot
   :bind
   (:map prog-mode-map

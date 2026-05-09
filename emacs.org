@@ -968,8 +968,7 @@ Less commonly used parts of Dired.
     :custom
     (dired-create-destination-dirs 'always)
     (dired-create-destination-dirs-on-trailing-dirsep t)
-    (dired-isearch-filenames 'dwim)
-    (dired-vc-rename-file t))
+    (dired-isearch-filenames 'dwim))
 #+end_src
 
 ** Emacs
@@ -1957,6 +1956,21 @@ Provides support for font-lock, outline, navigation commands, editing and variou
   (use-package diff-mode
     :custom
     (diff-add-log-use-relative-names t))
+#+end_src
+
+** [[https://github.com/dgutov/diff-hl][diff-hl]]
+
+#+begin_src emacs-lisp
+  (use-package diff-hl
+    :vc (:url "https://github.com/dgutov/diff-hl")
+    :ensure t
+    :custom
+    (diff-hl-update-async t)
+    :init
+    (global-diff-hl-mode)
+    :hook
+    (dired-mode . diff-hl-dired-mode)
+    (magit-post-refresh . diff-hl-magit-post-refresh))
 #+end_src
 
 ** Eglot
