@@ -2101,6 +2101,14 @@ Automatic parenthesis pairing.
     :ensure t)
 #+end_src
 
+*** [[https://git.isincredibly.gay/srxl/astro-ts-mode][Astro]]
+
+#+begin_src emacs-lisp
+  (use-package astro-ts-mode
+    :vc (:url "https://git.isincredibly.gay/srxl/astro-ts-mode")
+    :ensure t)
+#+end_src
+
 *** [[https://github.com/clojure-emacs/clojure-ts-mode][Clojure]]
 
 #+begin_quote

@@ -174,6 +174,10 @@
   :vc (:url "https://repo.or.cz/arduino-mode.git")
   :ensure t)
 
+(use-package astro-ts-mode
+  :vc (:url "https://git.isincredibly.gay/srxl/astro-ts-mode")
+  :ensure t)
+
 (use-package clojure-ts-mode
   :vc (:url "https://github.com/clojure-emacs/clojure-ts-mode")
   :custom
