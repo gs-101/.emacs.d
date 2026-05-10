@@ -1830,7 +1830,7 @@ Source code examples in Org.
                         ("dockerfile" . dockerfile-ts)
                         ("go" . go-ts)
                         ("haskell" . haskell-ts)
-                        ("html" . mhtml-ts)
+                        ("html" . html-ts)
                         ("java" . java-ts)
                         ("js" . js-ts)
                         ("json" . json-ts)
@@ -2472,7 +2472,7 @@ Emacs minor mode that keeps your code always indented. More reliable than electr
         (aggressive-indent-mode)))
     :ensure t
     :hook
-    (mhtml-ts-mode . aggressive-indent-mode)
+    (html-ts-mode . aggressive-indent-mode)
     (prog-mode . gs-101/aggressive-indent-mode-lisp))
 #+end_src
 

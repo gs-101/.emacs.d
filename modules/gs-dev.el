@@ -31,7 +31,7 @@
                       ("dockerfile" . dockerfile-ts)
                       ("go" . go-ts)
                       ("haskell" . haskell-ts)
-                      ("html" . mhtml-ts)
+                      ("html" . html-ts)
                       ("java" . java-ts)
                       ("js" . js-ts)
                       ("json" . json-ts)
@@ -370,7 +370,7 @@ Only runs if a `flutter' buffer already exits."
       (aggressive-indent-mode)))
   :ensure t
   :hook
-  (mhtml-ts-mode . aggressive-indent-mode)
+  (html-ts-mode . aggressive-indent-mode)
   (prog-mode . gs-101/aggressive-indent-mode-lisp))
 
 (use-package apheleia
