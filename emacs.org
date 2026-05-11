@@ -12,10 +12,6 @@
 ** Variables
 
 #+begin_src emacs-lisp
-  (defcustom gs-101/projects-code-directory (expand-file-name "~/Projects/code/")
-    "Path for project related to code, like applications."
-    :type 'directory)
-
   (defcustom gs-101/modules-directory (expand-file-name "modules" user-emacs-directory)
     "Path for this configuration's modules."
     :type 'directory)
@@ -2537,9 +2533,7 @@ An Emacs LeetCode client.
   (use-package leetcode
     :vc (:url "https://github.com/kaiwk/leetcode.el")
     :custom
-    (leetcode-directory
-     (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory))
-    (leetcode--paid "$")
+    (leetcode-directory "~/Projects/study/leetcode-solutions/")
     (leetcode-save-solutions t)
     :ensure t)
 #+end_src

@@ -395,9 +395,7 @@ Only runs if a `flutter' buffer already exits."
 (use-package leetcode
   :vc (:url "https://github.com/kaiwk/leetcode.el")
   :custom
-  (leetcode-directory
-   (expand-file-name "study/leetcode-solutions/" gs-101/projects-code-directory))
-  (leetcode--paid "$")
+  (leetcode-directory "~/Projects/study/leetcode-solutions/")
   (leetcode-save-solutions t)
   :ensure t)
 

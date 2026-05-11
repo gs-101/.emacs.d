@@ -1,9 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(defcustom gs-101/projects-code-directory (expand-file-name "~/Projects/code/")
-  "Path for project related to code, like applications."
-  :type 'directory)
-
 (defcustom gs-101/modules-directory (expand-file-name "modules" user-emacs-directory)
   "Path for this configuration's modules."
   :type 'directory)
