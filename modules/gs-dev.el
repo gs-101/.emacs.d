@@ -127,6 +127,8 @@
                                             "--background-index"
                                             "--clang-tidy"
                                             "--completion-style=detailed")))
+  (add-to-list 'eglot-ignored-server-capabilites
+               ':documentOnTypeFormattingProvider)
   :custom
   (eglot-autoshutdown t)
   (eglot-connect-timeout nil)
