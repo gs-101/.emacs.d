@@ -2422,6 +2422,14 @@ Completion is available for filenames, variables known from the script, the shel
           ("C-c C-p" . ansi-shell)))
 #+end_src
 
+*** Spice
+
+#+begin_src emacs-lisp
+  (use-package spice-mode
+    :vc (:url "https://github.com/emacsmirror/spice-mode")
+    :ensure t)
+#+end_src
+
 *** Verliog
 
 #+begin_src emacs-lisp

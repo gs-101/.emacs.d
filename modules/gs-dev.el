@@ -347,6 +347,10 @@ Only runs if a `flutter' buffer already exits."
   (:map sh-mode-map
         ("C-c C-p" . ansi-shell)))
 
+(use-package spice-mode
+  :vc (:url "https://github.com/emacsmirror/spice-mode")
+  :ensure t)
+
 (use-package verilog-ts-mode
   :vc (:url "https://github.com/gmlarumbe/verilog-ts-mode")
   :ensure t)
