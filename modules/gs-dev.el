@@ -86,7 +86,9 @@
 
 (use-package devcontainer
   :vc (:url "https://github.com/johannes-mueller/devcontainer.el")
-  :ensure t)
+  :ensure t
+  :custom
+  (devcontainer-engine 'podman))
 
 (use-package devdocs
   :vc (:url "https://github.com/astoff/devdocs.el")
