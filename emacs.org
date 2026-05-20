@@ -1916,7 +1916,7 @@ A supercharged [[https://godbolt.org/][godbolt]] embedded in Emacs.
     :ensure t)
 #+end_src
 
-*** [[https://github.com/lina-bh/devcontainer.el][devcontainer.el]]
+*** [[https://github.com/johannes-mueller/devcontainer.el][devcontainer.el]]
 
 #+begin_quote
 Adding support for Visual Studio Code-compatible [[https://containers.dev/][devcontainers]] to Emacs.
