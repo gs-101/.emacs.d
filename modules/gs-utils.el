@@ -242,6 +242,16 @@ using Helpful."
   (atool unzip)
   :after dwim-shell-command)
 
+(use-package ghostel
+  :vc (:url "https://github.com/dakra/ghostel")
+  :ensure t
+  :bind
+  ("C-c t s" . ghostel)
+  (:map project-prefix-map
+        ("s" . ghostel-project))
+  :custom
+  (disproject-shell-command #'ghostel-project))
+
 (use-package popper
   :vc (:url "https://github.com/karthink/popper")
   :bind
@@ -256,6 +266,7 @@ using Helpful."
                               eshell-mode
                               flutter-mode
                               geiser-repl-mode
+                              ghostel-mode
                               vterm-mode
                               inferior-emacs-lisp-mode
                               inferior-ess-r-mode
@@ -285,31 +296,6 @@ using Helpful."
   :init
   (popper-mode)
   (popper-echo-mode))
-
-(use-package vterm
-  :vc (:url "https://github.com/akermu/emacs-libvterm")
-  :ensure t
-  :bind
-  ("C-c t s" . vterm)
-  (:map project-prefix-map
-        ("s" . gs-101/project-vterm))
-  :config
-  (defun gs-101/project-vterm ()
-    "Start Vterm in the current project's root directory.
-
-If a buffer already exists for running Vterm in the project's root,
-switch to it. Otherwise, create a new Vterm buffer.
-With \\[universal-argument] prefix arg, create a new Vterm buffer even
-if one already exists.
-With numeric prefix arg, switch to the session with that number, or
-create it if it doesn't already exist."
-    (interactive)
-    (defvar vterm-buffer-name)
-    (let* ((default-directory (project-root (project-current t)))
-           (vterm-buffer-name (project-prefixed-buffer-name "vterm")))
-      (vterm current-prefix-arg)))
-  :custom
-  (disproject-shell-command #'gs-101/project-vterm))
 
 (use-package uniline
   :vc (:url "https://github.com/tbanel/uniline")
