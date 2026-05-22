@@ -149,6 +149,14 @@ using Helpful."
   :hook
   (minibuffer-setup . oantolin/choose-completion-in-region))
 
+(use-package ast-grep
+  :vc (:url "https://github.com/SunskyXH/ast-grep.el")
+  :ensure-system-package
+  ast-grep
+  :ensure t
+  :bind
+  ("M-s g a" . ast-grep-search))
+
 (use-package consult-notes
   :vc (:url "https://github.com/mclear-tools/consult-notes")
   :ensure t)

@@ -2975,6 +2975,18 @@ Consulting completing-read.
     (minibuffer-setup . oantolin/choose-completion-in-region))
 #+end_src
 
+*** [[https://github.com/SunskyXH/ast-grep.el][ast-grep.el]]
+
+#+begin_src emacs-lisp
+  (use-package ast-grep
+    :vc (:url "https://github.com/SunskyXH/ast-grep.el")
+    :ensure-system-package
+    ast-grep
+    :ensure t
+    :bind
+    ("M-s g a" . ast-grep-search))
+#+end_src
+
 *** [[https://github.com/mclear-tools/consult-notes][Notes]]
 
 #+begin_quote
