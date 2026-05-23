@@ -5,6 +5,12 @@
   :ensure-system-package
   direnv
   :ensure t
+  :config
+  (defun elfehr/advice-org-latex-preview-restart-ben (&rest args)
+    "Restart `ben-global-mode' during Org startup."
+    (if (and org-mode-loading ben-global-mode)
+        (ben-mode 1)))
+  (advice-add 'org-latex-preview :before 'elfehr/advice-org-latex-preview-restart-ben)
   :custom
   (ben-indicator nil)
   :init
