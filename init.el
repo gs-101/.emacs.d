@@ -11,5 +11,6 @@
 (require 'gs-completion)
 (require 'gs-utils)
 (require 'gs-chat)
+(require 'gs-elfeed)
 (require 'gs-llm)
 (require 'gs-ui)
