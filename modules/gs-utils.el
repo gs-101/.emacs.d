@@ -254,8 +254,11 @@ using Helpful."
   :vc (:url "https://github.com/dakra/ghostel")
   :ensure t
   :bind
+  ("C-c c" . ghostel-compile)
+  ("C-c C" . ghostel-recompile)
   ("C-c t s" . ghostel)
   (:map project-prefix-map
+        ("c" . ghostel-compile)
         ("s" . ghostel-project))
   :custom
   (disproject-shell-command #'ghostel-project))
