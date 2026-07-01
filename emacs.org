@@ -968,6 +968,16 @@ Less commonly used parts of Dired.
     (dired-isearch-filenames 'dwim))
 #+end_src
 
+*** [[https://github.com/kn66/dired-clipboard.el][Clipboard]]
+
+#+begin_src emacs-lisp
+  (use-package dired-clipboard
+    :vc (:url "https://github.com/kn66/dired-clipboard.el")
+    :ensure t
+    :hook
+    (dired-mode . dired-clipboard-mode))
+#+end_src
+
 ** Emacs
 
 #+begin_src emacs-lisp

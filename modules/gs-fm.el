@@ -18,6 +18,12 @@
   (dired-create-destination-dirs-on-trailing-dirsep t)
   (dired-isearch-filenames 'dwim))
 
+(use-package dired-clipboard
+  :vc (:url "https://github.com/kn66/dired-clipboard.el")
+  :ensure t
+  :hook
+  (dired-mode . dired-clipboard-mode))
+
 (use-package emacs
   :custom
   (delete-by-moving-to-trash t))
