@@ -46,9 +46,6 @@ marking all current messages as read."
   (elfeed-feeds
    '(("fever+https://gabriel@nix-pc.tailbf3a7f.ts.net"
       :api-url "https://nix-pc.tailbf3a7f.ts.net/fever/"
-      :password (auth-source-pick-first-password :host "nix-pc.tailbf3a7f.ts.net"))))
-  (elfeed-protocol-fever-fetch-category-as-tag t)
-  (elfeed-protocol-fever-update-unread-only nil)
-  (elfeed-use-curl t))
+      :use-authinfo t))))
 
 (provide 'gs-elfeed)
