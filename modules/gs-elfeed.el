@@ -44,8 +44,8 @@ marking all current messages as read."
   (elfeed-protocol-enable)
   :custom
   (elfeed-feeds
-   '(("fever+https://gabriel@nix-pc.tailbf3a7f.ts.net"
-      :api-url "https://nix-pc.tailbf3a7f.ts.net/fever/"
+   '(("fever+https://gabriel@nix-server.tailbf3a7f.ts.net/miniflux/"
+      :api-url "https://nix-server.tailbf3a7f.ts.net/miniflux/fever/"
       :use-authinfo t))))
 
 (provide 'gs-elfeed)
