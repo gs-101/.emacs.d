@@ -64,9 +64,8 @@ ARG is used for `eval-last-sexp'."
     (interactive)
     (message "Welcome back!"))
   :custom
-  (auto-save-include-big-deletions)
+  (auto-save-include-big-deletions t)
   (auto-window-vscroll nil) ; 3
-  (bidi-display-reordering 'left-to-right)
   (bidi-inhibit-bpa t) ; 3
   (bidi-paragraph-direction 'left-to-right)
   (completion-ignore-case t) ; 4
