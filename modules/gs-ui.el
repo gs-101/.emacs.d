@@ -99,12 +99,6 @@
   :init
   (auto-dark-mode))
 
-(use-package crystal-point
-  :vc (:url "https://github.com/laluxx/crystal-point")
-  :init
-  (crystal-point-enable)
-  :ensure t)
-
 (use-package doom-modeline
   :vc (:url "https://github.com/seagle0128/doom-modeline")
   :config
