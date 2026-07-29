@@ -148,17 +148,6 @@
   (eglot-managed-mode . eglot-codelens-mode)
   :ensure t)
 
-(use-package eglot-x
-  :vc (:url "https://github.com/nemethf/eglot-x")
-  :after eglot
-  :config
-  (eglot-x-setup)
-  :custom
-  (eglot-x-enable-server-status nil)
-  (eglot-x-enable-menu nil)
-  :demand t
-  :ensure t)
-
 (use-package eglot-hover
   :vc (:url "https://codeberg.org/slotThe/eglot-hover")
   :after eglot
