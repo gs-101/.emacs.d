@@ -24,6 +24,12 @@
   :hook
   (dired-mode . dired-clipboard-mode))
 
+(use-package dired-gitignore
+  :vc (:url "https://github.com/johannes-mueller/dired-gitignore.el")
+  :ensure t
+  :init
+  (dired-gitignore-global-mode t))
+
 (use-package emacs
   :custom
   (delete-by-moving-to-trash t))

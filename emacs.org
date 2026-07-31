@@ -977,6 +977,16 @@ Less commonly used parts of Dired.
     (dired-mode . dired-clipboard-mode))
 #+end_src
 
+*** [[https://github.com/johannes-mueller/dired-gitignore.el][dired-gitignore]]
+
+#+begin_src emacs-lisp
+  (use-package dired-gitignore
+    :vc (:url "https://github.com/johannes-mueller/dired-gitignore.el")
+    :ensure t
+    :init
+    (dired-gitignore-global-mode t))
+#+end_src
+
 ** Emacs
 
 #+begin_src emacs-lisp
