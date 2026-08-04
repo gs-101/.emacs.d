@@ -1810,14 +1810,6 @@ Emacs package to quickly find and act on bibliographic references, and edit org,
     (ben-global-mode))
 #+end_src
 
-** [[https://ess.r-project.org/][Emacs Speaks Statistics]]
-
-#+begin_src emacs-lisp
-  (use-package ess
-    :vc (:url "https://github.com/emacs-ess/ESS")
-    :ensure t)
-#+end_src
-
 ** Tree-Sitter
 
 #+begin_quote
@@ -2393,6 +2385,14 @@ Asynchronous Reliable Extensible IDE for Guile Scheme.
     (python-indent-guess-indent-offset-verbose nil)
     (python-shell-completion-native-enable nil))
     #+end_src
+
+*** R
+
+#+begin_src emacs-lisp
+  (use-package r-ts-mode
+    :vc (:url "https://codeberg.org/R-for-emacs/r-ts-mode")
+    :ensure t)
+#+end_src
 
 *** Rust
 

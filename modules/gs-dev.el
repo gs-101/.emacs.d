@@ -16,10 +16,6 @@
   :init
   (ben-global-mode))
 
-(use-package ess
-  :vc (:url "https://github.com/emacs-ess/ESS")
-  :ensure t)
-
 (use-package treesit
   :custom
   (treesit-font-lock-level 4))
@@ -325,6 +321,10 @@ Only runs if a `flutter' buffer already exits."
   :custom
   (python-indent-guess-indent-offset-verbose nil)
   (python-shell-completion-native-enable nil))
+
+(use-package r-ts-mode
+  :vc (:url "https://codeberg.org/R-for-emacs/r-ts-mode")
+  :ensure t)
 
 (use-package cargo-transient
   :vc (:url "https://github.com/peterstuart/cargo-transient")
