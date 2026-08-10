@@ -382,6 +382,10 @@ Only runs if a `flutter' buffer already exits."
   :hook
   (prog-mode . apheleia-mode))
 
+(use-package cov
+  :vc (:url "https://github.com/AdamNiederer/cov")
+  :ensure t)
+
 (use-package dape
   :vc (:url "https://github.com/svaante/dape")
   :ensure t

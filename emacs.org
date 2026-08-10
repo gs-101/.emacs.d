@@ -2507,6 +2507,14 @@ Run code formatter on buffer contents without moving point, using RCS patches an
     (prog-mode . apheleia-mode))
 #+end_src
 
+** [[https://github.com/AdamNiederer/cov][cov]]
+
+#+begin_src emacs-lisp
+  (use-package cov
+    :vc (:url "https://github.com/AdamNiederer/cov")
+    :ensure t)
+#+end_src
+
 ** [[https://github.com/svaante/dape][Dape]]
 
 #+begin_quote
