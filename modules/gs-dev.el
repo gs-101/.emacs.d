@@ -44,7 +44,8 @@
                       ("swift" . swift-ts)
                       ("toml" . toml-ts)
                       ("typescript" . typescript-ts)
-                      ("yaml" . yaml-ts)))
+                      ("yaml" . yaml-ts)
+                      ("zig" . zig-ts)))
     (add-to-list 'org-src-lang-modes language)))
 
 (use-package treesit-auto
@@ -354,6 +355,10 @@ Only runs if a `flutter' buffer already exits."
 
 (use-package vue-ts-mode
   :vc (:url "https://github.com/8uff3r/vue-ts-mode")
+  :ensure t)
+
+(use-package zig-ts-mode
+  :vc (:url "https://codeberg.org/meow_king/zig-ts-mode")
   :ensure t)
 
 (use-package smerge-mode
