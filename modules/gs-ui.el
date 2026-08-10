@@ -190,11 +190,18 @@ This advice replaces the rocket icon with a electric plug icon."
   :ensure t
   :init
   (define-minor-mode keycast-mode
-    "Show current command and its key binding in the mode line (fix for use with `doom-modeline')."
+    "Show current command and its key binding in the mode line (fix
+ for use with `doom-modeline')."
     :global t
-    (if keycast-mode
-        (add-hook 'pre-command-hook 'keycast--update t)
-      (remove-hook 'pre-command-hook 'keycast--update)))
+    (let ((fk/keycast-mode-line '("" keycast-mode-line " ")))
+      (if keycast-mode
+          (progn
+            (add-to-list 'global-mode-string fk/keycast-mode-line)
+            (add-hook 'pre-command-hook 'keycast--update t)
+            (add-hook 'minibuffer-exit-hook 'keycast--minibuffer-exit t))
+        (setopt global-mode-string (delete fk/keycast-mode-line global-mode-string))
+        (remove-hook 'pre-command-hook 'keycast--update)
+        (remove-hook 'minibuffer-exit-hook 'keycast--minibuffer-exit))))
   (add-to-list 'global-mode-string '("" keycast-mode-line))
   (keycast-mode))
 
