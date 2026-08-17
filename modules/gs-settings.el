@@ -341,6 +341,7 @@ With a ARG prefix argument, copy the buffer to the other window."
 (use-package diredfl
   :vc (:url "https://github.com/purcell/diredfl")
   :ensure t
+  :unless (member 'noctalia custom-enabled-themes)
   :hook
   (dired-mode . diredfl-mode))
 
