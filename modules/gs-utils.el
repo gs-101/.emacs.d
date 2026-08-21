@@ -261,6 +261,7 @@ using Helpful."
         ("c" . ghostel-compile)
         ("s" . ghostel-project))
   :custom
+  (ai-code-backends-infra-terminal-backend 'ghostel)
   (disproject-shell-command #'ghostel-project))
 
 (use-package popper

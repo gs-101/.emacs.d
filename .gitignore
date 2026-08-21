@@ -1,13 +1,11 @@
 # Directories.
-eca/
 eln-cache/
 elpa/
 etc/
-mason/
 themes/
 tree-sitter/
 var/
 
 # Files.
 .last-package-update-day
-*.gpg
+ai-code-backends-history.el

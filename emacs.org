@@ -3177,6 +3177,7 @@ Emacs Mini-Buffer Actions Rooted in Keymaps.
           ("c" . ghostel-compile)
           ("s" . ghostel-project))
     :custom
+    (ai-code-backends-infra-terminal-backend 'ghostel)
     (disproject-shell-command #'ghostel-project))
 #+end_src
 
@@ -3401,13 +3402,35 @@ Configuration for Large Language Models.
   ;;; -*- lexical-binding: t -*-
 #+end_src
 
-
-** [[https://github.com/editor-code-assistant/eca-emacs][ECA]]
+** [[https://github.com/tninja/ai-code-interface.el][AI Code Interface]]
 
 #+begin_src emacs-lisp
-  (use-package eca
-    :vc (:url "https://github.com/editor-code-assistant/eca-emacs")
-    :ensure t)
+  (use-package ai-code
+    :vc (:url "https://github.com/tninja/ai-code-interface.el")
+    :ensure t
+    :config
+    (ai-code-set-backend 'antigravity)
+    :custom
+    (ai-code-menu-layout 'two-columns))
+#+end_src
+
+*** Disproject
+
+#+begin_src emacs-lisp
+  (use-package ai-code
+    :after disproject
+    :config
+    (transient-insert-suffix 'disproject-dispatch "b"
+      '("a" "Agent" ai-code-menu)))
+#+end_src
+
+*** Magit
+
+#+begin_src emacs-lisp
+  (use-package ai-code
+    :after magit
+    :config
+    (ai-code-magit-setup-transients))
 #+end_src
 
 ** End
