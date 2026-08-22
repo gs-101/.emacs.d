@@ -538,6 +538,14 @@ Highlight matching paren.
     (repeat-mode))
 #+end_src
 
+*** replace
+
+#+begin_src emacs-lisp
+  (use-package replace
+    :custom
+    (query-replace-show-preview t))
+#+end_src
+
 *** Save History
 
 #+begin_quote

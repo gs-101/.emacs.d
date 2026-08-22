@@ -222,6 +222,10 @@ ARG is used for `eval-last-sexp'."
   :init
   (repeat-mode))
 
+(use-package replace
+  :custom
+  (query-replace-show-preview t))
+
 (use-package savehist
   :custom
   (history-length 300)
